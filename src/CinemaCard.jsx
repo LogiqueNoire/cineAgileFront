@@ -66,7 +66,7 @@ const CinemaCard = ({ sede, funciones }) => {
                     {funciones.some((funcion) => funcion.dimension === "3D" && funcion.categoria === "Premium")
                         ?
                         <>
-                            <h5 className="card-title">3D Regular</h5>
+                            <h5 className="card-title">3D Premium</h5>
                             <div className="row mb-2">
                                 {Object.keys(funciones).map((key) => {
                                     if (funciones[key].dimension === "3D" && funciones[key].categoria === "Premium") {
