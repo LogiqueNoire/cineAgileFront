@@ -2,6 +2,7 @@ import CinemaCard from './CinemaCard.jsx';
 import React, { useState } from "react";
 import DatePickerComponent from './DatePickerComponent.jsx';
 import Componente from './componente.jsx';
+import FilmTab from './FilmTab.jsx';
 
 const sede1 = {
     sede: 'CineAgile Trujillo',
@@ -81,6 +82,29 @@ const sede3 = {
         }
     ]
 }
+
+
+/*    @Column
+    @Temporal(TemporalType.DATE)      
+    LocalDate   fechaInicioPreventa;
+    @Column
+    @Temporal(TemporalType.DATE)
+    LocalDate   fechaInicioEstreno;
+    @Column
+    String estado;*/
+
+const peliculas = [
+    { id: 1, nombre: "Pelicula 1", sinopsis: "Descripcion de la pelicula 1", genero: '', director: '', clasificacion:'', actores:'', './img/Imagen1.png' },
+    { id: 2, titulo: "Pelicula 2", descripcion: "Descripcion de la pelicula 2", poster: './img/Imagen6.png' },
+    { id: 3, titulo: "Pelicula 3", descripcion: "Descripcion de la pelicula 3", poster: './img/Imagen7.png' },
+    { id: 4, titulo: "Pelicula 4", descripcion: "Descripcion de la pelicula 4", poster: './img/Imagen3.png' },
+    { id: 5, titulo: "Pelicula 5", descripcion: "Descripcion de la pelicula 5", poster: './img/Imagen1.png' },
+    { id: 6, titulo: "Pelicula 6", descripcion: "Descripcion de la pelicula 6", poster: './img/Imagen1.png' },
+    { id: 7, titulo: "Pelicula 7", descripcion: "Descripcion de la pelicula 7", poster: './img/Imagen1.png' }
+]
+
+
+
 function App() {
     return (
         <div className="App p-4">
@@ -95,21 +119,9 @@ function App() {
             <CinemaCard sede={sede2.sede} funciones={sede2.funciones}></CinemaCard>
             <CinemaCard sede={sede3.sede} funciones={sede3.funciones}></CinemaCard>
 
-            <FilmTab estado="En cartelera" peliculas={[
-                { id: 1, titulo: "Pelicula 1", descripcion: "Descripcion de la pelicula 1", poster: "https://via.placeholder.com/150" },
-                { id: 2, titulo: "Pelicula 2", descripcion: "Descripcion de la pelicula 2", poster: "https://via.placeholder.com/150" },
-                { id: 3, titulo: "Pelicula 3", descripcion: "Descripcion de la pelicula 3", poster: "https://via.placeholder.com/150" },
-                { id: 4, titulo: "Pelicula 4", descripcion: "Descripcion de la pelicula 4", poster: "https://via.placeholder.com/150" },
-                { id: 5, titulo: "Pelicula 5", descripcion: "Descripcion de la pelicula 5", poster: "https://via.placeholder.com/150" },
-                { id: 6, titulo: "Pelicula 6", descripcion: "Descripcion de la pelicula 6", poster: "https://via.placeholder.com/150" },
-                { id: 7, titulo: "Pelicula 7", descripcion: "Descripcion de la pelicula 7", poster: "https://via.placeholder.com/150" }
-            ]} />
-            <FilmTab estado="Proximamente" peliculas={[
-                { id: 1, titulo: "Pelicula 1", descripcion: "Descripcion de la pelicula 1", poster: "https://via.placeholder.com/150" },
-                { id: 2, titulo: "Pelicula 2", descripcion: "Descripcion de la pelicula 2", poster: "https://via.placeholder.com/150" }
-            ]} />
+            <FilmTab estado="En cartelera" peliculas={peliculas} />
            
-           
+
         </div>
     );
 }
