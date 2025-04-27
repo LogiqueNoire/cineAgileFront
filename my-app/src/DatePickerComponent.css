@@ -1,0 +1,12 @@
+input{
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.mydatePicker {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: min-content;
+}
