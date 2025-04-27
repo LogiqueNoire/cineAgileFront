@@ -21,8 +21,8 @@ const sede1 = {
             precio: 1000,
         },
         {
-            dimension: "2D",
-            categoria: "Premium",
+            dimension: "3D",
+            categoria: "Regular",
             horaInicio: "5:30 pm",
             sala: 1,
             precio: 1000,
@@ -66,14 +66,14 @@ const sede3 = {
             precio: 1000,
         },
         {
-            dimension: "2D",
+            dimension: "3D",
             categoria: "Regular",
             horaInicio: "7:30 pm",
             sala: 1,
             precio: 1000,
         },
         {
-            dimension: "2D",
+            dimension: "3D",
             categoria: "Premium",
             horaInicio: "8:30 pm",
             sala: 1,
