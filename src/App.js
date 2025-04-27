@@ -3,6 +3,8 @@ import React, { useState } from "react";
 import DatePickerComponent from './DatePickerComponent.jsx';
 import Componente from './componente.jsx';
 import FilmTab from './FilmTab.jsx';
+import ComJose1 from './ComJose1.jsx';
+import ComJose2 from './ComJose2.jsx';
 
 const sede1 = {
     sede: 'CineAgile Trujillo',
@@ -92,18 +94,11 @@ const sede3 = {
     LocalDate   fechaInicioEstreno;
     @Column
     String estado;*/
-
+//"En cartelera", "Próximamente", "Preventa", "No visible"
 const peliculas = [
-    { id: 1, nombre: "Pelicula 1", sinopsis: "Descripcion de la pelicula 1", genero: '', director: '', clasificacion:'', actores:'', './img/Imagen1.png' },
-    { id: 2, titulo: "Pelicula 2", descripcion: "Descripcion de la pelicula 2", poster: './img/Imagen6.png' },
-    { id: 3, titulo: "Pelicula 3", descripcion: "Descripcion de la pelicula 3", poster: './img/Imagen7.png' },
-    { id: 4, titulo: "Pelicula 4", descripcion: "Descripcion de la pelicula 4", poster: './img/Imagen3.png' },
-    { id: 5, titulo: "Pelicula 5", descripcion: "Descripcion de la pelicula 5", poster: './img/Imagen1.png' },
-    { id: 6, titulo: "Pelicula 6", descripcion: "Descripcion de la pelicula 6", poster: './img/Imagen1.png' },
-    { id: 7, titulo: "Pelicula 7", descripcion: "Descripcion de la pelicula 7", poster: './img/Imagen1.png' }
+    { id: 1, nombre: "Pelicula 1", sinopsis: "Descripcion de la pelicula 1", genero: '', director: '', clasificacion:'', actores:'', imagen:'./img/Imagen1.png', estado: "En cartelera" },
+    { id: 2, nombre: "Pelicula 2", sinopsis: "Descripcion de la pelicula 2", genero: '', director: '', clasificacion:'', actores:'', imagen:'./img/Imagen2Apple.png', estado: "En cartelera" },
 ]
-
-
 
 function App() {
     return (
@@ -115,13 +110,14 @@ function App() {
                 </div>
                 <DatePickerComponent></DatePickerComponent>
             </div>
+            
             <CinemaCard sede={sede1.sede} funciones={sede1.funciones}></CinemaCard>
             <CinemaCard sede={sede2.sede} funciones={sede2.funciones}></CinemaCard>
             <CinemaCard sede={sede3.sede} funciones={sede3.funciones}></CinemaCard>
 
             <FilmTab estado="En cartelera" peliculas={peliculas} />
            
-
+            <ComJose1></ComJose1>
         </div>
     );
 }
