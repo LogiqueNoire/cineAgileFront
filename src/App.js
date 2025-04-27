@@ -96,8 +96,8 @@ const sede3 = {
     String estado;*/
 //"En cartelera", "Próximamente", "Preventa", "No visible"
 const peliculas = [
-    { id: 1, nombre: "Pelicula 1", sinopsis: "Descripcion de la pelicula 1", genero: '', director: '', clasificacion:'', actores:'', imagen:'./img/Imagen1.png', estado: "En cartelera" },
-    { id: 2, nombre: "Pelicula 2", sinopsis: "Descripcion de la pelicula 2", genero: '', director: '', clasificacion:'', actores:'', imagen:'./img/Imagen2Apple.png', estado: "En cartelera" },
+    { id: 1, nombre: "Pelicula 1", sinopsis: "Descripcion de la pelicula 1", genero: '', director: '', clasificacion:'', actores:'', imagen:'/img/Imagen1.png', estado: "En cartelera" },
+    { id: 2, nombre: "Pelicula 2", sinopsis: "Descripcion de la pelicula 2", genero: '', director: '', clasificacion:'', actores:'', imagen:'/img/Imagen2Apple.png', estado: "En cartelera" },
 ]
 
 function App() {
