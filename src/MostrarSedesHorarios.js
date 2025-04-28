@@ -3,7 +3,7 @@ import { useState } from 'react';
 import CinemaCard from './CinemaCard.jsx';
 import Screening from './Screening.jsx';
 
-const MostrarSedesHorarios = (pelicula, sedes) => {
+const MostrarSedesHorarios = ({pelicula, sedes}) => {
     return (
         <div className="App p-4">
             <div className="justify-content-center">

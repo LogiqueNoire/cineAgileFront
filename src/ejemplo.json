@@ -1,5 +1,5 @@
 {
-    "peliculas": [
+    "pelicula":
       {
         "id": 1,
         "nombre": "Pelicula 1",
@@ -42,94 +42,8 @@
             ]
           }
         ]
-      },
-      {
-        "id": 2,
-        "nombre": "Pelicula 2",
-        "sinopsis": "Descripcion de la pelicula 2",
-        "genero": "Drama",
-        "imagen": "/img/Imagen2.png",
-        "estado": "En cartelera",
-        "sedes": [
-          {
-            "idSede": 1,
-            "nombreSede": "CineAgile Trujillo",
-            "funciones": [
-              { "idFuncion": 106, "dimension": "2D", "categoria": "Premium", "horaInicio": "1:00 pm", "sala": 1, "precio": 22 },
-              { "idFuncion": 107, "dimension": "3D", "categoria": "Regular", "horaInicio": "3:00 pm", "sala": 2, "precio": 18 },
-              { "idFuncion": 108, "dimension": "2D", "categoria": "Regular", "horaInicio": "5:00 pm", "sala": 3, "precio": 16 },
-              { "idFuncion": 109, "dimension": "3D", "categoria": "Premium", "horaInicio": "7:00 pm", "sala": 1, "precio": 23 },
-              { "idFuncion": 110, "dimension": "2D", "categoria": "Regular", "horaInicio": "9:00 pm", "sala": 2, "precio": 19 }
-            ]
-          },
-          {
-            "idSede": 2,
-            "nombreSede": "CineAgile Lima",
-            "funciones": [
-              { "idFuncion": 111, "dimension": "2D", "categoria": "Premium", "horaInicio": "2:00 pm", "sala": 1, "precio": 21 },
-              { "idFuncion": 112, "dimension": "3D", "categoria": "Regular", "horaInicio": "4:00 pm", "sala": 2, "precio": 20 },
-              { "idFuncion": 113, "dimension": "2D", "categoria": "Regular", "horaInicio": "6:00 pm", "sala": 3, "precio": 17 },
-              { "idFuncion": 114, "dimension": "3D", "categoria": "Premium", "horaInicio": "8:00 pm", "sala": 1, "precio": 25 },
-              { "idFuncion": 115, "dimension": "2D", "categoria": "Regular", "horaInicio": "10:00 pm", "sala": 2, "precio": 19 }
-            ]
-          },
-          {
-            "idSede": 3,
-            "nombreSede": "CineAgile Cajamarca",
-            "funciones": [
-              { "idFuncion": 116, "dimension": "2D", "categoria": "Premium", "horaInicio": "1:30 pm", "sala": 1, "precio": 23 },
-              { "idFuncion": 117, "dimension": "3D", "categoria": "Regular", "horaInicio": "3:30 pm", "sala": 2, "precio": 18 },
-              { "idFuncion": 118, "dimension": "2D", "categoria": "Regular", "horaInicio": "5:30 pm", "sala": 3, "precio": 15 },
-              { "idFuncion": 119, "dimension": "3D", "categoria": "Premium", "horaInicio": "7:30 pm", "sala": 1, "precio": 24 },
-              { "idFuncion": 120, "dimension": "2D", "categoria": "Regular", "horaInicio": "9:30 pm", "sala": 2, "precio": 17 }
-            ]
-          }
-        ]
-      },
-      {
-        "id": 3,
-        "nombre": "Pelicula 3",
-        "sinopsis": "Descripcion de la pelicula 3",
-        "genero": "Comedia",
-        "imagen": "/img/Imagen3.png",
-        "estado": "En cartelera",
-        "sedes": [
-          {
-            "idSede": 1,
-            "nombreSede": "CineAgile Trujillo",
-            "funciones": [
-              { "idFuncion": 121, "dimension": "2D", "categoria": "Premium", "horaInicio": "11:00 am", "sala": 1, "precio": 25 },
-              { "idFuncion": 122, "dimension": "3D", "categoria": "Regular", "horaInicio": "1:00 pm", "sala": 2, "precio": 20 },
-              { "idFuncion": 123, "dimension": "2D", "categoria": "Regular", "horaInicio": "3:00 pm", "sala": 3, "precio": 18 },
-              { "idFuncion": 124, "dimension": "3D", "categoria": "Premium", "horaInicio": "5:00 pm", "sala": 1, "precio": 30 },
-              { "idFuncion": 125, "dimension": "2D", "categoria": "Regular", "horaInicio": "7:00 pm", "sala": 2, "precio": 22 }
-            ]
-          },
-          {
-            "idSede": 2,
-            "nombreSede": "CineAgile Lima",
-            "funciones": [
-              { "idFuncion": 126, "dimension": "2D", "categoria": "Premium", "horaInicio": "12:00 pm", "sala": 1, "precio": 24 },
-              { "idFuncion": 127, "dimension": "3D", "categoria": "Regular", "horaInicio": "2:00 pm", "sala": 2, "precio": 21 },
-              { "idFuncion": 128, "dimension": "2D", "categoria": "Regular", "horaInicio": "4:00 pm", "sala": 3, "precio": 18 },
-              { "idFuncion": 129, "dimension": "3D", "categoria": "Premium", "horaInicio": "6:00 pm", "sala": 1, "precio": 32 },
-              { "idFuncion": 130, "dimension": "2D", "categoria": "Regular", "horaInicio": "8:00 pm", "sala": 2, "precio": 19 }
-            ]
-          },
-          {
-            "idSede": 3,
-            "nombreSede": "CineAgile Cajamarca",
-            "funciones": [
-              { "idFuncion": 131, "dimension": "2D", "categoria": "Premium", "horaInicio": "12:30 pm", "sala": 1, "precio": 27 },
-              { "idFuncion": 132, "dimension": "3D", "categoria": "Regular", "horaInicio": "2:30 pm", "sala": 2, "precio": 22 },
-              { "idFuncion": 133, "dimension": "2D", "categoria": "Regular", "horaInicio": "4:30 pm", "sala": 3, "precio": 20 },
-              { "idFuncion": 134, "dimension": "3D", "categoria": "Premium", "horaInicio": "6:30 pm", "sala": 1, "precio": 35 },
-              { "idFuncion": 135, "dimension": "2D", "categoria": "Regular", "horaInicio": "8:30 pm", "sala": 2, "precio": 24 }
-            ]
-          }
-        ]
       }
-    ]
+    
   }
   
   

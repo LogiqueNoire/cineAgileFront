@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App.js';
 import MostrarSedesHorarios from './MostrarSedesHorarios.js';
-
+import ejemplo from './ejemplo.json'
 
 import { RouterProvider, createBrowserRouter } from 'react-router';
 
@@ -13,7 +13,7 @@ const router = createBrowserRouter([
     },
     {
         path: '/MostrarSedesHorarios',
-        element: <MostrarSedesHorarios/>
+        element: <MostrarSedesHorarios pelicula={ejemplo.pelicula} sedes={ejemplo.pelicula.sedes}/>,
     }
 ])
 
