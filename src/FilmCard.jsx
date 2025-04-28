@@ -1,11 +1,13 @@
 import React from 'react';
 import './FilmCard.css';
+import { useNavigate } from 'react-router-dom'; // Necesario para navegar entre rutas
 
 const FilmCard = ({ pelicula }) => {
-    const handleClick = () => {
-        // Cambiar la ruta
-        window.location.href = '/MostrarSedesHorarios'; // Redirige a la nueva ruta
+    const navigate = useNavigate(); // Usamos el hook `useNavigate` para la navegación programática
 
+    const handleClick = () => {
+        // Redirigir a la ruta y pasar los datos de la película
+        navigate('/MostrarSedesHorarios', { state: { pelicula } }); // Usamos `state` para pasar la película
     };
 
     return (
@@ -20,6 +22,7 @@ const FilmCard = ({ pelicula }) => {
 };
 
 export default FilmCard;
+
 
 /*
         // Realizar una consulta utilizando Fetch (puedes usar otros métodos como AJAX si prefieres)
