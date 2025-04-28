@@ -1,7 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useSearchParams, useLocation } from 'react-router';
 
-import FilmTab from "./FilmTab";
 import FilmContainer from "./FilmContainer";
 import Pelicula from "../servicios/Pelicula"
 
@@ -35,7 +34,6 @@ const FilmPanel = () => {
 
     return (<>
         <div className="container-fluid">
-            <FilmTab />
             <div className='peli-cuerpo d-flex '>
                 <FilmContainer peliculas={peliculas} />
             </div>

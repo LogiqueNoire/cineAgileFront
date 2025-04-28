@@ -1,11 +1,19 @@
 import React from 'react';
 import './FilmCard.css';
-import { useNavigate } from 'react-router'; // Necesario para navegar entre rutas
+import { useNavigate } from 'react-router';
+
+//para probar, se importa un json de ejemplo
+import ejemplo from "../ejemploFuncionesPelicula.json";
 
 const FilmCard = ({ pelicula }) => {
+    const navigate = useNavigate();
+    
     const handleClick = () => {
         // Cambiar la ruta
-        window.location.href = '/MostrarSedesHorarios'; // Redirige a la nueva ruta
+        //window.location.href = '/MostrarSedesHorarios';
+
+        
+        navigate('/MostrarSedesHorarios', { state: { consultaSedesPorPelicula: ejemplo } });
     };
 
     return (
@@ -19,22 +27,3 @@ const FilmCard = ({ pelicula }) => {
 };
 
 export default FilmCard;
-
-
-/*
-        // Realizar una consulta utilizando Fetch (puedes usar otros métodos como AJAX si prefieres)
-        const params = { clave: 'valor', otroParametro: 123 }; // Parámetros a enviar
-        fetch('https://miapi.com/endpoint', {
-            method: 'GET', // o 'POST', según necesites
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(params), // Solo si usas 'POST' o si necesitas enviar un cuerpo
-        })
-        .then(response => response.json()) // O cualquier tipo de respuesta que se espere
-        .then(data => {
-            console.log('Consulta exitosa:', data);
-        })
-        .catch(error => {
-            console.error('Error al realizar la consulta:', error);
-        });*/
