@@ -9,8 +9,8 @@ const MostrarSedesHorarios = ({pelicula, sedes}) => {
             <div className="justify-content-center">
                 <h2>{pelicula.nombre}</h2>
                 {Object.keys(sedes).map((key) => {
-                    if (sedes[key].sede === sede.sede) {
-                        return <CinemaCard key={key} sede={sedes[key].sede} funciones={sedes[key].funciones}></CinemaCard>
+                    if (sedes[key].nombreSede === sedes.nombreSede) {
+                        return <CinemaCard key={key} sede={sedes[key].nombreSede} funciones={sedes[key].funciones}></CinemaCard>
                     }
                 })}
             </div>
