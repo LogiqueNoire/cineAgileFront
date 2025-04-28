@@ -2,7 +2,6 @@ import { useEffect, useMemo, useState } from 'react';
 import { useSearchParams, useLocation } from 'react-router';
 
 import FilmTab from "./FilmTab";
-import FilmFilter from "./FilmFilter";
 import FilmContainer from "./FilmContainer";
 import Pelicula from "../servicios/Pelicula"
 
@@ -16,7 +15,8 @@ const FilmPanel = () => {
     const [ location, query ] = useQuery()
 
     useEffect(() => {
-        const estado = query ? query.get("tab") : "estreno";
+        const estado = query ? (query.get("tab") ? query.get("tab") : "estreno" ) : "estreno";
+        console.log(query)
         let caller;
 
         switch (estado) {
@@ -38,7 +38,6 @@ const FilmPanel = () => {
         <div className="container-fluid">
             <FilmTab />
             <div className='peli-cuerpo d-flex '>
-                <FilmFilter />
                 <FilmContainer peliculas={peliculas} />
             </div>
         </div>
