@@ -16,7 +16,6 @@ const FilmPanel = () => {
 
     useEffect(() => {
         const estado = query ? (query.get("tab") ? query.get("tab") : "estreno" ) : "estreno";
-        console.log(query)
         let caller;
 
         switch (estado) {
