@@ -11,15 +11,15 @@ import { RouterProvider, createBrowserRouter } from 'react-router';
 const router = createBrowserRouter([
     {
         path: '/',
-        element: <App />
+        element: <Inicio />
     },
     {
         path: '/MostrarSedesHorarios',
         element: <MostrarSedesHorarios pelicula={ejemplo.pelicula} sedes={ejemplo.pelicula.sedes}/>,
     },
     {
-        path: '/inicio',
-        element: <Inicio />
+        path: '/app',
+        element: <App />
     }
 ])
 
