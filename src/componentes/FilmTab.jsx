@@ -16,7 +16,7 @@ const FilmTab = () => {
                             <Link 
                                 className={`nav-link ${ seleccion === i ? "active" : "" }`} 
                                 to={`?tab=${ el }` } onClick={ () => setSeleccion(i) }>
-                                    En cartelera
+                                    { el }
                             </Link>
                         </li>
                     </>
