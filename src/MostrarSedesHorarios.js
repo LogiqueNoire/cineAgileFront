@@ -1,6 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { useLocation } from 'react-router'
 import CinemaCard from './CinemaCard.jsx';
 
 const MostrarSedesHorarios = () => {

@@ -1,6 +1,6 @@
 import React from 'react';
 import './FilmCard.css';
-import { useNavigate } from 'react-router-dom'; // Necesario para navegar entre rutas
+import { useNavigate } from 'react-router'; // Necesario para navegar entre rutas
 
 const FilmCard = ({ pelicula }) => {
     const handleClick = () => {
