@@ -10,7 +10,7 @@ class Pelicula {
     }
     
     static async mostrarPeliculasProximas() {
-        const peliculas = await axios.get(`${url}pelicula/proximamente`)
+        const peliculas = await axios.get(`${url}/pelicula/proximamente`)
         return peliculas.data
     }
 
