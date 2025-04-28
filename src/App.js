@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import data2 from './ejemploP.json'
-import FilmTab from './FilmTab.jsx';
+import FilmTab from './componentes/FilmContainer.jsx';
 import ComJose1 from './ComJose1.jsx';
 import ComponenteVerde from "./componenteVerde.jsx";
 

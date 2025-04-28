@@ -3,19 +3,16 @@ import './FilmCard.css';
 import { useNavigate } from 'react-router-dom'; // Necesario para navegar entre rutas
 
 const FilmCard = ({ pelicula }) => {
-    const navigate = useNavigate(); // Usamos el hook `useNavigate` para la navegación programática
-
     const handleClick = () => {
-        // Redirigir a la ruta y pasar los datos de la película
-        navigate('/MostrarSedesHorarios', { state: { pelicula } }); // Usamos `state` para pasar la película
+        // Cambiar la ruta
+        window.location.href = '/MostrarSedesHorarios'; // Redirige a la nueva ruta
     };
 
     return (
         <button className="filmCard m-2 border-0" onClick={handleClick} key={pelicula.id} type="button">
-            <img src={pelicula.imagen} alt={pelicula.nombre} className='img-film-card' />
+            <img src={pelicula.imageUrl} alt={pelicula.nombre} className='img-film-card' />
             <div>
                 <h5>{pelicula.nombre}</h5>
-                <p>{pelicula.sinopsis}</p>
             </div>
         </button>
     );
