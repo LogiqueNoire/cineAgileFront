@@ -6,6 +6,11 @@ class Pelicula {
         const peliculas = await axios.get(`http://localhost:8080/pelicula/estreno`)
         return peliculas.data
     }
+    
+    static async mostrarPeliculasProximas() {
+        const peliculas = await axios.get(`http://localhost:8080/pelicula/proximamente`)
+        return peliculas.data
+    }
 
 }
 
