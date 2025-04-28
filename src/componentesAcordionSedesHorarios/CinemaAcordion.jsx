@@ -1,8 +1,8 @@
 import './CinemaCard.css';
 import React from 'react';
-import Screening from './Screening.jsx';
+import ScreeningButton from './ScreeningButton.jsx';
 
-const CinemaCard = ({ sede, funciones }) => {
+const CinemaAcordion = ({ sede, funciones }) => {
     return (
         <div className='mx-3'>
             <div className="card">
@@ -85,4 +85,4 @@ const CinemaCard = ({ sede, funciones }) => {
     );
 }
 
-export default CinemaCard;
+export default CinemaAcordion;
