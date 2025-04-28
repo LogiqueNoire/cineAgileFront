@@ -5,15 +5,13 @@ const FilmCard = ({ pelicula }) => {
     const handleClick = () => {
         // Cambiar la ruta
         window.location.href = '/MostrarSedesHorarios'; // Redirige a la nueva ruta
-
     };
 
     return (
         <button className="filmCard m-2 border-0" onClick={handleClick} key={pelicula.id} type="button">
-            <img src={pelicula.imagen} alt={pelicula.nombre} className='img-film-card' />
+            <img src={pelicula.imageUrl} alt={pelicula.nombre} className='img-film-card' />
             <div>
                 <h5>{pelicula.nombre}</h5>
-                <p>{pelicula.sinopsis}</p>
             </div>
         </button>
     );

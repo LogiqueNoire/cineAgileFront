@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import data from './ejemplo.json'
 import data2 from './ejemploP.json'
-import FilmTab from './FilmTab.jsx';
+import FilmTab from './componentes/FilmContainer.jsx';
 import ComJose1 from './ComJose1.jsx';
 
 function App() {
