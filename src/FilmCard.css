@@ -1,0 +1,6 @@
+.img-film-card {
+  width: 20vw;
+  aspect-ratio: 3/4;
+  object-fit: cover;
+  overflow: hidden;
+}
