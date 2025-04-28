@@ -1,4 +1,4 @@
-import './CinemaCard.css';
+import './CinemaAcordion.css';
 import React from 'react';
 import ScreeningButton from './ScreeningButton.jsx';
 
@@ -20,7 +20,7 @@ const CinemaAcordion = ({ sede, funciones }) => {
                             <div className="d-flex row mb-2">
                                 {Object.keys(funciones).map((key) => {
                                     if (funciones[key].dimension === "2D" && funciones[key].categoria === "Regular") {
-                                        return <Screening funcion={funciones[key]}></Screening>
+                                        return <ScreeningButton funcion={funciones[key]}></ScreeningButton>
 
                                     }
                                 })}
@@ -36,7 +36,7 @@ const CinemaAcordion = ({ sede, funciones }) => {
                             <div className="d-flex row mb-2">
                                 {Object.keys(funciones).map((key) => {
                                     if (funciones[key].dimension === "2D" && funciones[key].categoria === "Premium") {
-                                        return <Screening funcion={funciones[key]}></Screening>
+                                        return <ScreeningButton funcion={funciones[key]}></ScreeningButton>
 
                                     }
                                 })}
@@ -52,7 +52,7 @@ const CinemaAcordion = ({ sede, funciones }) => {
                             <div className="row mb-2">
                                 {Object.keys(funciones).map((key) => {
                                     if (funciones[key].dimension === "3D" && funciones[key].categoria === "Regular") {
-                                        return <Screening funcion={funciones[key]}></Screening>
+                                        return <ScreeningButton funcion={funciones[key]}></ScreeningButton>
 
 
 
@@ -70,7 +70,7 @@ const CinemaAcordion = ({ sede, funciones }) => {
                             <div className="row mb-2">
                                 {Object.keys(funciones).map((key) => {
                                     if (funciones[key].dimension === "3D" && funciones[key].categoria === "Premium") {
-                                        return <Screening funcion={funciones[key]}></Screening>
+                                        return <ScreeningButton funcion={funciones[key]}></ScreeningButton>
 
                                     }
                                 })}

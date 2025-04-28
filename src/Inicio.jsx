@@ -1,6 +1,6 @@
 
 import './Inicio.css'
-import FilmPanel from './componentes/FilmPanel'
+import FilmPanel from './componentesCartelera/FilmPanel'
 
 const Inicio = () => {
 
