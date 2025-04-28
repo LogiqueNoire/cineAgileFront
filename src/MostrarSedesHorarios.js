@@ -2,6 +2,8 @@ import React from 'react';
 import { useLocation } from 'react-router'
 import CinemaCard from './CinemaCard.jsx';
 
+const sedes = {}
+
 const MostrarSedesHorarios = () => {
     const location = useLocation(); // Obtener el estado de la ubicación
     const { pelicula } = location.state || {}; // Acceder a la película desde el estado
