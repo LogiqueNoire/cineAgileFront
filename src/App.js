@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import data2 from './ejemploPeliculasVarias.json'
-import FilmTab from './componentesCartelera/FilmContainer.jsx';
-import ComJose1 from './precios/ComJose1.jsx';
+import { Outlet } from "react-router";
 
+import ComJose1 from './precios/ComJose1.jsx';
 import Header from './componentesGenerales/Header'
 import Footer from './componentesGenerales/Footer'
-import { Outlet } from "react-router";
+
+import "./App.css"
 
 function App() {
     return (<>
@@ -16,7 +16,9 @@ function App() {
         </Header>
 
         { /* Muestra el contenido de las rutas hijas, como el componente Inicio */ }
-        <Outlet />
+        <div className="contenedor container-fluid">
+            <Outlet />
+        </div>
     
         <div className="App p-4">
             <ComJose1></ComJose1>
