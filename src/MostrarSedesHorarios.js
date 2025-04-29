@@ -1,9 +1,13 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { useLocation } from 'react-router'
 import CinemaAcordion from './componentesAcordionSedesHorarios/CinemaAcordion.jsx';
 
 const MostrarSedesHorarios = () => {
     const location = useLocation(); // Obtener el estado de la ubicación
+
+    // Scrollea hacia arriba
+    const _ = useMemo(() => { window.scrollTo({ top: true }) }, [ location ])
+
     const { consultaSedesPorPelicula } = location.state || {}; // Acceder a la película desde el estado
     console.log(consultaSedesPorPelicula);
 
