@@ -3,7 +3,6 @@ import React from 'react';
 import "./Header.css"
 
 const Header = ({ children }) => {
-  console.log(children)
   return (
     <header className="header">
       <h1>Cine Agile</h1> 

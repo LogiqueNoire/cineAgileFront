@@ -33,9 +33,10 @@ const FilmPanel = () => {
         if (caller) {
             caller().then(pelis => {
                 setPeliculas(pelis)
-                setLoading(false)
             }).catch(err => {
+                console.log(err)
                 setError("Error :(... Intenta recargar la página!")
+            }).finally(() => {
                 setLoading(false)
             })
         }
