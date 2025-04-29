@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
-import { useSearchParams, useLocation } from 'react-router';
+import { useLocation } from 'react-router';
 
 import FilmContainer from "./FilmContainer";
 import Pelicula from "../servicios/Pelicula"
