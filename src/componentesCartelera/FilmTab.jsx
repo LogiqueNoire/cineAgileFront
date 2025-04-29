@@ -3,8 +3,9 @@ import { Link } from "react-router";
 
 const categorias = [ "estreno", "proximamente" ]
 
-const FilmTab = () => {
-    const [ seleccion, setSeleccion ] = useState(0)
+const FilmTab = ({ query }) => {
+    let cat = categorias.find(el => el == query)
+    cat = cat ? cat : "estreno"
 
     return (<>
         <div className="peli-head d-flex justify-content-evenly">
@@ -14,8 +15,8 @@ const FilmTab = () => {
                     return <>
                         <li key={i} className='nav-item'>
                             <Link 
-                                className={`nav-link ${ seleccion === i ? "active" : "" }`} 
-                                to={`?tab=${ el }` } onClick={ () => setSeleccion(i) }>
+                                className={`nav-link ${ cat == el ? "active" : "" }`} 
+                                to={`?tab=${ el }` }>
                                     { el }
                             </Link>
                         </li>

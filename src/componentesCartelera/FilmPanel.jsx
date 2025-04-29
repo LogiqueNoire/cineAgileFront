@@ -3,6 +3,9 @@ import { useLocation } from 'react-router';
 
 import FilmContainer from "./FilmContainer";
 import Pelicula from "../servicios/Pelicula"
+import FilmTab from './FilmTab';
+
+import "./FilmPanel.css"
 
 const useQuery = () => {
     const location = useLocation()
@@ -11,6 +14,9 @@ const useQuery = () => {
 
 const FilmPanel = () => {
     const [ peliculas, setPeliculas ] = useState([])
+    const [ loading, setLoading ] = useState(true)
+    const [ error, setError ] = useState(null)
+
     const [ location, query ] = useQuery()
 
     useEffect(() => {
@@ -25,20 +31,29 @@ const FilmPanel = () => {
         }
 
         if (caller) {
-            caller().then(porEstreno => {
-                setPeliculas(porEstreno)
+            caller().then(pelis => {
+                setPeliculas(pelis)
+                setLoading(false)
+            }).catch(err => {
+                setError("Error :(... Intenta recargar la página!")
+                setLoading(false)
             })
         }
 
+        return () => {
+            setLoading(true)
+            setError(null)
+        }
     }, [ location ])
 
-    return (<>
-        <div className="container-fluid">
-            <div className='peli-cuerpo d-flex '>
-                <FilmContainer peliculas={peliculas} />
+    return (<div className='film-panel d-flex flex-column'>
+            <FilmTab query={ query.get("tab") } />
+            <div className='peli-cuerpo d-flex justify-content-center flex-grow-1'>
+                { loading && <div className='loader align-self-center'></div> }
+                { error && <div className={`alert alert-danger h-25 w-50 text-center`}>Error :/... Intenta recargar la página</div> }
+                { !loading && <FilmContainer peliculas={peliculas} /> }
             </div>
-        </div>
-    </>)
+    </div>)
 }
 
 export default FilmPanel;

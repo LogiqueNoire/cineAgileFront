@@ -5,7 +5,9 @@ import FilmPanel from './componentesCartelera/FilmPanel'
 const Inicio = () => {
 
     return (<>
-        <FilmPanel />
+        <div className="container-fluid">
+            <FilmPanel />
+        </div>
     </>)
 };
 
