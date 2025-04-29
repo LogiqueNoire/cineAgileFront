@@ -1,14 +1,12 @@
 
 import './Inicio.css'
 import FilmPanel from './componentesCartelera/FilmPanel'
+import Header from './componentesGenerales/Header'
 
 const Inicio = () => {
 
     return (<>
-        <header>
-            Cabecera
-        </header>
-
+        <Header />
         <FilmPanel />
 
         <footer>
