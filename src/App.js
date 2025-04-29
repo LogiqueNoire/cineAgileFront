@@ -4,6 +4,7 @@ import FilmTab from './componentesCartelera/FilmContainer.jsx';
 import ComJose1 from './precios/ComJose1.jsx';
 
 import Header from './componentesGenerales/Header'
+import Footer from './componentesGenerales/Footer'
 import { Outlet } from "react-router";
 
 function App() {
@@ -14,12 +15,14 @@ function App() {
             <a href="#blog">Blog</a>
         </Header>
 
+        { /* Muestra el contenido de las rutas hijas, como el componente Inicio */ }
         <Outlet />
     
         <div className="App p-4">
             <ComJose1></ComJose1>
         </div>
     
+        <Footer />
     </>
         
     );

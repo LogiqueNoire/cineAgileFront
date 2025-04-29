@@ -12,6 +12,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <StrictMode>
         <BrowserRouter>
             <Routes>
+                { /* Ruta principal: La idea es que el componente App muestra el contenido de las rutas
+                hijas (ej: Inicio) dependiendo de la ruta. En este caso, Inicio es lo que se motrará en la
+                ruta por defecto. Esto nos permite cambiar entre páginas sin necesidad de recargar. */ }
                 <Route path='/' element={ <App /> }>
                     <Route index element={ <Inicio /> } />
                 </Route>
