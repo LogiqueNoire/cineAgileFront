@@ -2,14 +2,13 @@ import React from 'react';
 
 import "./Header.css"
 
-export const Header = () => {
+const Header = ({ children }) => {
+  console.log(children)
   return (
     <header className="header">
       <h1>Cine Agile</h1> 
       <nav className="nav-links">
-        <a href="#pelis">Pelis</a>
-        <a href="#cines">Cines</a>
-        <a href="#blog">Blog</a>
+        { children }
       </nav>
       <div className="icons">
         <button className="icon-button">
@@ -23,4 +22,4 @@ export const Header = () => {
   );
 };
 
-export default Header;
+export default Header
