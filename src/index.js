@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom/client';
 
 import App from './App.js';
 import MostrarSedesHorarios from './MostrarSedesHorarios.js';
-import ejemplo from './ejemplo.json'
 import Inicio from './Inicio.jsx'
 import ButacaSelect from './componentes/ButacaSelect.jsx'
 
@@ -16,7 +15,7 @@ const router = createBrowserRouter([
     },
     {
         path: '/MostrarSedesHorarios',
-        element: <MostrarSedesHorarios pelicula={ejemplo.pelicula} sedes={ejemplo.pelicula.sedes}/>,
+        element: <MostrarSedesHorarios />,
     },
     {
         path: '/app',

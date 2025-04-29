@@ -1,6 +1,4 @@
 {
-    "pelicula":
-      {
         "id": 1,
         "nombre": "Pelicula 1",
         "sinopsis": "Descripcion de la pelicula 1",
@@ -42,8 +40,6 @@
             ]
           }
         ]
-      }
-    
   }
   
   
