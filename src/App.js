@@ -10,9 +10,11 @@ import "./App.css"
 function App() {
     return (<>
         <Header>
+            {/*
             <a href="#pelis">Pelis</a>
             <a href="#cines">Cines</a>
             <a href="#blog">Blog</a>
+            */}
         </Header>
 
         { /* Muestra el contenido de las rutas hijas, como el componente Inicio */ }

@@ -5,9 +5,12 @@ import "./Header.css"
 const Header = ({ children }) => {
   return (
     <header className="header">
-      <h1>Cine Agile</h1> 
+      <a href="#pelis">
+        <h1>Cine Agile</h1>
+      </a>
+
       <nav className="nav-links">
-        { children }
+        {children}
       </nav>
       <div className="icons">
         <button className="icon-button">
