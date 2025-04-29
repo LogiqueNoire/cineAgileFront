@@ -1,7 +1,7 @@
 import React from 'react';
-import './Screening.css';
+import './ScreeningButton.css';
 
-const Screening = ({ funcion }) => {
+const ScreeningButton = ({ funcion }) => {
     return (
         <div className='w-auto'>
             <button className="btn btn-outline-primary" type='button'>{funcion.horaInicio}</button>
@@ -9,4 +9,4 @@ const Screening = ({ funcion }) => {
     );
 }
 
-export default Screening;
+export default ScreeningButton;

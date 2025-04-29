@@ -1,4 +1,5 @@
 import React from "react";
+import { useState } from "react";
  const ComJose1 = ({ nombre, texto, precio  }) => {
     const [cantidad,setCantidad] =useState(0);
 

@@ -1,16 +1,32 @@
 import React, { useState } from "react";
-import data from './ejemplo.json'
-import data2 from './ejemploP.json'
-import FilmTab from './FilmTab.jsx';
-import ComJose1 from './ComJose1.jsx';
+import { Outlet } from "react-router";
+
+import ComJose1 from './precios/ComJose1.jsx';
+import Header from './componentesGenerales/Header'
+import Footer from './componentesGenerales/Footer'
+
+import "./App.css"
 
 function App() {
-    return (
+    return (<>
+        <Header>
+            <a href="#pelis">Pelis</a>
+            <a href="#cines">Cines</a>
+            <a href="#blog">Blog</a>
+        </Header>
+
+        { /* Muestra el contenido de las rutas hijas, como el componente Inicio */ }
+        <div className="contenedor container-fluid">
+            <Outlet />
+        </div>
+    
         <div className="App p-4">
-            <FilmTab estado="En cartelera" peliculas={data2} />
-           
             <ComJose1></ComJose1>
         </div>
+    
+        <Footer />
+    </>
+        
     );
 }
 export default App;
