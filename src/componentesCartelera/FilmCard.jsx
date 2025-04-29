@@ -10,10 +10,7 @@ const FilmCard = ({ pelicula }) => {
     
     const handleClick = () => {
         // Cambiar la ruta
-        //window.location.href = '/MostrarSedesHorarios';
-
-        
-        navigate('/MostrarSedesHorarios', { state: { consultaSedesPorPelicula: ejemplo } });
+        navigate(`/pelicula/${pelicula.idPelicula}`, { state: { consultaSedesPorPelicula: ejemplo } });
     };
 
     return (
