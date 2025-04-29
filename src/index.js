@@ -6,29 +6,21 @@ import MostrarSedesHorarios from './MostrarSedesHorarios.js';
 import Inicio from './Inicio.jsx'
 import ButacaSelect from './componentesVenta/ButacaSelect.jsx'
 
-import { RouterProvider, createBrowserRouter } from 'react-router';
-
-const router = createBrowserRouter([
-    {
-        path: '/',
-        element: <Inicio />
-    },
-    {
-        path: '/MostrarSedesHorarios',
-        element: <MostrarSedesHorarios />,
-    },
-    {
-        path: '/app',
-        element: <App />
-    },
-    {
-        path: '/butacas',
-        element: <ButacaSelect idSala={ 5 } />
-    }
-])
+import { BrowserRouter, Routes, Route } from 'react-router';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
     <StrictMode>
-        <RouterProvider router={router} />
+        <BrowserRouter>
+            <Routes>
+                <Route path='/' element={ <App /> }>
+                    <Route index element={ <Inicio /> } />
+                </Route>
+
+                <Route path='/MostrarSedesHorarios' element={ <MostrarSedesHorarios /> }/>
+
+                <Route path='/butacas' element={ <ButacaSelect idSala={ 5 } /> }/>
+
+            </Routes>
+        </BrowserRouter>
     </StrictMode>
 );
