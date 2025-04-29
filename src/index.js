@@ -17,9 +17,8 @@ ReactDOM.createRoot(document.getElementById('root')).render(
                 ruta por defecto. Esto nos permite cambiar entre páginas sin necesidad de recargar. */ }
                 <Route path='/' element={ <App /> }>
                     <Route index element={ <Inicio /> } />
+                    <Route path='/MostrarSedesHorarios' element={ <MostrarSedesHorarios /> }/>
                 </Route>
-
-                <Route path='/MostrarSedesHorarios' element={ <MostrarSedesHorarios /> }/>
 
                 <Route path='/butacas' element={ <ButacaSelect idSala={ 5 } /> }/>
 
