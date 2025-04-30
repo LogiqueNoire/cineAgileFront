@@ -21,7 +21,7 @@ class ScriptGenerarQR {
         /*convertimos el fila a char */
         const filaChar = numToChar(filaButaca);
         /*convertimos el columna a char */
-        const columnaChar = numToChar(columna);
+        const columnaChar = numToChar(columnaButaca);
         /*convertir un id de entrada a string xd */
         const CodEntrada = idEntrada.toString();
 
