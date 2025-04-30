@@ -44,5 +44,3 @@ class ScriptGenerarQR {
 
 export default ScriptGenerarQR;
 
-const codigo = new ScriptGenerarQR();
-codigo.generar();
