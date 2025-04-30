@@ -8,8 +8,7 @@ const MostrarSedesHorarios = () => {
     // Scrollea hacia arriba
     const _ = useMemo(() => { window.scrollTo({ top: true }) }, [ location ])
 
-    const { consultaSedesPorPelicula } = location.state || {}; // Acceder a la película desde el estado
-    console.log(consultaSedesPorPelicula);
+    const { consultaSedesPorPelicula } = location.state || {};
 
     if (!consultaSedesPorPelicula) {
         return <p>Pelicula no encontrada.</p>;
