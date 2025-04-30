@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom/client';
 import App from './App.js';
 import MostrarSedesHorarios from './MostrarSedesHorarios.js';
 import Inicio from './Inicio.jsx'
-import ButacaSelect from './componentesVenta/ButacaSelect.jsx'
+import ButacaSelect from './3 componentesVenta/ButacaSelect.jsx'
 
 import { BrowserRouter, Routes, Route } from 'react-router';
 
