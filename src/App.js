@@ -4,13 +4,13 @@ import { Outlet } from "react-router";
 import ComJose1 from './precios/ComJose1.jsx';
 import Header from './componentesGenerales/Header'
 import Footer from './componentesGenerales/Footer'
-import ScriptGenerarQR from "./servicios/ScriptGenerarQR.js"; // ✅ esta es la clase
+import ScriptGenerarQR from "./servicios/ScriptGenerarQR.js"; // esta es la clase
 
 import "./App.css"
 import QRCode from "react-qr-code";
 
 function App() {
-    const generador = new ScriptGenerarQR(); // ⬅️ instancia de la clase
+    const generador = new ScriptGenerarQR(); // instancia de la clase
     const codigoQR = generador.generar();
     return (<>
         <Header>
