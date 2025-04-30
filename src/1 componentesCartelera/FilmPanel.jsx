@@ -7,7 +7,7 @@ import FilmTab from './FilmTab';
 
 import "./FilmPanel.css"
 
-const useQuery = () => {
+const useUrlQuery = () => {
     const location = useLocation()
     return [ location, useMemo(() => { return new URLSearchParams(location.search) }, [ location.search ]) ]
 }
@@ -17,7 +17,7 @@ const FilmPanel = () => {
     const [ loading, setLoading ] = useState(true)
     const [ error, setError ] = useState(null)
 
-    const [ location, query ] = useQuery()
+    const [ location, query ] = useUrlQuery()
 
     useEffect(() => {
         const estado = query ? (query.get("tab") ? query.get("tab") : "estreno" ) : "estreno";
@@ -34,7 +34,6 @@ const FilmPanel = () => {
             caller().then(pelis => {
                 setPeliculas(pelis)
             }).catch(err => {
-                console.log(err)
                 setError("Error :(... Intenta recargar la página!")
             }).finally(() => {
                 setLoading(false)

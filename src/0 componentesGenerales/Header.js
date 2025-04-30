@@ -5,7 +5,7 @@ import "./Header.css"
 const Header = ({ children }) => {
   return (
     <header className="header">
-      <a href="#pelis">
+      <a href="/">
         <h1>Cine Agile</h1>
       </a>
 

@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import { useLocation } from 'react-router'
-import CinemaAcordion from './componentesAcordionSedesHorarios/CinemaAcordion.jsx';
+import CinemaAcordion from './2 componentesAcordionSedesHorarios/CinemaAcordion.jsx';
 
 const MostrarSedesHorarios = () => {
     const location = useLocation(); // Obtener el estado de la ubicación
