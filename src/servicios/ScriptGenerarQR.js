@@ -28,7 +28,7 @@ class ScriptGenerarQR {
         const cadenaPaConvertirEnQR = `${CodDepartamento}${CodSala}${filaChar}${columnaChar}${CodEntrada}`;
         console.log(cadenaPaConvertirEnQR); // Ejemplo: TRU03BE234
 
-        return finalCode;
+        return cadenaPaConvertirEnQR;
     }
 
 }
