@@ -1,4 +1,4 @@
-import { url } from '../configuracion/backend'
+//import { url } from '../configuracion/backend'
 class ScriptGenerarQR {
     
    /*Es solo pa hacer la prueba:v luego se pasa a back si quieren xd*/
