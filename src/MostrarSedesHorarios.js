@@ -5,7 +5,7 @@ import Funcion from './servicios/Funcion.js';
 
 const MostrarSedesHorarios = () => {
     const location = useLocation();
-    const { consultaIdPelicula } = location.state || {};
+    const { consultaIdPelicula, nombrePelicula } = location.state || {};
     const [sedes, setSedes] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -19,15 +19,15 @@ const MostrarSedesHorarios = () => {
         window.scrollTo({ top: 0 });
         let isMounted = true;
 
-        
+        console.log("Nombre peli",nombrePelicula);
         const now = new Date();
         // Formatear la fecha en formato 'yyyy-MM-ddTHH:mm'
-        let fechaFormateada = now.toISOString().slice(0, 19); // '2023-10-05T12:00'
+        let fechaFormateada = now.toISOString().slice(0, 19);
         
         const obtenerFunciones = async () => {
             try {
-                const funciones = await Funcion.mostrarSedesFuncionesPorPelicula(consultaIdPelicula, fechaFormateada, );
-                console.log(funciones);
+                const funciones = await Funcion.mostrarSedesFuncionesPorPelicula(consultaIdPelicula, fechaFormateada, nombrePelicula);
+                console.log("Funciones",funciones);
 
                 const agrupadasPorSede = funciones.reduce((acc, funcion) => {
                     let sede = acc.find(s => s.idSede === funcion.idSede);
@@ -79,7 +79,7 @@ const MostrarSedesHorarios = () => {
         <div className="App p-4">
             <div className="justify-content-center">
                 <div className="d-flex justify-content-between align-items-center">
-                    <h2>Funciones para película {consultaIdPelicula}</h2>
+                    <h2>Funciones para película {nombrePelicula}</h2>
                     <div>
                         <h5 className="mx-3">Seleccionar Fecha</h5>
                         <input type="date" className="mx-3" />
