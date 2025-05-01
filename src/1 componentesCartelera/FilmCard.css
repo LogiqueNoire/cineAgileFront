@@ -1,0 +1,25 @@
+.img-film-card {
+  width: 180px;
+  aspect-ratio: 3/4;
+  object-fit: cover;
+  overflow: hidden;
+
+  margin-bottom: 1rem;
+}
+
+.filmCard {
+  width: 200px;
+  height: 330px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  box-sizing: border-box;
+  padding: 1rem;
+
+  overflow: hidden;
+}
+
+.filmCard h5 {
+}

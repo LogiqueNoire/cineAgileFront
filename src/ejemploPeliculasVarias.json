@@ -1,53 +1,82 @@
-{
-    "peliculas": [
-      {
+[
+    {
         "id": 1,
         "nombre": "Pelicula 1",
         "sinopsis": "Descripcion de la pelicula 1",
         "genero": "Acción",
         "imagen": "/img/Imagen1.png",
         "estado": "En cartelera"
-      },
-      {
+    },
+    {
         "id": 2,
         "nombre": "Pelicula 2",
         "sinopsis": "Descripcion de la pelicula 2",
         "genero": "Drama",
         "imagen": "/img/Imagen2.png",
         "estado": "En cartelera"
-      },
-      {
+    },
+    {
         "id": 3,
         "nombre": "Pelicula 3",
         "sinopsis": "Descripcion de la pelicula 3",
         "genero": "Comedia",
         "imagen": "/img/Imagen3.png",
         "estado": "En cartelera"
-      },
-      {
+    },
+    {
         "id": 4,
         "nombre": "Pelicula 4",
         "sinopsis": "Descripcion de la pelicula 4",
         "genero": "Aventura",
         "imagen": "/img/Imagen4.png",
         "estado": "Proximamente"
-      },
-      {
+    },
+    {
         "id": 5,
         "nombre": "Pelicula 5",
         "sinopsis": "Descripcion de la pelicula 5",
         "genero": "Terror",
         "imagen": "/img/Imagen5.png",
         "estado": "Proximamente"
-      },
-      {
+    },
+    {
         "id": 6,
         "nombre": "Pelicula 6",
         "sinopsis": "Descripcion de la pelicula 6",
         "genero": "Ciencia Ficción",
         "imagen": "/img/Imagen6.png",
         "estado": "En cartelera"
-      }
-    ]
-  }
-  
+    },
+    {
+        "id": 7,
+        "nombre": "Pelicula 7",
+        "sinopsis": "Descripcion de la pelicula 7",
+        "genero": "Romance",
+        "imagen": "/img/Imagen7.png",
+        "estado": "En cartelera"
+    },
+    {
+        "id": 8,
+        "nombre": "Pelicula 8",
+        "sinopsis": "Descripcion de la pelicula 8",
+        "genero": "Acción",
+        "imagen": "/img/Imagen5.png",
+        "estado": "En cartelera"
+    },
+    {
+        "id": 9,
+        "nombre": "Pelicula 9",
+        "sinopsis": "Descripcion de la pelicula 9",
+        "genero": "Drama",
+        "imagen": "/img/Imagen1.png",
+        "estado": "En cartelera"
+    },
+    {
+        "id": 10,
+        "nombre": "Pelicula 10",
+        "sinopsis": "Descripcion de la pelicula 10",
+        "genero": "Comedia",
+        "imagen": "/img/Imagen1.png",
+        "estado": "Proximamente"
+    }
+]

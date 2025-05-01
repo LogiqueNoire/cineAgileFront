@@ -1,0 +1,46 @@
+/* HTML: <div class="loader"></div> */
+.loader {
+    width: 60px;
+    aspect-ratio: 1;
+    border: 15px solid #ddd;
+    border-radius: 50%;
+    position: relative;
+    transform: rotate(45deg);
+  }
+  .loader::before {
+    content: "";
+    position: absolute;
+    inset: -15px;
+    border-radius: 50%;
+    border: 15px solid #514b82;
+    animation: l18 2s infinite linear;
+  }
+  @keyframes l18 {
+      0%   {clip-path:polygon(50% 50%,0 0,0    0,0    0   ,0    0   ,0    0   )}
+      25%  {clip-path:polygon(50% 50%,0 0,100% 0,100% 0   ,100% 0   ,100% 0   )}
+      50%  {clip-path:polygon(50% 50%,0 0,100% 0,100% 100%,100% 100%,100% 100%)}
+      75%  {clip-path:polygon(50% 50%,0 0,100% 0,100% 100%,0    100%,0    100%)}
+      100% {clip-path:polygon(50% 50%,0 0,100% 0,100% 100%,0    100%,0    0   )}
+  }
+
+.film-panel {
+    background-color: rgb(246, 246, 246);
+    min-height: 900px;
+
+    margin: 2rem;
+    padding: 2rem;
+
+    box-sizing: border-box;
+}
+
+.peli-cuerpo {
+    background-color: rgb(204, 204, 204);
+    padding: 1rem;
+    box-sizing: border-box;
+    height: inherit;
+}
+
+.loader {
+    width: 100px;
+    height: 100px;
+}
