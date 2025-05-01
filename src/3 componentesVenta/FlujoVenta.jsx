@@ -2,7 +2,7 @@ import { useLocation, useNavigate } from "react-router";
 
 import ButacaSelect from './ButacaSelect'
 import { VentaContextProvider } from './VentaContextProvider'
-import ComJose3 from "../4 precios/ComJose3";
+import ComJose3 from '../4 precios/ComJose3'
 
 const FlujoVenta = () => {
     const navigate = useNavigate()
@@ -18,21 +18,14 @@ const FlujoVenta = () => {
         <ButacaSelect funcion={funcion} />
     ]
 
-    return (
-        <div className="d-flex align-items-center justify-content-center">
-            <ComJose3 idPelicula={idPelicula} nombrePelicula={nombrePelicula} imagenPeli={imagenPeli} catePeli={funcion.categoria} sedePeli={funcion.nombreSede}
-                fechaPeli={funcion.fechaHoraInicio} salaPeli={funcion.codigoSala}></ComJose3>
-            <VentaContextProvider className="">
-                <div className="d-block m-4">
+    return (<>
+        <VentaContextProvider>
+            { pasosCompra[0] }        
 
-                    {pasosCompra[0]}
-
-                    <button onClick={() => { navigate(-1) }} >Volver</button>
-                    <button>Siguiente</button>
-                </div>
-            </VentaContextProvider>
-        </div>
-    )
+            <button onClick={ () => { navigate(-1) } } >Volver</button>
+            <button>Siguiente</button>
+        </VentaContextProvider>
+    </>)
 }
 
 export default FlujoVenta;
