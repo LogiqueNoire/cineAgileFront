@@ -1,0 +1,30 @@
+@media (max-width:600px) {
+    .Rojo{
+        width:100vw;
+    }
+
+    .micontainer{
+        display: block;
+    }
+
+    img {
+        display: none;
+    }
+
+    .ContieneEntradas{
+        width: 100vw;
+        justify-self: center;
+    }
+}
+
+.micontainer{
+    display: flex;
+}
+
+.FilaPrecio {
+    justify-content: center;
+}
+
+.nombre{
+    width: 100px;
+}

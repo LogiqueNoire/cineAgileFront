@@ -4,7 +4,7 @@ import React from "react";
  const ComJose3 = ({nombrePeli, catePeli, sedePeli,fechaPeli,salaPeli}) => {
 
     return (
-        <div className="Rojo w-30">
+        <div className="Rojo">
             <div className=" d-flex justify-content-center"> 
             <img  className=""src="https://i.pinimg.com/736x/8d/60/e9/8d60e928c17f67d67683bd5262000a5c.jpg" alt="imagen" height="200px" ></img>
             </div>
