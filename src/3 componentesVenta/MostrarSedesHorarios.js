@@ -11,8 +11,21 @@ const MostrarSedesHorarios = ({ estado }) => {
     const [sedes, setSedes] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    
+    // Formatear la fecha en formato 'yyyy-MM-ddTHH:mm'
+    let hoy = new Date().toISOString().slice(0, 19);
+    
+    const [fecha, setfecha] = useState(hoy);
+
+<<<<<<< HEAD
 
 
+
+
+
+=======
+
+>>>>>>> 1d755088af667a24693abb213ed06ab1750afbce
     useEffect(() => {
         if (!consultaIdPelicula) {
             console.warn("No se recibió un id de película válido.");
@@ -23,12 +36,16 @@ const MostrarSedesHorarios = ({ estado }) => {
         let isMounted = true;
 
 
+<<<<<<< HEAD
+        
+=======
         const now = new Date();
         // Formatear la fecha con la zona horaria correcta
         let fechaFormateada = format(now, `yyyy-MM-dd.HH:mm`).replace('.', 'T')
         
         // Formatear la fecha en formato 'yyyy-MM-ddTHH:mm'
         // let fechaFormateada = now.toISOString().slice(0, 19);
+>>>>>>> 1d755088af667a24693abb213ed06ab1750afbce
 
         const obtenerFunciones = async () => {
             try {
