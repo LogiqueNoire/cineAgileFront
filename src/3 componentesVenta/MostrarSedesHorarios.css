@@ -1,0 +1,22 @@
+@media (max-width: 768px) {
+    h2,
+    h3,
+    h4,
+    h5{
+        text-align: center;
+    }
+    input{
+        justify-self: center;
+    }
+    
+}
+
+img{
+    width: 15vw;
+    height: auto;
+    
+}
+
+.infoPelicula{
+    padding-inline: 20%;
+}
