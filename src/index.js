@@ -2,7 +2,7 @@ import React, { StrictMode } from 'react';
 import ReactDOM from 'react-dom/client';
 
 import App from './App.js';
-import MostrarSedesHorarios from './MostrarSedesHorarios.js';
+import MostrarSedesHorarios from './3 componentesVenta/MostrarSedesHorarios.js';
 import Inicio from './Inicio.jsx'
 import ButacaSelect from './3 componentesVenta/ButacaSelect.jsx'
 import FlujoVenta from './3 componentesVenta/FlujoVenta.jsx';

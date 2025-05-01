@@ -11,7 +11,7 @@ const FilmCard = ({ pelicula }) => {
     const handleClick = () => {
         // Cambiar la ruta
         //console.log("Pelicula seleccionada:", pelicula);
-        navigate(`/funcion/pelicula/`, { state: { consultaIdPelicula: pelicula.idPelicula, nombrePelicula: pelicula.nombre } });
+        navigate(`/funcion/pelicula/`, { state: { consultaIdPelicula: pelicula.idPelicula, nombrePelicula: pelicula.nombre, imagenPeli: pelicula.imageUrl } });
     };
 
     return (

@@ -26,11 +26,12 @@ const SeleccionButaca = ({ funcion }) => {
         }
     }, [ funcion ])
 
-    return (<>
+    return (
+    <div className='d-block'>
         <h1>Selecciona tus butacas!</h1>
         { error && <h2>Error!</h2> }
         { !loading && <ButacaMap butacas={ data } /> }
-    </>)
+    </div>)
 };
 
 export default SeleccionButaca;

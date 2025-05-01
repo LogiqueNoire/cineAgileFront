@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import CinemaAcordion from './2 componentesAcordionSedesHorarios/CinemaAcordion.jsx';
-import Funcion from './servicios/Funcion.js';
+import CinemaAcordion from '../2 componentesAcordionSedesHorarios/CinemaAcordion.jsx';
+import Funcion from '../servicios/Funcion.js';
 
 const MostrarSedesHorarios = () => {
     const location = useLocation();
-    const { consultaIdPelicula, nombrePelicula } = location.state || {};
+    //Aqui se reciben los datos de la pelicula seleccionada
+    const { consultaIdPelicula, nombrePelicula, imagenPeli } = location.state || {};
     const [sedes, setSedes] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -19,7 +20,7 @@ const MostrarSedesHorarios = () => {
         window.scrollTo({ top: 0 });
         let isMounted = true;
 
-        console.log("Nombre peli",nombrePelicula);
+        
         const now = new Date();
         // Formatear la fecha en formato 'yyyy-MM-ddTHH:mm'
         let fechaFormateada = now.toISOString().slice(0, 19);
@@ -79,6 +80,7 @@ const MostrarSedesHorarios = () => {
         <div className="App p-4">
             <div className="justify-content-center">
                 <div className="d-flex justify-content-between align-items-center">
+                    <img src={imagenPeli} alt="imagen Peli" className='w-100'/>
                     <h2>Funciones para película {nombrePelicula}</h2>
                     <div>
                         <h5 className="mx-3">Seleccionar Fecha</h5>
@@ -87,7 +89,7 @@ const MostrarSedesHorarios = () => {
                 </div>
 
                 {sedes.map((sede) => (
-                    <CinemaAcordion data={sede} />
+                    <CinemaAcordion data={sede} idPelicula={consultaIdPelicula} nombrePelicula={nombrePelicula} imagenPeli={imagenPeli}/>
                 ))}
             </div>
         </div>
