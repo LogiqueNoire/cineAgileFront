@@ -5,6 +5,7 @@ import App from './App.js';
 import MostrarSedesHorarios from './MostrarSedesHorarios.js';
 import Inicio from './Inicio.jsx'
 import ButacaSelect from './3 componentesVenta/ButacaSelect.jsx'
+import FlujoVenta from './3 componentesVenta/FlujoVenta.jsx';
 
 import { BrowserRouter, Routes, Route } from 'react-router';
 
@@ -18,6 +19,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
                 <Route path='/' element={ <App /> }>
                     <Route index element={ <Inicio /> } />
                     <Route path='/funcion/pelicula/' element={ <MostrarSedesHorarios /> }/>
+                    <Route path='/compra' element={ <FlujoVenta /> } />
                 </Route>
 
                 <Route path='/butacas' element={ <ButacaSelect idSala={ 5 } /> }/>

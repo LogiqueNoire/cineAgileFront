@@ -10,7 +10,7 @@ const ScreeningButton = ({ funcion }) => {
     const handleClick = () => {
         // Cambiar la ruta
         //navigate(`/pelicula/${pelicula.idPelicula}/${funcion.idFuncion}`, { state: { consultaSedesPorPelicula: ejemplo } });
-        console.log("Funcion seleccionada:", funcion.fechaHoraInicio);
+        navigate(`/compra`, { state: { funcion } })
     };
 
     return (

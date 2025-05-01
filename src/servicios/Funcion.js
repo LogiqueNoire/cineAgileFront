@@ -13,6 +13,11 @@ class Funcion {
         return funciones.data
     }
 
+    static async mostrarButacasDeFuncion(idFuncion) {
+        const butacas = await axios.get(`${url}/funcion/butacas/${idFuncion}`)
+        return butacas.data
+    }
+
 }
 
 export default Funcion;

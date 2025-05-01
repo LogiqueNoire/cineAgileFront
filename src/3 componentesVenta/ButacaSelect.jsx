@@ -1,23 +1,34 @@
 import './ButacaMap'
 import ButacaMap from './ButacaMap';
 import SalaButaca from '../servicios/SalaButaca';
+import Funcion from '../servicios/Funcion';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 
-const SeleccionButaca = ({ idSala }) => {
+const SeleccionButaca = ({ funcion }) => {
     const [ data, setData ] = useState(null)
     const [ loading, setLoading ] = useState(true)
     const [ error, setError ] = useState(null)
 
     useEffect(() => {
-        SalaButaca.getButacas(idSala).then(data => {
-            setData(data)
+        Funcion.mostrarButacasDeFuncion(funcion.idFuncion).then(data => {
+            const butacas = data.map(el => ({ ...el.butaca, ocupado: el.ocupado }) )
+            setData(butacas)
+        }).catch(err => {
+            setError("Error al cargar")
+        }).finally(_ => [
             setLoading(false)
-        })
+        ])
 
-    }, [ idSala ])
+        return () => {
+            setLoading(true)
+            setError(null)
+        }
+    }, [ funcion ])
 
     return (<>
+        <h1>Selecciona tus butacas!</h1>
+        { error && <h2>Error!</h2> }
         { !loading && <ButacaMap butacas={ data } /> }
     </>)
 };
