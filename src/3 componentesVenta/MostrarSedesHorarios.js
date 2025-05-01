@@ -4,13 +4,14 @@ import CinemaAcordion from '../2 componentesAcordionSedesHorarios/CinemaAcordion
 import Funcion from '../servicios/Funcion.js';
 import './MostrarSedesHorarios.css';
 
-const MostrarSedesHorarios = () => {
-    const location = useLocation();
-    //Aqui se reciben los datos de la pelicula seleccionada
-    const { consultaIdPelicula, nombrePelicula, imagenPeli } = location.state || {};
+import { format } from 'date-fns'
+
+const MostrarSedesHorarios = ({ estado }) => {
+    const { consultaIdPelicula, nombrePelicula, imagenPeli } = estado
     const [sedes, setSedes] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+
 
     useEffect(() => {
         if (!consultaIdPelicula) {
@@ -23,8 +24,11 @@ const MostrarSedesHorarios = () => {
 
 
         const now = new Date();
+        // Formatear la fecha con la zona horaria correcta
+        let fechaFormateada = format(now, `yyyy-MM-dd.HH:mm`).replace('.', 'T')
+        
         // Formatear la fecha en formato 'yyyy-MM-ddTHH:mm'
-        let fechaFormateada = now.toISOString().slice(0, 19);
+        // let fechaFormateada = now.toISOString().slice(0, 19);
 
         const obtenerFunciones = async () => {
             try {
@@ -80,17 +84,6 @@ const MostrarSedesHorarios = () => {
     return (
         <div className="App p-4">
             <div className="justify-content-center">
-                <div className="d-flex justify-content-center align-items-center p-4 bg-light mb-4">
-                    <div className='infoPelicula me-4'>
-                        <h2 className='mb-4'>Funciones para película {nombrePelicula}</h2>
-                        <div>
-                            <h5 className="mx-3">Fecha:</h5>
-                            <input type="date" className="mx-3" />
-                        </div>
-                    </div>
-                    <img src={imagenPeli} alt="imagen Peli" />
-                </div>
-
                 {sedes.map((sede) => (
                     <CinemaAcordion data={sede} idPelicula={consultaIdPelicula} nombrePelicula={nombrePelicula} imagenPeli={imagenPeli} />
                 ))}
