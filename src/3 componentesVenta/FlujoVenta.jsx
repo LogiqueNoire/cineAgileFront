@@ -18,14 +18,21 @@ const FlujoVenta = () => {
         <ButacaSelect funcion={funcion} />
     ]
 
-    return (<>
-        <VentaContextProvider>
-            { pasosCompra[0] }        
+    return (
+        <div className="d-flex">
+            <div className="d-flex justify-content-center">
+                <ComJose3 idPelicula={idPelicula} nombrePelicula={nombrePelicula} imagenPeli={imagenPeli} catePeli={funcion.categoria} sedePeli={funcion.nombreSede} fechaPeli={funcion.fechaHoraInicio} salaPeli={funcion.sala} />
+            </div>
+            <VentaContextProvider>
+                <div className="d-block m-4 align-self-center">
 
-            <button onClick={ () => { navigate(-1) } } >Volver</button>
-            <button>Siguiente</button>
-        </VentaContextProvider>
-    </>)
+                    {pasosCompra[0]}
+
+                    <button onClick={() => { navigate(-1) }} >Volver</button>
+                    <button>Siguiente</button>
+                </div>
+            </VentaContextProvider>
+        </div>)
 }
 
 export default FlujoVenta;
