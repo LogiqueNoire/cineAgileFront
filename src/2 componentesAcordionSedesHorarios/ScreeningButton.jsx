@@ -10,11 +10,13 @@ const ScreeningButton = ({ funcion }) => {
     const handleClick = () => {
         // Cambiar la ruta
         //navigate(`/pelicula/${pelicula.idPelicula}/${funcion.idFuncion}`, { state: { consultaSedesPorPelicula: ejemplo } });
+        console.log("Funcion seleccionada:", funcion.fechaHoraInicio);
     };
 
     return (
+        
         <div className='w-auto'>
-            <button className="btn btn-outline-primary" onClick={handleClick} key={funcion.idFuncion} type='button'>{funcion.fechaHoraInicio}</button>
+            <button className="btn btn-outline-primary" onClick={handleClick} key={funcion.idFuncion} type='button'>{funcion.fechaHoraInicio.slice(11, 16)}</button>
         </div>
     );
 }
