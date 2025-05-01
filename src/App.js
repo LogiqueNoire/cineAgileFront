@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { Outlet } from "react-router";
 
-import ComJose1 from './precios/ComJose1.jsx';
-import Header from './componentesGenerales/Header'
-import Footer from './componentesGenerales/Footer'
+import ComJose1 from './4 precios/ComJose1.jsx';
+import Header from './0 componentesGenerales/Header'
+import Footer from './0 componentesGenerales/Footer'
 import ScriptGenerarQR from "./servicios/ScriptGenerarQR.js"; // esta es la clase
 
 import "./App.css"

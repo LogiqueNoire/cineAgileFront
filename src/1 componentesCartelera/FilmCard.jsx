@@ -10,7 +10,8 @@ const FilmCard = ({ pelicula }) => {
     
     const handleClick = () => {
         // Cambiar la ruta
-        navigate(`/pelicula/${pelicula.idPelicula}`, { state: { consultaSedesPorPelicula: ejemplo } });
+        console.log("Pelicula seleccionada:", pelicula);
+        navigate(`/funcion/pelicula/`, { state: { consultaIdPelicula: pelicula.idPelicula } });
     };
 
     return (

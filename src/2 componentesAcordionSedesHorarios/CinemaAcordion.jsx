@@ -1,88 +1,46 @@
 import './CinemaAcordion.css';
-import React from 'react';
 import ScreeningButton from './ScreeningButton.jsx';
 
-const CinemaAcordion = ({ sede, funciones }) => {
+const CinemaAcordion = ({ data }) => {
     return (
-        <div className='mx-3'>
-            <div className="card">
-                <button className="card-header" type="button" data-bs-toggle="collapse" data-bs-target={"#" + sede.replace(/\s+/g, '')}
-                    aria-expanded="false" aria-controls={sede.replace(/\s+/g, '')}>
-                    <h5 className='text-start'>
-                        {sede}
-                    </h5>
-                </button>
-                <div className="card-body collapse" id={sede.replace(/\s+/g, '')}>
-                    {funciones.some((funcion) => funcion.dimension === "2D" && funcion.categoria === "Regular")
-                        ?
-                        <>
-                            <h5 className="card-title">2D Regular</h5>
-                            <div className="d-flex row mb-2">
-                                {Object.keys(funciones).map((key) => {
-                                    if (funciones[key].dimension === "2D" && funciones[key].categoria === "Regular") {
-                                        return <ScreeningButton funcion={funciones[key]}></ScreeningButton>
+        <div className="mx-3">
+            {data.funciones.map((sede) => (
+                <div key={sede.idSede} className="card mb-3">
+                    <button
+                        className="card-header"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target={`#${sede.nombreSede.replace(/\s+/g, '')}`}
+                        aria-expanded="false"
+                        aria-controls={sede.nombreSede.replace(/\s+/g, '')}
+                    >
+                        <h5 className='text-start'>{sede.nombreSede}</h5>
+                    </button>
 
-                                    }
-                                })}
-                            </div>
-                        </>
-                        :
-                        <></>
-                    }
-                    {funciones.some((funcion) => funcion.dimension === "2D" && funcion.categoria === "Premium")
-                        ?
-                        <>
-                            <h5 className="card-title">2D Premium</h5>
-                            <div className="d-flex row mb-2">
-                                {Object.keys(funciones).map((key) => {
-                                    if (funciones[key].dimension === "2D" && funciones[key].categoria === "Premium") {
-                                        return <ScreeningButton funcion={funciones[key]}></ScreeningButton>
+                    <div className="card-body collapse" id={sede.nombreSede.replace(/\s+/g, '')}>
+                        {["2D Regular", "2D Premium", "3D Regular", "3D Premium"].map((tipo) => {
+                            const [dimension, categoria] = tipo.split(" ");
 
-                                    }
-                                })}
-                            </div>
-                        </>
-                        :
-                        <></>
-                    }
-                    {funciones.some((funcion) => funcion.dimension === "3D" && funcion.categoria === "Regular")
-                        ?
-                        <>
-                            <h5 className="card-title">3D Regular</h5>
-                            <div className="row mb-2">
-                                {Object.keys(funciones).map((key) => {
-                                    if (funciones[key].dimension === "3D" && funciones[key].categoria === "Regular") {
-                                        return <ScreeningButton funcion={funciones[key]}></ScreeningButton>
+                            const funcionesFiltradas = sede.funciones.filter(
+                                f => f.dimension === dimension && f.categoria === categoria
+                            );
 
-
-
-                                    }
-                                })}
-                            </div>
-                        </>
-                        :
-                        <></>
-                    }
-                    {funciones.some((funcion) => funcion.dimension === "3D" && funcion.categoria === "Premium")
-                        ?
-                        <>
-                            <h5 className="card-title">3D Premium</h5>
-                            <div className="row mb-2">
-                                {Object.keys(funciones).map((key) => {
-                                    if (funciones[key].dimension === "3D" && funciones[key].categoria === "Premium") {
-                                        return <ScreeningButton funcion={funciones[key]}></ScreeningButton>
-
-                                    }
-                                })}
-                            </div>
-                        </>
-                        :
-                        <></>
-                    }
+                            return funcionesFiltradas.length > 0 ? (
+                                <div key={tipo}>
+                                    <h5 className="card-title">{tipo}</h5>
+                                    <div className="row mb-2">
+                                        {funcionesFiltradas.map(funcion => (
+                                            <ScreeningButton key={funcion.idFuncion} funcion={funcion} />
+                                        ))}
+                                    </div>
+                                </div>
+                            ) : null;
+                        })}
+                    </div>
                 </div>
-            </div>
+            ))}
         </div>
     );
-}
+};
 
 export default CinemaAcordion;

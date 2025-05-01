@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom/client';
 import App from './App.js';
 import MostrarSedesHorarios from './MostrarSedesHorarios.js';
 import Inicio from './Inicio.jsx'
-import ButacaSelect from './componentesVenta/ButacaSelect.jsx'
+import ButacaSelect from './3 componentesVenta/ButacaSelect.jsx'
 
 import { BrowserRouter, Routes, Route } from 'react-router';
 
@@ -17,7 +17,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
                 ruta por defecto. Esto nos permite cambiar entre páginas sin necesidad de recargar. */ }
                 <Route path='/' element={ <App /> }>
                     <Route index element={ <Inicio /> } />
-                    <Route path='/pelicula/:id' element={ <MostrarSedesHorarios /> }/>
+                    <Route path='/funcion/pelicula/' element={ <MostrarSedesHorarios /> }/>
                 </Route>
 
                 <Route path='/butacas' element={ <ButacaSelect idSala={ 5 } /> }/>
