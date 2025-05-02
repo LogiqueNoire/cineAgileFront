@@ -21,6 +21,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
                     <Route index element={ <Inicio /> } />
                     <Route path='/funcion/pelicula/' element={ <PeliculaSedes /> }/>
                     <Route path='/compra' element={ <FlujoVenta /> } />
+                    <Route path='/precios' element={ <FlujoVenta /> } />
+                     
+
                 </Route>
 
                 <Route path='/butacas' element={ <ButacaSelect idSala={ 5 } /> }/>
