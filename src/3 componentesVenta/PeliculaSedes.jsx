@@ -11,6 +11,7 @@ const formatearTiempo = (fecha) => {
     } else {
         return format(fecha, `yyyy-MM-dd.HH:mm`).replace('.', 'T')
     }
+
 }
 
 const formatearTiempoSoloFecha = (fecha) => {
@@ -19,7 +20,8 @@ const formatearTiempoSoloFecha = (fecha) => {
 
 const PeliculaSedes = () => {
     const location = useLocation();
-    const { consultaIdPelicula } = location.state || {};
+    const { consultaIdPelicula, nombrePelicula, imagenPeli, sinopsis } = location.state || {};
+
     // Formatear la fecha en formato 'yyyy-MM-ddTHH:mm'
     const hoy = useRef(new Date());
     const [fecha, setfecha] = useState(hoy.current);
@@ -50,7 +52,7 @@ const PeliculaSedes = () => {
             setfecha(formatearTiempo(fechaActual));
             return;
         }
-        
+
         const fechaACambiar = new Date(`${e.target.value}T00:00`);
         setfecha(fechaACambiar);
     }
@@ -81,7 +83,7 @@ const PeliculaSedes = () => {
                 </div>
 
             </div>
-
+            <img src={imagenPeli} alt="imagen Peli" />
         </div>
 
         <MostrarSedesHorarios pelicula={ pelicula } fechaFormateada={ formatearTiempo(fecha) } />

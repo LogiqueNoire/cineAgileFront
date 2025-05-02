@@ -31,7 +31,7 @@ const CinemaAcordion = ({ data, pelicula }) => {
                                     <h5 className="card-title">{tipo}</h5>
                                     <div className="row mb-2">
                                         {funcionesFiltradas.map(funcion => (
-                                            <ScreeningButton key={funcion.idFuncion} funcion={funcion} pelicula={pelicula} />
+                                            <ScreeningButton key={funcion.idFuncion} funcion={funcion}/>
                                         ))}
                                     </div>
                                 </div>
