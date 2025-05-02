@@ -2,14 +2,11 @@ import React, { StrictMode } from 'react';
 import ReactDOM from 'react-dom/client';
 
 import App from './App.js';
-import MostrarSedesHorarios from './3 componentesVenta/MostrarSedesHorarios.js';
 import PeliculaSedes from './3 componentesVenta/PeliculaSedes.jsx';
 import Inicio from './Inicio.jsx'
 import ButacaSelect from './3 componentesVenta/ButacaSelect.jsx'
 import FlujoVenta from './3 componentesVenta/FlujoVenta.jsx';
-
 import { BrowserRouter, Routes, Route } from 'react-router';
-import { VentanaPrecios } from './4 precios/VentanaPrecios.jsx';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
     <StrictMode>
@@ -25,7 +22,6 @@ ReactDOM.createRoot(document.getElementById('root')).render(
                     {/*
                     <Route path='/precios' element={ <VentanaPrecios /> } />
                      */}
-                     
 
                 </Route>
 

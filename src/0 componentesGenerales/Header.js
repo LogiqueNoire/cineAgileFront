@@ -4,7 +4,7 @@ import "./Header.css"
 
 const Header = ({ children }) => {
   return (
-    <header className="header">
+    <header className="header shadow">
       <a href="/" className='text-decoration-none'>
         <h1>Cine Agile</h1>
       </a>

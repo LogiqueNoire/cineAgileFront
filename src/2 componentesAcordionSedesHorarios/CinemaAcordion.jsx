@@ -1,12 +1,7 @@
 import './CinemaAcordion.css';
 import ScreeningButton from './ScreeningButton.jsx';
 
-const CinemaAcordion = ({ data, idPelicula, nombrePelicula, imagenPeli }) => {
-    
-    data.funciones.filter(sede => sede === "CineCentro Cajamarca - El Quinde").map(sede => {
-        console.log(sede.funciones)
-    })
-
+const CinemaAcordion = ({ data, pelicula }) => {
     return (
         <div className="mx-3">
             {data.funciones.map((sede) => (
