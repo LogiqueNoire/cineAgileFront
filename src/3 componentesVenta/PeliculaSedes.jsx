@@ -2,6 +2,8 @@ import { useLocation } from "react-router";
 import { useRef, useState } from "react";
 import MostrarSedesHorarios from "./MostrarSedesHorarios";
 import { format } from 'date-fns'
+import React, { useState } from 'react';
+
 
 const formatearTiempo = (fecha) => {
     return format(fecha, `yyyy-MM-dd.HH:mm`).replace('.', 'T')
