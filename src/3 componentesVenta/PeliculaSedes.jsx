@@ -83,7 +83,6 @@ const PeliculaSedes = () => {
                 </div>
 
             </div>
-            <img src={imagenPeli} alt="imagen Peli" />
         </div>
 
         <MostrarSedesHorarios pelicula={ pelicula } fechaFormateada={ formatearTiempo(fecha) } />
