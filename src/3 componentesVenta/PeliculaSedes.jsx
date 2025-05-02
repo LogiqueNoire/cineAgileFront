@@ -10,8 +10,8 @@ const PeliculaSedes = () => {
     // Formatear la fecha en formato 'yyyy-MM-ddTHH:mm'
     const now = new Date().toISOString().slice(0, 19);
     let fechaFormateada = format(now, `yyyy-MM-dd.HH:mm`).replace('.', 'T')
-    const [fecha, setfecha] = useState(fechaFormateada);
-
+    const [fecha, setfecha] = useState(fechaFormateada+'T00:00:00');
+    console.log('fechaformateada', fechaFormateada);
 
     return (<>
         <div className="d-flex justify-content-center align-items-center p-4 bg-light mb-4">
@@ -25,7 +25,7 @@ const PeliculaSedes = () => {
             <img src={imagenPeli} alt="imagen Peli" />
         </div>
 
-        <MostrarSedesHorarios estado={ location.state} fechaFormateada={fechaFormateada} />
+        <MostrarSedesHorarios estado={location.state} fechaFormateada={fechaFormateada} />
     </>);
 };
 
