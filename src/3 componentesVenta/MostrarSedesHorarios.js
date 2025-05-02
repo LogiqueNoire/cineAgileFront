@@ -12,7 +12,11 @@ const MostrarSedesHorarios = ({ estado, fechaFormateada}) => {
     const [sedes, setSedes] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> 5ed0f19417eeeca4225151e28aa340b28e764f6a
     console.log('hello')
 
     useEffect(() => {

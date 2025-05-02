@@ -27,8 +27,7 @@ const SeleccionButaca = ({ funcion }) => {
     }, [ funcion ])
 
     return (
-    <div className='d-block'>
-        <h1>Selecciona tus butacas!</h1>
+    <div className='d-flex'>
         { error && <h2>Error!</h2> }
         { !loading && <ButacaMap butacas={ data } /> }
     </div>)
