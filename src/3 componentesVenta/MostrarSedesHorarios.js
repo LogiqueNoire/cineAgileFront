@@ -12,6 +12,8 @@ const MostrarSedesHorarios = ({ estado, fechaFormateada }) => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
+    console.log('hello')
+
     useEffect(() => {
         if (!consultaIdPelicula) {
             console.warn("No se recibió un id de película válido.");
@@ -20,9 +22,6 @@ const MostrarSedesHorarios = ({ estado, fechaFormateada }) => {
 
         window.scrollTo({ top: 0 });
         let isMounted = true;
-
-
-
 
         const obtenerFunciones = async () => {
             try {
@@ -61,7 +60,7 @@ const MostrarSedesHorarios = ({ estado, fechaFormateada }) => {
         return () => {
             isMounted = false;
         };
-    }, [consultaIdPelicula]);
+    }, [consultaIdPelicula, fechaFormateada]);
 
     if (!consultaIdPelicula) {
         return <p>No se encontró el id de la película.</p>;
