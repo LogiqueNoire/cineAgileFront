@@ -42,10 +42,11 @@ const ButacaMap = ({ butacas }) => {
             let disabled = !butaca || butaca.ocupado ? true : false
             let checked = (butaca && butaca.ocupado) || estaEnSeleccionados({ f: i, c: j })
             let libre = !butaca ? 'butaca-no-existe' : butaca.ocupado ? 'butaca-ocupado' : 'butaca-libre' ;
+            let discapacitado = butaca && butaca.discap ? 'butaca-discapacitado' : ''
 
             fila.push(<td key={key}>
                 <input
-                    className={`butaca-celda ${libre}`}
+                    className={`butaca-celda ${libre} ${discapacitado}`}
                     data-fila={butaca ? i : 'x'}
                     data-columna={butaca ? j : 'x'}
                     type='checkbox'
@@ -67,8 +68,6 @@ const ButacaMap = ({ butacas }) => {
                     {tablaFilas}
                 </tbody>
             </table>
-
-            <p>Seleccionadas: {JSON.stringify(butacaContext.seleccionadas)}</p>
         </div>)
 };
 
