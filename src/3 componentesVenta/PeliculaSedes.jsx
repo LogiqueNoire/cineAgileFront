@@ -60,7 +60,9 @@ const PeliculaSedes = () => {
     const soloFecha = formatearTiempoSoloFecha(fecha);
 
     if (loading) {
-        return <Loading />
+        return <div className="d-flex justify-content-center">
+            <Loading />
+        </div>
     }
 
     if (error) {
