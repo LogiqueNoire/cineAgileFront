@@ -4,6 +4,7 @@ import { useLocation } from 'react-router';
 import FilmContainer from "./FilmContainer";
 import Pelicula from "../servicios/Pelicula"
 import FilmTab from './FilmTab';
+import Loading from '../0 componentesGenerales/Loading';
 
 import "./FilmPanel.css"
 
@@ -49,8 +50,8 @@ const FilmPanel = () => {
     return (<div className='film-panel d-flex flex-column'>
             <FilmTab query={ query.get("tab") } />
             <div className='peli-cuerpo d-flex justify-content-center flex-grow-1'>
-                { loading && <div className='loader align-self-center'></div> }
-                { error && <div className={`alert alert-danger h-25 w-50 text-center`}>Error :/... Intenta recargar la página</div> }
+                { loading && <Loading /> }
+                { error && <div className="alert alert-danger h-25 w-50 text-center">Error :/... Intenta recargar la página</div> }
                 { !loading && <FilmContainer peliculas={peliculas} /> }
             </div>
     </div>)
