@@ -37,7 +37,7 @@ const PeliculaSedes = () => {
             <div className='infoPelicula me-4'>
                 <h2 className='mb-4'>Funciones para película {nombrePelicula}</h2>
                 <div>
-                    <h5 className="mx-3">Fecha:</h5>
+                    <span className="mx-3">Selecciona una fecha:</span>
                     <input type="date" className="mx-3" min={formatearTiempoSoloFecha(hoy.current)} value={soloFecha} onChange={onFechaChange}/>
                 </div>
             </div>
