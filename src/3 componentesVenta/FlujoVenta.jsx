@@ -29,7 +29,11 @@ const FlujoVenta = () => {
                     {pasosCompra[0]}
 
                     <button onClick={() => { navigate(-1) }} >Volver</button>
-                    <button>Siguiente</button>
+                    <button onClick={()=> { navigate(`/precios`,
+                     { state: { consultaIdPelicula: idPelicula, nombrePelicula: nombrePelicula,
+                         imagenPeli: imageUrl, contextData: contextData
+                         } });
+                        }}>Siguiente</button>
                 </div>
             </VentaContextProvider>
         </div>)
