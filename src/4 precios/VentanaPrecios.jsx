@@ -1,12 +1,13 @@
 import React from "react";
 import ComJose1 from "./ComJose1";
 import ComJose3 from "./ComJose3";
+import { useLocation } from "react-router";
 
 export const VentanaPrecios = () => {
     const location = useLocation();
-    const { idPelicula, nombrePelicula, imagenPeli, contextData } = location.state || {};
-    console.log(consultaIdPelicula)
-    console.log(contextData)
+    const { idPelicula, nombrePelicula, imagenPeli, funcion } = location.state || {};
+    console.log(idPelicula)
+    //console.log(contextData)
 
 
     //const navigate = useNavigate();
@@ -19,7 +20,7 @@ export const VentanaPrecios = () => {
     return(
         <div className="d-flex">
             <div className="d-flex justify-content-center">
-                <ComJose3 idPelicula={idPelicula} nombrePelicula={nombrePelicula} imagenPeli={imagenPeli} catePeli={funcion.categoria} sedePeli={funcion.nombreSede} fechaPeli={funcion.fechaHoraInicio} salaPeli={funcion.sala} />
+                <ComJose3 idPelicula={idPelicula} nombrePelicula={nombrePelicula} imagenPeli={imagenPeli} catePeli={funcion.categoria} sedePeli={funcion.nombreSede} fechaPeli={funcion.fechaHoraInicio} salaPeli={funcion.codigoSala} />
             </div>
             <div className="ContieneEntradas">
                 <h3> ENTRADAS GENERALES </h3>

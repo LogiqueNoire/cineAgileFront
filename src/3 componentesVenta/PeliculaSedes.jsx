@@ -5,7 +5,12 @@ import { format } from 'date-fns'
 
 
 const formatearTiempo = (fecha) => {
-    return format(fecha, `yyyy-MM-dd.HH:mm`).replace('.', 'T')
+    if (isNaN(fecha.getTime())) {
+        return format(new Date(), `yyyy-MM-dd.HH:mm`).replace('.', 'T')
+    } else {
+        return format(fecha, `yyyy-MM-dd.HH:mm`).replace('.', 'T')
+    }
+    
 }
 
 const formatearTiempoSoloFecha = (fecha) => {
