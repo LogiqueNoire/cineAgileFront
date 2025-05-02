@@ -6,7 +6,7 @@ import Pelicula from "../servicios/Pelicula";
 import Loading from "../0 componentesGenerales/Loading";
 
 const formatearTiempo = (fecha) => {
-    if (isNaN(fecha.getTime())) {
+    if (isNaN(fecha)) {
         return format(new Date(), `yyyy-MM-dd.HH:mm`).replace('.', 'T')
     } else {
         return format(fecha, `yyyy-MM-dd.HH:mm`).replace('.', 'T')
@@ -65,29 +65,27 @@ const PeliculaSedes = () => {
         return <h1>error</h1>
     }
 
-    return (<>
-        <div className="d-flex justify-content-center align-items-center px-5 py-4 bg-light border shadow mb-4">
-            <div className="d-flex gap-4 align-items-center">
-                <img className="shadow rounded" src={pelicula.imageUrl} alt="imagen Peli" />
-                <div>
-                    <h1 className="display-4"> { pelicula.nombre }</h1>
-                    <p> { pelicula.sinopsis }</p>
-                    
-                    <div className='mt-5'>
-                        <h5 className='my-2'>Opciones</h5>
-                        <div>
-                            <span className="">Selecciona una fecha:</span>
-                            <input type="date" className="mx-1" min={formatearTiempoSoloFecha(hoy.current)} value={soloFecha} onChange={onFechaChange}/>
-                        </div>
+    return (<div>
+        <div className="d-flex justify-content-center gap-4 align-items-center px-5 py-4 bg-light bg-gradient border shadow mb-4">
+            <img className="shadow rounded" src={pelicula.imageUrl} alt="imagen Peli" />
+            <div>
+                <h1 className="display-4"> { pelicula.nombre }</h1>
+                <p> { pelicula.sinopsis }</p>
+                
+                <div className='mt-5'>
+                    <h5 className='my-2'>Opciones</h5>
+                    <div>
+                        <span className="me-2">Selecciona una fecha:</span>
+                        <input type="date" className="mx-1" min={formatearTiempoSoloFecha(hoy.current)} value={soloFecha} onChange={onFechaChange}/>
                     </div>
-
                 </div>
+
             </div>
 
         </div>
 
         <MostrarSedesHorarios pelicula={ pelicula } fechaFormateada={ formatearTiempo(fecha) } />
-    </>);
+    </div>);
 };
 
 export default PeliculaSedes

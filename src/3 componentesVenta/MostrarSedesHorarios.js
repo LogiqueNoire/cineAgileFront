@@ -73,11 +73,12 @@ const MostrarSedesHorarios = ({ pelicula, fechaFormateada }) => {
 
 
     if (sedes.length === 0) {
-        return <p>No se encontraron funciones disponibles.</p>;
+        return <p className='text-center display-6 my-5'>No se encontraron funciones disponibles.</p>;
     }
 
     return (
-        <div className="App p-4">
+        <div className="sedes-horarios mx-5 p-5 my-1 border shadow">
+            <h1 className='display-5 text-center mb-5 round'>Sedes</h1>
             <div className="justify-content-center">
                 {sedes.map((sede) => (
                     <CinemaAcordion data={sede} pelicula={pelicula} />
