@@ -11,7 +11,7 @@ const ScreeningButton = ({ funcion, pelicula }) => {
         // Cambiar la ruta
         //navigate(`/pelicula/${pelicula.idPelicula}/${funcion.idFuncion}`, { state: { consultaSedesPorPelicula: ejemplo } });
         navigate(`/compra`, { state: { funcion, pelicula } })
-        console.log(funcion)
+        console.log(pelicula)
     };
 
     return (
