@@ -1,5 +1,6 @@
 import { useLocation } from "react-router";
 import MostrarSedesHorarios from "./MostrarSedesHorarios";
+import { useState } from "react";
 import { format } from 'date-fns'
 
 const PeliculaSedes = () => {
