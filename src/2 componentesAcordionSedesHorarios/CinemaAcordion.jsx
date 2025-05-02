@@ -2,7 +2,11 @@ import './CinemaAcordion.css';
 import ScreeningButton from './ScreeningButton.jsx';
 
 const CinemaAcordion = ({ data, idPelicula, nombrePelicula, imagenPeli }) => {
-    console.log("Data",data);
+    
+    data.funciones.filter(sede => sede === "CineCentro Cajamarca - El Quinde").map(sede => {
+        console.log(sede.funciones)
+    })
+
     return (
         <div className="mx-3">
             {data.funciones.map((sede) => (
@@ -19,8 +23,9 @@ const CinemaAcordion = ({ data, idPelicula, nombrePelicula, imagenPeli }) => {
                     </button>
 
                     <div className="card-body collapse" id={sede.nombreSede.replace(/\s+/g, '')}>
-                        {["2D Regular", "2D Premium", "3D Regular", "3D Premium"].map((tipo) => {
+                        {["2D Regular", "2D Prime", "3D Regular", "3D Prime"].map((tipo) => {
                             const [dimension, categoria] = tipo.split(" ");
+
 
                             const funcionesFiltradas = sede.funciones.filter(
                                 f => f.dimension === dimension && f.categoria === categoria
