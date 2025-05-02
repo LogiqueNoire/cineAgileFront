@@ -3,6 +3,7 @@ import React from "react";
 
 const ComJose3 = ({ idPelicula, nombrePelicula, imagenPeli, catePeli, sedePeli, fechaPeli, salaPeli }) => {
     console.log("imagenPeli", imagenPeli)
+    console.log('salaPeli', salaPeli)
     return (
         <div className="Rojo bg-light">
             <div className=" d-flex justify-content-center">

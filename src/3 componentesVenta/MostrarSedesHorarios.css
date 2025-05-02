@@ -1,3 +1,15 @@
+
+img{
+    width: 15vw;
+    height: auto;
+    
+}
+
+.infoPelicula{
+    width: 50%;
+    padding-inline: 20%;
+}
+
 @media (max-width: 768px) {
     h2,
     h3,
@@ -8,15 +20,12 @@
     input{
         justify-self: center;
     }
-    
-}
+    card-title{
+        text-align: left;
+    }
 
-img{
-    width: 15vw;
-    height: auto;
+    .infoPelicula{
+        padding-inline: 0%;
+    }
     
-}
-
-.infoPelicula{
-    padding-inline: 20%;
 }
