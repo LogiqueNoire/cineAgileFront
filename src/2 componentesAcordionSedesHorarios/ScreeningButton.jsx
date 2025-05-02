@@ -5,12 +5,12 @@ import Funcion from '../servicios/Funcion.js';
 import { useEffect, useMemo, useState } from 'react';
 import { useLocation } from 'react-router';
 
-const ScreeningButton = ({ funcion, idPelicula, nombrePelicula, imagenPeli, catePeli , director, sinopsis }) => {
+const ScreeningButton = ({ funcion, pelicula }) => {
     const navigate = useNavigate();
     const handleClick = () => {
         // Cambiar la ruta
         //navigate(`/pelicula/${pelicula.idPelicula}/${funcion.idFuncion}`, { state: { consultaSedesPorPelicula: ejemplo } });
-        navigate(`/compra`, { state: { funcion, idPelicula, nombrePelicula, imagenPeli, catePeli, director, sinopsis } })
+        navigate(`/compra`, { state: { funcion, pelicula } })
         console.log(funcion)
     };
 

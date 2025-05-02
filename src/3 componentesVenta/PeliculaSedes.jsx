@@ -1,8 +1,9 @@
 import { useLocation } from "react-router";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import MostrarSedesHorarios from "./MostrarSedesHorarios";
 import { format } from 'date-fns'
-
+import Pelicula from "../servicios/Pelicula";
+import Loading from "../0 componentesGenerales/Loading";
 
 const formatearTiempo = (fecha) => {
     if (isNaN(fecha.getTime())) {
@@ -10,7 +11,6 @@ const formatearTiempo = (fecha) => {
     } else {
         return format(fecha, `yyyy-MM-dd.HH:mm`).replace('.', 'T')
     }
-    
 }
 
 const formatearTiempoSoloFecha = (fecha) => {
@@ -19,10 +19,29 @@ const formatearTiempoSoloFecha = (fecha) => {
 
 const PeliculaSedes = () => {
     const location = useLocation();
-    const { consultaIdPelicula, nombrePelicula, imagenPeli, catePeli, sinopsis } = location.state || {};
+    const { consultaIdPelicula } = location.state || {};
     // Formatear la fecha en formato 'yyyy-MM-ddTHH:mm'
     const hoy = useRef(new Date());
     const [fecha, setfecha] = useState(hoy.current);
+
+    const [ pelicula, setPelicula ] = useState(null)
+    const [ loading, setLoading ] = useState(true)
+    const [ error, setError ] = useState(null)
+
+    useEffect(() => {
+        Pelicula.mostrarPelicula(consultaIdPelicula).then(data => {
+            setPelicula(data)
+        }).catch(err => {
+            setError(err)
+        }).finally(() => {
+            setLoading(false)
+        })
+
+        return () => {
+            setError(null)
+            setLoading(true)
+        }
+    }, [ consultaIdPelicula ])
 
     const onFechaChange = (e) => {
         const fechaActual = new Date()
@@ -38,22 +57,36 @@ const PeliculaSedes = () => {
 
     const soloFecha = formatearTiempoSoloFecha(fecha);
 
+    if (loading) {
+        return <Loading />
+    }
+
+    if (error) {
+        return <h1>error</h1>
+    }
+
     return (<>
-        <div className="d-flex justify-content-center align-items-center p-4 bg-light mb-4">
-            <div className='infoPelicula me-4'>
-                <h2 className='mb-4'>Funciones para película {nombrePelicula}</h2>
+        <div className="d-flex justify-content-center align-items-center px-5 py-4 bg-light border shadow mb-4">
+            <div className="d-flex gap-4 align-items-center">
+                <img className="shadow rounded" src={pelicula.imageUrl} alt="imagen Peli" />
                 <div>
-                    <span className="mx-3">Selecciona una fecha:</span>
-                    <input type="date" className="mx-3" min={formatearTiempoSoloFecha(hoy.current)} value={soloFecha} onChange={onFechaChange}/>
+                    <h1 className="display-4"> { pelicula.nombre }</h1>
+                    <p> { pelicula.sinopsis }</p>
+                    
+                    <div className='mt-5'>
+                        <h5 className='my-2'>Opciones</h5>
+                        <div>
+                            <span className="">Selecciona una fecha:</span>
+                            <input type="date" className="mx-1" min={formatearTiempoSoloFecha(hoy.current)} value={soloFecha} onChange={onFechaChange}/>
+                        </div>
+                    </div>
+
                 </div>
             </div>
-            <img src={imagenPeli} alt="imagen Peli" />
-            <h3>{catePeli} </h3>
-            <h3> {"Sinopsis:" +sinopsis}</h3>
-            <h3> {"Categoría:" +catePeli}</h3>
+
         </div>
 
-        <MostrarSedesHorarios estado={ location.state} fechaFormateada={ formatearTiempo(fecha) } />
+        <MostrarSedesHorarios pelicula={ pelicula } fechaFormateada={ formatearTiempo(fecha) } />
     </>);
 };
 
