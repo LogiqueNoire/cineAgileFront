@@ -20,7 +20,7 @@ export const VentanaPrecios = () => {
     return(
         <div className="d-flex">
             <div className="d-flex justify-content-center">
-                <ComJose3 idPelicula={idPelicula} nombrePelicula={nombrePelicula} imagenPeli={imagenPeli} catePeli={funcion.categoria} sedePeli={funcion.nombreSede} fechaPeli={funcion.fechaHoraInicio} salaPeli={funcion.sala} />
+                <ComJose3 idPelicula={idPelicula} nombrePelicula={nombrePelicula} imagenPeli={imagenPeli} catePeli={funcion.categoria} sedePeli={funcion.nombreSede} fechaPeli={funcion.fechaHoraInicio} salaPeli={funcion.codigoSala} />
             </div>
             <div className="ContieneEntradas">
                 <h3> ENTRADAS GENERALES </h3>
