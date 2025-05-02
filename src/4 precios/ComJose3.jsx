@@ -14,6 +14,7 @@ const ComJose3 = ({ idPelicula, nombrePelicula, imagenPeli, catePeli, sedePeli, 
             <h3 className="text-center  m-3">{"Fecha: "+fechaPeli.slice(0,10)}</h3>
             <h3 className="text-center  m-3">{"Hora inicio: "+fechaPeli.slice(11,16)}</h3>
             <h3 className="text-center  m-3">{"Sala: " +salaPeli}</h3>
+            <h3 className="text center m-3">Butacas: </h3>
         </div>
 
     );
