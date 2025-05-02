@@ -14,6 +14,7 @@ const VentaContextProvider = ({ children }) => {
 
     return (
         <VentaContext.Provider value={ contextData }>
+            
             { children }
         </VentaContext.Provider>
     )

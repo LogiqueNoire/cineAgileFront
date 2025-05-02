@@ -7,11 +7,12 @@ import Loading from '../0 componentesGenerales/Loading.jsx';
 
 
 
-const MostrarSedesHorarios = ({ estado, fechaFormateada }) => {
+const MostrarSedesHorarios = ({ estado, fechaFormateada, estado2 }) => {
     const { consultaIdPelicula, nombrePelicula, imagenPeli, catePeli, director } = estado
     const [sedes, setSedes] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    cosnt [catePeli, director, sinopsis] = estado2;
 
     console.log('hello')
 

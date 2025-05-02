@@ -2,8 +2,6 @@ import React from 'react';
 import './FilmCard.css';
 import { useNavigate } from 'react-router';
 
-//para probar, se importa un json de ejemplo
-import ejemplo from "../ejemploFuncionesPelicula.json";
 
 const FilmCard = ({ pelicula }) => {
     const navigate = useNavigate();
