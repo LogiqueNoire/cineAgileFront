@@ -19,7 +19,7 @@ const formatearTiempoSoloFecha = (fecha) => {
 
 const PeliculaSedes = () => {
     const location = useLocation();
-    const { consultaIdPelicula, nombrePelicula, imagenPeli } = location.state || {};
+    const { consultaIdPelicula, nombrePelicula, imagenPeli, catePeli, sinopsis } = location.state || {};
     // Formatear la fecha en formato 'yyyy-MM-ddTHH:mm'
     const hoy = useRef(new Date());
     const [fecha, setfecha] = useState(hoy.current);
@@ -48,6 +48,9 @@ const PeliculaSedes = () => {
                 </div>
             </div>
             <img src={imagenPeli} alt="imagen Peli" />
+            <h3>{catePeli} </h3>
+            <h3> {"Sinopsis:" +sinopsis}</h3>
+            <h3> {"Categoría:" +catePeli}</h3>
         </div>
 
         <MostrarSedesHorarios estado={ location.state} fechaFormateada={ formatearTiempo(fecha) } />
