@@ -62,12 +62,15 @@ const ButacaMap = ({ butacas }) => {
     }
 
     return (
-        <div className='d-block'>
-            <table className="butaca-map">
-                <tbody>
-                    {tablaFilas}
-                </tbody>
-            </table>
+        <div className='d-flex flex-column justify-align-center butaca-map'>
+            <h1>Pantalla</h1>
+            <div className='butaca-container'>
+                <table className="butaca-table">
+                    <tbody>
+                        {tablaFilas}
+                    </tbody>
+                </table>
+            </div>
         </div>)
 };
 

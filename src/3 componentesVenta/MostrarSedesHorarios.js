@@ -12,7 +12,6 @@ const MostrarSedesHorarios = ({ estado, fechaFormateada, estado2 }) => {
     const [sedes, setSedes] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    cosnt [catePeli, director, sinopsis] = estado2;
 
     console.log('hello')
 
