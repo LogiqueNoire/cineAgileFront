@@ -9,6 +9,36 @@
     height: 100%;
 }
 
-@media (screen) {
+.butaca-celda {
+    appearance: none;
+
+    background-color: white;
+    border-style: solid;
+    border-radius: 50%;
+
+    overflow: hidden;
     
+    display: grid;
+    place-content: center;
 }
+
+.butaca-no-existe {
+    border-color: rgba(255, 255, 255, 0);
+}
+
+.butaca-libre {
+    border-color: rgb(104, 104, 255);
+}
+
+.butaca-ocupado {
+    border-color: rgb(255, 104, 104);
+}
+
+.butaca-celda:checked::before {
+    content: " ";
+    width: 2em;
+    height: 2em;
+    box-shadow: inset 2em 2em rgb(104, 104, 255);
+
+    border-radius: 50%;
+ }

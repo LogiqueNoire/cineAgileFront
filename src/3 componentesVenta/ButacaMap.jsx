@@ -41,9 +41,11 @@ const ButacaMap = ({ butacas }) => {
             let key = `${i}-${j}`
             let disabled = !butaca || butaca.ocupado ? true : false
             let checked = (butaca && butaca.ocupado) || estaEnSeleccionados({ f: i, c: j })
+            let libre = !butaca ? 'butaca-no-existe' : butaca.ocupado ? 'butaca-ocupado' : 'butaca-libre' ;
 
             fila.push(<td key={key}>
                 <input
+                    className={`butaca-celda ${libre}`}
                     data-fila={butaca ? i : 'x'}
                     data-columna={butaca ? j : 'x'}
                     type='checkbox'
