@@ -10,7 +10,7 @@ const formatearTiempo = (fecha) => {
     } else {
         return format(fecha, `yyyy-MM-dd.HH:mm`).replace('.', 'T')
     }
-    
+
 }
 
 const formatearTiempoSoloFecha = (fecha) => {
@@ -19,7 +19,8 @@ const formatearTiempoSoloFecha = (fecha) => {
 
 const PeliculaSedes = () => {
     const location = useLocation();
-    const { consultaIdPelicula, nombrePelicula, imagenPeli, catePeli, sinopsis } = location.state || {};
+    const { consultaIdPelicula, nombrePelicula, imagenPeli, sinopsis } = location.state || {};
+
     // Formatear la fecha en formato 'yyyy-MM-ddTHH:mm'
     const hoy = useRef(new Date());
     const [fecha, setfecha] = useState(hoy.current);
@@ -31,7 +32,7 @@ const PeliculaSedes = () => {
             setfecha(formatearTiempo(fechaActual));
             return;
         }
-        
+
         const fechaACambiar = new Date(`${e.target.value}T00:00`);
         setfecha(fechaACambiar);
     }
@@ -39,21 +40,19 @@ const PeliculaSedes = () => {
     const soloFecha = formatearTiempoSoloFecha(fecha);
 
     return (<>
-        <div className="d-flex justify-content-center align-items-center p-4 bg-light mb-4">
+        <div className="d-flex justify-content-center align-items-center p-4 bg-light m-4">
             <div className='infoPelicula me-4'>
-                <h2 className='mb-4'>Funciones para película {nombrePelicula}</h2>
+                <h2 className='mb-4'>{nombrePelicula}</h2>
+                <h5 className='mb-4'> {"Sinopsis: " + sinopsis}</h5>
                 <div>
                     <span className="mx-3">Selecciona una fecha:</span>
-                    <input type="date" className="mx-3" min={formatearTiempoSoloFecha(hoy.current)} value={soloFecha} onChange={onFechaChange}/>
+                    <input type="date" className="mx-3" min={formatearTiempoSoloFecha(hoy.current)} value={soloFecha} onChange={onFechaChange} />
                 </div>
             </div>
             <img src={imagenPeli} alt="imagen Peli" />
-            <h3>{catePeli} </h3>
-            <h3> {"Sinopsis:" +sinopsis}</h3>
-            <h3> {"Categoría:" +catePeli}</h3>
         </div>
 
-        <MostrarSedesHorarios estado={ location.state} fechaFormateada={ formatearTiempo(fecha) } />
+        <MostrarSedesHorarios estado={location.state} fechaFormateada={formatearTiempo(fecha)} />
     </>);
 };
 
