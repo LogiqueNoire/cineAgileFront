@@ -19,17 +19,17 @@ const FlujoVenta = () => {
     ]
 
     return (
-        <div className="d-flex">
+        <div className="d-flex my-4 py-4 border border-2">
             <VentaContextProvider>
-                <div className="d-flex justify-content-center">
+                <div className="d-flex justify-content-center px-4 border-end">
                     <ComJose3 idPelicula={idPelicula} nombrePelicula={nombrePelicula} imagenPeli={imagenPeli}
                         catePeli={funcion.categoria} sedePeli={funcion.nombreSede} fechaPeli={funcion.fechaHoraInicio} salaPeli={funcion.codigoSala} />
                 </div>
                 <div className="d-flex flex-column justify-content-center align-items-center flex-grow-1">
                     { pasosCompra[0] }
                     <div>
-                        <button >Siguiente</button>
                         <button onClick={() => { navigate(-1) }} >Volver</button>
+                        <button >Siguiente</button>
                     </div>
                 </div>
             </VentaContextProvider>
