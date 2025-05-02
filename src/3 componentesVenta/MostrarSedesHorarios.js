@@ -3,6 +3,7 @@ import { useLocation } from 'react-router-dom';
 import CinemaAcordion from '../2 componentesAcordionSedesHorarios/CinemaAcordion.jsx';
 import Funcion from '../servicios/Funcion.js';
 import './MostrarSedesHorarios.css';
+import Loading from '../0 componentesGenerales/Loading.jsx';
 
 
 
@@ -59,16 +60,27 @@ const MostrarSedesHorarios = ({ estado, fechaFormateada }) => {
 
         return () => {
             isMounted = false;
+            setLoading(true)
+            setError(null)
         };
     }, [consultaIdPelicula, fechaFormateada]);
+
+    if (error) {
+        return <div className='w-100 d-flex justify-content-center'>
+            <div className='alert alert-danger h-25 w-50 text-center justify-self-center'>No se pudo cargar las funciones... Intenta recargar la página!</div>
+        </div>
+    }
+
+    if (loading) {
+        return <div className='w-100 d-flex justify-content-center'>
+            <Loading />
+        </div> 
+    }
 
     if (!consultaIdPelicula) {
         return <p>No se encontró el id de la película.</p>;
     }
 
-    if (loading) {
-        return <p>Cargando funciones...</p>;
-    }
 
     if (sedes.length === 0) {
         return <p>No se encontraron funciones disponibles.</p>;
