@@ -21,18 +21,18 @@ const FlujoVenta = () => {
     return (
         <div className="d-flex">
             <div className="d-flex justify-content-center">
-                <ComJose3 idPelicula={idPelicula} nombrePelicula={nombrePelicula} imagenPeli={imagenPeli} catePeli={funcion.categoria} sedePeli={funcion.nombreSede} fechaPeli={funcion.fechaHoraInicio} salaPeli={funcion.codigoSala} />
+                <ComJose3 idPelicula={idPelicula} nombrePelicula={nombrePelicula} imagenPeli={imagenPeli}
+                catePeli={funcion.categoria} sedePeli={funcion.nombreSede} fechaPeli={funcion.fechaHoraInicio} salaPeli={funcion.codigoSala} />
             </div>
             <VentaContextProvider>
                 <div className="d-block m-4 align-self-center">
 
                     {pasosCompra[0]}
-
                     <button onClick={() => { navigate(-1) }} >Volver</button>
                     <button onClick={()=> { navigate(`/precios`,
-                     { state: { consultaIdPelicula: idPelicula, nombrePelicula: nombrePelicula,
-                         imagenPeli: imagenPeli
-                         } });
+                     { state: { idPelicula: idPelicula, nombrePelicula: nombrePelicula,
+                         imagenPeli: imagenPeli, funcion: funcion }
+                          });
                         }}>Siguiente</button>
                 </div>
             </VentaContextProvider>

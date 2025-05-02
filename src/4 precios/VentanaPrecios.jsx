@@ -1,12 +1,13 @@
 import React from "react";
 import ComJose1 from "./ComJose1";
 import ComJose3 from "./ComJose3";
+import { useLocation } from "react-router";
 
 export const VentanaPrecios = () => {
     const location = useLocation();
-    const { idPelicula, nombrePelicula, imagenPeli, contextData } = location.state || {};
-    console.log(consultaIdPelicula)
-    console.log(contextData)
+    const { idPelicula, nombrePelicula, imagenPeli, funcion } = location.state || {};
+    console.log(idPelicula)
+    //console.log(contextData)
 
 
     //const navigate = useNavigate();
