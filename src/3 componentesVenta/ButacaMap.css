@@ -13,8 +13,8 @@
 }
 
 .butaca-table td {
-    width: 50px;
-    height: 50px;
+    width: 2rem;
+    height: 2rem;
 }
 
 .butaca-table td input {
@@ -48,10 +48,11 @@
 }
 
 .butaca-celda:checked::before {
+    --butaca-size: 1em;
     content: " ";
-    width: 2em;
-    height: 2em;
-    box-shadow: inset 2em 2em rgb(104, 104, 255);
+    width: var(--butaca-size);
+    height: var(--butaca-size);
+    box-shadow: inset var(--butaca-size) var(--butaca-size) rgb(104, 104, 255);
 
     border-radius: 50%;
  }
