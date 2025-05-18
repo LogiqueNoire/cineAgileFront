@@ -15,12 +15,12 @@ const ComJose1 = ({ nombre, texto, precio }) => {
         }
     };
     return (
-        <div className="FilaPrecio d-flex justify-content-center">
+        <div className="FilaPrecio w-100 d-flex justify-content-between align-items-center">
             <div className="nombre w-50">
-                <h2 className="text-center m-0">{nombre}</h2>
+                <h2 className="m-0">{nombre}</h2>
                 <div className="texto w-100">
-                    <p className="text-center">{texto}</p>
-                    <div className="precio w-100 text-center">
+                    <p className="">{texto}</p>
+                    <div className="precio w-100">
                         <p className="m-0">{precio} </p>
                     </div>
                 </div>

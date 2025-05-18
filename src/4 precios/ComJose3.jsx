@@ -2,13 +2,21 @@ import React, { useContext} from "react";
 import { VentaContext } from "../3 componentesVenta/VentaContextProvider.jsx"
 
 import './ComponenteJose.css'
+import { se } from "date-fns/locale";
 
-const ComJose3 = ({ pelicula, catePeli, sedePeli, fechaPeli, salaPeli }) => {
+const ComJose3 = ({ pelicula, catePeli, sedePeli, fechaPeli, salaPeli, seleccionadas }) => {
     const butacas = useContext(VentaContext);
+
+    if (seleccionadas === undefined) {
+        seleccionadas = JSON.stringify(butacas.butacaContext.seleccionadas.length);
+    } else {
+        butacas.butacaContext.seleccionadas = seleccionadas;
+    }
+    //${JSON.stringify(butacas.butacaContext.seleccionadas.length)}
     return (
         <div className="Rojo">
             <div className="d-flex justify-content-center">
-                <img className="img-fluid" src={pelicula.imageUrl} alt="imagen" ></img>
+                <img className="img-fluid imagenPelicula" src={pelicula.imageUrl} alt="imagen"></img>
             </div>
 
             <div className="d-flex flex-column align-items-center">
@@ -18,7 +26,7 @@ const ComJose3 = ({ pelicula, catePeli, sedePeli, fechaPeli, salaPeli }) => {
                 <h5 className="m-2">{"Fecha: "+fechaPeli.slice(0,10)}</h5>
                 <h5 className="m-2">{"Hora inicio: "+fechaPeli.slice(11,16)}</h5>
                 <h5 className="m-2">{"Sala: " +salaPeli}</h5>
-                <h5 className="m-2">{ `Butacas: ${JSON.stringify(butacas.butacaContext.seleccionadas.length)} `}</h5>
+                <h5 className="m-2">{'Butacas'+seleccionadas}</h5>
             </div>
         </div>
 

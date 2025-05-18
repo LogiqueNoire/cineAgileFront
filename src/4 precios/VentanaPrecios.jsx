@@ -5,10 +5,9 @@ import { useLocation } from "react-router";
 
 export const VentanaPrecios = () => {
     const location = useLocation();
-    const { idPelicula, nombrePelicula, imagenPeli, funcion } = location.state || {};
-    console.log(idPelicula)
-    //console.log(contextData)
+    const { pelicula, funcion } = location.state || {};
 
+    console.log("Ventana precios",pelicula)
 
     //const navigate = useNavigate();
     
@@ -18,11 +17,8 @@ export const VentanaPrecios = () => {
     //};
 
     return(
-        <div className="d-flex">
-            <div className="d-flex justify-content-center">
-                <ComJose3 idPelicula={idPelicula} nombrePelicula={nombrePelicula} imagenPeli={imagenPeli} catePeli={funcion.categoria} sedePeli={funcion.nombreSede} fechaPeli={funcion.fechaHoraInicio} salaPeli={funcion.codigoSala} />
-            </div>
-            <div className="ContieneEntradas">
+        <div className="d-flex mb-4">
+            <div className="ContieneEntradas gap-3 d-flex flex-column justify-content-center align-items-center">
                 <h3> ENTRADAS GENERALES </h3>
                 <ComJose1 nombre="GENERAL 2D" precio ="S/27.00" ></ComJose1>
                 <ComJose1 nombre="Mayores 60 2D" precio ="S/25.00" ></ComJose1>

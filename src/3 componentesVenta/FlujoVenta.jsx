@@ -3,15 +3,31 @@ import { useLocation, useNavigate } from "react-router";
 import ButacaSelect from './ButacaSelect'
 import { VentaContextProvider } from './VentaContextProvider'
 import ComJose3 from '../4 precios/ComJose3'
+import { VentanaPrecios } from '../4 precios/VentanaPrecios'
+import { useState } from "react";
 
 const FlujoVenta = () => {
+    const [indice, setIndice] = useState(0);
     const navigate = useNavigate()
     const location = useLocation()
     const { funcion, pelicula } = location.state
+    console.log(funcion)
+    console.log(pelicula)
 
     const pasosCompra = [
-        <ButacaSelect funcion={funcion} />
+        <ButacaSelect funcion={funcion} />,
+        <VentanaPrecios />
     ]
+
+    const navigatePrecios = () => {
+    navigate(`/funcion/precios`,
+        {
+            state: {
+                pelicula: pelicula, funcion: funcion
+            }
+        });
+};
+    
 
     return (
         <div className="d-flex my-4 py-4 border border-2">
@@ -20,10 +36,10 @@ const FlujoVenta = () => {
                     <ComJose3 pelicula={pelicula} sedePeli={funcion.nombreSede} fechaPeli={funcion.fechaHoraInicio} salaPeli={funcion.codigoSala} />
                 </div>
                 <div className="d-flex flex-column justify-content-center align-items-center flex-grow-1">
-                    { pasosCompra[0] }
+                    {pasosCompra[indice]}
                     <div>
                         <button onClick={() => { navigate(-1) }} >Volver</button>
-                        <button >Siguiente</button>
+                        <button onClick={() => {setIndice(indice+1)} }>Siguiente</button>
                     </div>
                 </div>
             </VentaContextProvider>
@@ -32,12 +48,3 @@ const FlujoVenta = () => {
 
 export default FlujoVenta;
 
-/*onClick={() => {
-                        navigate(`/precios`,
-                            {
-                                state: {
-                                    idPelicula: idPelicula, nombrePelicula: nombrePelicula,
-                                    imagenPeli: imagenPeli, funcion: funcion
-                                }
-                            });
-                    }} */

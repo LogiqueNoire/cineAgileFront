@@ -71,7 +71,7 @@ const PeliculaSedes = () => {
 
     return (<div>
         <div className="d-flex justify-content-center gap-4 align-items-center px-5 py-4 bg-light bg-gradient border shadow mb-4">
-            <img className="shadow rounded" src={pelicula.imageUrl} alt="imagen Peli" />
+            <img className="imagenPelicula shadow rounded" src={pelicula.imageUrl} alt="imagen Peli"  />
             <div>
                 <h1 className="display-4"> { pelicula.nombre }</h1>
                 <p> { pelicula.sinopsis }</p>
@@ -82,7 +82,7 @@ const PeliculaSedes = () => {
                         <span className="me-2">Selecciona una fecha:</span>
                         <input type="date" className="mx-1" min={formatearTiempoSoloFecha(hoy.current)} value={soloFecha} onChange={onFechaChange}/>
                     </div>
-                </div>
+                </div> 
 
             </div>
         </div>

@@ -12,7 +12,7 @@
     }
 
     .ContieneEntradas{
-        width: 100vw;
+        width: auto;
         justify-self: center;
     }
 }
