@@ -5,7 +5,6 @@ import { Outlet } from "react-router";
 import Header from './0 componentesGenerales/Header'
 import Footer from './0 componentesGenerales/Footer'
 import ScriptGenerarQR from "./servicios/ScriptGenerarQR.js"; // esta es la clase
-import AddFilm from './AgregarPelicula/AddFilm.js';
 
 import "./App.css"
 

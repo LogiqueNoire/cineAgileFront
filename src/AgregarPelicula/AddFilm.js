@@ -5,7 +5,6 @@ import { Link, useNavigate } from 'react-router-dom';
 export default function AddFilm() {
   const navigate = useNavigate();
 
-  // Estado con los campos que usas en tu backend para Pelicula
   const [pelicula, setPelicula] = useState({
 
     nombre: '',
@@ -21,7 +20,6 @@ export default function AddFilm() {
     sinopsis: '',
   });
 
-  // Desestructuramos para usar en los inputs
   const {
     
     nombre,
@@ -37,7 +35,6 @@ export default function AddFilm() {
     sinopsis,
   } = pelicula;
 
-  // Cambia el estado cuando escribes en los inputs
   const onInputChange = (e) => {
     setPelicula({
       ...pelicula,
@@ -45,14 +42,13 @@ export default function AddFilm() {
     });
   };
 
-  // Enviar datos al backend para agregar película
   const onSubmit = async (e) => {
     e.preventDefault();
 
     try {
       await axios.post('http://localhost:8080/pelicula/agregar', pelicula);
       alert('Película agregada correctamente');
-      navigate('/'); // Vuelve a home o donde quieras
+      navigate('/'); 
     } catch (error) {
       alert('Error al agregar la película');
       console.error(error);

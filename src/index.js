@@ -9,6 +9,7 @@ import FlujoVenta from './3 componentesVenta/FlujoVenta.jsx';
 import { VentanaPrecios } from './4 precios/VentanaPrecios.jsx';
 import { BrowserRouter, Routes, Route } from 'react-router';
 import AddFilm from './AgregarPelicula/AddFilm.js';
+import AddSede from './AgregarSede/AddSede.js';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
     <StrictMode>
@@ -24,7 +25,8 @@ ReactDOM.createRoot(document.getElementById('root')).render(
                     
 
                 </Route>
-                <Route exact path="/addFilm" element={<AddFilm></AddFilm>}></Route>
+                <Route path="/addFilm" element={<AddFilm></AddFilm>}></Route>
+                <Route path="/addSede" element={<AddSede></AddSede>}></Route>
                 <Route path='/butacas' element={ <ButacaSelect idSala={ 5 } /> }/>
                 
             </Routes>
