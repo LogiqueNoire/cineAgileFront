@@ -1,7 +1,7 @@
 import React from "react";
 import ComJose1 from "./ComJose1";
 import ComJose3 from "./ComJose3";
-import { useLocation } from "react-router";
+import { useLocation } from "react-router-dom";
 
 export const VentanaPrecios = () => {
     const location = useLocation();

@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
 import CinemaAcordion from '../2 componentesAcordionSedesHorarios/CinemaAcordion.jsx';
 import Funcion from '../servicios/Funcion.js';
 import './MostrarSedesHorarios.css';

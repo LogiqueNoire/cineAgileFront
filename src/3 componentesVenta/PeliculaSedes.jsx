@@ -1,4 +1,4 @@
-import { useLocation } from "react-router";
+import { useLocation } from "react-router-dom";
 import React, { useEffect, useRef, useState } from "react";
 import MostrarSedesHorarios from "./MostrarSedesHorarios";
 import { format } from 'date-fns'

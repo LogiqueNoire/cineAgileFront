@@ -1,13 +1,15 @@
 import React, { StrictMode } from 'react';
 import ReactDOM from 'react-dom/client';
 
-import App from './App.js';
+import App from './App.jsx';
 import PeliculaSedes from './3 componentesVenta/PeliculaSedes.jsx';
 import Inicio from './Inicio.jsx'
 import ButacaSelect from './3 componentesVenta/ButacaSelect.jsx'
 import FlujoVenta from './3 componentesVenta/FlujoVenta.jsx';
 import { VentanaPrecios } from './4 precios/VentanaPrecios.jsx';
-import { BrowserRouter, Routes, Route } from 'react-router';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import AddFilm from './AgregarPelicula/AddFilm.jsx';
+import AddSede from './AgregarSede/AddSede.jsx';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
     <StrictMode>
@@ -23,9 +25,10 @@ ReactDOM.createRoot(document.getElementById('root')).render(
                     
 
                 </Route>
-
+                <Route path="/addFilm" element={<AddFilm></AddFilm>}></Route>
+                <Route path="/addSede" element={<AddSede></AddSede>}></Route>
                 <Route path='/butacas' element={ <ButacaSelect idSala={ 5 } /> }/>
-
+                
             </Routes>
         </BrowserRouter>
     </StrictMode>

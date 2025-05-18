@@ -1,3 +1,5 @@
-const url = process.env.REACT_APP_BACKEND_API_URL
+import axios from "axios"
+
+const url = import.meta.env.VITE_BACKEND_URL
 
 export { url }

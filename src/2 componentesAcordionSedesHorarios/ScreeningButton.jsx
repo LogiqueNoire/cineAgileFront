@@ -1,9 +1,5 @@
-import React from 'react';
 import './ScreeningButton.css';
-import { useNavigate } from 'react-router';
-import Funcion from '../servicios/Funcion.js';
-import { useEffect, useMemo, useState } from 'react';
-import { useLocation } from 'react-router';
+import { useNavigate } from 'react-router-dom';
 
 const ScreeningButton = ({ funcion, pelicula }) => {
     const navigate = useNavigate();
