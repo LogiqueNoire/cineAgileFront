@@ -4,13 +4,13 @@ import { VentaContext } from "../3 componentesVenta/VentaContextProvider.jsx"
 import './ComponenteJose.css'
 import { se } from "date-fns/locale";
 
-const ComJose3 = ({ pelicula, catePeli, sedePeli, fechaPeli, salaPeli, seleccionadas, categoria, dimension}) => {
-    const butacas = useContext(VentaContext);
-
-    if (seleccionadas === undefined) {
-        seleccionadas = JSON.stringify(butacas.butacaContext.seleccionadas.length);
+const ComJose3 = ({ pelicula, catePeli, sedePeli, fechaPeli, salaPeli, categoria, butacasSeleccionadas, dimension}) => {
+    const contexto = useContext(VentaContext);
+    
+    if (butacasSeleccionadas === undefined) {
+        butacasSeleccionadas = JSON.stringify(contexto.butacaContext.seleccionadas.length);
     } else {
-        butacas.butacaContext.seleccionadas = seleccionadas;
+        contexto.butacasContext.seleccionadas = butacasSeleccionadas;
     }
     //${JSON.stringify(butacas.butacaContext.seleccionadas.length)}
     return (
@@ -26,7 +26,7 @@ const ComJose3 = ({ pelicula, catePeli, sedePeli, fechaPeli, salaPeli, seleccion
                 <h5 className="m-2">{"Fecha: "+fechaPeli.slice(0,10)}</h5>
                 <h5 className="m-2">{"Hora inicio: "+fechaPeli.slice(11,16)}</h5>
                 <h5 className="m-2">{"Sala: " +salaPeli}</h5>
-                <h5 className="m-2">{'Butacas: '+seleccionadas}</h5>
+                <h5 className="m-2">{'Butacas: '+butacasSeleccionadas}</h5>
             </div>
         </div>
 

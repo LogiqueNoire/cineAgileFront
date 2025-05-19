@@ -31,10 +31,10 @@ export const VentanaPrecios = () => {
         <div className="d-flex mb-4">
             <div className="ContieneEntradas gap-3 d-flex flex-column justify-content-center align-items-center">
                 <h3> PRECIOS DE LAS ENTRADAS </h3>
-                <ComJose1 nombre="General" precio ={(precioGeneral===undefined ? "Cargando" : "S/ "+precioGeneral)} ></ComJose1>
-                <ComJose1 nombre="Mayores de 60" precio ={(precioMayores===undefined ? "Cargando" : "S/ "+precioMayores)} ></ComJose1>
-                <ComJose1 nombre="Niños" texto="Para niños de 2 a 11 años. Menores de 2 años no pagan." precio ={(precioNiños===undefined ? "Cargando" : "S/ "+precioNiños)} ></ComJose1>
-                <ComJose1 nombre="Conadis" texto="Es obligatorio presentar DNI y carnet Conadis" precio ={(precioConadis===undefined ? "Cargando" : "S/ "+precioConadis)} ></ComJose1>
+                <ComJose1 nombre="General" precio ={(precioGeneral===undefined ? "Cargando" : precioGeneral)} ></ComJose1>
+                <ComJose1 nombre="Mayores de 60" precio ={(precioMayores===undefined ? "Cargando" : precioMayores)} ></ComJose1>
+                <ComJose1 nombre="Niños" texto="Para niños de 2 a 11 años. Menores de 2 años no pagan." precio ={(precioNiños===undefined ? "Cargando" : precioNiños)} ></ComJose1>
+                <ComJose1 nombre="Conadis" texto="Es obligatorio presentar DNI y carnet Conadis" precio ={(precioConadis===undefined ? "Cargando" : precioConadis)} ></ComJose1>
             </div>
         </div>
 );

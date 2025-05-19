@@ -5,6 +5,7 @@ import { VentaContextProvider, VentaContext } from './VentaContextProvider'
 import ComJose3 from '../4 precios/ComJose3'
 import { VentanaPrecios } from '../4 precios/VentanaPrecios'
 import { useEffect, useState, useContext } from "react";
+import { VentanaPago } from "../5 pago/VentanaPago";
 
 const FlujoVenta = () => {
     const [indice, setIndice] = useState(0);
@@ -20,7 +21,8 @@ const FlujoVenta = () => {
 
     const pasosCompra = [
         <ButacaSelect funcion={funcion} />,
-        <VentanaPrecios precios={precios}/>
+        <VentanaPrecios precios={precios}/>,
+        <VentanaPago/>
     ]
 
     useEffect(() => {

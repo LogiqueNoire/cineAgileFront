@@ -5,26 +5,57 @@ import { VentaContext } from "../3 componentesVenta/VentaContextProvider.jsx"
 
 const ComJose1 = ({ nombre, texto, precio, seleccionadas }) => {
     const [cantidad, setCantidad] = useState(0);
-    const butacas = useContext(VentaContext);
-    const entradasSeleccionadas = butacas.butacaContext.entradasSeleccionadas;
+    const contexto = useContext(VentaContext);
+    const entradasSeleccionadas = contexto.entradasContext.entradasSeleccionadas;
+    const total = contexto.totalContext.total;
     
     if (seleccionadas === undefined) {
-        seleccionadas = JSON.stringify(butacas.butacaContext.seleccionadas.length);
+        seleccionadas = JSON.stringify(contexto.butacaContext.seleccionadas.length);
     } else {
-        butacas.butacaContext.seleccionadas = seleccionadas;
+        contexto.butacaContext.seleccionadas = seleccionadas;
     }
 
     const agregar = () => {
         if (seleccionadas > entradasSeleccionadas) {
+            console.log("entradas seleccionadas", entradasSeleccionadas)
             setCantidad(cantidad + 1);
-            butacas.butacaContext.setEntradasSeleccionadas(entradasSeleccionadas+1)
+            contexto.entradasContext.setEntradasSeleccionadas(entradasSeleccionadas+1)
+            console.log("precio", precio)
+            contexto.totalContext.setTotal(total + parseFloat(precio));
+            
+            if (nombre === "General") {
+                contexto.entradasContext.setGeneralesSeleccionadas(contexto.entradasContext.generalesSeleccionadas + 1);
+            }
+            if (nombre === "Niños") {
+                contexto.entradasContext.setNiñosSeleccionadas(contexto.entradasContext.niñosSeleccionadas + 1);
+            }
+            if (nombre === "Conadis") {
+                contexto.entradasContext.setConadisSeleccionadas(contexto.entradasContext.conadisSeleccionadas + 1);
+            }
+            if (nombre === "Mayores de 60") {
+                contexto.entradasContext.setMayoresSeleccionadas(contexto.entradasContext.mayoresSeleccionadas + 1);
+            }
         }
     };
 
     const restar = () => {
         if (cantidad > 0) {
             setCantidad(cantidad - 1);
-            butacas.butacaContext.setEntradasSeleccionadas(entradasSeleccionadas-1)
+            contexto.entradasContext.setEntradasSeleccionadas(entradasSeleccionadas-1)
+            console.log("precio", precio)
+            contexto.totalContext.setTotal(total - parseFloat(precio));
+            if (nombre === "General") {
+                contexto.entradasContext.setGeneralesSeleccionadas(contexto.entradasContext.generalesSeleccionadas - 1);
+            }
+            if (nombre === "Niño") {
+                contexto.entradasContext.setNiñosSeleccionadas(contexto.entradasContext.niñosSeleccionadas - 1);
+            }
+            if (nombre === "Conadis") {
+                contexto.entradasContext.setConadisSeleccionadas(contexto.entradasContext.conadisSeleccionadas - 1);
+            }
+            if (nombre === "Mayores de 60") {
+                contexto.entradasContext.setMayoresSeleccionadas(contexto.entradasContext.mayoresSeleccionadas - 1);
+            }
         }
     };
     return (
@@ -34,7 +65,7 @@ const ComJose1 = ({ nombre, texto, precio, seleccionadas }) => {
                 <div className="texto w-100">
                     <p className="">{texto}</p>
                     <div className="precio w-100">
-                        <h5 className="m-0">{precio} </h5>
+                        <h5 className="m-0">{"S/ "+precio} </h5>
                     </div>
                 </div>
             </div>
