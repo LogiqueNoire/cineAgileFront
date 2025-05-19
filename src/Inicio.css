@@ -1,4 +1,11 @@
-* {
-    /*Mi primer commit en front:v*/
-}
+@import url('https://fonts.googleapis.com/css2?family=Ancizar+Sans:ital,wght@0,100..1000;1,100..1000&display=swap');
 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Ancizar Sans', sans-serif;
+  font-weight: 500;
+}

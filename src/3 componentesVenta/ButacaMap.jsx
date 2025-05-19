@@ -41,7 +41,7 @@ const ButacaMap = ({ butacas }) => {
             let key = `${i}-${j}`
             let disabled = !butaca || butaca.ocupado ? true : false
             let checked = (butaca && butaca.ocupado) || estaEnSeleccionados({ f: i, c: j })
-            let libre = !butaca ? 'butaca-no-existe' : butaca.ocupado ? 'butaca-ocupado' : 'butaca-libre' ;
+            let libre = !butaca ? 'butaca-no-existe' : butaca.ocupado ? 'butaca-ocupado' : 'butaca-libre';
             let discapacitado = butaca && butaca.discap ? 'butaca-discapacitado' : ''
 
             fila.push(<td key={key}>
@@ -71,7 +71,53 @@ const ButacaMap = ({ butacas }) => {
                     </tbody>
                 </table>
             </div>
+            <div className='border border-dark butaca-leyenda p-2'>
+                <h4 className="text-center mb-2">Leyenda</h4>
+                <table className="butaca-table d-flex justify-content-center">
+                    <tbody>
+                        <tr className=''>
+                            <td className=''>
+                                <input type="checkbox" className="butaca-celda butaca-libre" readOnly onClick={(e) => e.preventDefault()} />
+                            </td>
+                            <td className=''>
+                                <h4 className="butaca-label mx-2">Libre</h4>
+                            </td>
+                            <td className=''>
+                                <input type="checkbox" className="butaca-celda butaca-discapacitado" readOnly onClick={(e) => e.preventDefault()} />
+                            </td>
+                            <td className=''>
+                                <h4 className="butaca-label mx-2">Discapacitado</h4>
+                            </td>
+                        </tr>
+                        <tr className=''>
+                            <td>
+                                <input type="checkbox" className="butaca-celda butaca-ocupado" readOnly onClick={(e) => e.preventDefault()} />
+                            </td>
+                            <td>
+                                <h4 className="butaca-label mx-2">Ocupado</h4>
+                            </td>
+                            <td>
+                                <input type="checkbox" className="butaca-celda butaca-libre" readOnly checked onClick={(e) => e.preventDefault()} />
+                            </td>
+                            <td>
+                                <h4 className="butaca-label mx-2">Seleccionado</h4>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>)
 };
+/*
+.butaca-no-existe {
+    border-color: rgba(255, 255, 255, 0);
+}
 
+.butaca-discapacitado {
+    border-color: rgb(104, 104, 255);
+}
+
+.butaca-ocupado {
+    border-color: rgb(255, 104, 104);
+} */
 export default ButacaMap;

@@ -20,7 +20,7 @@ const ComJose3 = ({ pelicula, catePeli, sedePeli, fechaPeli, salaPeli, seleccion
             </div>
 
             <div className="d-flex flex-column align-items-center">
-                <h1 className="display-5 m-4" style={{ color: 'blue' }}>{pelicula.nombre}</h1>
+                <h1 className="m-4" style={{ fontSize:'36px', color: 'blue' }}>{pelicula.nombre}</h1>
                 <h3 className="m-2">{catePeli}</h3>
                 <h5 className="m-2">{"Sede: "+sedePeli}</h5>
                 <h5 className="m-2">{"Fecha: "+fechaPeli.slice(0,10)}</h5>
