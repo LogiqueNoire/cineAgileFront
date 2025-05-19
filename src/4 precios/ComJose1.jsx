@@ -1,17 +1,30 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import "./Com.css"
+import { VentaContext } from "../3 componentesVenta/VentaContextProvider.jsx"
 
-const ComJose1 = ({ nombre, texto, precio }) => {
+const ComJose1 = ({ nombre, texto, precio, seleccionadas }) => {
     const [cantidad, setCantidad] = useState(0);
+    const butacas = useContext(VentaContext);
+    const entradasSeleccionadas = butacas.butacaContext.entradasSeleccionadas;
+    
+    if (seleccionadas === undefined) {
+        seleccionadas = JSON.stringify(butacas.butacaContext.seleccionadas.length);
+    } else {
+        butacas.butacaContext.seleccionadas = seleccionadas;
+    }
 
     const agregar = () => {
-        setCantidad(cantidad + 1);
+        if (seleccionadas > entradasSeleccionadas) {
+            setCantidad(cantidad + 1);
+            butacas.butacaContext.setEntradasSeleccionadas(entradasSeleccionadas+1)
+        }
     };
 
     const restar = () => {
         if (cantidad > 0) {
             setCantidad(cantidad - 1);
+            butacas.butacaContext.setEntradasSeleccionadas(entradasSeleccionadas-1)
         }
     };
     return (
@@ -21,7 +34,7 @@ const ComJose1 = ({ nombre, texto, precio }) => {
                 <div className="texto w-100">
                     <p className="">{texto}</p>
                     <div className="precio w-100">
-                        <p className="m-0">{precio} </p>
+                        <h5 className="m-0">{precio} </h5>
                     </div>
                 </div>
             </div>

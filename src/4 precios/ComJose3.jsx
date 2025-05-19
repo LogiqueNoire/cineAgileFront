@@ -4,7 +4,7 @@ import { VentaContext } from "../3 componentesVenta/VentaContextProvider.jsx"
 import './ComponenteJose.css'
 import { se } from "date-fns/locale";
 
-const ComJose3 = ({ pelicula, catePeli, sedePeli, fechaPeli, salaPeli, seleccionadas }) => {
+const ComJose3 = ({ pelicula, catePeli, sedePeli, fechaPeli, salaPeli, seleccionadas, categoria, dimension}) => {
     const butacas = useContext(VentaContext);
 
     if (seleccionadas === undefined) {
@@ -20,13 +20,13 @@ const ComJose3 = ({ pelicula, catePeli, sedePeli, fechaPeli, salaPeli, seleccion
             </div>
 
             <div className="d-flex flex-column align-items-center">
-                <h1 className="m-4" style={{ fontSize:'36px', color: 'blue' }}>{pelicula.nombre}</h1>
-                <h3 className="m-2">{catePeli}</h3>
+                <h1 className="mt-4" style={{ fontSize:'36px', color: 'blue' }}>{pelicula.nombre}</h1>
+                <h3 className="m-2">{dimension+" "+categoria}</h3>
                 <h5 className="m-2">{"Sede: "+sedePeli}</h5>
                 <h5 className="m-2">{"Fecha: "+fechaPeli.slice(0,10)}</h5>
                 <h5 className="m-2">{"Hora inicio: "+fechaPeli.slice(11,16)}</h5>
                 <h5 className="m-2">{"Sala: " +salaPeli}</h5>
-                <h5 className="m-2">{'Butacas'+seleccionadas}</h5>
+                <h5 className="m-2">{'Butacas: '+seleccionadas}</h5>
             </div>
         </div>
 

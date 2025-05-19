@@ -4,11 +4,14 @@ const VentaContext = createContext({})
 
 const VentaContextProvider = ({ children }) => {
     const [ butacasSeleccionadas, setButacasSeleccionadas ] = useState([])
+    const [ entradasSeleccionadas, setEntradasSeleccionadas ] = useState(0)
 
     const contextData = {
         butacaContext: {
             seleccionadas: butacasSeleccionadas,
-            setSeleccionadas: setButacasSeleccionadas
+            setSeleccionadas: setButacasSeleccionadas,
+            entradasSeleccionadas: entradasSeleccionadas,
+            setEntradasSeleccionadas: setEntradasSeleccionadas
         }
     }
 

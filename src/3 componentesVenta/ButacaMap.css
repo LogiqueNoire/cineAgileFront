@@ -40,7 +40,7 @@
 }
 
 .butaca-discapacitado {
-    border-color: rgb(104, 104, 255);
+    border-color: rgb(104, 139, 255);
 }
 
 .butaca-ocupado {
@@ -52,7 +52,7 @@
     content: " ";
     width: var(--butaca-size);
     height: var(--butaca-size);
-    box-shadow: inset var(--butaca-size) var(--butaca-size) rgb(104, 104, 255);
+    box-shadow: inset var(--butaca-size) var(--butaca-size) rgb(104, 139, 255);
 
     border-radius: 50%;
  }
