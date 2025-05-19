@@ -21,12 +21,12 @@ const FilmPanel = () => {
     const [ location, query ] = useUrlQuery()
 
     useEffect(() => {
-        const estado = query ? (query.get("tab") ? query.get("tab") : "estreno" ) : "proximamente";
+        const estado = query ? (query.get("tab") ? query.get("tab") : "en cartelera" ) : "proximamente";
         let caller;
 
         switch (estado) {
-            case "estreno":
-                caller = Pelicula.mostrarPeliculasEstreno; break;
+            case "en cartelera":
+                caller = Pelicula.mostrarPeliculasEnCartelera; break;
             case "proximamente":
                 caller = Pelicula.mostrarPeliculasProximas; break;
         }
