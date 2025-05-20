@@ -4,7 +4,7 @@ import { VentaContext } from "../3 componentesVenta/VentaContextProvider.jsx"
 import './ComponenteJose.css'
 import { se } from "date-fns/locale";
 
-const ComJose3 = ({ pelicula, catePeli, sedePeli, fechaPeli, salaPeli, categoria, butacasSeleccionadas, dimension}) => {
+const ResumenPeliComJose3 = ({ pelicula, catePeli, sedePeli, fechaPeli, salaPeli, categoria, butacasSeleccionadas, dimension}) => {
     const contexto = useContext(VentaContext);
     
     if (butacasSeleccionadas === undefined) {
@@ -32,4 +32,4 @@ const ComJose3 = ({ pelicula, catePeli, sedePeli, fechaPeli, salaPeli, categoria
 
     );
 }
-export default ComJose3
+export default ResumenPeliComJose3

@@ -2,7 +2,7 @@ import { useLocation, useNavigate } from "react-router";
 
 import ButacaSelect from './ButacaSelect'
 import { VentaContextProvider, VentaContext } from './VentaContextProvider'
-import ComJose3 from '../4 precios/ComJose3'
+import ResumenPeliComJose3 from '../4 precios/ResumenPeliComJose3'
 import { VentanaPrecios } from '../4 precios/VentanaPrecios'
 import { useEffect, useState, useContext } from "react";
 import { VentanaPago } from "../5 pago/VentanaPago";
@@ -47,7 +47,7 @@ const FlujoVenta = () => {
         <div className="d-flex my-4 py-4 border border-2">
             <VentaContextProvider>
                 <div className="d-flex justify-content-center px-4 border-end">
-                    <ComJose3 pelicula={pelicula} sedePeli={funcion.nombreSede} fechaPeli={funcion.fechaHoraInicio}
+                    <ResumenPeliComJose3 pelicula={pelicula} sedePeli={funcion.nombreSede} fechaPeli={funcion.fechaHoraInicio}
                      salaPeli={funcion.codigoSala} categoria = {funcion.categoria} dimension ={funcion.dimension}/>
                 </div>
                 <div className="d-flex flex-column justify-content-center align-items-center flex-grow-1">

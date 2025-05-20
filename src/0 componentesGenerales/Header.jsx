@@ -1,5 +1,4 @@
 import React from 'react';
-
 import "./Header.css"
 
 const Header = ({ children }) => {
@@ -14,7 +13,7 @@ const Header = ({ children }) => {
       </nav>
       <div className="icons">
         <button className="icon-button">
-          <img src="/Icono-Usuario.png" alt="Usuario" />
+          <img src="../../intranet.png" alt="Usuario" />
         </button>
         <button className="icon-button">
           <img src="Ayuda.png" alt="Ayuda" />
