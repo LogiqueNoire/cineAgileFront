@@ -1,11 +1,11 @@
 import { useState } from "react";
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
 
-const categorias = [ "estreno", "proximamente" ]
+const categorias = [ "En cartelera", "Próximamente" ]
 
 const FilmTab = ({ query }) => {
     let cat = categorias.find(el => el == query)
-    cat = cat ? cat : "estreno"
+    cat = cat ? cat : "En cartelera"
 
     return (<>
         <div className="peli-head d-flex justify-content-evenly">

@@ -13,6 +13,10 @@ class Funcion {
         return butacas.data
     }
 
+    static async mostrarPreciosdeFuncion(idFuncion, persona) {
+        const precios = await axios.get(`${url}/funcion/precios?idFuncion=${idFuncion}&persona=${persona}`)  ///precios?idFuncion=225855&persona=22
+        return precios.data
+    }
 }
 
 export default Funcion;

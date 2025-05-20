@@ -1,6 +1,6 @@
 import React from 'react';
 import './FilmCard.css';
-import { useNavigate } from 'react-router';
+import { useNavigate } from 'react-router-dom';
 
 
 const FilmCard = ({ pelicula }) => {
@@ -9,7 +9,7 @@ const FilmCard = ({ pelicula }) => {
     const handleClick = () => {
         // Cambiar la ruta
         //console.log("Pelicula seleccionada:", pelicula);
-        navigate(`/funcion/pelicula/`, { state: { consultaIdPelicula: pelicula.idPelicula, nombrePelicula: pelicula.nombre, imagenPeli: pelicula.imageUrl } });
+        navigate(`/funcion/pelicula/`, { state: { consultaIdPelicula: pelicula.idPelicula, nombrePelicula: pelicula.nombre, imagenPeli: pelicula.imageUrl, sinopsis: pelicula.sinopsis} });
     };
 
     return (

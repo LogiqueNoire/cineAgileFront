@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
-import { useLocation } from 'react-router';
+import { useLocation } from 'react-router-dom';
 
 import FilmContainer from "./FilmContainer";
 import Pelicula from "../servicios/Pelicula"
@@ -21,13 +21,13 @@ const FilmPanel = () => {
     const [ location, query ] = useUrlQuery()
 
     useEffect(() => {
-        const estado = query ? (query.get("tab") ? query.get("tab") : "estreno" ) : "estreno";
+        const estado = query ? (query.get("tab") ? query.get("tab") : "En cartelera" ) : "Próximamente";
         let caller;
 
         switch (estado) {
-            case "estreno":
-                caller = Pelicula.mostrarPeliculasEstreno; break;
-            case "proximamente":
+            case "En cartelera":
+                caller = Pelicula.mostrarPeliculasEnCartelera; break;
+            case "Próximamente":
                 caller = Pelicula.mostrarPeliculasProximas; break;
         }
 

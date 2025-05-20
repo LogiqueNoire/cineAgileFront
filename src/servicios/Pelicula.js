@@ -8,8 +8,8 @@ class Pelicula {
         return peliculas.data
     }
 
-    static async mostrarPeliculasEstreno() {
-        const peliculas = await axios.get(`${url}/pelicula/estreno`)
+    static async mostrarPeliculasEnCartelera() {
+        const peliculas = await axios.get(`${url}/pelicula/encartelera`)
         return peliculas.data
     }
     

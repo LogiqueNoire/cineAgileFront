@@ -1,19 +1,11 @@
-body {
-    margin: 0;
-    padding: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f3f4f6;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-  }
-  
+ 
   .container {
+    gap: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100%;
+    flex-direction: column;
+    width: 50%;
   }
   
   .payment-box {
