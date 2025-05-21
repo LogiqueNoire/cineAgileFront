@@ -1,6 +1,3 @@
-import React from 'react';
-import './pago.css';
-
 export const Tarjeta = ({ metodo, setMetodo }) => {
   return (
     <button
