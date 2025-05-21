@@ -8,13 +8,15 @@ const FilaPrecioComJose1 = ({ nombre, texto, precio, seleccionadas }) => {
     //const [cantidad, setCantidad] = useState(0);
     const contexto = useContext(VentaContext);
     const entradasSeleccionadas = contexto.entradasContext.entradasSeleccionadas;
-    const total = contexto.totalContext.total;
 
     if (seleccionadas === undefined) {
         seleccionadas = JSON.stringify(contexto.butacaContext.seleccionadas.length);
+        
     } else {
         contexto.butacaContext.seleccionadas = seleccionadas;
     }
+        console.log("Seleccionadas", contexto.butacaContext)
+
     let cantidad, setCantidad
 
     switch (nombre) {
@@ -37,7 +39,7 @@ const FilaPrecioComJose1 = ({ nombre, texto, precio, seleccionadas }) => {
         default:
             break;
     }
-
+    console.log("total", contexto.totalContext.total)
 
     const agregar = () => {
         if (seleccionadas > entradasSeleccionadas) {
@@ -45,7 +47,7 @@ const FilaPrecioComJose1 = ({ nombre, texto, precio, seleccionadas }) => {
             setCantidad(cantidad + 1);
             contexto.entradasContext.setEntradasSeleccionadas(entradasSeleccionadas + 1)
             console.log("precio", precio)
-            contexto.totalContext.setTotal(total + parseFloat(precio));
+            contexto.totalContext.setTotal(contexto.totalContext.total + parseFloat(precio));
         }
     };
 
@@ -54,7 +56,7 @@ const FilaPrecioComJose1 = ({ nombre, texto, precio, seleccionadas }) => {
             setCantidad(cantidad - 1);
             contexto.entradasContext.setEntradasSeleccionadas(entradasSeleccionadas - 1)
             console.log("precio", precio)
-            contexto.totalContext.setTotal(total - parseFloat(precio));
+            contexto.totalContext.setTotal(contexto.totalContext.total - parseFloat(precio));
         }
     };
     return (

@@ -10,6 +10,7 @@ const VentaContextProvider = ({ children }) => {
     const [ conadisSeleccionadas, setConadisSeleccionadas ] = useState(0)
     const [ mayoresSeleccionadas, setMayoresSeleccionadas ] = useState(0)
     const [ total, setTotal ] = useState(0)
+    const [ pruebaInicial, setPruebaInicial ] = useState(0)
 
     const contextData = {
         butacaContext: {
@@ -31,6 +32,10 @@ const VentaContextProvider = ({ children }) => {
         totalContext: {
             total: total,
             setTotal: setTotal
+        },
+        pruebaInicialContext: {
+            pruebaInicial: pruebaInicial,
+            setPruebaInicial: setPruebaInicial
         }
     }
 
