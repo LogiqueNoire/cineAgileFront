@@ -1,5 +1,5 @@
-import React from 'react';
-import './pago.css';
+import React from "react";
+import "./pago.css";
 
 export const BilleteraElectronica = ({ metodo, setMetodo }) => {
   return (
