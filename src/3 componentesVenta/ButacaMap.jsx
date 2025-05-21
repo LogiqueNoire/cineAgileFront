@@ -5,14 +5,16 @@ import { VentaContext } from './VentaContextProvider';
 
 const ButacaMap = ({ butacas }) => {
     const { butacaContext } = useContext(VentaContext)
+    const contexto = useContext(VentaContext);
 
     const estaEnSeleccionados = (pos) => {
+
         return butacaContext.seleccionadas.some(el => el.f === pos.f && el.c === pos.c)
     }
 
     const inputOnChange = (el) => {
         const pos = { f: +el.target.dataset.fila, c: +el.target.dataset.columna }
-
+        contexto.pruebaInicialContext.setPruebaInicial(1);
         if (!estaEnSeleccionados(pos)) {
             butacaContext.setSeleccionadas([...butacaContext.seleccionadas, pos])
         } else {
@@ -108,16 +110,5 @@ const ButacaMap = ({ butacas }) => {
             </div>
         </div>)
 };
-/*
-.butaca-no-existe {
-    border-color: rgba(255, 255, 255, 0);
-}
 
-.butaca-discapacitado {
-    border-color: rgb(104, 104, 255);
-}
-
-.butaca-ocupado {
-    border-color: rgb(255, 104, 104);
-} */
 export default ButacaMap;

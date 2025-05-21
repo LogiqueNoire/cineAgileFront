@@ -10,6 +10,7 @@ import { VentanaPrecios } from './4 precios/VentanaPrecios.jsx';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import AddFilm from './AgregarPelicula/AddFilm.jsx';
 import AddSede from './AgregarSede/AddSede.jsx';
+import { VentaContextProvider } from './3 componentesVenta/VentaContextProvider.jsx';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
     <StrictMode>
@@ -21,7 +22,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
                 <Route path='/' element={ <App /> }>
                     <Route index element={ <Inicio /> } />
                     <Route path='/funcion/pelicula/' element={ <PeliculaSedes /> }/>
-                    <Route path='/compra' element={ <FlujoVenta /> } />
+                    <Route path='/compra' element={ <VentaContextProvider><FlujoVenta></FlujoVenta></VentaContextProvider> } />
                     
 
                 </Route>

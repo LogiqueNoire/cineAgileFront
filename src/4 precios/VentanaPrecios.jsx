@@ -11,7 +11,6 @@ export const VentanaPrecios = () => {
     const [precioMayores, setPrecioMayores] = React.useState();
     const [precioConadis, setPrecioConadis] = React.useState();
 
-
     useEffect(() => {
         const fetchData = async () => {
             try {
