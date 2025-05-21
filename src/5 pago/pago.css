@@ -1,169 +1,228 @@
- 
-  .container {
-    gap: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    width: 50%;
-  }
-  
-  .payment-box {
-    background: white;
-    padding: 30px;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(247, 1, 1, 0.1);
-    text-align: center;
-    width: 300px;
-  }
-  
-  .payment-box h2 {
-    font-size: 24px;
-    margin-bottom: 10px;
-  }
-  
-  .amount {
-    color: #2563eb;
-    font-weight: bold;
-    margin-bottom: 20px;
-  }
-  
-  .buttons {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    margin-bottom: 20px;
-  }
-  
-  .payment-method {
-    padding: 12px;
-    border: 2px solid #d1d5db;
-    border-radius: 8px;
-    background: none;
-    font-weight: 600;
-    transition: 0.3s;
-    display: flex;
-    justify-content: space-between; 
-    align-items: center; 
-    width: 100%;
-    cursor: pointer; 
-    font-size: 13px; 
-  }
-  
-  .payment-method:hover {
-    background-color: #f3f4f6;
-  }
-  
-  .selected.tarjeta {
-    border-color: #2563eb;
-    background-color: #ebf4ff;
-    color: #2563eb;
-  }
-  
-  .selected.billetera {
-    border-color: #2563eb;
-    background-color: #ebf4ff;
-    color: #2563eb;
-  }
-  
-  .wallet-images, .card-images {
-    display: flex;
-    gap: 8px; 
-  }
-  
-  .wallet-icon, .card-icon {
-    width: 30px; 
-    height: 30px; 
-    object-fit: contain; 
-  }
-  
-  .terms {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 14px;
-    margin-bottom: 20px;
-    text-align: left;
-  }
-  
-  .link {
-    color: #2563eb;
-    text-decoration: none;
-  }
-  
-  .link:hover {
-    text-decoration: underline;
-  }
-  
-  .pay-button {
-    background-color: #2563eb;
-    color: white;
-    border: none;
-    padding: 12px;
-    width: 100%;
-    border-radius: 8px;
-    font-weight: bold;
-    transition: background-color 0.3s;
-    font-size: 15px; 
-  }
-  
-  .pay-button:hover {
-    background-color: #1d4ed8;
-    cursor: pointer; 
-  }
-  
-  .modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 999;
-  }
-  
-  .modal {
-    background: white;
-    padding: 20px 30px;
-    border-radius: 10px;
-    max-width: 500px;
-    width: 90%;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-    text-align: left;
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* Centra el contenido dentro del modal */
-  }
-  
-  .modal h3 {
-    margin-top: 0;
-    font-size: 20px;
-    margin-bottom: 10px;
-  }
-  
-  .modal p {
-    font-size: 14px;
-    line-height: 1.6;
-  }
-  
-  /* Para centrar el botón de cerrar */
-  .close-button {
-    margin-top: 20px; /* Espacio entre el contenido y el botón */
-    background-color: #2563eb;
-    color: white;
-    border: none;
-    padding: 10px 16px;
-    border-radius: 6px;
-    cursor: pointer;
-    font-weight: bold;
-    width: 100%; /* Asegura que el botón ocupe el 100% del ancho del modal */
-    max-width: 150px; /* Opcional: para que el botón no sea demasiado ancho */
-  }
-  
-  .close-button:hover {
-    background-color: #1d4ed8;
-  }
-  
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  width: 50%;
+}
+
+.payment-box {
+  width: 300px;
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(247, 1, 1, 0.1);
+  text-align: center;
+}
+
+.payment-box h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.amount {
+  color: #2563eb;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.payment-method {
+  width: 100%;
+  max-width: 300px;
+  padding: 12px;
+  font-size: 13px;
+  font-weight: 600;
+  border: 2px solid #d1d5db;
+  border-radius: 8px;
+  background: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background-color 0.3s, border-color 0.3s;
+}
+
+.payment-method:hover {
+  background-color: #f3f4f6;
+}
+
+.selected.tarjeta,
+.selected.billetera {
+  border-color: #2563eb;
+  background-color: #ebf4ff;
+  color: #2563eb;
+}
+
+.wallet-images,
+.card-images {
+  display: flex;
+  gap: 8px;
+}
+
+.wallet-icon,
+.card-icon {
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
+}
+
+.terms {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.link {
+  color: #2563eb;
+  text-decoration: none;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
+.pay-button {
+  width: 100%;
+  padding: 12px;
+  font-weight: bold;
+  font-size: 15px;
+  border-radius: 8px;
+  border: none;
+  background-color: #2563eb;
+  color: white;
+  transition: background-color 0.3s;
+}
+
+.pay-button:hover {
+  background-color: #1d4ed8;
+  cursor: pointer;
+}
+
+/* MODAL CENTRADO Y ESTILOS */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center; /* centra horizontalmente */
+  align-items: center; /* centra verticalmente */
+  z-index: 999;
+}
+
+.modal {
+  width: 90%;
+  max-width: 500px;
+  background: white;
+  padding: 20px 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  text-align: left; /* texto alineado a la izquierda */
+  display: block; /* importante para evitar conflicto flex */
+}
+
+.modal h3 {
+  font-size: 20px;
+  margin: 0 0 10px;
+}
+
+.modal p {
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.close-button {
+  margin-top: 20px;
+  width: 100%;
+  max-width: 150px;
+  padding: 10px 16px;
+  font-weight: bold;
+  border-radius: 6px;
+  border: none;
+  background-color: #2563eb;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.close-button:hover {
+  background-color: #1d4ed8;
+}
+
+/* FORMULARIO */
+.formulario-contacto {
+  width: 100%;
+  max-width: 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.formulario-contacto input {
+  width: 100%;
+  height: 40px;
+  padding: 18px 0 4px 0;
+  font-size: 14px;
+  line-height: 1.2;
+  border: none;
+  border-bottom: 2px solid #d1d5db;
+  border-radius: 0;
+  box-sizing: border-box;
+  transition: border-color 0.2s ease-in-out;
+}
+
+.formulario-contacto input:focus {
+  outline: none;
+  border-bottom-color: #2563eb;
+  background-color: #f9fbff;
+}
+
+/* INPUT GRUPOS TARJETA */
+.input-row {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+  max-width: 300px;
+  margin-bottom: 10px;
+}
+
+.input-numero {
+  flex: 2;
+}
+
+.input-tipo {
+  flex: 1;
+}
+
+.input-mes,
+.input-anio,
+.input-cvv {
+  flex: 1;
+}
+
+.input-row select,
+.input-row input {
+  height: 40px;
+  font-size: 14px;
+  padding: 0 10px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.input-row select:focus,
+.input-row input:focus {
+  outline: none;
+  border-color: #2563eb;
+}

@@ -1,7 +1,11 @@
-import React from 'react';
-import './pago.css';
+import React from "react";
+import "./pago.css";
 
-export const TerminosCondiciones = ({ aceptaTerminos, setAceptaTerminos, onVerDetalles }) => {
+export const TerminosCondiciones = ({
+  aceptaTerminos,
+  setAceptaTerminos,
+  onVerDetalles,
+}) => {
   return (
     <div className="terms">
       <input
