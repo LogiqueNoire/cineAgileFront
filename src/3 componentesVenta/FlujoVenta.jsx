@@ -5,7 +5,7 @@ import { VentaContext } from './VentaContextProvider'
 import ResumenPeliComJose3 from '../4 precios/ResumenPeliComJose3'
 import { VentanaPrecios } from '../4 precios/VentanaPrecios'
 import { useEffect, useState, useContext } from "react";
-import { VentanaPago } from "../5 pago/VentanaPago";
+import { VentanaPago } from "../5 6 pago/VentanaPago";
 import { set } from "date-fns";
 import { se } from "date-fns/locale";
 
