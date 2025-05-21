@@ -46,7 +46,7 @@ const FlujoVenta = () => {
 
     const [error, setError] = useState(false)
     const [msjError, setMsjError] = useState("")
-    
+
     useEffect(() => {
         if (contexto.pruebaInicialContext.pruebaInicial === 0) {
         }
@@ -87,19 +87,15 @@ const FlujoVenta = () => {
             <div className="d-flex flex-column justify-content-center align-items-center flex-grow-1">
                 {pasosCompra[indice]}
                 <div className="d-flex justify-content-center gap-4 align-items-center">
-                    <button className="btn btn-primary" onClick={() => { indice != 0 ? (setIndice(indice - 1),
-                    console.log("indice", indice), setError(false))
-                        : console.log("indice", indice) }} >Volver</button>
+                    <button className="btn btn-primary" onClick={() => {
+                        indice != 0 ? (setIndice(indice - 1),
+                            console.log("indice", indice), setError(false))
+                        : console.log("indice", indice)
+                    }} >Volver</button>
                     {error === true && (msjError !== "" || msjError !== "No") ?
-                     <button disabled className="btn btn-primary">Siguiente</button>
+                        <button disabled className="btn btn-primary">Siguiente</button>
                         : <button className="btn btn-primary" onClick={() => { setIndice(indice + 1); setError(true) }}>Siguiente</button>}
-                    {msjError === "" || msjError === "No" || msjError === "Es menor" ?
-                        <></>
-                        :
-                        <div className="alert alert-danger" role="alert">
-                            {msjError}
-                        </div>
-                    }
+
 
 
                 </div>
