@@ -6,6 +6,8 @@ import ResumenPeliComJose3 from '../4 precios/ResumenPeliComJose3'
 import { VentanaPrecios } from '../4 precios/VentanaPrecios'
 import { useEffect, useState, useContext } from "react";
 import { VentanaPago } from "../5 pago/VentanaPago";
+import { set } from "date-fns";
+import { se } from "date-fns/locale";
 
 const FlujoVenta = () => {
     const [indice, setIndice] = useState(0);
@@ -51,24 +53,22 @@ const FlujoVenta = () => {
         else {
             if (indice === 0) {
                 if (contexto.butacaContext.seleccionadas.length === 0) {
-                    setError(true)
                     setMsjError("No seleccionaste ninguna butaca")
                     console.log("indice", indice)
+                    setError(true)
                 } else {
                     setMsjError("No")
                     console.log("msj", msjError)
+                    setError(false)
                 }
             } else if (indice === 1) {
-                if (contexto.entradasContext.entradasSeleccionadas === 0) {
+                setError(false)
+                if (contexto.entradasContext.entradasSeleccionadas != contexto.butacaContext.seleccionadas.length) {
                     setError(true)
-                    setMsjError("No seleccionaste ninguna entrada")
-                    console.log("indice", indice)
-                } else if (contexto.entradasContext.entradasSeleccionadas > contexto.butacaContext.seleccionadas.length) {
-                    setError(true)
-                    setMsjError("No seleccionaste la misma cantidad de entradas que de butacas")
                     console.log("indice", indice)
                 } else {
                     setMsjError("No")
+                    setError(false)
                 }
             } else if (indice === 2) {
                 //por agregar
@@ -87,10 +87,13 @@ const FlujoVenta = () => {
             <div className="d-flex flex-column justify-content-center align-items-center flex-grow-1">
                 {pasosCompra[indice]}
                 <div className="d-flex justify-content-center gap-4 align-items-center">
-                    <button className="btn btn-primary" onClick={() => { indice != 0 ? setIndice(indice - 1) && console.log("indice", indice) : console.log("indice", indice) }} >Volver</button>
-                    {error === false && msjError === "" ? <button disabled className="btn btn-primary">Siguiente</button>
-                        : <button className="btn btn-primary" onClick={() => { setIndice(indice + 1) }}>Siguiente</button>}
-                    {msjError === "" || msjError === "No" ?
+                    <button className="btn btn-primary" onClick={() => { indice != 0 ? (setIndice(indice - 1),
+                    console.log("indice", indice), setError(false))
+                        : console.log("indice", indice) }} >Volver</button>
+                    {error === true && (msjError !== "" || msjError !== "No") ?
+                     <button disabled className="btn btn-primary">Siguiente</button>
+                        : <button className="btn btn-primary" onClick={() => { setIndice(indice + 1); setError(true) }}>Siguiente</button>}
+                    {msjError === "" || msjError === "No" || msjError === "Es menor" ?
                         <></>
                         :
                         <div className="alert alert-danger" role="alert">
