@@ -1,7 +1,10 @@
 import React from 'react';
 import "./Header.css"
+import {useNavigate } from 'react-router-dom';
 
 const Header = ({ children }) => {
+  const navigate = useNavigate();
+
   return (
     <header className="header shadow">
       <a href="/" className='text-decoration-none'>
@@ -12,11 +15,8 @@ const Header = ({ children }) => {
         {children}
       </nav>
       <div className="icons">
-        <button className="icon-button">
-          <img src="../../intranet.png" alt="Usuario" />
-        </button>
-        <button className="icon-button">
-          <img src="Ayuda.png" alt="Ayuda" />
+        <button className="icon-button" onClick={(e) => {e.preventDefault(); navigate(`/addFilm`)}}>
+          <img src="../../intranet.png" alt="" />
         </button>
       </div>
     </header>
