@@ -4,10 +4,12 @@ import ButacaSelect from './ButacaSelect'
 import { VentaContext } from './VentaContextProvider'
 import ResumenPeliComJose3 from '../4 precios/ResumenPeliComJose3'
 import { VentanaPrecios } from '../4 precios/VentanaPrecios'
-import { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { VentanaPago } from "../5 6 pago/VentanaPago";
 import { set } from "date-fns";
 import { se } from "date-fns/locale";
+
+const ventanas = [ ButacaSelect, VentanaPrecios, VentanaPago ];
 
 const FlujoVenta = () => {
     const [indice, setIndice] = useState(0);
@@ -15,25 +17,31 @@ const FlujoVenta = () => {
     const navigate = useNavigate()
     const location = useLocation()
     const { funcion, pelicula } = location.state
-    console.log(funcion)
-    console.log(pelicula)
     const contexto = useContext(VentaContext);
-    console.log("Seleccionadas", contexto.butacaContext)
-    console.log(JSON.stringify(contexto.butacaContext));
 
-    const pasosCompra = [
-        <ButacaSelect funcion={funcion} />,
-        <VentanaPrecios precios={precios} />,
-        <VentanaPago />
+    const next = () => {
+        setIndice(indice + 1);
+    }
+
+    const prev = () => {
+        setIndice(Math.max(indice - 1, 0));
+    }
+
+    const ventanaProps = [
+        { // ButacaSelect
+            funcion: funcion
+        },
+        { // VentanaPrecios
+            precios: precios
+        },
+        {}
     ]
-    /*
-        useEffect(() => {
-            if (indice === 0) {
-                setPrecios(0)
-            } else if (indice === 1) {
-                setPrecios(1)
-            }
-        });*/
+
+    let ventana = React.createElement(ventanas[indice], {
+        ...ventanaProps[indice],
+        next: next,
+        prev: prev,
+    });
 
     const navigatePrecios = () => {
         navigate(`/funcion/precios`,
@@ -104,7 +112,7 @@ const FlujoVenta = () => {
             </div>
 
             <div className="d-flex flex-column justify-content-center align-items-center flex-grow-1">
-                {pasosCompra[indice]}
+                {ventana}
                 <div className="d-flex justify-content-center gap-4 align-items-center">
                     <button className="btn btn-primary" onClick={retroceder} >Volver</button>
                     {error === true && (msjError !== "" || msjError !== "No") ?
@@ -115,8 +123,6 @@ const FlujoVenta = () => {
                         )
                         : <button className="btn btn-primary" onClick={() => { setIndice(indice + 1); setError(true) }}>Siguiente</button>
                           }
-
-
 
                 </div>
             </div>
