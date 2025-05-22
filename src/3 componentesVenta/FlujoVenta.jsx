@@ -113,13 +113,6 @@ const FlujoVenta = () => {
 
             <div className="d-flex flex-column justify-content-center align-items-center flex-grow-1">
                 {ventana}
-                <div className="d-flex justify-content-center gap-4 align-items-center">
-                    <button className="btn btn-primary" onClick={retroceder} >Volver</button>
-                    {error === true && (msjError !== "" || msjError !== "No") ?
-                        <button disabled className="btn btn-primary">Siguiente</button>
-                        : <button className="btn btn-primary" onClick={() => { setIndice(indice + 1); setError(true) }}>Siguiente</button>}
-
-                </div>
             </div>
         </div>)
 }

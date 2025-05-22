@@ -2,10 +2,12 @@ import './ButacaMap'
 import ButacaMap from './ButacaMap';
 import SalaButaca from '../servicios/SalaButaca';
 import Funcion from '../servicios/Funcion';
+import { VentaContext } from './VentaContextProvider';
 
 import { useState, useEffect, useContext } from 'react';
 
-const SeleccionButaca = ({ funcion }) => {
+const SeleccionButaca = ({ funcion, prev, next }) => {
+    const context = useContext(VentaContext)
     const [ data, setData ] = useState(null)
     const [ loading, setLoading ] = useState(true)
     const [ error, setError ] = useState(null)
@@ -26,11 +28,26 @@ const SeleccionButaca = ({ funcion }) => {
         }
     }, [ funcion ])
 
+    const volver = () => {
+        prev();
+    }
+
+    const siguiente = () => {
+        next();
+    }
+
     return (
-    <div className='d-flex'>
-        { error && <h2>Error!</h2> }
-        { !loading && <ButacaMap butacas={ data } /> }
-    </div>)
+        <>
+            <div className='d-flex'>
+                { error && <h2>Error!</h2> }
+                { !loading && <ButacaMap butacas={ data } /> }
+            </div>
+    
+            <div className="d-flex justify-content-center gap-4 align-items-center">
+                <button className="btn btn-primary" onClick={volver} >Volver</button>
+                <button className="btn btn-primary" disabled={context.butacaContext.seleccionadas.length === 0} onClick={siguiente}>Siguiente</button>
+            </div>
+        </>)
 };
 
 export default SeleccionButaca;
