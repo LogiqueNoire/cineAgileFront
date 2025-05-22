@@ -12,6 +12,14 @@ import AddFilm from './B usuarioInterno/AgregarPelicula/AddFilm.jsx';
 import AddSede from './B usuarioInterno/AgregarSede/AddSede.jsx';
 import { VentaContextProvider } from './3 componentesVenta/VentaContextProvider.jsx';
 
+import { makeServer } from "./servicios/PagoServer.js";
+
+/* Descomentar para probar
+  makeServer();
+*/
+
+
+
 ReactDOM.createRoot(document.getElementById('root')).render(
     <StrictMode>
         <BrowserRouter>

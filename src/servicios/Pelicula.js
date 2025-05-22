@@ -9,7 +9,9 @@ class Pelicula {
     }
 
     static async mostrarPeliculasEnCartelera() {
+        console.log("aqui")
         const peliculas = await axios.get(`${url}/pelicula/encartelera`)
+        console.log("peliculas", peliculas.data)
         return peliculas.data
     }
     

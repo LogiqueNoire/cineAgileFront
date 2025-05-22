@@ -32,12 +32,40 @@ export const VentanaPago = ({ prev, next }) => {
     prev();
   }
 
-  const pagar = () => {
-    if (puedeContinuar) {
-      // Pago
-      next();
+  const [mensaje, setMensaje] = useState("");
+
+const pagar = async () => {
+  if (puedeContinuar) {
+    try {
+      const respuesta = await fetch("/api/pago", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ nombre, correo, metodo, tarjeta }),
+      });
+
+      const data = await respuesta.json();
+
+      if (!respuesta.ok) {
+        setMensaje(`Error: ${data.error || "Error desconocido"}`);
+        return;
+      }
+
+      setMensaje(
+        data.estado === "aprobado"
+          ? `✅ Pago aprobado (ID: ${data.transaccionId})`
+          : "❌ Pago rechazado. Intenta de nuevo."
+      );
+
+      if (data.estado === "aprobado") {
+        next(); // Avanza solo si el pago fue aprobado
+      }
+    } catch (error) {
+      setMensaje("⚠️ Error en la conexión");
     }
   }
+};
+
+
 
   return (
     <>
@@ -66,7 +94,9 @@ export const VentanaPago = ({ prev, next }) => {
           setTarjeta={setTarjeta}
         />
 
-        <BilleteraElectronica metodo={metodo} setMetodo={setMetodo} />
+        {/*
+          <BilleteraElectronica metodo={metodo} setMetodo={setMetodo} />
+        */}
 
         <TerminosCondiciones
           aceptaTerminos={aceptaTerminos}
@@ -85,6 +115,11 @@ export const VentanaPago = ({ prev, next }) => {
         <button className="btn btn-primary" onClick={volver} >Volver</button>
         <button className="btn btn-primary" disabled={!puedeContinuar} onClick={pagar}>Pagar</button>
       </div>
+      {mensaje && (
+        <div className="alert alert-info text-center mt-3">
+          {mensaje}
+        </div>
+      )}
     </>
 
   );
