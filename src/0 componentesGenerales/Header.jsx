@@ -15,7 +15,7 @@ const Header = ({ children }) => {
         {children}
       </nav>
       <div className="icons">
-        <button className="icon-button" onClick={(e) => {e.preventDefault(); navigate(`/addFilm`)}}>
+        <button className="icon-button" onClick={(e) => {e.preventDefault(); navigate(`/intranet`)}}>
           <img src="../../intranet.png" alt="" />
         </button>
       </div>

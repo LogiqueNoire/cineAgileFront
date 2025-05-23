@@ -13,6 +13,7 @@ import AddSede from './B usuarioInterno/AgregarSede/AddSede.jsx';
 import { VentaContextProvider } from './3 componentesVenta/VentaContextProvider.jsx';
 
 import { makeServer } from "./servicios/PagoServer.js";
+import VentanaInterior from './B usuarioInterno/VentanaInterior.jsx';
 
 /* Descomentar para probar
   makeServer();
@@ -34,8 +35,14 @@ ReactDOM.createRoot(document.getElementById('root')).render(
                     
 
                 </Route>
-                <Route path="/addFilm" element={<AddFilm></AddFilm>}></Route>
-                <Route path="/addSede" element={<AddSede></AddSede>}></Route>
+
+
+                <Route path='/intranet' element={ <App /> }>
+                    <Route index element={<VentanaInterior/>}></Route>
+                    <Route path="addSede" element={<AddSede></AddSede>}></Route>
+                    <Route path="addFilm" element={<AddFilm></AddFilm>}></Route>
+                </Route>
+                
                 <Route path='/butacas' element={ <ButacaSelect idSala={ 5 } /> }/>
                 
             </Routes>

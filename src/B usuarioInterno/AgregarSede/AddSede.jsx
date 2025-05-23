@@ -40,7 +40,7 @@ export default function AddSede() {
   return (
     <div className="container">
       <div className="row">
-        <div className="col-md-8 offset-md-2 border rounded p-4 mt-4 shadow">
+        <div className="border rounded p-4 mt-4 shadow">
           <h2 className="text-center m-4">Agregar Sede</h2>
           <form onSubmit={(e) => onSubmit(e)}>
                 
