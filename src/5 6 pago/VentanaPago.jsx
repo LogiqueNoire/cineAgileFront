@@ -113,7 +113,6 @@ const pagar = async () => {
 
       <div className="d-flex justify-content-center gap-4 align-items-center">
         <button className="btn btn-primary" onClick={volver} >Volver</button>
-        <button className="btn btn-primary" disabled={!puedeContinuar} onClick={pagar}>Pagar</button>
       </div>
       {mensaje && (
         <div className="alert alert-info text-center mt-3">
