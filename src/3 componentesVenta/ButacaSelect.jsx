@@ -5,8 +5,10 @@ import Funcion from '../servicios/Funcion';
 import { VentaContext } from './VentaContextProvider';
 
 import { useState, useEffect, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const SeleccionButaca = ({ funcion, prev, next }) => {
+    const navigate = useNavigate();
     const context = useContext(VentaContext)
     const [ data, setData ] = useState(null)
     const [ loading, setLoading ] = useState(true)
@@ -29,6 +31,7 @@ const SeleccionButaca = ({ funcion, prev, next }) => {
     }, [ funcion ])
 
     const volver = () => {
+        navigate(-1);
         prev();
     }
 
