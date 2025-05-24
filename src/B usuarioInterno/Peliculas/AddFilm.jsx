@@ -1,29 +1,27 @@
 import axios from 'axios';
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { url } from '../../configuracion/backend.js'
 
 import peliculaIcono from '../../assets/peliculaDark.svg'
 
 export default function AddFilm() {
-  const navigate = useNavigate();
-
   const [pelicula, setPelicula] = useState({
-
-    nombre: '',
-    director: '',
-    actores: '',
-    genero: '',
-    clasificacion: '',
-    duracion: '',
-    estado: '',
-    fechaInicioEstreno: '',
-    fechaInicioPreventa: '',
-    imageUrl: '',
-    sinopsis: '',
-  });
+  
+          nombre: '',
+          director: '',
+          actores: '',
+          genero: '',
+          clasificacion: '',
+          duracion: '',
+          estado: '',
+          fechaInicioEstreno: '',
+          fechaInicioPreventa: '',
+          imageUrl: '',
+          sinopsis: '',
+      });
 
   const {
-
     nombre,
     director,
     actores,
@@ -48,7 +46,7 @@ export default function AddFilm() {
     e.preventDefault();
 
     try {
-      await axios.post('http://localhost:8080/pelicula/agregar', pelicula);
+      await axios.post(`${url}/intranet/peliculas/agregar`, pelicula);
       alert('Película agregada correctamente');
       navigate('/');
     } catch (error) {
@@ -58,15 +56,14 @@ export default function AddFilm() {
   };
 
   return (
-    <div className="container">
-      <div className="row">
+      <div className="addFilm">
         <div className="border rounded p-4 mt-4 shadow">
           <div className="d-flex align-items-center p-2 gap-4 justify-content-center">
             <img src={peliculaIcono} alt="" style={{ height: '60px' }} />
             <h2 className="text-center">Agregar película</h2>
           </div>
           <form onSubmit={(e) => onSubmit(e)} >
-            <div className='d-flex wrap gap-3 justify-content-center'>
+            <div className='d-flex flex-wrap gap-3 justify-content-center'>
               <div className="mb-3">
                 <label htmlFor="nombre" className="form-label">
                   Nombre
@@ -173,6 +170,21 @@ export default function AddFilm() {
               </div>
 
               <div className="mb-3">
+                <label htmlFor="imageUrl" className="form-label">
+                  URL Imagen
+                </label>
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder="URL Imagen"
+                  name="imageUrl"
+                  value={imageUrl}
+                  onChange={(e) => onInputChange(e)}
+                  required
+                />
+              </div>
+
+              <div className="mb-3">
                 <label htmlFor="fechaInicioEstreno" className="form-label">
                   Fecha Inicio Estreno
                 </label>
@@ -200,20 +212,6 @@ export default function AddFilm() {
                 />
               </div>
 
-              <div className="mb-3">
-                <label htmlFor="imageUrl" className="form-label">
-                  URL Imagen
-                </label>
-                <input
-                  type="text"
-                  className="form-control"
-                  placeholder="URL Imagen"
-                  name="imageUrl"
-                  value={imageUrl}
-                  onChange={(e) => onInputChange(e)}
-                  required
-                />
-              </div>
 
               <div className="mb-3">
                 <label htmlFor="sinopsis" className="form-label">
@@ -242,6 +240,5 @@ export default function AddFilm() {
           </form>
         </div>
       </div>
-    </div>
   );
 }

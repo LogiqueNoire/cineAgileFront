@@ -5,7 +5,7 @@ const VentanaInterior = () => {
     const navigate = useNavigate();
 
     const moverseHaciaAddfilm = () => {
-        navigate(`/intranet/addfilm`)
+        navigate(`/intranet/peliculas`)
     }
 
     const moverseHaciaAddSede = () => {
