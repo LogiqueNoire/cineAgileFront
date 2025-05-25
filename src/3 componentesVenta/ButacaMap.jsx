@@ -13,7 +13,7 @@ const ButacaMap = ({ butacas }) => {
     }
 
     const inputOnChange = (el) => {
-        const pos = { f: +el.target.dataset.fila, c: +el.target.dataset.columna }
+        const pos = { id: el.target.dataset.id, f: +el.target.dataset.fila, c: +el.target.dataset.columna }
         contexto.pruebaInicialContext.setPruebaInicial(1);
         if (!estaEnSeleccionados(pos)) {
             butacaContext.setSeleccionadas([...butacaContext.seleccionadas, pos])
@@ -49,6 +49,7 @@ const ButacaMap = ({ butacas }) => {
             fila.push(<td key={key}>
                 <input
                     className={`butaca-celda ${libre} ${discapacitado}`}
+                    data-id={butaca ? butaca.id : 'x' }
                     data-fila={butaca ? i : 'x'}
                     data-columna={butaca ? j : 'x'}
                     type='checkbox'

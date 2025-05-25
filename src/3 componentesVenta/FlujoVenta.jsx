@@ -4,20 +4,23 @@ import ButacaSelect from './ButacaSelect'
 import { VentaContext } from './VentaContextProvider'
 import ResumenPeliComJose3 from '../4 precios/ResumenPeliComJose3'
 import { VentanaPrecios } from '../4 precios/VentanaPrecios'
+import InfoEntradas from "../5 6 pago/InfoEntradas";
 import React, { useEffect, useState, useContext } from "react";
 import { VentanaPago } from "../5 6 pago/VentanaPago";
 import { set } from "date-fns";
 import { se } from "date-fns/locale";
 
-const ventanas = [ ButacaSelect, VentanaPrecios, VentanaPago ];
+const ventanas = [ ButacaSelect, VentanaPrecios, VentanaPago, InfoEntradas ];
 
 const FlujoVenta = () => {
     const [indice, setIndice] = useState(0);
     const [precios, setPrecios] = useState(0);
     const navigate = useNavigate()
     const location = useLocation()
-    const { funcion, pelicula } = location.state
+    const { pelicula } = location.state
     const contexto = useContext(VentaContext);
+
+    const funcion = contexto.general.funcion;
 
     const next = () => {
         setIndice(indice + 1);
