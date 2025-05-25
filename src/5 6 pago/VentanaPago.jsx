@@ -1,12 +1,14 @@
 import React, { useContext, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { BilleteraElectronica } from "./BilleteraElectronica.jsx";
 import { Tarjeta } from "./Tarjeta.jsx";
 import { VentaContext } from "../3 componentesVenta/VentaContextProvider.jsx";
 import { TerminosCondiciones } from "./TerminosCondiciones.jsx";
 import { ModalTerminos } from "./ModalTerminos.jsx";
+import Entrada from "../servicios/Entrada.js";
 
 export const VentanaPago = ({ prev, next }) => {
+  const navigate = useNavigate();
   const location = useLocation();
   const { pelicula, funcion } = location.state || {};
   const contexto = useContext(VentaContext);
@@ -34,38 +36,56 @@ export const VentanaPago = ({ prev, next }) => {
 
   const [mensaje, setMensaje] = useState("");
 
-const pagar = async () => {
-  if (puedeContinuar) {
-    try {
-      const respuesta = await fetch("/api/pago", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ nombre, correo, metodo, tarjeta }),
-      });
+  const pagar = async () => {
+    if (puedeContinuar) {
+      try {
+        const respuesta = await fetch("/api/pago", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ nombre, correo, metodo, tarjeta }),
+        });
 
-      const data = await respuesta.json();
+        const data = await respuesta.json();
 
-      if (!respuesta.ok) {
-        setMensaje(`Error: ${data.error || "Error desconocido"}`);
-        return;
+        if (!respuesta.ok) {
+          setMensaje(`Error: ${data.error || "Error desconocido"}`);
+          return;
+        }
+
+        setMensaje(
+          data.estado === "aprobado"
+            ? `✅ Pago aprobado (ID: ${data.transaccionId})`
+            : "❌ Pago rechazado. Intenta de nuevo."
+        );
+
+        if (data.estado === "aprobado") {
+          next(); // Avanza solo si el pago fue aprobado
+        }
+      } catch (error) {
+        setMensaje("⚠️ Error en la conexión");
       }
+    }
+  };
 
-      setMensaje(
-        data.estado === "aprobado"
-          ? `✅ Pago aprobado (ID: ${data.transaccionId})`
-          : "❌ Pago rechazado. Intenta de nuevo."
-      );
+  // Temporal
+  let bloquearSolicitud = false;
 
-      if (data.estado === "aprobado") {
-        next(); // Avanza solo si el pago fue aprobado
+  const registrarTest = async () => {
+    if (!bloquearSolicitud) {
+      console.log("Hi");
+      bloquearSolicitud = true;
+
+      const entradas = contexto.butacaContext.seleccionadas.map(el => ({ id_butaca: el.id, persona: "general" }));
+  
+      const cuerpo = {
+        id_funcion: contexto.general.funcion.idFuncion,
+        entradas: entradas
       }
-    } catch (error) {
-      setMensaje("⚠️ Error en la conexión");
+  
+      await Entrada.comprarEntrada(cuerpo);
+      next();
     }
   }
-};
-
-
 
   return (
     <>
@@ -113,6 +133,7 @@ const pagar = async () => {
 
       <div className="d-flex justify-content-center gap-4 align-items-center">
         <button className="btn btn-primary" onClick={volver} >Volver</button>
+        <button className="btn btn-warning" onClick={registrarTest}>Registrar (Test)</button>
       </div>
       {mensaje && (
         <div className="alert alert-info text-center mt-3">
