@@ -1,8 +1,12 @@
 import { useState, createContext } from "react" 
+import { useLocation } from "react-router-dom"
 
 const VentaContext = createContext({})
 
 const VentaContextProvider = ({ children }) => {
+    const location = useLocation()
+    const { funcion } = location.state
+
     const [ butacasSeleccionadas, setButacasSeleccionadas ] = useState([])
     const [ entradasSeleccionadas, setEntradasSeleccionadas ] = useState(0)
     const [ generalesSeleccionadas, setGeneralesSeleccionadas ] = useState(0)
@@ -13,6 +17,9 @@ const VentaContextProvider = ({ children }) => {
     const [ pruebaInicial, setPruebaInicial ] = useState(0)
 
     const contextData = {
+        general: {
+            funcion
+        },
         butacaContext: {
             seleccionadas: butacasSeleccionadas,
             setSeleccionadas: setButacasSeleccionadas,

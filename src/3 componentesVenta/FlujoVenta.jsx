@@ -16,8 +16,10 @@ const FlujoVenta = () => {
     const [precios, setPrecios] = useState(0);
     const navigate = useNavigate()
     const location = useLocation()
-    const { funcion, pelicula } = location.state
+    const { pelicula } = location.state
     const contexto = useContext(VentaContext);
+
+    const funcion = contexto.general.funcion;
 
     const next = () => {
         setIndice(indice + 1);
