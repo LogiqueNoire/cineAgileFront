@@ -15,6 +15,7 @@ import { VentaContextProvider } from './3 componentesVenta/VentaContextProvider.
 
 import { makeServer } from "./servicios/PagoServer.js";
 import VentanaInterior from './B usuarioInterno/VentanaInterior.jsx';
+import InfoEntradas from './5 6 pago/InfoEntradas.jsx';
 
 /* Descomentar para probar
   makeServer();
@@ -33,8 +34,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
                     <Route index element={ <Inicio /> } />
                     <Route path='/funcion/pelicula/' element={ <PeliculaSedes /> }/>
                     <Route path='/compra' element={ <VentaContextProvider><FlujoVenta></FlujoVenta></VentaContextProvider> } />
-                    
-
+                    <Route path='/entradas' element={ <InfoEntradas /> } />
                 </Route>
 
 
