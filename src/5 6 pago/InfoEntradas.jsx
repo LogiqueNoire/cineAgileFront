@@ -1,4 +1,5 @@
 import { useLocation } from "react-router-dom";
+import html2pdf from "html2pdf.js";
 
 const EntradaCard = ({ infoGeneral, entrada }) => {
     // Adherir 'Z' a la fecha UTC en formato ISO 8601 hará que new Date() transforme
@@ -14,7 +15,7 @@ const EntradaCard = ({ infoGeneral, entrada }) => {
     console.log(infoGeneral)
 
     return (
-    <div className="border border-secondary">
+    <div className="border border-secondary entrada-card">
         <div>CineAgile entrada (titulo)</div>
         <div>QR</div>
 
@@ -37,15 +38,41 @@ const InfoEntradas = () => {
     const location = useLocation();
     const { entradas = null } = location.state || {};
 
+    const descargarPdf = async () => {
+        const docs = document.querySelectorAll(".entrada-card");
+        const opts = {
+            margin: 10
+        };
+
+        let pdf = html2pdf().from(document.createElement("div")).set(opts).toPdf();
+
+        let primero = true;
+
+        for (let card of docs) {
+            pdf = pdf.get("pdf").then(pdf => {
+                if (!primero)
+                    pdf.addPage();
+                else
+                    primero = false;
+            }).from(card).toContainer().toCanvas().toPdf();
+        }
+
+
+        await pdf.save();
+    }
+
     return (
         <div className="container">
             <h1>Entradas</h1>
+            <button onClick={ descargarPdf }>Descargar PDF</button>
 
-            { entradas && entradas.entradas.map(el => {
-                return (
-                    <EntradaCard infoGeneral={ { ...entradas } } entrada={ el } />
-                )
-            }) }
+            <div>
+                { entradas && entradas.entradas.map(el => {
+                    return (
+                        <EntradaCard infoGeneral={ { ...entradas } } entrada={ el } />
+                    )
+                }) }
+            </div>
 
         </div>
     )
