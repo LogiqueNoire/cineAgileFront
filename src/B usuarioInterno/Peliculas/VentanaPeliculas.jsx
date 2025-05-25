@@ -16,49 +16,45 @@ const VentanaPeliculas = () => {
     }
 
     useEffect(() => {
-        consultar()
-    }, [])
-
-    useEffect(() => {
         console.log(lista)
     }, [lista])
 
     return (
         <div>
             <div className='d-block'>
-                <AddFilm></AddFilm>
+                <AddFilm onSucess={consultar}></AddFilm>
 
-                <table className='table table-striped border table-hover mt-4'>
-                    <thead>
+                <table className='table mytable table-striped border table-hover mt-4'>
+                    <thead className='thead'>
                         <tr>
-                            <td>Nombre</td>
-                            <td>Duración (min)</td>
-                            <td style={{width: "400px"}}>Sinopsis</td>
-                            <td>Género</td>
-                            <td>Director</td>
-                            <td>Clasificación</td>
-                            <td>Estado</td>
-                            <td>Actores</td>
-                            <td>Inicio de preventa</td>
-                            <td>Inicio de estreno</td>
-                            <td>Imagen</td>
+                            <td className='td'>Nombre</td>
+                            <td className='td'>Duración (min)</td>
+                            <td className='td' style={{width: "400px"}}>Sinopsis</td>
+                            <td className='td'>Género</td>
+                            <td className='td'>Director</td>
+                            <td className='td'>Clasificación</td>
+                            <td className='td'>Estado</td>
+                            <td className='td'>Actores</td>
+                            <td className='td'>Inicio de preventa</td>
+                            <td className='td'>Inicio de estreno</td>
+                            <td className='td'>Imagen</td>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody className='tbody'>
                         {lista.map((el, id) => (
 
-                            <tr key={id}>
-                                <td data-label='Nombre'>{el.nombre}</td>
-                                <td data-label='Duración'>{el.duracion}</td>
-                                <td data-label='Sinopsis'><div className='sinopsis'>{el.sinopsis}</div></td>
-                                <td data-label='Género'>{el.genero === " " ? "-" : el.genero}</td>
-                                <td data-label='Director'>{el.director === " " ? "-" : el.director}</td>
-                                <td data-label='Clasificación'>{el.clasificacion === " " ? "-" : el.clasificacion}</td>
-                                <td data-label='Estado'>{el.estado}</td>
-                                <td data-label='Actores'>{el.actores === " " ? "-" : el.actores}</td>
-                                <td data-label='Inicio de preventa'>{el.fechaInicioPreventa}</td>
-                                <td data-label='Inicio de estreno'>{el.fechaInicioEstreno}</td>
-                                <td data-label='Imagen'>
+                            <tr className='tr' key={id}>
+                                <td className='td' data-label='Nombre'>{el.nombre}</td>
+                                <td className='td' data-label='Duración'>{el.duracion}</td>
+                                <td className='td' data-label='Sinopsis'><div className='sinopsis'>{el.sinopsis}</div></td>
+                                <td className='td' data-label='Género'>{el.genero === " " ? "-" : el.genero}</td>
+                                <td className='td' data-label='Director'>{el.director === " " ? "-" : el.director}</td>
+                                <td className='td' data-label='Clasificación'>{el.clasificacion === " " ? "-" : el.clasificacion}</td>
+                                <td className='td' data-label='Estado'>{el.estado}</td>
+                                <td className='td' data-label='Actores'>{el.actores === " " ? "-" : el.actores}</td>
+                                <td className='td' data-label='Inicio de preventa'>{el.fechaInicioPreventa}</td>
+                                <td className='td' data-label='Inicio de estreno'>{el.fechaInicioEstreno}</td>
+                                <td className='td' data-label='Imagen'>
                                     <a href={el.imageUrl} target="_blank" rel="noopener noreferrer">
                                         Enlace
                                     </a>

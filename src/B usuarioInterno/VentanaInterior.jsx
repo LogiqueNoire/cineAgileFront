@@ -4,12 +4,12 @@ import { useNavigate } from 'react-router-dom';
 const VentanaInterior = () => {
     const navigate = useNavigate();
 
-    const moverseHaciaAddfilm = () => {
+    const moverseHaciaVentanaPeliculas = () => {
         navigate(`/intranet/peliculas`)
     }
 
-    const moverseHaciaAddSede = () => {
-        navigate(`/intranet/addsede`)
+    const moverseHaciaVentanaSedesYSalas = () => {
+        navigate(`/intranet/sedesysalas`)
     }
 
     return (
@@ -18,14 +18,14 @@ const VentanaInterior = () => {
                 <h1 className="display-5 text-center">Módulo interno de operaciones para CineAgile</h1>
                 <div className="d-flex p-3 justify-content-center gap-4">
 
-                    <button className="btn btn-primary d-flex gap-1" onClick={moverseHaciaAddfilm}>
+                    <button className="btn btn-primary d-flex gap-1" onClick={moverseHaciaVentanaPeliculas}>
                         <img src={pelicula} alt="" style={{ height: '35px' }} />
                         <h2 className="">Películas</h2>
                     </button>
 
-                    <button className="btn btn-primary d-flex gap-1" onClick={moverseHaciaAddSede}>
+                    <button className="btn btn-primary d-flex gap-1" onClick={moverseHaciaVentanaSedesYSalas}>
                         <img src={sede} alt="" style={{ height: '35px' }} />
-                        <h2 className="">Sedes</h2>
+                        <h2 className="">Sedes y salas</h2>
                     </button>
 
                     <button className="btn btn-primary d-flex gap-1">

@@ -8,6 +8,7 @@ const ScreeningButton = ({ funcion, pelicula }) => {
         //navigate(`/pelicula/${pelicula.idPelicula}/${funcion.idFuncion}`, { state: { consultaSedesPorPelicula: ejemplo } });
         navigate(`/compra`, { state: { funcion, pelicula } })
         console.log(pelicula)
+        console.log(funcion)
     };
 
     return (

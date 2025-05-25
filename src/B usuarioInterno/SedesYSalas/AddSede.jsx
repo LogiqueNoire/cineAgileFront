@@ -1,8 +1,9 @@
 import axios from 'axios';
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { url } from '../../configuracion/backend.js'
 
-export default function AddSede() {
+export default function AddSede( onSucess ) {
   const navigate = useNavigate();
 
   const [sede, setSede] = useState({
@@ -28,9 +29,11 @@ export default function AddSede() {
     e.preventDefault();
 
     try {
-      await axios.post('http://localhost:8080/sede/agregar', sede);
+      await axios.post(`${url}/intranet/sedesysalas/agregar`, sede);
       alert('Sede agregada correctamente');
-      navigate('/'); 
+      /*if(onSucess){
+        onSucess
+      }*/
     } catch (error) {
       alert('Error al agregar la sede');
       console.error(error);
@@ -38,11 +41,11 @@ export default function AddSede() {
   };
 
   return (
-    <div className="container">
+    <div className="justify-self-center" style={{width:"400px"}}>
       <div className="row">
         <div className="border rounded p-4 mt-4 shadow">
           <h2 className="text-center m-4">Agregar Sede</h2>
-          <form onSubmit={(e) => onSubmit(e)}>
+          <form onSubmit={(e) => onSubmit(e)} className='d-flex justify-self-center flex-column'>
                 
             <div className="mb-3">
               <label htmlFor="nombre" className="form-label">
@@ -62,9 +65,12 @@ export default function AddSede() {
             <button type="submit" className="btn btn-outline-primary">
               Agregar Sede
             </button>
+            {/*
+
             <Link className="btn btn-outline-danger mx-2" to="/">
               Cancelar
             </Link>
+            */}
           </form>
         </div>
       </div>

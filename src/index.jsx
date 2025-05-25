@@ -9,7 +9,8 @@ import FlujoVenta from './3 componentesVenta/FlujoVenta.jsx';
 import { VentanaPrecios } from './4 precios/VentanaPrecios.jsx';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import VentanaPeliculas from './B usuarioInterno/Peliculas/VentanaPeliculas.jsx';
-import AddSede from './B usuarioInterno/AgregarSede/AddSede.jsx';
+import VentanaSedesYSalas from './B usuarioInterno/SedesYSalas/VentanaSedesYSalas.jsx';
+import AddSede from './B usuarioInterno/SedesYSalas/AddSede.jsx';
 import { VentaContextProvider } from './3 componentesVenta/VentaContextProvider.jsx';
 
 import { makeServer } from "./servicios/PagoServer.js";
@@ -40,6 +41,8 @@ ReactDOM.createRoot(document.getElementById('root')).render(
                 <Route path='/intranet' element={ <App /> }>
                     <Route index element={<VentanaInterior/>}></Route>
                     <Route path="peliculas" element={<VentanaPeliculas></VentanaPeliculas>}></Route>
+                    <Route path="sedesysalas" element={<VentanaSedesYSalas></VentanaSedesYSalas>}></Route>
+                    <Route path="salas" element={<VentanaSedesYSalas></VentanaSedesYSalas>}></Route>
                 </Route>
                 
                 <Route path='/butacas' element={ <ButacaSelect idSala={ 5 } /> }/>
