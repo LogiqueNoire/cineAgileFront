@@ -1,10 +1,10 @@
-table {
+.mytable {
     width: 100%;
     border-collapse: collapse;
 }
 
-th,
-td {
+.th,
+.td {
     border: 1px solid #ccc;
     text-align: left;
 }
@@ -12,26 +12,26 @@ td {
 @media (max-width: 1023px) {
 
 
-    table,
-    thead,
-    tbody,
-    th,
-    td,
-    tr {
+    .mytable,
+    .thead,
+    .tbody,
+    .th,
+    .td,
+    .tr {
         display: block;
 
     }
 
-    thead {
+    .thead {
         display: none;
     }
 
-    tr {
+    .tr {
         margin-bottom: 1rem;
         border: 1px solid #ddd;
     }
 
-    td {
+    .td {
         position: relative;
         padding-left: 50%;
         text-align: right;
@@ -39,11 +39,11 @@ td {
         border-bottom: 1px solid #eee;
     }
 
-    .table>:not(caption)>*>* {
+    .mytable>:not(caption)>*>* {
         box-shadow: none;
     }
 
-    td::before {
+    .td::before {
         text-align: left;
         content: attr(data-label);
         position: absolute;

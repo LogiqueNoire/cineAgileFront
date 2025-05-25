@@ -5,7 +5,7 @@ import { url } from '../../configuracion/backend.js'
 
 import peliculaIcono from '../../assets/peliculaDark.svg'
 
-export default function AddFilm() {
+export default function AddFilm({ onSucess }) {
   const [pelicula, setPelicula] = useState({
   
           nombre: '',
@@ -48,7 +48,9 @@ export default function AddFilm() {
     try {
       await axios.post(`${url}/intranet/peliculas/agregar`, pelicula);
       alert('Película agregada correctamente');
-      navigate('/');
+      if(onSucess){
+        onSucess()
+      }
     } catch (error) {
       alert('Error al agregar la película');
       console.error(error);
@@ -233,9 +235,11 @@ export default function AddFilm() {
               <button type="submit" className="btn btn-outline-primary">
                 Agregar película
               </button>
-              <Link className="btn btn-outline-danger mx-2" to="/">
+              {/*
+              <Link className="btn btn-outline-danger mx-2" to={`/intranet/peliculas`}>
                 Cancelar
               </Link>
+               */}
             </div>
           </form>
         </div>
