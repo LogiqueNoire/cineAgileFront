@@ -18,6 +18,11 @@ const VentanaSedesYSalas = () => {
         navigate(`/intranet/sedesysalas/${idSede}`)
     }
 
+    useEffect(()=>{
+        console.log("hola")
+        consultar()
+    }, [])
+
     useEffect(() => {
         console.log("Sedes y salas", lista)
     }, [lista])

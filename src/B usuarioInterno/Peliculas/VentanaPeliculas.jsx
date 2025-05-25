@@ -16,6 +16,11 @@ const VentanaPeliculas = () => {
     }
 
     useEffect(() => {
+        consultar()
+    }, [])
+
+
+    useEffect(() => {
         console.log(lista)
     }, [lista])
 

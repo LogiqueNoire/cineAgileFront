@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { url } from '../../configuracion/backend.js'
 
-export default function AddSede( onSucess ) {
+export default function AddSede( {onSucess} ) {
   const navigate = useNavigate();
 
   const [sede, setSede] = useState({
@@ -31,9 +31,9 @@ export default function AddSede( onSucess ) {
     try {
       await axios.post(`${url}/intranet/sedesysalas/agregar`, sede);
       alert('Sede agregada correctamente');
-      /*if(onSucess){
-        onSucess
-      }*/
+      if(onSucess){
+        onSucess()
+      }
     } catch (error) {
       alert('Error al agregar la sede');
       console.error(error);
