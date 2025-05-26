@@ -109,7 +109,7 @@
 }
 
 /* MODAL CENTRADO Y ESTILOS */
-.modal-overlay {
+.modal-terminos-overlay {
   position: fixed;
   inset: 0;
   background: rgba(0, 0, 0, 0.5);
@@ -119,7 +119,7 @@
   z-index: 999;
 }
 
-.modal {
+.modal-terminos {
   width: 90%;
   max-width: 500px;
   background: white;
@@ -130,17 +130,17 @@
   display: block; /* importante para evitar conflicto flex */
 }
 
-.modal h3 {
+.modal-terminos h3 {
   font-size: 20px;
   margin: 0 0 10px;
 }
 
-.modal p {
+.modal-terminos p {
   font-size: 14px;
   line-height: 1.6;
 }
 
-.close-button {
+.terminos-close-button {
   margin-top: 20px;
   width: 100%;
   max-width: 150px;

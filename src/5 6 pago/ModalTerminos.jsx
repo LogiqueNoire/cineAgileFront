@@ -2,9 +2,9 @@ import './pago.css';
 
 export const ModalTerminos = ({ onClose }) => {
   return (
-    <div className="modal-overlay">
-      <div className="modal">
-        <h3 className="modal-title">Términos y Condiciones</h3>
+    <div className="modal-terminos-overlay">
+      <div className="modal-terminos">
+        <h3 className="modal-terminos-title">Términos y Condiciones</h3>
         <div>
           <strong>Aceptación de Términos:</strong> Al comprar en línea en CineAgile, el usuario acepta los términos y condiciones.
         </div>
@@ -23,7 +23,7 @@ export const ModalTerminos = ({ onClose }) => {
         <div>
           <strong>Normas de Comportamiento:</strong> Se prohíben comportamientos peligrosos o de acoso. El cine puede negar el acceso a quienes no respeten las normas. No se permite grabar total o parcialmente el contenido de la función.
         </div>
-        <button className="close-button" onClick={onClose}>
+        <button className="terminos-close-button" onClick={onClose}>
           Cerrar
         </button>
       </div>
