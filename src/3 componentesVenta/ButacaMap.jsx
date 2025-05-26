@@ -16,6 +16,9 @@ const ButacaMap = ({ butacas }) => {
         const pos = { id: el.target.dataset.id, f: +el.target.dataset.fila, c: +el.target.dataset.columna }
         contexto.pruebaInicialContext.setPruebaInicial(1);
         if (!estaEnSeleccionados(pos)) {
+            if (butacaContext.seleccionadas.length + 1 > 5)
+                return;
+
             butacaContext.setSeleccionadas([...butacaContext.seleccionadas, pos])
         } else {
             const nuevosElementos = butacaContext.seleccionadas.filter(el => el.f !== pos.f || el.c !== pos.c)
