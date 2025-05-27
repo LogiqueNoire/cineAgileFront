@@ -1,94 +1,104 @@
 import { useLocation } from "react-router-dom";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import MostrarSedesHorarios from "./MostrarSedesHorarios";
-import { format } from 'date-fns'
+import { format } from 'date-fns';
 import Pelicula from "../servicios/Pelicula";
 import Loading from "../0 componentesGenerales/Loading";
-
-const formatearTiempo = (fecha) => {
-    if (isNaN(fecha)) {
-        return format(new Date(), `yyyy-MM-dd.HH:mm`).replace('.', 'T')
-    } else {
-        return format(fecha, `yyyy-MM-dd.HH:mm`).replace('.', 'T')
-    }
-
-}
-
-const formatearTiempoSoloFecha = (fecha) => {
-    return formatearTiempo(fecha).split('T')[0]
-}
+import axios from "axios";
+import { url } from "../configuracion/backend"
 
 const PeliculaSedes = () => {
     const location = useLocation();
-    const { consultaIdPelicula, nombrePelicula, imagenPeli, sinopsis } = location.state || {};
+    const { consultaIdPelicula } = location.state || {};
 
-    // Formatear la fecha en formato 'yyyy-MM-ddTHH:mm'
-    const hoy = useRef(new Date());
-    const [fecha, setfecha] = useState(hoy.current);
-
-    const [ pelicula, setPelicula ] = useState(null)
-    const [ loading, setLoading ] = useState(true)
-    const [ error, setError ] = useState(null)
+    const [fechaReal, setFechaReal] = useState(null);
+    const [fechaElegida, setFechaElegida] = useState(null);
+    const [pelicula, setPelicula] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
     useEffect(() => {
-        Pelicula.mostrarPelicula(consultaIdPelicula).then(data => {
-            setPelicula(data)
-        }).catch(err => {
-            setError(err)
-        }).finally(() => {
-            setLoading(false)
-        })
+        if (!consultaIdPelicula) return;
+        Pelicula.mostrarPelicula(consultaIdPelicula)
+            .then(data => setPelicula(data))
+            .catch(err => setError(err))
+            .finally(() => setLoading(false));
 
         return () => {
-            setError(null)
-            setLoading(true)
-        }
-    }, [ consultaIdPelicula ])
+            setError(null);
+            setLoading(true);
+        };
+    }, [consultaIdPelicula]);
+
+    /*****Logica fecha******/
+    let response
+    useEffect(() => {
+        const obtenerFecha = async () => {
+            try {
+                response = await axios.get(`${url}/fecha-actual`);
+                setFechaReal(new Date(response.data));
+
+            } catch (err) {
+                console.error("Error al obtener la fecha:", err);
+            }
+        };
+
+        obtenerFecha();
+    }, []);
+
+    useEffect(() => {
+        setFechaElegida(fechaReal)
+        console.log("respuesta fecha", fechaReal)
+        console.log("format fecha", format(new Date(fechaReal), `yyyy-MM-dd`))
+    }, [fechaReal])
+
 
     const onFechaChange = (e) => {
-        const fechaActual = new Date()
+        setFechaElegida(new Date(`${e.target.value}T00:00`));
+    };
 
-        if (formatearTiempoSoloFecha(fechaActual) == e.target.value) {
-            setfecha(formatearTiempo(fechaActual));
-            return;
-        }
-
-        const fechaACambiar = new Date(`${e.target.value}T00:00`);
-        setfecha(fechaACambiar);
+    if (loading || !fechaReal) {
+        return <div className="d-flex justify-content-center"><Loading /></div>;
     }
 
-    const soloFecha = formatearTiempoSoloFecha(fecha);
-
-    if (loading) {
-        return <div className="d-flex justify-content-center">
-            <Loading />
-        </div>
-    }
+    /*********** */
 
     if (error) {
-        return <h1>error</h1>
+        return <h1>Error cargando datos</h1>;
     }
 
-    return (<div>
-        <div className="d-flex justify-content-center gap-4 align-items-center px-5 py-4 bg-light bg-gradient border shadow mb-4">
-            <img className="imagenPelicula shadow rounded" src={pelicula.imageUrl} alt="imagen Peli"  />
-            <div>
-                <h1 className="display-4"> { pelicula.nombre }</h1>
-                <p> { pelicula.sinopsis }</p>
-                
-                <div className='mt-5'>
-                    <h5 className='my-2'>Opciones</h5>
-                    <div>
-                        <span className="me-2">Selecciona una fecha:</span>
-                        <input type="date" className="mx-1" min={formatearTiempoSoloFecha(hoy.current)} value={soloFecha} onChange={onFechaChange}/>
+    return (
+        <div>
+            <div className="d-flex justify-content-center gap-4 align-items-center px-5 py-4 bg-light bg-gradient border shadow mb-4">
+                <img className="imagenPelicula shadow rounded" src={pelicula.imageUrl} alt="imagen Peli" />
+                <div>
+                    <h1 className="display-4">{pelicula.nombre}</h1>
+                    <p>{pelicula.sinopsis}</p>
+
+                    <div className='mt-5'>
+                        <h5 className='my-2'>Opciones</h5>
+                        <div>
+                            <span className="me-2">Selecciona una fecha:</span>
+                            <input
+                                type="date"
+                                className="mx-1 form-control"
+                                min={format(fechaReal, 'yyyy-MM-dd')}
+                                max={format(new Date(fechaReal).setMonth(fechaReal.getMonth() + 3), 'yyyy-MM-dd')}
+                                value={format(fechaElegida, 'yyyy-MM-dd')}
+                                onChange={onFechaChange}
+                                style={{ width: "150px" }}
+                            />
+                        </div>
                     </div>
-                </div> 
-
+                </div>
             </div>
+            {fechaElegida && (
+                <MostrarSedesHorarios
+                    pelicula={pelicula}
+                    fechaFormateada={format(fechaElegida, `yyyy-MM-dd.HH:mm`).replace('.', 'T')}
+                />)}
         </div>
-
-        <MostrarSedesHorarios pelicula={ pelicula } fechaFormateada={ formatearTiempo(fecha) } />
-    </div>);
+    );
 };
 
-export default PeliculaSedes
+export default PeliculaSedes;

@@ -1,10 +1,13 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import AddSede from './AddSede';
 import axios from 'axios';
 import { url } from "../../configuracion/backend"
+import { useNavigate } from 'react-router-dom'
 
 const VentanaSedesYSalas = () => {
     const [lista, setLista] = useState([]);
+    const [idSede, setIdSede] = useState([]);
+    const navigate = useNavigate();
 
     const consultar = async () => {
         try {
@@ -14,8 +17,9 @@ const VentanaSedesYSalas = () => {
         }
     }
 
-    const moverse = () => {
-        navigate(`/intranet/sedesysalas/${idSede}`)
+    const moverse = (id) => {
+        setIdSede(id)
+        //navigate(`/intranet/sedesysalas/${idSede}`)
     }
 
     useEffect(()=>{
@@ -45,7 +49,7 @@ const VentanaSedesYSalas = () => {
                             <tr key={el.id}>
                                 <td>{el.nombre}</td>
                                 <td className='text-center'>
-                                    <button className='btn btn-primary' onClick={moverse}>Ver</button>
+                                    <button className='btn btn-primary' onClick={moverse(el.id)}>Ver</button>
                                 </td>
                             </tr>
 
