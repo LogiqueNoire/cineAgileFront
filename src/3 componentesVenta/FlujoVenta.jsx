@@ -10,7 +10,7 @@ import { VentanaPago } from "../5 6 pago/VentanaPago";
 import { set } from "date-fns";
 import { se } from "date-fns/locale";
 
-const ventanas = [ ButacaSelect, VentanaPrecios, VentanaPago, InfoEntradas ];
+const ventanas = [ ButacaSelect, VentanaPrecios, VentanaPago ];
 
 const FlujoVenta = () => {
     const [indice, setIndice] = useState(0);

@@ -70,20 +70,21 @@ export const VentanaPago = ({ prev, next }) => {
   // Temporal
   let bloquearSolicitud = false;
 
-  const registrarTest = async () => {
+  const registrarTest = () => {
     if (!bloquearSolicitud) {
-      console.log("Hi");
       bloquearSolicitud = true;
 
       const entradas = contexto.butacaContext.seleccionadas.map(el => ({ id_butaca: el.id, persona: "general" }));
   
       const cuerpo = {
         id_funcion: contexto.general.funcion.idFuncion,
-        entradas: entradas
+        entradas: entradas,
+        tiempoRegistro: (new Date(Date.now())).toISOString()
       }
   
-      await Entrada.comprarEntrada(cuerpo);
-      next();
+      Entrada.comprarEntrada(cuerpo).then(res => {
+        navigate("/entradas", { state: { entradas: res.data } })
+      });
     }
   }
 

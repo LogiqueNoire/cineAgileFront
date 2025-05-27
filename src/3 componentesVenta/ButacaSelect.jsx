@@ -45,6 +45,24 @@ const SeleccionButaca = ({ funcion, prev, next }) => {
                 { error && <h2>Error!</h2> }
                 { !loading && <ButacaMap butacas={ data } /> }
             </div>
+
+            <div className="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+              <div className="modal-dialog modal-dialog-centered">
+                <div className="modal-content">
+                  <div className="modal-header">
+                    <h1 className="modal-title fs-5" id="staticBackdropLabel">Aviso</h1>
+                  </div>
+                  <div className="modal-body">
+                    <h2 className='text-primary text-center'>
+                      ¡Máximo de butacas seleccionadas!
+                    </h2>
+                  </div>
+                  <div className="modal-footer">
+                    <button type="button" className="btn btn-primary" data-bs-dismiss="modal">Entendido</button>
+                  </div>
+                </div>
+              </div>
+            </div>
     
             <div className="d-flex justify-content-center gap-4 align-items-center">
                 <button className="btn btn-primary" onClick={volver} >Volver</button>

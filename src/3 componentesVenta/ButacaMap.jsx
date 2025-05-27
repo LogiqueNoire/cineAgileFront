@@ -13,9 +13,17 @@ const ButacaMap = ({ butacas }) => {
     }
 
     const inputOnChange = (el) => {
+
+
         const pos = { id: el.target.dataset.id, f: +el.target.dataset.fila, c: +el.target.dataset.columna }
         contexto.pruebaInicialContext.setPruebaInicial(1);
         if (!estaEnSeleccionados(pos)) {
+            if (butacaContext.seleccionadas.length + 1 > 5) {
+                const myModal = new bootstrap.Modal(document.getElementById("staticBackdrop"));
+                myModal.show();
+                return;
+            }
+
             butacaContext.setSeleccionadas([...butacaContext.seleccionadas, pos])
         } else {
             const nuevosElementos = butacaContext.seleccionadas.filter(el => el.f !== pos.f || el.c !== pos.c)
