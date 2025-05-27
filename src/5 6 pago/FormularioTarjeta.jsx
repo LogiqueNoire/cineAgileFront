@@ -1,3 +1,4 @@
+import { PayPalButtons, PayPalScriptProvider } from "@paypal/react-paypal-js";
 import React from "react";
 
 export const FormularioTarjeta = ({ tarjeta, setTarjeta }) => {
@@ -98,6 +99,9 @@ export const FormularioTarjeta = ({ tarjeta, setTarjeta }) => {
       <button type="submit" className="pay-button">
         Pagar
       </button>
+      <PayPalScriptProvider options={{"client-id": import.meta.env.VITE_PAYPAL_CLIENT_ID}}>
+          <PayPalButtons></PayPalButtons>
+      </PayPalScriptProvider>
     </form>
   );
 };
