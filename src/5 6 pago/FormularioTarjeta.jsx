@@ -1,7 +1,37 @@
 import { PayPalButtons, PayPalScriptProvider } from "@paypal/react-paypal-js";
-import React from "react";
+import { useContext } from "react";
+import { VentaContext } from "../3 componentesVenta/VentaContextProvider.jsx";
+import Entrada from "../servicios/Entrada.js";
+import { useLocation, useNavigate } from "react-router-dom";
+
 
 export const FormularioTarjeta = ({ tarjeta, setTarjeta }) => {
+  const contexto = useContext(VentaContext)
+  const total = contexto.totalContext.total;
+
+    const navigate = useNavigate();
+  // Temporal
+  let bloquearSolicitud = false;
+
+  const registrarTest = () => {
+    if (!bloquearSolicitud) {
+      bloquearSolicitud = true;
+
+      const entradas = contexto.butacaContext.seleccionadas.map(el => ({ id_butaca: el.id, persona: "general" }));
+
+      const cuerpo = {
+        id_funcion: contexto.general.funcion.idFuncion,
+        entradas: entradas,
+        tiempoRegistro: (new Date(Date.now())).toISOString()
+      }
+
+      Entrada.comprarEntrada(cuerpo).then(res => {
+        navigate("/entradas", { state: { entradas: res.data } })
+      });
+    }
+  }
+
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setTarjeta((prev) => ({
@@ -17,6 +47,35 @@ export const FormularioTarjeta = ({ tarjeta, setTarjeta }) => {
   };
 
   return (
+    <div>
+
+      <PayPalScriptProvider options={{ "client-id": import.meta.env.VITE_PAYPAL_CLIENT_ID }}>
+        <PayPalButtons
+          createOrder={(_, actions) => {
+            return actions.order.create({
+              purchase_units: [{
+                amount: {
+                  value: total
+                },
+                custom_id: 23232 /*aqui va el numero de orden de la entrada*/
+              }]
+            })
+          }}
+          onApprove={(_, actions) => {
+            return actions.order.capture().then(details=>{
+              registrarTest() //////////////////////////////////////////////////////////////////
+              console.log("Pago exitoso")
+              console.log(details)
+              alert("Pago exitoso")
+            })
+          }}
+          />
+      </PayPalScriptProvider>
+    </div>
+  );
+};
+
+/*
     <form className="formulario-tarjeta" onSubmit={simularPago}>
       <div className="input-row">
         <input
@@ -99,9 +158,5 @@ export const FormularioTarjeta = ({ tarjeta, setTarjeta }) => {
       <button type="submit" className="pay-button">
         Pagar
       </button>
-      <PayPalScriptProvider options={{"client-id": import.meta.env.VITE_PAYPAL_CLIENT_ID}}>
-          <PayPalButtons></PayPalButtons>
-      </PayPalScriptProvider>
-    </form>
-  );
-};
+      
+    </form>*/

@@ -2,7 +2,9 @@ import React, { useState } from "react";
 import "./pago.css";
 import { FormularioTarjeta } from "./FormularioTarjeta";
 
+
 export const Tarjeta = ({ metodo, setMetodo, tarjeta, setTarjeta }) => {
+
   return (
     <>
       <button
@@ -13,11 +15,11 @@ export const Tarjeta = ({ metodo, setMetodo, tarjeta, setTarjeta }) => {
           metodo === "tarjeta" ? "selected tarjeta" : ""
         }`}
       >
-        <span>Tarjeta de Crédito o Débito</span>
-        <div className="card-images">
+        <span className="">Elegir forma de pago</span>
+        {/*<div className="card-images">
           <img src="/visa.png" alt="Visa" className="card-icon" />
           <img src="/mastercard.png" alt="MasterCard" className="card-icon" />
-        </div>
+        </div>*/}
       </button>
 
       {metodo === "tarjeta" && (
