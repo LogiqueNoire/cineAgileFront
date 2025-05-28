@@ -49,7 +49,7 @@ export const FormularioTarjeta = ({ tarjeta, setTarjeta }) => {
   return (
     <div>
 
-      <PayPalScriptProvider options={{ "client-id": import.meta.env.VITE_PAYPAL_CLIENT_ID }}>
+      <PayPalScriptProvider options={{ "client-id": import.meta.env.VITE_PAYPAL_CLIENT_ID, locale: "es_PE" }}>
         <PayPalButtons
           createOrder={(_, actions) => {
             return actions.order.create({
@@ -57,13 +57,13 @@ export const FormularioTarjeta = ({ tarjeta, setTarjeta }) => {
                 amount: {
                   value: total
                 },
-                custom_id: 23232 /*aqui va el numero de orden de la entrada*/
+                custom_id: 23232 
               }]
             })
           }}
           onApprove={(_, actions) => {
             return actions.order.capture().then(details=>{
-              registrarTest() //////////////////////////////////////////////////////////////////
+              registrarTest() 
               console.log("Pago exitoso")
               console.log(details)
               alert("Pago exitoso")

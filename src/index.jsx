@@ -13,7 +13,7 @@ import AddSede from './B usuarioInterno/SedesYSalas/AddSede.jsx';
 import { VentaContextProvider } from './3 componentesVenta/VentaContextProvider.jsx';
 
 import VentanaInterior from './B usuarioInterno/VentanaInterior.jsx';
-import InfoEntradas from './5 6 pago/InfoEntradas.jsx';
+import InfoEntradas from './5 6 pago y entradas/InfoEntradas.jsx';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
     <StrictMode>
@@ -34,7 +34,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
                     <Route index element={<VentanaInterior/>}></Route>
                     <Route path="peliculas" element={<VentanaPeliculas></VentanaPeliculas>}></Route>
                     <Route path="sedesysalas" element={<VentanaSedesYSalas></VentanaSedesYSalas>}></Route>
-                    <Route path="salas" element={<VentanaSedesYSalas></VentanaSedesYSalas>}></Route>
+                    <Route path="salas" /*element={<VentanaSedesYSalas></VentanaSedesYSalas>}*/></Route>
                 </Route>
                 
                 <Route path='/butacas' element={ <ButacaSelect idSala={ 5 } /> }/>
