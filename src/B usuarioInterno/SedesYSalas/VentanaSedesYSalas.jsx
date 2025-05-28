@@ -3,10 +3,12 @@ import AddSede from './AddSede';
 import axios from 'axios';
 import { url } from "../../configuracion/backend"
 import { useNavigate } from 'react-router-dom'
+import Loading from '../../0 componentesGenerales/Loading';
 
 const VentanaSedesYSalas = () => {
     const [lista, setLista] = useState([]);
     const [idSede, setIdSede] = useState([]);
+    const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
 
     const consultar = async () => {
@@ -14,6 +16,8 @@ const VentanaSedesYSalas = () => {
             setLista((await axios.get(`${url}/intranet/sedesysalas`)).data);
         } catch (error) {
             console.error(error);
+        } finally {
+            setLoading(false)
         }
     }
 
@@ -35,7 +39,7 @@ const VentanaSedesYSalas = () => {
         <div>
             <div className='d-flex flex-column align-items-center container'>
                 <AddSede onSucess={consultar}></AddSede>
-                {loading == true
+                {loading === true
                     ? <Loading></Loading> :
                     <table className='table table-striped border table-hover m-4'>
                         <thead className=''>

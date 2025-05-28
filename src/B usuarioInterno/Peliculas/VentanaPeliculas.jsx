@@ -14,6 +14,8 @@ const VentanaPeliculas = () => {
             setLista((await axios.get(`${url}/intranet/peliculas`)).data);
         } catch (error) {
             console.error(error);
+        } finally {
+            setLoading(false);
         }
     }
 
@@ -23,7 +25,6 @@ const VentanaPeliculas = () => {
 
 
     useEffect(() => {
-        setLoading(false)
         console.log(lista)
     }, [lista])
 
@@ -32,8 +33,8 @@ const VentanaPeliculas = () => {
             <div className='d-block'>
                 <AddFilm onSucess={consultar}></AddFilm>
 
-                {loading == true
-                ? <Loading></Loading> : 
+                {loading === true
+                    ? <div className='d-flex flex-column align-items-center container'><Loading></Loading></div> :
                     <table className='table mytable table-striped border table-hover mt-4'>
                         <thead className='thead'>
                             <tr>
