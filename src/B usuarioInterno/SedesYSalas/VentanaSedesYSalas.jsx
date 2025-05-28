@@ -49,7 +49,7 @@ const VentanaSedesYSalas = () => {
                             <tr key={el.id}>
                                 <td>{el.nombre}</td>
                                 <td className='text-center'>
-                                    <button className='btn btn-primary' onClick={moverse(el.id)}>Ver</button>
+                                    <button className='btn btn-primary' onClick={() => moverse(el.id)}>Ver</button>
                                 </td>
                             </tr>
 
