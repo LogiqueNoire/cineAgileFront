@@ -16,9 +16,9 @@
     "date-fns": "^4.1.0",
     "html2pdf.js": "^0.10.3",
     "jspdf": "^3.0.1",
-    "miragejs": "^0.1.48",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
+    "react-qr-code": "^2.0.15",
     "react-router-dom": "^7.6.0"
   },
   "devDependencies": {

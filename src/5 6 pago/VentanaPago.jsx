@@ -44,7 +44,7 @@ export const VentanaPago = ({ prev, next }) => {
 
         {aceptaTerminos &&
           <div className="formulario-contacto">
-            <input
+            {/*<input
               type="text"
               placeholder="Nombre completo"
               value={nombre}
@@ -55,7 +55,7 @@ export const VentanaPago = ({ prev, next }) => {
               placeholder="Correo electrónico"
               value={correo}
               onChange={(e) => setCorreo(e.target.value)}
-            />
+            />*/}
             <Tarjeta
               metodo={metodo}
               setMetodo={setMetodo}

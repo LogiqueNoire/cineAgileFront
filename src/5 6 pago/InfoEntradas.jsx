@@ -1,5 +1,6 @@
 import { useLocation } from "react-router-dom";
 import html2pdf from "html2pdf.js";
+import QRCode from "react-qr-code";
 
 const EntradaCard = ({ infoGeneral, entrada }) => {
     // Adherir 'Z' a la fecha UTC en formato ISO 8601 hará que new Date() transforme
@@ -15,21 +16,28 @@ const EntradaCard = ({ infoGeneral, entrada }) => {
     console.log(infoGeneral)
 
     return (
-    <div className="border border-secondary entrada-card">
-        <div>CineAgile entrada (titulo)</div>
-        <div>QR</div>
+        <div className="border border-secondary entrada-card p-3">
 
-        <h2>Datos elegidos</h2>
-        <p>Pelicula: { infoGeneral.tituloPelicula }</p>
-        <p>Fecha y hora: { fechaHoraInicioCorrecto }</p>
-        <p>Sede: { infoGeneral.nombreSede } </p>
-        <p>Sala: { infoGeneral.sala }</p>
-        <p>Butaca: { letra + (columna + 1) }</p>
+            <div>
 
-        <h2>Datos del pago</h2>
-        <p>Fecha y hora del pago: { tiempoRegistroCorrecto }</p>
-        <p>Precio final: { entrada.costoFinal } nuevos soles </p>
-    </div>
+                <div className="d-flex align-items-center gap-4">
+                    <h2 className="w-50 text-center">CineAgile<br />Entrada</h2>
+                    <QRCode className="w-50" style={{height: "auto"}} value={158454545} /> {/*codigoQR*/}
+                </div>
+
+                <h2 className="text-center mt-4">Datos elegidos</h2>
+
+                <h5>Pelicula: {infoGeneral.tituloPelicula}</h5>
+                <h5>Fecha y hora: {fechaHoraInicioCorrecto}</h5>
+                <h5>Sede: {infoGeneral.nombreSede} </h5>
+                <h5>Sala: {infoGeneral.sala}</h5>
+                <h5>Butaca: {letra + (columna + 1)}</h5>
+
+                <h2 className="text-center mt-4">Datos del pago</h2>
+                <h5>Fecha y hora del pago: {tiempoRegistroCorrecto}</h5>
+                <h5>Precio final: {entrada.costoFinal} nuevos soles </h5>
+            </div>
+        </div>
     )
 
 }
@@ -44,7 +52,9 @@ const InfoEntradas = () => {
             margin: 10
         };
 
-        let pdf = html2pdf().from(document.createElement("div")).set(opts).toPdf();
+        let pdf = Entrada.generarPdf()
+
+        /*html2pdf().from(document.createElement("div")).set(opts).toPdf();*/
 
         let primero = true;
 
@@ -62,16 +72,19 @@ const InfoEntradas = () => {
     }
 
     return (
-        <div className="container">
-            <h1>Entradas</h1>
-            <button onClick={ descargarPdf }>Descargar PDF</button>
+        <div className="w-100 p-4">
+            <div className="container">
 
-            <div>
-                { entradas && entradas.entradas.map(el => {
-                    return (
-                        <EntradaCard infoGeneral={ { ...entradas } } entrada={ el } />
-                    )
-                }) }
+                <h1>Entradas</h1>
+                <button onClick={descargarPdf}>Descargar PDF</button>
+
+                <div>
+                    {entradas && entradas.entradas.map(el => {
+                        return (
+                            <EntradaCard infoGeneral={{ ...entradas }} entrada={el} />
+                        )
+                    })}
+                </div>
             </div>
 
         </div>

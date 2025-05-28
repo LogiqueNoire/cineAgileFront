@@ -6,22 +6,14 @@ import PeliculaSedes from './3 componentesVenta/PeliculaSedes.jsx';
 import Inicio from './Inicio.jsx'
 import ButacaSelect from './3 componentesVenta/ButacaSelect.jsx'
 import FlujoVenta from './3 componentesVenta/FlujoVenta.jsx';
-import { VentanaPrecios } from './4 precios/VentanaPrecios.jsx';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import VentanaPeliculas from './B usuarioInterno/Peliculas/VentanaPeliculas.jsx';
 import VentanaSedesYSalas from './B usuarioInterno/SedesYSalas/VentanaSedesYSalas.jsx';
 import AddSede from './B usuarioInterno/SedesYSalas/AddSede.jsx';
 import { VentaContextProvider } from './3 componentesVenta/VentaContextProvider.jsx';
 
-import { makeServer } from "./servicios/PagoServer.js";
 import VentanaInterior from './B usuarioInterno/VentanaInterior.jsx';
 import InfoEntradas from './5 6 pago/InfoEntradas.jsx';
-
-/* Descomentar para probar
-  makeServer();
-*/
-
-
 
 ReactDOM.createRoot(document.getElementById('root')).render(
     <StrictMode>
