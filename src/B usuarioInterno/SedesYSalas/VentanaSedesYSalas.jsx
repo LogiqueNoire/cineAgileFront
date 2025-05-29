@@ -50,6 +50,11 @@ const VentanaSedesYSalas = () => {
         console.log("Sedes y salas", lista)
     }, [lista])
 
+    const funcionCambiar = () => {
+        setModalAbierto(false)
+        setPrimeraVez(true)
+    }
+
     return (
         <div>
             <div className='d-flex flex-column align-items-center container'>
@@ -79,7 +84,7 @@ const VentanaSedesYSalas = () => {
                     </table>
 
                 }
-                {modalAbierto && <ModalSalas onClose={() => setModalAbierto(false)} salas={salas} sede={sede}/>}
+                {modalAbierto && <ModalSalas onClose={funcionCambiar} salas={salas} sede={sede}/>}
             </div>
         </div>
     )

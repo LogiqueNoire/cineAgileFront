@@ -4,8 +4,8 @@ import guardar from "../../assets/guardarAzul.svg"
 import guardarBlanco from "../../assets/guardarBlanco.svg"
 
 export const ModalSalas = ({ onClose, salas, sede }) => {
-  const [codigoSalaGuardar, setCodigoSalaGuardar] = useState()
-  const [categoriaGuardar, setCategoriaGuardar] = useState()
+  const [codigoSalaGuardar, setCodigoSalaGuardar] = useState('')
+  const [categoriaGuardar, setCategoriaGuardar] = useState('')
 
   const update = async () => {
     console.log("guardando")
@@ -16,7 +16,7 @@ export const ModalSalas = ({ onClose, salas, sede }) => {
     e.preventDefault();
 
     try {
-      await axios.post(`${url}/intranet/sedesysalas/nuevaSala`, sede);
+      await axios.post(`${url}/intranet/sedesysalas/nuevaSala`, sede.id, sede.codigoSala, sede.categoria);
       alert('Sala agregada correctamente a la sede');
     } catch (error) {
       alert('Error al agregar la sede');
@@ -52,7 +52,7 @@ export const ModalSalas = ({ onClose, salas, sede }) => {
                   className="form-control"
                   placeholder="Nuevo nombre"
                   name="nuevonombre"
-                  value={''}
+                  value={codigoSalaGuardar}
                   onChange={(e) => setCodigoSalaGuardar(e.target.value)}
                   required
                 />
@@ -63,7 +63,7 @@ export const ModalSalas = ({ onClose, salas, sede }) => {
                   className="form-control"
                   placeholder="Nueva categoría"
                   name="nuevacategoria"
-                  value={''}
+                  value={categoriaGuardar}
                   onChange={(e) => setCategoriaGuardar(e.target.value)}
                   required
                 />
