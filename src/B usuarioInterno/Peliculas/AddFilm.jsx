@@ -5,6 +5,7 @@ import { url } from '../../configuracion/backend.js'
 import { format } from 'date-fns'
 
 import peliculaIcono from '../../assets/peliculaDark.svg'
+import Loading from '../../0 componentesGenerales/Loading.jsx';
 
 export default function AddFilm({ onSucess }) {
   const [pelicula, setPelicula] = useState({
@@ -30,7 +31,7 @@ export default function AddFilm({ onSucess }) {
     genero,
     clasificacion,
     duracion,
-    estado="próximamente",
+    estado = "próximamente",
     fechaInicioEstreno,
     fechaInicioPreventa,
     imageUrl,
@@ -85,7 +86,7 @@ export default function AddFilm({ onSucess }) {
   const onSubmit = async (e) => {
     e.preventDefault();
     console.log(pelicula)
-    if (!(genero === '' || clasificacion === '' || estado === "")){
+    if (!(genero === '' || clasificacion === '' || estado === "")) {
 
       try {
         await axios.post(`${url}/intranet/peliculas/agregar`, pelicula);
@@ -102,7 +103,7 @@ export default function AddFilm({ onSucess }) {
 
   return (
     <div className="addFilm">
-      {fechaReal &&
+      {fechaReal !== undefined ?
         <div className="border rounded p-4 mt-4 shadow">
           <div className="d-flex align-items-center p-2 gap-4 justify-content-center">
             <img src={peliculaIcono} alt="" style={{ height: '60px' }} />
@@ -311,6 +312,10 @@ export default function AddFilm({ onSucess }) {
               */}
             </div>
           </form>
+        </div>
+        :
+        <div className="d-flex justify-content-center">
+          <Loading ></Loading>
         </div>
       }
     </div>
