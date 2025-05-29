@@ -13,6 +13,7 @@ const VentanaSedesYSalas = () => {
     const [salas, setSalas] = useState([]);
     const navigate = useNavigate();
     const [modalAbierto, setModalAbierto] = useState(false)
+    const [primeraVez, setPrimeraVez] = useState(true)
 
     const consultar = async () => {
         try {
@@ -25,6 +26,7 @@ const VentanaSedesYSalas = () => {
     }
 
     const moverse = (el) => {
+        setPrimeraVez(false)
         setSalas(el.salas)
         setSede(el)
         console.log(el.salas)
@@ -33,8 +35,10 @@ const VentanaSedesYSalas = () => {
     }
 
     useEffect(() => {
-        setModalAbierto(true);
-    }, [salas]);
+        if(!primeraVez){
+            setModalAbierto(true);
+        }
+    }, [primeraVez]);
 
 
     useEffect(() => {
