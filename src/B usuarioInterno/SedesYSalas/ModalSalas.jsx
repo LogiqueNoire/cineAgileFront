@@ -1,83 +1,128 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import butaca from "../../assets/butaca.svg"
 import guardar from "../../assets/guardarAzul.svg"
 import guardarBlanco from "../../assets/guardarBlanco.svg"
+import axios from 'axios';
+import { url } from '../../configuracion/backend.js'
+import Loading from '../../0 componentesGenerales/Loading';
 
-export const ModalSalas = ({ onClose, salas, sede }) => {
+export const ModalSalas = ({ onClose, sede }) => {
   const [codigoSalaGuardar, setCodigoSalaGuardar] = useState('')
+  const [salas, setSalas] = useState()
   const [categoriaGuardar, setCategoriaGuardar] = useState('')
+  const [loading, setLoading] = useState(true);
 
   const update = async () => {
     console.log("guardando")
   }
 
-
-  const agregarSala = async () => {
+  let listaActualizada
+  const agregarSala = async (e) => {
     e.preventDefault();
+    if (!(categoriaGuardar === '')) {
 
-    try {
-      await axios.post(`${url}/intranet/sedesysalas/nuevaSala`, sede.id, sede.codigoSala, sede.categoria);
-      alert('Sala agregada correctamente a la sede');
-    } catch (error) {
-      alert('Error al agregar la sede');
-      console.error(error);
+      try {
+        setLoading(true)
+        await axios.post(`${url}/intranet/sedesysalas/nuevaSala`, {
+          idSede: sede.id,
+          codigoSala: codigoSalaGuardar,
+          categoria: categoriaGuardar,
+        });
+        alert('Sala agregada correctamente a la sede');
+      } catch (error) {
+        if (
+          error.response?.data?.message?.includes('duplicate key') ||
+          error.response?.data?.detail?.includes('already exists')
+        ) {
+          alert('Ya existe una sala con ese código en esta sede.');
+        } else {
+          alert('Error al agregar la sala');
+        }
+        console.error(error);
+      } finally {
+        consultar()
+        setCodigoSalaGuardar('');
+        setCategoriaGuardar('');
+      }
+    } else {
+      alert('Ingresar categoria');
     }
   };
 
+
+  const consultar = async () => {
+    try {
+      listaActualizada = (await axios.get(`${url}/intranet/sedesysalas`)).data;
+    } catch (error) {
+      console.error(error);
+    } finally {
+      const sedeActualizada = listaActualizada.find(el => el.id === sede.id);
+      if (sedeActualizada) {
+        setSalas(sedeActualizada.salas);
+        setLoading(false)
+      }
+    }
+  }
+
+  useEffect(() => {
+    consultar()
+  }, [])
+
   return (
-    <div className="modal-terminos-overlay">
-      <div className="modal-terminos d-flex flex-column align-items-center">
+    <div className="modal-terminos-overlay" >
+      <div className="modal-terminos d-flex flex-column align-items-center" style={{ "max-height": "80vh", "overflow-y": "auto" }}>
         <h3 className="modal-terminos-title">Sede {sede.nombre}</h3>
-        <button className='btn btn-primary d-flex gap-3'>
+
+        <button className='btn btn-primary d-flex gap-3' onClick={(e) => agregarSala(e)}>
           <h3 className="mb-0">Guardar nueva sala</h3>
           <img src={guardarBlanco} alt="" style={{ height: '22px' }} />
         </button>
-        <table className='table table-striped border table-hover m-4'>
-          <thead className=''>
-            <tr className=''>
-              <td className=''>Sala</td>
-              <td className=''>Categoría</td>
-              {/*
+
+        {loading ?
+          <Loading></Loading> :
+          <table className='table table-striped border table-hover m-4'>
+            <thead className=''>
+              <tr className=''>
+                <td className=''>Sala</td>
+                <td className=''>Categoría</td>
+                {/*
               <td className=''></td>
               <td className=''></td>
-               */}
-            </tr>
-          </thead>
+              */}
+              </tr>
+            </thead>
 
-          <tbody className=''>
-            <tr>
-              <td>
-                <input
-                  type="text"
-                  className="form-control"
-                  placeholder="Nuevo nombre"
-                  name="nuevonombre"
-                  value={codigoSalaGuardar}
-                  onChange={(e) => setCodigoSalaGuardar(e.target.value)}
-                  required
-                />
-              </td>
-              <td>
-                <input
-                  type="text"
-                  className="form-control"
-                  placeholder="Nueva categoría"
-                  name="nuevacategoria"
-                  value={categoriaGuardar}
-                  onChange={(e) => setCategoriaGuardar(e.target.value)}
-                  required
-                />
-              </td>
+            <tbody className=''>
+              <tr>
+                <td>
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Nuevo nombre"
+                    name="nuevonombre"
+                    value={codigoSalaGuardar}
+                    onChange={(e) => setCodigoSalaGuardar(e.target.value)}
+                    required
+                  />
+                </td>
+                <td>
+                  <select
+                    className="form-select"
+                    name="nuevacategoria"
+                    value={categoriaGuardar}
+                    onChange={(e) => setCategoriaGuardar(e.target.value)}
+                    required>
+                    <option value="">Elija una categoría</option>
+                    <option value="Regular">Regular</option>
+                    <option value="Prime">Prime</option>
+                  </select>
+                </td>
 
-              <td className='text-center'>
-
-              </td>
-
-            </tr>
+              </tr>
 
 
-            {salas.length > 0 ?
-              
+              {salas.length > 0 ?
+
                 salas.map((el, id) => (
 
                   <tr key={el.id}>
@@ -122,13 +167,14 @@ export const ModalSalas = ({ onClose, salas, sede }) => {
 
 
                 ))
-              : <></>
-            }
+                : <></>
+              }
 
-          </tbody>
+            </tbody>
 
 
-        </table>
+          </table>
+        }
 
         <button className="terminos-close-button" onClick={onClose}>
           Cerrar

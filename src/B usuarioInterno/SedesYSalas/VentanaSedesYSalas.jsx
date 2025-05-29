@@ -42,7 +42,6 @@ const VentanaSedesYSalas = () => {
 
 
     useEffect(() => {
-        console.log("hola")
         consultar()
     }, [])
 
@@ -53,6 +52,7 @@ const VentanaSedesYSalas = () => {
     const funcionCambiar = () => {
         setModalAbierto(false)
         setPrimeraVez(true)
+        consultar()
     }
 
     return (
