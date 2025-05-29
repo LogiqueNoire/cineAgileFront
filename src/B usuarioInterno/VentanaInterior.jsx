@@ -16,7 +16,7 @@ const VentanaInterior = () => {
         <div className="m-3">
             <div className="row">
                 <h1 className="display-5 text-center">Módulo interno de operaciones para CineAgile</h1>
-                <div className="d-flex p-3 justify-content-center gap-4">
+                <div className="d-flex p-3 justify-content-center gap-4 flex-wrap">
 
                     <button className="btn btn-primary d-flex gap-1" onClick={moverseHaciaVentanaPeliculas}>
                         <img src={pelicula} alt="" style={{ height: '35px' }} />
