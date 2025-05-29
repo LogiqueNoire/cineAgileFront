@@ -73,10 +73,16 @@ export const ModalSalas = ({ onClose, sede }) => {
       <div className="modal-terminos d-flex flex-column align-items-center" style={{ "max-height": "80vh", "overflow-y": "auto" }}>
         <h3 className="modal-terminos-title">Sede {sede.nombre}</h3>
 
-        <button className='btn btn-primary d-flex gap-3' onClick={(e) => agregarSala(e)}>
-          <h3 className="mb-0">Guardar nueva sala</h3>
-          <img src={guardarBlanco} alt="" style={{ height: '22px' }} />
-        </button>
+        <div className="w-100 d-flex justify-content-between">
+          <button className="btn btn-danger" onClick={onClose}>
+            Cerrar
+          </button>
+
+          <button className='btn btn-primary d-flex gap-3' onClick={(e) => agregarSala(e)}>
+            <h3 className="mb-0">Guardar nueva sala</h3>
+            <img src={guardarBlanco} alt="" style={{ height: '22px' }} />
+          </button>
+        </div>
 
         {loading ?
           <Loading></Loading> :
@@ -175,10 +181,6 @@ export const ModalSalas = ({ onClose, sede }) => {
 
           </table>
         }
-
-        <button className="terminos-close-button" onClick={onClose}>
-          Cerrar
-        </button>
       </div>
     </div>
   );

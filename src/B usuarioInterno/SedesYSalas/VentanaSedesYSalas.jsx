@@ -5,6 +5,8 @@ import { url } from "../../configuracion/backend"
 import { useNavigate } from 'react-router-dom'
 import Loading from '../../0 componentesGenerales/Loading';
 import { ModalSalas } from './ModalSalas'
+import sala from '../../assets/sala.svg'
+
 
 const VentanaSedesYSalas = () => {
     const [lista, setLista] = useState([]);
@@ -35,7 +37,7 @@ const VentanaSedesYSalas = () => {
     }
 
     useEffect(() => {
-        if(!primeraVez){
+        if (!primeraVez) {
             setModalAbierto(true);
         }
     }, [primeraVez]);
@@ -72,8 +74,14 @@ const VentanaSedesYSalas = () => {
                             {lista.map((el, id) => (
                                 <tr key={el.id || id}>
                                     <td>{el.nombre}</td>
-                                    <td className='text-center'>
-                                        <button className='btn btn-primary' onClick={() => moverse(el)}>Ver</button>
+                                    <td >
+                                        <div className='d-flex justify-content-end'>
+
+                                        <button className='btn btn-primary d-flex gap-2' onClick={() => moverse(el)}>
+                                            <label className="">Salas</label>
+                                            <img src={sala} alt="" style={{ width: '25px' }} />
+                                        </button>
+                                        </div>
                                     </td>
                                 </tr>
 
@@ -84,7 +92,7 @@ const VentanaSedesYSalas = () => {
                     </table>
 
                 }
-                {modalAbierto && <ModalSalas onClose={funcionCambiar} salas={salas} sede={sede}/>}
+                {modalAbierto && <ModalSalas onClose={funcionCambiar} salas={salas} sede={sede} />}
             </div>
         </div>
     )
