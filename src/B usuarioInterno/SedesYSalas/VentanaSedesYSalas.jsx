@@ -4,12 +4,15 @@ import axios from 'axios';
 import { url } from "../../configuracion/backend"
 import { useNavigate } from 'react-router-dom'
 import Loading from '../../0 componentesGenerales/Loading';
+import { ModalSalas } from './ModalSalas'
 
 const VentanaSedesYSalas = () => {
     const [lista, setLista] = useState([]);
-    const [idSede, setIdSede] = useState([]);
+    const [sede, setSede] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [salas, setSalas] = useState([]);
     const navigate = useNavigate();
+    const [modalAbierto, setModalAbierto] = useState(false)
 
     const consultar = async () => {
         try {
@@ -21,10 +24,20 @@ const VentanaSedesYSalas = () => {
         }
     }
 
-    const moverse = (id) => {
-        setIdSede(id)
+    const moverse = (el) => {
+        setSalas(el.salas)
+        setSede(el)
+        console.log(el.salas)
+
         //navigate(`/intranet/sedesysalas/${idSede}`)
     }
+
+    useEffect(() => {
+        if (salas.length > 0) {
+            setModalAbierto(true);
+        }
+    }, [salas]);
+
 
     useEffect(() => {
         console.log("hola")
@@ -50,11 +63,10 @@ const VentanaSedesYSalas = () => {
                         </thead>
                         <tbody className=''>
                             {lista.map((el, id) => (
-
-                                <tr key={el.id}>
+                                <tr key={el.id || id}>
                                     <td>{el.nombre}</td>
                                     <td className='text-center'>
-                                        <button className='btn btn-primary' onClick={() => moverse(el.id)}>Ver</button>
+                                        <button className='btn btn-primary' onClick={() => moverse(el)}>Ver</button>
                                     </td>
                                 </tr>
 
@@ -63,7 +75,9 @@ const VentanaSedesYSalas = () => {
                         </tbody>
 
                     </table>
+
                 }
+                {modalAbierto && <ModalSalas onClose={() => setModalAbierto(false)} salas={salas} sede={sede}/>}
             </div>
         </div>
     )

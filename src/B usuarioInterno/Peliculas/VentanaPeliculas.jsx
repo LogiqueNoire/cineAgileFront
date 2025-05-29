@@ -58,11 +58,11 @@ const VentanaPeliculas = () => {
                                     <td className='td' data-label='Nombre'>{el.nombre}</td>
                                     <td className='td' data-label='Duración'>{el.duracion}</td>
                                     <td className='td' data-label='Sinopsis'><div className='sinopsis'>{el.sinopsis}</div></td>
-                                    <td className='td' data-label='Género'>{el.genero === " " ? "-" : el.genero}</td>
-                                    <td className='td' data-label='Director'>{el.director === " " ? "-" : el.director}</td>
-                                    <td className='td' data-label='Clasificación'>{el.clasificacion === " " ? "-" : el.clasificacion}</td>
+                                    <td className='td' data-label='Género'>{el.genero === "" || el.genero === " " ? "-" : el.genero}</td>
+                                    <td className='td' data-label='Director'>{el.director === "" | el.director === " " ? "-" : el.director}</td>
+                                    <td className='td' data-label='Clasificación'>{el.clasificacion === "" | el.clasificacion === " " ? "-" : el.clasificacion}</td>
                                     <td className='td' data-label='Estado'>{el.estado}</td>
-                                    <td className='td' data-label='Actores'>{el.actores === " " ? "-" : el.actores}</td>
+                                    <td className='td' data-label='Actores'>{el.actores === "" || el.actores === " " ? "-" : el.actores}</td>
                                     <td className='td' data-label='Inicio de preventa'>{el.fechaInicioPreventa}</td>
                                     <td className='td' data-label='Inicio de estreno'>{el.fechaInicioEstreno}</td>
                                     <td className='td' data-label='Imagen'>
