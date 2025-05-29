@@ -33,9 +33,7 @@ const VentanaSedesYSalas = () => {
     }
 
     useEffect(() => {
-        if (salas.length > 0) {
-            setModalAbierto(true);
-        }
+        setModalAbierto(true);
     }, [salas]);
 
 

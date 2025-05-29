@@ -46,7 +46,6 @@ const VentanaPeliculas = () => {
                                 <td className='td'>Clasificación</td>
                                 <td className='td'>Estado</td>
                                 <td className='td'>Actores</td>
-                                <td className='td'>Inicio de preventa</td>
                                 <td className='td'>Inicio de estreno</td>
                                 <td className='td'>Imagen</td>
                             </tr>
@@ -63,7 +62,6 @@ const VentanaPeliculas = () => {
                                     <td className='td' data-label='Clasificación'>{el.clasificacion === "" | el.clasificacion === " " ? "-" : el.clasificacion}</td>
                                     <td className='td' data-label='Estado'>{el.estado}</td>
                                     <td className='td' data-label='Actores'>{el.actores === "" || el.actores === " " ? "-" : el.actores}</td>
-                                    <td className='td' data-label='Inicio de preventa'>{el.fechaInicioPreventa}</td>
                                     <td className='td' data-label='Inicio de estreno'>{el.fechaInicioEstreno}</td>
                                     <td className='td' data-label='Imagen'>
                                         <a href={el.imageUrl} target="_blank" rel="noopener noreferrer">
