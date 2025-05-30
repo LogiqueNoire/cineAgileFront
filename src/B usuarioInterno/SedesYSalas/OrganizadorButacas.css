@@ -1,0 +1,81 @@
+* {
+}
+
+.boton-sec {
+    display: flex;
+    position: relative;
+    opacity: 0;
+}
+
+.boton-sec:hover {
+    opacity: 1;
+
+}
+
+thead .boton-sec {
+    left: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+tbody .boton-sec {
+    flex-direction: column;
+    top: -1.2rem;
+    margin-right: 0.5rem;
+    width: 1rem;
+
+    background-color: aqua;
+}
+
+thead button, tbody button {
+    width: 1rem;
+    height: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.celda {
+    width: 2rem;
+    height: 2rem;
+}
+
+.celda input {
+    width: 100%;
+    height: 100%;
+    
+    appearance: none;
+    border-style: solid;
+    border-radius: 30%;
+    
+    overflow: hidden;
+    
+    display: grid;
+    place-content: center;
+}
+
+.celda input:hover {
+    background-color: rgb(206, 206, 206);
+}
+
+.celda input:checked::before {
+    content: " ";
+
+    --celdainput-size: 1.5rem;
+
+    width: var(--celdainput-size);
+    height: var(--celdainput-size);
+}
+
+.celda input[data-estado="activo"]::before {
+    --celdainput-size: 1.5rem;
+
+    box-shadow: inset var(--celdainput-size) var(--celdainput-size) rgb(0, 0, 0);
+    border-radius: 30%;
+}
+
+.celda input[data-estado="discapacitado"]::before {
+    --celdainput-size: 1.5rem;
+
+    box-shadow: inset var(--celdainput-size) var(--celdainput-size) #3f48cc;
+    border-radius: 30%;
+}
