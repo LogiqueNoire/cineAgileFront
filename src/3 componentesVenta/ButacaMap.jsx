@@ -2,6 +2,7 @@ import { useContext, useMemo } from 'react';
 import './ButacaMap.css'
 
 import { VentaContext } from './VentaContextProvider';
+import SalaButaca from '../servicios/SalaButaca';
 
 const ButacaMap = ({ butacas }) => {
     const { butacaContext } = useContext(VentaContext)
@@ -31,14 +32,7 @@ const ButacaMap = ({ butacas }) => {
         }
     }
 
-    let max_row, max_col
-    let resul = butacas.reduce((acc, el) => {
-        max_row = Object.keys(acc).length === 0 ? el.fila : (max_row > el.fila ? max_row : el.fila)
-        max_col = Object.keys(acc).length === 0 ? el.columna : (max_col > el.columna ? max_col : el.columna)
-
-        acc[el.fila] = { ...acc[el.fila], [el.columna]: { id: el.id, discap: el.discapacitado, ocupado: el.ocupado } }
-        return acc
-    }, {})
+    let [ max_row, max_col, matriz ] = SalaButaca.convButacasAMatriz(butacas);
 
     let tablaFilas = []
     let i = 0
@@ -47,7 +41,7 @@ const ButacaMap = ({ butacas }) => {
         let fila = []
 
         for (; j < max_col; j++) {
-            let butaca = resul[i][j]
+            let butaca = matriz[i][j]
             let key = `${i}-${j}`
             let disabled = !butaca || butaca.ocupado ? true : false
             let checked = (butaca && butaca.ocupado) || estaEnSeleccionados({ f: i, c: j })
