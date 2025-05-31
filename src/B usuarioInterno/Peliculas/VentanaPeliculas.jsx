@@ -4,6 +4,8 @@ import './VentanaPeliculas.css'
 import axios from 'axios';
 import { url } from "../../configuracion/backend"
 import Loading from '../../0 componentesGenerales/Loading';
+import Cookies from 'js-cookie';
+
 
 const VentanaPeliculas = () => {
     const [lista, setLista] = useState([]);

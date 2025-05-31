@@ -6,6 +6,8 @@ import { format } from 'date-fns'
 
 import peliculaIcono from '../../assets/peliculaDark.svg'
 import Loading from '../../0 componentesGenerales/Loading.jsx';
+import Cookies from 'js-cookie';
+
 
 export default function AddFilm({ onSucess }) {
   const [pelicula, setPelicula] = useState({
