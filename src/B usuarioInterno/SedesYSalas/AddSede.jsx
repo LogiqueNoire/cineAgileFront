@@ -29,7 +29,9 @@ export default function AddSede( {onSucess} ) {
     e.preventDefault();
 
     try {
-      await axios.post(`${url}/intranet/sedesysalas/agregar`, sede);
+      await axios.post(`${url}/intranet/sedesysalas/agregar`, sede, { 
+                      headers: { Authorization: `Bearer ${Cookies.get("auth-token")}` } 
+                  });
       alert('Sede agregada correctamente');
       if(onSucess){
         onSucess()

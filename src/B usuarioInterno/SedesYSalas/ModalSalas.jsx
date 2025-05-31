@@ -5,6 +5,7 @@ import guardarBlanco from "../../assets/guardarBlanco.svg"
 import axios from 'axios';
 import { url } from '../../configuracion/backend.js'
 import Loading from '../../0 componentesGenerales/Loading';
+import Cookies from "js-cookie";
 
 export const ModalSalas = ({ onClose, sede }) => {
   const [codigoSalaGuardar, setCodigoSalaGuardar] = useState('')
@@ -27,6 +28,8 @@ export const ModalSalas = ({ onClose, sede }) => {
           idSede: sede.id,
           codigoSala: codigoSalaGuardar,
           categoria: categoriaGuardar,
+        }, { 
+            headers: { Authorization: `Bearer ${Cookies.get("auth-token")}` } 
         });
         alert('Sala agregada correctamente a la sede');
       } catch (error) {
@@ -52,7 +55,9 @@ export const ModalSalas = ({ onClose, sede }) => {
 
   const consultar = async () => {
     try {
-      listaActualizada = (await axios.get(`${url}/intranet/sedesysalas`)).data;
+      listaActualizada = (await axios.get(`${url}/intranet/sedesysalas`, { 
+                      headers: { Authorization: `Bearer ${Cookies.get("auth-token")}` } 
+                  })).data;
     } catch (error) {
       console.error(error);
     } finally {

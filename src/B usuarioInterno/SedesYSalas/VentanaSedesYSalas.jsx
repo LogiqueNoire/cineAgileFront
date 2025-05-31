@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom'
 import Loading from '../../0 componentesGenerales/Loading';
 import { ModalSalas } from './ModalSalas'
 import sala from '../../assets/sala.svg'
+import Cookies from 'js-cookie';
 
 
 const VentanaSedesYSalas = () => {
@@ -19,7 +20,9 @@ const VentanaSedesYSalas = () => {
 
     const consultar = async () => {
         try {
-            setLista((await axios.get(`${url}/intranet/sedesysalas`)).data);
+            setLista((await axios.get(`${url}/intranet/sedesysalas`, { 
+                headers: { Authorization: `Bearer ${Cookies.get("auth-token")}` } 
+            })).data);
         } catch (error) {
             console.error(error);
         } finally {
