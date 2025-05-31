@@ -128,7 +128,7 @@ const OrganizadorButacas = () => {
 
     return (
         <div>
-            <table>
+            <table className="org-tabla">
                 <thead><tr>{thead}</tr></thead>
                 <tbody>
                     { filas }
