@@ -89,7 +89,9 @@ export default function AddFilm({ onSucess }) {
     if (!(genero === '' || clasificacion === '' || estado === "")) {
 
       try {
-        await axios.post(`${url}/intranet/peliculas/agregar`, pelicula);
+        await axios.post(`${url}/intranet/peliculas/agregar`, pelicula, { 
+          headers: { Authorization: `Bearer ${Cookies.get("auth-token")}` } 
+      });
         alert('Película agregada correctamente');
         if (onSucess) {
           onSucess()

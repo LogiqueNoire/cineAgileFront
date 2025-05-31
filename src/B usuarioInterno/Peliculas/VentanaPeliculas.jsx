@@ -11,7 +11,9 @@ const VentanaPeliculas = () => {
 
     const consultar = async () => {
         try {
-            setLista((await axios.get(`${url}/intranet/peliculas`)).data);
+            setLista((await axios.get(`${url}/intranet/peliculas`, { 
+                headers: { Authorization: `Bearer ${Cookies.get("auth-token")}` } 
+            })).data);
         } catch (error) {
             console.error(error);
         } finally {
