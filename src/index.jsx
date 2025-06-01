@@ -9,11 +9,13 @@ import FlujoVenta from './3 componentesVenta/FlujoVenta.jsx';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import VentanaPeliculas from './B usuarioInterno/Peliculas/VentanaPeliculas.jsx';
 import VentanaSedesYSalas from './B usuarioInterno/SedesYSalas/VentanaSedesYSalas.jsx';
-import AddSede from './B usuarioInterno/SedesYSalas/AddSede.jsx';
 import { VentaContextProvider } from './3 componentesVenta/VentaContextProvider.jsx';
 
 import VentanaInterior from './B usuarioInterno/VentanaInterior.jsx';
 import InfoEntradas from './5 6 pago y entradas/InfoEntradas.jsx';
+import OrganizadorButacas from './B usuarioInterno/SedesYSalas/OrganizadorButacas.jsx';
+import Intranet from './B usuarioInterno/Intranet.jsx';
+import LoginForm from './B usuarioInterno/LoginForm.jsx';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
     <StrictMode>
@@ -30,11 +32,13 @@ ReactDOM.createRoot(document.getElementById('root')).render(
                 </Route>
 
 
-                <Route path='/intranet' element={ <App /> }>
+                <Route path='/intranet' element={ <Intranet /> }>
                     <Route index element={<VentanaInterior/>}></Route>
+                    <Route path='login' element={<LoginForm/>}></Route>
                     <Route path="peliculas" element={<VentanaPeliculas></VentanaPeliculas>}></Route>
                     <Route path="sedesysalas" element={<VentanaSedesYSalas></VentanaSedesYSalas>}></Route>
                     <Route path="salas" /*element={<VentanaSedesYSalas></VentanaSedesYSalas>}*/></Route>
+                    <Route path="saladetalle" element={ <OrganizadorButacas /> }></Route>
                 </Route>
                 
                 <Route path='/butacas' element={ <ButacaSelect idSala={ 5 } /> }/>

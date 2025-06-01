@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { url } from '../../configuracion/backend.js'
+import Cookies from 'js-cookie';
 
 export default function AddSede( {onSucess} ) {
   const navigate = useNavigate();
@@ -29,7 +30,9 @@ export default function AddSede( {onSucess} ) {
     e.preventDefault();
 
     try {
-      await axios.post(`${url}/intranet/sedesysalas/agregar`, sede);
+      await axios.post(`${url}/intranet/sedesysalas/agregar`, sede, { 
+                      headers: { Authorization: `Bearer ${Cookies.get("auth-token")}` } 
+                  });
       alert('Sede agregada correctamente');
       if(onSucess){
         onSucess()

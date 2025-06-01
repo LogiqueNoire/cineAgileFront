@@ -4,6 +4,8 @@ import './VentanaPeliculas.css'
 import axios from 'axios';
 import { url } from "../../configuracion/backend"
 import Loading from '../../0 componentesGenerales/Loading';
+import Cookies from 'js-cookie';
+
 
 const VentanaPeliculas = () => {
     const [lista, setLista] = useState([]);
@@ -11,7 +13,9 @@ const VentanaPeliculas = () => {
 
     const consultar = async () => {
         try {
-            setLista((await axios.get(`${url}/intranet/peliculas`)).data);
+            setLista((await axios.get(`${url}/intranet/peliculas`, { 
+                headers: { Authorization: `Bearer ${Cookies.get("auth-token")}` } 
+            })).data);
         } catch (error) {
             console.error(error);
         } finally {

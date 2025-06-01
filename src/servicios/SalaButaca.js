@@ -9,6 +9,19 @@ class SalaButaca {
         return res.data
     }
 
+    static convButacasAMatriz(butacas) {
+        let max_row, max_col
+        let matriz = butacas.reduce((acc, el) => {
+            max_row = Object.keys(acc).length === 0 ? el.fila : (max_row > el.fila ? max_row : el.fila)
+            max_col = Object.keys(acc).length === 0 ? el.columna : (max_col > el.columna ? max_col : el.columna)
+    
+            acc[el.fila] = { ...acc[el.fila], [el.columna]: { id: el.id, discap: el.discapacitado, ocupado: el.ocupado } }
+            return acc
+        }, {})
+
+        return [ max_row, max_col, matriz ];
+    }
+
 }
 
 export default SalaButaca
