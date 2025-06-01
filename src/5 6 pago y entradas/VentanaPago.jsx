@@ -31,11 +31,35 @@ export const VentanaPago = ({ prev, next }) => {
     prev();
   }
 
+//////////////////////ver
+    // Temporal
+  let bloquearSolicitud = false;
+
+  const registrarTest = () => {
+    if (!bloquearSolicitud) {
+      bloquearSolicitud = true;
+
+      const entradas = contexto.butacaContext.seleccionadas.map(el => ({ id_butaca: el.id, persona: "general" }));
+  
+      const cuerpo = {
+        id_funcion: contexto.general.funcion.idFuncion,
+        entradas: entradas,
+        tiempoRegistro: (new Date(Date.now())).toISOString()
+      }
+  
+      Entrada.comprarEntrada(cuerpo).then(res => {
+        navigate("/entradas", { state: { entradas: res.data } })
+      });
+    }
+  }
+
   return (
     <>
-      <div className="mb-4 container">
-        <h3 className="titulo-pago">Pago</h3>
-
+      <div className="container">
+        <h2 className="">Módulo de pago</h2>
+        <div className="d-flex flex-column justify-content-center align-items-center">
+          <h3>{"Total: S/ " + total.toFixed(2)}</h3>
+        </div>
         <TerminosCondiciones
           aceptaTerminos={aceptaTerminos}
           setAceptaTerminos={setAceptaTerminos}
@@ -44,18 +68,6 @@ export const VentanaPago = ({ prev, next }) => {
 
         {aceptaTerminos &&
           <div className="formulario-contacto">
-            {/*<input
-              type="text"
-              placeholder="Nombre completo"
-              value={nombre}
-              onChange={(e) => setNombre(e.target.value)}
-            />
-            <input
-              type="email"
-              placeholder="Correo electrónico"
-              value={correo}
-              onChange={(e) => setCorreo(e.target.value)}
-            />*/}
             <Tarjeta
               metodo={metodo}
               setMetodo={setMetodo}
@@ -67,12 +79,7 @@ export const VentanaPago = ({ prev, next }) => {
 
         {/*
           <BilleteraElectronica metodo={metodo} setMetodo={setMetodo} />
-        */}
-
-
-        <div className="d-flex flex-column justify-content-center align-items-center">
-          <h3>{"Total: S/ " + total.toFixed(2)}</h3>
-        </div>
+        */}        
 
         {modalAbierto && <ModalTerminos onClose={() => setModalAbierto(false)} />}
       </div>

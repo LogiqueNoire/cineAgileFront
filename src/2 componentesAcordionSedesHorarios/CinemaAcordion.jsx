@@ -14,7 +14,7 @@ const CinemaAcordion = ({ data, pelicula }) => {
                         aria-expanded="false"
                         aria-controls={sede.nombreSede.replace(/\s+/g, '')}
                     >
-                        <h5 className='text-start'>{sede.nombreSede}</h5>
+                        <h5 className='text-start h5'>{sede.nombreSede}</h5>
                     </button>
 
                     <div className="card-body collapse" id={sede.nombreSede.replace(/\s+/g, '')}>
@@ -28,7 +28,7 @@ const CinemaAcordion = ({ data, pelicula }) => {
 
                             return funcionesFiltradas.length > 0 ? (
                                 <div key={tipo}>
-                                    <h5 className="card-title">{tipo}</h5>
+                                    <h5 className="card-title h5">{tipo}</h5>
                                     <div className="row mb-2">
                                         {funcionesFiltradas.map(funcion => (
                                             <ScreeningButton key={funcion.idFuncion} pelicula={pelicula} funcion={funcion}/>

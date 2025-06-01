@@ -9,7 +9,7 @@ export const FormularioTarjeta = ({ tarjeta, setTarjeta }) => {
   const contexto = useContext(VentaContext)
   const total = contexto.totalContext.total;
 
-    const navigate = useNavigate();
+  const navigate = useNavigate();
   // Temporal
   let bloquearSolicitud = false;
 
@@ -31,21 +31,6 @@ export const FormularioTarjeta = ({ tarjeta, setTarjeta }) => {
     }
   }
 
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setTarjeta((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
-
-  const simularPago = (e) => {
-    e.preventDefault();
-    console.log("Datos tarjeta:", tarjeta);
-    alert("Pago simulado con éxito!");
-  };
-
   return (
     <div>
 
@@ -57,19 +42,24 @@ export const FormularioTarjeta = ({ tarjeta, setTarjeta }) => {
                 amount: {
                   value: total
                 },
-                custom_id: 23232 
-              }]
+                custom_id: 23232
+              }],
+              application_context: {
+                shipping_preference: "NO_SHIPPING", // Oculta dirección completa
+              },
+              payer: {
+              }
             })
           }}
           onApprove={(_, actions) => {
-            return actions.order.capture().then(details=>{
-              registrarTest() 
+            return actions.order.capture().then(details => {
+              registrarTest()
               console.log("Pago exitoso")
               console.log(details)
               alert("Pago exitoso")
             })
           }}
-          />
+        />
       </PayPalScriptProvider>
     </div>
   );
