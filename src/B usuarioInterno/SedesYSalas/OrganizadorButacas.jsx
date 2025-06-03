@@ -41,7 +41,7 @@ const OrganizadorButacas = () => {
             const newButacas = butacas.map(el => el);
 
             if (operador == "+")
-                newButacas.splice(row, 0, new Array(5).fill(null))
+                newButacas.splice(row, 0, new Array(newButacas[0].length).fill(null))
             else
                 newButacas.splice(row, 1);
 
