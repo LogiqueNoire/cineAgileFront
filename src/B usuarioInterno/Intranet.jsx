@@ -28,7 +28,7 @@ const Intranet = () => {
     return (
         <>
             <Header>
-                Usuario: { username }
+                <h5>Usuario: { username }</h5>
             </Header>
 
             {

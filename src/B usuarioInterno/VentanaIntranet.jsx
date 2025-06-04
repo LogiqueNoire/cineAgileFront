@@ -2,7 +2,7 @@ import pelicula from '../assets/pelicula.svg'
 import sede from '../assets/sede.svg'
 import funciones from '../assets/funciones.svg'
 import { useNavigate } from 'react-router-dom';
-const VentanaInterior = () => {
+const VentanaIntranet = () => {
     const navigate = useNavigate();
 
     const moverseHaciaVentanaPeliculas = () => {
@@ -16,7 +16,7 @@ const VentanaInterior = () => {
     return (
         <div className="m-3">
             <div className="row">
-                <h1 className="display-5 text-center">Módulo interno de operaciones para CineAgile</h1>
+                <h1 className="display-5 text-center"><strong>Módulo interno de operaciones para CineAgile</strong></h1>
                 <div className="d-flex p-3 justify-content-center gap-4 flex-wrap">
 
                     <button className="btn btn-primary d-flex gap-1 flex-column align-items-center justify-content-center" onClick={moverseHaciaVentanaPeliculas}>
@@ -39,4 +39,4 @@ const VentanaInterior = () => {
         </div>
     );
 }
-export default VentanaInterior;
+export default VentanaIntranet;
