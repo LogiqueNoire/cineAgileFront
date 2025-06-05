@@ -82,30 +82,44 @@ const VentanaSedesYSalas = () => {
             <div className='d-flex flex-column align-items-center container'>
                 {loading === true
                     ? <Loading></Loading> :
-                    <div className='d-flex gap-4 m-4'>
+                    <>
+                        <div className='d-flex gap-4 m-4'>
+                            <h1 className='text-center'>1. Selecciona una sede y fechas</h1>
+                        </div>
+                        <div className='d-flex gap-4 m-4'>
+                            <select className='form-select' onChange={(e) => moverse(e)}>
+                                <option value="">Seleccione una sede</option>
+                                {sedes.map((el, id) => (
+                                    <option key={el.id || id} value={el.id} >{el.nombre}</option>
+                                ))}
+                            </select>
+                            <input type='date' className='form-control' placeholder='Fecha' onChange={(e) => moverse(e)} />
+                            <input type='date' className='form-control' placeholder='Fecha' onChange={(e) => moverse(e)} />
+                        </div>
+                        <div className='d-flex gap-4 m-4'>
+                            <h1 className='text-center'>2. Selecciona una pelicula o sala</h1>
+                        </div>     
+                        <div className='d-flex gap-4 m-4'>
 
-                        <select className='form-select' onChange={(e) => moverse(e)}>
-                            <option value="">Seleccione una sede</option>
-                            {sedes.map((el, id) => (
-                                <option key={el.id || id} value={el.id} >{el.nombre}</option>
-                            ))}
-                        </select>
-                        {peliculasSede.length > 0 ? 
-                        <select className='form-select' /*onChange={() => moverse()}*/>
-                            <option value="">Seleccione una pelicula</option>
-                            {peliculasSede.map((el, id) => (
-                                <option key={el.id || id} value={el.id} >{el.nombre}</option>
-                            ))}
-                        </select>
-                        :
-                        <select className='form-select' disabled>
-                            <option value="">No hay peliculas disponibles</option> 
-                        </select>}
-
-
-
-                    </div>
-
+                            <select className='form-select' onChange={(e) => moverse(e)}>
+                                <option value="">Seleccione una sala</option>
+                                /*{sedes.map((el, id) => (
+                                    <option key={el.id || id} value={el.id} >{el.nombre}</option>
+                                ))}*/
+                            </select>
+                            {peliculasSede.length > 0 ?
+                                <select className='form-select' /*onChange={() => moverse()}*/>
+                                    <option value="">Seleccione una pelicula</option>
+                                    {peliculasSede.map((el, id) => (
+                                        <option key={el.id || id} value={el.id} >{el.nombre}</option>
+                                    ))}
+                                </select>
+                                :
+                                <select className='form-select' disabled>
+                                    <option value="">No hay peliculas disponibles</option>
+                                </select>}
+                        </div>
+                    </>
 
                 }
             </div>
