@@ -61,7 +61,7 @@ const FilaPrecioComJose1 = ({ nombre, texto, precio, seleccionadas }) => {
     };
     return (
         <div className="FilaPrecio w-100 d-flex justify-content-between align-items-center">
-            <div className="nombre w-50">
+            <div className="ms-2 ps-1 nombre w-50">
                 <h2 className="m-0">{nombre}</h2>
                 <div className="texto w-100">
                     <p className="">{texto}</p>

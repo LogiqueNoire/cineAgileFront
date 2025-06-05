@@ -11,7 +11,7 @@ export const VentanaPago = ({ prev, next }) => {
   const location = useLocation();
   const { pelicula, funcion } = location.state || {};
   const contexto = useContext(VentaContext);
-  const total = contexto.totalContext.total;
+  const total = Number(contexto.totalContext.total.toFixed(2));
 
   const [nombre, setNombre] = useState("");
   const [correo, setCorreo] = useState("");
@@ -55,10 +55,10 @@ export const VentanaPago = ({ prev, next }) => {
 
   return (
     <>
-      <div className="container">
+      <div className="container-fluid d-flex flex-column justify-content-center align-items-center my-4 py-4 px-4 bg-gradient gap-4">
         <h2 className="">Módulo de pago</h2>
         <div className="d-flex flex-column justify-content-center align-items-center">
-          <h3>{"Total: S/ " + total.toFixed(2)}</h3>
+          <h3>{"Total: S/ " + total}</h3>
         </div>
         <TerminosCondiciones
           aceptaTerminos={aceptaTerminos}

@@ -7,7 +7,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 
 export const FormularioTarjeta = ({ tarjeta, setTarjeta }) => {
   const contexto = useContext(VentaContext)
-  const total = contexto.totalContext.total;
+  const total = Number(contexto.totalContext.total.toFixed(2));
 
   const navigate = useNavigate();
   // Temporal

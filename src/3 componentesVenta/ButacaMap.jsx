@@ -69,7 +69,7 @@ const ButacaMap = ({ butacas }) => {
     return (
         <div className='d-flex flex-column justify-align-center butaca-map'>
             <h1>Pantalla</h1>
-            <div className='butaca-container'>
+            <div className='butaca-container d-flex justify-content-center'>
                 <table className="butaca-table">
                     <tbody>
                         {tablaFilas}
@@ -96,7 +96,7 @@ const ButacaMap = ({ butacas }) => {
                         </tr>
                         <tr className=''>
                             <td>
-                                <input type="checkbox" className="butaca-celda butaca-ocupado" readOnly onClick={(e) => e.preventDefault()} />
+                                <input type="checkbox" className="butaca-celda butaca-ocupado" readOnly checked onClick={(e) => e.preventDefault()} />
                             </td>
                             <td>
                                 <h4 className="butaca-label mx-2">Ocupado</h4>
