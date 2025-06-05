@@ -27,7 +27,7 @@ const CinemaAcordion = ({ data, pelicula }) => {
                             );
 
                             return funcionesFiltradas.length > 0 ? (
-                                <div key={tipo}>
+                                <div className='d-flex flex-column gap-2' key={tipo}>
                                     <h5 className="card-title h5">{tipo}</h5>
                                     <div className="row mb-2">
                                         {funcionesFiltradas.map(funcion => (

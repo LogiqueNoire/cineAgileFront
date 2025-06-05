@@ -105,8 +105,8 @@ const FlujoVenta = () => {
     }
 
     return (
-        <div className="d-flex my-4 py-4 border border-2 flex-wrap justify-content-center">
-            <div className="d-flex justify-content-center p-4 bg-light">
+        <div className="d-flex my-4 border border-2 flex-wrap justify-content-center">
+            <div className="d-flex justify-content-center p-4 bg-light m-4">
                 <ResumenPeliComJose3 pelicula={pelicula} sedePeli={funcion.nombreSede} fechaPeli={funcion.fechaHoraInicio}
                     salaPeli={funcion.codigoSala} categoria={funcion.categoria} dimension={funcion.dimension} />
             </div>

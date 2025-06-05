@@ -1,9 +1,6 @@
 import React, { useContext} from "react";
 import { VentaContext } from "../3 componentesVenta/VentaContextProvider.jsx"
 
-import './ComponenteJose.css'
-import { se } from "date-fns/locale";
-
 const ResumenPeliComJose3 = ({ pelicula, catePeli, sedePeli, fechaPeli, salaPeli, categoria, butacasSeleccionadas, dimension}) => {
     const contexto = useContext(VentaContext);
     

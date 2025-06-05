@@ -19,7 +19,7 @@
     input{
         justify-self: center;
     }
-    card-title{
+    .card-title{
         text-align: left;
     }
 

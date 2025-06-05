@@ -55,7 +55,7 @@ export const VentanaPago = ({ prev, next }) => {
 
   return (
     <>
-      <div className="container-fluid d-flex flex-column justify-content-center align-items-center my-4 py-4 px-4 bg-gradient gap-4">
+      <div className="container-fluid d-flex flex-column justify-content-center align-items-center gap-4">
         <h2 className="">Módulo de pago</h2>
         <div className="d-flex flex-column justify-content-center align-items-center">
           <h3>{"Total: S/ " + total}</h3>
