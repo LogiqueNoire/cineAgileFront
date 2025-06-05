@@ -13,6 +13,10 @@ const VentanaIntranet = () => {
         navigate(`/intranet/sedesysalas`)
     }
 
+    const moverseHaciaFunciones = () => {
+        navigate(`/intranet/funciones`)
+    }
+
     return (
         <div className="m-3">
             <div className="row">
@@ -29,7 +33,7 @@ const VentanaIntranet = () => {
                         <h2 className="">Sedes y salas</h2>
                     </button>
 
-                    <button className="btn btn-primary d-flex gap-1 flex-column align-items-center justify-content-center">
+                    <button className="btn btn-primary d-flex gap-1 flex-column align-items-center justify-content-center" onClick={moverseHaciaFunciones}>
                         <img src={funciones} alt="" style={{ width: '90px' }} />
                         <h2 className="">Funciones</h2>
                     </button>

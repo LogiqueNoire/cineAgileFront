@@ -20,8 +20,8 @@ const VentanaSedesYSalas = () => {
 
     const consultar = async () => {
         try {
-            setLista((await axios.get(`${url}/intranet/sedesysalas`, { 
-                headers: { Authorization: `Bearer ${Cookies.get("auth-token")}` } 
+            setLista((await axios.get(`${url}/intranet/soloSedes`, {
+                headers: { Authorization: `Bearer ${Cookies.get("auth-token")}` }
             })).data);
         } catch (error) {
             console.error(error);
@@ -78,13 +78,7 @@ const VentanaSedesYSalas = () => {
                                 <tr key={el.id || id}>
                                     <td>{el.nombre}</td>
                                     <td >
-                                        <div className='d-flex justify-content-end'>
 
-                                        <button className='btn btn-primary d-flex gap-2' onClick={() => moverse(el)}>
-                                            <label className="">Salas</label>
-                                            <img src={sala} alt="" style={{ width: '25px' }} />
-                                        </button>
-                                        </div>
                                     </td>
                                 </tr>
 
@@ -102,3 +96,13 @@ const VentanaSedesYSalas = () => {
 }
 
 export default VentanaSedesYSalas;
+
+/*
+<div className='d-flex justify-content-end'>
+
+<button className='btn btn-primary d-flex gap-2' onClick={() => moverse(el)}>
+    <label className="">Salas</label>
+    <img src={sala} alt="" style={{ width: '25px' }} />
+</button>
+</div>
+*/

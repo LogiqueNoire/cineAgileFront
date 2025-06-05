@@ -1,19 +1,24 @@
 import React, { StrictMode } from 'react';
 import ReactDOM from 'react-dom/client';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import App from './App.jsx';
-import PeliculaSedes from './3 componentesVenta/PeliculaSedes.jsx';
 import Inicio from './Inicio.jsx'
+
+// Componentes de venta
+import PeliculaSedes from './3 componentesVenta/PeliculaSedes.jsx';
 import ButacaSelect from './3 componentesVenta/ButacaSelect.jsx'
+import { VentaContextProvider } from './3 componentesVenta/VentaContextProvider.jsx';
 import FlujoVenta from './3 componentesVenta/FlujoVenta.jsx';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+
+import InfoEntradas from './5 6 pago y entradas/InfoEntradas.jsx';
+
+// Usuario interno
+import VentanaIntranet from './B usuarioInterno/VentanaIntranet.jsx';
 import VentanaPeliculas from './B usuarioInterno/Peliculas/VentanaPeliculas.jsx';
 import VentanaSedesYSalas from './B usuarioInterno/SedesYSalas/VentanaSedesYSalas.jsx';
-import { VentaContextProvider } from './3 componentesVenta/VentaContextProvider.jsx';
-
-import VentanaIntranet from './B usuarioInterno/VentanaIntranet.jsx';
-import InfoEntradas from './5 6 pago y entradas/InfoEntradas.jsx';
 import OrganizadorButacas from './B usuarioInterno/SedesYSalas/OrganizadorButacas.jsx';
+import VentanaFunciones from './B usuarioInterno/Funciones/VentanaFunciones.jsx';
 import Intranet from './B usuarioInterno/Intranet.jsx';
 import LoginForm from './B usuarioInterno/LoginForm.jsx';
 
@@ -27,16 +32,17 @@ ReactDOM.createRoot(document.getElementById('root')).render(
                 <Route path='/' element={ <App /> }>
                     <Route index element={ <Inicio /> } />
                     <Route path='/funcion/pelicula/' element={ <PeliculaSedes /> }/>
-                    <Route path='/compra' element={ <VentaContextProvider><FlujoVenta></FlujoVenta></VentaContextProvider> } />
+                    <Route path='/compra' element={ <VentaContextProvider><FlujoVenta/></VentaContextProvider> } />
                     <Route path='/entradas' element={ <InfoEntradas /> } />
                 </Route>
 
 
                 <Route path='/intranet' element={ <Intranet /> }>
-                    <Route index element={<VentanaIntranet/>}></Route>
-                    <Route path='login' element={<LoginForm/>}></Route>
-                    <Route path="peliculas" element={<VentanaPeliculas></VentanaPeliculas>}></Route>
-                    <Route path="sedesysalas" element={<VentanaSedesYSalas></VentanaSedesYSalas>}></Route>
+                    <Route index element={<VentanaIntranet />}></Route>
+                    <Route path='login' element={<LoginForm />}></Route>
+                    <Route path="peliculas" element={<VentanaPeliculas />}></Route>
+                    <Route path="sedesysalas" element={<VentanaSedesYSalas />}></Route>
+                    <Route path="funciones" element={<VentanaFunciones />}></Route>
                     <Route path="salas" /*element={<VentanaSedesYSalas></VentanaSedesYSalas>}*/></Route>
                     <Route path="saladetalle" element={ <OrganizadorButacas /> }></Route>
                 </Route>
