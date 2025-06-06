@@ -10,6 +10,7 @@ import Cookies from 'js-cookie';
 
 
 export default function AddFilm({ onSucess }) {
+  const [fechaReal, setFechaReal] = useState()
   const [pelicula, setPelicula] = useState({
 
     nombre: '',
@@ -20,11 +21,10 @@ export default function AddFilm({ onSucess }) {
     duracion: '',
     estado: '',
     fechaInicioEstreno: '',
-    fechaInicioPreventa: '',
     imageUrl: '',
     sinopsis: '',
   });
-  const [fechaReal, setFechaReal] = useState()
+  
 
   const {
     nombre,
@@ -35,7 +35,6 @@ export default function AddFilm({ onSucess }) {
     duracion,
     estado = "próximamente",
     fechaInicioEstreno,
-    fechaInicioPreventa,
     imageUrl,
     sinopsis,
   } = pelicula;
@@ -259,28 +258,12 @@ export default function AddFilm({ onSucess }) {
                   type="date"
                   className="form-control"
                   name="fechaInicioEstreno"
-                  min={fechaInicioEstreno ? format(new Date(fechaInicioEstreno), 'yyyy-MM-dd') : ''}
+                  min={fechaReal ? format(new Date(fechaReal), 'yyyy-MM-dd') : ''}
                   value={fechaInicioEstreno ? format(new Date(fechaInicioEstreno), 'yyyy-MM-dd') : ''}
                   onChange={(e) => onInputChange(e)}
                   required
                 />
               </div>
-
-              {/*
-                <div className="mb-3">
-                  <label htmlFor="fechaInicioPreventa" className="form-label">
-                    Fecha Inicio Preventa
-                  </label>
-                  <input
-                    type="date"
-                    className="form-control"
-                    name="fechaInicioPreventa"
-                    value={fechaInicioPreventa}
-                    onChange={(e) => onInputChange(e)}
-                    required
-                  />
-                </div>
-              */}
 
             </div>
 
