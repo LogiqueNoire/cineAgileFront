@@ -13,8 +13,7 @@ const Cronograma = ({ funciones, fechaConsultada, filtro }) => {
     aux.setDate(aux.getDate() + 1);
     fechasSemana.push(aux.getDate());
   }
-  console.log("fechasSemana", fechasSemana);
-
+  
   const horas = [];
 
   for (let h = 7; h <= 23; h++) {

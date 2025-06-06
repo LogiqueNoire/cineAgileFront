@@ -52,9 +52,6 @@ const VentanaSedesYSalas = () => {
 
     const handlePeliculaChange = async (e) => {
         const peliculaId = e.target.value;
-        console.log("Pelicula elegida:", peliculaId);
-        console.log("Fecha elegida:", fechaElegida);
-        console.log("Sede elegida:", sedeElegida);
         if (peliculaId) {
             setSelectSala('')
             setSelectPelicula(peliculaId);
@@ -75,9 +72,6 @@ const VentanaSedesYSalas = () => {
 
     const handleSalaChange = async (e) => {
         const salaId = e.target.value;
-        console.log("sala elegida:", salaId);
-        console.log("Fecha elegida:", fechaElegida);
-        console.log("Sede elegida:", sedeElegida);
         if (salaId) {
             setSelectPelicula('')
             setSelectSala(salaId);
@@ -95,10 +89,6 @@ const VentanaSedesYSalas = () => {
             }
         }
     }
-
-    useEffect(() => {
-        console.log(funciones)
-    }, [funciones])
 
     useEffect(() => {
         consultarSedes()

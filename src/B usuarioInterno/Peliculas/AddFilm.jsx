@@ -12,19 +12,18 @@ import Cookies from 'js-cookie';
 export default function AddFilm({ onSucess }) {
   const [fechaReal, setFechaReal] = useState()
   const [pelicula, setPelicula] = useState({
-
     nombre: '',
     director: '',
     actores: '',
     genero: '',
     clasificacion: '',
     duracion: '',
-    estado: '',
+    estado: 'próximamente',
     fechaInicioEstreno: '',
     imageUrl: '',
     sinopsis: '',
   });
-  
+
 
   const {
     nombre,
@@ -71,32 +70,53 @@ export default function AddFilm({ onSucess }) {
 
   useEffect(() => {
     if (fechaReal) {
+      /*setFechaElegida(fechaReal)*/
+      console.log("Fecha real obtenida:", fechaReal);
       setPelicula((prev) => ({
         ...prev,
-        fechaInicioEstreno: format(new Date(fechaReal), 'yyyy-MM-dd'),
+        fechaInicioEstreno: fechaReal,
       }));
     }
   }, [fechaReal]);
 
 
   const onFechaChange = (e) => {
-    setFechaElegida(new Date(`${e.target.value}T00:00`));
+    setPelicula({
+      ...pelicula,
+      [e.target.name]: new Date(`${e.target.value}T00:00`),
+    });
   };
 
 
   const onSubmit = async (e) => {
     e.preventDefault();
     console.log(pelicula)
-    if (!(genero === '' || clasificacion === '' || estado === "")) {
 
+    if (!(genero === '' || clasificacion === '' || estado === "")) {
+      const peliculaFinal = {
+        ...pelicula,
+        fechaInicioEstreno: format(pelicula.fechaInicioEstreno, 'yyyy-MM-dd'),
+      };
       try {
-        await axios.post(`${url}/intranet/peliculas/agregar`, pelicula, { 
-          headers: { Authorization: `Bearer ${Cookies.get("auth-token")}` } 
-      });
+        await axios.post(`${url}/intranet/peliculas/agregar`, peliculaFinal, {
+          headers: { Authorization: `Bearer ${Cookies.get("auth-token")}` }
+        });
         alert('Película agregada correctamente');
         if (onSucess) {
           onSucess()
         }
+        setPelicula({
+          nombre: '',
+          director: '',
+          actores: '',
+          genero: '',
+          clasificacion: '',
+          duracion: '',
+          estado: 'próximamente',
+          fechaInicioEstreno: '',
+          imageUrl: '',
+          sinopsis: '',
+        });
       } catch (error) {
         alert('Error al agregar la película');
         console.error(error);
@@ -258,9 +278,9 @@ export default function AddFilm({ onSucess }) {
                   type="date"
                   className="form-control"
                   name="fechaInicioEstreno"
-                  min={fechaReal ? format(new Date(fechaReal), 'yyyy-MM-dd') : ''}
-                  value={fechaInicioEstreno ? format(new Date(fechaInicioEstreno), 'yyyy-MM-dd') : ''}
-                  onChange={(e) => onInputChange(e)}
+                  min={fechaReal ? format(fechaReal, 'yyyy-MM-dd') : ''}
+                  value={fechaInicioEstreno ? format(fechaInicioEstreno, 'yyyy-MM-dd') : ''}
+                  onChange={(e) => onFechaChange(e)}
                   required
                 />
               </div>
