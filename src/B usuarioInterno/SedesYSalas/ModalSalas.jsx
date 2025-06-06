@@ -61,7 +61,7 @@ export const ModalSalas = ({ onClose, sede }) => {
                   console.log(listaActualizada);
                   
       if (listaActualizada) {
-        setSalas(listaActualizada);
+        setSalas(listaActualizada.reverse());
         setLoading(false)
       }
     } catch (error) {
