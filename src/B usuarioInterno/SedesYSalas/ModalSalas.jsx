@@ -17,7 +17,6 @@ export const ModalSalas = ({ onClose, sede }) => {
     console.log("guardando")
   }
 
-  let listaActualizada
   const agregarSala = async (e) => {
     e.preventDefault();
     if (!(categoriaGuardar === '')) {
@@ -55,17 +54,18 @@ export const ModalSalas = ({ onClose, sede }) => {
 
   const consultar = async () => {
     try {
-      listaActualizada = (await axios.get(`${url}/intranet/sedesysalas`, { 
+      const listaActualizada = (await axios.get(`${url}/sede/${sede.id}/salas`, { 
                       headers: { Authorization: `Bearer ${Cookies.get("auth-token")}` } 
                   })).data;
-    } catch (error) {
-      console.error(error);
-    } finally {
-      const sedeActualizada = listaActualizada.find(el => el.id === sede.id);
-      if (sedeActualizada) {
-        setSalas(sedeActualizada.salas);
+
+                  console.log(listaActualizada);
+                  
+      if (listaActualizada) {
+        setSalas(listaActualizada);
         setLoading(false)
       }
+    } catch (error) {
+      console.error(error);
     }
   }
 
