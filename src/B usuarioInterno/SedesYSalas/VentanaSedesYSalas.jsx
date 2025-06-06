@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import AddSede from './AddSede';
+import sala from '../../assets/sala2.svg';
 import axios from 'axios';
 import { url } from "../../configuracion/backend"
 import { useNavigate } from 'react-router-dom'
 import Loading from '../../0 componentesGenerales/Loading';
 import { ModalSalas } from './ModalSalas'
-import sala from '../../assets/sala.svg'
 import Cookies from 'js-cookie';
 
 
@@ -79,6 +79,13 @@ const VentanaSedesYSalas = () => {
                                     <td>{el.nombre}</td>
                                     <td >
 
+                                        <div className='d-flex justify-content-end'>
+
+                                            <button className='btn btn-primary d-flex gap-2' onClick={() => moverse(el)}>
+                                                <label className="">Salas</label>
+                                                <img src={sala} alt="" style={{ height: '25px' }} />
+                                            </button>
+                                        </div>
                                     </td>
                                 </tr>
 
@@ -97,12 +104,4 @@ const VentanaSedesYSalas = () => {
 
 export default VentanaSedesYSalas;
 
-/*
-<div className='d-flex justify-content-end'>
 
-<button className='btn btn-primary d-flex gap-2' onClick={() => moverse(el)}>
-    <label className="">Salas</label>
-    <img src={sala} alt="" style={{ width: '25px' }} />
-</button>
-</div>
-*/

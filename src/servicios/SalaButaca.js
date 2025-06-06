@@ -1,5 +1,6 @@
 import { url } from '../configuracion/backend'
 import axios from "axios";
+import Cookies from 'js-cookie';
 
 class SalaButaca {
 
@@ -14,12 +15,20 @@ class SalaButaca {
         let matriz = butacas.reduce((acc, el) => {
             max_row = Object.keys(acc).length === 0 ? el.fila : (max_row > el.fila ? max_row : el.fila)
             max_col = Object.keys(acc).length === 0 ? el.columna : (max_col > el.columna ? max_col : el.columna)
-    
+
             acc[el.fila] = { ...acc[el.fila], [el.columna]: { id: el.id, discap: el.discapacitado, ocupado: el.ocupado } }
             return acc
         }, {})
 
-        return [ max_row, max_col, matriz ];
+        return [max_row, max_col, matriz];
+    }
+
+    static async salasPorSede(sedeElegida) {
+        const salas = await axios.get(`${url}/intranet/salasPorSede`, {
+            params: { idSede: sedeElegida },
+            headers: { Authorization: `Bearer ${Cookies.get("auth-token")}` }
+        });
+        return salas.data
     }
 
 }

@@ -109,9 +109,9 @@ export default function AddFilm({ onSucess }) {
     <div className="addFilm">
       {fechaReal !== undefined ?
         <div className="border rounded p-4 mt-4 shadow">
-          <div className="d-flex align-items-center p-2 gap-4 justify-content-center">
-            <img src={peliculaIcono} alt="" style={{ height: '60px' }} />
+          <div className="d-flex align-items-center p-2 gap-2 justify-content-center">
             <h2 className="text-center">Agregar película</h2>
+            <img src={peliculaIcono} alt="" style={{ height: '80px' }} />
           </div>
           <form onSubmit={(e) => onSubmit(e)} >
             <div className='d-flex flex-wrap gap-3 justify-content-center'>

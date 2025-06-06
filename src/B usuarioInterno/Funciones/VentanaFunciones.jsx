@@ -6,16 +6,23 @@ import Loading from '../../0 componentesGenerales/Loading';
 import sala from '../../assets/sala.svg'
 import Cookies from 'js-cookie';
 import { se } from 'date-fns/locale';
+import { set } from 'date-fns';
+import SalaButaca from '../../servicios/SalaButaca';
+import Pelicula from '../../servicios/Pelicula';
+import Cronograma from './Cronograma';
 
 
 const VentanaSedesYSalas = () => {
     const [sedes, setSedes] = useState([]);
     const [peliculasSede, setPeliculasSede] = useState([]);
+    const [salasSede, setSalasSede] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [sedeElegida, setSedeElegida] = useState();
-    const navigate = useNavigate();
-    const [modalAbierto, setModalAbierto] = useState(false)
+    const [sedeElegida, setSedeElegida] = useState('');
     const [primeraVez, setPrimeraVez] = useState(true)
+    const [fechaElegida, setFechaElegida] = useState(new Date().toISOString().split('T')[0]); // Formato YYYY-MM-DD
+
+    const [funciones, setFunciones] = useState([]);
+
 
     const consultarSedes = async () => {
         try {
@@ -29,32 +36,56 @@ const VentanaSedesYSalas = () => {
         }
     }
 
-    const consultarPeliculasPorSede = async () => {
-        let s
-        try {
-            setPeliculasSede(['Cargando...']);
-            s = ((await axios.get(`${url}/intranet/peliculasPorSede`, {
-                params: { nombreSede: sedeElegida },
-                headers: { Authorization: `Bearer ${Cookies.get("auth-token")}` }
-            })).data);
-        } catch (error) {
-            console.error(error);
-        } finally {
-            setPeliculasSede(s);
-        }
-    }
-
     const moverse = (e) => {
         setPrimeraVez(false)
         setSedeElegida(e.target.value);
     }
 
-    useEffect(() => {
-        if (!primeraVez) {
-            setModalAbierto(true);
+    const handlePeliculaChange = async (e) => {
+        const peliculaId = e.target.value;
+        console.log("Pelicula elegida:", peliculaId);
+        console.log("Fecha elegida:", fechaElegida);
+        console.log("Sede elegida:", sedeElegida);
+        if (peliculaId) {
+            try {
+                setFunciones((await axios.get(`${url}/intranet/buscarFuncionesPorSemanaConPelicula`, {
+                    params: {
+                        idPelicula: peliculaId,
+                        fecha: `${fechaElegida}T00:00:00`,
+                        idSede: sedeElegida
+                    },
+                    headers: { Authorization: `Bearer ${Cookies.get("auth-token")}` }
+                })).data);
+            } catch (error) {
+                console.error(error);
+            }
         }
-    }, [primeraVez]);
+    }
 
+    const handleSalaChange = async (e) => {
+        const salaId = e.target.value;
+        console.log("sala elegida:", salaId);
+        console.log("Fecha elegida:", fechaElegida);
+        console.log("Sede elegida:", sedeElegida);
+        if (salaId) {
+            try {
+                setFunciones((await axios.get(`${url}/intranet/buscarFuncionesPorSemanaConSala`, {
+                    params: {
+                        idSala: salaId,
+                        fecha: `${fechaElegida}T00:00:00`,
+                        idSede: sedeElegida
+                    },
+                    headers: { Authorization: `Bearer ${Cookies.get("auth-token")}` }
+                })).data);
+            } catch (error) {
+                console.error(error);
+            }
+        }
+    }
+
+    useEffect(() => {
+        console.log(funciones)
+    }, [funciones])
 
     useEffect(() => {
         consultarSedes()
@@ -65,64 +96,74 @@ const VentanaSedesYSalas = () => {
     }, [sedes])
 
     useEffect(() => {
-        if (sedeElegida !== undefined) {
-            setPeliculasSede(['Cargando...'])
-            setPeliculasSede(consultarPeliculasPorSede())
+        if (sedeElegida !== '') {
+            Pelicula.mostrarPeliculasPorSede(sedeElegida)
+                .then(data => setPeliculasSede(data))
+                .catch(err => console.error("Error al obtener peliculas por sede:", err));
+
+            SalaButaca.salasPorSede(sedeElegida)
+                .then(data => setSalasSede(data))
+                .catch(err => console.error("Error al obtener salas por sede:", err));
         }
     }, [sedeElegida])
 
-    const funcionCambiar = () => {
-        setModalAbierto(false)
-        setPrimeraVez(true)
-        consultarSedes()
-    }
 
     return (
         <div>
-            <div className='d-flex flex-column align-items-center container'>
+            <div className='d-flex flex-column align-items-center'>
                 {loading === true
                     ? <Loading></Loading> :
-                    <>
-                        <div className='d-flex gap-4 m-4'>
-                            <h1 className='text-center'>1. Selecciona una sede y fechas</h1>
-                        </div>
-                        <div className='d-flex gap-4 m-4'>
+                    <div className='d-flex flex-column align-items-center gap-4 m-3 border p-4 rounded w-100'>
+                        <div className='d-flex gap-4 w-100'>
                             <select className='form-select' onChange={(e) => moverse(e)}>
-                                <option value="">Seleccione una sede</option>
+                                <option value=''>Elija una sede</option>
                                 {sedes.map((el, id) => (
                                     <option key={el.id || id} value={el.id} >{el.nombre}</option>
                                 ))}
                             </select>
-                            <input type='date' className='form-control' placeholder='Fecha' onChange={(e) => moverse(e)} />
-                            <input type='date' className='form-control' placeholder='Fecha' onChange={(e) => moverse(e)} />
-                        </div>
-                        <div className='d-flex gap-4 m-4'>
-                            <h1 className='text-center'>2. Selecciona una pelicula o sala</h1>
-                        </div>     
-                        <div className='d-flex gap-4 m-4'>
+                            <input type='date' className='form-control' value={fechaElegida} placeholder='Fecha' onChange={(e) => setFechaElegida(e.target.value)} />
 
-                            <select className='form-select' onChange={(e) => moverse(e)}>
-                                <option value="">Seleccione una sala</option>
-                                /*{sedes.map((el, id) => (
-                                    <option key={el.id || id} value={el.id} >{el.nombre}</option>
-                                ))}*/
-                            </select>
-                            {peliculasSede.length > 0 ?
-                                <select className='form-select' /*onChange={() => moverse()}*/>
-                                    <option value="">Seleccione una pelicula</option>
-                                    {peliculasSede.map((el, id) => (
-                                        <option key={el.id || id} value={el.id} >{el.nombre}</option>
-                                    ))}
-                                </select>
-                                :
-                                <select className='form-select' disabled>
-                                    <option value="">No hay peliculas disponibles</option>
-                                </select>}
                         </div>
-                    </>
-
+                        <div className='d-flex gap-4 w-100 align-items-center'>
+                            <label className='d-flex text-nowrap'>Elige pelicula o sala</label>
+                            <div>
+                                <label className='d-flex text-nowrap'>Pelicula</label>
+                                {peliculasSede.length > 0 ?
+                                    <select className='form-select' onChange={(e) => handlePeliculaChange(e)}>
+                                        <option value="">Elije una pelicula</option>
+                                        {peliculasSede.map((el, id) => (
+                                            <option key={el.id || id} value={el.id} >{el.nombre}</option>
+                                        ))}
+                                    </select>
+                                    :
+                                    <select className='form-select' disabled>
+                                        <option value="">No hay peliculas</option>
+                                    </select>}
+                            </div>
+                            <div>
+                                <label className='d-flex text-nowrap'>Sala</label>
+                                {salasSede.length > 0 ?
+                                    <select className='form-select' onChange={(e) => handleSalaChange(e)}>
+                                        <option value="">Elije una sala</option>
+                                        {salasSede.map((el, id) => (
+                                            <option key={el.id || id} value={el.id} >{el.codigoSala}</option>
+                                        ))}
+                                    </select>
+                                    :
+                                    <select className='form-select' disabled>
+                                        <option value="">No hay salas</option>
+                                    </select>}
+                            </div>
+                        </div>
+                    </div>
                 }
             </div>
+            {funciones.length > 0 ?
+            <Cronograma funciones={funciones} fechaConsultada={new Date(fechaElegida)}/>
+            : <div className='d-flex justify-content-center align-items-center m-4'>
+                <h3>No hay funciones para mostrar</h3>
+            </div>}
+
         </div>
     )
 }

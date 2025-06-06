@@ -3,8 +3,9 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { url } from '../../configuracion/backend.js'
 import Cookies from 'js-cookie';
+import sedeDark from '../../assets/sedeDark.svg';
 
-export default function AddSede( {onSucess} ) {
+export default function AddSede({ onSucess }) {
   const navigate = useNavigate();
 
   const [sede, setSede] = useState({
@@ -14,9 +15,9 @@ export default function AddSede( {onSucess} ) {
   });
 
   const {
-    
+
     nombre,
-    
+
   } = sede;
 
   const onInputChange = (e) => {
@@ -30,11 +31,11 @@ export default function AddSede( {onSucess} ) {
     e.preventDefault();
 
     try {
-      await axios.post(`${url}/intranet/sedesysalas/agregar`, sede, { 
-                      headers: { Authorization: `Bearer ${Cookies.get("auth-token")}` } 
-                  });
+      await axios.post(`${url}/intranet/sedesysalas/agregar`, sede, {
+        headers: { Authorization: `Bearer ${Cookies.get("auth-token")}` }
+      });
       alert('Sede agregada correctamente');
-      if(onSucess){
+      if (onSucess) {
         onSucess()
       }
     } catch (error) {
@@ -44,12 +45,15 @@ export default function AddSede( {onSucess} ) {
   };
 
   return (
-    <div className="justify-self-center" style={{width:"400px"}}>
+    <div className="justify-self-center" style={{ width: "400px" }}>
       <div className="row">
         <div className="border rounded p-4 mt-4 shadow">
-          <h2 className="text-center m-4">Agregar Sede</h2>
+          <div className='d-flex justify-content-center align-items-center gap-2'>
+            <h2 className="text-center">Agregar Sede</h2>
+            <img src={sedeDark} alt="" />
+          </div>
           <form onSubmit={(e) => onSubmit(e)} className='d-flex justify-self-center flex-column'>
-                
+
             <div className="mb-3">
               <label htmlFor="nombre" className="form-label">
                 Nombre

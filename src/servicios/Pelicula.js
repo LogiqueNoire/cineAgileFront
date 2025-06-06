@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { url } from '../configuracion/backend'
+import Cookies from 'js-cookie';
 
 class Pelicula {
     
@@ -17,6 +18,15 @@ class Pelicula {
     
     static async mostrarPeliculasProximas() {
         const peliculas = await axios.get(`${url}/pelicula/proximamente`)
+        return peliculas.data
+    }
+
+    static async mostrarPeliculasPorSede(sedeElegida) {
+        const peliculas = await axios.get(`${url}/intranet/peliculasPorSede`,
+            {
+                params: { idSede: sedeElegida },
+                headers: { Authorization: `Bearer ${Cookies.get("auth-token")}` }
+            })
         return peliculas.data
     }
 
