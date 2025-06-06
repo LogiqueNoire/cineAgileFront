@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react";
 import MostrarSedesHorarios from "../../3 componentesVenta/MostrarSedesHorarios";
 
-const Cronograma = ({ funciones, fechaConsultada }) => {
+const Cronograma = ({ funciones, fechaConsultada, filtro }) => {
   if (!funciones.length) return null;
 
   const diasDeLaSemana = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'];
@@ -31,13 +31,11 @@ const Cronograma = ({ funciones, fechaConsultada }) => {
   }
 
   function AdespuesoigualB(hora1, hora2) {
-    console.log("hora1", hora1, "hora2", hora2);
     return (hora1.getHours() > hora2.getHours() ||
       (hora1.getHours() === hora2.getHours() && hora1.getMinutes() >= hora2.getMinutes()))
   }
 
   function AdespuesB(hora1, hora2) {
-    console.log("hora1", hora1, "hora2", hora2);
     return (hora1.getHours() > hora2.getHours() ||
       (hora1.getHours() === hora2.getHours() && hora1.getMinutes() > hora2.getMinutes()))
   }
@@ -91,8 +89,12 @@ const Cronograma = ({ funciones, fechaConsultada }) => {
                                     style={{ backgroundColor: `hsl(${[35,45,55,65,75,125,135,145,160,180,210,230,250][el.idFuncion % 13]}, 70%, 85%)`}}>
                                     <h6>{'#' + el.idFuncion}</h6>
                                     <h6>{formatearHora(el.fechaHoraInicio) + '-' + formatearHora(el.fechaHoraFin)}</h6>
+                                    {filtro === 'pelicula' ?
+                                      <h6>{'Sala ' + el.codigoSala}</h6>
+                                      :
+                                      <h6>{el.nombrePelicula}</h6>
+                                    }
                                     <h6>{el.categoria + ' ' + el.dimension}</h6>
-                                    <h6>{'Sala ' + el.codigoSala}</h6>
                                     <h6></h6>
                                   </div>
                                   :
