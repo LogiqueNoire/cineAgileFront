@@ -149,7 +149,8 @@ const VentanaSedesYSalas = () => {
 
                                 <label className='text-nowrap'>Filtro</label>
                                 <select className='form-select' value={filtro} onChange={(e) => {
-                                    setFiltro(e.target.value)
+                                    setFiltro(e.target.value);
+setFunciones([]);
                                 }} >
                                     <option value=''>Elige filtro</option>
                                     <option value='pelicula'>Por película</option>
