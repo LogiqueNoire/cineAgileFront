@@ -30,18 +30,26 @@ const Cronograma = ({ funciones, fechaConsultada }) => {
     return `${h}:${m}`;
   }
 
+  function AdespuesoigualB(hora1, hora2) {
+    console.log("hora1", hora1, "hora2", hora2);
+    return (hora1.getHours() > hora2.getHours() ||
+      (hora1.getHours() === hora2.getHours() && hora1.getMinutes() >= hora2.getMinutes()))
+  }
+
+  function AdespuesB(hora1, hora2) {
+    console.log("hora1", hora1, "hora2", hora2);
+    return (hora1.getHours() > hora2.getHours() ||
+      (hora1.getHours() === hora2.getHours() && hora1.getMinutes() > hora2.getMinutes()))
+  }
+
   return (
     <section className=''>
-      <h2 className='d-none d-lg-block mr-4'>Funciones</h2>
+      <h2 className='d-none d-lg-block mr-4'>Funciones de la semana</h2>
       <div className="table-responsive">
-        <table className="table">
+        <table className="table" style={{ 'border-collapse': 'separate', width: '100%' }}>
           <thead>
             <tr>
-              <th scope="col" style={{ backgroundColor: 'rgb(184, 248, 255)' }}>
-                <div>
-                  <h4 className='d-flex align-items-center'>Hora</h4>
-                </div>
-              </th>
+              <th scope="col" style={{ backgroundColor: 'rgb(184, 248, 255)' }}>Hora</th>
               {fechasSemana.map((_, index) => (
                 <th className='text-center' key={index} scope="col" style={{ backgroundColor: 'rgb(184, 248, 255)' }}>
                   {fechasSemana[index] ? `${diasDeLaSemana[index]} ${fechasSemana[index].toString().padStart(2, '0')}` : ''}
@@ -53,34 +61,49 @@ const Cronograma = ({ funciones, fechaConsultada }) => {
             {
               horas.map((hora, index) => (
                 <tr>
-                  <td>{hora.getHours()}</td>
+                  <td>{formatearHora(hora)}</td>
                   {
 
 
                     fechasSemana.map((fs, index) => (
                       <td>
-                        <div className='d-flex flex-column align-items-center gap-2'>
+                        <div className='d-flex align-items-center gap-2'>
 
                           {
-                          funciones.map((el, key) => (
-                            (new Date(el.fechaHoraInicio)).getDay() + 1 === fs && hora.getHours() === (new Date(el.fechaHoraInicio)).getHours()
-                              ?
-                              <td className='text-center' style={{ backgroundColor: 'rgb(184, 248, 255)' }}>
-                                <h6>{'Funcion ' + el.idFuncion}</h6>
-                                <h6>{formatearHora(el.fechaHoraInicio)}</h6>
-                                <h6>{el.categoria + ' ' + el.dimension}</h6>
-                                <h6>{'Sala ' + el.codigoSala}</h6>
-                                <h6></h6>
-                              </td>
-                              :
-                              <></>
-                          ))
+                            funciones.map((el, key) => (
+                              (new Date(el.fechaHoraInicio)).getDay() + 1 === fs
+                              &&
+                              (
+                                (
+                                  AdespuesoigualB(new Date(el.fechaHoraInicio), hora)
+                                  &&
+                                  AdespuesB(new Date(new Date().setHours(hora.getHours() + 1, hora.getMinutes(), 0, 0)), new Date(el.fechaHoraInicio))
+                                )
+                                ||
+                                (
+                                  AdespuesoigualB(new Date(el.fechaHoraFin), hora)
+                                  &&
+                                  AdespuesB(new Date(new Date().setHours(hora.getHours() + 1, hora.getMinutes(), 0, 0)), new Date(el.fechaHoraFin))
+                                )
+                              )
+                                  ?
+                                  <div className='text-center p-2'
+                                    style={{ backgroundColor: `hsl(${[35,45,55,65,75,125,135,145,160,180,210,230,250][el.idFuncion % 13]}, 70%, 85%)`}}>
+                                    <h6>{'#' + el.idFuncion}</h6>
+                                    <h6>{formatearHora(el.fechaHoraInicio) + '-' + formatearHora(el.fechaHoraFin)}</h6>
+                                    <h6>{el.categoria + ' ' + el.dimension}</h6>
+                                    <h6>{'Sala ' + el.codigoSala}</h6>
+                                    <h6></h6>
+                                  </div>
+                                  :
+                                  <></>
+                                ))
                           }
                         </div>
                       </td>
                     ))
 
-                    
+
                   }
                 </tr>
               ))
@@ -93,4 +116,4 @@ const Cronograma = ({ funciones, fechaConsultada }) => {
 };
 
 
-export default Cronograma;
+export default Cronograma;      

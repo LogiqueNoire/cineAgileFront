@@ -20,6 +20,8 @@ const VentanaSedesYSalas = () => {
     const [sedeElegida, setSedeElegida] = useState('');
     const [primeraVez, setPrimeraVez] = useState(true)
     const [fechaElegida, setFechaElegida] = useState(new Date().toISOString().split('T')[0]); // Formato YYYY-MM-DD
+    const [selectPelicula, setSelectPelicula] = React.useState('');
+    const [selectSala, setSelectSala] = React.useState('');
 
     const [funciones, setFunciones] = useState([]);
 
@@ -47,6 +49,8 @@ const VentanaSedesYSalas = () => {
         console.log("Fecha elegida:", fechaElegida);
         console.log("Sede elegida:", sedeElegida);
         if (peliculaId) {
+            setSelectSala('')
+            setSelectPelicula(peliculaId);
             try {
                 setFunciones((await axios.get(`${url}/intranet/buscarFuncionesPorSemanaConPelicula`, {
                     params: {
@@ -68,6 +72,8 @@ const VentanaSedesYSalas = () => {
         console.log("Fecha elegida:", fechaElegida);
         console.log("Sede elegida:", sedeElegida);
         if (salaId) {
+            setSelectPelicula('')
+            setSelectSala(salaId);
             try {
                 setFunciones((await axios.get(`${url}/intranet/buscarFuncionesPorSemanaConSala`, {
                     params: {
@@ -113,15 +119,29 @@ const VentanaSedesYSalas = () => {
             <div className='d-flex flex-column align-items-center'>
                 {loading === true
                     ? <Loading></Loading> :
-                    <div className='d-flex flex-column align-items-center gap-4 m-3 border p-4 rounded w-100'>
+                    <div className='d-flex flex-column align-items-center gap-4 m-3 border p-4 rounded'>
                         <div className='d-flex gap-4 w-100'>
-                            <select className='form-select' onChange={(e) => moverse(e)}>
-                                <option value=''>Elija una sede</option>
-                                {sedes.map((el, id) => (
-                                    <option key={el.id || id} value={el.id} >{el.nombre}</option>
-                                ))}
-                            </select>
-                            <input type='date' className='form-control' value={fechaElegida} placeholder='Fecha' onChange={(e) => setFechaElegida(e.target.value)} />
+                            <div>
+                                <label className='d-flex text-nowrap'>Elige sede</label>
+                                <select className='form-select' onChange={(e) => moverse(e)}>
+                                    <option value='0'>Elija una sede</option>
+                                    {sedes.map((el, id) => (
+                                        <option key={el.id || id} value={el.id} >{el.nombre}</option>
+                                    ))}
+                                </select>
+                            </div>
+                            <div>
+                                <label className='d-flex text-nowrap'>Elige fecha dentro de una semana</label>
+                                <input type='date' className='form-control' value={fechaElegida} placeholder='Fecha'
+                                 onChange={
+                                    (e) => {
+                                        setFechaElegida(e.target.value)
+                                        setSelectPelicula('')
+                                        setSelectSala('')
+                                        setFunciones([]) // Limpiar funciones al cambiar la fecha
+                                    }
+                                    } />
+                            </div>
 
                         </div>
                         <div className='d-flex gap-4 w-100 align-items-center'>
@@ -129,8 +149,8 @@ const VentanaSedesYSalas = () => {
                             <div>
                                 <label className='d-flex text-nowrap'>Pelicula</label>
                                 {peliculasSede.length > 0 ?
-                                    <select className='form-select' onChange={(e) => handlePeliculaChange(e)}>
-                                        <option value="">Elije una pelicula</option>
+                                    <select value={selectPelicula} className='form-select' onChange={(e) => handlePeliculaChange(e)}>
+                                        <option value="0">Elije una pelicula</option>
                                         {peliculasSede.map((el, id) => (
                                             <option key={el.id || id} value={el.id} >{el.nombre}</option>
                                         ))}
@@ -143,7 +163,7 @@ const VentanaSedesYSalas = () => {
                             <div>
                                 <label className='d-flex text-nowrap'>Sala</label>
                                 {salasSede.length > 0 ?
-                                    <select className='form-select' onChange={(e) => handleSalaChange(e)}>
+                                    <select value={selectSala} className='form-select' onChange={(e) => handleSalaChange(e)}>
                                         <option value="">Elije una sala</option>
                                         {salasSede.map((el, id) => (
                                             <option key={el.id || id} value={el.id} >{el.codigoSala}</option>
@@ -159,10 +179,10 @@ const VentanaSedesYSalas = () => {
                 }
             </div>
             {funciones.length > 0 ?
-            <Cronograma funciones={funciones} fechaConsultada={new Date(fechaElegida)}/>
-            : <div className='d-flex justify-content-center align-items-center m-4'>
-                <h3>No hay funciones para mostrar</h3>
-            </div>}
+                <Cronograma funciones={funciones} fechaConsultada={new Date(fechaElegida)} />
+                : <div className='d-flex justify-content-center align-items-center m-4'>
+                    <h3>No hay funciones para mostrar</h3>
+                </div>}
 
         </div>
     )
