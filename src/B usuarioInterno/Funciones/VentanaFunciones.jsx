@@ -11,6 +11,12 @@ import SalaButaca from '../../servicios/SalaButaca';
 import Pelicula from '../../servicios/Pelicula';
 import Cronograma from './Cronograma';
 
+const ordenamientoAlfa = (a, b) => {
+    const x = a.nombre.toLowerCase();
+    const y = b.nombre.toLowerCase();
+
+    return x < y ? -1 : 1;
+}
 
 const VentanaSedesYSalas = () => {
     const [sedes, setSedes] = useState([]);
@@ -104,7 +110,7 @@ const VentanaSedesYSalas = () => {
     useEffect(() => {
         if (sedeElegida !== '') {
             Pelicula.mostrarPeliculasPorSede(sedeElegida)
-                .then(data => setPeliculasSede(data))
+                .then(data => setPeliculasSede(data.sort(ordenamientoAlfa)))
                 .catch(err => console.error("Error al obtener peliculas por sede:", err));
 
             SalaButaca.salasPorSede(sedeElegida)
