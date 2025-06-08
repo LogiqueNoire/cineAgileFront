@@ -3,6 +3,30 @@ import { useState } from "react";
 import MostrarSedesHorarios from "../../3 componentesVenta/MostrarSedesHorarios";
 
 const Cronograma = ({ funciones, fechaConsultada, filtro }) => {
+  const [draggedFuncion, setDraggedFuncion] = useState(null);
+
+  const onDragStart = (e, funcion) => {
+    setDraggedFuncion(funcion);
+    e.dataTransfer.effectAllowed = "move";
+  };
+
+  const onDragOver = (e) => {
+    e.preventDefault(); // Necesario para permitir drop
+  };
+
+  const onDrop = (e, fechaDia, hora) => {
+    e.preventDefault();
+    if (!draggedFuncion) return;
+    
+    // Aquí puedes actualizar la función para cambiar su fecha y hora,
+    // por ejemplo asignarle fechaDia + hora
+
+    console.log("Función arrastrada:", draggedFuncion);
+    console.log("Soltada en:", fechaDia, hora);
+
+    setDraggedFuncion(null);
+  };
+
   const colores = [
     "#f0c9b3", // anaranjado claro (hue 20)
     "#f1d5b3", // durazno claro (hue 35)
@@ -86,13 +110,14 @@ const Cronograma = ({ funciones, fechaConsultada, filtro }) => {
 
 
                     fechasSemana.map((fs, index) => (
-                      <td>
+                      <td onDragOver={onDragOver}
+                        onDrop={(e) => onDrop(e, fs, hora)}>
                         <div className='d-flex align-items-center gap-2'>
 
                           {
                             funciones.map((el, key) => (
-                              ((new Date(el.fechaHoraInicio)).getDay() === index+1 
-                              || ((new Date(el.fechaHoraInicio)).getDay() === 0 && index===6))
+                              ((new Date(el.fechaHoraInicio)).getDay() === index + 1
+                                || ((new Date(el.fechaHoraInicio)).getDay() === 0 && index === 6))
                                 &&
                                 (
                                   (
@@ -106,9 +131,17 @@ const Cronograma = ({ funciones, fechaConsultada, filtro }) => {
                                     &&
                                     AdespuesB(new Date(new Date().setHours(hora.getHours() + 1, hora.getMinutes(), 0, 0)), new Date(el.fechaHoraFin))
                                   )
+                                  ||
+                                  (
+                                    AdespuesB(hora, new Date(el.fechaHoraInicio))
+                                    &&
+                                    AdespuesB(new Date(el.fechaHoraFin), hora)
+                                  )
                                 )
                                 ?
                                 <div className='text-center p-2'
+                                  draggable
+                                  onDragStart={(e) => onDragStart(e, el)}
                                   style={{ backgroundColor: `${colores[el.idFuncion % colores.length]}` }}>
                                   <h6>{'#' + el.idFuncion}</h6>
                                   <h6>{formatearHora(el.fechaHoraInicio) + '-' + formatearHora(el.fechaHoraFin)}</h6>
