@@ -23,12 +23,25 @@ const Intranet = () => {
         else {
             navigate("/intranet/login");
         }
-    }, [ ])
+    }, [ navigate ])
+
+    const onCerrarSesion = () => {
+        Cookies.remove("auth-token");
+        setUsername(null);
+        navigate("/intranet/login")
+    }
 
     return (
         <>
             <Header>
-                <h5>Usuario: { username }</h5>
+                {
+                    username &&
+                    <div className='d-flex align-items-center gap-5'>
+                        <h5>Usuario: { username }</h5>
+                        <button className='btn btn-danger' onClick={onCerrarSesion}>Cerrar sesión</button>
+                    </div>
+                }
+                
             </Header>
 
             {
