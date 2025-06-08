@@ -6,8 +6,10 @@ import axios from 'axios';
 import { url } from '../../configuracion/backend.js'
 import Loading from '../../0 componentesGenerales/Loading';
 import Cookies from "js-cookie";
+import { useNavigate } from "react-router-dom";
 
 export const ModalSalas = ({ onClose, sede }) => {
+  const navigate = useNavigate();
   const [codigoSalaGuardar, setCodigoSalaGuardar] = useState('')
   const [salas, setSalas] = useState()
   const [categoriaGuardar, setCategoriaGuardar] = useState('')
@@ -73,6 +75,10 @@ export const ModalSalas = ({ onClose, sede }) => {
     consultar()
   }, [])
 
+  const irACrearSala = () => {
+    navigate("/intranet/crearsala", { state: { sede } })
+  }
+
   return (
     <div className="modal-terminos-overlay" >
       <div className="modal-terminos d-flex flex-column align-items-center" style={{ "max-height": "80vh", "overflow-y": "auto" }}>
@@ -83,10 +89,18 @@ export const ModalSalas = ({ onClose, sede }) => {
             Cerrar
           </button>
 
+          <button className='btn btn-primary d-flex gap-3' onClick={irACrearSala}>
+            <h3 className="mb-0">Crear nueva sala</h3>
+          </button>
+
+          { /*
+
           <button className='btn btn-primary d-flex gap-3' onClick={(e) => agregarSala(e)}>
             <h3 className="mb-0">Guardar nueva sala</h3>
             <img src={guardarBlanco} alt="" style={{ height: '22px' }} />
           </button>
+
+          */ }
         </div>
 
         {loading ?
@@ -96,6 +110,7 @@ export const ModalSalas = ({ onClose, sede }) => {
               <tr className=''>
                 <td className=''>Sala</td>
                 <td className=''>Categoría</td>
+                <td className=''>Acciones</td>
                 {/*
               <td className=''></td>
               <td className=''></td>
@@ -104,6 +119,9 @@ export const ModalSalas = ({ onClose, sede }) => {
             </thead>
 
             <tbody className=''>
+
+              { /*
+
               <tr>
                 <td>
                   <input
@@ -130,6 +148,8 @@ export const ModalSalas = ({ onClose, sede }) => {
                 </td>
 
               </tr>
+
+              */ } 
 
 
               {salas.length > 0 ?
@@ -160,6 +180,9 @@ export const ModalSalas = ({ onClose, sede }) => {
                         required
                         disabled
                       />
+                    </td>
+                    <td>
+                      <button className="btn btn-primary">Detalles</button>
                     </td>
                     {/*
                         <td className='text-center'>

@@ -11,10 +11,12 @@ const SeccionBotones = ({ onClick, row, col }) => {
     );
 }
 
-const OrganizadorButacas = () => {
+const OrganizadorButacas = ({ setButacasExt }) => {
     const [ butacas, setButacas ] = useState(new Array(5).fill().map(el => new Array(5).fill(null)));
 
     const btonOnClick = (evt) => {
+        evt.preventDefault();
+
         const parent = evt.target.parentNode;
         const row = +parent.dataset.row;
         const col = +parent.dataset.col;
@@ -59,6 +61,7 @@ const OrganizadorButacas = () => {
         newButacas[row][col] = nuevoEstado;
 
         setButacas(newButacas);
+        extraerButacas();
     }
 
     const maxCols = butacas[0].length;
@@ -74,7 +77,7 @@ const OrganizadorButacas = () => {
     for (let i = 0; i < maxRows; i++) {
         const columnas = [];
         
-        columnas.push(<td>
+        columnas.push(<td key="--x--">
             <SeccionBotones onClick={btonOnClick} row={i} />
         </td>)
 
@@ -103,17 +106,17 @@ const OrganizadorButacas = () => {
         filas.push(<tr key={i}>{columnas}</tr>);
     }
 
-    filas.push(<tr>
+    filas.push(<tr key="---">
         <td>
             <SeccionBotones onClick={btonOnClick} row={maxRows} />
         </td>
     </tr>)
 
-    const onGrabar = () => {
+    const extraerButacas = () => {
         const butacasProcesadas = butacas.reduce((acc, el, idx) => {
             const columnas = el.map((c, cidx) => {
                 if (c != null)
-                    return { row: idx, col: cidx, discapacitado: c == "discapacitado" };
+                    return { fila: idx, columna: cidx, discapacitado: c == "discapacitado" };
 
                 return null;
             }).filter(el => el != null);
@@ -123,7 +126,7 @@ const OrganizadorButacas = () => {
             else return acc;
         }, []);
 
-        console.log(butacasProcesadas);
+        setButacasExt(butacasProcesadas);
     }
 
     return (
@@ -134,8 +137,6 @@ const OrganizadorButacas = () => {
                     { filas }
                 </tbody>
             </table>
-
-            <button onClick={onGrabar}>Grabar</button>
         </div>
     )
 };

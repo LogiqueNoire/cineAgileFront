@@ -31,6 +31,14 @@ class SalaButaca {
         return salas.data
     }
 
+    static async crearSala(sala) {
+        const res = await axios.post(`${url}/intranet/crearsala`, sala, {
+            headers: { Authorization: `Bearer ${Cookies.get("auth-token")}` }
+        });
+
+        return res;
+    }
+
 }
 
 export default SalaButaca

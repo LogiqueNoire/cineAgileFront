@@ -21,6 +21,7 @@ import OrganizadorButacas from './B usuarioInterno/SedesYSalas/OrganizadorButaca
 import VentanaFunciones from './B usuarioInterno/Funciones/VentanaFunciones.jsx';
 import Intranet from './B usuarioInterno/Intranet.jsx';
 import LoginForm from './B usuarioInterno/LoginForm.jsx';
+import AddSala from './B usuarioInterno/SedesYSalas/AddSala.jsx';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
     <StrictMode>
@@ -42,6 +43,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
                     <Route path='login' element={<LoginForm />}></Route>
                     <Route path="peliculas" element={<VentanaPeliculas />}></Route>
                     <Route path="sedesysalas" element={<VentanaSedesYSalas />}></Route>
+                    <Route path="crearsala" element={ <AddSala /> }></Route>
                     <Route path="funciones" element={<VentanaFunciones />}></Route>
                     <Route path="salas" /*element={<VentanaSedesYSalas></VentanaSedesYSalas>}*/></Route>
                     <Route path="saladetalle" element={ <OrganizadorButacas /> }></Route>
