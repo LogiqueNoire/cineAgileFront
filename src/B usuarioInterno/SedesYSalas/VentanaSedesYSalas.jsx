@@ -20,9 +20,9 @@ const VentanaSedesYSalas = () => {
 
     const consultar = async () => {
         try {
-            setLista((await axios.get(`${url}/intranet/soloSedes`, {
+            setLista(((await axios.get(`${url}/intranet/soloSedes`, {
                 headers: { Authorization: `Bearer ${Cookies.get("auth-token")}` }
-            })).data);
+            })).data).reverse());
         } catch (error) {
             console.error(error);
         } finally {

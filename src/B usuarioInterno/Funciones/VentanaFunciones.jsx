@@ -28,6 +28,7 @@ const VentanaSedesYSalas = () => {
     const [fechaElegida, setFechaElegida] = useState(new Date().toISOString().split('T')[0]); // Formato YYYY-MM-DD
     const [selectPelicula, setSelectPelicula] = React.useState('');
     const [selectSala, setSelectSala] = React.useState('');
+    const [filtro, setFiltro] = useState('');
 
     const [funciones, setFunciones] = useState([]);
 
@@ -51,9 +52,6 @@ const VentanaSedesYSalas = () => {
 
     const handlePeliculaChange = async (e) => {
         const peliculaId = e.target.value;
-        console.log("Pelicula elegida:", peliculaId);
-        console.log("Fecha elegida:", fechaElegida);
-        console.log("Sede elegida:", sedeElegida);
         if (peliculaId) {
             setSelectSala('')
             setSelectPelicula(peliculaId);
@@ -74,9 +72,6 @@ const VentanaSedesYSalas = () => {
 
     const handleSalaChange = async (e) => {
         const salaId = e.target.value;
-        console.log("sala elegida:", salaId);
-        console.log("Fecha elegida:", fechaElegida);
-        console.log("Sede elegida:", sedeElegida);
         if (salaId) {
             setSelectPelicula('')
             setSelectSala(salaId);
@@ -96,16 +91,15 @@ const VentanaSedesYSalas = () => {
     }
 
     useEffect(() => {
-        console.log(funciones)
-    }, [funciones])
-
-    useEffect(() => {
         consultarSedes()
     }, [])
 
     useEffect(() => {
-        console.log("Solos sedes", sedes)
-    }, [sedes])
+        setSelectPelicula('')
+        setSelectSala('')
+        setFiltro('')
+        setFunciones([]) // Limpiar funciones al cambiar la sede
+    }, [sedeElegida, fechaElegida, primeraVez])
 
     useEffect(() => {
         if (sedeElegida !== '') {
@@ -139,53 +133,76 @@ const VentanaSedesYSalas = () => {
                             <div>
                                 <label className='d-flex text-nowrap'>Elige fecha dentro de una semana</label>
                                 <input type='date' className='form-control' value={fechaElegida} placeholder='Fecha'
-                                 onChange={
-                                    (e) => {
-                                        setFechaElegida(e.target.value)
-                                        setSelectPelicula('')
-                                        setSelectSala('')
-                                        setFunciones([]) // Limpiar funciones al cambiar la fecha
-                                    }
+                                    onChange={
+                                        (e) => {
+                                            setFechaElegida(e.target.value)
+                                            setSelectPelicula('')
+                                            setSelectSala('')
+                                            setFunciones([]) // Limpiar funciones al cambiar la fecha
+                                        }
                                     } />
                             </div>
 
                         </div>
                         <div className='d-flex gap-4 w-100 align-items-center'>
-                            <label className='d-flex text-nowrap'>Elige pelicula o sala</label>
                             <div>
-                                <label className='d-flex text-nowrap'>Pelicula</label>
-                                {peliculasSede.length > 0 ?
-                                    <select value={selectPelicula} className='form-select' onChange={(e) => handlePeliculaChange(e)}>
-                                        <option value="0">Elije una pelicula</option>
-                                        {peliculasSede.map((el, id) => (
-                                            <option key={el.id || id} value={el.id} >{el.nombre}</option>
-                                        ))}
-                                    </select>
-                                    :
-                                    <select className='form-select' disabled>
-                                        <option value="">No hay peliculas</option>
-                                    </select>}
+
+                                <label className='text-nowrap'>Filtro</label>
+                                <select className='form-select' value={filtro} onChange={(e) => {
+                                    setFiltro(e.target.value);
+setFunciones([]);
+                                }} >
+                                    <option value=''>Elige filtro</option>
+                                    <option value='pelicula'>Por película</option>
+                                    <option value='sala'>Por sala</option>
+                                </select>
                             </div>
-                            <div>
-                                <label className='d-flex text-nowrap'>Sala</label>
-                                {salasSede.length > 0 ?
-                                    <select value={selectSala} className='form-select' onChange={(e) => handleSalaChange(e)}>
-                                        <option value="">Elije una sala</option>
-                                        {salasSede.map((el, id) => (
-                                            <option key={el.id || id} value={el.id} >{el.codigoSala}</option>
-                                        ))}
-                                    </select>
+                            {
+                                filtro === 'pelicula' ?
+                                    <div>
+                                        <label className='d-flex text-nowrap'>Pelicula</label>
+                                        {peliculasSede.length > 0 ?
+                                            <select value={selectPelicula} className='form-select' onChange={(e) => handlePeliculaChange(e)}>
+                                                <option value="0">Elige una película</option>
+                                                {peliculasSede.map((el, id) => (
+                                                    <option key={el.id || id} value={el.id} >{el.nombre}</option>
+                                                ))}
+                                            </select>
+                                            :
+                                            <select className='form-select' disabled>
+                                                <option value="">No hay peliculas</option>
+                                            </select>
+                                        }
+                                    </div>
                                     :
-                                    <select className='form-select' disabled>
-                                        <option value="">No hay salas</option>
-                                    </select>}
-                            </div>
+                                    <></>
+                            }
+                            {
+                                filtro === 'sala' ?
+                                    <div>
+                                        <label className='d-flex text-nowrap'>Sala</label>
+                                        {salasSede.length > 0 ?
+                                            <select value={selectSala} className='form-select' onChange={(e) => handleSalaChange(e)}>
+                                                <option value="">Elige una sala</option>
+                                                {salasSede.map((el, id) => (
+                                                    <option key={el.id || id} value={el.id} >{el.codigoSala}</option>
+                                                ))}
+                                            </select>
+                                            :
+                                            <select className='form-select' disabled>
+                                                <option value="">No hay salas</option>
+                                            </select>
+                                        }
+                                    </div>
+                                    :
+                                    <></>
+                            }
                         </div>
                     </div>
                 }
             </div>
             {funciones.length > 0 ?
-                <Cronograma funciones={funciones} fechaConsultada={new Date(fechaElegida)} />
+                <Cronograma funciones={funciones} fechaConsultada={new Date(fechaElegida)} filtro={filtro}/>
                 : <div className='d-flex justify-content-center align-items-center m-4'>
                     <h3>No hay funciones para mostrar</h3>
                 </div>}
