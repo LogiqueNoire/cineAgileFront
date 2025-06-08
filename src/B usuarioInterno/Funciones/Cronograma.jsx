@@ -20,7 +20,7 @@ const Cronograma = ({ funciones, fechaConsultada, filtro }) => {
     "#b3cdf0", // azul claro (hue 210)
     "#c1b3f0", // violeta suave (hue 230)
     "#d6b3f0",  // lila claro (hue 250)
-    "#97B0C3", // azul grisáceo (hue 270)
+    "#a7bdcd", // azul grisáceo (hue 270)
     "#c5ac87", // marrón claro (hue 290)
     "#cccccc" // gris claro (hue 0)
   ];
