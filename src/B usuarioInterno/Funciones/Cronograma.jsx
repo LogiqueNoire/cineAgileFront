@@ -26,7 +26,7 @@ const Cronograma = ({ funciones, fechaConsultada, filtro }) => {
   ];
 
   if (!funciones.length) return null;
-
+  console.log(funciones);
   const diasDeLaSemana = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'];
   const fechasSemana = [];
   let aux = new Date(fechaConsultada);
@@ -35,6 +35,7 @@ const Cronograma = ({ funciones, fechaConsultada, filtro }) => {
     aux.setDate(aux.getDate() + 1);
     fechasSemana.push(aux.getDate());
   }
+  console.log(fechasSemana);
 
   const horas = [];
 
@@ -90,7 +91,8 @@ const Cronograma = ({ funciones, fechaConsultada, filtro }) => {
 
                           {
                             funciones.map((el, key) => (
-                              (new Date(el.fechaHoraInicio)).getDay() + 1 === fs
+                              (new Date(el.fechaHoraInicio)).getDay() === index+1 
+                              || ((new Date(el.fechaHoraInicio)).getDay() === 0 && index===6)
                                 &&
                                 (
                                   (
