@@ -91,8 +91,8 @@ const Cronograma = ({ funciones, fechaConsultada, filtro }) => {
 
                           {
                             funciones.map((el, key) => (
-                              (new Date(el.fechaHoraInicio)).getDay() === index+1 
-                              || ((new Date(el.fechaHoraInicio)).getDay() === 0 && index===6)
+                              ((new Date(el.fechaHoraInicio)).getDay() === index+1 
+                              || ((new Date(el.fechaHoraInicio)).getDay() === 0 && index===6))
                                 &&
                                 (
                                   (
