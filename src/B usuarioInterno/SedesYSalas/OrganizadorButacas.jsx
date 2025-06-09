@@ -69,17 +69,27 @@ const OrganizadorButacas = ({ setButacasExt }) => {
 
     const filas = [];
 
-    const thead = [];
+    const thead2 = [ <td></td>, <td></td> ];
     for (let i = 0; i < maxCols; i++)
+        thead2.push(<td key={"xi" + i}><div className="d-flex justify-content-center">{i + 1}</div></td>)
+
+    const thead = [ <td></td> ];
+    for (let i = 0; i < maxCols; i++) 
         thead.push(<td key={"i" + i}><SeccionBotones onClick={btonOnClick} col={i} /></td>)
     thead.push(<td key={"i" + maxCols}><SeccionBotones onClick={btonOnClick} col={maxCols} /></td>)
-
+ 
     for (let i = 0; i < maxRows; i++) {
         const columnas = [];
         
-        columnas.push(<td key="--x--">
-            <SeccionBotones onClick={btonOnClick} row={i} />
-        </td>)
+        columnas.push(<>
+            <td key="--x--_">
+                <div>{ String.fromCharCode('A'.charCodeAt(0) + i) }</div>
+            </td>
+        
+            <td key="--x--">
+                <SeccionBotones onClick={btonOnClick} row={i} />
+            </td>
+        </>)
 
         for (let j = 0; j < maxCols; j++) {
             let celda = butacas[i][j];
@@ -132,7 +142,10 @@ const OrganizadorButacas = ({ setButacasExt }) => {
     return (
         <div>
             <table className="org-tabla">
-                <thead><tr>{thead}</tr></thead>
+                <thead>
+                    <tr>{thead2}</tr>
+                    <tr>{thead}</tr>
+                </thead>
                 <tbody>
                     { filas }
                 </tbody>
