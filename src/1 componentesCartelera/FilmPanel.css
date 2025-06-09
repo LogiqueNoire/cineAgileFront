@@ -15,52 +15,66 @@
     height: inherit;
 }
 
-.mytab {
+.activetab,
+.inactivetab {
     display: inline-block;
     position: relative;
     font-weight: 600;
+    color: #01217B;
+    text-decoration: none;
 }
 
-.mytab::after {
+.activetab::before {
     content: "";
     position: absolute;
-    height: 4px;
-    background: linear-gradient(#023B99 50%, #01217B);
+    height: 6px;
+    width: 70%;
     bottom: 0;
     left: 0;
+    background: linear-gradient(to right, #01217B 10%, #023B99 50%);
+    transform: scaleX(1);
+    transform-origin: left;
+    transition: transform 0.8s;
+}
+
+.activetab::after {
+  display: none;
+}
+
+.inactivetab::after {
+    content: "";
+    position: absolute;
+    height: 6px;
+    width: 70%;
+    bottom: 0;
+    left: 0;
+    background: linear-gradient(to right, #01217B 10%, #023B99 50%);
     transform: scaleX(0);
     transform-origin: left;
     transition: transform 0.8s;
-    color: #01217B;
-    width: 70%;
 }
 
-.active.mytab::before {
-    content: "";
-    position: absolute;
-    height: 4px;
-    background: linear-gradient(#023B99 50%, #01217B);
-    bottom: 0;
-    left: 0;
+.inactivetab:hover::after {
     transform: scaleX(1);
-    transform-origin: left;
-    transition: transform 0.8s;
-    background: linear-gradient(#023B99 50%, #01217B);
-    width: 70%;
+}/*
+
+.activetab:hover::after {
+   transform: scaleX(0);
+}*/
+
+a.tab,
+a.tab:link,
+a.tab:visited,
+a.tab:focus,
+a.tab:hover,
+a.tab:active {
+    text-decoration: none;
+    text-emphasis: none;
     color: #01217B;
 }
 
-.mytab:hover::after {
-    transform: scaleX(1);
-    background: linear-gradient(#023B99 50%, #01217B);
-    width: 70%;
-    color: #01217B;
-}
 
-.mytab,
-.mytab:hover,
-.active:hover,
-.active {
-    color: #01217B;
-}
+
+
+
 

@@ -15,7 +15,7 @@ const FilmTab = ({ query }) => {
                     return <>
                         <li key={i} className='nav-item'>
                             <Link 
-                                className={`nav-link mytab ${ cat == el ? "active" : "" }`} 
+                                className={`nav-link tab ${ cat == el ? "active activetab" : "inactivetab" }`} 
                                 to={`?tab=${ el }` }>
                                     { el }
                             </Link>
