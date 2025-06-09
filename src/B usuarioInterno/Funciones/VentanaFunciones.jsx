@@ -10,6 +10,8 @@ import { set } from 'date-fns';
 import SalaButaca from '../../servicios/SalaButaca';
 import Pelicula from '../../servicios/Pelicula';
 import Cronograma from './Cronograma';
+import { format } from 'date-fns'
+
 
 const ordenamientoAlfa = (a, b) => {
     const x = a.nombre.toLowerCase();
@@ -132,7 +134,7 @@ const VentanaSedesYSalas = () => {
                             </div>
                             <div>
                                 <label className='d-flex text-nowrap'>Elige fecha dentro de una semana</label>
-                                <input type='date' className='form-control' value={fechaElegida} placeholder='Fecha'
+                                <input type='date' className='form-control' value={format(fechaElegida, 'yyyy-MM-dd')} placeholder='Fecha'
                                     onChange={
                                         (e) => {
                                             setFechaElegida(e.target.value)
@@ -150,7 +152,7 @@ const VentanaSedesYSalas = () => {
                                 <label className='text-nowrap'>Filtro</label>
                                 <select className='form-select' value={filtro} onChange={(e) => {
                                     setFiltro(e.target.value);
-setFunciones([]);
+                                    setFunciones([]);
                                 }} >
                                     <option value=''>Elige filtro</option>
                                     <option value='pelicula'>Por película</option>
@@ -202,7 +204,7 @@ setFunciones([]);
                 }
             </div>
             {funciones.length > 0 ?
-                <Cronograma funciones={funciones} fechaConsultada={new Date(fechaElegida)} filtro={filtro}/>
+                <Cronograma funciones={funciones} fechaConsultada={new Date(fechaElegida)} filtro={filtro} />
                 : <div className='d-flex justify-content-center align-items-center m-4'>
                     <h3>No hay funciones para mostrar</h3>
                 </div>}
