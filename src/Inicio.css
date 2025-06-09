@@ -11,3 +11,22 @@ p {
   font-weight: 600;
   margin-bottom: 0%;
 }
+
+.azulOscuro {
+  color: #01217B;
+}
+
+.btn-primary {
+  background-color: #01217B;
+  color: white;
+  border-radius: 5px;
+  padding: 10px 20px;
+  text-decoration: none;
+  border: none;
+}
+.btn-primary:hover {
+  background-color: #0A2B9C;
+}
+.btn-primary:active {
+  background-color: #011A5C;
+}

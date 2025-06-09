@@ -14,3 +14,53 @@
     box-sizing: border-box;
     height: inherit;
 }
+
+.mytab {
+    display: inline-block;
+    position: relative;
+    font-weight: 600;
+}
+
+.mytab::after {
+    content: "";
+    position: absolute;
+    height: 4px;
+    background: linear-gradient(#023B99 50%, #01217B);
+    bottom: 0;
+    left: 0;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.8s;
+    color: #01217B;
+    width: 70%;
+}
+
+.active.mytab::before {
+    content: "";
+    position: absolute;
+    height: 4px;
+    background: linear-gradient(#023B99 50%, #01217B);
+    bottom: 0;
+    left: 0;
+    transform: scaleX(1);
+    transform-origin: left;
+    transition: transform 0.8s;
+    background: linear-gradient(#023B99 50%, #01217B);
+    width: 70%;
+    color: #01217B;
+}
+
+.mytab:hover::after {
+    transform: scaleX(1);
+    background: linear-gradient(#023B99 50%, #01217B);
+    width: 70%;
+    color: #01217B;
+}
+
+.mytab,
+.mytab:hover,
+.active:hover,
+.active {
+    color: #01217B;
+}
+
