@@ -1,29 +1,20 @@
-/* HTML: <div class="loader"></div> */
 .loader {
-    width: 60px;
-    aspect-ratio: 1;
-    border: 15px solid #ddd;
-    border-radius: 50%;
-    position: relative;
-    transform: rotate(45deg);
-  }
-  .loader::before {
-    content: "";
-    position: absolute;
-    inset: -15px;
-    border-radius: 50%;
-    border: 15px solid #514b82;
-    animation: l18 2s infinite linear;
-  }
-  @keyframes l18 {
-      0%   {clip-path:polygon(50% 50%,0 0,0    0,0    0   ,0    0   ,0    0   )}
-      25%  {clip-path:polygon(50% 50%,0 0,100% 0,100% 0   ,100% 0   ,100% 0   )}
-      50%  {clip-path:polygon(50% 50%,0 0,100% 0,100% 100%,100% 100%,100% 100%)}
-      75%  {clip-path:polygon(50% 50%,0 0,100% 0,100% 100%,0    100%,0    100%)}
-      100% {clip-path:polygon(50% 50%,0 0,100% 0,100% 100%,0    100%,0    0   )}
-  }
-  
-.loader {
-    width: 100px;
-    height: 100px;
+  --loader-size: 80px;
+  width: var(--loader-size);
+  height: var(--loader-size);
+  border-radius: 50%;
+  display: inline-block;
+  border-top: 3px solid #7b7b7b;
+  border-right: 3px solid transparent;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
 }
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+} 
