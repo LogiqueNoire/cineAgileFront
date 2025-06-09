@@ -3,61 +3,51 @@ import AddSede from './AddSede';
 import sala from '../../assets/sala2.svg';
 import axios from 'axios';
 import { url } from "../../configuracion/backend"
-import { useNavigate } from 'react-router-dom'
 import Loading from '../../0 componentesGenerales/Loading';
 import { ModalSalas } from './ModalSalas'
 import Cookies from 'js-cookie';
+import { useLocation } from 'react-router-dom';
 
 
 const VentanaSedesYSalas = () => {
+    const location = useLocation();
+    const { sedeRedir = null } = location.state || {};
+
     const [lista, setLista] = useState([]);
-    const [sede, setSede] = useState([]);
+    const [sede, setSede] = useState(null);
     const [loading, setLoading] = useState(true);
-    const [salas, setSalas] = useState([]);
-    const navigate = useNavigate();
-    const [modalAbierto, setModalAbierto] = useState(false)
-    const [primeraVez, setPrimeraVez] = useState(true)
 
-    const consultar = async () => {
-        try {
-            setLista(((await axios.get(`${url}/intranet/soloSedes`, {
-                headers: { Authorization: `Bearer ${Cookies.get("auth-token")}` }
-            })).data).reverse());
-        } catch (error) {
-            console.error(error);
-        } finally {
-            setLoading(false)
-        }
+    const consultar = () => {
+        axios.get(`${url}/intranet/soloSedes`, {
+            headers: { Authorization: `Bearer ${Cookies.get("auth-token")}` }
+        }).then(res => {
+            setLista(res.data.reverse());
+
+            if (sedeRedir) {
+                let sede = res.data.find(el => el.id == sedeRedir.id)
+                if (sede) setSede(sede);
+            }
+        }).catch(err => {
+            console.log(err);
+        }).finally(_ => {
+            setLoading(false);
+        });
     }
 
-    const moverse = (el) => {
-        setPrimeraVez(false)
-        setSalas(el.salas)
-        setSede(el)
-        console.log(el.salas)
-
-        //navigate(`/intranet/sedesysalas/${idSede}`)
+    const moverse = (sede) => {
+        setSede(sede);
     }
 
     useEffect(() => {
-        if (!primeraVez) {
-            setModalAbierto(true);
+        consultar();
+
+        return () => {
+            setLoading(true);
         }
-    }, [primeraVez]);
-
-
-    useEffect(() => {
-        consultar()
     }, [])
 
-    useEffect(() => {
-        console.log("Sedes y salas", lista)
-    }, [lista])
-
-    const funcionCambiar = () => {
-        setModalAbierto(false)
-        setPrimeraVez(true)
-        consultar()
+    const onCerrarModal = () => {
+        setSede(null);
     }
 
     return (
@@ -96,7 +86,7 @@ const VentanaSedesYSalas = () => {
                     </table>
 
                 }
-                {modalAbierto && <ModalSalas onClose={funcionCambiar} salas={salas} sede={sede} />}
+                {sede && <ModalSalas onClose={onCerrarModal} sede={sede} />}
             </div>
         </div>
     )

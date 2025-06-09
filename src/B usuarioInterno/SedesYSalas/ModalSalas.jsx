@@ -14,66 +14,23 @@ export const ModalSalas = ({ onClose, sede }) => {
   const [salas, setSalas] = useState()
   const [categoriaGuardar, setCategoriaGuardar] = useState('')
   const [loading, setLoading] = useState(true);
-
-  const update = async () => {
-    console.log("guardando")
-  }
-
-  const agregarSala = async (e) => {
-    e.preventDefault();
-    if (!(categoriaGuardar === '')) {
-
-      try {
-        setLoading(true)
-        await axios.post(`${url}/intranet/sedesysalas/nuevaSala`, {
-          idSede: sede.id,
-          codigoSala: codigoSalaGuardar,
-          categoria: categoriaGuardar,
-        }, { 
-            headers: { Authorization: `Bearer ${Cookies.get("auth-token")}` } 
-        });
-        alert('Sala agregada correctamente a la sede');
-      } catch (error) {
-        if (
-          error.response?.data?.message?.includes('duplicate key') ||
-          error.response?.data?.detail?.includes('already exists')
-        ) {
-          alert('Ya existe una sala con ese código en esta sede.');
-        } else {
-          alert('Error al agregar la sala');
-        }
-        console.error(error);
-      } finally {
-        consultar()
-        setCodigoSalaGuardar('');
-        setCategoriaGuardar('');
-      }
-    } else {
-      alert('Ingresar categoria');
-    }
-  };
-
-
-  const consultar = async () => {
-    try {
-      const listaActualizada = (await axios.get(`${url}/sede/${sede.id}/salas`, { 
-                      headers: { Authorization: `Bearer ${Cookies.get("auth-token")}` } 
-                  })).data;
-
-                  console.log(listaActualizada);
-                  
-      if (listaActualizada) {
-        setSalas(listaActualizada.reverse());
-        setLoading(false)
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  }
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    consultar()
-  }, [])
+    axios.get(`${url}/sede/${sede.id}/salas`, { 
+      headers: { Authorization: `Bearer ${Cookies.get("auth-token")}` } 
+    }).then(res => {
+      if (res.data) {
+        setSalas(res.data.reverse());
+        setLoading(false);
+      }
+    }).catch(err => {
+      setError("Servicio no disponible.");
+      console.log(err);
+    }).finally(_ => {
+      setLoading(false);
+    })
+  }, [ sede ]);
 
   const irACrearSala = () => {
     navigate("/intranet/crearsala", { state: { sede } })

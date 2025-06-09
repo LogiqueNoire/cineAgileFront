@@ -14,11 +14,13 @@ const AddSala = () => {
 
     const { sede = null } = location.state || {};
 
+    // Si no hay una sede de entrada, entonces volver al menú de
+    // sedes y salas.
     useEffect(() => {
         if (!sede) {
             navigate("/intranet/sedesysalas")
         }
-    })
+    }, [])
 
     const codigoSalaOnChange = (evt) => {
         setCodigoSala(evt.target.value);
@@ -40,7 +42,7 @@ const AddSala = () => {
 
         setError(null);
         SalaButaca.crearSala(crearSalaReq).then(res => {
-            navigate("/intranet/sedesysalas"); // Futuro: Que abra automáticamente el modal de salas
+            navigate("/intranet/sedesysalas", { state: { sedeRedir: sede } });
             console.log("Sala creada!");
         }).catch(err => {
             if (err.response.status == 409) {
