@@ -83,7 +83,7 @@ const OrganizadorButacas = ({ setButacasExt }) => {
         
         columnas.push(<>
             <td key="--x--_">
-                <div>{ String.fromCharCode('A'.charCodeAt(0) + i) }</div>
+                <div className="px-2">{ String.fromCharCode('A'.charCodeAt(0) + i) }</div>
             </td>
         
             <td key="--x--">
@@ -117,6 +117,7 @@ const OrganizadorButacas = ({ setButacasExt }) => {
     }
 
     filas.push(<tr key="---">
+        <td></td>
         <td>
             <SeccionBotones onClick={btonOnClick} row={maxRows} />
         </td>
