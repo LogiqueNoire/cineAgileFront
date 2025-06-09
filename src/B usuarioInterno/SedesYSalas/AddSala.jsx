@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import OrganizadorButacas from "./OrganizadorButacas";
 import SalaButaca from "../../servicios/SalaButaca";
+import BotonCarga from "../../0 componentesGenerales/BotonCarga";
 
 const AddSala = () => {
     const navigate = useNavigate();
@@ -11,6 +12,7 @@ const AddSala = () => {
     const [ categoria, setCategoria ] = useState("");
     const [ butacas, setButacas ] = useState([]);
     const [ error, setError ] = useState(null);
+    const [ submitting, setSubmitting ] = useState(false);
 
     const { sede = null } = location.state || {};
 
@@ -33,6 +35,10 @@ const AddSala = () => {
     const onGrabar = (evt) => {
         evt.preventDefault();
 
+        if (submitting) return;
+
+        setSubmitting(true);
+
         const crearSalaReq = {
             idSede: sede.id,
             codigoSala,
@@ -51,6 +57,7 @@ const AddSala = () => {
             console.log(err);
         }).finally(_ => {
             window.scrollTo({ top: 0 });
+            setSubmitting(false);
         })
     }
 
@@ -91,7 +98,9 @@ const AddSala = () => {
                         <OrganizadorButacas setButacasExt={setButacas} />
                     </div>
 
-                    <button className="btn btn-primary w-25 align-self-center">Grabar</button>
+                    <BotonCarga type={"submit"} className={"btn btn-primary w-25 align-self-center"} submitting={submitting}>
+                        Grabar
+                    </BotonCarga>
                 </div>
 
             </form>
