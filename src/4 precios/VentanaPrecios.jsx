@@ -74,7 +74,7 @@ export const VentanaPrecios = ({ prev, next }) => {
     );
     } else {
         return (
-            <Loading></Loading>
+            <Loading style={{ margin: "15rem" }}></Loading>
         )
     }
 }

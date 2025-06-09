@@ -1,7 +1,7 @@
 import './Loading.css'
 
-const Loading = () => {
-    return <span class="loader"></span>
+const Loading = ({ style }) => {
+    return <span style={style} class="loader"></span>
 }
 
 export default Loading;

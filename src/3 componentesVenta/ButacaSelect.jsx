@@ -3,6 +3,7 @@ import ButacaMap from './ButacaMap';
 import SalaButaca from '../servicios/SalaButaca';
 import Funcion from '../servicios/Funcion';
 import { VentaContext } from './VentaContextProvider';
+import Loading from '../0 componentesGenerales/Loading';
 
 import { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -41,9 +42,11 @@ const SeleccionButaca = ({ funcion, prev, next }) => {
 
     return (
         <>
+          { error && <h2>Error!</h2> }
+          { loading ? <Loading style={ { margin: "15rem" } } /> :
+          <>
             <div className='d-flex'>
-                { error && <h2>Error!</h2> }
-                { !loading && <ButacaMap butacas={ data } /> }
+                  <ButacaMap butacas={ data } />
             </div>
 
             <div className="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -68,6 +71,9 @@ const SeleccionButaca = ({ funcion, prev, next }) => {
                 <button className="btn btn-primary" onClick={volver} >Volver</button>
                 <button className="btn btn-primary" disabled={context.butacaContext.seleccionadas.length === 0} onClick={siguiente}>Siguiente</button>
             </div>
+          </>
+          }
+
         </>)
 };
 
