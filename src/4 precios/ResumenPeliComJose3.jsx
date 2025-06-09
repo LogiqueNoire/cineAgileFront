@@ -13,7 +13,7 @@ const ResumenPeliComJose3 = ({ pelicula, catePeli, sedePeli, fechaPeli, salaPeli
     return (
         <div className="Rojo">
             <div className="d-flex justify-content-center">
-                <img className="img-fluid imagenPelicula" src={pelicula.imageUrl} alt="imagen"></img>
+                <img className="img-fluid imagenPelicula shadow rounded" src={pelicula.imageUrl} alt="imagen"></img>
             </div>
 
             <div className="d-flex flex-column align-items-center">
