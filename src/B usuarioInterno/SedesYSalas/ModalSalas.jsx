@@ -105,7 +105,7 @@ export const ModalSalas = ({ onClose, sede }) => {
 
         {loading ?
           <Loading></Loading> :
-          <table className='table table-striped border table-hover m-4'>
+          <table className='table table-striped border table-hover my-4'>
             <thead className=''>
               <tr className=''>
                 <td className=''>Sala</td>
