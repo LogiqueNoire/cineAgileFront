@@ -4,10 +4,10 @@ import { Link, useNavigate } from 'react-router-dom';
 import { url } from '../../configuracion/backend.js'
 import Cookies from 'js-cookie';
 import sedeDark from '../../assets/sedeDark.svg';
+import BotonCarga from '../../0 componentesGenerales/BotonCarga.jsx';
 
 export default function AddSede({ onSucess }) {
-  const navigate = useNavigate();
-
+  const [ submitting, setSubmitting ] = useState(false);
   const [sede, setSede] = useState({
 
     nombre: '',
@@ -30,17 +30,24 @@ export default function AddSede({ onSucess }) {
   const onSubmit = async (e) => {
     e.preventDefault();
 
+    if (submitting)
+      return;
+
+    setSubmitting(true);
+
     try {
       await axios.post(`${url}/intranet/sedesysalas/agregar`, sede, {
         headers: { Authorization: `Bearer ${Cookies.get("auth-token")}` }
       });
-      alert('Sede agregada correctamente');
       if (onSucess) {
+        alert("Sede agregada!")
         onSucess()
       }
     } catch (error) {
       alert('Error al agregar la sede');
       console.error(error);
+    } finally {
+      setSubmitting(false);
     }
   };
 
@@ -69,15 +76,10 @@ export default function AddSede({ onSucess }) {
               />
             </div>
 
-            <button type="submit" className="btn btn-outline-primary">
-              Agregar Sede
-            </button>
-            {/*
+            <BotonCarga type={"submit"} className={"btn btn-outline-primary"} submitting={submitting}>
+              Agregar sede
+            </BotonCarga>
 
-            <Link className="btn btn-outline-danger mx-2" to="/">
-              Cancelar
-            </Link>
-            */}
           </form>
         </div>
       </div>
