@@ -34,11 +34,17 @@ const ButacaMap = ({ butacas }) => {
 
     let [ max_row, max_col, matriz ] = SalaButaca.convButacasAMatriz(butacas);
 
+    let head = [<td></td>]
+    for(let i = 0; i < max_col; i++) {
+        head.push(<td><div className='d-flex justify-content-center'>{i + 1}</div></td>)
+    }
+
     let tablaFilas = []
     let i = 0
     let j = 0
     for (; i < max_row; i++) {
         let fila = []
+        fila.push(<td><div>{ String.fromCharCode('A'.charCodeAt(0) + i) }</div></td>)
 
         for (; j < max_col; j++) {
             let butaca = matriz[i][j]
@@ -71,6 +77,9 @@ const ButacaMap = ({ butacas }) => {
             <h1>Pantalla</h1>
             <div className='butaca-container d-flex justify-content-center'>
                 <table className="butaca-table">
+                    <thead>
+                        <tr>{ head }</tr>
+                    </thead>
                     <tbody>
                         {tablaFilas}
                     </tbody>
@@ -78,7 +87,7 @@ const ButacaMap = ({ butacas }) => {
             </div>
             <div className='border border-dark butaca-leyenda p-2'>
                 <h4 className="text-center mb-2">Leyenda</h4>
-                <table className="butaca-table d-flex justify-content-center">
+                <table className="butaca-table butaca-hist d-flex justify-content-center">
                     <tbody>
                         <tr className=''>
                             <td className=''>

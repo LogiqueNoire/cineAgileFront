@@ -22,17 +22,38 @@
     height: 100%;
 }
 
+.butaca-table:not(.butaca-hist) thead td {
+    padding-bottom: 2rem;
+}
+
+.butaca-table:not(.butaca-hist) tbody td:first-child {
+    padding-right: 2rem;
+}
+
 .butaca-celda {
     appearance: none;
 
     background-color: white;
     border-style: solid;
+    border-width: 0.14rem;
     border-radius: 50%;
+    border-color: rgb(41, 41, 41);
 
     overflow: hidden;
     
     display: grid;
     place-content: center;
+
+    transition-property: transform;
+    transition-duration: 0.05s;
+}
+
+.butaca-celda:hover {
+    border-width: 0.17rem;
+}
+
+.butaca-celda:active {
+    transform: scale(1.1);
 }
 
 .butaca-no-existe {
@@ -47,12 +68,25 @@
     border-color: rgb(255, 104, 104);
 }
 
-.butaca-celda:checked::before {
-    --butaca-size: 1em;
+.butaca-celda::before {
+    --butaca-size: 0rem;
+    --butaca-color: rgb(104, 139, 255);
+
     content: " ";
     width: var(--butaca-size);
     height: var(--butaca-size);
     box-shadow: inset var(--butaca-size) var(--butaca-size) rgb(104, 139, 255);
 
     border-radius: 50%;
+    transition-property: width height;
+    transition-duration: 0.1s;
+ }
+
+ .butaca-ocupado::before {
+    box-shadow: inset var(--butaca-size) var(--butaca-size) rgb(255, 104, 104);
+ }
+
+.butaca-celda:checked::before {
+    --butaca-size: 1.2em;
+
  }
