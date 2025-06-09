@@ -1,3 +1,5 @@
+* {
+}
 
 .boton-sec {
     display: flex;
@@ -13,8 +15,8 @@
     overflow: hidden;
 }
 
-.org-tabla td:last-child {
-    padding-right: 2rem;
+.org-tabla tr:not(:last-child) td:last-child  {
+    padding-right: 1rem;
 }
 
 .org-tabla thead .boton-sec {
@@ -53,7 +55,7 @@
     background-color: #0d6efd;
     width: 100vw;
     height: 2px;
-    top: 53%;
+    top: 17px;
     position: absolute;
     z-index: -1;
 }
@@ -61,7 +63,7 @@
 .org-tabla thead .boton-sec:hover::before {
     content: " ";
     background-color: #0d6efd;
-    left: 50%;
+    left: 16px;
     width: 2px;
     height: 100vh;
     position: absolute;
