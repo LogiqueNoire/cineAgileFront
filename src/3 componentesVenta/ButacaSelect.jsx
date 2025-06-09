@@ -40,13 +40,35 @@ const SeleccionButaca = ({ funcion, prev, next }) => {
         next();
     }
 
+  const { butacaContext } = context;
+
+  const estaEnSeleccionados = (pos) => {
+      return butacaContext.seleccionadas.some(el => el.f === pos.f && el.c === pos.c)
+  }
+
+  const onButacaSelect = (pos) => {
+      context.pruebaInicialContext.setPruebaInicial(1);
+      if (!estaEnSeleccionados(pos)) {
+          if (butacaContext.seleccionadas.length + 1 > 5) {
+              const myModal = new bootstrap.Modal(document.getElementById("staticBackdrop"));
+              myModal.show();
+              return;
+          }
+
+          butacaContext.setSeleccionadas([...butacaContext.seleccionadas, pos])
+      } else {
+          const nuevosElementos = butacaContext.seleccionadas.filter(el => el.f !== pos.f || el.c !== pos.c)
+          butacaContext.setSeleccionadas(nuevosElementos)
+      }
+  }
+
     return (
         <>
           { error && <h2>Error!</h2> }
           { loading ? <Loading style={ { margin: "15rem" } } /> :
           <>
             <div className='d-flex'>
-                  <ButacaMap butacas={ data } />
+                  <ButacaMap isSelectedFunc={estaEnSeleccionados} onButacaSelect={onButacaSelect} butacas={ data } />
             </div>
 
             <div className="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">

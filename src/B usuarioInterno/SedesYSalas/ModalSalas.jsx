@@ -36,6 +36,10 @@ export const ModalSalas = ({ onClose, sede }) => {
     navigate("/intranet/crearsala", { state: { sede } })
   }
 
+  const onDetallesClick = (sala) => {
+    navigate("/intranet/detallesala", { state: { sala, sede } })
+  };
+
   return (
     <div className="modal-terminos-overlay" >
       <div className="modal-terminos d-flex flex-column align-items-center" style={{ "max-height": "80vh", "overflow-y": "auto" }}>
@@ -139,7 +143,7 @@ export const ModalSalas = ({ onClose, sede }) => {
                       />
                     </td>
                     <td>
-                      <button className="btn btn-primary">Detalles</button>
+                      <button className="btn btn-primary" onClick={() => { onDetallesClick(el) }}>Detalles</button>
                     </td>
                     {/*
                         <td className='text-center'>

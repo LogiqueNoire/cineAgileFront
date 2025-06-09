@@ -1,58 +1,44 @@
-import { useContext, useMemo } from 'react';
 import './ButacaMap.css'
-
-import { VentaContext } from './VentaContextProvider';
 import SalaButaca from '../servicios/SalaButaca';
+import { useState } from 'react';
 
-const ButacaMap = ({ butacas }) => {
-    const { butacaContext } = useContext(VentaContext)
-    const contexto = useContext(VentaContext);
-
-    const estaEnSeleccionados = (pos) => {
-
-        return butacaContext.seleccionadas.some(el => el.f === pos.f && el.c === pos.c)
-    }
+const ButacaMap = ({ onButacaSelect, isSelectedFunc, butacas }) => {
+    //if (butacas.length == 0)
+    //    return <div>No hay nada que mostrar.</div>
 
     const inputOnChange = (el) => {
-
-
-        const pos = { id: el.target.dataset.id, f: +el.target.dataset.fila, c: +el.target.dataset.columna }
-        contexto.pruebaInicialContext.setPruebaInicial(1);
-        if (!estaEnSeleccionados(pos)) {
-            if (butacaContext.seleccionadas.length + 1 > 5) {
-                const myModal = new bootstrap.Modal(document.getElementById("staticBackdrop"));
-                myModal.show();
-                return;
-            }
-
-            butacaContext.setSeleccionadas([...butacaContext.seleccionadas, pos])
-        } else {
-            const nuevosElementos = butacaContext.seleccionadas.filter(el => el.f !== pos.f || el.c !== pos.c)
-            butacaContext.setSeleccionadas(nuevosElementos)
+        if (onButacaSelect) {
+            const pos = { id: el.target.dataset.id, f: +el.target.dataset.fila, c: +el.target.dataset.columna }
+            onButacaSelect(pos);
         }
     }
 
     let [ max_row, max_col, matriz ] = SalaButaca.convButacasAMatriz(butacas);
+    console.log(max_row, max_col, matriz);
 
     let head = [<td></td>]
-    for(let i = 0; i < max_col; i++) {
+    for(let i = 0; i <= max_col; i++) {
         head.push(<td><div className='d-flex justify-content-center'>{i + 1}</div></td>)
     }
 
     let tablaFilas = []
     let i = 0
     let j = 0
-    for (; i < max_row; i++) {
+    for (; i <= max_row; i++) {
         let fila = []
         fila.push(<td><div>{ String.fromCharCode('A'.charCodeAt(0) + i) }</div></td>)
 
-        for (; j < max_col; j++) {
-            let butaca = matriz[i][j]
+        for (; j <= max_col; j++) {
+            let butaca = matriz[i] ? matriz[i][j] : undefined;
             let key = `${i}-${j}`
-            let disabled = !butaca || butaca.ocupado ? true : false
-            let checked = (butaca && butaca.ocupado) || estaEnSeleccionados({ f: i, c: j })
-            let libre = !butaca ? 'butaca-no-existe' : butaca.ocupado ? 'butaca-ocupado' : 'butaca-libre';
+            let disabled = !butaca || butaca.ocupado ? true : false;
+            let checked = (butaca && butaca.ocupado) || (isSelectedFunc && isSelectedFunc({ f: i, c: j }))
             let discapacitado = butaca && butaca.discap ? 'butaca-discapacitado' : ''
+            let libre = !butaca ? 'butaca-no-existe' : butaca.ocupado ? 'butaca-ocupado' : 'butaca-libre';
+
+            if (!isSelectedFunc) {
+                checked = false;
+            }
 
             fila.push(<td key={key}>
                 <input
@@ -76,14 +62,18 @@ const ButacaMap = ({ butacas }) => {
         <div className='d-flex flex-column justify-align-center butaca-map'>
             <h1>Pantalla</h1>
             <div className='butaca-container d-flex justify-content-center'>
-                <table className="butaca-table">
-                    <thead>
-                        <tr>{ head }</tr>
-                    </thead>
-                    <tbody>
-                        {tablaFilas}
-                    </tbody>
-                </table>
+                {   butacas.length > 1 ?
+                    <table className="butaca-table">
+                        <thead>
+                            <tr>{ head }</tr>
+                        </thead>
+                        <tbody>
+                            {tablaFilas}
+                        </tbody>
+                    </table>
+                    : <div className='fw-bold'>No hay nada que mostrar.</div>
+                }
+
             </div>
             <div className='border border-dark butaca-leyenda p-2'>
                 <h4 className="text-center mb-2">Leyenda</h4>
