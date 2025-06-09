@@ -47,35 +47,51 @@ const AddSala = () => {
                 setError("¡Ya existe una sala dentro de la sede con el mismo código!");
             }
             console.log(err);
+        }).finally(_ => {
+            window.scrollTo({ top: 0 });
         })
     }
 
     return (
-        <div>
-            {   error &&
-                <div className="text-danger">{ error }</div>
-            }
-            <form method="post" onSubmit={onGrabar}>
-                <h2>Sede: { sede.nombre } </h2>
-                <h2>Información general</h2>
+        <div className="container-fluid py-3">
+            <form method="post" onSubmit={onGrabar} className="d-flex flex-column gap-3">
+                {
+                    error &&
+                    <div className="row bg-danger bg-opacity-10 border border-danger rounded shadow p-3">
+                        <div className="text-center text-danger">{ error }</div>
+                    </div>
+                }
 
-                <div className="mb-3">
-                    <label htmlFor="codigoSala" className="form-label">Código de sala</label>
-                    <input onChange={codigoSalaOnChange} value={codigoSala} type="text" className="form-control" id="codigoSala" placeholder="Código" required />
+                <div className="row rounded shadow p-5 bg-white row">
+                    <h1 className="mb-4">Sede: { sede.nombre } </h1>
+                    <h2>Información general</h2>
+
+                    <div className="row my-4">
+                        <div className="mb-3 col-6">
+                            <label htmlFor="codigoSala" className="form-label">Código de sala</label>
+                            <input onChange={codigoSalaOnChange} value={codigoSala} type="text" className="form-control" id="codigoSala" placeholder="Código" required />
+                        </div>
+                        
+                        <div className="col-6">
+                            <label htmlFor="categoria" className="form-label">Categoría</label>
+                            <select onChange={categoriaOnChange} value={categoria} className="form-select" id="categoria" required>
+                                <option value="" disabled={true}>Selecciona una categoría</option>
+                                <option value="Regular">Regular</option>
+                                <option value="Prime">Prime</option>
+                            </select>
+                        </div>
+                    </div>
                 </div>
-                
-                <select onChange={categoriaOnChange} value={categoria} className="form-select" aria-label="Default select example" required>
-                    <option value="" disabled={true}>Selecciona una categoría</option>
-                    <option value="Regular">Regular</option>
-                    <option value="Prime">Prime</option>
-                </select>
 
-                <div>
-                    <h2>Sala</h2>
-                    <OrganizadorButacas setButacasExt={setButacas} />
+                <div className="bg-white row rounded border shadow p-5 overflow-auto d-flex flex-column">
+                    <h2>Estructura de la sala</h2>
+                    <div className="my-5">
+                        <OrganizadorButacas setButacasExt={setButacas} />
+                    </div>
+
+                    <button className="btn btn-primary w-25 align-self-center">Grabar</button>
                 </div>
 
-                <button className="btn btn-primary">Grabar</button>
             </form>
         </div>
     )
