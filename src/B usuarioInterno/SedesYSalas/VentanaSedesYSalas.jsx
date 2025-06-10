@@ -71,7 +71,7 @@ const VentanaSedesYSalas = () => {
 
                                         <div className='d-flex justify-content-end'>
 
-                                            <button className='btn btn-primary d-flex gap-2' onClick={() => moverse(el)}>
+                                            <button className='btn btn-primary d-flex gap-2 px-3' onClick={() => moverse(el)}>
                                                 <label className="">Salas</label>
                                                 <img src={sala} alt="" style={{ height: '25px' }} />
                                             </button>

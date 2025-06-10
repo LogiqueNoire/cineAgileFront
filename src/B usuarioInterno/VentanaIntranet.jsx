@@ -23,17 +23,17 @@ const VentanaIntranet = () => {
                 <h1 className="display-5 text-center"><strong>Módulo interno de operaciones para CineAgile</strong></h1>
                 <div className="d-flex p-3 justify-content-center gap-4 flex-wrap">
 
-                    <button className="btn btn-primary d-flex gap-1 flex-column align-items-center justify-content-center" onClick={moverseHaciaVentanaPeliculas}>
+                    <button className="btn btn-primary d-flex gap-3 align-items-center justify-content-center" onClick={moverseHaciaVentanaPeliculas}>
                         <img src={pelicula} alt="" style={{ width: '90px' }} />
                         <h2 className="">Películas</h2>
                     </button>
 
-                    <button className="btn btn-primary d-flex gap-1 flex-column align-items-center justify-content-center" onClick={moverseHaciaVentanaSedesYSalas}>
+                    <button className="btn btn-primary d-flex gap-3 align-items-center justify-content-center" onClick={moverseHaciaVentanaSedesYSalas}>
                         <img src={sede} alt="" style={{ width: '90px', height: "auto" }} />
-                        <h2 className="">Sedes y salas</h2>
+                        <h2 className="text-start">Sedes, salas<br></br>y butacas</h2>
                     </button>
 
-                    <button className="btn btn-primary d-flex gap-1 flex-column align-items-center justify-content-center" onClick={moverseHaciaFunciones}>
+                    <button className="btn btn-primary d-flex gap-3 align-items-center justify-content-center" onClick={moverseHaciaFunciones}>
                         <img src={funciones} alt="" style={{ width: '90px' }} />
                         <h2 className="">Funciones</h2>
                     </button>
