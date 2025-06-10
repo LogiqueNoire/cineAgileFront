@@ -1,7 +1,4 @@
 import { useEffect, useState } from "react";
-import butaca from "../../assets/butaca.svg"
-import guardar from "../../assets/guardarAzul.svg"
-import guardarBlanco from "../../assets/guardarBlanco.svg"
 import axios from 'axios';
 import { url } from '../../configuracion/backend.js'
 import Loading from '../../0 componentesGenerales/Loading';
@@ -33,11 +30,12 @@ export const ModalSalas = ({ onClose, sede }) => {
   }, [ sede ]);
 
   const irACrearSala = () => {
-    navigate("/intranet/crearsala", { state: { sede } })
+    navigate("/intranet/sala", { state: { sede, modo: "crear" } })
   }
 
   const onDetallesClick = (sala) => {
-    navigate("/intranet/detallesala", { state: { sala, sede } })
+    navigate("/intranet/sala", { state: { sala, sede, modo: "detalle" } })
+    // navigate("/intranet/detallesala", { state: { sala, sede } })
   };
 
   return (

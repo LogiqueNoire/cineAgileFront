@@ -17,12 +17,10 @@ import InfoEntradas from './5 6 pago y entradas/InfoEntradas.jsx';
 import VentanaIntranet from './B usuarioInterno/VentanaIntranet.jsx';
 import VentanaPeliculas from './B usuarioInterno/Peliculas/VentanaPeliculas.jsx';
 import VentanaSedesYSalas from './B usuarioInterno/SedesYSalas/VentanaSedesYSalas.jsx';
-import OrganizadorButacas from './B usuarioInterno/SedesYSalas/OrganizadorButacas.jsx';
 import VentanaFunciones from './B usuarioInterno/Funciones/VentanaFunciones.jsx';
 import Intranet from './B usuarioInterno/Intranet.jsx';
 import LoginForm from './B usuarioInterno/LoginForm.jsx';
-import AddSala from './B usuarioInterno/SedesYSalas/AddSala.jsx';
-import DetalleSala from './B usuarioInterno/SedesYSalas/DetalleSala.jsx';
+import Sala from './B usuarioInterno/SedesYSalas/Sala.jsx';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
     <StrictMode>
@@ -44,8 +42,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
                     <Route path='login' element={<LoginForm />}></Route>
                     <Route path="peliculas" element={<VentanaPeliculas />}></Route>
                     <Route path="sedesysalas" element={<VentanaSedesYSalas />}></Route>
-                    <Route path="crearsala" element={ <AddSala /> }></Route>
-                    <Route path="detallesala" element={ <DetalleSala /> }></Route>
+                    <Route path="sala" element={ <Sala /> }></Route>
                     <Route path="funciones" element={<VentanaFunciones />}></Route>
                     <Route path="salas" /*element={<VentanaSedesYSalas></VentanaSedesYSalas>}*/></Route>
                 </Route>
