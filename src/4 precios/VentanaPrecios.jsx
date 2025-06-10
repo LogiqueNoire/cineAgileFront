@@ -14,7 +14,7 @@ export const VentanaPrecios = ({ prev, next }) => {
     const [precioMayores, setPrecioMayores] = React.useState();
     const [precioConadis, setPrecioConadis] = React.useState();
     const [cargandoPrecios, setCargandoPrecios] = React.useState(true);
-    
+
     const fetchData = async () => {
         try {
             setPrecioGeneral((parseFloat(await Funcion.mostrarPreciosdeFuncion(funcion.idFuncion, "general"))).toFixed(2));
@@ -51,16 +51,18 @@ export const VentanaPrecios = ({ prev, next }) => {
         prev();
     }
 
-    if(!cargandoPrecios){
+    if (!cargandoPrecios) {
 
         return (
-            <>            
+            <>
                 <div className="d-flex mb-4">
                     <div className="ContieneEntradas gap-3 d-flex flex-column justify-content-center align-items-center">
                         <h3> PRECIOS DE LAS ENTRADAS </h3>
                         <FilaPrecioComJose1 nombre="General" precio={precioGeneral} />
                         <FilaPrecioComJose1 nombre="Mayores de 60" precio={precioMayores} />
-                        <FilaPrecioComJose1 nombre="Niños" texto="Para niños de 2 a 11 años. Menores de 2 años no pagan." precio={precioNiños} />
+                        {pelicula.clasificacion == "Apto para todos" &&
+                            <FilaPrecioComJose1 nombre="Niños" texto="Para niños de 2 a 11 años. Menores de 2 años no pagan." precio={precioNiños} />
+                        }
                         <FilaPrecioComJose1 nombre="Conadis" texto="Es obligatorio presentar DNI y carnet Conadis" precio={precioConadis} />
                     </div>
                 </div>
@@ -71,7 +73,7 @@ export const VentanaPrecios = ({ prev, next }) => {
                 </div>
             </>
 
-    );
+        );
     } else {
         return (
             <Loading style={{ margin: "15rem" }}></Loading>
