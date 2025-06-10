@@ -73,8 +73,39 @@ a.tab:active {
     color: #01217B;
 }
 
+@media (max-width: 600px) {
+
+.film-panel {
+    margin: 0rem;
+    padding: 1rem;
+}
+
+.contenedor.container-fluid {
+    margin: 0rem;
+    padding: 0rem;
+}
+
+.peli-cuerpo {
+    padding: 0rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+.film-panel {
+    background-color: white;
+}
+
+.filmCard {
+    width: 40%;
+    height: auto;
+    margin-bottom: 1rem;
+}
+
+.filmCard > .img-film-card {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 3/4;
+    object-fit: cover;
 
 
-
-
-
+}
