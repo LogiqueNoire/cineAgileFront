@@ -154,7 +154,8 @@ const VentanaSedesYSalas = () => {
                 } else {
                     if (nuevaFecha !== '') {
                         // Si se ha proporcionado una nueva fecha, combinarla con la nueva hora
-                        nuevaFechaHoraInicio = new Date(nuevaFecha);
+                        const [anio, mes, dia] = nuevaFecha.split('-').map(Number);
+                        let nuevaFechaHoraInicio = new Date(anio, mes - 1, dia);
                         console.log("Nueva fecha:", nuevaFecha);
                         console.log("Nueva fecha h i:", nuevaFechaHoraInicio);
                         nuevaFechaHoraInicio.setHours(nuevaHoraInicio.split(':')[0]);
@@ -330,7 +331,7 @@ const VentanaSedesYSalas = () => {
             {
                 funciones.length > 0 ?
                     <Cronograma funciones={funciones} fechaConsultada={new Date(fechaElegida)}
-                    filtro={filtro} setFuncionElegida={setFuncionElegida}/>
+                        filtro={filtro} setFuncionElegida={setFuncionElegida} />
                     : <div className='d-flex justify-content-center align-items-center m-4'>
                         <h3>No hay funciones para mostrar</h3>
                     </div>
