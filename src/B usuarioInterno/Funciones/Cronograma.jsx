@@ -1,8 +1,19 @@
 import React from "react";
 import { useState } from "react";
 import MostrarSedesHorarios from "../../3 componentesVenta/MostrarSedesHorarios";
+import { useContext } from "react";
+import { FuncionesContext } from "./FuncionesContext";
 
-const Cronograma = ({ funciones, fechaConsultada, filtro, setFuncionElegida }) => {
+const Cronograma = () => {
+  const {
+    valoresBusqueda,
+    setValoresBusqueda,
+    funcion,
+    setFuncion,
+    listaFunciones,
+    setListaFunciones
+  } = useContext(FuncionesContext);
+
   const [draggedFuncion, setDraggedFuncion] = useState(null);
 
   const onDragStart = (e, funcion) => {
@@ -17,7 +28,7 @@ const Cronograma = ({ funciones, fechaConsultada, filtro, setFuncionElegida }) =
   const onDrop = (e, fechaDia, hora) => {
     e.preventDefault();
     if (!draggedFuncion) return;
-    
+
     // Aquí puedes actualizar la función para cambiar su fecha y hora,
     // por ejemplo asignarle fechaDia + hora
 
@@ -50,10 +61,10 @@ const Cronograma = ({ funciones, fechaConsultada, filtro, setFuncionElegida }) =
     "#cccccc" // gris claro (hue 0)
   ];
 
-  if (!funciones.length) return null;
+  if (!listaFunciones.length) return null;
   const diasDeLaSemana = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'];
   const fechasSemana = [];
-  let aux = new Date(fechaConsultada);
+  let aux = new Date(valoresBusqueda.fechaElegida);
   aux.setDate(aux.getDate() - aux.getDay());
   while (fechasSemana.length < 7) {
     aux.setDate(aux.getDate() + 1);
@@ -112,7 +123,7 @@ const Cronograma = ({ funciones, fechaConsultada, filtro, setFuncionElegida }) =
                         <div className='d-flex justify-content-center align-items-center gap-2'>
 
                           {
-                            funciones.map((el, key) => (
+                            listaFunciones.map((el, key) => (
                               ((new Date(el.fechaHoraInicio)).getDay() === index + 1
                                 || ((new Date(el.fechaHoraInicio)).getDay() === 0 && index === 6))
                                 &&
@@ -137,11 +148,19 @@ const Cronograma = ({ funciones, fechaConsultada, filtro, setFuncionElegida }) =
                                 )
                                 ?
                                 <div className='text-center p-2'
-                                  onClick={(e) => {e.preventDefault(); setFuncionElegida(el)}}
+                                  onClick={(e) => {
+                                    e.preventDefault();
+                                    setFuncion(
+                                      prev => ({
+                                        ...prev,
+                                        funcionElegida: el
+                                      })
+                                    )
+                                  }}
                                   style={{ backgroundColor: `${colores[el.idFuncion % colores.length]}` }}>
                                   <h6>{'#' + el.idFuncion}</h6>
                                   <h6>{formatearHora(el.fechaHoraInicio) + '-' + formatearHora(el.fechaHoraFin)}</h6>
-                                  {filtro === 'pelicula' ?
+                                  {valoresBusqueda.filtro === 'pelicula' ?
                                     <h6>{'Sala ' + el.codigoSala}</h6>
                                     :
                                     <h6>{el.nombrePelicula}</h6>
