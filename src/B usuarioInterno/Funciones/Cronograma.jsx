@@ -32,6 +32,7 @@ const Cronograma = ({ funciones, fechaConsultada, filtro, setFuncionElegida }) =
     "#f1d5b3", // durazno claro (hue 35)
     "#f1deb3", // amarillo cálido (hue 45)
     "#f1e6b3", // amarillo claro (hue 55)
+    "#fcffa8", // amarillo puro
     "#edf0b3", // lima pálido (hue 65)
     "#e3f0b3", // verde lima claro (hue 75)
     "#caf0b3", // verde suave (hue 100)
