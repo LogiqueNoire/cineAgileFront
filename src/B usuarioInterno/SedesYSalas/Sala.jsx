@@ -58,8 +58,9 @@ const Sala = () => {
         }).catch(err => {
             if (err.response.status == 409) {
                 setError("¡Ya existe una sala dentro de la sede con el mismo código!");
+            } else {
+                setError(err.response.data);
             }
-            console.log(err);
         }).finally(_ => {
             window.scrollTo({ top: 0 });
             setSubmitting(false);

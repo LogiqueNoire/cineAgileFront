@@ -42,9 +42,9 @@ const OrganizadorButacas = ({ setButacasExt }) => {
 
             const newButacas = butacas.map(el => el);
 
-            if (operador == "+")
+            if (operador == "+" && newButacas.length < 26)
                 newButacas.splice(row, 0, new Array(newButacas[0].length).fill(null))
-            else
+            else if (operador == "-")
                 newButacas.splice(row, 1);
 
             setButacas(newButacas);
