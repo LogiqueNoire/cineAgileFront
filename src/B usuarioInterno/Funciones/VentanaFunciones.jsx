@@ -155,7 +155,7 @@ const VentanaSedesYSalas = () => {
                     if (nuevaFecha !== '') {
                         // Si se ha proporcionado una nueva fecha, combinarla con la nueva hora
                         const [anio, mes, dia] = nuevaFecha.split('-').map(Number);
-                        let nuevaFechaHoraInicio = new Date(anio, mes - 1, dia);
+                        nuevaFechaHoraInicio = new Date(anio, mes - 1, dia);
                         console.log("Nueva fecha:", nuevaFecha);
                         console.log("Nueva fecha h i:", nuevaFechaHoraInicio);
                         nuevaFechaHoraInicio.setHours(nuevaHoraInicio.split(':')[0]);
