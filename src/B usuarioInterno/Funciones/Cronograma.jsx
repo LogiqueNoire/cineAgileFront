@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react";
 import MostrarSedesHorarios from "../../3 componentesVenta/MostrarSedesHorarios";
 
-const Cronograma = ({ funciones, fechaConsultada, filtro }) => {
+const Cronograma = ({ funciones, fechaConsultada, filtro, setFuncionElegida }) => {
   const [draggedFuncion, setDraggedFuncion] = useState(null);
 
   const onDragStart = (e, funcion) => {
@@ -107,9 +107,8 @@ const Cronograma = ({ funciones, fechaConsultada, filtro }) => {
 
 
                     fechasSemana.map((fs, index) => (
-                      <td onDragOver={onDragOver}
-                        onDrop={(e) => onDrop(e, fs, hora)}>
-                        <div className='d-flex align-items-center gap-2'>
+                      <td>
+                        <div className='d-flex justify-content-center align-items-center gap-2'>
 
                           {
                             funciones.map((el, key) => (
@@ -137,8 +136,7 @@ const Cronograma = ({ funciones, fechaConsultada, filtro }) => {
                                 )
                                 ?
                                 <div className='text-center p-2'
-                                  draggable
-                                  onDragStart={(e) => onDragStart(e, el)}
+                                  onClick={(e) => {e.preventDefault(); setFuncionElegida(el)}}
                                   style={{ backgroundColor: `${colores[el.idFuncion % colores.length]}` }}>
                                   <h6>{'#' + el.idFuncion}</h6>
                                   <h6>{formatearHora(el.fechaHoraInicio) + '-' + formatearHora(el.fechaHoraFin)}</h6>

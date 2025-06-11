@@ -14,8 +14,8 @@ export const ModalSalas = ({ onClose, sede }) => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    axios.get(`${url}/sede/${sede.id}/salas`, { 
-      headers: { Authorization: `Bearer ${Cookies.get("auth-token")}` } 
+    axios.get(`${url}/sede/${sede.id}/salas`, {
+      headers: { Authorization: `Bearer ${Cookies.get("auth-token")}` }
     }).then(res => {
       if (res.data) {
         setSalas(res.data.reverse());
@@ -27,7 +27,7 @@ export const ModalSalas = ({ onClose, sede }) => {
     }).finally(_ => {
       setLoading(false);
     })
-  }, [ sede ]);
+  }, [sede]);
 
   const irACrearSala = () => {
     navigate("/intranet/sala", { state: { sede, modo: "crear" } })
@@ -108,7 +108,7 @@ export const ModalSalas = ({ onClose, sede }) => {
 
               </tr>
 
-              */ } 
+              */ }
 
 
               {salas.length > 0 ?
