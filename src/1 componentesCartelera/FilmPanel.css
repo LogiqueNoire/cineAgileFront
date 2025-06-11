@@ -38,7 +38,7 @@
 }
 
 .activetab::after {
-  display: none;
+    display: none;
 }
 
 .inactivetab::after {
@@ -56,7 +56,9 @@
 
 .inactivetab:hover::after {
     transform: scaleX(1);
-}/*
+}
+
+/*
 
 .activetab:hover::after {
    transform: scaleX(0);
@@ -75,37 +77,39 @@ a.tab:active {
 
 @media (max-width: 600px) {
 
-.film-panel {
-    margin: 0rem;
-    padding: 1rem;
-}
+    .film-panel {
+        margin: 0rem;
+        padding: 1rem;
+    }
 
-.contenedor.container-fluid {
-    margin: 0rem;
-    padding: 0rem;
-}
+    .contenedor.container-fluid {
+        margin: 0rem;
+        padding: 0rem;
+    }
 
-.peli-cuerpo {
-    padding: 0rem;
-    padding-top: 1rem;
-    padding-bottom: 1rem;
-}
+    .peli-cuerpo {
+        padding: 0rem;
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+    }
 
-.film-panel {
-    background-color: white;
-}
+    .film-panel {
+        background-color: white;
+    }
 
-.filmCard {
-    width: 40%;
-    height: auto;
-    margin-bottom: 1rem;
-}
+    .filmCard {
+        width: 40%;
+        height: auto;
+        margin-bottom: 1rem;
+    }
 
-.filmCard > .img-film-card {
-    width: 100%;
-    height: auto;
-    aspect-ratio: 3/4;
-    object-fit: cover;
+    .filmCard>.img-film-card {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 3/4;
+        object-fit: cover;
 
+
+    }
 
 }
