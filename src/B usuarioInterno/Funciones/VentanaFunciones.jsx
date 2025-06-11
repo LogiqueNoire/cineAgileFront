@@ -27,16 +27,32 @@ const VentanaSedesYSalas = () => {
     const [loading, setLoading] = useState(true);
     const [sedeElegida, setSedeElegida] = useState('');
     const [primeraVez, setPrimeraVez] = useState(true)
-    const [fechaElegida, setFechaElegida] = useState(new Date().toISOString().split('T')[0]); // Formato YYYY-MM-DD
+    const [fechaElegida, setFechaElegida] = useState(format(new Date(), "yyyy-MM-dd")); // Formato YYYY-MM-DD
     const [selectPelicula, setSelectPelicula] = React.useState('');
     const [selectSala, setSelectSala] = React.useState('');
     const [filtro, setFiltro] = useState('');
 
+    // Variables para actualizar función
+    const [funcionElegida, setFuncionElegida] = useState(null);
     const [codigoFuncion, setCodigoFuncion] = useState('');
+    const [nuevaFecha, setNuevaFecha] = useState(''); // Formato YYYY-MM-DD
     const [nuevaHoraInicio, setNuevaHoraInicio] = useState('');
 
     const [funciones, setFunciones] = useState([]);
 
+    useEffect(() => {
+        console.log("Funcion:", funcionElegida);
+        if (funcionElegida) {
+            setCodigoFuncion(funcionElegida.idFuncion);
+            const fechaHoraInicio = new Date(funcionElegida.fechaHoraInicio);
+            setNuevaFecha(format(fechaHoraInicio, "yyyy-MM-dd")); // Formato YYYY-MM-DD
+            setNuevaHoraInicio(format(fechaHoraInicio, "HH:mm")); // Formato HH:mm
+        } else {
+            setCodigoFuncion('');
+            setNuevaFecha('');
+            setNuevaHoraInicio('');
+        }
+    }, [funcionElegida]);
 
     const consultarSedes = async () => {
         try {
@@ -131,11 +147,19 @@ const VentanaSedesYSalas = () => {
         funciones.map((el) => {
             if (el.idFuncion === Number(codigoFuncion)) {
                 const [horaRef, minutoRef] = nuevaHoraInicio.split(':').map(Number);
-                if ((new Date(el.fechaHoraInicio)).getHours() === horaRef && (new Date(el.fechaHoraInicio)).getMinutes() === minutoRef) {
+                if ((new Date(el.fechaHoraInicio)).getHours() === horaRef && (new Date(el.fechaHoraInicio)).getMinutes() === minutoRef
+                    && nuevaFecha === '') {
                     alert("La hora de inicio es la misma que la actual");
                     return;
                 } else {
-                    nuevaFechaHoraInicio = new Date(el.fechaHoraInicio);
+                    if (nuevaFecha !== '') {
+                        // Si se ha proporcionado una nueva fecha, combinarla con la nueva hora
+                        nuevaFechaHoraInicio = new Date(nuevaFecha);
+                        console.log("Nueva fecha:", nuevaFecha);
+                        console.log("Nueva fecha h i:", nuevaFechaHoraInicio);
+                        nuevaFechaHoraInicio.setHours(nuevaHoraInicio.split(':')[0]);
+                        nuevaFechaHoraInicio.setMinutes(nuevaHoraInicio.split(':')[1]);
+                    }
                     nuevaFechaHoraInicio.setHours(nuevaHoraInicio.split(':')[0]);
                     nuevaFechaHoraInicio.setMinutes(nuevaHoraInicio.split(':')[1]);
                     //formatear
@@ -179,6 +203,7 @@ const VentanaSedesYSalas = () => {
                 }
                 setCodigoFuncion('');
                 setNuevaHoraInicio('');
+                setNuevaFecha('');
             }
         } catch (error) {
             console.error("Error al actualizar la función:", error);
@@ -278,9 +303,14 @@ const VentanaSedesYSalas = () => {
                         <div className='d-flex flex-column align-items-center gap-4 m-3 border p-4 rounded'>
                             <div className='d-flex flex-column align-items-center gap-3'>
                                 <h3 className='d-flex text-nowrap'>Módulo ágil de actualización</h3>
+                                <label>Clickea una función para copiar sus datos</label>
                                 <div className='d-flex w-100'>
                                     <label className='w-100'>Código de función</label>
                                     <input className='form-control w-100' type="text" value={codigoFuncion} onChange={(e) => setCodigoFuncion(e.target.value)}></input>
+                                </div>
+                                <div className='d-flex w-100'>
+                                    <label className='w-100'>Nueva fecha</label>
+                                    <input className='form-control w-100' type="date" value={nuevaFecha} onChange={(e) => setNuevaFecha(e.target.value)}></input>
                                 </div>
                                 <div className='d-flex w-100'>
                                     <label className='w-100'>Nueva hora de inicio</label>
@@ -299,7 +329,8 @@ const VentanaSedesYSalas = () => {
             </div>
             {
                 funciones.length > 0 ?
-                    <Cronograma funciones={funciones} fechaConsultada={new Date(fechaElegida)} filtro={filtro} />
+                    <Cronograma funciones={funciones} fechaConsultada={new Date(fechaElegida)}
+                    filtro={filtro} setFuncionElegida={setFuncionElegida}/>
                     : <div className='d-flex justify-content-center align-items-center m-4'>
                         <h3>No hay funciones para mostrar</h3>
                     </div>
