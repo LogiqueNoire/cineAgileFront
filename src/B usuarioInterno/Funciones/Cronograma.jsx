@@ -50,7 +50,6 @@ const Cronograma = ({ funciones, fechaConsultada, filtro }) => {
   ];
 
   if (!funciones.length) return null;
-  console.log(funciones);
   const diasDeLaSemana = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'];
   const fechasSemana = [];
   let aux = new Date(fechaConsultada);
@@ -59,8 +58,6 @@ const Cronograma = ({ funciones, fechaConsultada, filtro }) => {
     aux.setDate(aux.getDate() + 1);
     fechasSemana.push(aux.getDate());
   }
-  console.log(fechasSemana);
-
   const horas = [];
 
   for (let h = 7; h <= 23; h++) {
@@ -90,7 +87,7 @@ const Cronograma = ({ funciones, fechaConsultada, filtro }) => {
     <section className=''>
       <h2 className='d-none d-lg-block mr-4'>Funciones de la semana</h2>
       <div className="table-responsive">
-        <table className="table" style={{ 'border-collapse': 'separate', width: '100%' }}>
+        <table className="table" style={{ 'borderCollapse': 'separate', width: '100%' }}>
           <thead>
             <tr>
               <th scope="col" style={{ backgroundColor: 'rgb(184, 248, 255)' }}>Hora</th>
