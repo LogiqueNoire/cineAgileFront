@@ -56,34 +56,30 @@ const BuscarFunciones = ({ handlePeliculaChange, handleSalaChange }) => {
             ? <Loading></Loading> :
             <div className='d-flex flex-column align-items-center gap-4 m-3 border p-4 rounded'>
                 <h3>Búsqueda de funciones</h3>
-                <div className='d-flex gap-4 w-100'>
-                    <div>
-                        <label className='d-flex text-nowrap'>Elige sede</label>
-                        <select className='form-select' onChange={(e) => cambiarSede(e)}>
-                            <option value='0'>Elija una sede</option>
-                            {valoresBusqueda.sedes.map((el, id) => (
-                                <option key={el.id || id} value={el.id} >{el.nombre}</option>
-                            ))}
-                        </select>
-                    </div>
-                    <div>
+                <div>
+                    <label className='d-flex text-nowrap'>Elige sede</label>
+                    <select className='form-select' onChange={(e) => cambiarSede(e)}>
+                        <option value='0'>Elija una sede</option>
+                        {valoresBusqueda.sedes.map((el, id) => (
+                            <option key={el.id || id} value={el.id} >{el.nombre}</option>
+                        ))}
+                    </select>
+                </div>
+                <div className="d-flex gap-4">
+
+                    <div className="">
                         <label className='d-flex text-nowrap'>Elige fecha dentro de una semana</label>
                         <input type='date' className='form-control' value={valoresBusqueda.fechaElegida} placeholder='Fecha'
                             onChange={
                                 (e) => {
                                     setValoresBusqueda(prev => ({
                                         ...prev,
-                                        fechaElegida: e.target.value,
-                                        selectPelicula: '',
-                                        selectSala: ''
+                                        fechaElegida: e.target.value
                                     }));
                                     setListaFunciones([]) // Limpiar funciones al cambiar la fecha
                                 }
                             } />
                     </div>
-
-                </div>
-                <div className='d-flex gap-4 w-100 align-items-center'>
                     <div>
                         <label className='text-nowrap'>Filtro</label>
                         {valoresBusqueda.sedeElegida === '' || valoresBusqueda.sedeElegida === '0' ?
@@ -95,7 +91,8 @@ const BuscarFunciones = ({ handlePeliculaChange, handleSalaChange }) => {
                                 setValoresBusqueda(prev => ({
                                     ...prev,
                                     filtro: e.target.value,
-
+                                    selectPelicula: '',
+                                    selectSala: '',
                                 }));
                                 setListaFunciones([])
                             }} >
@@ -105,10 +102,14 @@ const BuscarFunciones = ({ handlePeliculaChange, handleSalaChange }) => {
                             </select>
                         }
                     </div>
+                </div>
+
+                <div className='d-flex gap-4 w-100 align-items-center justify-content-center'>
+
                     {
                         valoresBusqueda.filtro === 'pelicula' ?
                             valoresBusqueda.peliculasSede != '' ?
-                                <div>
+                                <div className="">
                                     <label className='d-flex text-nowrap'>Pelicula</label>
                                     {valoresBusqueda.peliculasSede.length > 0 ?
                                         <select value={valoresBusqueda.selectPelicula} className='form-select' onChange={(e) => handlePeliculaChange(e)}>
