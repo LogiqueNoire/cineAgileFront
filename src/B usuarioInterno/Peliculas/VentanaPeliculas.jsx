@@ -6,6 +6,12 @@ import { url } from "../../configuracion/backend"
 import Loading from '../../0 componentesGenerales/Loading';
 import Cookies from 'js-cookie';
 
+const ordenamientoFecha = (a, b) => {
+    const x = a.fechaInicioEstreno;
+    const y = b.fechaInicioEstreno;
+
+    return x < y ? -1 : 1;
+}
 
 const VentanaPeliculas = () => {
     const [lista, setLista] = useState([]);
@@ -13,9 +19,9 @@ const VentanaPeliculas = () => {
 
     const consultar = async () => {
         try {
-            setLista((await axios.get(`${url}/intranet/peliculas`, { 
-                headers: { Authorization: `Bearer ${Cookies.get("auth-token")}` } 
-            })).data);
+            setLista((await axios.get(`${url}/intranet/peliculas`, {
+                headers: { Authorization: `Bearer ${Cookies.get("auth-token")}` }
+            })).data.sort(ordenamientoFecha).reverse());
         } catch (error) {
             console.error(error);
         } finally {
@@ -58,7 +64,9 @@ const VentanaPeliculas = () => {
                             {lista.map((el, id) => (
 
                                 <tr className='tr' key={id}>
-                                    <td className='td' data-label='Nombre'>{el.nombre}</td>
+                                    <td className='td' data-label='Nombre'>
+                                        <input type="text" value={el.nombre} />
+                                    </td>
                                     <td className='td' data-label='Duración'>{el.duracion}</td>
                                     <td className='td' data-label='Sinopsis'><div className='sinopsis'>{el.sinopsis}</div></td>
                                     <td className='td' data-label='Género'>{el.genero === "" || el.genero === " " ? "-" : el.genero}</td>

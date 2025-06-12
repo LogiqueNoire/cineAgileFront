@@ -10,7 +10,7 @@ import Cronograma from './Cronograma';
 import { format } from 'date-fns'
 import { FuncionesContext } from './FuncionesContext';
 import BuscarFunciones from './BuscarFunciones';
-import ActualizarFuncion from './ActualizarFuncion';
+import ModuloFuncion from './ModuloFuncion';
 
 const ordenamientoAlfa = (a, b) => {
     const x = a.nombre.toLowerCase();
@@ -40,14 +40,17 @@ const VentanaFunciones = () => {
                 ...prev,
                 codigoFuncion: funcion.funcionElegida.idFuncion,
                 nuevaFecha: format(fhi, "yyyy-MM-dd"),
-                nuevaHoraInicio: format(fhi, "HH:mm")
+                nuevaHoraInicio: format(fhi, "HH:mm"),
+                nuevaSalaId: valoresBusqueda.salasSede.find(el => el.codigoSala === funcion.funcionElegida.codigoSala)?.id,
+                nuevaPeliculaId: valoresBusqueda.peliculasSede.find(el => el.id === funcion.funcionElegida.idPelicula)?.id,
             }));
         } else {
             setFuncion(prev => ({
                 ...prev,
                 codigoFuncion: '',
                 nuevaFecha: '',
-                nuevaFechaHoraInicio: ''
+                nuevaHoraInicio: '',
+                nuevoCodigoSala: ''
             }));
         }
     }, [funcion.funcionElegida]);
@@ -142,7 +145,7 @@ const VentanaFunciones = () => {
                 <div className='d-flex flex-wrap justify-content-center gap-4'>
                     <BuscarFunciones handlePeliculaChange={handlePeliculaChange} handleSalaChange={handleSalaChange}></BuscarFunciones>
 
-                    <ActualizarFuncion handlePeliculaChange={handlePeliculaChange} handleSalaChange={handleSalaChange}></ActualizarFuncion>
+                    <ModuloFuncion handlePeliculaChange={handlePeliculaChange} handleSalaChange={handleSalaChange}></ModuloFuncion>
                     
                 </div>
 

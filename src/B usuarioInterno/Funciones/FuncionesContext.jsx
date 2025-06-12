@@ -21,7 +21,9 @@ export const FuncionesContextProvider = ({ children }) => {
         funcionElegida: '',
         codigoFuncion: '',
         nuevaFecha: '', // Formato YYYY-MM-DD
-        nuevaHoraInicio: ''
+        nuevaHoraInicio: '',
+        nuevaSalaId: '',
+        nuevaPeliculaId: ''
     });
 
     const [listaFunciones, setListaFunciones] = useState([]);
