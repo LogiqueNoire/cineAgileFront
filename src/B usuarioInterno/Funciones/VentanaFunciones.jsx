@@ -28,7 +28,9 @@ const VentanaFunciones = () => {
         funcion,
         setFuncion,
         listaFunciones,
-        setListaFunciones
+        setListaFunciones,
+        listaPeliculas,
+        setListaPeliculas
     } = useContext(FuncionesContext);
 
     useEffect(() => {
@@ -43,17 +45,25 @@ const VentanaFunciones = () => {
                 nuevaHoraInicio: format(fhi, "HH:mm"),
                 nuevaSalaId: valoresBusqueda.salasSede.find(el => el.codigoSala === funcion.funcionElegida.codigoSala)?.id,
                 nuevaPeliculaId: valoresBusqueda.peliculasSede.find(el => el.id === funcion.funcionElegida.idPelicula)?.id,
+                nuevaSedeId: valoresBusqueda.sedes.find(el => el.id === funcion.funcionElegida.idSede)?.id
             }));
         } else {
             setFuncion(prev => ({
                 ...prev,
+                funcionElegida: '',
                 codigoFuncion: '',
                 nuevaFecha: '',
                 nuevaHoraInicio: '',
-                nuevoCodigoSala: ''
+                nuevaSalaId: '',
+                nuevaPeliculaId: '',
+                nuevaSedeId: ''
             }));
         }
     }, [funcion.funcionElegida]);
+
+    useEffect(() => {
+        console.log("lista", listaPeliculas)
+    }),[funcion]
 
     useEffect(() => {
         setValoresBusqueda(prev => ({
@@ -63,6 +73,16 @@ const VentanaFunciones = () => {
             filtro: ''
         }));
         setListaFunciones([]);
+        setFuncion(prev => ({
+            ...prev,
+            funcionElegida: '',
+            codigoFuncion: '',
+            nuevaFecha: '',
+            nuevaHoraInicio: '',
+            nuevaSalaId: '',
+            nuevaPeliculaId: '',
+            nuevaSedeId: ''
+        }));
     }, [valoresBusqueda.sedeElegida, valoresBusqueda.fechaElegida])
 
     useEffect(() => {
@@ -87,7 +107,7 @@ const VentanaFunciones = () => {
         }
     }, [valoresBusqueda.sedeElegida])
 
-    
+
 
     const handlePeliculaChange = async (e) => {
         const peliculaId = e.target.value;
@@ -146,7 +166,7 @@ const VentanaFunciones = () => {
                     <BuscarFunciones handlePeliculaChange={handlePeliculaChange} handleSalaChange={handleSalaChange}></BuscarFunciones>
 
                     <ModuloFuncion handlePeliculaChange={handlePeliculaChange} handleSalaChange={handleSalaChange}></ModuloFuncion>
-                    
+
                 </div>
 
 

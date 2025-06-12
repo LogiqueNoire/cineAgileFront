@@ -15,10 +15,22 @@ const ModuloFuncion = ({ handlePeliculaChange, handleSalaChange }) => {
         funcion,
         setFuncion,
         listaFunciones,
-        setListaFunciones
+        setListaFunciones,
+        listaPeliculas,
+        setListaPeliculas
     } = useContext(FuncionesContext);
 
     const [checked, setChecked] = useState(true)
+
+    const [primeraVez, setPrimeraVez] = useState(true)
+
+    useEffect(() => {
+        if (primeraVez) {
+            consultarPeliculas()
+        } else {
+            setPrimeraVez(false);
+        }
+    }, [primeraVez])
 
     const cambiarEstado = (checked) => {
         setChecked(checked)
@@ -29,6 +41,25 @@ const ModuloFuncion = ({ handlePeliculaChange, handleSalaChange }) => {
             nuevoCodigoSala: ''
         });
 
+    }
+
+    const ordenamientoAlfa = (a, b) => {
+        const x = a.nombre.toLowerCase();
+        const y = b.nombre.toLowerCase();
+
+        return x < y ? -1 : 1;
+    }
+
+    const consultarPeliculas = async () => {
+        try {
+            const datos = (await axios.get(`${url}/intranet/peliculas`, {
+                headers: { Authorization: `Bearer ${Cookies.get("auth-token")}` }
+            })).data;
+
+            setListaPeliculas(datos.sort(ordenamientoAlfa));
+        } catch (error) {
+            console.error(error);
+        }
     }
 
     const actualizarFuncion = async () => {
@@ -80,10 +111,10 @@ const ModuloFuncion = ({ handlePeliculaChange, handleSalaChange }) => {
                 precioBase: null,
                 idSede: null,
                 nombreSede: null,
-                idSala: null,
+                idSala: funcion.nuevaSalaId,
                 categoria: null,
                 codigoSala: funcion.codigoSala,
-                idPelicula: null,
+                idPelicula: funcion.nuevaPeliculaId,
                 nombrePelicula: null
             }, {
                 headers: { Authorization: `Bearer ${Cookies.get("auth-token")}` }
@@ -135,6 +166,12 @@ const ModuloFuncion = ({ handlePeliculaChange, handleSalaChange }) => {
                             <div className="d-flex flex-column gap-3">
                                 <label>Clickea una función para copiar sus datos</label>
                                 <div className='d-flex w-100 align-items-center'>
+                                    <label className='d-flex text-nowrap w-100'>Elige sede</label>
+                                    <select className='form-select w-100' disabled>
+                                        <option value="">Elige una sede</option>
+                                    </select>
+                                </div>
+                                <div className='d-flex w-100 align-items-center'>
                                     <label className='w-100'>Código de función</label>
                                     <input className='form-control w-100' disabled type="text"></input>
                                 </div>
@@ -172,6 +209,19 @@ const ModuloFuncion = ({ handlePeliculaChange, handleSalaChange }) => {
                             <div className="d-flex flex-column gap-3">
                                 <label>Clickea una función para copiar sus datos</label>
                                 <div className='d-flex w-100 align-items-center'>
+                                    <label className='d-flex text-nowrap w-100'>Elige sede</label>
+                                    <select className='form-select w-100' value={funcion.nuevaSedeId}
+                                        onChange={() => setFuncion(prev => ({
+                                            ...prev,
+                                            nuevaSedeId: valoresBusqueda.sedes.find(el => el.id === funcion.funcionElegida.sedeId)?.id
+                                        }))}>
+                                        <option value='0'>Elija una sede</option>
+                                        {valoresBusqueda.sedes.map((el, id) => (
+                                            <option key={el.id || id} value={el.id} >{el.nombre}</option>
+                                        ))}
+                                    </select>
+                                </div>
+                                <div className='d-flex w-100 align-items-center'>
                                     <label className='w-100'>Código de función</label>
                                     <input className='form-control w-100' type="text" value={funcion.codigoFuncion}
                                         onChange={(e) =>
@@ -206,7 +256,7 @@ const ModuloFuncion = ({ handlePeliculaChange, handleSalaChange }) => {
 
                                     <select value={funcion.nuevaSalaId}
                                         className='form-select w-100'
-                                        onChange={(e) => setFuncion(prev => ({
+                                        onChange={() => setFuncion(prev => ({
                                             ...prev,
                                             nuevaSalaId: valoresBusqueda.salasSede.find(el => el.codigoSala === funcion.funcionElegida.codigoSala)?.id
                                         }))
@@ -220,17 +270,16 @@ const ModuloFuncion = ({ handlePeliculaChange, handleSalaChange }) => {
 
                                 <div className='d-flex w-100 align-items-center'>
                                     <label className='w-100'>Pelicula</label>
-
                                     <select value={funcion.nuevaPeliculaId}
                                         className='form-select w-100'
                                         onChange={(e) => setFuncion(prev => ({
                                             ...prev,
-                                            nuevaPeliculaId: valoresBusqueda.peliculasSede.find(el => el.id === funcion.funcionElegida.idPelicula)?.id
+                                            nuevaPeliculaId: listaPeliculas.find(el => el.idPelicula === funcion.funcionElegida.idPelicula)?.id
                                         }))
                                         }>
                                         <option value="0">Elige una película</option>
-                                        {valoresBusqueda.peliculasSede.map((el, id) => (
-                                            <option key={el.id || id} value={el.id} >{el.nombre}</option>
+                                        {listaPeliculas.map((el, id) => (
+                                            <option key={el.id || id} value={el.idPelicula} >{el.nombre}</option>
                                         ))}
                                     </select>
                                 </div>
@@ -241,7 +290,17 @@ const ModuloFuncion = ({ handlePeliculaChange, handleSalaChange }) => {
                                 }}>Actualizar</button>
                             </div>
                         :
+                        /*Crear */
                         <div className="d-flex flex-column gap-3">
+                            <div className='d-flex w-100 align-items-center'>
+                                <label className='d-flex text-nowrap w-100'>Elige sede</label>
+                                <select className='form-select w-100' onChange={(e) => cambiarSede(e)}>
+                                    <option value='0'>Elija una sede</option>
+                                    {valoresBusqueda.sedes.map((el, id) => (
+                                        <option key={el.id || id} value={el.id} >{el.nombre}</option>
+                                    ))}
+                                </select>
+                            </div>
                             <div className='d-flex w-100 align-items-center'>
                                 <label className='w-100'>Nueva fecha</label>
                                 <input className='form-control w-100' type="date" value={funcion.nuevaFecha}
@@ -286,11 +345,11 @@ const ModuloFuncion = ({ handlePeliculaChange, handleSalaChange }) => {
                                     className='form-select w-100'
                                     onChange={(e) => setFuncion(prev => ({
                                         ...prev,
-                                        nuevaPeliculaId: valoresBusqueda.peliculasSede.find(el => el.id === funcion.funcionElegida.idPelicula)?.id
+                                        nuevaPeliculaId: listaPeliculas.find(el => el.id === funcion.funcionElegida.idPelicula)?.id
                                     }))
                                     }>
                                     <option value="0">Elige una película</option>
-                                    {valoresBusqueda.peliculasSede.map((el, id) => (
+                                    {listaPeliculas.map((el, id) => (
                                         <option key={el.id || id} value={el.id} >{el.nombre}</option>
                                     ))}
                                 </select>

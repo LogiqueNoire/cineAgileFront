@@ -23,15 +23,23 @@ export const FuncionesContextProvider = ({ children }) => {
         nuevaFecha: '', // Formato YYYY-MM-DD
         nuevaHoraInicio: '',
         nuevaSalaId: '',
-        nuevaPeliculaId: ''
+        nuevaPeliculaId: '',
+        nuevaSedeId: ''
     });
 
     const [listaFunciones, setListaFunciones] = useState([]);
 
+    const [listaPeliculas, setListaPeliculas] = useState([])
+
 
 
     return (
-        <FuncionesContext.Provider value={{ valoresBusqueda, setValoresBusqueda, funcion, setFuncion, listaFunciones, setListaFunciones }}>
+        <FuncionesContext.Provider
+            value={{
+                valoresBusqueda, setValoresBusqueda,
+                funcion, setFuncion, listaFunciones, setListaFunciones,
+                listaPeliculas, setListaPeliculas
+            }}>
             {children}
         </FuncionesContext.Provider>
     )
