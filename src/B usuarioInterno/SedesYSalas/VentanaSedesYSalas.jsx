@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import AddSede from './AddSede';
 import sala from '../../assets/sala2.svg';
+import guardar from '../../assets/guardar.svg'
 import axios from 'axios';
 import { url } from "../../configuracion/backend"
 import Loading from '../../0 componentesGenerales/Loading';
@@ -14,6 +15,8 @@ const VentanaSedesYSalas = () => {
     const { sedeRedir = null } = location.state || {};
 
     const [lista, setLista] = useState([]);
+    const [edicion, setEdicion] = useState([]); // Copia para editar sin guardar
+
     const [sede, setSede] = useState(null);
     const [loading, setLoading] = useState(true);
 
@@ -22,7 +25,7 @@ const VentanaSedesYSalas = () => {
             headers: { Authorization: `Bearer ${Cookies.get("auth-token")}` }
         }).then(res => {
             setLista(res.data.reverse());
-
+            setEdicion([...res.data]);
             if (sedeRedir) {
                 let sede = res.data.find(el => el.id == sedeRedir.id)
                 if (sede) setSede(sede);
@@ -34,8 +37,23 @@ const VentanaSedesYSalas = () => {
         });
     }
 
-    const moverse = (sede) => {
-        setSede(sede);
+    const actualizarSede = async (el) => {
+        console.log(el);
+        try {
+            await axios.patch(`${url}/intranet/editarSede`, el, {
+                headers: { Authorization: `Bearer ${Cookies.get("auth-token")}` }
+            });
+            alert("¡Sede editada!")
+            consultar()
+        } catch (error) {
+                alert('Error al guardar la sede. Tal vez ya existe una sede con el mismo nombre.');
+            console.error(error);
+        }
+    }
+
+    const moverse = (id) => {
+        setSede(lista[id]);
+
     }
 
     useEffect(() => {
@@ -60,18 +78,29 @@ const VentanaSedesYSalas = () => {
                         <thead className=''>
                             <tr className=''>
                                 <td className=''>Nombre de sede</td>
-                                <td className=''></td>
+                                <td className=''>Opciones</td>
                             </tr>
                         </thead>
                         <tbody className=''>
-                            {lista.map((el, id) => (
+                            {edicion.map((el, id) => (
                                 <tr key={el.id || id}>
-                                    <td>{el.nombre}</td>
-                                    <td >
+                                    <td className='align-content-center'>
+                                        <input className='form-control ' type="text" value={el.nombre}
+                                            onChange={(e) => {
+                                                const nuevaLista = [...lista];
+                                                nuevaLista[id] = { ...el, nombre: e.target.value };
+                                                setEdicion(nuevaLista);
+                                            }} />
 
-                                        <div className='d-flex justify-content-end'>
+                                    </td>
+                                    <td style={{ 'width': 'min-content' }}>
 
-                                            <button className='btn btn-primary d-flex gap-2 px-3' onClick={() => moverse(el)}>
+                                        <div className='d-flex justify-content-center gap-4' style={{ 'width': 'min-content' }}>
+                                            <button className='btn btn-primary d-flex gap-2 px-3' onClick={() => actualizarSede(el)}>
+                                                <img src={guardar} alt="" style={{ height: '25px' }} />
+                                            </button>
+
+                                            <button className='btn btn-primary d-flex gap-2 px-3' onClick={() => moverse(id)}>
                                                 <label className="">Salas</label>
                                                 <img src={sala} alt="" style={{ height: '25px' }} />
                                             </button>

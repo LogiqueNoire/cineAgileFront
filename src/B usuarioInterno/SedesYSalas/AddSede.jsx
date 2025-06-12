@@ -7,7 +7,7 @@ import sedeDark from '../../assets/sedeDark.svg';
 import BotonCarga from '../../0 componentesGenerales/BotonCarga.jsx';
 
 export default function AddSede({ onSucess }) {
-  const [ submitting, setSubmitting ] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
   const [sede, setSede] = useState({
 
     nombre: '',
@@ -44,7 +44,10 @@ export default function AddSede({ onSucess }) {
         onSucess()
       }
     } catch (error) {
-      alert('Error al agregar la sede');
+      if (error.status == 409)
+        alert(error.response.data);
+      else
+        alert('Error al agregar la sede');
       console.error(error);
     } finally {
       setSubmitting(false);
