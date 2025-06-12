@@ -157,11 +157,19 @@ export default function AddFilm({ onSucess }) {
                   type="number"
                   min="0"
                   max="500"
+                  step="0"
                   className="form-control"
                   placeholder="Duración"
                   name="duracion"
                   value={duracion}
-                  onChange={(e) => onInputChange(e)}
+                  onChange={(e) => {
+                    const input = e.target.value;
+                    const regex = /^\d*\.?\d{0}$/; // permite hasta 0 decimales
+                    if (input === "" || regex.test(input)) {
+                      onInputChange(e)
+                    };
+                  }
+                  }
                   required
 
                 />

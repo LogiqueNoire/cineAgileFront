@@ -24,12 +24,16 @@ export const FuncionesContextProvider = ({ children }) => {
         nuevaHoraInicio: '',
         nuevaSalaId: '',
         nuevaPeliculaId: '',
-        nuevaSedeId: ''
+        nuevaSedeId: '',
+        nuevaDimension: '',
+        nuevoPrecioBase: 0
     });
 
     const [listaFunciones, setListaFunciones] = useState([]);
 
     const [listaPeliculas, setListaPeliculas] = useState([])
+
+    const [salasNuevaSede, setSalasNuevaSede] = useState([])
 
 
 
@@ -37,8 +41,10 @@ export const FuncionesContextProvider = ({ children }) => {
         <FuncionesContext.Provider
             value={{
                 valoresBusqueda, setValoresBusqueda,
-                funcion, setFuncion, listaFunciones, setListaFunciones,
-                listaPeliculas, setListaPeliculas
+                funcion, setFuncion,
+                listaFunciones, setListaFunciones,
+                listaPeliculas, setListaPeliculas,
+                salasNuevaSede, setSalasNuevaSede
             }}>
             {children}
         </FuncionesContext.Provider>

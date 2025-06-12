@@ -30,7 +30,9 @@ const VentanaFunciones = () => {
         listaFunciones,
         setListaFunciones,
         listaPeliculas,
-        setListaPeliculas
+        setListaPeliculas,
+        salasNuevaSede,
+        setSalasNuevaSede
     } = useContext(FuncionesContext);
 
     useEffect(() => {
@@ -44,8 +46,10 @@ const VentanaFunciones = () => {
                 nuevaFecha: format(fhi, "yyyy-MM-dd"),
                 nuevaHoraInicio: format(fhi, "HH:mm"),
                 nuevaSalaId: valoresBusqueda.salasSede.find(el => el.codigoSala === funcion.funcionElegida.codigoSala)?.id,
-                nuevaPeliculaId: valoresBusqueda.peliculasSede.find(el => el.id === funcion.funcionElegida.idPelicula)?.id,
-                nuevaSedeId: valoresBusqueda.sedes.find(el => el.id === funcion.funcionElegida.idSede)?.id
+                nuevaPeliculaId: listaPeliculas.find(el => el.idPelicula === funcion.funcionElegida.idPelicula)?.idPelicula,
+                nuevaSedeId: valoresBusqueda.sedes.find(el => el.id === funcion.funcionElegida.idSede)?.id,
+                nuevaDimension: funcion.funcionElegida.dimension,
+                nuevoPrecioBase: funcion.funcionElegida.precioBase
             }));
         } else {
             setFuncion(prev => ({
@@ -56,14 +60,12 @@ const VentanaFunciones = () => {
                 nuevaHoraInicio: '',
                 nuevaSalaId: '',
                 nuevaPeliculaId: '',
-                nuevaSedeId: ''
+                nuevaSedeId: '',
+                nuevaDimension: '',
+                nuevoPrecioBase: 0
             }));
         }
     }, [funcion.funcionElegida]);
-
-    useEffect(() => {
-        console.log("lista", listaPeliculas)
-    }),[funcion]
 
     useEffect(() => {
         setValoresBusqueda(prev => ({
@@ -81,7 +83,9 @@ const VentanaFunciones = () => {
             nuevaHoraInicio: '',
             nuevaSalaId: '',
             nuevaPeliculaId: '',
-            nuevaSedeId: ''
+            nuevaSedeId: '',
+            nuevaDimension: '',
+            nuevoPrecioBase: 0
         }));
     }, [valoresBusqueda.sedeElegida, valoresBusqueda.fechaElegida])
 

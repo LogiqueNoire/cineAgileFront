@@ -14,30 +14,6 @@ const Cronograma = () => {
     setListaFunciones
   } = useContext(FuncionesContext);
 
-  const [draggedFuncion, setDraggedFuncion] = useState(null);
-
-  const onDragStart = (e, funcion) => {
-    setDraggedFuncion(funcion);
-    e.dataTransfer.effectAllowed = "move";
-  };
-
-  const onDragOver = (e) => {
-    e.preventDefault(); // Necesario para permitir drop
-  };
-
-  const onDrop = (e, fechaDia, hora) => {
-    e.preventDefault();
-    if (!draggedFuncion) return;
-
-    // Aquí puedes actualizar la función para cambiar su fecha y hora,
-    // por ejemplo asignarle fechaDia + hora
-
-    console.log("Función arrastrada:", draggedFuncion);
-    console.log("Soltada en:", fechaDia, hora);
-
-    setDraggedFuncion(null);
-  };
-
   const colores = [
     "#f0c9b3", // anaranjado claro (hue 20)
     "#f1d5b3", // durazno claro (hue 35)
@@ -166,6 +142,7 @@ const Cronograma = () => {
                                     <h6>{el.nombrePelicula}</h6>
                                   }
                                   <h6>{el.categoria + ' ' + el.dimension}</h6>
+                                  <h6>{'S/ ' + el.precioBase}</h6>
                                   <h6></h6>
                                 </div>
                                 :
