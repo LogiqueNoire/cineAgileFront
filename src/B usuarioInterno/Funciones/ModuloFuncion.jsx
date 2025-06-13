@@ -232,7 +232,7 @@ const ModuloFuncion = ({ handlePeliculaChange, handleSalaChange }) => {
                 }));
             }
         } catch (error) {
-            console.error("Error al crear la función:", error);
+            alert("Error al crear la función");
         }
     }
 
