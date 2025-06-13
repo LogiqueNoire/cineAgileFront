@@ -113,7 +113,7 @@ const BuscarFunciones = ({ handlePeliculaChange, handleSalaChange }) => {
                                     <label className='d-flex text-nowrap'>Pelicula</label>
                                     {valoresBusqueda.peliculasSede.length > 0 ?
                                         <select value={valoresBusqueda.selectPelicula} className='form-select' onChange={(e) => handlePeliculaChange(e)}>
-                                            <option value="0">Elige una película</option>
+                                            <option value="0">Elige una película por la sede</option>
                                             {valoresBusqueda.peliculasSede.map((el, id) => (
                                                 <option key={el.id || id} value={el.id} >{el.nombre}</option>
                                             ))}
@@ -136,7 +136,7 @@ const BuscarFunciones = ({ handlePeliculaChange, handleSalaChange }) => {
                                     {valoresBusqueda.salasSede.length > 0 ?
                                         <select value={valoresBusqueda.selectSala}
                                             className='form-select' onChange={(e) => handleSalaChange(e)}>
-                                            <option value="">Elige una sala</option>
+                                            <option value="">Elige una sala de la sede</option>
                                             {valoresBusqueda.salasSede.map((el, id) => (
                                                 <option key={el.id || id} value={el.id} >{el.codigoSala}</option>
                                             ))}

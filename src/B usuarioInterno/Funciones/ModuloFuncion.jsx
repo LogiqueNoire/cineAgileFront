@@ -239,7 +239,6 @@ const ModuloFuncion = ({ handlePeliculaChange, handleSalaChange }) => {
 
     return (
 
-        listaFunciones.length > 0 ?
             <div className='d-flex flex-column align-items-center gap-4 m-3 border p-4 rounded'>
                 <div className='d-flex flex-column align-items-center gap-3'>
                     <h3 className='d-flex text-nowrap'>Módulo ágil de funciones</h3>
@@ -552,8 +551,7 @@ const ModuloFuncion = ({ handlePeliculaChange, handleSalaChange }) => {
                     }
                 </div>
             </div >
-            :
-            <></>
+            
     )
 };
 export default ModuloFuncion
