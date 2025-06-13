@@ -1,6 +1,7 @@
 import pelicula from '../assets/pelicula.svg'
 import sede from '../assets/sede.svg'
 import funciones from '../assets/funciones.svg'
+import usuariosInternos from '../assets/modulo_usuario_icono.svg'
 import { useNavigate } from 'react-router-dom';
 const VentanaIntranet = () => {
     const navigate = useNavigate();
@@ -16,12 +17,21 @@ const VentanaIntranet = () => {
     const moverseHaciaFunciones = () => {
         navigate(`/intranet/funciones`)
     }
+    
+    const moverseHaciaUsuarios = () => {
+        navigate(`/intranet/usuarios`)
+    }
 
     return (
         <div className="m-3">
             <div className="row">
                 <h1 className="display-5 text-center"><strong>Módulo interno de operaciones para CineAgile</strong></h1>
                 <div className="d-flex p-3 justify-content-center gap-4 flex-wrap">
+
+                    <button className="btn btn-primary d-flex gap-3 align-items-center justify-content-center" onClick={moverseHaciaUsuarios}>
+                        <img src={usuariosInternos} alt="" style={{ width: '90px' }} />
+                        <h2 className="">Usuarios</h2>
+                    </button>
 
                     <button className="btn btn-primary d-flex gap-3 align-items-center justify-content-center" onClick={moverseHaciaVentanaPeliculas}>
                         <img src={pelicula} alt="" style={{ width: '90px' }} />
