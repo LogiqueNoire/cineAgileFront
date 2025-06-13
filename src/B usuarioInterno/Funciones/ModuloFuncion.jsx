@@ -301,6 +301,16 @@ return (
                                 </select>
                             </div>
 
+                            <div className='d-flex w-100 align-items-center'>
+                            <label className='w-100'>Dimensión</label>
+                            <select value=''className='form-select w-100' disabled></select>
+                        </div>
+
+                        <div className='d-flex w-100 align-items-center'>
+                            <label className='w-100'>Precio base</label>
+                            <input value='' step="0.1" min="0" className='form-control w-100' type="number" disabled> </input>
+                        </div>
+
                             <button className='btn btn-primary' disabled >Actualizar</button>
                         </div>
                         :
