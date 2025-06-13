@@ -160,7 +160,7 @@ const ModuloFuncion = ({ handlePeliculaChange, handleSalaChange }) => {
                 }));
             }
         } catch (error) {
-            console.error("Error al actualizar la función:", error);
+            alert("Error al actualizar la función");
         }
     }
 
