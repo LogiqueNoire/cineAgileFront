@@ -271,15 +271,15 @@ const ModuloFuncion = ({ handlePeliculaChange, handleSalaChange }) => {
                                 </div>
                                 <div className='d-flex w-100 align-items-center'>
                                     <label className='w-100'>Código de función</label>
-                                    <input className='form-control w-100' disabled type="text" value=''></input>
+                                    <input className='form-control w-100' disabled type="text" value=''/>
                                 </div>
                                 <div className='d-flex w-100 align-items-center'>
                                     <label className='w-100'>Nueva fecha</label>
-                                    <input className='form-control w-100' disabled type="date" value=''></input>
+                                    <input className='form-control w-100' disabled type="date" value=''/>
                                 </div>
                                 <div className='d-flex w-100 align-items-center'>
                                     <label className='w-100'>Nueva hora de inicio (formato 24h)</label>
-                                    <input className='form-control w-100' disabled type="time" value=''></input>
+                                    <input className='form-control w-100' disabled type="time" value=''/>
                                 </div>
                                 <div className='d-flex w-100 align-items-center'>
                                     <label className='w-100'>Sala</label>
@@ -342,7 +342,7 @@ const ModuloFuncion = ({ handlePeliculaChange, handleSalaChange }) => {
                                                 ...prev,
                                                 codigoFuncion: e.target.value
                                             }))
-                                        }></input>
+                                        }/>
                                 </div>
                                 <div className='d-flex w-100 align-items-center'>
                                     <label className='w-100'>Nueva fecha</label>
@@ -352,7 +352,7 @@ const ModuloFuncion = ({ handlePeliculaChange, handleSalaChange }) => {
                                                 ...prev,
                                                 nuevaFecha: e.target.value
                                             }))
-                                        }></input>
+                                        }/>
                                 </div>
                                 <div className='d-flex w-100 align-items-center'>
                                     <label className='w-100'>Nueva hora de inicio (formato 24h)</label>
@@ -362,7 +362,7 @@ const ModuloFuncion = ({ handlePeliculaChange, handleSalaChange }) => {
                                                 ...prev,
                                                 nuevaHoraInicio: e.target.value
                                             }))
-                                        }></input>
+                                        }/>
                                 </div>
                                 <div className='d-flex w-100 align-items-center'>
                                     <label className='w-100'>Sala</label>
@@ -429,8 +429,7 @@ const ModuloFuncion = ({ handlePeliculaChange, handleSalaChange }) => {
                                                 }))
                                             };
                                         }
-                                        }>
-                                    </input>
+                                        }/>
                                 </div>
 
                                 <button className='btn btn-primary' onClick={(e) => {
@@ -464,7 +463,7 @@ const ModuloFuncion = ({ handlePeliculaChange, handleSalaChange }) => {
                                             ...prev,
                                             nuevaFecha: e.target.value
                                         }))
-                                    }></input>
+                                    }/>
                             </div>
                             <div className='d-flex w-100 align-items-center'>
                                 <label className='w-100'>Nueva hora de inicio (formato 24h)</label>
@@ -474,7 +473,7 @@ const ModuloFuncion = ({ handlePeliculaChange, handleSalaChange }) => {
                                             ...prev,
                                             nuevaHoraInicio: e.target.value
                                         }))
-                                    }></input>
+                                    }/>
                             </div>
                             <div className='d-flex w-100 align-items-center'>
                                 <label className='w-100'>Sala</label>
@@ -542,8 +541,7 @@ const ModuloFuncion = ({ handlePeliculaChange, handleSalaChange }) => {
                                             }))
                                         };
                                     }
-                                    }>
-                                </input>
+                                    }/>
                             </div>
 
                             <button className='btn btn-primary' onClick={(e) => {
