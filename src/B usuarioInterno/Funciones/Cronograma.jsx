@@ -61,14 +61,11 @@ const Cronograma = () => {
     return `${h}:${m}`;
   }
 
-  function AdespuesoigualB(hora1, hora2) {
-    return (hora1.getHours() > hora2.getHours() ||
-      (hora1.getHours() === hora2.getHours() && hora1.getMinutes() >= hora2.getMinutes()))
-  }
-
   function AdespuesB(hora1, hora2) {
-    return (hora1.getHours() > hora2.getHours() ||
-      (hora1.getHours() === hora2.getHours() && hora1.getMinutes() > hora2.getMinutes()))
+    const [horas, minutos] = hora1.split(':').map(Number);
+    const hora1conFechahora2 = new Date(hora2);
+    hora1conFechahora2.setHours(horas, minutos, 0, 0);
+    return hora1conFechahora2 > hora2;
   }
 
   return (
@@ -78,7 +75,7 @@ const Cronograma = () => {
         <table className="table" style={{ 'borderCollapse': 'separate', width: '100%' }}>
           <thead>
             <tr>
-              <th className='text-center' scope="col mb-3" style={{ backgroundColor: 'rgb(184, 248, 255)'}}>Hora</th>
+              <th className='text-center' scope="col mb-3" style={{ backgroundColor: 'rgb(184, 248, 255)' }}>Hora</th>
               {fechasSemana.map((_, index) => (
                 <th className='text-center' key={index} scope="col" style={{ backgroundColor: 'rgb(184, 248, 255)' }}>
                   {fechasSemana[index] ? `${diasDeLaSemana[index]} ${fechasSemana[index].toString().padStart(2, '0')}` : ''}
