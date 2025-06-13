@@ -48,7 +48,7 @@ const Cronograma = () => {
   }
   const horas = [];
 
-  for (let h = 7; h <= 23; h++) {
+  for (let h = 7; h <= 24; h++) {
     const fecha = new Date();
     fecha.setHours(h, 0, 0);
     horas.push(new Date(fecha));
@@ -78,7 +78,7 @@ const Cronograma = () => {
         <table className="table" style={{ 'borderCollapse': 'separate', width: '100%' }}>
           <thead>
             <tr>
-              <th scope="col" style={{ backgroundColor: 'rgb(184, 248, 255)' }}>Hora</th>
+              <th className='text-center' scope="col mb-3" style={{ backgroundColor: 'rgb(184, 248, 255)'}}>Hora</th>
               {fechasSemana.map((_, index) => (
                 <th className='text-center' key={index} scope="col" style={{ backgroundColor: 'rgb(184, 248, 255)' }}>
                   {fechasSemana[index] ? `${diasDeLaSemana[index]} ${fechasSemana[index].toString().padStart(2, '0')}` : ''}
@@ -87,15 +87,39 @@ const Cronograma = () => {
             </tr>
           </thead>
           <tbody>
+            <tr style={{ 'height': '20px' }}>
+              {fechasSemana.map((_, __) => (
+                <td></td>
+              ))}
+              <td></td>
+            </tr>
             {
-              horas.map((hora, index) => (
-                <tr>
-                  <td>{formatearHora(hora)}</td>
+              horas.map((hora, i) => (
+                <tr >
+                  <td style={{
+                    position: 'relative', padding: '1.5rem', width: '80px',
+                    borderBottom: (i === horas.length - 1) ? 'none' : ''
+                  }}>
+                    <div style={{
+                      position: 'absolute',
+                      top: '-0.85rem',
+                      left: '0.7rem',
+                      backgroundColor: 'white',
+                      padding: '0 0.5rem',
+                      fontSize: '1rem',
+                      fontWeight: 'bold'
+                    }}>
+                      {formatearHora(hora)}
+                    </div>
+                  </td>
+
                   {
 
 
                     fechasSemana.map((fs, index) => (
-                      <td>
+                      <td key={index} style={{
+                        borderBottom: (i === horas.length - 1) ? 'none' : ''
+                      }}>
                         <div className='d-flex justify-content-center align-items-center gap-2'>
 
                           {
@@ -103,25 +127,8 @@ const Cronograma = () => {
                               ((new Date(el.fechaHoraInicio)).getDay() === index + 1
                                 || ((new Date(el.fechaHoraInicio)).getDay() === 0 && index === 6))
                                 &&
-                                (
-                                  (
-                                    AdespuesoigualB(new Date(el.fechaHoraInicio), hora)
-                                    &&
-                                    AdespuesB(new Date(new Date().setHours(hora.getHours() + 1, hora.getMinutes(), 0, 0)), new Date(el.fechaHoraInicio))
-                                  )
-                                  ||
-                                  (
-                                    AdespuesoigualB(new Date(el.fechaHoraFin), hora)
-                                    &&
-                                    AdespuesB(new Date(new Date().setHours(hora.getHours() + 1, hora.getMinutes(), 0, 0)), new Date(el.fechaHoraFin))
-                                  )
-                                  ||
-                                  (
-                                    AdespuesB(hora, new Date(el.fechaHoraInicio))
-                                    &&
-                                    AdespuesB(new Date(el.fechaHoraFin), hora)
-                                  )
-                                )
+                                (AdespuesB(new Date(new Date().setHours(hora.getHours() + 1, hora.getMinutes(), 0, 0)), new Date(el.fechaHoraInicio))
+                                  && AdespuesoigualB(new Date(el.fechaHoraFin), hora))
                                 ?
                                 <div className='text-center p-2'
                                   onClick={(e) => {
