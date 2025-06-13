@@ -310,7 +310,7 @@ const ModuloFuncion = ({ handlePeliculaChange, handleSalaChange }) => {
 
                                 <div className='d-flex w-100 align-items-center'>
                                     <label className='w-100'>Precio base</label>
-                                    <input value='0' step="0.1" min="0" className='form-control w-100' type="number" disabled> </input>
+                                    <input value='0' step="0.1" min="0" className='form-control w-100' type="number" disabled/>
                                 </div>
 
                                 <button className='btn btn-primary' disabled >Actualizar</button>
