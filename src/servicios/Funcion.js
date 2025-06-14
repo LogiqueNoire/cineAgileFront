@@ -17,6 +17,11 @@ class Funcion {
         const precios = await axios.get(`${url}/funcion/precios?idFuncion=${idFuncion}&persona=${persona}`)  ///precios?idFuncion=225855&persona=22
         return precios.data
     }
+
+    static async cantidadButacasDisponibles(idFuncion) {
+        const cantidad = await axios.get(`${url}/funcion/cantidadButacasDisponibles?idFuncion=${idFuncion}`)
+        return cantidad.data
+    }
 }
 
 export default Funcion;

@@ -4,3 +4,28 @@
     font-weight: 500;
     font-style: normal;
 }
+
+.mybtn-outline-primary {
+    color: #01217B;
+    border-color: #01217B;
+    border-width: 2px;
+    font-weight: 500;
+}
+
+.mybtn-outline-primary:active,
+.mybtn-outline-primary:hover {
+    color: #0A2B9C;
+    border-color: #0A2B9C;
+    background-color: aliceblue;
+    border-width: 2px;
+    font-weight: 500;
+}
+    
+.fade {
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
+
+.fade.show {
+  opacity: 1;
+}

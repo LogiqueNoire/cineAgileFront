@@ -61,12 +61,11 @@ const Cronograma = () => {
     return `${h}:${m}`;
   }
 
-  function AdespuesB(hora1, hora2) {
-    const [horas, minutos] = hora1.split(':').map(Number);
-    const hora1conFechahora2 = new Date(hora2);
-    hora1conFechahora2.setHours(horas, minutos, 0, 0);
-    return hora1conFechahora2 > hora2;
+ function AdespuesB(hora1, hora2) {
+    return (hora1.getHours() > hora2.getHours() ||
+      (hora1.getHours() === hora2.getHours() && hora1.getMinutes() > hora2.getMinutes()))
   }
+
 
   return (
     <section className=''>
@@ -125,7 +124,7 @@ const Cronograma = () => {
                                 || ((new Date(el.fechaHoraInicio)).getDay() === 0 && index === 6))
                                 &&
                                 (AdespuesB(new Date(new Date().setHours(hora.getHours() + 1, hora.getMinutes(), 0, 0)), new Date(el.fechaHoraInicio))
-                                  && AdespuesoigualB(new Date(el.fechaHoraFin), hora))
+                                  && AdespuesB(new Date(el.fechaHoraFin), hora))
                                 ?
                                 <div className='text-center p-2'
                                   onClick={(e) => {

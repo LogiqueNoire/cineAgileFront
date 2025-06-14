@@ -9,6 +9,17 @@ const MostrarSedesHorarios = ({ pelicula, fechaFormateada }) => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
+    const [toast, setToast] = useState({ visible: false, mensaje: '' });
+
+    const mostrarToast = () => {
+        setToast({ visible: true });
+        setTimeout(() => setToast({ visible: false }), 3000);
+    };
+
+    useEffect(() => {
+        mostrarToast();
+    }, []);
+
     useEffect(() => {
 
         window.scrollTo({ top: 0 });
@@ -63,7 +74,7 @@ const MostrarSedesHorarios = ({ pelicula, fechaFormateada }) => {
     if (loading) {
         return <div className='w-100 d-flex justify-content-center'>
             <Loading />
-        </div> 
+        </div>
     }
 
     if (!pelicula) {
@@ -83,7 +94,14 @@ const MostrarSedesHorarios = ({ pelicula, fechaFormateada }) => {
                     <CinemaAcordion data={sede} pelicula={pelicula} />
                 ))}
             </div>
+            {toast.visible && (
+                <div className="toast-notificacion">
+                    <div>Ahora puedes ver la cantidad de funciones disponibles</div>
+                    <div>con el nuevo botón a lado de cada función</div>
+                </div>
+            )}
         </div>
+
     );
 };
 
