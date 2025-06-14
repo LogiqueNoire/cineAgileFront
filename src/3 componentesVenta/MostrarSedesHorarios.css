@@ -28,23 +28,3 @@
     }
     
 }
-
-.toast-notificacion {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background-color: #0a2c9cd6;
-  color: white;
-  padding: 1rem 1.5rem;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.3);
-  opacity: 1;
-  animation: fadeOut 3s forwards;
-  z-index: 1000;
-}
-
-@keyframes fadeOut {
-  0% { opacity: 1; transform: translateY(0); }
-  80% { opacity: 1; transform: translateY(0); }
-  100% { opacity: 0; transform: translateY(20px); }
-}

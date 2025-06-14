@@ -3,22 +3,19 @@ import CinemaAcordion from '../2 componentesAcordionSedesHorarios/CinemaAcordion
 import Funcion from '../servicios/Funcion.js';
 import './MostrarSedesHorarios.css';
 import Loading from '../0 componentesGenerales/Loading.jsx';
+import Toast  from '../Toast.jsx';
 
 const MostrarSedesHorarios = ({ pelicula, fechaFormateada }) => {
     const [sedes, setSedes] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
-    const [toast, setToast] = useState({ visible: false, mensaje: '' });
+    const [toast, setToast] = useState({ visible: false });
 
     const mostrarToast = () => {
         setToast({ visible: true });
         setTimeout(() => setToast({ visible: false }), 3000);
     };
-
-    useEffect(() => {
-        mostrarToast();
-    }, []);
 
     useEffect(() => {
 
@@ -46,6 +43,7 @@ const MostrarSedesHorarios = ({ pelicula, fechaFormateada }) => {
                 if (isMounted) {
                     setSedes(agrupadasPorSede);
                     setLoading(false);
+                    mostrarToast();
                 }
             } catch (err) {
 
@@ -94,12 +92,9 @@ const MostrarSedesHorarios = ({ pelicula, fechaFormateada }) => {
                     <CinemaAcordion data={sede} pelicula={pelicula} />
                 ))}
             </div>
-            {toast.visible && (
-                <div className="toast-notificacion">
-                    <div>Ahora puedes ver la cantidad de funciones disponibles</div>
-                    <div>con el nuevo botón a lado de cada función</div>
-                </div>
-            )}
+            <Toast tipo={'toast-info'}
+                mensaje={'Ahora puedes ver la cantidad de funciones disponibles con el nuevo botón a lado de cada función'}
+                visible={toast.visible} />
         </div>
 
     );

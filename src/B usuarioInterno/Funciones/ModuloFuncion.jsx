@@ -7,7 +7,7 @@ import Cookies from 'js-cookie';
 import { format } from "date-fns";
 import './ModuloFuncion.css'
 import SalaButaca from '../../servicios/SalaButaca';
-
+import Toast from '../../Toast'
 
 const ModuloFuncion = ({ handlePeliculaChange, handleSalaChange }) => {
     const [loading, setLoading] = useState(true);
@@ -27,6 +27,9 @@ const ModuloFuncion = ({ handlePeliculaChange, handleSalaChange }) => {
     const [checked, setChecked] = useState(true)
 
     const [primeraVez, setPrimeraVez] = useState(true)
+
+    const [toast, setToast] = useState({ visible: false, titulo: '', mensaje: '' });
+
 
     useEffect(() => {
         if (primeraVez) {
@@ -160,7 +163,11 @@ const ModuloFuncion = ({ handlePeliculaChange, handleSalaChange }) => {
                 }));
             }
         } catch (error) {
-            alert("Error al actualizar la función");
+            setToast({
+                visible: true,
+                titulo: 'Función no actualizada',
+                mensaje: 'Horario fuera de rango permitido, cruce detectado o función con entradas vendidas' });
+            setTimeout(() => setToast({ visible: false }), 3000);
         }
     }
 
@@ -232,216 +239,99 @@ const ModuloFuncion = ({ handlePeliculaChange, handleSalaChange }) => {
                 }));
             }
         } catch (error) {
-            alert("Error al crear la función");
+            setToast({
+                visible: true,
+                titulo: 'Error al crear la función',
+                mensaje: 'Horario fuera de rango permitido o cruce detectado' });
+            setTimeout(() => setToast({ visible: false }), 3000);
         }
     }
 
 
     return (
 
-            <div className='d-flex flex-column align-items-center gap-4 m-3 border p-4 rounded'>
-                <div className='d-flex flex-column align-items-center gap-3'>
-                    <h3 className='d-flex text-nowrap'>Módulo ágil de funciones</h3>
-                    <div className="d-flex align-items-center">
-                        {checked === true ?  /*true = actualizar */
-                            <label className="fs-4">Crear</label>
-                            :
-                            <label className="fs-4"><strong style={{ "color": "#01217B" }}>Crear</strong></label>
-                        }
-                        <label className="switch m-2">
-                            <input type="checkbox" checked={checked} onChange={(e) => { cambiarEstado(e.target.checked) }} />
-                            <span className="slider round"></span>
-                        </label>
-                        {checked === true ?
-                            <label className="fs-4"><strong style={{ "color": "#01217B" }}>Actualizar</strong></label>
-                            :
-                            <label className="fs-4">Actualizar</label>}
-                    </div>
-                    {checked === true ?
-                        funcion.funcionElegida === undefined || funcion.codigoFuncion === '' ?
-                            /*deshabilitado */
-                            <div className="d-flex flex-column gap-3">
-                                <label>Cliquea una función para copiar sus datos</label>
-                                <div className='d-flex w-100 align-items-center'>
-                                    <label className='d-flex text-nowrap w-100'>Elige sede</label>
-                                    <select className='form-select w-100' disabled>
-                                        <option value="">Elige una sede</option>
-                                    </select>
-                                </div>
-                                <div className='d-flex w-100 align-items-center'>
-                                    <label className='w-100'>Código de función</label>
-                                    <input className='form-control w-100' disabled type="text" value=''/>
-                                </div>
-                                <div className='d-flex w-100 align-items-center'>
-                                    <label className='w-100'>Nueva fecha</label>
-                                    <input className='form-control w-100' disabled type="date" value=''/>
-                                </div>
-                                <div className='d-flex w-100 align-items-center'>
-                                    <label className='w-100'>Nueva hora de inicio (formato 24h)</label>
-                                    <input className='form-control w-100' disabled type="time" value=''/>
-                                </div>
-                                <div className='d-flex w-100 align-items-center'>
-                                    <label className='w-100'>Sala</label>
-
-                                    <select value='' disabled
-                                        className='form-select w-100'>
-                                        <option value="">Elige una sala</option>
-
-                                    </select>
-                                </div>
-
-                                <div className='d-flex w-100 align-items-center'>
-                                    <label className='w-100'>Pelicula</label>
-
-                                    <select value='' disabled
-                                        className='form-select w-100' >
-                                        <option value="0">Elige una película</option>
-
-                                    </select>
-                                </div>
-
-                                <div className='d-flex w-100 align-items-center'>
-                                    <label className='w-100'>Dimensión</label>
-                                    <select value='' className='form-select w-100' disabled>
-                                        <option value="0">Elige una dimensión</option>
-                                    </select>
-                                </div>
-
-                                <div className='d-flex w-100 align-items-center'>
-                                    <label className='w-100'>Precio base</label>
-                                    <input value='0' step="0.1" min="0" className='form-control w-100' type="number" disabled/>
-                                </div>
-
-                                <button className='btn btn-primary' disabled >Actualizar</button>
-                            </div>
-                            :
-                            /*luego de cliquear */
-                            <div className="d-flex flex-column gap-3">
-                                <label>Cliquea una función para copiar sus datos</label>
-                                <div className='d-flex w-100 align-items-center'>
-                                    <label className='d-flex text-nowrap w-100'>Elige sede</label>
-                                    <select className='form-select w-100' value={funcion.nuevaSedeId}
-                                        onChange={(e) =>
-                                            setFuncion(prev => ({
-                                                ...prev,
-                                                nuevaSedeId: e.target.value
-                                            }))
-                                        }>
-                                        <option value='0'>Elija una sede</option>
-                                        {valoresBusqueda.sedes.map((el, id) => (
-                                            <option key={el.id || id} value={el.id} >{el.nombre}</option>
-                                        ))}
-                                    </select>
-                                </div>
-                                <div className='d-flex w-100 align-items-center'>
-                                    <label className='w-100'>Código de función</label>
-                                    <input className='form-control w-100' type="text" disabled value={funcion.codigoFuncion}
-                                        onChange={(e) =>
-                                            setFuncion(prev => ({
-                                                ...prev,
-                                                codigoFuncion: e.target.value
-                                            }))
-                                        }/>
-                                </div>
-                                <div className='d-flex w-100 align-items-center'>
-                                    <label className='w-100'>Nueva fecha</label>
-                                    <input className='form-control w-100' type="date" value={funcion.nuevaFecha}
-                                        onChange={(e) =>
-                                            setFuncion(prev => ({
-                                                ...prev,
-                                                nuevaFecha: e.target.value
-                                            }))
-                                        }/>
-                                </div>
-                                <div className='d-flex w-100 align-items-center'>
-                                    <label className='w-100'>Nueva hora de inicio (formato 24h)</label>
-                                    <input className='form-control w-100' type="time" value={funcion.nuevaHoraInicio}
-                                        onChange={(e) =>
-                                            setFuncion(prev => ({
-                                                ...prev,
-                                                nuevaHoraInicio: e.target.value
-                                            }))
-                                        }/>
-                                </div>
-                                <div className='d-flex w-100 align-items-center'>
-                                    <label className='w-100'>Sala</label>
-
-                                    <select value={funcion.nuevaSalaId}
-                                        className='form-select w-100'
-                                        onChange={(e) => setFuncion(prev => ({
-                                            ...prev,
-                                            nuevaSalaId: e.target.value
-                                        }))
-                                        }>
-                                        <option value="">Elige una sala</option>
-                                        {salasNuevaSede.map((el, id) => (
-                                            <option key={el.id || id} value={el.id} >{el.codigoSala}</option>
-                                        ))}
-                                    </select>
-                                </div>
-
-                                <div className='d-flex w-100 align-items-center'>
-                                    <label className='w-100'>Pelicula</label>
-                                    <select value={funcion.nuevaPeliculaId}
-                                        className='form-select w-100'
-                                        onChange={(e) =>
-                                            setFuncion(prev => ({
-                                                ...prev,
-                                                nuevaPeliculaId: e.target.value
-                                            }))
-                                        }>
-                                        <option value="0">Elige una película</option>
-                                        {listaPeliculas.map((el, id) => (
-                                            <option key={el.idPelicula || id} value={el.idPelicula} >{el.nombre}</option>
-                                        ))}
-                                    </select>
-                                </div>
-
-                                <div className='d-flex w-100 align-items-center'>
-                                    <label className='w-100'>Dimensión</label>
-                                    <select value={funcion.nuevaDimension}
-                                        className='form-select w-100'
-                                        onChange={(e) =>
-                                            setFuncion(prev => ({
-                                                ...prev,
-                                                nuevaDimension: e.target.value
-                                            }))
-                                        }>
-                                        <option value="0">Elige dimensión</option>
-                                        {['2D', '3D'].map((el, id) => (
-                                            <option key={id} value={el} >{el}</option>
-                                        ))}
-                                    </select>
-                                </div>
-
-                                <div className='d-flex w-100 align-items-center'>
-                                    <label className='w-100'>Precio base</label>
-                                    <input value={funcion.nuevoPrecioBase} step="0.1" min="0"
-                                        className='form-control w-100' type="number"
-                                        onChange={(e) => {
-                                            const input = e.target.value;
-                                            const regex = /^\d*\.?\d{0,1}$/; // permite hasta 1 decimal
-                                            if (input === "" || regex.test(input)) {
-                                                setFuncion(prev => ({
-                                                    ...prev,
-                                                    nuevoPrecioBase: e.target.value
-                                                }))
-                                            };
-                                        }
-                                        }/>
-                                </div>
-
-                                <button className='btn btn-primary' onClick={(e) => {
-                                    e.preventDefault();
-                                    actualizarFuncion()
-                                }}>Actualizar</button>
-                            </div>
+        <div className='d-flex flex-column align-items-center gap-4 m-3 border p-4 rounded'>
+            <div className='d-flex flex-column align-items-center gap-3'>
+                <h3 className='d-flex text-nowrap'>Módulo ágil de funciones</h3>
+                <div className="d-flex align-items-center">
+                    {checked === true ?  /*true = actualizar */
+                        <label className="fs-4">Crear</label>
                         :
-                        /*Crear */
+                        <label className="fs-4"><strong style={{ "color": "#01217B" }}>Crear</strong></label>
+                    }
+                    <label className="switch m-2">
+                        <input type="checkbox" checked={checked} onChange={(e) => { cambiarEstado(e.target.checked) }} />
+                        <span className="slider round"></span>
+                    </label>
+                    {checked === true ?
+                        <label className="fs-4"><strong style={{ "color": "#01217B" }}>Actualizar</strong></label>
+                        :
+                        <label className="fs-4">Actualizar</label>}
+                </div>
+                {checked === true ?
+                    funcion.funcionElegida === undefined || funcion.codigoFuncion === '' ?
+                        /*deshabilitado */
                         <div className="d-flex flex-column gap-3">
+                            <label>Cliquea una función para copiar sus datos</label>
                             <div className='d-flex w-100 align-items-center'>
                                 <label className='d-flex text-nowrap w-100'>Elige sede</label>
-                                <select className='form-select w-100'
+                                <select className='form-select w-100' disabled>
+                                    <option value="">Elige una sede</option>
+                                </select>
+                            </div>
+                            <div className='d-flex w-100 align-items-center'>
+                                <label className='w-100'>Código de función</label>
+                                <input className='form-control w-100' disabled type="text" value='' />
+                            </div>
+                            <div className='d-flex w-100 align-items-center'>
+                                <label className='w-100'>Nueva fecha</label>
+                                <input className='form-control w-100' disabled type="date" value='' />
+                            </div>
+                            <div className='d-flex w-100 align-items-center'>
+                                <label className='w-100'>Nueva hora de inicio (formato 24h)</label>
+                                <input className='form-control w-100' disabled type="time" value='' />
+                            </div>
+                            <div className='d-flex w-100 align-items-center'>
+                                <label className='w-100'>Sala</label>
+
+                                <select value='' disabled
+                                    className='form-select w-100'>
+                                    <option value="">Elige una sala</option>
+
+                                </select>
+                            </div>
+
+                            <div className='d-flex w-100 align-items-center'>
+                                <label className='w-100'>Pelicula</label>
+
+                                <select value='' disabled
+                                    className='form-select w-100' >
+                                    <option value="0">Elige una película</option>
+
+                                </select>
+                            </div>
+
+                            <div className='d-flex w-100 align-items-center'>
+                                <label className='w-100'>Dimensión</label>
+                                <select value='' className='form-select w-100' disabled>
+                                    <option value="0">Elige una dimensión</option>
+                                </select>
+                            </div>
+
+                            <div className='d-flex w-100 align-items-center'>
+                                <label className='w-100'>Precio base</label>
+                                <input value='0' step="0.1" min="0" className='form-control w-100' type="number" disabled />
+                            </div>
+
+                            <button className='btn btn-primary' disabled >Actualizar</button>
+                        </div>
+                        :
+                        /*luego de cliquear */
+                        <div className="d-flex flex-column gap-3">
+                            <label>Cliquea una función para copiar sus datos</label>
+                            <div className='d-flex w-100 align-items-center'>
+                                <label className='d-flex text-nowrap w-100'>Elige sede</label>
+                                <select className='form-select w-100' value={funcion.nuevaSedeId}
                                     onChange={(e) =>
                                         setFuncion(prev => ({
                                             ...prev,
@@ -455,6 +345,16 @@ const ModuloFuncion = ({ handlePeliculaChange, handleSalaChange }) => {
                                 </select>
                             </div>
                             <div className='d-flex w-100 align-items-center'>
+                                <label className='w-100'>Código de función</label>
+                                <input className='form-control w-100' type="text" disabled value={funcion.codigoFuncion}
+                                    onChange={(e) =>
+                                        setFuncion(prev => ({
+                                            ...prev,
+                                            codigoFuncion: e.target.value
+                                        }))
+                                    } />
+                            </div>
+                            <div className='d-flex w-100 align-items-center'>
                                 <label className='w-100'>Nueva fecha</label>
                                 <input className='form-control w-100' type="date" value={funcion.nuevaFecha}
                                     onChange={(e) =>
@@ -462,7 +362,7 @@ const ModuloFuncion = ({ handlePeliculaChange, handleSalaChange }) => {
                                             ...prev,
                                             nuevaFecha: e.target.value
                                         }))
-                                    }/>
+                                    } />
                             </div>
                             <div className='d-flex w-100 align-items-center'>
                                 <label className='w-100'>Nueva hora de inicio (formato 24h)</label>
@@ -472,7 +372,7 @@ const ModuloFuncion = ({ handlePeliculaChange, handleSalaChange }) => {
                                             ...prev,
                                             nuevaHoraInicio: e.target.value
                                         }))
-                                    }/>
+                                    } />
                             </div>
                             <div className='d-flex w-100 align-items-center'>
                                 <label className='w-100'>Sala</label>
@@ -493,11 +393,10 @@ const ModuloFuncion = ({ handlePeliculaChange, handleSalaChange }) => {
 
                             <div className='d-flex w-100 align-items-center'>
                                 <label className='w-100'>Pelicula</label>
-
                                 <select value={funcion.nuevaPeliculaId}
                                     className='form-select w-100'
-                                    onChange={
-                                        (e) => setFuncion(prev => ({
+                                    onChange={(e) =>
+                                        setFuncion(prev => ({
                                             ...prev,
                                             nuevaPeliculaId: e.target.value
                                         }))
@@ -540,18 +439,134 @@ const ModuloFuncion = ({ handlePeliculaChange, handleSalaChange }) => {
                                             }))
                                         };
                                     }
-                                    }/>
+                                    } />
                             </div>
 
                             <button className='btn btn-primary' onClick={(e) => {
                                 e.preventDefault();
-                                crearFuncion()
-                            }}>Crear</button>
+                                actualizarFuncion()
+                            }}>Actualizar</button>
                         </div>
-                    }
-                </div>
-            </div >
-            
+                    :
+                    /*Crear */
+                    <div className="d-flex flex-column gap-3">
+                        <div className='d-flex w-100 align-items-center'>
+                            <label className='d-flex text-nowrap w-100'>Elige sede</label>
+                            <select className='form-select w-100'
+                                onChange={(e) =>
+                                    setFuncion(prev => ({
+                                        ...prev,
+                                        nuevaSedeId: e.target.value
+                                    }))
+                                }>
+                                <option value='0'>Elija una sede</option>
+                                {valoresBusqueda.sedes.map((el, id) => (
+                                    <option key={el.id || id} value={el.id} >{el.nombre}</option>
+                                ))}
+                            </select>
+                        </div>
+                        <div className='d-flex w-100 align-items-center'>
+                            <label className='w-100'>Nueva fecha</label>
+                            <input className='form-control w-100' type="date" value={funcion.nuevaFecha}
+                                onChange={(e) =>
+                                    setFuncion(prev => ({
+                                        ...prev,
+                                        nuevaFecha: e.target.value
+                                    }))
+                                } />
+                        </div>
+                        <div className='d-flex w-100 align-items-center'>
+                            <label className='w-100'>Nueva hora de inicio (formato 24h)</label>
+                            <input className='form-control w-100' type="time" value={funcion.nuevaHoraInicio}
+                                onChange={(e) =>
+                                    setFuncion(prev => ({
+                                        ...prev,
+                                        nuevaHoraInicio: e.target.value
+                                    }))
+                                } />
+                        </div>
+                        <div className='d-flex w-100 align-items-center'>
+                            <label className='w-100'>Sala</label>
+
+                            <select value={funcion.nuevaSalaId}
+                                className='form-select w-100'
+                                onChange={(e) => setFuncion(prev => ({
+                                    ...prev,
+                                    nuevaSalaId: e.target.value
+                                }))
+                                }>
+                                <option value="">Elige una sala</option>
+                                {salasNuevaSede.map((el, id) => (
+                                    <option key={el.id || id} value={el.id} >{el.codigoSala}</option>
+                                ))}
+                            </select>
+                        </div>
+
+                        <div className='d-flex w-100 align-items-center'>
+                            <label className='w-100'>Pelicula</label>
+
+                            <select value={funcion.nuevaPeliculaId}
+                                className='form-select w-100'
+                                onChange={
+                                    (e) => setFuncion(prev => ({
+                                        ...prev,
+                                        nuevaPeliculaId: e.target.value
+                                    }))
+                                }>
+                                <option value="0">Elige una película</option>
+                                {listaPeliculas.map((el, id) => (
+                                    <option key={el.idPelicula || id} value={el.idPelicula} >{el.nombre}</option>
+                                ))}
+                            </select>
+                        </div>
+
+                        <div className='d-flex w-100 align-items-center'>
+                            <label className='w-100'>Dimensión</label>
+                            <select value={funcion.nuevaDimension}
+                                className='form-select w-100'
+                                onChange={(e) =>
+                                    setFuncion(prev => ({
+                                        ...prev,
+                                        nuevaDimension: e.target.value
+                                    }))
+                                }>
+                                <option value="0">Elige dimensión</option>
+                                {['2D', '3D'].map((el, id) => (
+                                    <option key={id} value={el} >{el}</option>
+                                ))}
+                            </select>
+                        </div>
+
+                        <div className='d-flex w-100 align-items-center'>
+                            <label className='w-100'>Precio base</label>
+                            <input value={funcion.nuevoPrecioBase} step="0.1" min="0"
+                                className='form-control w-100' type="number"
+                                onChange={(e) => {
+                                    const input = e.target.value;
+                                    const regex = /^\d*\.?\d{0,1}$/; // permite hasta 1 decimal
+                                    if (input === "" || regex.test(input)) {
+                                        setFuncion(prev => ({
+                                            ...prev,
+                                            nuevoPrecioBase: e.target.value
+                                        }))
+                                    };
+                                }
+                                } />
+                        </div>
+
+                        <button className='btn btn-primary' onClick={(e) => {
+                            e.preventDefault();
+                            crearFuncion()
+                        }}>Crear</button>
+                    </div>
+                }
+            </div>
+            <Toast tipo={'toast-danger'}
+                titulo={toast.titulo}
+                mensaje={toast.mensaje}
+                visible={toast.visible} />
+        </div >
+
     )
 };
 export default ModuloFuncion
