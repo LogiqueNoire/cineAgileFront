@@ -1,4 +1,4 @@
-import './inicio.css'
+import './Inicio.css'
 
 const Toast = ({tipo, titulo, mensaje, visible}) => {
 
