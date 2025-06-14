@@ -61,9 +61,10 @@ const Cronograma = () => {
     return `${h}:${m}`;
   }
 
- function AdespuesB(hora1, hora2) {
+  function AdespuesB(hora1, hora2) {
     return (hora1.getHours() > hora2.getHours() ||
-      (hora1.getHours() === hora2.getHours() && hora1.getMinutes() > hora2.getMinutes()))
+       (hora1.getHours() == hora2.getHours() &&
+        hora1.getMinutes() > hora2.getMinutes()));
   }
 
 
