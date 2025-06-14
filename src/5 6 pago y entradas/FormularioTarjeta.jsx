@@ -40,7 +40,7 @@ export const FormularioTarjeta = ({ tarjeta, setTarjeta }) => {
             return actions.order.create({
               purchase_units: [{
                 amount: {
-                  value: total
+                  value: Math.round((total / 3.7) * 100) / 100
                 },
                 custom_id: 23232
               }],
