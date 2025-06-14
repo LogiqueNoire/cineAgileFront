@@ -19,6 +19,7 @@ import VentanaPeliculas from './B usuarioInterno/Peliculas/VentanaPeliculas.jsx'
 import VentanaSedesYSalas from './B usuarioInterno/SedesYSalas/VentanaSedesYSalas.jsx';
 import VentanaFunciones from './B usuarioInterno/Funciones/VentanaFunciones.jsx';
 import VentanaUsuario from './B usuarioInterno/Usuarios/VentanaUsuario.jsx';
+import VentanaAjustes from './B usuarioInterno/Ajustes/VentanaAjustes.jsx';
 import Intranet from './B usuarioInterno/Intranet.jsx';
 import LoginForm from './B usuarioInterno/LoginForm.jsx';
 import Sala from './B usuarioInterno/SedesYSalas/Sala.jsx';
@@ -46,7 +47,8 @@ ReactDOM.createRoot(document.getElementById('root')).render(
                     <Route path="sedesysalas" element={<VentanaSedesYSalas />}></Route>
                     <Route path="sala" element={ <Sala /> }></Route>
                     <Route path="funciones" element={ <FuncionesContextProvider><VentanaFunciones /></FuncionesContextProvider> }></Route>
-                    <Route path="usuarios" element={ <VentanaUsuario /> }></Route>
+                    { /* <Route path="usuarios" element={ <VentanaUsuario /> }></Route> */ }
+                    <Route path='ajustes' element={ <VentanaAjustes /> }></Route>
                     <Route path="salas" /*element={<VentanaSedesYSalas></VentanaSedesYSalas>}*/></Route>
                 </Route>
                 
