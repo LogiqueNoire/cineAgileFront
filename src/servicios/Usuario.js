@@ -19,6 +19,14 @@ class Usuario {
 
         return res.data;
     }
+    
+    static async cambiarContra(datosFormulario) {
+        const res = await axios.put(`${url}/intranet/nuevacontra`, datosFormulario, {
+            headers: { Authorization: `Bearer ${Cookies.get("auth-token")}` }
+        })
+
+        return res.data;
+    }
 
 }
 
