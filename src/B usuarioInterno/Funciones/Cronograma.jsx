@@ -124,7 +124,7 @@ const Cronograma = () => {
                                 || ((new Date(el.fechaHoraInicio)).getDay() === 0 && index === 6))
                                 &&
                                 (AdespuesB(new Date(new Date().setHours(hora.getHours() + 1, hora.getMinutes(), 0, 0)), new Date(el.fechaHoraInicio))
-                                  && AdespuesoB(new Date(el.fechaHoraFin), hora))
+                                  && AdespuesB(new Date(el.fechaHoraFin), hora))
                                 ?
                                 <div className='text-center p-2'
                                   onClick={(e) => {
