@@ -5,8 +5,8 @@ import "./OrganizadorButacas.css";
 const SeccionBotones = ({ onClick, row, col }) => {
     return (
         <div className="boton-sec" data-row={row} data-col={col}>
-            <button className="boton-sec-substract" onClick={onClick}>-</button>
-            <button className="boton-sec-add" onClick={onClick}>+</button>
+            <button tabIndex={-1} className="boton-sec-substract" onClick={onClick}>-</button>
+            <button tabIndex={-1} className="boton-sec-add" onClick={onClick}>+</button>
         </div>
     );
 }
