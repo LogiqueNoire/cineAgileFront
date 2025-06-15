@@ -142,7 +142,7 @@ const OrganizadorButacas = ({ setButacasExt }) => {
 
     return (
         <div>
-            <table className="org-tabla">
+            <table className="org-tabla mb-4">
                 <thead>
                     <tr>{thead2}</tr>
                     <tr>{thead}</tr>
@@ -151,6 +151,42 @@ const OrganizadorButacas = ({ setButacasExt }) => {
                     { filas }
                 </tbody>
             </table>
+
+            <div className='border border-dark p-2'>
+                <h4 className="text-center mb-4">Leyenda</h4>
+                <table className="d-flex justify-content-center">
+                    <tbody>
+                        <tr className=''>
+                            <td>
+                                <div className="celda">
+                                    <input type="checkbox" data-estado="none" readOnly onClick={(e) => e.preventDefault()} />
+                                </div>
+                            </td>
+                            <td>
+                                <h4 className="mx-2">Libre</h4>
+                            </td>
+                            <td>
+                                <div className="celda">
+                                    <input type="checkbox" checked={true} data-estado="discapacitado" readOnly onClick={(e) => e.preventDefault()} />
+                                </div>
+                            </td>
+                            <td>
+                                <h4 className="mx-2">Discapacitado</h4>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div className="celda">
+                                    <input type="checkbox" checked={true} data-estado="activo" readOnly onClick={(e) => e.preventDefault()} />
+                                </div>
+                            </td>
+                            <td>
+                                <h4 className="mx-2">Ocupado</h4>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     )
 };
