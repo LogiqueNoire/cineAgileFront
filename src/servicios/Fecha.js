@@ -13,7 +13,7 @@ class Fecha {
 
     // Transforma la fecha (traída del backend) a la correcta para la ubicación del cliente
     static tiempoStringUTC_A_TiempoLocalString(str) {
-        return format((new Date(str + 'Z')), "yyyy-mm-dd.HH:mm:ss").replace(".", "T");
+        return format((new Date(str + 'Z')), "yyyy-MM-dd.HH:mm:ss").replace(".", "T");
     }
 }
 
