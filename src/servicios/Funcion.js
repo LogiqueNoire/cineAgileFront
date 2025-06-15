@@ -1,10 +1,21 @@
 import axios from 'axios'
 import { url } from '../configuracion/backend'
+import { format } from 'date-fns'
 
 class Funcion {
-
     static async mostrarSedesFuncionesPorPelicula(idPelicula, fecha) {
         const funciones = await axios(`${url}/funcion/pelicula/${idPelicula}?fecha=${fecha}`)
+        
+        if (funciones.data) {
+            funciones.data.map(el => {
+                el.funciones.map(func => {
+                    func.fechaHoraFin = format(new Date(func.fechaHoraFin + "Z"), "yyyy-mm-dd.HH:mm:ss").replace(".", "T");
+                    func.fechaHoraInicio = format(new Date(func.fechaHoraInicio + "Z"), "yyyy-mm-dd.HH:mm:ss").replace(".", "T");
+                    // console.log(el.nombreSede, func);
+                })
+            })
+        }
+
         return funciones.data
     }
 
