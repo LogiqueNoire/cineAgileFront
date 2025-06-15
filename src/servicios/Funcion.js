@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { url } from '../configuracion/backend'
 import { format } from 'date-fns'
+import Fecha from './Fecha'
 
 class Funcion {
     static async mostrarSedesFuncionesPorPelicula(idPelicula, fecha) {
@@ -9,8 +10,8 @@ class Funcion {
         if (funciones.data) {
             funciones.data.map(el => {
                 el.funciones.map(func => {
-                    func.fechaHoraFin = format(new Date(func.fechaHoraFin + "Z"), "yyyy-mm-dd.HH:mm:ss").replace(".", "T");
-                    func.fechaHoraInicio = format(new Date(func.fechaHoraInicio + "Z"), "yyyy-mm-dd.HH:mm:ss").replace(".", "T");
+                    func.fechaHoraFin = Fecha.tiempoStringUTC_A_TiempoLocalString(func.fechaHoraFin);
+                    func.fechaHoraInicio = Fecha.tiempoStringUTC_A_TiempoLocalString(func.fechaHoraInicio);
                     // console.log(el.nombreSede, func);
                 })
             })

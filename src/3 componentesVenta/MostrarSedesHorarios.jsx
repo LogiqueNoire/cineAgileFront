@@ -4,6 +4,7 @@ import Funcion from '../servicios/Funcion.js';
 import './MostrarSedesHorarios.css';
 import Loading from '../0 componentesGenerales/Loading.jsx';
 import Toast  from '../Toast.jsx';
+import Fecha from '../servicios/Fecha.js';
 
 const MostrarSedesHorarios = ({ pelicula, fechaFormateada }) => {
     const [sedes, setSedes] = useState([]);
@@ -24,7 +25,8 @@ const MostrarSedesHorarios = ({ pelicula, fechaFormateada }) => {
 
         const obtenerFunciones = async () => {
             try {
-                const fechaUtc = (new Date(fechaFormateada)).toISOString();
+                const fechaUtc = Fecha.tiempoLocalString_A_UTCString(fechaFormateada);
+                console.log("formateada: "  + fechaFormateada + ", utc: " + fechaUtc)
                 const funciones = await Funcion.mostrarSedesFuncionesPorPelicula(pelicula.idPelicula, fechaUtc);
 
                 const agrupadasPorSede = funciones.reduce((acc, funcion) => {
