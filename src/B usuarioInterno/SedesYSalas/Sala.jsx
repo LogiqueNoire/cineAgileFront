@@ -8,7 +8,7 @@ import ButacaMap from "../../3 componentesVenta/ButacaMap";
 const Sala = () => {
     const navigate = useNavigate();
     const location = useLocation();
-    const { sede = null, sala = null, modo = "detalle" } = location.state || {};
+    const { sede = null, sala = null, modo = "editar" } = location.state || {};
 
     const [ codigoSala, setCodigoSala ] = useState(sala?.codigoSala ? sala.codigoSala : "");
     const [ categoria, setCategoria ] = useState(sala?.categoria ? sala.categoria : "");
@@ -21,7 +21,7 @@ const Sala = () => {
     // sedes y salas.
     useEffect(() => {
         const noExisteSede = !sede;
-        const noExisteInfoSala = !sala && (modo == "detalle" || modo == "editar");
+        const noExisteInfoSala = !sala && (modo == "editar" || modo == "editar");
 
         if (noExisteSede || noExisteInfoSala) {
             navigate("/intranet/sedesysalas")
@@ -44,27 +44,48 @@ const Sala = () => {
 
         setSubmitting(true);
 
-        const crearSalaReq = {
-            idSede: sede.id,
-            codigoSala,
-            categoria,
-            butacas
-        };
-
         setError(null);
-        SalaButaca.crearSala(crearSalaReq).then(res => {
-            navigate("/intranet/sedesysalas", { state: { sedeRedir: sede } });
-            console.log("Sala creada!");
-        }).catch(err => {
-            if (err.response.status == 409) {
-                setError("¡Ya existe una sala dentro de la sede con el mismo código!");
-            } else {
-                setError(err.response.data);
+
+        if (modo == "crear") {
+            const crearSalaReq = {
+                idSede: sede.id,
+                codigoSala,
+                categoria,
+                butacas
+            };
+
+            SalaButaca.crearSala(crearSalaReq).then(res => {
+                navigate("/intranet/sedesysalas", { state: { sedeRedir: sede } });
+                console.log("Sala creada!");
+            }).catch(err => {
+                if (err.response.status == 409) {
+                    setError("¡Ya existe una sala dentro de la sede con el mismo código!");
+                } else {
+                    setError(err.response.data);
+                }
+            }).finally(_ => {
+                window.scrollTo({ top: 0 });
+                setSubmitting(false);
+            })
+        }
+
+        if (modo == "editar") {
+            const editarSalaReq = {
+                idSala: sala.id,
+                codigoSala,
+                categoria
             }
-        }).finally(_ => {
-            window.scrollTo({ top: 0 });
-            setSubmitting(false);
-        })
+
+            SalaButaca.editarSala(editarSalaReq).then(res => {
+                navigate("/intranet/sedesysalas", { state: { sedeRedir: sede } });
+                console.log("Sala editada!");
+            }).catch(err => {
+                setError(err.response.data);
+            }).finally(_ => {
+                window.scrollTo({ top: 0 });
+                setSubmitting(false);
+            })
+        }
     }
 
     return (
@@ -100,7 +121,6 @@ const Sala = () => {
                                 id="codigoSala" 
                                 placeholder="Código" 
                                 required={ true }
-                                disabled={ modo == "detalle" }
                             />
                         </div>
                         
@@ -112,7 +132,6 @@ const Sala = () => {
                                 className="form-select" 
                                 id="categoria" 
                                 required={ true }
-                                disabled={ modo == "detalle" }
                             >
                                 <option value="" disabled={true}>Selecciona una categoría</option>
                                 <option value="Regular">Regular</option>
@@ -125,21 +144,18 @@ const Sala = () => {
                 <div className="bg-white row rounded border shadow p-5 overflow-auto d-flex flex-column">
                     <h2>Organización de la sala</h2>
                     <div className="my-5 col-10 align-self-center">
-                        { modo == "crear" ?
+                        { modo != "editar" ?
                             <OrganizadorButacas setButacasExt={setButacas} /> :
                             <ButacaMap butacas={ sala.butacas } />
                         }
                     </div>
                 </div>
 
-                {   modo != "detalle" &&
-                    <div className="bg-white row rounded border shadow p-5 overflow-auto d-flex flex-column">
-                        <BotonCarga type={"submit"} className={"btn btn-primary w-25 align-self-center"} submitting={submitting}>
-                            Grabar
-                        </BotonCarga>
-                    </div>
-                }
-
+                <div className="bg-white row rounded border shadow p-5 overflow-auto d-flex flex-column">
+                    <BotonCarga type={"submit"} className={"btn btn-primary w-25 align-self-center"} submitting={submitting}>
+                        Grabar
+                    </BotonCarga>
+                </div>
 
             </form>
         </div>

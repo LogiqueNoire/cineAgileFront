@@ -4,6 +4,7 @@ import { url } from '../../configuracion/backend.js'
 import Loading from '../../0 componentesGenerales/Loading';
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
+import pencilSvg from "../../assets/pencil.svg"
 
 export const ModalSalas = ({ onClose, sede }) => {
   const navigate = useNavigate();
@@ -34,7 +35,7 @@ export const ModalSalas = ({ onClose, sede }) => {
   }
 
   const onDetallesClick = (sala) => {
-    navigate("/intranet/sala", { state: { sala, sede, modo: "detalle" } })
+    navigate("/intranet/sala", { state: { sala, sede, modo: "editar" } })
     // navigate("/intranet/detallesala", { state: { sala, sede } })
   };
 
@@ -141,7 +142,7 @@ export const ModalSalas = ({ onClose, sede }) => {
                       />
                     </td>
                     <td>
-                      <button className="btn btn-primary" onClick={() => { onDetallesClick(el) }}>Detalles</button>
+                        <button className="py-1 btn btn-primary" onClick={() => { onDetallesClick(el) }}><img src={pencilSvg} width={"24px"} height={"24px"}/></button>
                     </td>
                     {/*
                         <td className='text-center'>

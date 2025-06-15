@@ -39,6 +39,14 @@ class SalaButaca {
         return res;
     }
 
+    static async editarSala(sala) {
+        const res = await axios.patch(`${url}/intranet/sala`, sala, {
+            headers: { Authorization: `Bearer ${Cookies.get("auth-token")}` }
+        });
+        
+        return res;
+    }
+
 }
 
 export default SalaButaca
