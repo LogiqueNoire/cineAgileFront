@@ -49,7 +49,7 @@
     color: black;
 }
 
-.org-tabla tbody .boton-sec:hover::before {
+.org-tabla tbody .boton-sec-add:hover::before {
     content: " ";
     background-color: #0d6efd;
     width: 100vw;
@@ -59,12 +59,34 @@
     z-index: 10;
 }
 
-.org-tabla thead .boton-sec:hover::before {
+.org-tabla tbody .boton-sec-substract:hover::before {
+    content: " ";
+    background-color: #072c6428;
+    border: #05295f solid 1px;
+    width: 100vw;
+    height: 32px;
+    top: 19px;
+    position: absolute;
+    z-index: 10;
+}
+
+.org-tabla thead .boton-sec-add:hover::before {
     content: " ";
     background-color: #0d6efd;
     left: 16px;
     width: 2px;
     height: 100vh;
+    position: absolute;
+    z-index: 10;
+}
+
+.org-tabla thead .boton-sec-substract:hover::before {
+    content: " ";
+    background-color: #072c6428;
+    border: #05295f solid 1px;
+    left: 18px;
+    width: 32px;
+    height: 1000vh;
     position: absolute;
     z-index: 10;
 }
