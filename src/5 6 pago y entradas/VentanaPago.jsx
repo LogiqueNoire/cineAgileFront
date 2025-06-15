@@ -5,9 +5,10 @@ import { Tarjeta } from "./Tarjeta.jsx";
 import { VentaContext } from "../3 componentesVenta/VentaContextProvider.jsx";
 import { TerminosCondiciones } from "./TerminosCondiciones.jsx";
 import { ModalTerminos } from "./ModalTerminos.jsx";
+import Entrada from "../servicios/Entrada.js";
 
 export const VentanaPago = ({ prev, next }) => {
-
+  const navigate = useNavigate();
   const location = useLocation();
   const { pelicula, funcion } = location.state || {};
   const contexto = useContext(VentaContext);
@@ -46,10 +47,15 @@ export const VentanaPago = ({ prev, next }) => {
         entradas: entradas,
         tiempoRegistro: (new Date(Date.now())).toISOString()
       }
+
+      console.log(cuerpo);
   
       Entrada.comprarEntrada(cuerpo).then(res => {
-        navigate("/entradas", { state: { entradas: res.data } })
-      });
+        console.log(res);
+        navigate("/entradas", { state: { entradas: res.data.entradasCompradasDTO } })
+      }).catch(err => {
+        console.log(err);
+      })
     }
   }
 
@@ -85,9 +91,11 @@ export const VentanaPago = ({ prev, next }) => {
       </div>
 
       <div className="d-flex justify-content-center gap-4 align-items-center">
+        <button className="btn btn-warning" onClick={registrarTest}>Pasar!</button>
         <button className="btn btn-primary" onClick={volver} >Volver</button>
         {/*<button className="btn btn-warning" onClick={registrarTest}>Registrar (Test)</button>*/}
       </div>
+
 
     </>
 

@@ -18,7 +18,7 @@ export const FormularioTarjeta = ({ tarjeta, setTarjeta }) => {
       bloquearSolicitud = true;
 
       const entradas = contexto.butacaContext.seleccionadas.map(el => ({ id_butaca: el.id, persona: "general" }));
-
+      
       const cuerpo = {
         id_funcion: contexto.general.funcion.idFuncion,
         entradas: entradas,
@@ -26,8 +26,11 @@ export const FormularioTarjeta = ({ tarjeta, setTarjeta }) => {
       }
 
       Entrada.comprarEntrada(cuerpo).then(res => {
-        navigate("/entradas", { state: { entradas: res.data } })
-      });
+        console.log(res);
+        navigate("/entradas", { state: { entradas: res.data.entradasCompradasDTO } })
+      }).catch(err => {
+        console.log(err);
+      })
     }
   }
 
