@@ -24,7 +24,8 @@ const MostrarSedesHorarios = ({ pelicula, fechaFormateada }) => {
 
         const obtenerFunciones = async () => {
             try {
-                const funciones = await Funcion.mostrarSedesFuncionesPorPelicula(pelicula.idPelicula, fechaFormateada);
+                const fechaUtc = (new Date(fechaFormateada)).toISOString();
+                const funciones = await Funcion.mostrarSedesFuncionesPorPelicula(pelicula.idPelicula, fechaUtc);
 
                 const agrupadasPorSede = funciones.reduce((acc, funcion) => {
                     let sede = acc.find(s => s.idSede === funcion.idSede);
