@@ -8,16 +8,19 @@ class Funcion {
         const funciones = await axios(`${url}/funcion/pelicula/${idPelicula}?fecha=${fecha}`)
         
         if (funciones.data) {
-            funciones.data.map(el => {
-                el.funciones.map(func => {
-                    func.fechaHoraFin = Fecha.tiempoStringUTC_A_TiempoLocalString(func.fechaHoraFin);
-                    func.fechaHoraInicio = Fecha.tiempoStringUTC_A_TiempoLocalString(func.fechaHoraInicio);
-                    // console.log(el.nombreSede, func);
-                })
+            funciones.data.forEach(el => {
+                this.funcionesUTC_A_local(el.funciones);
             })
         }
 
         return funciones.data
+    }
+
+    static funcionesUTC_A_local(funciones) {
+        funciones.forEach(func => {
+            func.fechaHoraFin = Fecha.tiempoStringUTC_A_TiempoLocalString(func.fechaHoraFin);
+            func.fechaHoraInicio = Fecha.tiempoStringUTC_A_TiempoLocalString(func.fechaHoraInicio);
+        })
     }
 
     static async mostrarButacasDeFuncion(idFuncion) {

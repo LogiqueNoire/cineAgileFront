@@ -11,6 +11,8 @@ import { format } from 'date-fns'
 import { FuncionesContext } from './FuncionesContext';
 import BuscarFunciones from './BuscarFunciones';
 import ModuloFuncion from './ModuloFuncion';
+import Fecha from '../../servicios/Fecha';
+import Funcion from '../../servicios/Funcion';
 
 const ordenamientoAlfa = (a, b) => {
     const x = a.nombre.toLowerCase();
@@ -122,15 +124,20 @@ const VentanaFunciones = () => {
                 selectPelicula: peliculaId
             }));
 
+            const fechaElegidaUTC = Fecha.tiempoLocalString_A_UTCString(`${valoresBusqueda.fechaElegida}T00:00:00`);
+
             try {
-                setListaFunciones((await axios.get(`${url}/intranet/buscarFuncionesPorSemanaConPelicula`, {
+                const funciones = (await axios.get(`${url}/intranet/buscarFuncionesPorSemanaConPelicula`, {
                     params: {
                         idPelicula: peliculaId,
-                        fecha: `${valoresBusqueda.fechaElegida}T00:00:00`,
+                        fecha: fechaElegidaUTC, //(new Date(`${valoresBusqueda.fechaElegida}T00:00:00Z`)).toISOString(),
                         idSede: valoresBusqueda.sedeElegida
                     },
                     headers: { Authorization: `Bearer ${Cookies.get("auth-token")}` }
-                })).data);
+                })).data;
+
+                Funcion.funcionesUTC_A_local(funciones);
+                setListaFunciones(funciones);
             } catch (error) {
                 console.error(error);
             }
@@ -146,15 +153,20 @@ const VentanaFunciones = () => {
                 selectPelicula: ''
             }));
 
+            const fechaElegidaUTC = Fecha.tiempoLocalString_A_UTCString(`${valoresBusqueda.fechaElegida}T00:00:00`);
+
             try {
-                setListaFunciones((await axios.get(`${url}/intranet/buscarFuncionesPorSemanaConSala`, {
+                const funciones = (await axios.get(`${url}/intranet/buscarFuncionesPorSemanaConSala`, {
                     params: {
                         idSala: salaId,
-                        fecha: `${valoresBusqueda.fechaElegida}T00:00:00`,
+                        fecha: fechaElegidaUTC, //`${valoresBusqueda.fechaElegida}T00:00:00`,
                         idSede: valoresBusqueda.sedeElegida
                     },
                     headers: { Authorization: `Bearer ${Cookies.get("auth-token")}` }
-                })).data);
+                })).data;
+
+                Funcion.funcionesUTC_A_local(funciones);
+                setListaFunciones(funciones);
             } catch (error) {
                 console.error(error);
             }
