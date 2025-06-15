@@ -9,6 +9,8 @@ import './ModuloFuncion.css'
 import SalaButaca from '../../servicios/SalaButaca';
 import Toast from '../../Toast'
 
+import Fecha from "../../servicios/Fecha";
+
 const ModuloFuncion = ({ handlePeliculaChange, handleSalaChange }) => {
     const [loading, setLoading] = useState(true);
     const {
@@ -125,9 +127,10 @@ const ModuloFuncion = ({ handlePeliculaChange, handleSalaChange }) => {
         try {
             //console.log("Actualizando función con código:", funcion.codigoFuncion);
             //console.log("Nueva fecha y hora de inicio:", nfhi);
+            let nfhiEnUTC = Fecha.tiempoLocalString_A_UTCString(nfhi);
             const response = await axios.patch(`${url}/intranet/actualizarFuncion`, {
                 idFuncion: funcion.codigoFuncion,
-                fechaHoraInicio: nfhi,
+                fechaHoraInicio: nfhiEnUTC,
                 fechaHoraFin: null,
                 dimension: funcion.nuevaDimension,
                 precioBase: funcion.nuevoPrecioBase,
@@ -198,10 +201,10 @@ const ModuloFuncion = ({ handlePeliculaChange, handleSalaChange }) => {
 
         try {
             //console.log("Actualizando función con código:", funcion.codigoFuncion);
-            console.log("Nueva fecha y hora de inicio:", nfhi);
+            let nfhiEnUTC = Fecha.tiempoLocalString_A_UTCString(nfhi);
             const response = await axios.post(`${url}/intranet/crearFuncion`, {
                 idFuncion: null,
-                fechaHoraInicio: nfhi,
+                fechaHoraInicio: nfhiEnUTC,
                 fechaHoraFin: null,
                 dimension: funcion.nuevaDimension, //dimension 
                 precioBase: funcion.nuevoPrecioBase,
