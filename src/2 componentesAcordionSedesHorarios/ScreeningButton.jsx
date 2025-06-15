@@ -39,7 +39,7 @@ const ScreeningButton = ({ funcion, pelicula }) => {
                 type='button' style={{ 'position': 'relative', 'borderBottomLeftRadius': '0px', 'borderTopLeftRadius': '0px' }}>
                 <img src={iconoButaca} alt="" style={{ 'height': '20px' }} />
 
-                <div className={`fade ${mostrarCantidad === true ? 'show' : ''}`}
+                <div className={`cantidad-disponible fade ${mostrarCantidad === true ? 'show' : ''}`}
                     style={{
                         position: 'absolute',
                         top: '-1rem',
