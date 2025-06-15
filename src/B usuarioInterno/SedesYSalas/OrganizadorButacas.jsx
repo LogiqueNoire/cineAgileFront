@@ -163,7 +163,7 @@ const OrganizadorButacas = ({ setButacasExt }) => {
                                 </div>
                             </td>
                             <td>
-                                <h4 className="mx-2">Libre</h4>
+                                <h4 className="mx-2">Vacío</h4>
                             </td>
                             <td>
                                 <div className="celda">
@@ -181,7 +181,7 @@ const OrganizadorButacas = ({ setButacasExt }) => {
                                 </div>
                             </td>
                             <td>
-                                <h4 className="mx-2">Ocupado</h4>
+                                <h4 className="mx-2">Butaca normal</h4>
                             </td>
                         </tr>
                     </tbody>
