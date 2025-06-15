@@ -72,17 +72,17 @@ const SeleccionButaca = ({ funcion, prev, next }) => {
             </div>
 
             <div className="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-              <div className="modal-dialog modal-dialog-centered">
+              <div className="modal-dialog w-25 modal-dialog-centered">
                 <div className="modal-content">
-                  <div className="modal-header">
-                    <h1 className="modal-title fs-5" id="staticBackdropLabel">Aviso</h1>
+                  <div className="modal-header d-flex justify-content-center">
+                    <h1 className="modal-title fs-2" id="staticBackdropLabel">Aviso</h1>
                   </div>
                   <div className="modal-body">
-                    <h2 className='text-primary text-center'>
+                    <h2 className='text-center'>
                       ¡Máximo de butacas seleccionadas!
                     </h2>
                   </div>
-                  <div className="modal-footer">
+                  <div className="modal-footer d-flex justify-content-center">
                     <button type="button" className="btn btn-primary" data-bs-dismiss="modal">Entendido</button>
                   </div>
                 </div>
