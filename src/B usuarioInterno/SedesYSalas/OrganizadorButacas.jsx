@@ -142,6 +142,15 @@ const OrganizadorButacas = ({ setButacasExt }) => {
 
     return (
         <div>
+            <div className="mb-5">
+                Instrucciones:
+                <ul>
+                    <li>Para cambiar el tipo de butaca, hacer clic en una celda.</li>
+                    <li>Al pasar el cursor debajo del los números de cada columna, o a la derecha de cada letra, aparecerán dos botones.</li>
+                    <li>Utilice estos botones para agregar o eliminar filas/columnas.</li>
+                </ul>
+            </div>
+
             <table className="org-tabla mb-4">
                 <thead>
                     <tr>{thead2}</tr>
