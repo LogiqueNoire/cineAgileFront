@@ -58,8 +58,11 @@ const Sala = () => {
                 navigate("/intranet/sedesysalas", { state: { sedeRedir: sede } });
                 console.log("Sala creada!");
             }).catch(err => {
+                console.log(err);
                 if (err.response.status == 409) {
                     setError("¡Ya existe una sala dentro de la sede con el mismo código!");
+                } else if (err.response.status == 500) {
+                    setError("Error interno.")
                 } else {
                     setError(err.response.data);
                 }
