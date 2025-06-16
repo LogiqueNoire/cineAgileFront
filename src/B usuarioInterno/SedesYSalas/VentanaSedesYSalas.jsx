@@ -114,8 +114,8 @@ const VentanaSedesYSalas = () => {
                                     </td>
                                     <td className='align-content-center td2 tdEstado'  data-label='Estado'>
                                         {el.activo ? 
-                                        <div className='btn btn-success' style={{width: '100px'}}>Activo</div> : 
-                                        <div className='btn btn-danger' style={{width: '100px'}}>Desactiva</div>}
+                                        <div className='btn btn-success' style={{width: '100px'}}>Activa</div> : 
+                                        <div className='btn btn-danger' style={{width: '100px'}}>Inactiva</div>}
                                     </td>
                                     <td className='td2 tdOpciones' data-label='Opciones'>
 
