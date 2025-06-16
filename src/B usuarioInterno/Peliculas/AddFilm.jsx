@@ -32,7 +32,7 @@ export default function AddFilm({ onSucess }) {
     genero,
     clasificacion,
     duracion,
-    estado = "próximamente",
+    estado = "proximamente",
     fechaInicioEstreno,
     imageUrl,
     sinopsis,
