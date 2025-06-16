@@ -33,7 +33,7 @@ const FilmPanel = () => {
 
         if (caller) {
             caller().then(pelis => {
-                setPeliculas(pelis)
+                setPeliculas(pelis.reverse())
             }).catch(err => {
                 setError("Error :(... Intenta recargar la página!")
             }).finally(() => {
