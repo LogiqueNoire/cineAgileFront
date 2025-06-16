@@ -14,7 +14,6 @@ const ButacaMap = ({ onButacaSelect, isSelectedFunc, butacas }) => {
     }
 
     let [ max_row, max_col, matriz ] = SalaButaca.convButacasAMatriz(butacas);
-    console.log(max_row, max_col, matriz);
 
     let head = [<td></td>]
     for(let i = 0; i <= max_col; i++) {

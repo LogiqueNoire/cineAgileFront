@@ -8,7 +8,7 @@ const EntradaCard = ({ infoGeneral, entrada }) => {
     // dicha fecha a la zona horaria correcta.
     console.log("")
 
-    const tiempoRegistroCorrecto = (new Date(entrada.tiempoRegistro + 'Z')).toLocaleString();
+    const tiempoRegistroCorrecto = (new Date(entrada.tiempoRegistro)).toLocaleString();
 
     // Falta estandarizar todas las fechas de las funciones a UTC
     const fechaHoraInicioCorrecto = (new Date(infoGeneral.fechaHoraInicio)).toLocaleString();

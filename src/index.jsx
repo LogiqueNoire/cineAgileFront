@@ -26,7 +26,6 @@ import Sala from './B usuarioInterno/SedesYSalas/Sala.jsx';
 import { FuncionesContextProvider } from './B usuarioInterno/Funciones/FuncionesContext.jsx';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-    <StrictMode>
         <BrowserRouter>
             <Routes>
                 { /* Ruta principal: La idea es que el componente App muestra el contenido de las rutas
@@ -56,5 +55,4 @@ ReactDOM.createRoot(document.getElementById('root')).render(
                 
             </Routes>
         </BrowserRouter>
-    </StrictMode>
 );

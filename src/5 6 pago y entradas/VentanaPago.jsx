@@ -6,6 +6,7 @@ import { VentaContext } from "../3 componentesVenta/VentaContextProvider.jsx";
 import { TerminosCondiciones } from "./TerminosCondiciones.jsx";
 import { ModalTerminos } from "./ModalTerminos.jsx";
 import Entrada from "../servicios/Entrada.js";
+import { format } from "date-fns";
 
 export const VentanaPago = ({ prev, next }) => {
   const navigate = useNavigate();
@@ -42,10 +43,12 @@ export const VentanaPago = ({ prev, next }) => {
 
       const entradas = contexto.butacaContext.seleccionadas.map(el => ({ id_butaca: el.id, persona: "general" }));
   
+      const fechaAhora = (new Date(Date.now()));
+
       const cuerpo = {
         id_funcion: contexto.general.funcion.idFuncion,
         entradas: entradas,
-        tiempoRegistro: (new Date(Date.now()))// .toISOString()
+        tiempoRegistro: format(fechaAhora, "yyyy-MM-dd.HH:mm:ss").replace(".", "T")// .toISOString()
       }
 
       console.log(cuerpo);
