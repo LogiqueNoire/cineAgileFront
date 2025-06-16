@@ -1,7 +1,7 @@
 import React, { useContext} from "react";
 import { VentaContext } from "../3 componentesVenta/VentaContextProvider.jsx"
 
-const ResumenPeliComJose3 = ({ pelicula, catePeli, sedePeli, fechaPeli, salaPeli, categoria, butacasSeleccionadas, dimension}) => {
+const ResumenPeliComJose3 = ({ pelicula, catePeli, sedePeli, fechaPeli, salaPeli, categoria, butacasSeleccionadas, dimension, idFuncion}) => {
     const contexto = useContext(VentaContext);
     
     if (butacasSeleccionadas === undefined) {
