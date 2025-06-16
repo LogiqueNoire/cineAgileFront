@@ -22,7 +22,7 @@ export const FormularioTarjeta = ({ tarjeta, setTarjeta }) => {
       const cuerpo = {
         id_funcion: contexto.general.funcion.idFuncion,
         entradas: entradas,
-        tiempoRegistro: (new Date(Date.now())).toISOString()
+        tiempoRegistro: (new Date(Date.now())) //.toISOString()
       }
 
       Entrada.comprarEntrada(cuerpo).then(res => {

@@ -45,7 +45,7 @@ export const VentanaPago = ({ prev, next }) => {
       const cuerpo = {
         id_funcion: contexto.general.funcion.idFuncion,
         entradas: entradas,
-        tiempoRegistro: (new Date(Date.now())).toISOString()
+        tiempoRegistro: (new Date(Date.now()))// .toISOString()
       }
 
       console.log(cuerpo);
