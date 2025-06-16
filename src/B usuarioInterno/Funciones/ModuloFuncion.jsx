@@ -132,7 +132,7 @@ const ModuloFuncion = ({ handlePeliculaChange, handleSalaChange }) => {
 
             const response = await axios.patch(`${url}/intranet/actualizarFuncion`, {
                 idFuncion: funcion.codigoFuncion,
-                fechaHoraInicio: nfhiEnUTC,
+                fechaHoraInicio: nfhi,
                 fechaHoraFin: null,
                 dimension: funcion.nuevaDimension,
                 precioBase: funcion.nuevoPrecioBase,
@@ -203,10 +203,10 @@ const ModuloFuncion = ({ handlePeliculaChange, handleSalaChange }) => {
 
         try {
             let nfhiEnUTC = Fecha.tiempoLocalString_A_UTCString(nfhi);
-            console.log("Actualizando función con fecha UTC:", nfhiEnUTC);
+            console.log("Actualizando función con fecha UTC:", nfhi, nfhiEnUTC);
             const response = await axios.post(`${url}/intranet/crearFuncion`, {
                 idFuncion: null,
-                fechaHoraInicio: nfhiEnUTC,
+                fechaHoraInicio: nfhi,
                 fechaHoraFin: null,
                 dimension: funcion.nuevaDimension, //dimension 
                 precioBase: funcion.nuevoPrecioBase,

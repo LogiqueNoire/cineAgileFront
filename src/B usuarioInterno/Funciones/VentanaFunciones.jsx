@@ -130,7 +130,7 @@ const VentanaFunciones = () => {
                 const funciones = (await axios.get(`${url}/intranet/buscarFuncionesPorSemanaConPelicula`, {
                     params: {
                         idPelicula: peliculaId,
-                        fecha: fechaElegidaUTC, //(new Date(`${valoresBusqueda.fechaElegida}T00:00:00Z`)).toISOString(),
+                        fecha: (new Date(`${valoresBusqueda.fechaElegida}T00:00:00Z`)).toISOString(),
                         idSede: valoresBusqueda.sedeElegida
                     },
                     headers: { Authorization: `Bearer ${Cookies.get("auth-token")}` }
@@ -159,7 +159,7 @@ const VentanaFunciones = () => {
                 const funciones = (await axios.get(`${url}/intranet/buscarFuncionesPorSemanaConSala`, {
                     params: {
                         idSala: salaId,
-                        fecha: fechaElegidaUTC, //`${valoresBusqueda.fechaElegida}T00:00:00`,
+                        fecha: `${valoresBusqueda.fechaElegida}T00:00:00`,
                         idSede: valoresBusqueda.sedeElegida
                     },
                     headers: { Authorization: `Bearer ${Cookies.get("auth-token")}` }
