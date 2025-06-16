@@ -31,6 +31,23 @@ p {
   background-color: #011A5C;
 }
 
+.btn-red {
+  background-color: #7b0101;
+  color: white;
+  border-radius: 5px;
+  padding: 10px 20px;
+  text-decoration: none;
+  border: none;
+}
+
+.btn-red:hover {
+  background-color: #9c0a0a;
+}
+
+.btn-red:active {
+  background-color: #5c0101;
+}
+
 .toast-info {
   position: fixed;
   bottom: 20px;

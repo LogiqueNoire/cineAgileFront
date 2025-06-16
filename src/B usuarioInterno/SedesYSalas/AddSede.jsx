@@ -55,7 +55,7 @@ export default function AddSede({ onSucess }) {
   };
 
   return (
-    <div className="justify-self-center" style={{ width: "400px" }}>
+    <div className="justify-self-center" style={{ width: "300px" }}>
       <div className="row">
         <div className="border rounded p-4 mt-4 shadow">
           <div className='d-flex justify-content-center align-items-center gap-2'>

@@ -2,13 +2,14 @@ import React, { useEffect, useState } from 'react';
 import AddSede from './AddSede';
 import sala from '../../assets/sala2.svg';
 import guardar from '../../assets/guardar.svg'
+import iconoApagar from '../../assets/apagar.svg'
 import axios from 'axios';
 import { url } from "../../configuracion/backend"
 import Loading from '../../0 componentesGenerales/Loading';
 import { ModalSalas } from './ModalSalas'
 import Cookies from 'js-cookie';
 import { useLocation } from 'react-router-dom';
-
+import "./VentanaSedesYSalas.css"
 
 const VentanaSedesYSalas = () => {
     const location = useLocation();
@@ -21,7 +22,7 @@ const VentanaSedesYSalas = () => {
     const [loading, setLoading] = useState(true);
 
     const consultar = () => {
-        axios.get(`${url}/intranet/soloSedes`, {
+        axios.get(`${url}/intranet/sedesTodas`, {
             headers: { Authorization: `Bearer ${Cookies.get("auth-token")}` }
         }).then(res => {
             setLista(res.data.reverse());
@@ -46,9 +47,26 @@ const VentanaSedesYSalas = () => {
             alert("¡Sede editada!")
             consultar()
         } catch (error) {
-                alert('Error al guardar la sede. Tal vez ya existe una sede con el mismo nombre.');
+            alert('Error al guardar la sede. Tal vez ya existe una sede con el mismo nombre.');
             console.error(error);
         }
+    }
+
+    const apagarPrender = async (el) => {
+        console.log(el);
+        const confirmado = window.confirm('¿Estás seguro de que deseas cambiar el estado de esta sede?');
+        if (confirmado) {
+            try {
+                await axios.patch(`${url}/intranet/activarDesactivarSede`, el, {
+                    headers: { Authorization: `Bearer ${Cookies.get("auth-token")}` }
+                });
+                alert("¡Sede editada!")
+                consultar()
+            } catch (error) {
+                console.error(error);
+            }
+        }
+
     }
 
     const moverse = (id) => {
@@ -70,22 +88,23 @@ const VentanaSedesYSalas = () => {
 
     return (
         <div>
-            <div className='d-flex flex-column align-items-center container'>
+            <div className='d-flex flex-column align-items-center container-fluid'>
                 <AddSede onSucess={consultar}></AddSede>
                 {loading === true
                     ? <Loading></Loading> :
-                    <table className='table table-striped border table-hover m-4'>
-                        <thead className=''>
-                            <tr className=''>
-                                <td className=''>Nombre de sede</td>
-                                <td className=''>Opciones</td>
+                    <table className='mytable2 table table-striped border table-hover m-4'>
+                        <thead className='thead2'>
+                            <tr className='tr2'>
+                                <td className='td2'>Nombre de sede</td>
+                                <td className='td2'>Estado</td>
+                                <td className='td2'>Opciones</td>
                             </tr>
                         </thead>
-                        <tbody className=''>
+                        <tbody className='tbody2'>
                             {edicion.map((el, id) => (
-                                <tr key={el.id || id}>
-                                    <td className='align-content-center'>
-                                        <input className='form-control ' type="text" value={el.nombre}
+                                <tr key={el.id || id} className='tr2'>
+                                    <td className='align-content-center td2' data-label='Nombre' >
+                                        <input className='form-control ms-end' type="text" value={el.nombre} style={{width: '250px'}}
                                             onChange={(e) => {
                                                 const nuevaLista = [...lista];
                                                 nuevaLista[id] = { ...el, nombre: e.target.value };
@@ -93,11 +112,22 @@ const VentanaSedesYSalas = () => {
                                             }} />
 
                                     </td>
-                                    <td style={{ 'width': 'min-content' }}>
+                                    <td className='align-content-center td2 tdEstado'  data-label='Estado'>
+                                        {el.activo ? 
+                                        <div className='btn btn-success' style={{width: '100px'}}>Activo</div> : 
+                                        <div className='btn btn-danger' style={{width: '100px'}}>Desactiva</div>}
+                                    </td>
+                                    <td className='td2 tdOpciones' data-label='Opciones'>
 
-                                        <div className='d-flex justify-content-center gap-4' style={{ 'width': 'min-content' }}>
-                                            <button className='btn btn-primary d-flex gap-2 px-3' onClick={() => actualizarSede(el)}>
+                                        <div className='d-flex justify-content-center gap-2' style={{ 'width': 'min-content' }} >
+                                            <button className='btn btn-primary d-flex gap-2' onClick={() => actualizarSede(el)}
+                                                style={{ 'paddingInline': '12px' }}>
                                                 <img src={guardar} alt="" style={{ height: '25px' }} />
+                                            </button>
+
+                                            <button className='btn btn-red d-flex gap-2' onClick={() => apagarPrender(el)}
+                                                style={{ padding:'6px'}}>
+                                                <img className='' src={iconoApagar} alt="" style={{ height: '33px' }} />
                                             </button>
 
                                             <button className='btn btn-primary d-flex gap-2 px-3' onClick={() => moverse(id)}>

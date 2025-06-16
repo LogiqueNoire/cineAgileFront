@@ -1,37 +1,47 @@
-.mytable {
+.mytable2 {
     width: 100%;
-    border-collapse: collapse;
 }
 
-.th,
-.td {
-    border: 1px solid #ccc;
+.th2,
+.td2 {
     text-align: left;
 }
 
-@media (max-width: 1023px) {
+.opciones {
+    white-space: nowrap;
+    width: 1%
+}
 
+.tdEstado {
+    width: 100px;
+}
 
-    .mytable,
-    .thead,
-    .tbody,
-    .th,
-    .td,
-    .tr {
+.tdOpciones {
+    width: 250px;
+}
+
+@media (max-width: 685px) {
+
+    .mytable2,
+    .thead2,
+    .tbody2,
+    .th2,
+    .td2,
+    .tr2 {
         display: block;
 
     }
 
-    .thead {
+    .thead2 {
         display: none;
     }
 
-    .tr {
+    .tr2 {
         margin-bottom: 1rem;
         border: 1px solid #ddd;
     }
 
-    .td {
+    .td2 {
         position: relative;
         padding-left: 50%;
         text-align: right;
@@ -41,17 +51,18 @@
         justify-content: flex-end;
     }
 
-    .ms-end{
+    .ms-end {
         text-align: right;
+        width: 400px;
     }
 
-    
 
-    .mytable>:not(caption)>*>* {
+
+    .mytable2>:not(caption)>*>* {
         box-shadow: none;
     }
 
-    .td::before {
+    .td2::before {
         text-align: left;
         content: attr(data-label);
         position: absolute;
@@ -66,18 +77,22 @@
 
     .sinopsis {
         display: flex;
-        justify-content:right;
+        justify-content: right;
         justify-self: flex-end;
         width: 80%;
     }
-}
-.addFilm{
-    justify-self: center;
-    width: 70%;
-}
-@media (max-width: 768px) {
-    .addFilm{
+
+    .opciones {
+        white-space: nowrap;
+        width: 100%
+    }
+
+    .tdEstado {
         width: 100%;
     }
-}
 
+    .tdOpciones {
+        width: 100%;
+    }
+
+}
