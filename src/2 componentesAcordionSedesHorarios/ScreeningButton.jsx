@@ -44,7 +44,6 @@ const ScreeningButton = ({ funcion, pelicula }) => {
                         position: 'absolute',
                         top: '-1rem',
                         left: '1.5rem',
-                        backgroundColor: 'white',
                         padding: '0 0.5rem',
                         fontSize: '1rem',
                         fontWeight: 'bold',

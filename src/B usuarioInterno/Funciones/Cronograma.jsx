@@ -117,7 +117,7 @@ const Cronograma = () => {
                       <td key={index} style={{
                         borderBottom: (i === horas.length - 1) ? 'none' : ''
                       }}>
-                        <div className='d-flex justify-content-center align-items-center gap-2'>
+                        <div className='d-flex justify-content-center flex-column align-items-center gap-2'>
 
                           {
                             listaFunciones.map((el, key) => (

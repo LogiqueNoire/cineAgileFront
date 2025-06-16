@@ -90,6 +90,7 @@ const ModuloFuncion = ({ handlePeliculaChange, handleSalaChange }) => {
             alert("Debe ingresar una nueva hora de inicio");
             return;
         }
+        
         listaFunciones.map((el) => {
             if (el.idFuncion === Number(funcion.codigoFuncion)) {
                 const [horaRef, minutoRef] = funcion.nuevaHoraInicio.split(':').map(Number);
@@ -128,6 +129,7 @@ const ModuloFuncion = ({ handlePeliculaChange, handleSalaChange }) => {
             //console.log("Actualizando función con código:", funcion.codigoFuncion);
             //console.log("Nueva fecha y hora de inicio:", nfhi);
             let nfhiEnUTC = Fecha.tiempoLocalString_A_UTCString(nfhi);
+
             const response = await axios.patch(`${url}/intranet/actualizarFuncion`, {
                 idFuncion: funcion.codigoFuncion,
                 fechaHoraInicio: nfhiEnUTC,
@@ -200,8 +202,8 @@ const ModuloFuncion = ({ handlePeliculaChange, handleSalaChange }) => {
         console.log(funcion)
 
         try {
-            //console.log("Actualizando función con código:", funcion.codigoFuncion);
             let nfhiEnUTC = Fecha.tiempoLocalString_A_UTCString(nfhi);
+            console.log("Actualizando función con fecha UTC:", nfhiEnUTC);
             const response = await axios.post(`${url}/intranet/crearFuncion`, {
                 idFuncion: null,
                 fechaHoraInicio: nfhiEnUTC,
