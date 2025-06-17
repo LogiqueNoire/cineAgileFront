@@ -1,0 +1,20 @@
+.tableCronograma {
+    border-collapse: separate;
+    width: 100%
+}
+
+.hora {
+    position: absolute;
+    top: -0.85rem;
+    left: 0.7rem;
+    background-color: white;
+    padding: 0 0.5rem;
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+@media (max-width: 880px) {
+    .hora{
+        left: 0rem;
+    }
+}

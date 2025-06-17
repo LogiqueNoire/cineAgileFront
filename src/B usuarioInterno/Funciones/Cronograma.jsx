@@ -3,6 +3,7 @@ import { useState } from "react";
 import MostrarSedesHorarios from "../../3 componentesVenta/MostrarSedesHorarios";
 import { useContext } from "react";
 import { FuncionesContext } from "./FuncionesContext";
+import './Cronograma.css'
 
 const Cronograma = () => {
   const {
@@ -72,13 +73,14 @@ const Cronograma = () => {
     <section className=''>
       <h2 className='d-none d-lg-block mr-4'>Funciones de la semana</h2>
       <div className="table-responsive">
-        <table className="table" style={{ 'borderCollapse': 'separate', width: '100%' }}>
+        <table className="table tableCronograma">
           <thead>
             <tr>
               <th className='text-center' scope="col mb-3" style={{ backgroundColor: 'rgb(184, 248, 255)' }}>Hora</th>
               {fechasSemana.map((_, index) => (
                 <th className='text-center' key={index} scope="col" style={{ backgroundColor: 'rgb(184, 248, 255)' }}>
-                  {fechasSemana[index] ? `${diasDeLaSemana[index]} ${fechasSemana[index].toString().padStart(2, '0')}` : ''}
+                  <div>{fechasSemana[index] ? `${diasDeLaSemana[index]}` : ''}</div>
+                  <div>{fechasSemana[index] ? `${fechasSemana[index].toString().padStart(2, '0')}` : ''}</div>
                 </th>
               ))}
             </tr>
@@ -97,15 +99,7 @@ const Cronograma = () => {
                     position: 'relative', padding: '1.5rem', width: '80px',
                     borderBottom: (i === horas.length - 1) ? 'none' : ''
                   }}>
-                    <div style={{
-                      position: 'absolute',
-                      top: '-0.85rem',
-                      left: '0.7rem',
-                      backgroundColor: 'white',
-                      padding: '0 0.5rem',
-                      fontSize: '1rem',
-                      fontWeight: 'bold'
-                    }}>
+                    <div className='hora'>
                       {formatearHora(hora)}
                     </div>
                   </td>
