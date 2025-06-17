@@ -22,7 +22,7 @@ const VentanaSedesYSalas = () => {
     const [sede, setSede] = useState(null);
     const [loading, setLoading] = useState(true);
 
-    const [toast, setToast] = useState({ visible: false, titulo: '', mensaje: '' });
+    const [toast, setToast] = useState({ tipo: '', visible: false, titulo: '', mensaje: '' });
 
     const consultar = () => {
         axios.get(`${url}/intranet/sedesTodas`, {
@@ -47,11 +47,24 @@ const VentanaSedesYSalas = () => {
             await axios.patch(`${url}/intranet/editarSede`, el, {
                 headers: { Authorization: `Bearer ${Cookies.get("auth-token")}` }
             });
-            alert("¡Sede editada!")
             consultar()
         } catch (error) {
-            alert('Error al guardar la sede. Tal vez ya existe una sede con el mismo nombre.');
+            setToast({
+                tipo: 'toast-danger',
+                visible: true,
+                titulo: 'Error al guardar la sede.',
+                mensaje: 'Tal vez ya existe una sede con el mismo nombre.'
+            });
+            setTimeout(() => setToast({ visible: false }), 3000);
             console.error(error);
+        } finally {
+            setToast({
+                tipo: 'toast-info',
+                visible: true,
+                titulo: '¡Sede editada!',
+                mensaje: ''
+            });
+            setTimeout(() => setToast({ visible: false }), 3000);
         }
     }
 
@@ -74,12 +87,14 @@ const VentanaSedesYSalas = () => {
             } finally {
                 if (el.activo = true)
                     setToast({
+                        tipo: 'toast-info',
                         visible: true,
                         titulo: 'Estado de sede cambiado',
                         mensaje: 'Las funciones asociadas también se mostrarán'
                     });
                 else
                     setToast({
+                        tipo: 'toast-info',
                         visible: true,
                         titulo: 'Estado de sede cambiado',
                         mensaje: 'Las funciones asociadas también se ocultarán'
@@ -166,7 +181,7 @@ const VentanaSedesYSalas = () => {
                     </table>
 
                 }
-                {<Toast tipo={'toast-info'}
+                {<Toast tipo={toast.tipo}
                     titulo={toast.titulo}
                     mensaje={toast.mensaje}
                     visible={toast.visible} />}

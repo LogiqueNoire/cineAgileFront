@@ -12,6 +12,8 @@ import Toast from '../../Toast'
 import Fecha from "../../servicios/Fecha";
 
 const ModuloFuncion = ({ handlePeliculaChange, handleSalaChange }) => {
+    const [toast, setToast] = useState({ tipo: '', visible: false, titulo: '', mensaje: '' });
+
     const [loading, setLoading] = useState(true);
     const {
         valoresBusqueda,
@@ -29,9 +31,6 @@ const ModuloFuncion = ({ handlePeliculaChange, handleSalaChange }) => {
     const [checked, setChecked] = useState(true)
 
     const [primeraVez, setPrimeraVez] = useState(true)
-
-    const [toast, setToast] = useState({ visible: false, titulo: '', mensaje: '' });
-
 
     useEffect(() => {
         if (primeraVez) {
@@ -87,16 +86,29 @@ const ModuloFuncion = ({ handlePeliculaChange, handleSalaChange }) => {
     const actualizarFuncion = async () => {
         let nfhi;
         if (!funcion.nuevaHoraInicio) {
-            alert("Debe ingresar una nueva hora de inicio");
+            setToast({
+                tipo: 'toast-danger',
+                visible: true,
+                titulo: '¡Cuidado!',
+                mensaje: 'Debe ingresar una nueva hora de inicio'
+            });
+            setTimeout(() => setToast({ visible: false }), 3000);
+            onSucess()
             return;
         }
-        
+
         listaFunciones.map((el) => {
             if (el.idFuncion === Number(funcion.codigoFuncion)) {
                 const [horaRef, minutoRef] = funcion.nuevaHoraInicio.split(':').map(Number);
                 if ((new Date(el.fechaHoraInicio)).getHours() === horaRef && (new Date(el.fechaHoraInicio)).getMinutes() === minutoRef
                     && funcion.nuevaFecha === '') {
-                    alert("La hora de inicio es la misma que la actual");
+                    setToast({
+                        tipo: 'toast-danger',
+                        visible: true,
+                        titulo: '¡Cuidado!',
+                        mensaje: 'La hora de inicio es la misma que la actual'
+                    });
+                    setTimeout(() => setToast({ visible: false }), 3000);
                     return;
                 } else {
                     if (funcion.nuevaFecha !== '') {
@@ -117,7 +129,13 @@ const ModuloFuncion = ({ handlePeliculaChange, handleSalaChange }) => {
             }
 
             if (!el.fechaHoraInicio) {
-                alert("La función no tiene una fecha de inicio válida");
+                setToast({
+                    tipo: 'toast-danger',
+                    visible: true,
+                    titulo: '¡Cuidado!',
+                    mensaje: 'La función no tiene una fecha de inicio válida'
+                });
+                setTimeout(() => setToast({ visible: false }), 3000);
                 return;
             }
 
@@ -148,7 +166,13 @@ const ModuloFuncion = ({ handlePeliculaChange, handleSalaChange }) => {
             });
 
             if (response.status === 200) {
-                alert("¡Función editada!")
+                setToast({
+                    tipo: 'toast-info',
+                    visible: true,
+                    titulo: '¡Función editada!',
+                    mensaje: ''
+                });
+                setTimeout(() => setToast({ visible: false }), 3000);
                 if (valoresBusqueda.selectSala) {
                     handleSalaChange({ target: { value: valoresBusqueda.selectSala } });
                 } else if (valoresBusqueda.selectPelicula) {
@@ -171,7 +195,8 @@ const ModuloFuncion = ({ handlePeliculaChange, handleSalaChange }) => {
             setToast({
                 visible: true,
                 titulo: 'Función no actualizada',
-                mensaje: 'Horario fuera de rango permitido, cruce detectado o función con entradas vendidas' });
+                mensaje: 'Horario fuera de rango permitido, cruce detectado o función con entradas vendidas'
+            });
             setTimeout(() => setToast({ visible: false }), 3000);
         }
     }
@@ -179,7 +204,13 @@ const ModuloFuncion = ({ handlePeliculaChange, handleSalaChange }) => {
     const crearFuncion = async () => {
         let nfhi;
         if (!funcion.nuevaHoraInicio) {
-            alert("Debe ingresar una nueva hora de inicio");
+            setToast({
+                        tipo: 'toast-danger',
+                        visible: true,
+                        titulo: '¡Cuidado!',
+                        mensaje: 'Debe ingresar una nueva hora de inicio'
+                    });
+                    setTimeout(() => setToast({ visible: false }), 3000);
             return;
         }
 
@@ -222,7 +253,13 @@ const ModuloFuncion = ({ handlePeliculaChange, handleSalaChange }) => {
             });
 
             if (response.status === 200) {
-                alert("¡Función creada!")
+                setToast({
+                        tipo: 'toast-info',
+                        visible: true,
+                        titulo: '¡Función creada!',
+                        mensaje: ''
+                    });
+                    setTimeout(() => setToast({ visible: false }), 3000);
                 if (valoresBusqueda.selectSala) {
                     handleSalaChange({ target: { value: valoresBusqueda.selectSala } });
                 } else if (valoresBusqueda.selectPelicula) {
@@ -247,7 +284,8 @@ const ModuloFuncion = ({ handlePeliculaChange, handleSalaChange }) => {
             setToast({
                 visible: true,
                 titulo: 'Error al crear la función',
-                mensaje: 'Horario fuera de rango permitido o cruce detectado' });
+                mensaje: 'Horario fuera de rango permitido o cruce detectado'
+            });
             setTimeout(() => setToast({ visible: false }), 3000);
         }
     }

@@ -3,11 +3,13 @@ import { useContext } from "react";
 import { VentaContext } from "../3 componentesVenta/VentaContextProvider.jsx";
 import Entrada from "../servicios/Entrada.js";
 import { useLocation, useNavigate } from "react-router-dom";
-
+import Toast from "../Toast.jsx";
 
 export const FormularioTarjeta = ({ tarjeta, setTarjeta }) => {
   const contexto = useContext(VentaContext)
   const total = Number(contexto.totalContext.total.toFixed(2));
+
+  const [toast, setToast] = useState({ visible: false, titulo: '', mensaje: '' });
 
   const navigate = useNavigate();
   // Temporal
@@ -18,7 +20,7 @@ export const FormularioTarjeta = ({ tarjeta, setTarjeta }) => {
       bloquearSolicitud = true;
 
       const entradas = contexto.butacaContext.seleccionadas.map(el => ({ id_butaca: el.id, persona: "general" }));
-      
+
       const cuerpo = {
         id_funcion: contexto.general.funcion.idFuncion,
         entradas: entradas,
@@ -57,13 +59,21 @@ export const FormularioTarjeta = ({ tarjeta, setTarjeta }) => {
           onApprove={(_, actions) => {
             return actions.order.capture().then(details => {
               registrarTest()
-              console.log("Pago exitoso")
               console.log(details)
-              alert("Pago exitoso")
+              setToast({
+                visible: true,
+                titulo: 'Pago exitoso',
+                mensaje: ''
+              });
+              setTimeout(() => setToast({ visible: false }), 3000);
             })
           }}
         />
       </PayPalScriptProvider>
+      <Toast tipo={'toast-info'}
+        titulo={toast.titulo}
+        mensaje={toast.mensaje}
+        visible={toast.visible} />
     </div>
   );
 };

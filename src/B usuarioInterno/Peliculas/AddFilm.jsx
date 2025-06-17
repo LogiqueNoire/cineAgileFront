@@ -7,9 +7,11 @@ import { format } from 'date-fns'
 import peliculaIcono from '../../assets/peliculaDark.svg'
 import Loading from '../../0 componentesGenerales/Loading.jsx';
 import Cookies from 'js-cookie';
-
+import Toast from '../../Toast.jsx';
 
 export default function AddFilm({ onSucess }) {
+  const [toast, setToast] = useState({ tipo: '', visible: false, titulo: '', mensaje: '' });
+
   const [fechaReal, setFechaReal] = useState()
   const [pelicula, setPelicula] = useState({
     nombre: '',
@@ -101,7 +103,7 @@ export default function AddFilm({ onSucess }) {
         await axios.post(`${url}/intranet/peliculas/agregar`, peliculaFinal, {
           headers: { Authorization: `Bearer ${Cookies.get("auth-token")}` }
         });
-        alert('Película agregada correctamente');
+
         if (onSucess) {
           onSucess()
         }
@@ -118,8 +120,22 @@ export default function AddFilm({ onSucess }) {
           sinopsis: '',
         });
       } catch (error) {
-        alert('Error al agregar la película');
+        setToast({
+          tipo: 'toast-danger',
+          visible: true,
+          titulo: 'Error al agregar la película',
+          mensaje: ''
+        });
+        setTimeout(() => setToast({ visible: false }), 3000);
         console.error(error);
+      } finally {
+        setToast({
+          tipo: 'toast-info',
+          visible: true,
+          titulo: 'Película agregada correctamente',
+          mensaje: ''
+        });
+        setTimeout(() => setToast({ visible: false }), 3000);
       }
     }
   };
@@ -333,6 +349,10 @@ export default function AddFilm({ onSucess }) {
           <Loading ></Loading>
         </div>
       }
+      {<Toast tipo={toast.tipo}
+        titulo={toast.titulo}
+        mensaje={toast.mensaje}
+        visible={toast.visible} />}
     </div>
 
   );

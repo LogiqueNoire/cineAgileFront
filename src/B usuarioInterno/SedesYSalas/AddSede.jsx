@@ -5,8 +5,11 @@ import { url } from '../../configuracion/backend.js'
 import Cookies from 'js-cookie';
 import sedeDark from '../../assets/sedeDark.svg';
 import BotonCarga from '../../0 componentesGenerales/BotonCarga.jsx';
+import Toast from '../../Toast.jsx';
 
 export default function AddSede({ onSucess }) {
+  const [toast, setToast] = useState({ tipo: '', visible: false, titulo: '', mensaje: '' });
+
   const [submitting, setSubmitting] = useState(false);
   const [sede, setSede] = useState({
 
@@ -40,14 +43,32 @@ export default function AddSede({ onSucess }) {
         headers: { Authorization: `Bearer ${Cookies.get("auth-token")}` }
       });
       if (onSucess) {
-        alert("Sede agregada!")
-        onSucess()
+        setToast({
+          tipo: 'toast-info',
+          visible: true,
+          titulo: 'Sede agregada',
+          mensaje: ''
+        });
+        setTimeout(() => setToast({ visible: false }), 3000); onSucess()
       }
     } catch (error) {
-      if (error.status == 409)
-        alert(error.response.data);
-      else
-        alert('Error al agregar la sede');
+      if (error.status == 409){
+        setToast({
+          tipo: 'toast-danger',
+          visible: true,
+          titulo: 'Error al agregar la película',
+          mensaje: error.response.data
+        });
+        setTimeout(() => setToast({ visible: false }), 3000);
+      } else {
+        setToast({
+          tipo: 'toast-danger',
+          visible: true,
+          titulo: 'Error al agregar la sede',
+          mensaje: ''
+        });
+        setTimeout(() => setToast({ visible: false }), 3000);
+      }
       console.error(error);
     } finally {
       setSubmitting(false);
@@ -86,6 +107,10 @@ export default function AddSede({ onSucess }) {
           </form>
         </div>
       </div>
+      {<Toast tipo={toast.tipo}
+        titulo={toast.titulo}
+        mensaje={toast.mensaje}
+        visible={toast.visible} />}
     </div>
   );
 }
