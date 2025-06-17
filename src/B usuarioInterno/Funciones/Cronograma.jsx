@@ -45,15 +45,17 @@ const Cronograma = () => {
   aux.setDate(aux.getDate() - aux.getDay());
   while (fechasSemana.length < 7) {
     aux.setDate(aux.getDate() + 1);
-    fechasSemana.push(aux.getDate());
+    fechasSemana.push(new Date(aux));
   }
+  console.log(fechasSemana)
   const horas = [];
 
-  for (let h = 7; h <= 24; h++) {
+  for (let h = 0; h <= 23; h++) {
     const fecha = new Date();
     fecha.setHours(h, 0, 0);
     horas.push(new Date(fecha));
   }
+  console.log("horas", horas)
 
   function formatearHora(fechaStr) {
     const fecha = new Date(fechaStr);
@@ -63,11 +65,29 @@ const Cronograma = () => {
   }
 
   function AdespuesB(hora1, hora2) {
-    return (hora1.getHours() > hora2.getHours() ||
-       (hora1.getHours() == hora2.getHours() &&
-        hora1.getMinutes() > hora2.getMinutes()));
+    //console.log(hora1, hora2)
+    /*const [horas, minutos] = hora1.split(':').map(Number);
+    const hora1conFechahora2 = new Date(hora2);
+    hora1conFechahora2.setHours(horas, minutos, 0, 0);
+    return hora1conFechahora2 > hora2;*/
+    //if (hora1.getDate)
+    //return (hora1.getHours() > hora2.getHours() ||
+    //  (hora1.getHours() == hora2.getHours() &&
+    //    hora1.getMinutes() > hora2.getMinutes()));
+    return hora1 > hora2
   }
 
+  function comparar(el, hora) {
+    const fechaInicio = new Date(el.fechaHoraInicio);
+    const fechaFin = new Date(el.fechaHoraFin);
+
+    // Clona hora y le suma una hora
+    const horaMasUna = new Date(hora);
+    horaMasUna.setHours(hora.getHours() + 1, hora.getMinutes(), 0, 0);
+
+    return AdespuesB(horaMasUna, fechaInicio) &&
+      AdespuesB(fechaFin, hora);
+  }
 
   return (
     <section className=''>
@@ -80,7 +100,7 @@ const Cronograma = () => {
               {fechasSemana.map((_, index) => (
                 <th className='text-center' key={index} scope="col" style={{ backgroundColor: 'rgb(184, 248, 255)' }}>
                   <div>{fechasSemana[index] ? `${diasDeLaSemana[index]}` : ''}</div>
-                  <div>{fechasSemana[index] ? `${fechasSemana[index].toString().padStart(2, '0')}` : ''}</div>
+                  <div>{fechasSemana[index] ? `${fechasSemana[index].getDate().toString().padStart(2, '0')}` : ''}</div>
                 </th>
               ))}
             </tr>
@@ -112,40 +132,38 @@ const Cronograma = () => {
                         borderBottom: (i === horas.length - 1) ? 'none' : ''
                       }}>
                         <div className='d-flex justify-content-center flex-column align-items-center gap-2'>
-
-                          {
-                            listaFunciones.map((el, key) => (
-                              ((new Date(el.fechaHoraInicio)).getDay() === index + 1
-                                || ((new Date(el.fechaHoraInicio)).getDay() === 0 && index === 6))
-                                &&
-                                (AdespuesB(new Date(new Date().setHours(hora.getHours() + 1, hora.getMinutes(), 0, 0)), new Date(el.fechaHoraInicio))
-                                  && AdespuesB(new Date(el.fechaHoraFin), hora))
-                                ?
-                                <div className='text-center p-2'
-                                  onClick={(e) => {
-                                    e.preventDefault();
-                                    setFuncion(
-                                      prev => ({
-                                        ...prev,
-                                        funcionElegida: el
-                                      })
-                                    )
-                                  }}
-                                  style={{ backgroundColor: `${colores[el.idFuncion % colores.length]}` }}>
-                                  <h6>{'#' + el.idFuncion}</h6>
-                                  <h6>{formatearHora(el.fechaHoraInicio) + '-' + formatearHora(el.fechaHoraFin)}</h6>
-                                  {valoresBusqueda.filtro === 'pelicula' ?
-                                    <h6>{'Sala ' + el.codigoSala}</h6>
-                                    :
-                                    <h6>{el.nombrePelicula}</h6>
-                                  }
-                                  <h6>{el.categoria + ' ' + el.dimension}</h6>
-                                  <h6>{'S/ ' + el.precioBase}</h6>
-                                  <h6></h6>
-                                </div>
-                                :
-                                <></>
-                            ))
+                          {listaFunciones.map((el, key) => {
+                            const horaDelDia = new Date(fs);
+                            horaDelDia.setHours(hora.getHours(), hora.getMinutes(), 0, 0);
+                            return (
+                              AdespuesB((new Date(horaDelDia)).setHours(horaDelDia.getHours() + 1, horaDelDia.getMinutes(), 0, 0), new Date(el.fechaHoraInicio))
+                              && AdespuesB(new Date(el.fechaHoraFin), horaDelDia))
+                              ?
+                              <div className='text-center p-2'
+                                onClick={(e) => {
+                                  e.preventDefault();
+                                  setFuncion(
+                                    prev => ({
+                                      ...prev,
+                                      funcionElegida: el
+                                    })
+                                  )
+                                }}
+                                style={{ backgroundColor: `${colores[el.idFuncion % colores.length]}` }}>
+                                <h6>{'#' + el.idFuncion}</h6>
+                                <h6>{formatearHora(el.fechaHoraInicio) + '-' + formatearHora(el.fechaHoraFin)}</h6>
+                                {valoresBusqueda.filtro === 'pelicula' ?
+                                  <h6>{'Sala ' + el.codigoSala}</h6>
+                                  :
+                                  <h6>{el.nombrePelicula}</h6>
+                                }
+                                <h6>{el.categoria + ' ' + el.dimension}</h6>
+                                <h6>{'S/ ' + el.precioBase}</h6>
+                                <h6></h6>
+                              </div>
+                              :
+                              <></>
+                          })
                           }
                         </div>
                       </td>
