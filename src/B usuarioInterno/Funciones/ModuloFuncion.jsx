@@ -344,7 +344,7 @@ const ModuloFuncion = ({ handlePeliculaChange, handleSalaChange }) => {
                                         }))
                                     }>
                                     <option value='0'>Elija una sede</option>
-                                    {valoresBusqueda.sedes.map((el, id) => (
+                                    {valoresBusqueda.sedesActivas.map((el, id) => (
                                         <option key={el.id || id} value={el.id} >{el.nombre}</option>
                                     ))}
                                 </select>
@@ -465,7 +465,7 @@ const ModuloFuncion = ({ handlePeliculaChange, handleSalaChange }) => {
                                     }))
                                 }>
                                 <option value='0'>Elija una sede</option>
-                                {valoresBusqueda.sedes.map((el, id) => (
+                                {valoresBusqueda.sedesActivas.map((el, id) => (
                                     <option key={el.id || id} value={el.id} >{el.nombre}</option>
                                 ))}
                             </select>

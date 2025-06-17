@@ -20,13 +20,31 @@ const BuscarFunciones = ({ handlePeliculaChange, handleSalaChange }) => {
 
     useEffect(() => {
         if (primeraVez) {
-            consultarSedes()
+            consultarSedesTodas()
+            consultarSedesActivas()
         } else {
             setPrimeraVez(false);
         }
     }, [primeraVez])
 
-    const consultarSedes = async () => {
+    const consultarSedesTodas = async () => {
+        try {
+            const datos = (await axios.get(`${url}/intranet/sedesTodas`, {
+                headers: { Authorization: `Bearer ${Cookies.get("auth-token")}` }
+            })).data;
+
+            setValoresBusqueda(prev => ({
+                ...prev,
+                sedesTodas: datos
+            }));
+        } catch (error) {
+            console.error(error);
+        } finally {
+            setLoading(false)
+        }
+    }
+
+    const consultarSedesActivas = async () => {
         try {
             const datos = (await axios.get(`${url}/intranet/soloSedes`, {
                 headers: { Authorization: `Bearer ${Cookies.get("auth-token")}` }
@@ -34,12 +52,10 @@ const BuscarFunciones = ({ handlePeliculaChange, handleSalaChange }) => {
 
             setValoresBusqueda(prev => ({
                 ...prev,
-                sedes: datos
+                sedesActivas: datos
             }));
         } catch (error) {
             console.error(error);
-        } finally {
-            setLoading(false)
         }
     }
 
@@ -60,7 +76,7 @@ const BuscarFunciones = ({ handlePeliculaChange, handleSalaChange }) => {
                     <label className='d-flex text-nowrap'>Elige sede</label>
                     <select className='form-select' onChange={(e) => cambiarSede(e)}>
                         <option value='0'>Elija una sede</option>
-                        {valoresBusqueda.sedes.map((el, id) => (
+                        {valoresBusqueda.sedesTodas.map((el, id) => (
                             <option key={el.id || id} value={el.id} >{el.nombre}</option>
                         ))}
                     </select>

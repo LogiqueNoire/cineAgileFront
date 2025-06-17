@@ -49,7 +49,7 @@ const VentanaFunciones = () => {
                 nuevaHoraInicio: format(fhi, "HH:mm"),
                 nuevaSalaId: valoresBusqueda.salasSede.find(el => el.codigoSala === funcion.funcionElegida.codigoSala)?.id,
                 nuevaPeliculaId: listaPeliculas.find(el => el.idPelicula === funcion.funcionElegida.idPelicula)?.idPelicula,
-                nuevaSedeId: valoresBusqueda.sedes.find(el => el.id === funcion.funcionElegida.idSede)?.id,
+                nuevaSedeId: valoresBusqueda.sedesActivas.find(el => el.id === funcion.funcionElegida.idSede)?.id,
                 nuevaDimension: funcion.funcionElegida.dimension,
                 nuevoPrecioBase: funcion.funcionElegida.precioBase
             }));

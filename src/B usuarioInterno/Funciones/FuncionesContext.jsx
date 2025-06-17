@@ -7,7 +7,8 @@ export const FuncionesContext = createContext()
 export const FuncionesContextProvider = ({ children }) => {
 
     const [valoresBusqueda, setValoresBusqueda] = useState({
-        sedes: [],
+        sedesTodas: [],
+        sedesActivas: [],
         sedeElegida: '',
         peliculasSede: [],
         salasSede: [],

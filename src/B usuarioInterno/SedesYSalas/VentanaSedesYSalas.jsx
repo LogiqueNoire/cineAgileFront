@@ -10,6 +10,7 @@ import { ModalSalas } from './ModalSalas'
 import Cookies from 'js-cookie';
 import { useLocation } from 'react-router-dom';
 import "./VentanaSedesYSalas.css"
+import Toast from '../../Toast';
 
 const VentanaSedesYSalas = () => {
     const location = useLocation();
@@ -20,6 +21,8 @@ const VentanaSedesYSalas = () => {
 
     const [sede, setSede] = useState(null);
     const [loading, setLoading] = useState(true);
+
+    const [toast, setToast] = useState({ visible: false, titulo: '', mensaje: '' });
 
     const consultar = () => {
         axios.get(`${url}/intranet/sedesTodas`, {
@@ -54,16 +57,34 @@ const VentanaSedesYSalas = () => {
 
     const apagarPrender = async (el) => {
         console.log(el);
-        const confirmado = window.confirm('¿Estás seguro de que deseas cambiar el estado de esta sede?');
+        let confirmado
+        if (el.activo === true)
+            confirmado = window.confirm('¿Estás seguro de que deseas desactivar esta sede? Las funciones asociadas se ocultarán y no se podrán crear nuevas funciones en esa sede');
+        else
+            confirmado = window.confirm('¿Estás seguro de que deseas activar esta sede?');
+
         if (confirmado) {
             try {
                 await axios.patch(`${url}/intranet/activarDesactivarSede`, el, {
                     headers: { Authorization: `Bearer ${Cookies.get("auth-token")}` }
                 });
-                alert("¡Sede editada!")
                 consultar()
             } catch (error) {
                 console.error(error);
+            } finally {
+                if (el.activo = true)
+                    setToast({
+                        visible: true,
+                        titulo: 'Estado de sede cambiado',
+                        mensaje: 'Las funciones asociadas también se mostrarán'
+                    });
+                else
+                    setToast({
+                        visible: true,
+                        titulo: 'Estado de sede cambiado',
+                        mensaje: 'Las funciones asociadas también se ocultarán'
+                    });
+                setTimeout(() => setToast({ visible: false }), 3000);
             }
         }
 
@@ -104,7 +125,7 @@ const VentanaSedesYSalas = () => {
                             {edicion.map((el, id) => (
                                 <tr key={el.id || id} className='tr2'>
                                     <td className='align-content-center td2' data-label='Nombre' >
-                                        <input className='form-control ms-end' type="text" value={el.nombre} style={{width: '250px'}}
+                                        <input className='form-control ms-end' type="text" value={el.nombre} style={{ width: '250px' }}
                                             onChange={(e) => {
                                                 const nuevaLista = [...lista];
                                                 nuevaLista[id] = { ...el, nombre: e.target.value };
@@ -112,10 +133,10 @@ const VentanaSedesYSalas = () => {
                                             }} />
 
                                     </td>
-                                    <td className='align-content-center td2 tdEstado'  data-label='Estado'>
-                                        {el.activo ? 
-                                        <div className='btn btn-success' style={{width: '100px'}}>Activa</div> : 
-                                        <div className='btn btn-danger' style={{width: '100px'}}>Inactiva</div>}
+                                    <td className='align-content-center td2 tdEstado' data-label='Estado'>
+                                        {el.activo ?
+                                            <div className='btn btn-success' style={{ width: '100px' }}>Activa</div> :
+                                            <div className='btn btn-danger' style={{ width: '100px' }}>Inactiva</div>}
                                     </td>
                                     <td className='td2 tdOpciones' data-label='Opciones'>
 
@@ -126,7 +147,7 @@ const VentanaSedesYSalas = () => {
                                             </button>
 
                                             <button className='btn btn-red d-flex gap-2' onClick={() => apagarPrender(el)}
-                                                style={{ padding:'6px'}}>
+                                                style={{ padding: '6px' }}>
                                                 <img className='' src={iconoApagar} alt="" style={{ height: '33px' }} />
                                             </button>
 
@@ -145,6 +166,10 @@ const VentanaSedesYSalas = () => {
                     </table>
 
                 }
+                {<Toast tipo={'toast-info'}
+                    titulo={toast.titulo}
+                    mensaje={toast.mensaje}
+                    visible={toast.visible} />}
                 {sede && <ModalSalas onClose={onCerrarModal} sede={sede} />}
             </div>
         </div>
