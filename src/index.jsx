@@ -25,6 +25,8 @@ import LoginForm from './B usuarioInterno/LoginForm.jsx';
 import Sala from './B usuarioInterno/SedesYSalas/Sala.jsx';
 import { FuncionesContextProvider } from './B usuarioInterno/Funciones/FuncionesContext.jsx';
 
+let codigo;
+
 ReactDOM.createRoot(document.getElementById('root')).render(
         <BrowserRouter>
             <Routes>
@@ -53,6 +55,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
                 
                 <Route path='/butacas' element={ <ButacaSelect idSala={ 5 } /> }/>
                 
+                <Route path={`/entrada/${codigo}`} element={<InfoEntradas ></InfoEntradas>}></Route>
             </Routes>
         </BrowserRouter>
 );

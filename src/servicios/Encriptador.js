@@ -1,7 +1,7 @@
 //import { url } from '../configuracion/backend'
 import CryptoJS from 'crypto-js';
 
-class ScriptGenerarQR {
+class Encriptador {
     /*Es solo pa hacer la prueba: luego se pasa a back si quieren xd*/
     generar() {
          const sede = "TRUJILLO";
@@ -39,8 +39,20 @@ class ScriptGenerarQR {
          console.log("Código Encriptado:", codigoEncriptado);
  
          return codigoEncriptado; // Devolver el código encriptado
-     }
+    }
+
+    static encriptar(idFuncion, idButaca){
+        const claveSecreta = 'mi_clave_secreta_123';
+        const cadenaPaConvertirEnQR = `${idFuncion}${idButaca}`;
+        /*Encriptar la cadena */
+        return CryptoJS.AES.encrypt(cadenaPaConvertirEnQR, claveSecreta).toString();
+    }
+
+    static desencriptar(codigo){
+        console.log(CryptoJS.AES.decrypt(codigo))
+    }
  }
 
-export default ScriptGenerarQR;
+
+export default Encriptador;
 

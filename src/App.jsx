@@ -4,13 +4,13 @@ import { Outlet } from "react-router";
 
 import Header from './0 componentesGenerales/Header.jsx'
 import Footer from './0 componentesGenerales/Footer.jsx'
-import ScriptGenerarQR from "./servicios/ScriptGenerarQR.js"; // esta es la clase
+import Encriptador from "./servicios/Encriptador.js"; // esta es la clase
 
 import "./App.css"
 
 
 function App() {
-    const generador = new ScriptGenerarQR(); // instancia de la clase
+    const generador = new Encriptador(); // instancia de la clase
   
     return (<>
         <Header>

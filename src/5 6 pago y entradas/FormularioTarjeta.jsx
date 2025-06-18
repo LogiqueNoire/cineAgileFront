@@ -1,5 +1,5 @@
 import { PayPalButtons, PayPalScriptProvider } from "@paypal/react-paypal-js";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { VentaContext } from "../3 componentesVenta/VentaContextProvider.jsx";
 import Entrada from "../servicios/Entrada.js";
 import { useLocation, useNavigate } from "react-router-dom";

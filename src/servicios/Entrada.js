@@ -43,6 +43,10 @@ class Entrada {
         window.open(url, "_blank");
     }
 
+    static async buscarEntrada(){
+        return await axios.get(`${url}/entrada?token=${idFuncion}&idButaca=${idButaca}`)
+    }
+
 }
 
 export default Entrada;

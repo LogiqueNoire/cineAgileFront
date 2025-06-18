@@ -47,7 +47,6 @@ const Cronograma = () => {
     aux.setDate(aux.getDate() + 1);
     fechasSemana.push(new Date(aux));
   }
-  console.log(fechasSemana)
   const horas = [];
 
   for (let h = 0; h <= 23; h++) {
@@ -55,8 +54,7 @@ const Cronograma = () => {
     fecha.setHours(h, 0, 0);
     horas.push(new Date(fecha));
   }
-  console.log("horas", horas)
-
+  
   function formatearHora(fechaStr) {
     const fecha = new Date(fechaStr);
     const h = fecha.getHours().toString().padStart(2, '0');
