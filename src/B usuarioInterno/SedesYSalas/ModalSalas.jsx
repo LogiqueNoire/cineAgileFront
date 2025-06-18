@@ -5,6 +5,10 @@ import Loading from '../../0 componentesGenerales/Loading';
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
 import pencilSvg from "../../assets/pencil.svg"
+import BotonCarga from "../../0 componentesGenerales/BotonCarga.jsx";
+import iconoApagar from '../../assets/apagar.svg'
+import SalaButaca from "../../servicios/SalaButaca.js";
+import Toast from "../../Toast.jsx";
 
 export const ModalSalas = ({ onClose, sede }) => {
   const navigate = useNavigate();
@@ -13,8 +17,9 @@ export const ModalSalas = ({ onClose, sede }) => {
   const [categoriaGuardar, setCategoriaGuardar] = useState('')
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [toast, setToast] = useState({ tipo: '', visible: false, titulo: '', mensaje: '' });
 
-  useEffect(() => {
+  const consultar = () => {
     axios.get(`${url}/sede/${sede.id}/salas`, {
       headers: { Authorization: `Bearer ${Cookies.get("auth-token")}` }
     }).then(res => {
@@ -24,10 +29,13 @@ export const ModalSalas = ({ onClose, sede }) => {
       }
     }).catch(err => {
       setError("Servicio no disponible.");
-      console.log(err);
     }).finally(_ => {
       setLoading(false);
     })
+  }
+
+  useEffect(() => {
+    consultar();
   }, [sede]);
 
   const irACrearSala = () => {
@@ -36,12 +44,62 @@ export const ModalSalas = ({ onClose, sede }) => {
 
   const onDetallesClick = (sala) => {
     navigate("/intranet/sala", { state: { sala, sede, modo: "editar" } })
-    // navigate("/intranet/detallesala", { state: { sala, sede } })
   };
 
+  const crearOnCambiarEstadoSala = () => {
+    let submitting = false;
+    
+    return (sala) => {
+      if (submitting) return;
+      submitting = true;
+
+      let confirmado = sala.activo === true ?
+      window.confirm('¿Estás seguro de que deseas desactivar esta sede? Las funciones asociadas se ocultarán y no se podrán crear nuevas funciones en esa sede')
+      : window.confirm('¿Estás seguro de que deseas activar esta sede?');
+      
+      if (!confirmado) {
+        submitting = false;
+        return;
+      }
+
+      SalaButaca.cambiarEstado(sala.id, !sala.activo).then((res) => {
+
+        if (sala.activo) {
+          setToast({
+            tipo: 'toast-info',
+            visible: true,
+            titulo: 'Estado de sala cambiado',
+            mensaje: 'Las funciones asociadas también se mostrarán'
+        });
+        } else {
+          setToast({
+            tipo: 'toast-info',
+            visible: true,
+            titulo: 'Estado de sala cambiado',
+            mensaje: 'Las funciones asociadas también se ocultarán'
+        });
+        }
+        consultar();
+      }).catch(err => {
+        setToast({
+          tipo: 'toast-danger',
+          visible: true,
+          titulo: 'Error al guardar la sala.',
+          mensaje: err.data
+      });
+  
+      }).finally(_ => {
+        submitting = false;
+        setTimeout(() => setToast({ visible: false }), 3000);
+      })
+    }
+  }
+
+  const onCambiarEstadoSala = crearOnCambiarEstadoSala();
+
   return (
-    <div className="modal-terminos-overlay" >
-      <div className="modal-terminos d-flex flex-column align-items-center" style={{ "max-height": "80vh", "overflow-y": "auto" }}>
+    <div className="modal-terminos-overlay">
+      <div className="modal-terminos w-50 d-flex flex-column align-items-center" style={{ "max-height": "80vh", "overflow-y": "auto" }}>
         <h3 className="modal-terminos-title">Sede {sede.nombre}</h3>
 
         <div className="w-100 d-flex justify-content-between">
@@ -71,46 +129,12 @@ export const ModalSalas = ({ onClose, sede }) => {
                 <td className=''>Sala</td>
                 <td className=''>Categoría</td>
                 <td className=''>Acciones</td>
-                {/*
-              <td className=''></td>
-              <td className=''></td>
-              */}
               </tr>
             </thead>
 
             <tbody className=''>
 
-              { /*
-
-              <tr>
-                <td>
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="Nuevo nombre"
-                    name="nuevonombre"
-                    value={codigoSalaGuardar}
-                    onChange={(e) => setCodigoSalaGuardar(e.target.value)}
-                    required
-                  />
-                </td>
-                <td>
-                  <select
-                    className="form-select"
-                    name="nuevacategoria"
-                    value={categoriaGuardar}
-                    onChange={(e) => setCategoriaGuardar(e.target.value)}
-                    required>
-                    <option value="">Elija una categoría</option>
-                    <option value="Regular">Regular</option>
-                    <option value="Prime">Prime</option>
-                  </select>
-                </td>
-
-              </tr>
-
-              */ }
-
+              { error && <div className="text-danger text-center">{error}</div> }
 
               {salas.length > 0 ?
 
@@ -142,21 +166,16 @@ export const ModalSalas = ({ onClose, sede }) => {
                       />
                     </td>
                     <td>
-                        <button className="py-1 btn btn-primary" onClick={() => { onDetallesClick(el) }}><img src={pencilSvg} width={"24px"} height={"24px"}/></button>
+                      <div className="d-flex gap-2">
+                        <button className="py-1 btn btn-primary py-1 px-2" onClick={() => { onDetallesClick(el) }}><img src={pencilSvg} width={"24px"} height={"24px"}/></button>
+                        <BotonCarga 
+                          onClick={ () => onCambiarEstadoSala(el) }
+                          className={`btn ${ el.activo ? "btn-success" : "btn-danger" } p-1`} >
+                          <img src={iconoApagar} style={{ height: '33px' }} />
+                        </BotonCarga>
+                      </div>
                     </td>
-                    {/*
-                        <td className='text-center'>
-                        <button className='btn px-0' style={{"white-space": "nowrap"}}
-                        onClick={() => update()}>
-                        <img src={butaca} alt="" style={{ height: '22px' }}/>
-                        </button>
-                        </td>
-                        <td className='text-center'>
-                        <button className='btn px-0'>
-                        <img src={guardar} alt="" style={{ height: '22px' }}/>
-                        </button>
-                        </td>
-                        */}
+
                   </tr>
 
 
@@ -170,6 +189,11 @@ export const ModalSalas = ({ onClose, sede }) => {
           </table>
         }
       </div>
+
+      {<Toast tipo={toast.tipo}
+                    titulo={toast.titulo}
+                    mensaje={toast.mensaje}
+                    visible={toast.visible} />}
     </div>
   );
 };

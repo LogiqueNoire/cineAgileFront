@@ -47,6 +47,14 @@ class SalaButaca {
         return res;
     }
 
+    static async cambiarEstado(idSala, nuevoEstado) {
+        const res = await axios.patch(`${url}/intranet/sala/cambiar-estado/${idSala}`, { activo: nuevoEstado }, {
+            headers: { Authorization: `Bearer ${Cookies.get("auth-token")}` }
+        });
+        
+        return res;
+    }
+
 }
 
 export default SalaButaca
