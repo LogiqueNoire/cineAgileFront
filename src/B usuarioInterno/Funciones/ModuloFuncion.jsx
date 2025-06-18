@@ -79,21 +79,29 @@ const ModuloFuncion = ({ handlePeliculaChange, handleSalaChange }) => {
                     setSalasNuevaSede(data)
                 )
                 .catch(err => console.error("Error al obtener salas por sede:", err));
+
+        } else {
+            setFuncion(prev => ({
+                ...prev,
+                nuevaSalaId: '0'
+            }))
+
         }
 
     }, [funcion.nuevaSedeId])
 
     const actualizarFuncion = async () => {
         let nfhi;
-        if (!funcion.nuevaHoraInicio) {
+        console.log("funcion a editar", funcion)
+        if (funcion.nuevaHoraInicio === '' || funcion.nuevaFecha === '' || funcion.nuevaHoraInicio === '' || funcion.nuevaDimension === '0' ||
+            funcion.nuevoPrecioBase === '0' || funcion.nuevaSalaId === '0' || funcion.nuevaSalaId === '' || funcion.nuevaPeliculaId === '0') {
             setToast({
                 tipo: 'toast-danger',
                 visible: true,
                 titulo: '¡Cuidado!',
-                mensaje: 'Debe ingresar una nueva hora de inicio'
+                mensaje: 'Faltan datos obligatorios o son incorrectos.'
             });
             setTimeout(() => setToast({ visible: false }), 3000);
-            onSucess()
             return;
         }
 
@@ -185,14 +193,22 @@ const ModuloFuncion = ({ handlePeliculaChange, handleSalaChange }) => {
                     codigoFuncion: '',
                     nuevaHoraInicio: '',
                     nuevaFecha: '',
-                    codigoSala: '',
                     nuevaPeliculaId: '',
                     nuevaSalaId: '',
                     nuevaSedeId: ''
                 }));
             }
+            if (response.status === 400) {
+                setToast({
+                    tipo: 'toast-danger',
+                    visible: true,
+                    titulo: 'Función no actualizada',
+                    mensaje: response.data
+                });
+            }
         } catch (error) {
             setToast({
+                tipo: 'toast-danger',
                 visible: true,
                 titulo: 'Función no actualizada',
                 mensaje: 'Horario fuera de rango permitido, cruce detectado o función con entradas vendidas'
@@ -203,14 +219,16 @@ const ModuloFuncion = ({ handlePeliculaChange, handleSalaChange }) => {
 
     const crearFuncion = async () => {
         let nfhi;
-        if (!funcion.nuevaHoraInicio) {
+        console.log("funcion a editar", funcion)
+        if (funcion.nuevaHoraInicio === '' || funcion.nuevaFecha === '' || funcion.nuevaHoraInicio === '' || funcion.nuevaDimension === '0' ||
+            funcion.nuevoPrecioBase === '0' || funcion.nuevaSalaId === '0' || funcion.nuevaSalaId === '' || funcion.nuevaPeliculaId === '0') {
             setToast({
-                        tipo: 'toast-danger',
-                        visible: true,
-                        titulo: '¡Cuidado!',
-                        mensaje: 'Debe ingresar una nueva hora de inicio'
-                    });
-                    setTimeout(() => setToast({ visible: false }), 3000);
+                tipo: 'toast-danger',
+                visible: true,
+                titulo: '¡Cuidado!',
+                mensaje: 'Faltan datos'
+            });
+            setTimeout(() => setToast({ visible: false }), 3000);
             return;
         }
 
@@ -254,12 +272,12 @@ const ModuloFuncion = ({ handlePeliculaChange, handleSalaChange }) => {
 
             if (response.status === 200) {
                 setToast({
-                        tipo: 'toast-info',
-                        visible: true,
-                        titulo: '¡Función creada!',
-                        mensaje: ''
-                    });
-                    setTimeout(() => setToast({ visible: false }), 3000);
+                    tipo: 'toast-info',
+                    visible: true,
+                    titulo: '¡Función creada!',
+                    mensaje: ''
+                });
+                setTimeout(() => setToast({ visible: false }), 3000);
                 if (valoresBusqueda.selectSala) {
                     handleSalaChange({ target: { value: valoresBusqueda.selectSala } });
                 } else if (valoresBusqueda.selectPelicula) {
@@ -272,7 +290,6 @@ const ModuloFuncion = ({ handlePeliculaChange, handleSalaChange }) => {
                     codigoFuncion: '',
                     nuevaHoraInicio: '',
                     nuevaFecha: '',
-                    codigoSala: '',
                     nuevaPeliculaId: '',
                     nuevaSalaId: '',
                     nuevaSedeId: '',
@@ -281,12 +298,16 @@ const ModuloFuncion = ({ handlePeliculaChange, handleSalaChange }) => {
                 }));
             }
         } catch (error) {
-            setToast({
-                visible: true,
-                titulo: 'Error al crear la función',
-                mensaje: 'Horario fuera de rango permitido o cruce detectado'
-            });
-            setTimeout(() => setToast({ visible: false }), 3000);
+            if (response.status === 400) {
+                setToast({
+                    tipo: 'toast-info',
+                    visible: true,
+                    titulo: 'Error al crear la función',
+                    mensaje: response.data
+                });
+                setTimeout(() => setToast({ visible: false }), 3000);
+            }
+
         }
     }
 
@@ -378,7 +399,8 @@ const ModuloFuncion = ({ handlePeliculaChange, handleSalaChange }) => {
                                     onChange={(e) =>
                                         setFuncion(prev => ({
                                             ...prev,
-                                            nuevaSedeId: e.target.value
+                                            nuevaSedeId: e.target.value,
+                                            nuevaSalaId: ''
                                         }))
                                     }>
                                     <option value='0'>Elija una sede</option>
@@ -604,7 +626,7 @@ const ModuloFuncion = ({ handlePeliculaChange, handleSalaChange }) => {
                     </div>
                 }
             </div>
-            <Toast tipo={'toast-danger'}
+            <Toast tipo={toast.tipo}
                 titulo={toast.titulo}
                 mensaje={toast.mensaje}
                 visible={toast.visible} />
