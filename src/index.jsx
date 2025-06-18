@@ -24,6 +24,7 @@ import Intranet from './B usuarioInterno/Intranet.jsx';
 import LoginForm from './B usuarioInterno/LoginForm.jsx';
 import Sala from './B usuarioInterno/SedesYSalas/Sala.jsx';
 import { FuncionesContextProvider } from './B usuarioInterno/Funciones/FuncionesContext.jsx';
+import Error from "./Error.jsx"
 
 let codigo;
 
@@ -38,6 +39,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
                     <Route path='/funcion/pelicula/' element={ <PeliculaSedes /> }/>
                     <Route path='/compra' element={ <VentaContextProvider><FlujoVenta/></VentaContextProvider> } />
                     <Route path='/entradas' element={ <InfoEntradas /> } />
+                    <Route path='/error' element={ <Error /> }/>
                 </Route>
 
 

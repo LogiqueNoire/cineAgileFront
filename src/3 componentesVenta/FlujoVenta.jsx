@@ -6,6 +6,7 @@ import ResumenPeliComJose3 from '../4 precios/ResumenPeliComJose3'
 import { VentanaPrecios } from '../4 precios/VentanaPrecios'
 import React, { useEffect, useState, useContext } from "react";
 import { VentanaPago } from "../5 6 pago y entradas/VentanaPago";
+import Funcion from "../servicios/Funcion";
 
 const ventanas = [ ButacaSelect, VentanaPrecios, VentanaPago ];
 
@@ -20,7 +21,13 @@ const FlujoVenta = () => {
     const funcion = contexto.general.funcion;
 
     const next = () => {
-        setIndice(indice + 1);
+        Funcion.estaDisponible(funcion.idFuncion).then(res => {
+            console.log(funcion, res);
+            setIndice(indice + 1);
+        }).catch(err => {
+            console.log(err);
+            navigate("/error", { state: { errorInfo: "Función cerrada." } });
+        });
     }
 
     const prev = () => {
