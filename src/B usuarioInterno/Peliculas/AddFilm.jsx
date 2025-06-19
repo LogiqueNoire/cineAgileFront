@@ -83,18 +83,22 @@ export default function AddFilm({ onSucess }) {
 
 
   const onFechaChange = (e) => {
+    const { name, value } = e.target;
+
     setPelicula({
       ...pelicula,
-      [e.target.name]: new Date(`${e.target.value}T00:00`),
+      [name]: value ? new Date(`${value}T00:00`) : null,
     });
   };
+
 
 
   const onSubmit = async (e) => {
     e.preventDefault();
     console.log(pelicula)
 
-    if (!(genero === '' || clasificacion === '' || estado === "")) {
+    if (!(genero.trim() === '' || clasificacion.trim() === '' || estado.trim() === "" || duracion === 0
+      || director.trim() === '' || imageUrl.trim() === '' || sinopsis.trim() === '')) {
       const peliculaFinal = {
         ...pelicula,
         fechaInicioEstreno: format(pelicula.fechaInicioEstreno, 'yyyy-MM-dd'),
@@ -137,6 +141,15 @@ export default function AddFilm({ onSucess }) {
         });
         setTimeout(() => setToast({ visible: false }), 3000);
       }
+    } else {
+      console.log('error 1')
+      setToast({
+        tipo: 'toast-danger',
+        visible: true,
+        titulo: 'Error',
+        mensaje: 'Falta llenar campos.'
+      });
+      setTimeout(() => setToast({ visible: false }), 3000);
     }
   };
 
@@ -171,7 +184,7 @@ export default function AddFilm({ onSucess }) {
                 </label>
                 <input
                   type="number"
-                  min="0"
+                  min="1"
                   max="500"
                   step="0"
                   className="form-control"
@@ -303,7 +316,7 @@ export default function AddFilm({ onSucess }) {
                   className="form-control"
                   name="fechaInicioEstreno"
                   min={fechaReal ? format(fechaReal, 'yyyy-MM-dd') : ''}
-                  value={fechaInicioEstreno ? format(fechaInicioEstreno, 'yyyy-MM-dd') : ''}
+                  value={fechaInicioEstreno ? format(fechaInicioEstreno, 'yyyy-MM-dd') : format(fechaReal, 'yyyy-MM-dd')}
                   onChange={(e) => onFechaChange(e)}
                   required
                 />
@@ -352,7 +365,7 @@ export default function AddFilm({ onSucess }) {
       {<Toast tipo={toast.tipo}
         titulo={toast.titulo}
         mensaje={toast.mensaje}
-        visible={toast.visible} />}
+        visible={toast.visible}  />}
     </div>
 
   );

@@ -9,15 +9,15 @@ class Pelicula {
         return peliculas.data
     }
 
-    static async mostrarPeliculasEnCartelera() {
+    static async mostrarPeliculasEnCartelera(fechaReal) {
         console.log("aqui")
-        const peliculas = await axios.get(`${url}/pelicula/encartelera`)
+        const peliculas = await axios.get(`${url}/pelicula/encartelera?fecha=${fechaReal}`)
         console.log("peliculas", peliculas.data)
         return peliculas.data
     }
     
-    static async mostrarPeliculasProximas() {
-        const peliculas = await axios.get(`${url}/pelicula/proximamente`)
+    static async mostrarPeliculasProximas(fechaReal) {
+        const peliculas = await axios.get(`${url}/pelicula/proximamente?fecha=${fechaReal}`)
         return peliculas.data
     }
 

@@ -5,55 +5,78 @@ import FilmContainer from "./FilmContainer";
 import Pelicula from "../servicios/Pelicula"
 import FilmTab from './FilmTab';
 import Loading from '../0 componentesGenerales/Loading';
+import axios from 'axios';
+import { url } from '../configuracion/backend';
 
 import "./FilmPanel.css"
 
 const useUrlQuery = () => {
     const location = useLocation()
-    return [ location, useMemo(() => { return new URLSearchParams(location.search) }, [ location.search ]) ]
+    return [location, useMemo(() => { return new URLSearchParams(location.search) }, [location.search])]
 }
 
 const FilmPanel = () => {
-    const [ peliculas, setPeliculas ] = useState([])
-    const [ loading, setLoading ] = useState(true)
-    const [ error, setError ] = useState(null)
+    const [peliculas, setPeliculas] = useState([])
+    const [loading, setLoading] = useState(true)
+    const [error, setError] = useState(null)
 
-    const [ location, query ] = useUrlQuery()
+    const [location, query] = useUrlQuery()
+
+    const [fechaReal, setFechaReal] = useState()
+
 
     useEffect(() => {
-        const estado = query ? (query.get("tab") ? query.get("tab") : "En cartelera" ) : "Próximamente";
-        let caller;
+    const obtenerPeliculas = async () => {
+        try {
+            const respuesta = await axios.get(`${url}/fecha-actual`);
+            const fecha = new Date(respuesta.data);
+            setFechaReal(fecha); // Se guarda igual para renderizado si es necesario
 
-        switch (estado) {
-            case "En cartelera":
-                caller = Pelicula.mostrarPeliculasEnCartelera; break;
-            case "Próximamente":
-                caller = Pelicula.mostrarPeliculasProximas; break;
-        }
+            const estado = query?.get("tab") || "En cartelera";
+            let caller;
 
-        if (caller) {
-            caller().then(pelis => {
-                setPeliculas(pelis.reverse())
-            }).catch(err => {
-                setError("Error :(... Intenta recargar la página!")
-            }).finally(() => {
-                setLoading(false)
-            })
-        }
+            switch (estado) {
+                case "En cartelera":
+                    console.log("Fecha enviada a EnCartelera:", fecha.toISOString());
+                    caller = () => Pelicula.mostrarPeliculasEnCartelera(fecha.toISOString());
+                    break;
+                case "Próximamente":
+                    console.log("Fecha enviada a Proximamente:", fecha.toISOString());
+                    caller = () => Pelicula.mostrarPeliculasProximas(fecha.toISOString());
+                    break;
+                default:
+                    caller = null;
+            }
 
-        return () => {
-            setLoading(true)
-            setError(null)
+            if (caller) {
+                const pelis = await caller();
+                setPeliculas(pelis.reverse());
+            }
+        } catch (err) {
+            console.error("Error al obtener las películas:", err);
+            setError("Error :(... Intenta recargar la página!");
+        } finally {
+            setLoading(false);
         }
-    }, [ location ])
+    };
+
+    obtenerPeliculas();
+
+    return () => {
+        setLoading(true);
+        setError(null);
+    };
+}, [location]);
+
+
 
     return (<div className='film-panel d-flex flex-column'>
-            <FilmTab query={ query.get("tab") } />
-            <div className='peli-cuerpo d-flex justify-content-center flex-grow-1'>
-                { loading && <Loading /> }
-                { error && <div className="alert alert-danger h-25 w-50 text-center">Error :/... Intenta recargar la página</div> }
-                { !loading && <FilmContainer peliculas={peliculas} /> }
-            </div>
+        <FilmTab query={query.get("tab")} />
+        <div className='peli-cuerpo d-flex justify-content-center flex-grow-1'>
+            {loading && <Loading />}
+            {error && <div className="alert alert-danger h-25 w-50 text-center">Error :/... Intenta recargar la página</div>}
+            {!loading && <FilmContainer peliculas={peliculas} />}
+        </div>
     </div>)
 }
 
