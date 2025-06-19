@@ -20,7 +20,6 @@ export default function AddFilm({ onSucess }) {
     genero: '',
     clasificacion: '',
     duracion: '',
-    estado: 'próximamente',
     fechaInicioEstreno: '',
     imageUrl: '',
     sinopsis: '',
@@ -34,7 +33,6 @@ export default function AddFilm({ onSucess }) {
     genero,
     clasificacion,
     duracion,
-    estado = "proximamente",
     fechaInicioEstreno,
     imageUrl,
     sinopsis,
@@ -49,7 +47,7 @@ export default function AddFilm({ onSucess }) {
 
 
   useEffect(() => {
-    if (duracion > 500 || duracion < 0) {
+    if (duracion > 500 || duracion <= 0) {
       setPelicula(prev => ({ ...prev, duracion: '' }));
     }
   }, [duracion]);
@@ -97,7 +95,7 @@ export default function AddFilm({ onSucess }) {
     e.preventDefault();
     console.log(pelicula)
 
-    if (!(genero.trim() === '' || clasificacion.trim() === '' || estado.trim() === "" || duracion === 0
+    if (!(genero.trim() === '' || clasificacion.trim() === '' || duracion === 0
       || director.trim() === '' || imageUrl.trim() === '' || sinopsis.trim() === '')) {
       const peliculaFinal = {
         ...pelicula,
@@ -118,7 +116,6 @@ export default function AddFilm({ onSucess }) {
           genero: '',
           clasificacion: '',
           duracion: '',
-          estado: 'próximamente',
           fechaInicioEstreno: '',
           imageUrl: '',
           sinopsis: '',
@@ -261,21 +258,6 @@ export default function AddFilm({ onSucess }) {
                   <option value="+14">+14</option>
                   <option value="+18">+18</option>
                 </select>
-              </div>
-
-              <div className="mb-3">
-                <label htmlFor="estado" className="form-label">
-                  Estado
-                </label>
-                <input
-                  type='text'
-                  className="form-control"
-                  placeholder="Estado"
-                  name={estado}
-                  value="Próximamente"
-                  required
-                  disabled>
-                </input>
               </div>
 
               <div className="mb-3">
