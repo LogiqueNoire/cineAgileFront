@@ -28,9 +28,9 @@ const EntradaCard = ({ infoGeneral, entrada, token }) => {
                 <div className="d-flex align-items-center">
                     <h2 className="w-50 text-center">CineAgile<br />Entrada</h2>
                     <div className="w-50 d-flex justify-content-center">
-                        <h2>{}</h2>
+                        <h2>{ }</h2>
                         <QRCode className="w-100 d-flex align-items-center" style={{ height: "auto" }}
-                         value={`${url}/entrada/${token}`} renderAs='canvas'/> {/*codigoQR*/}
+                            value={`${url}/entrada/${token}`} renderAs='canvas' /> {/*codigoQR*/}
 
                     </div>
                 </div>
@@ -56,6 +56,12 @@ const InfoEntradas = () => {
     const location = useLocation();
     const { entradas = null } = location.state || {};
 
+    if (entradas === null) {
+        const entradas = Entrada.buscarEntrada(codigo)
+        navigate("/entradas", { state: { entradas: funcion } })
+    }
+
+
     const descargarPdf = async () => {
         const docs = document.querySelectorAll(".entrada-card");
         const opts = {
@@ -79,6 +85,7 @@ const InfoEntradas = () => {
         let mypdf = Entrada.generarPdf(entradas)
     }
 
+    /*
     const canvasRef = canvasRef.current;
 
     const generarPDF = () => {
@@ -97,7 +104,7 @@ const InfoEntradas = () => {
         }
 
         doc.save("entrada.pdf");
-    };
+    };*/
 
     console.log(entradas)
 
@@ -115,7 +122,7 @@ const InfoEntradas = () => {
                 <div className="d-flex flex-column align-items-center gap-4">
                     {entradas && entradas.entradas.map((el, i) => {
                         return (
-                            <EntradaCard infoGeneral={{ ...entradas }} entrada={el} token={entradas.tokens[i]}/>
+                            <EntradaCard infoGeneral={{ ...entradas }} entrada={el} token={entradas.tokens[i]} />
                         )
                     })}
                 </div>
