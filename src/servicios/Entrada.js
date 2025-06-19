@@ -26,8 +26,8 @@ class Entrada {
         const escribirEntrada = (entrada) => {
             doc.text(`Entrada ${entrada.id.idFuncion + entrada.butaca.id}`, 40, 30);
             doc.text(`Butaca: ${String.fromCharCode('A'.charCodeAt(0) + entrada.butaca.fila)
-                +entrada.butaca.fila}`, 20, 100);
-            doc.text(`Precio final: ${entrada.costoFinal}%`, 20, 110);
+                +entrada.butaca.columna}`, 20, 100);
+            doc.text(`Precio final: ${entrada.costoFinal}`, 20, 110);
         }
         for (let e of entradas){
             console.log("E", e)
@@ -44,7 +44,7 @@ class Entrada {
     }
 
     static async buscarEntrada(){
-        return await axios.get(`${url}/entrada?token=${idFuncion}&idButaca=${idButaca}`)
+        return await axios.get(`${url}/entrada?token=${token}`)
     }
 
 }
