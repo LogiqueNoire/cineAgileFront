@@ -61,7 +61,7 @@ const ModuloFuncion = ({ handlePeliculaChange, handleSalaChange }) => {
 
     const consultarPeliculas = async () => {
         try {
-            const datos = (await axios.get(`${url}/intranet/peliculas`, {
+            const datos = (await axios.get(`${url}/intranet/soloPeliculas`, {
                 headers: { Authorization: `Bearer ${Cookies.get("auth-token")}` }
             })).data;
 
