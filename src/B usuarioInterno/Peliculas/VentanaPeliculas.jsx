@@ -40,13 +40,14 @@ const VentanaPeliculas = () => {
     useEffect(() => {
         if (fechaReal) {
             /*setFechaElegida(fechaReal)*/
+            consultar()
             console.log("Fecha real obtenida:", fechaReal);
         }
     }, [fechaReal]);
 
     const consultar = async () => {
         try {
-            setLista((await axios.get(`${url}/intranet/peliculas`, {
+            setLista((await axios.get(`${url}/intranet/peliculas?fechaReal=${fechaReal.toISOString()}`, {
                 headers: { Authorization: `Bearer ${Cookies.get("auth-token")}` }
             })).data.sort(ordenamientoFecha).reverse());
         } catch (error) {
@@ -55,11 +56,6 @@ const VentanaPeliculas = () => {
             setLoading(false);
         }
     }
-
-    useEffect(() => {
-        consultar()
-    }, [])
-
 
     useEffect(() => {
         console.log(lista)
@@ -140,9 +136,30 @@ const VentanaPeliculas = () => {
                                         />
                                     </td>
                                     <td className='td' data-label='Clasificación'>{el.clasificacion === "" | el.clasificacion === " " ? "-" : el.clasificacion}</td>
-                                    <td className='td' data-label='Estado'>{el.estado == "proximamente" ? "Próximamente" : "En cartelera"}</td>
-                                    <td className='td' data-label='Actores'>{el.actores === "" || el.actores === " " ? "-" : el.actores}</td>
-                                    <td className='td' data-label='Inicio de estreno'>{el.fechaInicioEstreno}</td>
+                                    <td className='td' data-label='Estado'>{el.estado}</td>
+                                    <td className='td' data-label='Actores'>
+                                        <input
+                                            type="text"
+                                            className="form-control ms-end"
+                                            placeholder="Actores"
+                                            name="actores"
+                                            value={el.actores}
+                                            style={{ width: '250px' }}
+                                        /*onChange={(e) => onInputChange(e)}*/
+                                        />
+                                    </td>
+                                    <td className='td' data-label='Inicio de estreno'>
+                                        <input
+                                            type="date"
+                                            className="form-control ms-end"
+                                            name="fechaInicioEstreno"
+                                            min={fechaReal ? format(fechaReal, 'yyyy-MM-dd') : ''}
+                                            value={el.fechaInicioEstreno ? format(el.fechaInicioEstreno, 'yyyy-MM-dd') : ''}
+                                            style={{ width: '150px' }}
+                                            /*onChange={(e) => onFechaChange(e)}*/
+                                            required
+                                        />
+                                    </td>
                                     <td className='td' data-label='Imagen'>
                                         <div className='d-flex align-items-center'>
                                             <a href={el.imageUrl} target="_blank" rel="noopener noreferrer">
