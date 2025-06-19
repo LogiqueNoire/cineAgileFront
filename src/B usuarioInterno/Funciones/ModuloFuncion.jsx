@@ -298,15 +298,13 @@ const ModuloFuncion = ({ handlePeliculaChange, handleSalaChange }) => {
                 }));
             }
         } catch (error) {
-            if (response.status === 400) {
-                setToast({
-                    tipo: 'toast-info',
-                    visible: true,
-                    titulo: 'Error al crear la función',
-                    mensaje: response.data
-                });
-                setTimeout(() => setToast({ visible: false }), 3000);
-            }
+            setToast({
+                tipo: 'toast-danger',
+                visible: true,
+                titulo: 'Error al crear la función',
+                mensaje: 'Tal vez hay algún cruce entre las funciones'
+            });
+            setTimeout(() => setToast({ visible: false }), 3000);
 
         }
     }
@@ -517,7 +515,7 @@ const ModuloFuncion = ({ handlePeliculaChange, handleSalaChange }) => {
                     <div className="d-flex flex-column gap-3">
                         <div className='d-flex w-100 align-items-center'>
                             <label className='d-flex text-nowrap w-100'>Elige sede</label>
-                            <select className='form-select w-100'
+                            <select className='form-select w-100' value={funcion.nuevaSedeId}
                                 onChange={(e) =>
                                     setFuncion(prev => ({
                                         ...prev,
