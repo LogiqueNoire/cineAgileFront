@@ -54,8 +54,8 @@ export const ModalSalas = ({ onClose, sede }) => {
       submitting = true;
 
       let confirmado = sala.activo === true ?
-      window.confirm('¿Estás seguro de que deseas desactivar esta sede? Las funciones asociadas se ocultarán y no se podrán crear nuevas funciones en esa sede')
-      : window.confirm('¿Estás seguro de que deseas activar esta sede?');
+      window.confirm('¿Estás seguro de que deseas desactivar esta sala? Las funciones asociadas se ocultarán y no se podrán crear nuevas funciones en esa sede')
+      : window.confirm('¿Estás seguro de que deseas activar esta sala?');
       
       if (!confirmado) {
         submitting = false;

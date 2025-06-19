@@ -74,41 +74,7 @@ const ButacaMap = ({ onButacaSelect, isSelectedFunc, butacas }) => {
                 }
 
             </div>
-            <div className='border border-dark butaca-leyenda p-2'>
-                <h4 className="text-center mb-2">Leyenda</h4>
-                <table className="butaca-table butaca-hist d-flex justify-content-center">
-                    <tbody>
-                        <tr className=''>
-                            <td className=''>
-                                <input type="checkbox" className="butaca-celda butaca-libre" readOnly onClick={(e) => e.preventDefault()} />
-                            </td>
-                            <td className=''>
-                                <h4 className="butaca-label mx-2">Libre</h4>
-                            </td>
-                            <td className=''>
-                                <input type="checkbox" className="butaca-celda butaca-discapacitado" readOnly onClick={(e) => e.preventDefault()} />
-                            </td>
-                            <td className=''>
-                                <h4 className="butaca-label mx-2">Discapacitado</h4>
-                            </td>
-                        </tr>
-                        <tr className=''>
-                            <td>
-                                <input type="checkbox" className="butaca-celda butaca-ocupado" readOnly checked onClick={(e) => e.preventDefault()} />
-                            </td>
-                            <td>
-                                <h4 className="butaca-label mx-2">Ocupado</h4>
-                            </td>
-                            <td>
-                                <input type="checkbox" className="butaca-celda butaca-libre" readOnly checked onClick={(e) => e.preventDefault()} />
-                            </td>
-                            <td>
-                                <h4 className="butaca-label mx-2">Seleccionado</h4>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+            
         </div>)
 };
 

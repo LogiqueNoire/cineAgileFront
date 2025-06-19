@@ -10,11 +10,11 @@ const Sala = () => {
     const location = useLocation();
     const { sede = null, sala = null, modo = "editar" } = location.state || {};
 
-    const [ codigoSala, setCodigoSala ] = useState(sala?.codigoSala ? sala.codigoSala : "");
-    const [ categoria, setCategoria ] = useState(sala?.categoria ? sala.categoria : "");
-    const [ butacas, setButacas ] = useState([]);
-    const [ error, setError ] = useState(null);
-    const [ submitting, setSubmitting ] = useState(false);
+    const [codigoSala, setCodigoSala] = useState(sala?.codigoSala ? sala.codigoSala : "");
+    const [categoria, setCategoria] = useState(sala?.categoria ? sala.categoria : "");
+    const [butacas, setButacas] = useState([]);
+    const [error, setError] = useState(null);
+    const [submitting, setSubmitting] = useState(false);
 
 
     // Si no hay una sede de entrada, entonces volver al menú de
@@ -32,7 +32,7 @@ const Sala = () => {
     const codigoSalaOnChange = (evt) => {
         setCodigoSala(evt.target.value);
     }
-    
+
     const categoriaOnChange = (evt) => {
         setCategoria(evt.target.value);
     }
@@ -97,7 +97,7 @@ const Sala = () => {
                 {
                     error &&
                     <div className="row bg-danger bg-opacity-10 border border-danger rounded shadow p-3">
-                        <div className="text-center text-danger">{ error }</div>
+                        <div className="text-center text-danger">{error}</div>
                     </div>
                 }
 
@@ -106,35 +106,35 @@ const Sala = () => {
                     <div className="row my-4">
                         <div className="mb-3 col-4">
                             <label htmlFor="sede" className="form-label">Nombre</label>
-                            <input type="text" className="form-control" id="sede" value={ sede.nombre } disabled={true} />
+                            <input type="text" className="form-control" id="sede" value={sede.nombre} disabled={true} />
                         </div>
                     </div>
-                    
+
                     <hr />
 
                     <h2>Sala</h2>
                     <div className="row my-4">
                         <div className="mb-3 col-4">
                             <label htmlFor="codigoSala" className="form-label">Código</label>
-                            <input 
-                                onChange={codigoSalaOnChange} 
-                                value={codigoSala} 
-                                type="text" 
-                                className="form-control" 
-                                id="codigoSala" 
-                                placeholder="Código" 
-                                required={ true }
+                            <input
+                                onChange={codigoSalaOnChange}
+                                value={codigoSala}
+                                type="text"
+                                className="form-control"
+                                id="codigoSala"
+                                placeholder="Código"
+                                required={true}
                             />
                         </div>
-                        
+
                         <div className="col-4">
                             <label htmlFor="categoria" className="form-label">Categoría</label>
-                            <select 
-                                onChange={categoriaOnChange} 
-                                value={categoria} 
-                                className="form-select" 
-                                id="categoria" 
-                                required={ true }
+                            <select
+                                onChange={categoriaOnChange}
+                                value={categoria}
+                                className="form-select"
+                                id="categoria"
+                                required={true}
                             >
                                 <option value="" disabled={true}>Selecciona una categoría</option>
                                 <option value="Regular">Regular</option>
@@ -147,9 +147,32 @@ const Sala = () => {
                 <div className="bg-white row rounded border shadow p-5 overflow-auto d-flex flex-column">
                     <h2>Organización de la sala</h2>
                     <div className="my-5 col-10 align-self-center">
-                        { modo != "editar" ?
+                        {modo != "editar" ?
                             <OrganizadorButacas setButacasExt={setButacas} /> :
-                            <ButacaMap butacas={ sala.butacas } />
+                            <div>
+                                <ButacaMap butacas={sala.butacas} />
+                                <div className='border border-dark butaca-leyenda p-2'>
+                                    <h4 className="text-center mb-2">Leyenda de tipos de butacas</h4>
+                                    <table className="butaca-table butaca-hist d-flex justify-content-center">
+                                        <tbody>
+                                            <tr className=''>
+                                                <td className=''>
+                                                    <input type="checkbox" className="butaca-celda butaca-libre" readOnly onClick={(e) => e.preventDefault()} />
+                                                </td>
+                                                <td className=''>
+                                                    <h4 className="butaca-label mx-2">Normal</h4>
+                                                </td>
+                                                <td className=''>
+                                                    <input type="checkbox" className="butaca-celda butaca-discapacitado" readOnly onClick={(e) => e.preventDefault()} />
+                                                </td>
+                                                <td className=''>
+                                                    <h4 className="butaca-label mx-2">Discapacitado</h4>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
                         }
                     </div>
                 </div>

@@ -31,7 +31,15 @@ p {
   background-color: #011A5C;
 }
 
-.btn-red {
+.btn-danger:hover {
+  background-color: #9c0a0a;
+}
+
+.btn-danger:active {
+  background-color: #7b0101;
+}
+
+.btn-danger {
   background-color: #7b0101;
   color: white;
   border-radius: 5px;
@@ -40,12 +48,21 @@ p {
   border: none;
 }
 
-.btn-red:hover {
-  background-color: #9c0a0a;
+.btn-success:hover {
+  background-color: #0a9c19;
 }
 
-.btn-red:active {
-  background-color: #5c0101;
+.btn-success:active {
+  background-color: #015c04;
+}
+
+.btn-success {
+  background-color: #015c04;
+  color: white;
+  border-radius: 5px;
+  padding: 10px 20px;
+  text-decoration: none;
+  border: none;
 }
 
 .toast-info {

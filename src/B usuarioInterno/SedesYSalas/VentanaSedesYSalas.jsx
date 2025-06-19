@@ -43,8 +43,11 @@ const VentanaSedesYSalas = () => {
 
     const actualizarSede = async (el) => {
         console.log(el);
+        el.nombre = el.nombre.trim();
+
+        let response
         try {
-            await axios.patch(`${url}/intranet/editarSede`, el, {
+            response = await axios.patch(`${url}/intranet/editarSede`, el, {
                 headers: { Authorization: `Bearer ${Cookies.get("auth-token")}` }
             });
             consultar()
@@ -58,24 +61,42 @@ const VentanaSedesYSalas = () => {
             setTimeout(() => setToast({ visible: false }), 3000);
             console.error(error);
         } finally {
-            setToast({
-                tipo: 'toast-info',
-                visible: true,
-                titulo: '¡Sede editada!',
-                mensaje: ''
-            });
-            setTimeout(() => setToast({ visible: false }), 3000);
+            if (response.status === 200) {
+                setToast({
+                    tipo: 'toast-info',
+                    visible: true,
+                    titulo: '¡Sede editada!',
+                    mensaje: ''
+                });
+                setTimeout(() => setToast({ visible: false }), 3000);
+            } else {
+                setToast({
+                    tipo: 'toast-danger',
+                    visible: true,
+                    titulo: 'Error al editar',
+                    mensaje: response.data
+                });
+                setTimeout(() => setToast({ visible: false }), 3000);
+            }
         }
     }
 
     const apagarPrender = async (el) => {
         console.log(el);
+        let msj, title, type
         let confirmado
-        if (el.activo === true)
+        if (el.activo === true) {
             confirmado = window.confirm('¿Estás seguro de que deseas desactivar esta sede? Las funciones asociadas se ocultarán y no se podrán crear nuevas funciones en esa sede');
-        else
+            type = 'toast-danger'
+            title = 'Sede desactivada'
+            msj = 'Las funciones asociadas también se ocultarán'
+        }
+        else {
             confirmado = window.confirm('¿Estás seguro de que deseas activar esta sede?');
-
+            type = 'toast-info'
+            title = 'Sede activada'
+            msj = 'Las funciones asociadas también se mostrarán'
+        }
         if (confirmado) {
             try {
                 await axios.patch(`${url}/intranet/activarDesactivarSede`, el, {
@@ -85,20 +106,12 @@ const VentanaSedesYSalas = () => {
             } catch (error) {
                 console.error(error);
             } finally {
-                if (el.activo = true)
-                    setToast({
-                        tipo: 'toast-info',
-                        visible: true,
-                        titulo: 'Estado de sede cambiado',
-                        mensaje: 'Las funciones asociadas también se mostrarán'
-                    });
-                else
-                    setToast({
-                        tipo: 'toast-info',
-                        visible: true,
-                        titulo: 'Estado de sede cambiado',
-                        mensaje: 'Las funciones asociadas también se ocultarán'
-                    });
+                setToast({
+                    tipo: type,
+                    visible: true,
+                    titulo: 'Estado de sede cambiado',
+                    mensaje: msj
+                });
                 setTimeout(() => setToast({ visible: false }), 3000);
             }
         }
@@ -132,7 +145,6 @@ const VentanaSedesYSalas = () => {
                         <thead className='thead2'>
                             <tr className='tr2'>
                                 <td className='td2'>Nombre de sede</td>
-                                <td className='td2'>Estado</td>
                                 <td className='td2'>Opciones</td>
                             </tr>
                         </thead>
@@ -148,11 +160,6 @@ const VentanaSedesYSalas = () => {
                                             }} />
 
                                     </td>
-                                    <td className='align-content-center td2 tdEstado' data-label='Estado'>
-                                        {el.activo ?
-                                            <div className='btn btn-success' style={{ width: '100px' }}>Activa</div> :
-                                            <div className='btn btn-danger' style={{ width: '100px' }}>Inactiva</div>}
-                                    </td>
                                     <td className='td2 tdOpciones' data-label='Opciones'>
 
                                         <div className='d-flex justify-content-center gap-2' style={{ 'width': 'min-content' }} >
@@ -161,7 +168,8 @@ const VentanaSedesYSalas = () => {
                                                 <img src={guardar} alt="" style={{ height: '25px' }} />
                                             </button>
 
-                                            <button className='btn btn-red d-flex gap-2' onClick={() => apagarPrender(el)}
+                                            <button className={el.activo ? 'btn btn-success d-flex gap-2' : 'btn btn-danger d-flex gap-2'}
+                                                onClick={() => apagarPrender(el)}
                                                 style={{ padding: '6px' }}>
                                                 <img className='' src={iconoApagar} alt="" style={{ height: '33px' }} />
                                             </button>
