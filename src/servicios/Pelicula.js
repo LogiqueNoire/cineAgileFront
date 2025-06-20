@@ -30,6 +30,15 @@ class Pelicula {
         return peliculas.data
     }
 
+    static async editarPelicula(pelicula) {
+        const peliculas = await axios.patch(`${url}/intranet/pelicula`,
+            pelicula,
+            {
+                headers: { Authorization: `Bearer ${Cookies.get("auth-token")}` }
+            })
+        return peliculas.data
+    }
+
 }
 
 export default Pelicula;

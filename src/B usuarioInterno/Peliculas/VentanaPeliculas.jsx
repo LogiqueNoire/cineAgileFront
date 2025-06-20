@@ -7,6 +7,7 @@ import Loading from '../../0 componentesGenerales/Loading';
 import Cookies from 'js-cookie';
 import { format, parse } from 'date-fns';
 import iconoEditar from '../../assets/editar.svg'
+import PeliculaModal from './PeliculaModal';
 
 const ordenamientoFecha = (a, b) => {
     const x = a.fechaInicioEstreno;
@@ -20,6 +21,7 @@ const VentanaPeliculas = () => {
 
     const [lista, setLista] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [ pelicula, setPelicula ] = useState(null);
 
     /*manejo de fecha*/
     let response
@@ -60,6 +62,15 @@ const VentanaPeliculas = () => {
     useEffect(() => {
         console.log(lista)
     }, [lista])
+
+    const editarOnClick = (pelicula) => {
+        setPelicula(pelicula);
+    };
+
+    const onPeliModalCerrar = () => {
+        setPelicula(null);
+        consultar();
+    }
 
     return (
         <div>
@@ -165,7 +176,7 @@ const VentanaPeliculas = () => {
                                             <a href={el.imageUrl} target="_blank" rel="noopener noreferrer">
                                                 <strong>Enlace</strong>
                                             </a>
-                                            <button className='d-flex align-items-center btn btn-primary p-2 mx-2'>
+                                            <button className='d-flex align-items-center btn btn-primary p-2 mx-2' onClick={ () => editarOnClick(el) }>
                                                 <img src={iconoEditar} alt="" style={{ height: '20px' }} />
                                             </button>
                                         </div>
@@ -178,6 +189,8 @@ const VentanaPeliculas = () => {
                     </table>
                 }
             </div>
+
+            { pelicula && <PeliculaModal pelicula={ pelicula } onCerrar={ onPeliModalCerrar } /> }
         </div>
     )
 }
