@@ -21,6 +21,14 @@ const EntradaCard = ({ infoGeneral, entrada, token, qrRef }) => {
     const { fila, columna } = entrada.butaca;
     const letra = String.fromCharCode('A'.charCodeAt(0) + fila);
 
+    let tipoPersona = "";
+    switch(entrada.persona) {
+        case "general": tipoPersona = "General"; break;
+        case "mayores": tipoPersona = "Mayor"; break;
+        case "niños": tipoPersona = "Niño"; break;
+        case "conadis": tipoPersona = "Conadis"; break;
+    }
+
 
     return (
         <div className="border border-secondary p-3">
@@ -43,6 +51,7 @@ const EntradaCard = ({ infoGeneral, entrada, token, qrRef }) => {
                 <h5>Sede: {infoGeneral.nombreSede} </h5>
                 <h5>Sala: {infoGeneral.sala}</h5>
                 <h5>Butaca: {letra + (columna + 1)}</h5>
+                <h5>Tipo: { tipoPersona }</h5>
 
                 <h2 className="text-center mt-4">Datos del pago</h2>
                 <h5>Fecha y hora del pago: {tiempoRegistroCorrecto}</h5>
@@ -60,6 +69,7 @@ const InfoEntradas = () => {
 
     // Limpiar y asignar refs una vez que llegan las entradas
 
+    console.log(entradas);
     if (entradas?.entradas && qrRefs.current.length !== entradas.entradas.length) {
         qrRefs.current = entradas.entradas.map(() => React.createRef());
     }

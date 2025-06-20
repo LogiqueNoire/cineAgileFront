@@ -41,7 +41,18 @@ export const VentanaPago = ({ prev, next }) => {
     if (!bloquearSolicitud) {
       bloquearSolicitud = true;
 
-      const entradas = contexto.butacaContext.seleccionadas.map(el => ({ id_butaca: el.id, persona: "general" }));
+      let tiposEntradas = [];
+      const entradasContext = contexto.entradasContext;
+
+      tiposEntradas = tiposEntradas.concat(new Array(entradasContext.generalesSeleccionadas).fill("general"));
+      tiposEntradas = tiposEntradas.concat(new Array(entradasContext.niñosSeleccionadas).fill("niños"));
+      tiposEntradas = tiposEntradas.concat(new Array(entradasContext.conadisSeleccionadas).fill("conadis"));
+      tiposEntradas = tiposEntradas.concat(new Array(entradasContext.mayoresSeleccionadas).fill("mayores"));
+
+      const entradas = contexto.butacaContext.seleccionadas.map(el => ({
+         id_butaca: el.id, 
+         persona: tiposEntradas.shift()
+      }));
   
       const fechaAhora = (new Date(Date.now()));
 
@@ -52,7 +63,7 @@ export const VentanaPago = ({ prev, next }) => {
       }
 
       console.log(cuerpo);
-  
+
       Entrada.comprarEntrada(cuerpo).then(res => {
         console.log(res);
         navigate("/entradas", { state: { entradas: res.data.entradasCompradasDTO } })
@@ -94,7 +105,7 @@ export const VentanaPago = ({ prev, next }) => {
       </div>
 
       <div className="d-flex justify-content-center gap-4 align-items-center">
-        {/*<button className="btn btn-warning" onClick={registrarTest}>Pasar!</button>*/}
+        { /* <button className="btn btn-warning" onClick={registrarTest}>Pasar!</button> */ }
         <button className="btn btn-primary" onClick={volver} >Volver</button>
         {/*<button className="btn btn-warning" onClick={registrarTest}>Registrar (Test)</button>*/}
       </div>

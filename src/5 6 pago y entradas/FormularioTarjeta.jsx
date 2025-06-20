@@ -4,6 +4,7 @@ import { VentaContext } from "../3 componentesVenta/VentaContextProvider.jsx";
 import Entrada from "../servicios/Entrada.js";
 import { useLocation, useNavigate } from "react-router-dom";
 import Toast from "../Toast.jsx";
+import { format } from "date-fns";
 
 export const FormularioTarjeta = ({ tarjeta, setTarjeta }) => {
   const contexto = useContext(VentaContext)
@@ -19,12 +20,25 @@ export const FormularioTarjeta = ({ tarjeta, setTarjeta }) => {
     if (!bloquearSolicitud) {
       bloquearSolicitud = true;
 
-      const entradas = contexto.butacaContext.seleccionadas.map(el => ({ id_butaca: el.id, persona: "general" }));
+      let tiposEntradas = [];
+      const entradasContext = contexto.entradasContext;
+
+      tiposEntradas = tiposEntradas.concat(new Array(entradasContext.generalesSeleccionadas).fill("general"));
+      tiposEntradas = tiposEntradas.concat(new Array(entradasContext.niñosSeleccionadas).fill("niños"));
+      tiposEntradas = tiposEntradas.concat(new Array(entradasContext.conadisSeleccionadas).fill("conadis"));
+      tiposEntradas = tiposEntradas.concat(new Array(entradasContext.mayoresSeleccionadas).fill("mayores"));
+
+      const entradas = contexto.butacaContext.seleccionadas.map(el => ({
+        id_butaca: el.id, 
+        persona: tiposEntradas.shift()
+     }));
+
+     const fechaAhora = (new Date(Date.now()));
 
       const cuerpo = {
         id_funcion: contexto.general.funcion.idFuncion,
         entradas: entradas,
-        tiempoRegistro: (new Date(Date.now())) //.toISOString()
+        tiempoRegistro: format(fechaAhora, "yyyy-MM-dd.HH:mm:ss").replace(".", "T")// .toISOString()
       }
 
       Entrada.comprarEntrada(cuerpo).then(res => {
