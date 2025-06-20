@@ -71,16 +71,16 @@ const VentanaPeliculas = () => {
                     <table className='table mytable table-striped border table-hover mt-4'>
                         <thead className='thead'>
                             <tr>
-                                <td className='td'>Nombre</td>
-                                <td className='td'>Duración (min)</td>
-                                <td className='td' style={{ width: "400px" }}>Sinopsis</td>
-                                <td className='td'>Género</td>
-                                <td className='td'>Director</td>
-                                <td className='td'>Clasificación</td>
-                                <td className='td'>Estado</td>
-                                <td className='td'>Actores</td>
-                                <td className='td'>Inicio de estreno</td>
-                                <td className='td'>Imagen</td>
+                                <th className='td'>Nombre</th>
+                                <th className='td'>Duración (min)</th>
+                                <th className='td'>Sinopsis</th>
+                                <th className='td'>Género</th>
+                                <th className='td'>Director</th>
+                                <th className='td'>Clasificación</th>
+                                <th className='td'>Estado</th>
+                                <th className='td'>Actores</th>
+                                <th className='td'>Inicio de estreno</th>
+                                <th className='td'>Imagen</th>
                             </tr>
                         </thead>
                         <tbody className='tbody'>
@@ -88,7 +88,7 @@ const VentanaPeliculas = () => {
 
                                 <tr className='tr' key={id}>
                                     <td className='td' data-label='Nombre'>
-                                        <input
+                                        <input style={{width: '200px'}}
                                             type="text"
                                             className="form-control ms-end sinopsis"
                                             placeholder="Nombre"
@@ -121,7 +121,7 @@ const VentanaPeliculas = () => {
 
                                         />
                                     </td>
-                                    <td className='td' data-label='Sinopsis'><div className='sinopsis'>{el.sinopsis}</div></td>
+                                    <td className='td' data-label='Sinopsis'><div className='sinopsis' style={{width: '200px'}}>{el.sinopsis}</div></td>
                                     <td className='td' data-label='Género'>{el.genero === "" || el.genero === " " ? "-" : el.genero}</td>
                                     <td className='td' data-label='Director'>
                                         <input
