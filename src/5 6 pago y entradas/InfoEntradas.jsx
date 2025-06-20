@@ -85,8 +85,8 @@ const InfoEntradas = () => {
         let mypdf = Entrada.generarPdf(entradas)
     }
 
-    /*
-    const canvasRef = canvasRef.current;
+    
+    /*const canvasRef = canvasRef.current;*/
 
     const generarPDF = () => {
         const doc = new jsPDF();
@@ -97,14 +97,15 @@ const InfoEntradas = () => {
         doc.text("Fecha: 2025-06-22", 10, 30);
 
         // Captura la imagen del QR desde el canvas
+        /*
         const canvas = canvasRef.current.querySelector('canvas');
         if (canvas) {
             const imgData = canvas.toDataURL('image/png');
             doc.addImage(imgData, 'PNG', 10, 40, 50, 50); // x, y, width, height
         }
-
+        */
         doc.save("entrada.pdf");
-    };*/
+    };
 
     console.log(entradas)
 
