@@ -54,7 +54,7 @@ const Cronograma = () => {
     fecha.setHours(h, 0, 0);
     horas.push(new Date(fecha));
   }
-  
+
   function formatearHora(fechaStr) {
     const fecha = new Date(fechaStr);
     const h = fecha.getHours().toString().padStart(2, '0');
@@ -129,7 +129,7 @@ const Cronograma = () => {
                       <td key={index} style={{
                         borderBottom: (i === horas.length - 1) ? 'none' : ''
                       }}>
-                        <div className='d-flex justify-content-center flex-column align-items-center gap-2'>
+                        <div className={`d-flex justify-content-center align-items-center gap-2 ${valoresBusqueda.filtro === "sala" ? "flex-column" : ""}`}>
                           {listaFunciones.map((el, key) => {
                             const horaDelDia = new Date(fs);
                             horaDelDia.setHours(hora.getHours(), hora.getMinutes(), 0, 0);
