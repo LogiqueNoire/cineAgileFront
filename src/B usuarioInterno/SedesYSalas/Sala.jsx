@@ -4,6 +4,7 @@ import OrganizadorButacas from "./OrganizadorButacas";
 import SalaButaca from "../../servicios/SalaButaca";
 import BotonCarga from "../../0 componentesGenerales/BotonCarga";
 import ButacaMap from "../../3 componentesVenta/ButacaMap";
+import EditorButacas from "./EditorButacas";
 
 const Sala = () => {
     const navigate = useNavigate();
@@ -76,7 +77,8 @@ const Sala = () => {
             const editarSalaReq = {
                 idSala: sala.id,
                 codigoSala,
-                categoria
+                categoria,
+                butacas: butacas.map(el => ({ idButaca: el.id, accion: el.accion }))
             }
 
             SalaButaca.editarSala(editarSalaReq).then(res => {
@@ -90,6 +92,8 @@ const Sala = () => {
             })
         }
     }
+
+    console.log(butacas);
 
     return (
         <div className="container-fluid py-3 col-10">
@@ -147,33 +151,12 @@ const Sala = () => {
                 <div className="bg-white row rounded border shadow p-5 overflow-auto d-flex flex-column">
                     <h2>Organización de la sala</h2>
                     <div className="my-5 col-10 align-self-center">
-                        {modo != "editar" ?
-                            <OrganizadorButacas setButacasExt={setButacas} /> :
-                            <div>
-                                <ButacaMap butacas={sala.butacas} />
-                                <div className='border border-dark butaca-leyenda p-2'>
-                                    <h4 className="text-center mb-2">Leyenda de tipos de butacas</h4>
-                                    <table className="butaca-table butaca-hist d-flex justify-content-center">
-                                        <tbody>
-                                            <tr className=''>
-                                                <td className=''>
-                                                    <input type="checkbox" className="butaca-celda butaca-libre" readOnly onClick={(e) => e.preventDefault()} />
-                                                </td>
-                                                <td className=''>
-                                                    <h4 className="butaca-label mx-2">Normal</h4>
-                                                </td>
-                                                <td className=''>
-                                                    <input type="checkbox" className="butaca-celda butaca-discapacitado" readOnly onClick={(e) => e.preventDefault()} />
-                                                </td>
-                                                <td className=''>
-                                                    <h4 className="butaca-label mx-2">Discapacitado</h4>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        }
+
+                    { modo != "editar" ? 
+                        <OrganizadorButacas setButacasExt={setButacas} /> :
+                        <EditorButacas cambios={butacas} setCambios={setButacas} butacasExistentes={sala.butacas} />
+                    }
+
                     </div>
                 </div>
 

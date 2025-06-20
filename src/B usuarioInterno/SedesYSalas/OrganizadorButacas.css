@@ -139,3 +139,17 @@
     box-shadow: inset var(--celdainput-size) var(--celdainput-size) #3f48cc;
     border-radius: 30%;
 }
+
+.celda-desactivada::before {
+    opacity: 0.5;
+}
+
+.cambiar-a-activo {
+    border-color: rgb(0, 236, 0);
+    box-shadow: 0px 0px 5px rgb(0, 236, 0);
+}
+
+.cambiar-a-inactivo {
+    border-color: red;
+    box-shadow: 0px 0px 5px red;
+}
