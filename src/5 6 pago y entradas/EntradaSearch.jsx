@@ -1,17 +1,9 @@
 import Entrada from "../servicios/Entrada"
 import Encriptador from "../servicios/Encriptador"
-
+import InfoEntradas from './InfoEntradas'
 
 const EntradaSearch = (codigo) => {
-    Encriptador.desencriptar(codigo)
-
-    Entrada.buscarEntrada()
-
-    return (
-        <div>
-            
-        </div>
-    )
+    
 }
 
 export default EntradaSearch;

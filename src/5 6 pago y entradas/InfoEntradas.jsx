@@ -1,13 +1,14 @@
 import { useLocation } from "react-router-dom";
 import html2pdf from "html2pdf.js";
 import Entrada from '../servicios/Entrada'
-import QRCode from "react-qr-code";
+import { QRCodeCanvas } from "qrcode.react";
 import { url } from "../configuracion/backend";
 import Encriptador from "../servicios/Encriptador";
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
 import jsPDF from "jspdf";
+import React from "react";
 
-const EntradaCard = ({ infoGeneral, entrada, token }) => {
+const EntradaCard = ({ infoGeneral, entrada, token, qrRef }) => {
     // Adherir 'Z' a la fecha UTC en formato ISO 8601 hará que new Date() transforme
     // dicha fecha a la zona horaria correcta.
     console.log("entrada", entrada)
@@ -20,6 +21,7 @@ const EntradaCard = ({ infoGeneral, entrada, token }) => {
     const { fila, columna } = entrada.butaca;
     const letra = String.fromCharCode('A'.charCodeAt(0) + fila);
 
+
     return (
         <div className="border border-secondary p-3">
 
@@ -28,9 +30,8 @@ const EntradaCard = ({ infoGeneral, entrada, token }) => {
                 <div className="d-flex align-items-center">
                     <h2 className="w-50 text-center">CineAgile<br />Entrada</h2>
                     <div className="w-50 d-flex justify-content-center">
-                        <h2>{ }</h2>
-                        <QRCode className="w-100 d-flex align-items-center" style={{ height: "auto" }}
-                            value={`${url}/entrada/${token}`} renderAs='canvas' /> {/*codigoQR*/}
+                        <QRCodeCanvas className="w-100 d-flex align-items-center" ref={qrRef} style={{ height: "auto" }}
+                            value={`${url}/entrada/${token}`} /> {/*codigoQR*/}
 
                     </div>
                 </div>
@@ -55,14 +56,54 @@ const EntradaCard = ({ infoGeneral, entrada, token }) => {
 const InfoEntradas = () => {
     const location = useLocation();
     const { entradas = null } = location.state || {};
+    const qrRefs = useRef([]);
 
-    if (entradas === null) {
-        const entradas = Entrada.buscarEntrada(codigo)
-        navigate("/entradas", { state: { entradas: funcion } })
+    // Limpiar y asignar refs una vez que llegan las entradas
+
+    if (entradas?.entradas && qrRefs.current.length !== entradas.entradas.length) {
+        qrRefs.current = entradas.entradas.map(() => React.createRef());
     }
 
 
-    const descargarPdf = async () => {
+    const handleGenerarPDF = () => {
+        setTimeout(() => {
+            Entrada.generarPdf(entradas, qrRefs.current);
+        }, 500); // Espera medio segundo
+    };
+
+    return (
+        <div className="w-100 p-4">
+            <div className="container-fluid gap-4">
+
+
+                <div className="d-flex flex-column align-items-center gap-4 mb-4">
+                    <h1>Entradas</h1>
+                    <button className='btn btn-primary' onClick={() => handleGenerarPDF()}>Descargar PDF</button>
+                </div>
+
+                <div className="d-flex flex-column align-items-center gap-4">
+                    {entradas && entradas.entradas.map((el, i) => {
+                        return (
+                            <EntradaCard
+                                infoGeneral={{ ...entradas }}
+                                entrada={el}
+                                token={entradas.tokens[i]}
+                                qrRef={qrRefs.current[i]} />
+                        )
+                    })}
+                </div>
+            </div>
+
+        </div>
+    )
+}
+
+export default InfoEntradas;
+
+
+/*
+
+const descargarPdf = async () => {
         const docs = document.querySelectorAll(".entrada-card");
         const opts = {
             margin: 10
@@ -82,55 +123,5 @@ const InfoEntradas = () => {
         }
         await pdf.save();
         console.log("entradas", entradas)
-        let mypdf = Entrada.generarPdf(entradas)
-    }
-
-    
-    /*const canvasRef = canvasRef.current;*/
-
-    const generarPDF = () => {
-        const doc = new jsPDF();
-
-        // Agrega texto u otros datos
-        doc.text("Entrada para el evento", 10, 10);
-        doc.text("Nombre: Juan Pérez", 10, 20);
-        doc.text("Fecha: 2025-06-22", 10, 30);
-
-        // Captura la imagen del QR desde el canvas
-        /*
-        const canvas = canvasRef.current.querySelector('canvas');
-        if (canvas) {
-            const imgData = canvas.toDataURL('image/png');
-            doc.addImage(imgData, 'PNG', 10, 40, 50, 50); // x, y, width, height
-        }
-        */
-        doc.save("entrada.pdf");
-    };
-
-    console.log(entradas)
-
-    return (
-        <div className="w-100 p-4">
-            <div className="container-fluid gap-4">
-
-
-                <div className="d-flex flex-column align-items-center gap-4 mb-4">
-                    <h1>Entradas</h1>
-                    <button onClick={descargarPdf}>Descargar PDF</button>
-                    <button onClick={generarPDF}>Descargar PDF v2</button>
-                </div>
-
-                <div className="d-flex flex-column align-items-center gap-4">
-                    {entradas && entradas.entradas.map((el, i) => {
-                        return (
-                            <EntradaCard infoGeneral={{ ...entradas }} entrada={el} token={entradas.tokens[i]} />
-                        )
-                    })}
-                </div>
-            </div>
-
-        </div>
-    )
-}
-
-export default InfoEntradas;
+        let mypdf = 
+    }*/
