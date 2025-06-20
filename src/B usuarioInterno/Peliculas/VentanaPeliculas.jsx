@@ -5,7 +5,7 @@ import axios from 'axios';
 import { url } from "../../configuracion/backend"
 import Loading from '../../0 componentesGenerales/Loading';
 import Cookies from 'js-cookie';
-import { format } from 'date-fns';
+import { format, parse } from 'date-fns';
 import iconoEditar from '../../assets/editar.svg'
 
 const ordenamientoFecha = (a, b) => {
@@ -154,7 +154,7 @@ const VentanaPeliculas = () => {
                                             className="form-control ms-end"
                                             name="fechaInicioEstreno"
                                             min={fechaReal ? format(fechaReal, 'yyyy-MM-dd') : ''}
-                                            value={el.fechaInicioEstreno ? format(el.fechaInicioEstreno, 'yyyy-MM-dd') : ''}
+                                            value={el.fechaInicioEstreno ? format(parse(el.fechaInicioEstreno, 'yyyy-MM-dd', new Date()), 'yyyy-MM-dd') : ''}
                                             style={{ width: '150px' }}
                                             /*onChange={(e) => onFechaChange(e)}*/
                                             required
