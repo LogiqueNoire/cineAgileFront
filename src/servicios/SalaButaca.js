@@ -13,6 +13,9 @@ class SalaButaca {
     static convButacasAMatriz(butacas) {
         let max_row, max_col
         let matriz = butacas.reduce((acc, el) => {
+            if (!el.activo)
+                return acc;
+
             max_row = Object.keys(acc).length === 0 ? el.fila : (max_row > el.fila ? max_row : el.fila)
             max_col = Object.keys(acc).length === 0 ? el.columna : (max_col > el.columna ? max_col : el.columna)
 
