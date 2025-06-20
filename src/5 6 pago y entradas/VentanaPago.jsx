@@ -94,7 +94,7 @@ export const VentanaPago = ({ prev, next }) => {
       </div>
 
       <div className="d-flex justify-content-center gap-4 align-items-center">
-        <button className="btn btn-warning" onClick={registrarTest}>Pasar!</button>
+        {/*<button className="btn btn-warning" onClick={registrarTest}>Pasar!</button>*/}
         <button className="btn btn-primary" onClick={volver} >Volver</button>
         {/*<button className="btn btn-warning" onClick={registrarTest}>Registrar (Test)</button>*/}
       </div>
