@@ -31,7 +31,7 @@ const EntradaCard = ({ infoGeneral, entrada, token, qrRef }) => {
                     <h2 className="w-50 text-center">CineAgile<br />Entrada</h2>
                     <div className="w-50 d-flex justify-content-center">
                         <QRCodeCanvas className="w-100 d-flex align-items-center" ref={qrRef} style={{ height: "auto" }}
-                            value={`${url}/entrada/${token}`} /> {/*codigoQR*/}
+                            size={256} value={`${url}/entrada/${token}`} /> {/*codigoQR*/}
 
                     </div>
                 </div>
