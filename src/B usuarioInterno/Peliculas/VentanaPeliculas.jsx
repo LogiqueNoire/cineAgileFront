@@ -85,11 +85,8 @@ const VentanaPeliculas = () => {
                                 <th className='td'>Nombre</th>
                                 <th className='td'>Duración (min)</th>
                                 <th className='td'>Sinopsis</th>
-                                <th className='td'>Género</th>
-                                <th className='td'>Director</th>
                                 <th className='td'>Clasificación</th>
                                 <th className='td'>Estado</th>
-                                <th className='td'>Actores</th>
                                 <th className='td'>Inicio de estreno</th>
                                 <th className='td'>Imagen</th>
                             </tr>
@@ -99,77 +96,16 @@ const VentanaPeliculas = () => {
 
                                 <tr className='tr' key={id}>
                                     <td className='td' data-label='Nombre'>
-                                        <input style={{width: '200px'}}
-                                            type="text"
-                                            className="form-control ms-end sinopsis"
-                                            placeholder="Nombre"
-                                            name="nombre"
-                                            value={el.nombre}
-                                            /*onChange={(e) => onInputChange(e)}*/
-                                            required
-                                        />
+                                        { el.nombre }
                                     </td>
                                     <td className='td' data-label='Duración'>
-                                        <input
-                                            type="number"
-                                            min="0"
-                                            max="500"
-                                            step="0"
-                                            className="form-control ms-end"
-                                            placeholder="Duración"
-                                            name="duracion"
-                                            value={el.duracion}
-                                            style={{ width: '100px' }}
-                                            /*onChange={(e) => {
-                                                const input = e.target.value;
-                                                const regex = /^\d*\.?\d{0}$/; // permite hasta 0 decimales
-                                                if (input === "" || regex.test(input)) {
-                                                    onInputChange(e)
-                                                };
-                                            }
-                                            }*/
-                                            required
-
-                                        />
+                                        { el.duracion }
                                     </td>
                                     <td className='td' data-label='Sinopsis'><div className='sinopsis' style={{width: '200px'}}>{el.sinopsis}</div></td>
-                                    <td className='td' data-label='Género'>{el.genero === "" || el.genero === " " ? "-" : el.genero}</td>
-                                    <td className='td' data-label='Director'>
-                                        <input
-                                            type="text"
-                                            className="form-control ms-end"
-                                            placeholder="Director"
-                                            name="director"
-                                            value={el.director}
-                                            style={{ width: '250px' }}
-                                            /*onChange={(e) => onInputChange(e)}*/
-                                            required
-                                        />
-                                    </td>
                                     <td className='td' data-label='Clasificación'>{el.clasificacion === "" | el.clasificacion === " " ? "-" : el.clasificacion}</td>
                                     <td className='td' data-label='Estado'>{el.estado}</td>
-                                    <td className='td' data-label='Actores'>
-                                        <input
-                                            type="text"
-                                            className="form-control ms-end"
-                                            placeholder="Actores"
-                                            name="actores"
-                                            value={el.actores}
-                                            style={{ width: '250px' }}
-                                        /*onChange={(e) => onInputChange(e)}*/
-                                        />
-                                    </td>
                                     <td className='td' data-label='Inicio de estreno'>
-                                        <input
-                                            type="date"
-                                            className="form-control ms-end"
-                                            name="fechaInicioEstreno"
-                                            min={fechaReal ? format(fechaReal, 'yyyy-MM-dd') : ''}
-                                            value={el.fechaInicioEstreno ? format(parse(el.fechaInicioEstreno, 'yyyy-MM-dd', new Date()), 'yyyy-MM-dd') : ''}
-                                            style={{ width: '150px' }}
-                                            /*onChange={(e) => onFechaChange(e)}*/
-                                            required
-                                        />
+                                        { el.fechaInicioEstreno ? format(parse(el.fechaInicioEstreno, 'yyyy-MM-dd', new Date()), 'yyyy-MM-dd') : '' }
                                     </td>
                                     <td className='td' data-label='Imagen'>
                                         <div className='d-flex align-items-center'>
