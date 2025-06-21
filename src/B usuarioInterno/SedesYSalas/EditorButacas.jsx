@@ -18,8 +18,8 @@ const SeccionBotones = ({ onClick, row, col }) => {
 
 const EditorButacas = ({ cambios, setCambios, butacasExistentes }) => {
     const [ butacas ] = useState((() => {
-        const [ nax_row, max_col ] = SalaButaca.convButacasAMatriz(butacasExistentes);
-        const but = new Array(nax_row + 1).fill().map(el => new Array(max_col + 1).fill(null));
+        const [ max_row, max_col ] = SalaButaca.convButacasAMatriz(butacasExistentes);
+        const but = new Array(max_row + 1).fill().map(el => new Array(max_col + 1).fill(null));
 
         butacasExistentes.forEach(el => {
             but[el.fila][el.columna] = { 
