@@ -105,7 +105,7 @@ const VentanaPeliculas = () => {
                                     <td className='td' data-label='Clasificación'>{el.clasificacion === "" | el.clasificacion === " " ? "-" : el.clasificacion}</td>
                                     <td className='td' data-label='Estado'>{el.estado}</td>
                                     <td className='td' data-label='Inicio de estreno'>
-                                        { el.fechaInicioEstreno ? format(parse(el.fechaInicioEstreno, 'yyyy-MM-dd', new Date()), 'yyyy-MM-dd') : '' }
+                                        { el.fechaInicioEstreno ? format(parse(el.fechaInicioEstreno, 'yyyy-MM-dd', new Date()), 'dd/MM/yyyy') : '' }
                                     </td>
                                     <td className='td' data-label='Imagen'>
                                         <div className='d-flex align-items-center'>
