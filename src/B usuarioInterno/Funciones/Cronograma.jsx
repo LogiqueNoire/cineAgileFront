@@ -156,7 +156,7 @@ const Cronograma = () => {
                                   <h6>{el.nombrePelicula}</h6>
                                 }
                                 <h6>{el.categoria + ' ' + el.dimension}</h6>
-                                <h6>{'S/ ' + el.precioBase}</h6>
+                                <h6>{'S/ ' + el.precioBase.toFixed(2)}</h6>
                                 <h6></h6>
                               </div>
                               :
