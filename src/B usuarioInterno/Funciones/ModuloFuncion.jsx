@@ -34,7 +34,9 @@ const ModuloFuncion = ({ handlePeliculaChange, handleSalaChange }) => {
 
     useEffect(() => {
         if (primeraVez) {
+
             consultarPeliculas()
+            obtenerFecha();
         } else {
             setPrimeraVez(false);
         }
@@ -49,23 +51,23 @@ const ModuloFuncion = ({ handlePeliculaChange, handleSalaChange }) => {
         });
     };
 
-  const [fechaReal, setFechaReal] = useState()
+    const [fechaReal, setFechaReal] = useState()
 
 
 
-  /*manejo de fecha*/
-  let response
+    /*manejo de fecha*/
+    let response
     const obtenerFecha = async () => {
-      try {
-        response = await axios.get(`${url}/fecha-actual`);
-        setFechaReal(new Date(response.data));
+        try {
+            response = await axios.get(`${url}/fecha-actual`);
+            setFechaReal(new Date(response.data));
 
-      } catch (err) {
-        console.error("Error al obtener la fecha:", err);
-      }
+        } catch (err) {
+            console.error("Error al obtener la fecha:", err);
+        }
     };
 
-    obtenerFecha();
+
 
     const cambiarEstado = (checked) => {
         setChecked(checked)
@@ -95,6 +97,9 @@ const ModuloFuncion = ({ handlePeliculaChange, handleSalaChange }) => {
             setListaPeliculas(datos.sort(ordenamientoAlfa));
         } catch (error) {
             console.error(error);
+        }
+        finally {
+            console.log('hola')
         }
     }
 
@@ -337,6 +342,8 @@ const ModuloFuncion = ({ handlePeliculaChange, handleSalaChange }) => {
     }
 
 
+
+
     return (
 
         <div className='d-flex flex-column align-items-center gap-4 m-3 border p-4 rounded'>
@@ -357,9 +364,9 @@ const ModuloFuncion = ({ handlePeliculaChange, handleSalaChange }) => {
                         :
                         <label className="fs-4">Actualizar</label>}
                 </div>
+                <label>Cliquea una función para copiar sus datos</label>
                 {checked === true ?
                     <div className="d-flex flex-column gap-3">
-                        <label>Cliquea una función para copiar sus datos</label>
                         <div className='d-flex w-100 align-items-center'>
                             <label className='d-flex text-nowrap w-100'>Elige sede</label>
                             <select className='form-select w-100'
@@ -389,10 +396,36 @@ const ModuloFuncion = ({ handlePeliculaChange, handleSalaChange }) => {
                                 } />
                         </div>
                         <div className='d-flex w-100 align-items-center'>
+                            <label className='w-100'>Pelicula</label>
+                            <select value={funcion.nuevaPeliculaId}
+                                disabled={funcion.funcionElegida === undefined || funcion.codigoFuncion === ''}
+                                className='form-select w-100'
+                                onChange={(e) => {
+                                    setFuncion(prev => ({
+                                        ...prev,
+                                        nuevaPeliculaId: e.target.value
+                                    }))
+                                    setFuncion(prev => ({
+                                        ...prev,
+                                        nuevaFecha: ''
+                                    }))
+                                }
+                                }>
+                                <option value="0">Elige una película</option>
+                                {listaPeliculas.map((el, id) => (
+                                    <option key={el.idPelicula || id} value={el.idPelicula} >{el.nombre}</option>
+                                ))}
+                            </select>
+                        </div>
+                        <div className='d-flex w-100 align-items-center'>
                             <label className='w-100'>Nueva fecha</label>
                             <input className='form-control w-100' type="date"
                                 disabled={funcion.funcionElegida === undefined || funcion.codigoFuncion === ''}
                                 value={funcion.nuevaFecha}
+                                min={(funcion.nuevaPeliculaId != '' && funcion.nuevaPeliculaId != '0') ?
+                                    (new Date(listaPeliculas.find(item => item.idPelicula == funcion.nuevaPeliculaId).fechaInicioEstreno) > new Date(fechaReal) ?
+                                        listaPeliculas.find(item => item.idPelicula == funcion.nuevaPeliculaId).fechaInicioEstreno : format(fechaReal, "yyyy-MM-dd"))
+                                    : ''}
                                 onChange={(e) =>
                                     setFuncion(prev => ({
                                         ...prev,
@@ -430,23 +463,6 @@ const ModuloFuncion = ({ handlePeliculaChange, handleSalaChange }) => {
                             </select>
                         </div>
 
-                        <div className='d-flex w-100 align-items-center'>
-                            <label className='w-100'>Pelicula</label>
-                            <select value={funcion.nuevaPeliculaId}
-                                disabled={funcion.funcionElegida === undefined || funcion.codigoFuncion === ''}
-                                className='form-select w-100'
-                                onChange={(e) =>
-                                    setFuncion(prev => ({
-                                        ...prev,
-                                        nuevaPeliculaId: e.target.value
-                                    }))
-                                }>
-                                <option value="0">Elige una película</option>
-                                {listaPeliculas.map((el, id) => (
-                                    <option key={el.idPelicula || id} value={el.idPelicula} >{el.nombre}</option>
-                                ))}
-                            </select>
-                        </div>
 
                         <div className='d-flex w-100 align-items-center'>
                             <label className='w-100'>Dimensión</label>
@@ -508,8 +524,30 @@ const ModuloFuncion = ({ handlePeliculaChange, handleSalaChange }) => {
                             </select>
                         </div>
                         <div className='d-flex w-100 align-items-center'>
+                            <label className='w-100'>Pelicula</label>
+
+                            <select value={funcion.nuevaPeliculaId}
+                                className='form-select w-100'
+                                onChange={
+                                    (e) => setFuncion(prev => ({
+                                        ...prev,
+                                        nuevaPeliculaId: e.target.value
+                                    }))
+                                }>
+                                <option value="0">Elige una película</option>
+                                {listaPeliculas.map((el, id) => (
+                                    <option key={el.idPelicula || id} value={el.idPelicula} >{el.nombre}</option>
+                                ))}
+                            </select>
+                        </div>
+                        <div className='d-flex w-100 align-items-center'>
                             <label className='w-100'>Nueva fecha</label>
                             <input className='form-control w-100' type="date" value={funcion.nuevaFecha}
+                                disabled={funcion.nuevaPeliculaId == '' || funcion.nuevaPeliculaId == 0}
+                                min={(funcion.nuevaPeliculaId != '' && funcion.nuevaPeliculaId != '0') ?
+                                    (new Date(listaPeliculas.find(item => item.idPelicula == funcion.nuevaPeliculaId).fechaInicioEstreno) > new Date(fechaReal) ?
+                                        listaPeliculas.find(item => item.idPelicula == funcion.nuevaPeliculaId).fechaInicioEstreno : format(fechaReal, "yyyy-MM-dd"))
+                                    : ''}
                                 onChange={(e) =>
                                     setFuncion(prev => ({
                                         ...prev,
@@ -519,7 +557,9 @@ const ModuloFuncion = ({ handlePeliculaChange, handleSalaChange }) => {
                         </div>
                         <div className='d-flex w-100 align-items-center'>
                             <label className='w-100'>Nueva hora de inicio (formato 24h)</label>
-                            <input className='form-control w-100' type="time" value={funcion.nuevaHoraInicio}
+                            <input className='form-control w-100' type="time"
+                                disabled={funcion.nuevaPeliculaId == '' || funcion.nuevaPeliculaId == 0}
+                                value={funcion.nuevaHoraInicio}
                                 onChange={(e) =>
                                     setFuncion(prev => ({
                                         ...prev,
@@ -544,23 +584,6 @@ const ModuloFuncion = ({ handlePeliculaChange, handleSalaChange }) => {
                             </select>
                         </div>
 
-                        <div className='d-flex w-100 align-items-center'>
-                            <label className='w-100'>Pelicula</label>
-
-                            <select value={funcion.nuevaPeliculaId}
-                                className='form-select w-100'
-                                onChange={
-                                    (e) => setFuncion(prev => ({
-                                        ...prev,
-                                        nuevaPeliculaId: e.target.value
-                                    }))
-                                }>
-                                <option value="0">Elige una película</option>
-                                {listaPeliculas.map((el, id) => (
-                                    <option key={el.idPelicula || id} value={el.idPelicula} >{el.nombre}</option>
-                                ))}
-                            </select>
-                        </div>
 
                         <div className='d-flex w-100 align-items-center'>
                             <label className='w-100'>Dimensión</label>
