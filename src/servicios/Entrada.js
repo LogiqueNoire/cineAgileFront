@@ -29,7 +29,7 @@ class Entrada {
                 + entrada.butaca.columna}`, 20, 110);
             doc.text(`Fecha y hora del pago: ${(new Date(entrada.tiempoRegistro)).toLocaleString()}`, 20, 140);
 
-            doc.text(`Precio final: ${entrada.costoFinal}`, 20, 150);
+            doc.text(`Precio final: ${entrada.costoFinal.toFixed(2)}`, 20, 150);
         }
 
         for (let i = 0; i < entradas.length; i++) {

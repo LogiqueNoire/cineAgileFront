@@ -55,7 +55,7 @@ const EntradaCard = ({ infoGeneral, entrada, token, qrRef }) => {
 
                 <h2 className="text-center mt-4">Datos del pago</h2>
                 <h5>Fecha y hora del pago: {tiempoRegistroCorrecto}</h5>
-                <h5>Precio final: {entrada.costoFinal} nuevos soles </h5>
+                <h5>Precio final: {entrada.costoFinal.toFixed(2)} nuevos soles </h5>
             </div>
         </div>
     )
