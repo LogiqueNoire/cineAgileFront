@@ -49,6 +49,24 @@ const ModuloFuncion = ({ handlePeliculaChange, handleSalaChange }) => {
         });
     };
 
+  const [fechaReal, setFechaReal] = useState()
+
+
+
+  /*manejo de fecha*/
+  let response
+    const obtenerFecha = async () => {
+      try {
+        response = await axios.get(`${url}/fecha-actual`);
+        setFechaReal(new Date(response.data));
+
+      } catch (err) {
+        console.error("Error al obtener la fecha:", err);
+      }
+    };
+
+    obtenerFecha();
+
     const cambiarEstado = (checked) => {
         setChecked(checked)
         setFuncion({
