@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { url } from '../configuracion/backend'
 import jsPDF from 'jspdf';
+import imagenMarco from '../assets/marcoPNG.png'
 
 class Entrada {
 
@@ -17,20 +18,45 @@ class Entrada {
         const entradas = entradasCompletas.entradas
 
         const escribirInfoComun = (data) => {
-            doc.text(`Cine Agile`, 40, 40);
-            doc.text(`Pelicula: ${data.tituloPelicula}`, 20, 80);
-            doc.text(`Fecha y hora de inicio de la función: ${(new Date(data.fechaHoraInicio)).toLocaleString()}`, 20, 120);
-            doc.text(`Sede: ${data.nombreSede}`, 20, 90);
-            doc.text(`Sala: ${data.sala}`, 20, 100);
+            doc.setFontSize('20')
+            doc.text(`Cine Agile`, 60, 70);
+            doc.text(`Datos elegidos`, 80, 120);
+            doc.setFontSize('16')
+            doc.text(`Película: ${data.tituloPelicula}`, 40, 130);
+            doc.text(`Fecha y hora de la función: ${(new Date(data.fechaHoraInicio)).toLocaleString()}`, 40, 140);
+            doc.text(`Sede: ${data.nombreSede}`, 40, 150);
+            doc.text(`Sala: ${data.sala}`, 40, 160);
         }
         const escribirEntrada = (entrada, index) => {
-            doc.text(`Entrada ${index + 1}`, 40, 50);
+            doc.setFontSize('20')
+            doc.text(`Entrada ${index + 1}`, 61, 80);
+            doc.setFontSize('16')
             doc.text(`Butaca: ${String.fromCharCode('A'.charCodeAt(0) + entrada.butaca.fila)
-                + entrada.butaca.columna}`, 20, 110);
-            doc.text(`Fecha y hora del pago: ${(new Date(entrada.tiempoRegistro)).toLocaleString()}`, 20, 140);
-
-            doc.text(`Precio final: ${entrada.costoFinal.toFixed(2)}`, 20, 150);
+                + entrada.butaca.columna}`, 40, 170);
+            doc.text(`Tipo de entrada: ${entrada.persona}`, 40, 180);
+            doc.setFontSize('20')
+            doc.text(`Datos de pago`, 80, 200);
+            doc.setFontSize('16')
+            doc.text(`Fecha y hora del pago: ${(new Date(entrada.tiempoRegistro)).toLocaleString()}`, 40, 210);
+            doc.text(`Precio final: S/ ${entrada.costoFinal.toFixed(2)}`, 40, 220);
         }
+
+        const getImageDataURL = (src) =>
+            new Promise((resolve, reject) => {
+                const img = new Image();
+                img.crossOrigin = "Anonymous";
+                img.onload = () => {
+                    const canvas = document.createElement("canvas");
+                    canvas.width = img.width;
+                    canvas.height = img.height;
+                    canvas.getContext("2d").drawImage(img, 0, 0);
+                    resolve(canvas.toDataURL("image/png"));
+                };
+                img.onerror = reject;
+                img.src = src;
+            });
+
+        const marcoImg = await getImageDataURL(imagenMarco);
 
         for (let i = 0; i < entradas.length; i++) {
             if (i !== 0) doc.addPage();
@@ -40,11 +66,12 @@ class Entrada {
 
             if (canvasEl) {
                 const imgData = canvasEl.toDataURL("image/png");
-                doc.addImage(imgData, "PNG", 110, 20, 60, 60);
+                doc.addImage(imgData, "PNG", 110, 40, 60, 60);
             } else {
                 console.warn(`No se encontró canvas para la entrada ${i}`);
             }
 
+            doc.addImage(marcoImg, "PNG", 20, 20, 170, 260);
             escribirInfoComun(entradasCompletas);
             escribirEntrada(entrada, i);
         }
@@ -57,9 +84,13 @@ class Entrada {
         window.open(url, "_blank");
     }
 
+
+
     static async buscarEntrada() {
         return await axios.get(`${url}/entrada?token=${token}`)
     }
+
+
 
 }
 

@@ -51,11 +51,11 @@ const EntradaCard = ({ infoGeneral, entrada, token, qrRef }) => {
                 <h5>Sede: {infoGeneral.nombreSede} </h5>
                 <h5>Sala: {infoGeneral.sala}</h5>
                 <h5>Butaca: {letra + (columna + 1)}</h5>
-                <h5>Tipo: { tipoPersona }</h5>
+                <h5>Tipo de entrada: { tipoPersona }</h5>
 
                 <h2 className="text-center mt-4">Datos del pago</h2>
                 <h5>Fecha y hora del pago: {tiempoRegistroCorrecto}</h5>
-                <h5>Precio final: {entrada.costoFinal.toFixed(2)} nuevos soles </h5>
+                <h5>Precio final: S/ {entrada.costoFinal.toFixed(2)}</h5>
             </div>
         </div>
     )
