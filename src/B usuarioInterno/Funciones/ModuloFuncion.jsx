@@ -334,7 +334,7 @@ const ModuloFuncion = ({ handlePeliculaChange, handleSalaChange }) => {
                 tipo: 'toast-danger',
                 visible: true,
                 titulo: 'Error al crear la función',
-                mensaje: 'Tal vez hay algún cruce entre las funciones'
+                mensaje: 'Horario fuera de rango permitido o cruce detectado'
             });
             setTimeout(() => setToast({ visible: false }), 3000);
 
