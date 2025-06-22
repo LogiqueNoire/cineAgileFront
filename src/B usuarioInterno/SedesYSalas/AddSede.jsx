@@ -38,6 +38,11 @@ export default function AddSede({ onSucess }) {
 
     setSubmitting(true);
 
+    setSede({
+      ...sede,
+      nombre: nombre.trim(),
+    });
+
     try {
       await axios.post(`${url}/intranet/sedesysalas/agregar`, sede, {
         headers: { Authorization: `Bearer ${Cookies.get("auth-token")}` }
