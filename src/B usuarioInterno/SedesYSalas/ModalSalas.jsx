@@ -75,7 +75,7 @@ export const ModalSalas = ({ onClose, sede }) => {
           setToast({
             tipo: 'toast-info',
             visible: true,
-            titulo: 'Sala actibada',
+            titulo: 'Sala activada',
             mensaje: 'Las funciones asociadas también se mostrarán'
         });
         }
