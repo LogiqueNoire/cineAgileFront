@@ -1,10 +1,10 @@
-import { useLocation } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import html2pdf from "html2pdf.js";
 import Entrada from '../servicios/Entrada'
 import { QRCodeCanvas } from "qrcode.react";
-import { url } from "../configuracion/backend";
+const url = import.meta.env.VITE_FRONT_URL;
 import Encriptador from "../servicios/Encriptador";
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import jsPDF from "jspdf";
 import React from "react";
 
@@ -22,7 +22,7 @@ const EntradaCard = ({ infoGeneral, entrada, token, qrRef }) => {
     const letra = String.fromCharCode('A'.charCodeAt(0) + fila);
 
     let tipoPersona = "";
-    switch(entrada.persona) {
+    switch (entrada.persona) {
         case "general": tipoPersona = "General"; break;
         case "mayores": tipoPersona = "Mayor"; break;
         case "niños": tipoPersona = "Niño"; break;
@@ -40,7 +40,6 @@ const EntradaCard = ({ infoGeneral, entrada, token, qrRef }) => {
                     <div className="w-50 d-flex justify-content-center">
                         <QRCodeCanvas className="w-100 d-flex align-items-center" ref={qrRef} style={{ height: "auto" }}
                             size={256} value={`${url}/entrada/${token}`} /> {/*codigoQR*/}
-
                     </div>
                 </div>
 
@@ -51,7 +50,7 @@ const EntradaCard = ({ infoGeneral, entrada, token, qrRef }) => {
                 <h5>Sede: {infoGeneral.nombreSede} </h5>
                 <h5>Sala: {infoGeneral.sala}</h5>
                 <h5>Butaca: {letra + (columna + 1)}</h5>
-                <h5>Tipo de entrada: { tipoPersona }</h5>
+                <h5>Tipo de entrada: {tipoPersona}</h5>
 
                 <h2 className="text-center mt-4">Datos del pago</h2>
                 <h5>Fecha y hora del pago: {tiempoRegistroCorrecto}</h5>
@@ -63,22 +62,41 @@ const EntradaCard = ({ infoGeneral, entrada, token, qrRef }) => {
 }
 
 const InfoEntradas = () => {
+    const { codigo } = useParams()
+
     const location = useLocation();
-    const { entradas = null } = location.state || {};
+    const [entradas, setEntradas] = useState(location.state?.entradas || null);
+
     const qrRefs = useRef([]);
 
-    // Limpiar y asignar refs una vez que llegan las entradas
+    useEffect(() => {
+        if (!entradas && codigo) {
+            const fetchEntrada = async () => {
+                try {
+                    console.log(codigo)
+                    const response = await Entrada.buscarEntrada(codigo);
+                    console.log(response);
+                    setEntradas(response.data);
+                } catch (error) {
+                    console.error("Error al buscar entrada:", error);
+                }
+            };
 
-    console.log(entradas);
-    if (entradas?.entradas && qrRefs.current.length !== entradas.entradas.length) {
-        qrRefs.current = entradas.entradas.map(() => React.createRef());
-    }
+            fetchEntrada();
+            modoBuscar
+        }
+    }, [codigo, entradas]);
 
+    useEffect(() => {
+        if (entradas?.entradas && qrRefs.current.length !== entradas.entradas.length) {
+            qrRefs.current = entradas.entradas.map(() => React.createRef());
+        }
+    }, [entradas]);
 
     const handleGenerarPDF = () => {
         setTimeout(() => {
             Entrada.generarPdf(entradas, qrRefs.current);
-        }, 500); // Espera medio segundo
+        }, 500);
     };
 
     return (
@@ -97,7 +115,7 @@ const InfoEntradas = () => {
                             <EntradaCard
                                 infoGeneral={{ ...entradas }}
                                 entrada={el}
-                                token={entradas.tokens[i]}
+                                token={entradas.tokens ? entradas.tokens[i] : null}
                                 qrRef={qrRefs.current[i]} />
                         )
                     })}

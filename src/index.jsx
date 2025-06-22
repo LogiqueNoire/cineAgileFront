@@ -42,6 +42,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
                     <Route path='/compra' element={ <VentaContextProvider><FlujoVenta/></VentaContextProvider> } />
                     <Route path='/entradas' element={ <InfoEntradas /> } />
                     <Route path='/error' element={ <Error /> }/>
+                    <Route path="/entrada/:codigo" element={<InfoEntradas />}></Route>
                 </Route>
 
 
@@ -58,8 +59,8 @@ ReactDOM.createRoot(document.getElementById('root')).render(
                 </Route>
                 
                 <Route path='/butacas' element={ <ButacaSelect idSala={ 5 } /> }/>
+            
                 
-                <Route path={`/entrada/${codigo}`} element={<EntradaSearch ></EntradaSearch>}></Route>
             </Routes>
         </BrowserRouter>
 );

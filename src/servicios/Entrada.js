@@ -86,8 +86,8 @@ class Entrada {
 
 
 
-    static async buscarEntrada() {
-        return await axios.get(`${url}/entrada?token=${token}`)
+    static async buscarEntrada(token) {
+        return await axios.get(`${url}/entrada?token=${encodeURIComponent(token)}`)
     }
 
 
