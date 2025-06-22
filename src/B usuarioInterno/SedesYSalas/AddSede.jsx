@@ -40,7 +40,7 @@ export default function AddSede({ onSucess }) {
 
     setSede({
       ...sede,
-      [e.target.name]: e.target.value.trim(),
+      nombre: nombre.trim(),
     });
 
     try {
