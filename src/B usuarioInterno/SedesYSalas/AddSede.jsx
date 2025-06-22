@@ -56,7 +56,7 @@ export default function AddSede({ onSucess }) {
         setToast({
           tipo: 'toast-danger',
           visible: true,
-          titulo: 'Error al agregar la película',
+          titulo: 'Error al agregar la sede',
           mensaje: error.response.data
         });
         setTimeout(() => setToast({ visible: false }), 3000);
