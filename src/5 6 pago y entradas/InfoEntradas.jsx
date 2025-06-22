@@ -83,7 +83,6 @@ const InfoEntradas = () => {
             };
 
             fetchEntrada();
-            modoBuscar
         }
     }, [codigo, entradas]);
 
