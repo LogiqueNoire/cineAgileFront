@@ -25,10 +25,6 @@ import LoginForm from './B usuarioInterno/LoginForm.jsx';
 import Sala from './B usuarioInterno/SedesYSalas/Sala.jsx';
 import { FuncionesContextProvider } from './B usuarioInterno/Funciones/FuncionesContext.jsx';
 import Error from "./Error.jsx"
-import Entrada from './servicios/Entrada.js';
-import EntradaSearch from './5 6 pago y entradas/EntradaSearch.jsx';
-
-let codigo;
 
 ReactDOM.createRoot(document.getElementById('root')).render(
         <BrowserRouter>
