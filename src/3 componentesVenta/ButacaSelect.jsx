@@ -4,9 +4,11 @@ import SalaButaca from '../servicios/SalaButaca';
 import Funcion from '../servicios/Funcion';
 import { VentaContext } from './VentaContextProvider';
 import Loading from '../0 componentesGenerales/Loading';
+import Entrada from '../servicios/Entrada';
 
 import { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { format } from 'date-fns';
 
 const SeleccionButaca = ({ funcion, prev, next }) => {
   const navigate = useNavigate();
@@ -14,6 +16,7 @@ const SeleccionButaca = ({ funcion, prev, next }) => {
   const [data, setData] = useState(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
+  const { butacaContext } = context;
 
   useEffect(() => {
     Funcion.mostrarButacasDeFuncion(funcion.idFuncion).then(data => {
@@ -36,11 +39,22 @@ const SeleccionButaca = ({ funcion, prev, next }) => {
     prev();
   }
 
+
   const siguiente = () => {
-    next();
+    const fechaAhora = (new Date(Date.now()));
+    const info = {
+      id_funcion: funcion.idFuncion,
+      entradas: butacaContext.seleccionadas.map(el => ({ id_butaca: +el.id })),
+      tiempoRegistro: format(fechaAhora, "yyyy-MM-dd.HH:mm:ss").replace(".", "T")
+    };
+
+    Entrada.bloquearEntradas(info).then(res => {
+      next();
+    }).catch(err => {
+      console.log(err);
+    })
   }
 
-  const { butacaContext } = context;
 
   const estaEnSeleccionados = (pos) => {
     return butacaContext.seleccionadas.some(el => el.f === pos.f && el.c === pos.c)
