@@ -3,7 +3,7 @@ import "./pago.css";
 import { FormularioTarjeta } from "./FormularioTarjeta";
 
 
-export const Tarjeta = ({ metodo, setMetodo, tarjeta, setTarjeta }) => {
+export const Tarjeta = ({ metodo, setMetodo, tarjeta, setTarjeta, setSubmitting, setStatus, setto }) => {
 
   return (
     <>
@@ -23,7 +23,7 @@ export const Tarjeta = ({ metodo, setMetodo, tarjeta, setTarjeta }) => {
       </button>
 
       {metodo === "tarjeta" && (
-        <FormularioTarjeta tarjeta={tarjeta} setTarjeta={setTarjeta} />
+        <FormularioTarjeta tarjeta={tarjeta} setTarjeta={setTarjeta} setSubmitting={setSubmitting} setStatus={setStatus} setto={setto} />
       )}
     </>
   );

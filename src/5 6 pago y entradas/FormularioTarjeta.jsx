@@ -6,7 +6,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import Toast from "../Toast.jsx";
 import { format } from "date-fns";
 
-export const FormularioTarjeta = ({ tarjeta, setTarjeta }) => {
+export const FormularioTarjeta = ({ tarjeta, setTarjeta, setSubmitting, setStatus, setto }) => {
   const contexto = useContext(VentaContext)
   const total = Number(contexto.totalContext.total.toFixed(2));
 
@@ -19,6 +19,7 @@ export const FormularioTarjeta = ({ tarjeta, setTarjeta }) => {
   const registrarTest = () => {
     if (!bloquearSolicitud) {
       bloquearSolicitud = true;
+      setSubmitting(true);
 
       let tiposEntradas = [];
       const entradasContext = contexto.entradasContext;
@@ -46,6 +47,12 @@ export const FormularioTarjeta = ({ tarjeta, setTarjeta }) => {
         navigate("/entradas", { state: { entradas: res.data.entradasCompradasDTO } })
       }).catch(err => {
         console.log(err);
+        if (err.response?.data.estado)
+          setStatus({ error: true, msg: err.response.data.estado })
+        else
+          setStatus({ error: true, msg: "No se pudo conectar con el servidor." });
+      }).finally(_ => {
+        setSubmitting(false);
       })
     }
   }
@@ -55,6 +62,14 @@ export const FormularioTarjeta = ({ tarjeta, setTarjeta }) => {
 
       <PayPalScriptProvider options={{ "client-id": import.meta.env.VITE_PAYPAL_CLIENT_ID, locale: "es_PE" }}>
         <PayPalButtons
+          onClick={(data, actions) => {
+            setto.setTerminos(false);
+            return actions.resolve();
+          }}
+          onCancel={(data, actions) => {
+            setto.setTerminos(true);
+            return actions.redirect()
+          }}
           createOrder={(_, actions) => {
             return actions.order.create({
               purchase_units: [{
