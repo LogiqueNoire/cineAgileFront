@@ -7,6 +7,7 @@ import { TerminosCondiciones } from "./TerminosCondiciones.jsx";
 import { ModalTerminos } from "./ModalTerminos.jsx";
 import Entrada from "../servicios/Entrada.js";
 import { format } from "date-fns";
+import Loading from "../0 componentesGenerales/Loading.jsx";
 
 export const VentanaPago = ({ prev, next }) => {
   const navigate = useNavigate();
@@ -26,8 +27,14 @@ export const VentanaPago = ({ prev, next }) => {
     cvv: "",
   });
 
+  const [terminos, setTerminos] = useState(true);
   const [aceptaTerminos, setAceptaTerminos] = useState(false);
   const [modalAbierto, setModalAbierto] = useState(false);
+
+  const [ submitting, setSubmitting ] = useState(false);
+  const [ status, setStatus ] = useState({ error: false, msg: null });
+
+  console.log(terminos);
 
   const volver = () => {
     prev();
@@ -75,6 +82,19 @@ export const VentanaPago = ({ prev, next }) => {
 
   return (
     <>
+    { status.error &&
+    <div className="mb-5 w-100 d-flex flex-column align-items-center">
+      <div className="bg-danger bg-opacity-10 text-danger p-3 w-100 text-center border border-danger shadow mb-3">
+        Error: { status.msg }
+      </div>
+
+      <button className="btn btn-primary" onClick={ () => { navigate("/"); } }>Volver a la página inicial</button>
+    </div>
+    }
+
+    { submitting ?
+      <Loading /> :
+      <>
       <div className="container-fluid d-flex flex-column justify-content-center align-items-center gap-4">
         <h2 className="">Módulo de pago</h2>
         <div className="d-flex flex-column justify-content-center align-items-center">
@@ -84,6 +104,7 @@ export const VentanaPago = ({ prev, next }) => {
           aceptaTerminos={aceptaTerminos}
           setAceptaTerminos={setAceptaTerminos}
           onVerDetalles={() => setModalAbierto(true)}
+          setto={{terminos, setTerminos}}
         />
 
         {aceptaTerminos &&
@@ -93,6 +114,9 @@ export const VentanaPago = ({ prev, next }) => {
               setMetodo={setMetodo}
               tarjeta={tarjeta}
               setTarjeta={setTarjeta}
+              setSubmitting={setSubmitting}
+              setStatus={setStatus}
+              setto={{ setTerminos }}
             />
           </div>
         }
@@ -106,9 +130,14 @@ export const VentanaPago = ({ prev, next }) => {
 
       <div className="d-flex justify-content-center gap-4 align-items-center">
         <button className="btn btn-warning" onClick={registrarTest}>Pasar!</button>
-        <button className="btn btn-primary" onClick={volver} >Volver</button>
+        <button className="btn btn-primary" disabled={aceptaTerminos} onClick={volver} >Volver</button>
         {/*<button className="btn btn-warning" onClick={registrarTest}>Registrar (Test)</button>*/}
       </div>
+      </>
+       
+    }
+    
+
 
 
     </>

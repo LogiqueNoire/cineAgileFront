@@ -5,6 +5,7 @@ export const TerminosCondiciones = ({
   aceptaTerminos,
   setAceptaTerminos,
   onVerDetalles,
+  setto
 }) => {
   return (
     <div className="terms">
@@ -13,6 +14,7 @@ export const TerminosCondiciones = ({
         id="terminos"
         checked={aceptaTerminos}
         onChange={(e) => setAceptaTerminos(e.target.checked)}
+        disabled={!setto.terminos}
       />
       <label htmlFor="terminos">
         Acepto los{" "}
