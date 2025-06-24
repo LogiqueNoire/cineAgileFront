@@ -18,7 +18,7 @@ export default function AddFilm({ onSucess }) {
     nombre: '',
     director: '',
     actores: '',
-    genero: '',
+    genero: [],
     clasificacion: '',
     duracion: '',
     fechaInicioEstreno: '',
@@ -126,7 +126,7 @@ export default function AddFilm({ onSucess }) {
     e.preventDefault();
     console.log(pelicula)
 
-    if (!(genero.trim() === '' || clasificacion.trim() === '' || duracion === 0
+    if (!(genero.length == 0 || clasificacion.trim() === '' || duracion === 0
       || director.trim() === '' || imageUrl.trim() === '' || sinopsis.trim() === '')) {
       const peliculaFinal = {
         ...pelicula,
@@ -144,7 +144,7 @@ export default function AddFilm({ onSucess }) {
           nombre: '',
           director: '',
           actores: '',
-          genero: '',
+          genero: [],
           clasificacion: '',
           duracion: '',
           fechaInicioEstreno: '',
@@ -180,59 +180,6 @@ export default function AddFilm({ onSucess }) {
       setTimeout(() => setToast({ visible: false }), 3000);
     }
   };
-
-
-
-  /*pruebas*/
-
-
-  const [isOpen, setIsOpen] = useState(false);
-  const [selectedItems, setSelectedItems] = useState([]);
-
-  const options = [
-    { id: 'js', value: 'JavaScript', label: 'JavaScript' },
-    { id: 'py', value: 'Python', label: 'Python' },
-    { id: 'java', value: 'Java', label: 'Java' },
-    { id: 'cpp', value: 'C++', label: 'C++' },
-    { id: 'react', value: 'React', label: 'React' },
-    { id: 'node', value: 'Node.js', label: 'Node.js' },
-    { id: 'css', value: 'CSS', label: 'CSS' },
-    { id: 'html', value: 'HTML', label: 'HTML' }
-  ];
-
-  const toggleDropdown = () => {
-    setIsOpen(!isOpen);
-  };
-
-  const handleCheckboxChange = (optionValue) => {
-    setSelectedItems(prev => {
-      if (prev.includes(optionValue)) {
-        return prev.filter(item => item !== optionValue);
-      } else {
-        return [...prev, optionValue];
-      }
-    });
-  };
-
-  const clearAll = () => {
-    setSelectedItems([]);
-  };
-
-  const getDropdownText = () => {
-    const count = selectedItems.length;
-    if (count === 0) {
-      return 'Seleccionar opciones';
-    } else if (count === 1) {
-      return selectedItems[0];
-    } else {
-      return `${count} opciones seleccionadas`;
-    }
-  };
-
-
-
-
-
 
   return (
     <div className="addFilm">
@@ -373,29 +320,33 @@ export default function AddFilm({ onSucess }) {
               <div className="mb-3">
                 <label className="form-label">Género(s)</label>
                 <div className="border rounded p-3 bg-light" style={{ maxHeight: '110px', overflowY: 'auto' }}>
-                  {generos.map((genre, id) => (
-                    <div className="form-check" key={id}>
-                      <input
-                        className="form-check-input"
-                        type="checkbox"
-                        id={`genre-${id}`}
-                        checked={genero.includes(genre)}
-                        onChange={(e) => {
-                          const currentGenres = genero ? genero.split(', ').filter(g => g) : [];
-                          let newGenres;
-                          if (e.target.checked) {
-                            newGenres = [...currentGenres, genre];
-                          } else {
-                            newGenres = currentGenres.filter(g => g !== genre);
-                          }
-                          onInputChange({ target: { name: 'genero', value: newGenres.join(', ') } });
-                        }}
-                      />
-                      <label className="form-check-label" htmlFor={`genre-${genre}`}>
-                        {genre.nombre}
-                      </label>
-                    </div>
-                  ))}
+                  {generos.map((genre, id) => {
+                    const isChecked = pelicula.genero.some(g => g.id === genre.id);
+
+                    return (
+                      <div className="form-check" key={genre.id}>
+                        <input
+                          className="form-check-input"
+                          type="checkbox"
+                          id={`genre-${genre.id}`}
+                          checked={isChecked}
+                          onChange={(e) => {
+                            const nuevosGeneros = e.target.checked
+                              ? [...pelicula.genero, genre]
+                              : pelicula.genero.filter(g => g.id !== genre.id);
+
+                            setPelicula(prev => ({
+                              ...prev,
+                              genero: nuevosGeneros
+                            }));
+                          }}
+                        />
+                        <label className="form-check-label" htmlFor={`genre-${genre.id}`}>
+                          {genre.nombre}
+                        </label>
+                      </div>
+                    );
+                  })}
                 </div>
               </div>
 
