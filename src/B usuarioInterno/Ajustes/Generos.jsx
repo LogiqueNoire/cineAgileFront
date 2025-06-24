@@ -30,7 +30,7 @@ const Generos = () => {
         e.preventDefault();
         let response;
         try {
-            response = await axios.post(`${url}/intranet/generos/agregar`, nombre, {
+            response = await axios.post(`${url}/intranet/generos/agregar`, nombre.trim(), {
                 headers: {
                     Authorization: `Bearer ${Cookies.get("auth-token")}`,
                     'Content-Type': 'text/plain'
@@ -67,7 +67,7 @@ const Generos = () => {
         e.preventDefault();
         let response;
         try {
-            response = await axios.patch(`${url}/intranet/generos/editar`, {id: el.id, nombre: el.nombre}, {
+            response = await axios.patch(`${url}/intranet/generos/editar`, {id: el.id, nombre: el.nombre.trim()}, {
                 headers: {
                     Authorization: `Bearer ${Cookies.get("auth-token")}`
                 }
