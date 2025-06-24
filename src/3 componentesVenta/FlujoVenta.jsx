@@ -8,6 +8,8 @@ import React, { useEffect, useState, useContext } from "react";
 import { VentanaPago } from "../5 6 pago y entradas/VentanaPago";
 import Funcion from "../servicios/Funcion";
 import Contador from "./Contador";
+import Entrada from "../servicios/Entrada";
+import { format } from "date-fns";
 
 const ventanas = [ ButacaSelect, VentanaPrecios, VentanaPago ];
 
@@ -45,10 +47,32 @@ const FlujoVenta = () => {
         {}
     ]
 
+    const onCancelar = (accion) => {
+        if (contexto.butacaContext.seleccionadas.length == 0) {
+            navigate(-1);
+            return;
+        }
+
+        const fechaAhora = (new Date(Date.now()));
+        const info = {
+          id_funcion: funcion.idFuncion,
+          entradas: contexto.butacaContext.seleccionadas.map(el => ({ id_butaca: +el.id })),
+          tiempoRegistro: format(fechaAhora, "yyyy-MM-dd.HH:mm:ss").replace(".", "T")
+        };
+    
+        Entrada.desbloquearEntradas(info).then(res => {
+            accion();
+        }).catch(err => {
+          console.log(err);
+        });
+
+    };
+
     let ventana = React.createElement(ventanas[indice], {
         ...ventanaProps[indice],
         next: next,
         prev: prev,
+        onCancelar
     });
 
     const navigatePrecios = () => {
@@ -112,10 +136,6 @@ const FlujoVenta = () => {
 
     }
 
-    const onCancelar = () => {
-
-    };
-
     return (
         <>
         <div className="d-flex border border-2 flex-wrap justify-content-center">
@@ -130,7 +150,7 @@ const FlujoVenta = () => {
             </div>
 
             <div>
-                <button className="btn btn-danger">Cancelar</button>
+                <button className="btn btn-danger" onClick={() => onCancelar(() => { navigate(-1); })}>Cancelar</button>
             </div>
 
         </div>

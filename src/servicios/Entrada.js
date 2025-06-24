@@ -94,6 +94,11 @@ class Entrada {
         const resultado = await axios.post(`${url}/entrada/lock`, info);
         return resultado;
     }
+    
+    static async desbloquearEntradas(info) {
+        const resultado = await axios.post(`${url}/entrada/unlock`, info);
+        return resultado;
+    }
 
 }
 
