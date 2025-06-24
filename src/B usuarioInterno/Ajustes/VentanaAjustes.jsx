@@ -1,5 +1,5 @@
 import CambiarContra from "./CambiarContra";
-
+import Generos from "./Generos";
 const VentanaAjustes = () => {
 
     return (
@@ -9,6 +9,8 @@ const VentanaAjustes = () => {
             </div>
 
             <CambiarContra />
+
+            <Generos />
         </div>
     )
 }

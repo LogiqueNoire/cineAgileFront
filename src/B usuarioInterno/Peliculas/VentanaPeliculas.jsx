@@ -49,6 +49,9 @@ const VentanaPeliculas = () => {
 
     const consultar = async () => {
         try {
+            console.log((await axios.get(`${url}/intranet/peliculas?fechaReal=${fechaReal.toISOString()}`, {
+                headers: { Authorization: `Bearer ${Cookies.get("auth-token")}` }
+            })).data)
             setLista((await axios.get(`${url}/intranet/peliculas?fechaReal=${fechaReal.toISOString()}`, {
                 headers: { Authorization: `Bearer ${Cookies.get("auth-token")}` }
             })).data.sort(ordenamientoFecha).reverse());

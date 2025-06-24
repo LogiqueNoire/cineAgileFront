@@ -72,8 +72,17 @@ const PeliculaSedes = () => {
             <div className="d-flex justify-content-center gap-4 align-items-center px-5 py-4 bg-light bg-gradient border shadow mb-4">
                 <img className="imagenPelicula shadow rounded" src={pelicula.imageUrl} alt="imagen Peli" />
                 <div>
-                    <h1 className="display-4">{pelicula.nombre}</h1>
-                    <p>{pelicula.sinopsis}</p>
+                    <div className="d-flex flex-column gap-2">
+
+                        <h1 className="display-4" style={{color: '#0A2B9C'}}><strong>{pelicula.nombre}</strong></h1>
+                        <h5 style={{color: '#01217B'}}>{pelicula.clasificacion}</h5>
+                        <div>
+                            <p>{`Sinopsis`}</p>
+                            <p>{pelicula.sinopsis}</p>
+                        </div>
+                        <h5>{`Director. ${pelicula.director}`}</h5>
+                        <h5>{`Actores principales. ${pelicula.actores}`}</h5>
+                    </div>
 
                     <div className='mt-5'>
                         <h5 className='my-2'>Opciones</h5>
