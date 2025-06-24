@@ -1,12 +1,14 @@
 import { PayPalButtons, PayPalScriptProvider } from "@paypal/react-paypal-js";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { VentaContext } from "../3 componentesVenta/VentaContextProvider.jsx";
 import Entrada from "../servicios/Entrada.js";
 import { useLocation, useNavigate } from "react-router-dom";
 import Toast from "../Toast.jsx";
 import { format } from "date-fns";
+import axios from 'axios';
+const TOKEN = import.meta.env.VITE_TOKEN;
 
-export const FormularioTarjeta = ({ tarjeta, setTarjeta, setSubmitting, setStatus, setto }) => {
+export const FormularioTarjeta = ({ tarjeta, setTarjeta, setSubmitting, setStatus, setto, tipoCambio }) => {
   const contexto = useContext(VentaContext)
   const total = Number(contexto.totalContext.total.toFixed(2));
 
@@ -30,11 +32,11 @@ export const FormularioTarjeta = ({ tarjeta, setTarjeta, setSubmitting, setStatu
       tiposEntradas = tiposEntradas.concat(new Array(entradasContext.mayoresSeleccionadas).fill("mayores"));
 
       const entradas = contexto.butacaContext.seleccionadas.map(el => ({
-        id_butaca: el.id, 
+        id_butaca: el.id,
         persona: tiposEntradas.shift()
-     }));
+      }));
 
-     const fechaAhora = (new Date(Date.now()));
+      const fechaAhora = (new Date(Date.now()));
 
       const cuerpo = {
         id_funcion: contexto.general.funcion.idFuncion,
@@ -74,7 +76,7 @@ export const FormularioTarjeta = ({ tarjeta, setTarjeta, setSubmitting, setStatu
             return actions.order.create({
               purchase_units: [{
                 amount: {
-                  value: Math.round((total / 3.7) * 100) / 100
+                  value: Math.round((total / tipoCambio) * 100) / 100
                 },
                 custom_id: 23232
               }],
