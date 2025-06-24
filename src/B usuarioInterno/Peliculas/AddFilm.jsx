@@ -11,7 +11,7 @@ import Toast from '../../Toast.jsx';
 
 export default function AddFilm({ onSucess }) {
   const [toast, setToast] = useState({ tipo: '', visible: false, titulo: '', mensaje: '' });
-  const [generos, setGeneros] = useState()
+  const [generos, setGeneros] = useState([])
 
   const [fechaReal, setFechaReal] = useState()
   const [pelicula, setPelicula] = useState({
@@ -54,34 +54,50 @@ export default function AddFilm({ onSucess }) {
   }, [duracion]);
 
   const consultarGeneros = async () => {
-        try {
-            const datos = (await axios.get(`${url}/intranet/generos`, {
-                headers: { Authorization: `Bearer ${Cookies.get("auth-token")}` }
-            })).data;
+    try {
+      const datos = (await axios.get(`${url}/intranet/generos`, {
+        headers: { Authorization: `Bearer ${Cookies.get("auth-token")}` }
+      })).data;
 
-            setGeneros(datos)
-        } catch (error) {
-            console.error(error);
-        } finally {
-            setLoading(false)
-        }
+      setGeneros(datos)
+    } catch (error) {
+      console.error(error);
     }
+  }
+
+  let response
+  const obtenerFecha = async () => {
+    try {
+      response = await axios.get(`${url}/fecha-actual`);
+      setFechaReal(new Date(response.data));
+
+    } catch (err) {
+      console.error("Error al obtener la fecha:", err);
+    }
+  };
 
   /*manejo de fecha*/
-  let response
-  useEffect(() => {
-    const obtenerFecha = async () => {
-      try {
-        response = await axios.get(`${url}/fecha-actual`);
-        setFechaReal(new Date(response.data));
 
-      } catch (err) {
-        console.error("Error al obtener la fecha:", err);
+  useEffect(() => {
+    const obtenerDatos = async () => {
+      try {
+        await Promise.all([consultarGeneros(), obtenerFecha()]);
+
+        // Aquí puedes ejecutar lógica adicional si ambas funciones terminaron bien
+        console.log("Generos y fecha obtenidos con éxito");
+
+        if (fechaReal !== undefined && generos !== undefined) {
+          // Aquí va tu código
+        }
+
+      } catch (error) {
+        console.error("Error al obtener los datos:", error);
       }
     };
-    consultarGeneros()
-    obtenerFecha();
+
+    obtenerDatos();
   }, []);
+
 
   useEffect(() => {
     if (fechaReal) {
@@ -220,7 +236,7 @@ export default function AddFilm({ onSucess }) {
 
   return (
     <div className="addFilm">
-      {fechaReal !== undefined ?
+      {fechaReal !== undefined && generos !== undefined ?
         <div className="border rounded p-4 mt-4 shadow">
           <div className="d-flex align-items-center p-2 gap-2 justify-content-center">
             <h2 className="text-center">Agregar película</h2>
@@ -346,7 +362,7 @@ export default function AddFilm({ onSucess }) {
                 />
               </div>
 
-              
+
 
             </div>
 
@@ -357,7 +373,7 @@ export default function AddFilm({ onSucess }) {
               <div className="mb-3">
                 <label className="form-label">Género(s)</label>
                 <div className="border rounded p-3 bg-light" style={{ maxHeight: '110px', overflowY: 'auto' }}>
-                  {generos.map((genre,id) => (
+                  {generos.map((genre, id) => (
                     <div className="form-check" key={id}>
                       <input
                         className="form-check-input"
@@ -388,14 +404,14 @@ export default function AddFilm({ onSucess }) {
                   Sinopsis
                 </label>
                 <textarea
-                style={{ height: '110px', overflowY: 'auto' }}
+                  style={{ height: '110px', overflowY: 'auto' }}
                   className="form-control"
                   placeholder="Sinopsis"
                   name="sinopsis"
                   value={sinopsis}
                   onChange={(e) => onInputChange(e)}
                   required
-                  
+
                 ></textarea>
               </div>
             </div>
