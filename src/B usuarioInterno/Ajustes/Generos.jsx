@@ -111,17 +111,17 @@ const Generos = () => {
                 ? <div className='d-flex flex-column align-items-center container'><Loading></Loading></div> :
                 <table className='table mytable table-striped border table-hover mt-4'>
                     <thead className='thead'>
-                        <tr>
+                        <tr className="tr">
                             <th className='td'>Nombre</th>
                             <th className='td'></th>
                         </tr>
                     </thead>
                     <tbody className='tbody'>
                         <tr className='tr'>
-                            <td className='td'>
+                            <td className='td' data-label='Nombre'>
                                 <input
                                     type="text"
-                                    className="form-control"
+                                    className="sinopsis form-control"
                                     placeholder="Nuevo nombre"
                                     name="nuevonombre"
                                     value={generoNombre}
@@ -129,7 +129,7 @@ const Generos = () => {
                                     required
                                 />
                             </td>
-                            <td className='td'>
+                            <td className='td' data-label='Opciones'>
                                 <button className='d-flex align-items-center btn btn-primary p-2 mx-2' onClick={(e) => agregarGenero(e, generoNombre)}>
                                     <img src={iconoGuardar} alt="" style={{ height: '20px' }} />
                                 </button>
@@ -142,7 +142,7 @@ const Generos = () => {
                                 <td className='td' data-label='Nombre'>
                                     <input
                                         type="text"
-                                        className="form-control"
+                                        className="sinopsis form-control"
                                         placeholder="Nuevo nombre"
                                         name="nuevonombre"
                                         value={el.nombre}
@@ -154,7 +154,7 @@ const Generos = () => {
                                         required
                                     />
                                 </td>
-                                <td className='td' data-label='Imagen'>
+                                <td className='td' data-label='Opciones'>
                                     <button className='d-flex align-items-center btn btn-primary p-2 mx-2' onClick={(e) => editarGenero(e, el)}>
                                         <img src={iconoGuardar} alt="" style={{ height: '20px' }} />
                                     </button>
