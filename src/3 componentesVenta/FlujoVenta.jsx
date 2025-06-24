@@ -7,6 +7,7 @@ import { VentanaPrecios } from '../4 precios/VentanaPrecios'
 import React, { useEffect, useState, useContext } from "react";
 import { VentanaPago } from "../5 6 pago y entradas/VentanaPago";
 import Funcion from "../servicios/Funcion";
+import Contador from "./Contador";
 
 const ventanas = [ ButacaSelect, VentanaPrecios, VentanaPago ];
 
@@ -112,8 +113,10 @@ const FlujoVenta = () => {
     }
 
     return (
+        <>
         <div className="d-flex border border-2 flex-wrap justify-content-center">
-            <div className="d-flex justify-content-center p-4 bg-light">
+            <div className="d-flex flex-column justify-content-center p-4 bg-light">
+                <Contador />
                 <ResumenPeliComJose3 pelicula={pelicula} sedePeli={funcion.nombreSede} fechaPeli={funcion.fechaHoraInicio}
                     salaPeli={funcion.codigoSala} categoria={funcion.categoria} dimension={funcion.dimension} idFuncion={funcion.idFuncion} />
             </div>
@@ -121,7 +124,11 @@ const FlujoVenta = () => {
             <div className="d-flex flex-column py-5 bg-white align-items-center flex-grow-1 px-4">
                 {ventana}
             </div>
-        </div>)
+
+        </div>
+
+        </>
+)
 }
 /*Envuelto por el provider para que funcione el contexto*/
 export default FlujoVenta;
