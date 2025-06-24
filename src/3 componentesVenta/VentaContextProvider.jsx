@@ -15,7 +15,7 @@ const VentaContextProvider = ({ children }) => {
     const [ mayoresSeleccionadas, setMayoresSeleccionadas ] = useState(0)
     const [ total, setTotal ] = useState(0)
     const [ pruebaInicial, setPruebaInicial ] = useState(0)
-    const [ tiempo, setTiempo ] = useState(new Date(2000, 0, 0, 0, 5, 0, 0));
+    const [ tiempo, setTiempo ] = useState(new Date(2000, 0, 0, 0, 4, 59, 0));
 
     const contextData = {
         general: {
