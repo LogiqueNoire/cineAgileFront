@@ -48,6 +48,9 @@ const VentanaPeliculas = () => {
     }, [fechaReal]);
 
     const consultar = async () => {
+        if (loading) return;
+        setLoading(true);
+
         try {
             console.log((await axios.get(`${url}/intranet/peliculas?fechaReal=${fechaReal.toISOString()}`, {
                 headers: { Authorization: `Bearer ${Cookies.get("auth-token")}` }
