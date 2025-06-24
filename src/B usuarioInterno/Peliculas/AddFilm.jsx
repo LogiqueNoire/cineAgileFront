@@ -11,6 +11,7 @@ import Toast from '../../Toast.jsx';
 
 export default function AddFilm({ onSucess }) {
   const [toast, setToast] = useState({ tipo: '', visible: false, titulo: '', mensaje: '' });
+  const [generos, setGeneros] = useState()
 
   const [fechaReal, setFechaReal] = useState()
   const [pelicula, setPelicula] = useState({
@@ -52,6 +53,20 @@ export default function AddFilm({ onSucess }) {
     }
   }, [duracion]);
 
+  const consultarGeneros = async () => {
+        try {
+            const datos = (await axios.get(`${url}/intranet/generos`, {
+                headers: { Authorization: `Bearer ${Cookies.get("auth-token")}` }
+            })).data;
+
+            setGeneros(datos)
+        } catch (error) {
+            console.error(error);
+        } finally {
+            setLoading(false)
+        }
+    }
+
   /*manejo de fecha*/
   let response
   useEffect(() => {
@@ -64,7 +79,7 @@ export default function AddFilm({ onSucess }) {
         console.error("Error al obtener la fecha:", err);
       }
     };
-
+    consultarGeneros()
     obtenerFecha();
   }, []);
 
@@ -342,12 +357,12 @@ export default function AddFilm({ onSucess }) {
               <div className="mb-3">
                 <label className="form-label">Género(s)</label>
                 <div className="border rounded p-3 bg-light" style={{ maxHeight: '110px', overflowY: 'auto' }}>
-                  {['Acción', 'Animación', 'Biográfico', 'Ciencia ficción', 'Comedia', 'Drama', 'Documental', 'Terror', 'Thriller'].map(genre => (
-                    <div className="form-check" key={genre}>
+                  {generos.map((genre,id) => (
+                    <div className="form-check" key={id}>
                       <input
                         className="form-check-input"
                         type="checkbox"
-                        id={`genre-${genre}`}
+                        id={`genre-${id}`}
                         checked={genero.includes(genre)}
                         onChange={(e) => {
                           const currentGenres = genero ? genero.split(', ').filter(g => g) : [];
@@ -361,7 +376,7 @@ export default function AddFilm({ onSucess }) {
                         }}
                       />
                       <label className="form-check-label" htmlFor={`genre-${genre}`}>
-                        {genre}
+                        {genre.nombre}
                       </label>
                     </div>
                   ))}
