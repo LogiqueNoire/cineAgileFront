@@ -5,7 +5,7 @@ import Funcion from "../servicios/Funcion.js";
 import Loading from "../0 componentesGenerales/Loading.jsx";
 import { VentaContext } from "../3 componentesVenta/VentaContextProvider.jsx";
 
-export const VentanaPrecios = ({ prev, next }) => {
+export const VentanaPrecios = ({ prev, next, onCancelar }) => {
     const contexto = useContext(VentaContext)
     const location = useLocation();
     const { pelicula, funcion } = location.state || {};
@@ -42,13 +42,15 @@ export const VentanaPrecios = ({ prev, next }) => {
     }
 
     const volver = () => {
-        contexto.entradasContext.setEntradasSeleccionadas(0)
-        contexto.entradasContext.setGeneralesSeleccionadas(0)
-        contexto.entradasContext.setNiñosSeleccionadas(0)
-        contexto.entradasContext.setConadisSeleccionadas(0)
-        contexto.entradasContext.setMayoresSeleccionadas(0)
-        contexto.totalContext.setTotal(0)
-        prev();
+        onCancelar(() => {
+            contexto.entradasContext.setEntradasSeleccionadas(0)
+            contexto.entradasContext.setGeneralesSeleccionadas(0)
+            contexto.entradasContext.setNiñosSeleccionadas(0)
+            contexto.entradasContext.setConadisSeleccionadas(0)
+            contexto.entradasContext.setMayoresSeleccionadas(0)
+            contexto.totalContext.setTotal(0)
+            prev();
+        })
     }
 
     if (!cargandoPrecios) {

@@ -10,7 +10,7 @@ import { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { format } from 'date-fns';
 
-const SeleccionButaca = ({ funcion, prev, next }) => {
+const SeleccionButaca = ({ funcion, prev, next, onCancelar }) => {
   const navigate = useNavigate();
   const context = useContext(VentaContext)
   const [data, setData] = useState(null)
@@ -35,8 +35,10 @@ const SeleccionButaca = ({ funcion, prev, next }) => {
   }, [funcion])
 
   const volver = () => {
-    navigate(-1);
-    prev();
+    onCancelar(() => {
+      navigate(-1);
+      prev();
+    })
   }
 
 
