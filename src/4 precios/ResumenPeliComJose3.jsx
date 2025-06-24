@@ -1,5 +1,6 @@
 import React, { useContext} from "react";
 import { VentaContext } from "../3 componentesVenta/VentaContextProvider.jsx"
+import { format, parseISO } from "date-fns";
 
 const ResumenPeliComJose3 = ({ pelicula, catePeli, sedePeli, fechaPeli, salaPeli, categoria, butacasSeleccionadas, dimension, idFuncion}) => {
     const contexto = useContext(VentaContext);
@@ -20,7 +21,7 @@ const ResumenPeliComJose3 = ({ pelicula, catePeli, sedePeli, fechaPeli, salaPeli
                 <h1 className="mt-4" style={{ fontSize:'36px', color: 'blue' }}>{pelicula.nombre}</h1>
                 <h3 className="m-2">{dimension+" "+categoria}</h3>
                 <h5 className="m-2">{"Sede: "+sedePeli}</h5>
-                <h5 className="m-2">{"Fecha: "+fechaPeli.slice(0,10)}</h5>
+                <h5 className="m-2">{"Fecha: "+format(parseISO(fechaPeli.slice(0, 10)), "dd/MM/yyyy")}</h5>
                 <h5 className="m-2">{"Hora inicio: "+fechaPeli.slice(11,16)}</h5>
                 <h5 className="m-2">{"Sala: " +salaPeli}</h5>
                 <h5 className="m-2">{'Butacas: '+butacasSeleccionadas}</h5>
