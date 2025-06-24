@@ -17,13 +17,53 @@ const PeliculaModal = ({ pelicula, onCerrar }) => {
                         <h2>Detalles Pelicula</h2>
                     </div>
                     <div className="d-flex flex-column gap-3 w-100">
-                        <FTextInput atributo={"nombre"} valorPorDefecto={ pelicula.nombre } label={"Nombre"} onSave={ onInputSave } />
-                        <FTextInput atributo={"director"} valorPorDefecto={ pelicula.director } label={"Director"} onSave={ onInputSave } />
-                        <FTextInput atributo={"actores"} valorPorDefecto={ pelicula.actores } label={"Actores"} onSave={ onInputSave } />
-                        <FSelectInput atributo={ "genero" }
+                        <FTextInput atributo={"nombre"} valorPorDefecto={pelicula.nombre} label={"Nombre"} onSave={onInputSave} />
+                        <FTextInput atributo={"director"} valorPorDefecto={pelicula.director} label={"Director"} onSave={onInputSave} />
+                        <FTextInput atributo={"actores"} valorPorDefecto={pelicula.actores} label={"Actores"} onSave={onInputSave} />
+                        <div className="mb-3">
+                            <label className="form-label">Género(s)</label>
+                            <div
+                                className="border rounded p-3 bg-light"
+                                style={{ maxHeight: '110px', overflowY: 'auto' }}
+                            >
+                                {pelicula.genero.map((genre) => {
+                                    const selected = pelicula.genero?.some((g) => g.id === genre.id);
+
+                                    return (
+                                        <div className="form-check" key={genre.id}>
+                                            <input
+                                                className="form-check-input"
+                                                type="checkbox"
+                                                id={`genre-${genre.id}`}
+                                                checked={selected}
+                                                onChange={(e) => {
+                                                    let newGenres;
+                                                    if (e.target.checked) {
+                                                        newGenres = [...pelicula.genero, genre];
+                                                    } else {
+                                                        newGenres = pelicula.genero.filter((g) => g.id !== genre.id);
+                                                    }
+
+                                                    onInputChange({
+                                                        target: {
+                                                            name: 'genero',
+                                                            value: newGenres,
+                                                        },
+                                                    });
+                                                }}
+                                            />
+                                            <label className="form-check-label" htmlFor={`genre-${genre.id}`}>
+                                                {genre.nombre}
+                                            </label>
+                                        </div>
+                                    );
+                                })}
+                            </div>
+                        </div>
+                        {/*<FSelectInput atributo={ "genero" }
                             opciones={ [ "Acción", "Animación", "Biográfico", "Ciencia ficción", "Comedia", "Drama", "Documental", "Terror", "Thriller" ] } 
-                            valorPorDefecto={ pelicula.genero } label={"Género"} onSave={ onInputSave }
-                        />
+                            valorPorDefecto={ pelicula.genero.map(g => g.nombre).join(', ') } label={"Género"} onSave={ onInputSave }
+                        />*/}
                     </div>
                 </div>
             </div>

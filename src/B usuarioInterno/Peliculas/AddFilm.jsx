@@ -150,6 +150,59 @@ export default function AddFilm({ onSucess }) {
     }
   };
 
+
+
+  /*pruebas*/
+
+
+  const [isOpen, setIsOpen] = useState(false);
+  const [selectedItems, setSelectedItems] = useState([]);
+
+  const options = [
+    { id: 'js', value: 'JavaScript', label: 'JavaScript' },
+    { id: 'py', value: 'Python', label: 'Python' },
+    { id: 'java', value: 'Java', label: 'Java' },
+    { id: 'cpp', value: 'C++', label: 'C++' },
+    { id: 'react', value: 'React', label: 'React' },
+    { id: 'node', value: 'Node.js', label: 'Node.js' },
+    { id: 'css', value: 'CSS', label: 'CSS' },
+    { id: 'html', value: 'HTML', label: 'HTML' }
+  ];
+
+  const toggleDropdown = () => {
+    setIsOpen(!isOpen);
+  };
+
+  const handleCheckboxChange = (optionValue) => {
+    setSelectedItems(prev => {
+      if (prev.includes(optionValue)) {
+        return prev.filter(item => item !== optionValue);
+      } else {
+        return [...prev, optionValue];
+      }
+    });
+  };
+
+  const clearAll = () => {
+    setSelectedItems([]);
+  };
+
+  const getDropdownText = () => {
+    const count = selectedItems.length;
+    if (count === 0) {
+      return 'Seleccionar opciones';
+    } else if (count === 1) {
+      return selectedItems[0];
+    } else {
+      return `${count} opciones seleccionadas`;
+    }
+  };
+
+
+
+
+
+
   return (
     <div className="addFilm">
       {fechaReal !== undefined ?
@@ -202,29 +255,18 @@ export default function AddFilm({ onSucess }) {
               </div>
 
               <div className="mb-3">
-                <label htmlFor="genero" className="form-label">
-                  Género
+                <label htmlFor="fechaInicioEstreno" className="form-label">
+                  Fecha Inicio Estreno
                 </label>
-                <select
-                  className="form-select"
-                  placeholder="Género"
-                  name="genero"
-                  value={genero}
-                  onChange={(e) => onInputChange(e)}
-                  required>
-                  <option value="">Seleccione un género</option>
-                  <option value="Acción">Acción</option>
-                  <option value="Animación">Animación</option>
-                  <option value="Biográfico">Biográfico</option>
-                  <option value="Ciencia ficción">Ciencia ficción</option>
-                  <option value="Comedia">Comedia</option>
-                  <option value="Drama">Drama</option>
-                  <option value="Documental">Documental</option>
-                  <option value="Terror">Terror</option>
-                  <option value="Thriller">Thriller</option>
-
-                </select>
-
+                <input
+                  type="date"
+                  className="form-control"
+                  name="fechaInicioEstreno"
+                  min={fechaReal ? format(fechaReal, 'yyyy-MM-dd') : ''}
+                  value={fechaInicioEstreno ? format(fechaInicioEstreno, 'yyyy-MM-dd') : format(fechaReal, 'yyyy-MM-dd')}
+                  onChange={(e) => onFechaChange(e)}
+                  required
+                />
               </div>
 
               <div className="mb-3">
@@ -289,36 +331,56 @@ export default function AddFilm({ onSucess }) {
                 />
               </div>
 
-              <div className="mb-3">
-                <label htmlFor="fechaInicioEstreno" className="form-label">
-                  Fecha Inicio Estreno
-                </label>
-                <input
-                  type="date"
-                  className="form-control"
-                  name="fechaInicioEstreno"
-                  min={fechaReal ? format(fechaReal, 'yyyy-MM-dd') : ''}
-                  value={fechaInicioEstreno ? format(fechaInicioEstreno, 'yyyy-MM-dd') : format(fechaReal, 'yyyy-MM-dd')}
-                  onChange={(e) => onFechaChange(e)}
-                  required
-                />
-              </div>
+              
 
             </div>
 
+
+
             <div className='d-flex flex-wrap gap-3 justify-content-center'>
 
-              <div className="mb-3 w-100">
+              <div className="mb-3">
+                <label className="form-label">Género(s)</label>
+                <div className="border rounded p-3 bg-light" style={{ maxHeight: '110px', overflowY: 'auto' }}>
+                  {['Acción', 'Animación', 'Biográfico', 'Ciencia ficción', 'Comedia', 'Drama', 'Documental', 'Terror', 'Thriller'].map(genre => (
+                    <div className="form-check" key={genre}>
+                      <input
+                        className="form-check-input"
+                        type="checkbox"
+                        id={`genre-${genre}`}
+                        checked={genero.includes(genre)}
+                        onChange={(e) => {
+                          const currentGenres = genero ? genero.split(', ').filter(g => g) : [];
+                          let newGenres;
+                          if (e.target.checked) {
+                            newGenres = [...currentGenres, genre];
+                          } else {
+                            newGenres = currentGenres.filter(g => g !== genre);
+                          }
+                          onInputChange({ target: { name: 'genero', value: newGenres.join(', ') } });
+                        }}
+                      />
+                      <label className="form-check-label" htmlFor={`genre-${genre}`}>
+                        {genre}
+                      </label>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="mb-3 w-50">
                 <label htmlFor="sinopsis" className="form-label">
                   Sinopsis
                 </label>
                 <textarea
+                style={{ height: '110px', overflowY: 'auto' }}
                   className="form-control"
                   placeholder="Sinopsis"
                   name="sinopsis"
                   value={sinopsis}
                   onChange={(e) => onInputChange(e)}
                   required
+                  
                 ></textarea>
               </div>
             </div>
@@ -347,7 +409,7 @@ export default function AddFilm({ onSucess }) {
       {<Toast tipo={toast.tipo}
         titulo={toast.titulo}
         mensaje={toast.mensaje}
-        visible={toast.visible}  />}
+        visible={toast.visible} />}
     </div>
 
   );
