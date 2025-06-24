@@ -112,6 +112,10 @@ const FlujoVenta = () => {
 
     }
 
+    const onCancelar = () => {
+
+    };
+
     return (
         <>
         <div className="d-flex border border-2 flex-wrap justify-content-center">
@@ -123,6 +127,10 @@ const FlujoVenta = () => {
 
             <div className="d-flex flex-column py-5 bg-white align-items-center flex-grow-1 px-4">
                 {ventana}
+            </div>
+
+            <div>
+                <button className="btn btn-danger">Cancelar</button>
             </div>
 
         </div>

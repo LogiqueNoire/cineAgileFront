@@ -90,7 +90,10 @@ class Entrada {
         return await axios.get(`${url}/entrada?token=${encodeURIComponent(token)}`)
     }
 
-
+    static async bloquearEntradas(info) {
+        const resultado = await axios.post(`${url}/entrada/lock`, info);
+        return resultado;
+    }
 
 }
 
