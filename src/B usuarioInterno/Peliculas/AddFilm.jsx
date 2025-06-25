@@ -46,6 +46,12 @@ export default function AddFilm({ onSucess }) {
     });
   };
 
+  const ordenamientoAlfa = (a, b) => {
+        const x = a.nombre.toLowerCase();
+        const y = b.nombre.toLowerCase();
+
+        return x < y ? -1 : 1;
+    }
 
   useEffect(() => {
     if (duracion > 500 || duracion <= 0) {
@@ -59,7 +65,7 @@ export default function AddFilm({ onSucess }) {
         headers: { Authorization: `Bearer ${Cookies.get("auth-token")}` }
       })).data;
 
-      setGeneros(datos)
+      setGeneros(datos.sort(ordenamientoAlfa))
     } catch (error) {
       console.error(error);
     }
