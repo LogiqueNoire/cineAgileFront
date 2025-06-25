@@ -96,6 +96,7 @@ const PeliculaSedes = () => {
                                 value={format(fechaElegida, 'yyyy-MM-dd')}
                                 onChange={onFechaChange}
                                 style={{ width: "150px" }}
+                                onKeyDown={(e) => e.preventDefault()}
                             />
                         </div>
                     </div>
