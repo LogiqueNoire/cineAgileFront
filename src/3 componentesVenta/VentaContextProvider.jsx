@@ -1,5 +1,6 @@
 import { useState, createContext } from "react" 
 import { useLocation } from "react-router-dom"
+import { addSeconds, addMinutes } from "date-fns"
 
 const VentaContext = createContext({})
 
@@ -15,7 +16,7 @@ const VentaContextProvider = ({ children }) => {
     const [ mayoresSeleccionadas, setMayoresSeleccionadas ] = useState(0)
     const [ total, setTotal ] = useState(0)
     const [ pruebaInicial, setPruebaInicial ] = useState(0)
-    const [ tiempo, setTiempo ] = useState(new Date(2000, 0, 0, 0, 4, 59, 0));
+    const [ tiempo, setTiempo ] = useState(addSeconds(addMinutes(new Date(), 5), 0));
 
     const contextData = {
         general: {

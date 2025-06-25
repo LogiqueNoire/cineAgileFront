@@ -1,13 +1,37 @@
-import { useContext, useEffect, useState } from "react";
-import { addSeconds, format, subSeconds } from 'date-fns';
+import { useContext, useEffect, useReducer, useState } from "react";
+import { differenceInSeconds, addSeconds, format, subMinutes, subSeconds } from 'date-fns';
 import { useNavigate } from "react-router-dom";
 import { VentaContext } from "./VentaContextProvider";
+
+const actualizarTiempo = (aPartirDe) => {
+    let ahoraMismo = new Date();
+    const diff = differenceInSeconds(aPartirDe, ahoraMismo);
+    const contador = addSeconds(new Date(2000,0,0,0,0,0,0), diff);
+
+  return { diff, contador };
+};
 
 const Contador = ({ onCancelar }) => {
     const navigate = useNavigate();
     const { tiempo, setTiempo } = useContext(VentaContext).general;
+    const [ estado, actualizar ] = useReducer((_, action) => actualizarTiempo(action), tiempo, actualizarTiempo);
 
+    let timeOut = false;
+    
+    setTimeout(() => {
+      if (estado.diff == 0 && !timeOut) {
+        timeOut = true;
+        const myModal = new bootstrap.Modal(document.getElementById("contadorBackdrop"));
+        myModal.show();
+        return;
+      }
 
+      actualizar(tiempo);
+    }, 1000);
+
+    // console.log(estado.contador);
+
+    /*
     useEffect(() => {
         let timeOut = false;
 
@@ -24,6 +48,8 @@ const Contador = ({ onCancelar }) => {
         }, 1000);
     }, [ tiempo ])
 
+    */
+
     const onVolver = () => {
       onCancelar(() => {
         navigate(-1);
@@ -32,7 +58,7 @@ const Contador = ({ onCancelar }) => {
 
     return (<>
     <div className="text-center p-1 text-primary border border-2 border-primary mb-3 fs-4 rounded-4">
-        { "Restante: " + format(tiempo, "mm:ss") }
+        { "Restante: " + format(estado.contador, 'mm:ss') }
     </div>
 
     
