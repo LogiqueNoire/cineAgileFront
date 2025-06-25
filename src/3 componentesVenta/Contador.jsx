@@ -2,6 +2,7 @@ import { useContext, useEffect, useReducer, useState } from "react";
 import { differenceInSeconds, addSeconds, format, subMinutes, subSeconds } from 'date-fns';
 import { useNavigate } from "react-router-dom";
 import { VentaContext } from "./VentaContextProvider";
+import iconotiempo from "../assets/time.svg"
 
 const actualizarTiempo = (aPartirDe) => {
     let ahoraMismo = new Date();
@@ -57,8 +58,10 @@ const Contador = ({ onCancelar }) => {
     }
 
     return (<>
-    <div className="text-center p-1 text-primary border border-2 border-primary mb-3 fs-4 rounded-4">
-        { "Restante: " + format(estado.contador, 'mm:ss') }
+    <div className="text-center p-1 px-3 text-primary border border-2 border-primary fs-4 rounded-4 d-flex align-items-center gap-2" style={{width: 'max-content'}}>
+      <img src={iconotiempo} alt="" style={{height: '30px'}}/>
+      <h4>{format(tiempo, "mm:ss")}</h4>
+        
     </div>
 
     

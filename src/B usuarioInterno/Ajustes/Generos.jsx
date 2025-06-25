@@ -12,13 +12,20 @@ const Generos = () => {
     const [generoNombre, setGeneroNombre] = useState(null)
     const [toast, setToast] = useState({ visible: false, tipo: '', titulo: '', mensaje: '' })
 
+    const ordenamientoAlfa = (a, b) => {
+        const x = a.nombre.toLowerCase();
+        const y = b.nombre.toLowerCase();
+
+        return x < y ? -1 : 1;
+    }
+
     const consultarGeneros = async () => {
         try {
             const datos = (await axios.get(`${url}/intranet/generos`, {
                 headers: { Authorization: `Bearer ${Cookies.get("auth-token")}` }
             })).data;
 
-            setGeneros(datos)
+            setGeneros(datos.sort(ordenamientoAlfa))
         } catch (error) {
             console.error(error);
         } finally {
@@ -42,7 +49,7 @@ const Generos = () => {
         } finally {
             consultarGeneros()
             if (response) {
-                
+
                 setToast({
                     visible: true,
                     tipo: 'toast-info',
@@ -67,7 +74,7 @@ const Generos = () => {
         e.preventDefault();
         let response;
         try {
-            response = await axios.patch(`${url}/intranet/generos/editar`, {id: el.id, nombre: el.nombre.trim()}, {
+            response = await axios.patch(`${url}/intranet/generos/editar`, { id: el.id, nombre: el.nombre.trim() }, {
                 headers: {
                     Authorization: `Bearer ${Cookies.get("auth-token")}`
                 }
@@ -78,7 +85,7 @@ const Generos = () => {
         } finally {
             consultarGeneros()
             if (response) {
-                
+
                 setToast({
                     visible: true,
                     tipo: 'toast-info',
@@ -147,9 +154,11 @@ const Generos = () => {
                                         name="nuevonombre"
                                         value={el.nombre}
                                         onChange={
-                                            (e) => {const nuevaLista = [...generos];
+                                            (e) => {
+                                                const nuevaLista = [...generos];
                                                 nuevaLista[id] = { ...el, nombre: e.target.value };
-                                                setGeneros(nuevaLista);}
+                                                setGeneros(nuevaLista);
+                                            }
                                         }
                                         required
                                     />
