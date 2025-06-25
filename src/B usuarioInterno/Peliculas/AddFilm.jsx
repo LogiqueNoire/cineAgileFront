@@ -244,6 +244,7 @@ export default function AddFilm({ onSucess }) {
                 </label>
                 <input
                   type="date"
+                  onKeyDown={(e) => e.preventDefault()}
                   className="form-control"
                   name="fechaInicioEstreno"
                   min={fechaReal ? format(fechaReal, 'yyyy-MM-dd') : ''}

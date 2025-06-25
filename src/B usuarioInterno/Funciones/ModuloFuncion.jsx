@@ -419,7 +419,7 @@ const ModuloFuncion = ({ handlePeliculaChange, handleSalaChange }) => {
                         </div>
                         <div className='d-flex w-100 align-items-center'>
                             <label className='w-100'>Nueva fecha</label>
-                            <input className='form-control w-100' type="date"
+                            <input className='form-control w-100' type="date" onKeyDown={(e) => e.preventDefault()}
                                 disabled={funcion.funcionElegida === undefined || funcion.codigoFuncion === ''}
                                 value={funcion.nuevaFecha}
                                 min={(funcion.nuevaPeliculaId != '' && funcion.nuevaPeliculaId != '0') ?
@@ -542,7 +542,7 @@ const ModuloFuncion = ({ handlePeliculaChange, handleSalaChange }) => {
                         </div>
                         <div className='d-flex w-100 align-items-center'>
                             <label className='w-100'>Nueva fecha</label>
-                            <input className='form-control w-100' type="date" value={funcion.nuevaFecha}
+                            <input className='form-control w-100' type="date" value={funcion.nuevaFecha} onKeyDown={(e) => e.preventDefault()}
                                 disabled={funcion.nuevaPeliculaId == '' || funcion.nuevaPeliculaId == 0}
                                 min={(funcion.nuevaPeliculaId != '' && funcion.nuevaPeliculaId != '0') ?
                                     (new Date(listaPeliculas.find(item => item.idPelicula == funcion.nuevaPeliculaId).fechaInicioEstreno) > new Date(fechaReal) ?
