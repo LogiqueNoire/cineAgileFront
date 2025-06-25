@@ -11,7 +11,7 @@ import Contador from "./Contador";
 import Entrada from "../servicios/Entrada";
 import { format } from "date-fns";
 
-const ventanas = [ ButacaSelect, VentanaPrecios, VentanaPago ];
+const ventanas = [ButacaSelect, VentanaPrecios, VentanaPago];
 
 const FlujoVenta = () => {
     const [indice, setIndice] = useState(0);
@@ -55,15 +55,15 @@ const FlujoVenta = () => {
 
         const fechaAhora = (new Date(Date.now()));
         const info = {
-          id_funcion: funcion.idFuncion,
-          entradas: contexto.butacaContext.seleccionadas.map(el => ({ id_butaca: +el.id })),
-          tiempoRegistro: format(fechaAhora, "yyyy-MM-dd.HH:mm:ss").replace(".", "T")
+            id_funcion: funcion.idFuncion,
+            entradas: contexto.butacaContext.seleccionadas.map(el => ({ id_butaca: +el.id })),
+            tiempoRegistro: format(fechaAhora, "yyyy-MM-dd.HH:mm:ss").replace(".", "T")
         };
-    
+
         Entrada.desbloquearEntradas(info).then(res => {
             accion();
         }).catch(err => {
-          console.log(err);
+            console.log(err);
         });
 
     };
@@ -138,25 +138,29 @@ const FlujoVenta = () => {
 
     return (
         <>
-        <div className="d-flex border border-2 flex-wrap justify-content-center">
-            <div className="d-flex flex-column justify-content-center p-4 bg-light">
-                <Contador onCancelar={onCancelar} />
-                <ResumenPeliComJose3 pelicula={pelicula} sedePeli={funcion.nombreSede} fechaPeli={funcion.fechaHoraInicio}
-                    salaPeli={funcion.codigoSala} categoria={funcion.categoria} dimension={funcion.dimension} idFuncion={funcion.idFuncion} />
-            </div>
+            <div className="d-flex border border-2 flex-wrap justify-content-center">
+                <div className="d-flex flex-column justify-content-center p-4 bg-light">
+                    
+                    <ResumenPeliComJose3 pelicula={pelicula} sedePeli={funcion.nombreSede} fechaPeli={funcion.fechaHoraInicio}
+                        salaPeli={funcion.codigoSala} categoria={funcion.categoria} dimension={funcion.dimension} idFuncion={funcion.idFuncion} />
+                </div>
 
-            <div className="d-flex flex-column py-5 bg-white align-items-center flex-grow-1 px-4">
-                {ventana}
-            </div>
+                <div className="d-flex flex-column py-5 bg-white align-items-center flex-grow-1 px-4">
+                    <div className="d-flex justify-content-between w-100">
+                        <Contador />
+                        <button className="btn btn-danger" onClick={() => onCancelar(() => { navigate(-1); })}>Cancelar</button>
+                    </div>
+                    <div>
+                        {ventana}
+                    </div>
+                </div>
 
-            <div>
-                <button className="btn btn-danger" onClick={() => onCancelar(() => { navigate(-1); })}>Cancelar</button>
-            </div>
 
-        </div>
+
+            </div>
 
         </>
-)
+    )
 }
 /*Envuelto por el provider para que funcione el contexto*/
 export default FlujoVenta;

@@ -59,7 +59,8 @@ const ButacaMap = ({ onButacaSelect, isSelectedFunc, butacas }) => {
 
     return (
         <div className='d-flex flex-column justify-align-center butaca-map'>
-            <h1>Pantalla</h1>
+            <h3 className='text-center mb-3'>Elección de butacas</h3>
+            <h1 className='mb-0'>Pantalla</h1>
             <div className='butaca-container d-flex justify-content-center'>
                 {   butacas.length >= 1 ?
                     <table className="butaca-table">
