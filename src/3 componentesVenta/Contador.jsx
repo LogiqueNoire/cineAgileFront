@@ -3,7 +3,7 @@ import { addSeconds, format, subSeconds } from 'date-fns';
 import { useNavigate } from "react-router-dom";
 import { VentaContext } from "./VentaContextProvider";
 
-const Contador = () => {
+const Contador = ({ onCancelar }) => {
     const navigate = useNavigate();
     const { tiempo, setTiempo } = useContext(VentaContext).general;
 
@@ -25,7 +25,9 @@ const Contador = () => {
     }, [ tiempo ])
 
     const onVolver = () => {
+      onCancelar(() => {
         navigate(-1);
+      })
     }
 
     return (<>
