@@ -140,7 +140,7 @@ const FlujoVenta = () => {
         <>
         <div className="d-flex border border-2 flex-wrap justify-content-center">
             <div className="d-flex flex-column justify-content-center p-4 bg-light">
-                <Contador />
+                <Contador onCancelar={onCancelar} />
                 <ResumenPeliComJose3 pelicula={pelicula} sedePeli={funcion.nombreSede} fechaPeli={funcion.fechaHoraInicio}
                     salaPeli={funcion.codigoSala} categoria={funcion.categoria} dimension={funcion.dimension} idFuncion={funcion.idFuncion} />
             </div>
