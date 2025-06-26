@@ -32,10 +32,10 @@ class Entrada {
         }
         const escribirEntrada = (entrada, index) => {
             doc.setFontSize('20')
-            doc.text(`Entrada ${index + 1}`, 61, 90);
+            doc.text(`Entrada`, 64, 80);
             doc.setFontSize('16')
             doc.text(`Butaca: ${String.fromCharCode('A'.charCodeAt(0) + entrada.butaca.fila)
-                + entrada.butaca.columna}`, 40, 180);
+                + Number(entrada.butaca.columna+1)}`, 40, 180);
             doc.text(`Tipo de entrada: ${entrada.persona}`, 40, 190);
             doc.setFontSize('20')
             doc.text(`Datos de pago`, 80, 210);

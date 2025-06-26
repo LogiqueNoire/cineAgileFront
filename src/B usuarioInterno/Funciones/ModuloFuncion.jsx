@@ -434,7 +434,7 @@ const ModuloFuncion = ({ handlePeliculaChange, handleSalaChange }) => {
                                 } />
                         </div>
                         <div className='d-flex w-100 align-items-center'>
-                            <label className='w-100'>Nueva hora de inicio (formato 24h)</label>
+                            <label className='w-100'>Nueva hora de inicio<br></br>(formato según dispositivo)</label>
                             <input className='form-control w-100' type="time"
                                 disabled={funcion.funcionElegida === undefined || funcion.codigoFuncion === ''}
                                 value={funcion.nuevaHoraInicio}
@@ -556,7 +556,7 @@ const ModuloFuncion = ({ handlePeliculaChange, handleSalaChange }) => {
                                 } />
                         </div>
                         <div className='d-flex w-100 align-items-center'>
-                            <label className='w-100'>Nueva hora de inicio (formato 24h)</label>
+                            <label className='w-100'>Nueva hora de inicio<br></br>(formato según sistema)</label>
                             <input className='form-control w-100' type="time"
                                 disabled={funcion.nuevaPeliculaId == '' || funcion.nuevaPeliculaId == 0}
                                 value={funcion.nuevaHoraInicio}
