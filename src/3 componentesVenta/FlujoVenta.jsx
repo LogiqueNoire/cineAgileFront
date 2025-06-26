@@ -9,7 +9,7 @@ import { VentanaPago } from "../5 6 pago y entradas/VentanaPago";
 import Funcion from "../servicios/Funcion";
 import Contador from "./Contador";
 import Entrada from "../servicios/Entrada";
-import { format } from "date-fns";
+import { format, isBefore } from "date-fns";
 
 const ventanas = [ButacaSelect, VentanaPrecios, VentanaPago];
 
@@ -115,6 +115,15 @@ const FlujoVenta = () => {
             }
         }
     }, [contexto.butacaContext.seleccionadas, contexto.entradasContext.entradasSeleccionadas])
+
+    console.log()
+
+    useEffect(() => {
+        const tiempoInicio = new Date(contexto.general.funcion.fechaHoraInicio);
+        if (isBefore(tiempoInicio, new Date())) {
+            navigate(-1);
+        } 
+    }, [ location ]);
 
     const retroceder = () => {
         console.log("retrocediendo")
