@@ -1,6 +1,7 @@
 import Pelicula from "../../servicios/Pelicula";
 import FTextInput from "../../0 componentesGenerales/FTextInput";
 import FSelectInput from "../../0 componentesGenerales/FSelectInput";
+import FNumberInput from "../../0 componentesGenerales/FNumberInput";
 
 const PeliculaModal = ({ pelicula, onCerrar }) => {
 
@@ -11,15 +12,31 @@ const PeliculaModal = ({ pelicula, onCerrar }) => {
     return (
         <div>
             <div className="modal-terminos-overlay">
-                <div className="modal-terminos w-50 d-flex flex-column align-items-center p-5" style={{ "max-height": "80vh", "overflow-y": "auto" }}>
+                <div className="modal-terminos w-75 d-flex flex-column align-items-center p-5" style={{ "max-height": "80vh", "overflow-y": "auto" }}>
                     <div className="d-flex align-items-center justify-content-between w-100 mb-3">
                         <button className="btn btn-danger" onClick={onCerrar}>Cerrar</button>
                         <h2>Detalles Pelicula</h2>
                     </div>
                     <div className="d-flex flex-column gap-3 w-100">
-                        <FTextInput atributo={"nombre"} valorPorDefecto={pelicula.nombre} label={"Nombre"} onSave={onInputSave} />
-                        <FTextInput atributo={"director"} valorPorDefecto={pelicula.director} label={"Director"} onSave={onInputSave} />
-                        <FTextInput atributo={"actores"} valorPorDefecto={pelicula.actores} label={"Actores"} onSave={onInputSave} />
+                        <div className="row d-flex">
+                            <FTextInput className="col" atributo={"nombre"} valorPorDefecto={pelicula.nombre} label={"Nombre"} onSave={onInputSave} required={true} />
+                            <FNumberInput className="col" atributo={"duracion"} valorPorDefecto={pelicula.duracion} label={"Duración"} onSave={onInputSave} required={true} />
+                        </div>
+                        <div className="row">
+                            <FTextInput atributo={"actores"} valorPorDefecto={pelicula.actores} label={"Actores principales (opcional)"} onSave={onInputSave} />
+                        </div>
+                        <div className="row">
+                            <FTextInput className="col" atributo={"director"} valorPorDefecto={pelicula.director} label={"Director"} onSave={onInputSave} required={true} />
+                            <FSelectInput className="col" atributo={ "clasificacion" }
+                                opciones={ [ "Apto para todos", "+14", "+18" ] } 
+                                valorPorDefecto={ pelicula.clasificacion } label={"Clasificación"} onSave={ onInputSave }
+                            />
+                        </div>
+                        
+                        <div className="row">
+                            <FTextInput atributo={"imgUrl"} valorPorDefecto={pelicula.imageUrl} label={"Imagen URL"} onSave={onInputSave} required={true} />
+                        </div>
+
                         <div className="mb-3">
                             <label className="form-label">Género(s)</label>
                             <div
