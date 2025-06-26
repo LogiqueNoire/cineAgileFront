@@ -107,7 +107,7 @@ const PeliculaSedes = () => {
                         :
                         <div className="mt-5">
                             <h3 style={{ color: '#7b0101' }}>
-                                {`Aún falta más de 1 semana para el estreno. Disponible a partir del ${format(pelicula.fechaInicioEstreno, "dd 'de' MMMM 'de' yyyy", { locale: es })}`}
+                                {`Aún falta más de 1 semana para el estreno, el cual será a partir del ${format(pelicula.fechaInicioEstreno, "dd 'de' MMMM 'de' yyyy", { locale: es })}`}
                             </h3>
                         </div>
                     }
