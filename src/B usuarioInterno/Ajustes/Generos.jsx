@@ -49,7 +49,7 @@ const Generos = () => {
         } finally {
             consultarGeneros()
             if (response) {
-
+                setGeneroNombre('')
                 setToast({
                     visible: true,
                     tipo: 'toast-info',
