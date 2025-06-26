@@ -24,6 +24,8 @@ const Contador = ({ onCancelar }) => {
         timeOut = true;
         const myModal = new bootstrap.Modal(document.getElementById("contadorBackdrop"));
         myModal.show();
+
+        if (contexto.butacaContext.seleccionadas.length != 0) onCancelar(() => {});
         return;
       }
 
@@ -52,9 +54,7 @@ const Contador = ({ onCancelar }) => {
     */
 
     const onVolver = () => {
-      onCancelar(() => {
-        navigate(-1);
-      })
+      navigate(-1);
     }
 
     return (<>
