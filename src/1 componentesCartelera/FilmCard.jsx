@@ -13,10 +13,10 @@ const FilmCard = ({ pelicula }) => {
     };
 
     return (
-        <button className="filmCard m-2 border-0" onClick={handleClick} key={pelicula.id} type="button">
-            <img src={pelicula.imageUrl} alt={pelicula.nombre} className='img-film-card' />
+        <button className="filmcard-hover card col-10 col-sm-5 col-md-3 col-lg-2 p-1" onClick={handleClick} key={pelicula.id} type="button">
+            <img src={pelicula.imageUrl} alt={pelicula.nombre} className='h-100 rounded img-fluid img-film-card2' />
             <div>
-                <h5>{pelicula.nombre}</h5>
+                <div className='text-truncate fw-bold fs-6 text-secondary' >{pelicula.nombre}</div>
             </div>
         </button>
     );

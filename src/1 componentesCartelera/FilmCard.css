@@ -1,22 +1,48 @@
 .img-film-card {
-  width: 180px;
-  aspect-ratio: 3/4;
+  width: 230px;
+  aspect-ratio: 3/4.5;
   object-fit: cover;
   overflow: hidden;
 
   margin-bottom: 1rem;
 }
 
+.img-film-card2 {
+  object-fit: cover;
+}
+
 .filmCard {
-  width: 200px;
-  height: 330px;
+  width: 240px;
 
   display: flex;
   flex-direction: column;
   align-items: center;
 
   box-sizing: border-box;
-  padding: 1rem;
+  padding: 0.3rem;
 
   overflow: hidden;
+}
+
+.filmcard-peli-titulo {
+  width: 180px;
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+.filmcard-hover {
+  box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.409);
+  transition-property: transform box-shadow;
+  transition-duration: 0.1s;
+}
+
+.filmcard-hover:hover {
+  z-index: 999;
+  transform: scale(1.05);
+  box-shadow: 0 0 20px 20px rgba(57, 57, 57, 0.174);
 }
