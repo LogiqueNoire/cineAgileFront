@@ -2,6 +2,7 @@ import axios from 'axios'
 import { url } from '../configuracion/backend'
 import jsPDF from 'jspdf';
 import imagenMarco from '../assets/marcoPNG.png'
+import QRCode from 'qrcode'
 
 class Entrada {
 
@@ -11,7 +12,7 @@ class Entrada {
         return resultado;
     }
 
-    static async generarPdf(entradasCompletas, qrRefs) {
+    static async generarPdf(entradasCompletas, tokens) {
         const doc = new jsPDF();
         doc.setFont("Helvetica", "Bold");
 
@@ -62,14 +63,11 @@ class Entrada {
             if (i !== 0) doc.addPage();
 
             const entrada = entradas[i];
-            const canvasEl = qrRefs[i]?.current; // QRCodeCanvas renderiza canvas, ref apunta directo al canvas
+            const qrDataUrl = await QRCode.toDataURL(tokens[i]);
 
-            if (canvasEl) {
-                const imgData = canvasEl.toDataURL("image/png");
-                doc.addImage(imgData, "PNG", 110, 40, 60, 60);
-            } else {
-                console.warn(`No se encontró canvas para la entrada ${i}`);
-            }
+
+            doc.addImage(qrDataUrl, "PNG", 110, 40, 60, 60);
+
 
             doc.addImage(marcoImg, "PNG", 20, 20, 170, 260);
             escribirInfoComun(entradasCompletas);
@@ -94,7 +92,7 @@ class Entrada {
         const resultado = await axios.post(`${url}/entrada/lock`, info);
         return resultado;
     }
-    
+
     static async desbloquearEntradas(info) {
         const resultado = await axios.post(`${url}/entrada/unlock`, info);
         return resultado;

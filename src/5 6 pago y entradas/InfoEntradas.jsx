@@ -94,7 +94,7 @@ const InfoEntradas = () => {
 
     const handleGenerarPDF = () => {
         setTimeout(() => {
-            Entrada.generarPdf(entradas, qrRefs.current);
+            Entrada.generarPdf(entradas, entradas.tokens);
         }, 2500);
     };
 
