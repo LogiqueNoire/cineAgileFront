@@ -2,12 +2,57 @@ import Pelicula from "../../servicios/Pelicula";
 import FTextInput from "../../0 componentesGenerales/FTextInput";
 import FSelectInput from "../../0 componentesGenerales/FSelectInput";
 import FNumberInput from "../../0 componentesGenerales/FNumberInput";
+import FDateInput from "../../0 componentesGenerales/FDateInput";
+import FTextAreaInput from "../../0 componentesGenerales/FTextAreaInput";
+import FGeneroInput from "./FGeneroInput";
+
+import Cookies from "js-cookie";
+import axios from "axios";
+import { url } from "../../configuracion/backend";
+import { useState, useEffect } from "react";
+import Loading from "../../0 componentesGenerales/Loading";
+
+const ordenamientoAlfa = (a, b) => {
+    const x = a.nombre.toLowerCase();
+    const y = b.nombre.toLowerCase();
+
+    return x < y ? -1 : 1;
+}
 
 const PeliculaModal = ({ pelicula, onCerrar }) => {
+    const [generos, setGeneros] = useState([])
 
     const onInputSave = async (keyValue) => {
         await Pelicula.editarPelicula({ idPelicula: pelicula.idPelicula, ...keyValue });
     };
+
+    const consultarGeneros = async () => {
+        try {
+          const datos = (await axios.get(`${url}/intranet/generos`, {
+            headers: { Authorization: `Bearer ${Cookies.get("auth-token")}` }
+          })).data;
+    
+          setGeneros(datos.sort(ordenamientoAlfa))
+        } catch (error) {
+          console.error(error);
+        }
+    }
+
+    useEffect(() => {
+        const obtenerDatos = async () => {
+            try {
+                await consultarGeneros();
+
+            } catch (error) {
+                console.error("Error al obtener los datos:", error);
+            }
+        };
+
+        obtenerDatos();
+    }, []);
+
+
+    // console.log('Pelicula Modal: ', pelicula, generos);
 
     return (
         <div>
@@ -21,6 +66,7 @@ const PeliculaModal = ({ pelicula, onCerrar }) => {
                         <div className="row d-flex">
                             <FTextInput className="col" atributo={"nombre"} valorPorDefecto={pelicula.nombre} label={"Nombre"} onSave={onInputSave} required={true} />
                             <FNumberInput className="col" atributo={"duracion"} valorPorDefecto={pelicula.duracion} label={"Duración"} onSave={onInputSave} required={true} />
+                            <FDateInput className="col" atributo={"fechaEstreno"} valorPorDefecto={pelicula.fechaInicioEstreno} label={"Fecha Inicio Estreno"} onSave={onInputSave} required={true} />
                         </div>
                         <div className="row">
                             <FTextInput atributo={"actores"} valorPorDefecto={pelicula.actores} label={"Actores principales (opcional)"} onSave={onInputSave} />
@@ -30,57 +76,32 @@ const PeliculaModal = ({ pelicula, onCerrar }) => {
                             <FSelectInput className="col" atributo={ "clasificacion" }
                                 opciones={ [ "Apto para todos", "+14", "+18" ] } 
                                 valorPorDefecto={ pelicula.clasificacion } label={"Clasificación"} onSave={ onInputSave }
+                                required={true}
                             />
                         </div>
                         
                         <div className="row">
                             <FTextInput atributo={"imgUrl"} valorPorDefecto={pelicula.imageUrl} label={"Imagen URL"} onSave={onInputSave} required={true} />
                         </div>
-
-                        <div className="mb-3">
-                            <label className="form-label">Género(s)</label>
-                            <div
-                                className="border rounded p-3 bg-light"
-                                style={{ maxHeight: '110px', overflowY: 'auto' }}
-                            >
-                                {pelicula.genero.map((genre) => {
-                                    const selected = pelicula.genero?.some((g) => g.id === genre.id);
-
-                                    return (
-                                        <div className="form-check" key={genre.id}>
-                                            <input
-                                                className="form-check-input"
-                                                type="checkbox"
-                                                id={`genre-${genre.id}`}
-                                                checked={selected}
-                                                onChange={(e) => {
-                                                    let newGenres;
-                                                    if (e.target.checked) {
-                                                        newGenres = [...pelicula.genero, genre];
-                                                    } else {
-                                                        newGenres = pelicula.genero.filter((g) => g.id !== genre.id);
-                                                    }
-
-                                                    onInputChange({
-                                                        target: {
-                                                            name: 'genero',
-                                                            value: newGenres,
-                                                        },
-                                                    });
-                                                }}
-                                            />
-                                            <label className="form-check-label" htmlFor={`genre-${genre.id}`}>
-                                                {genre.nombre}
-                                            </label>
-                                        </div>
-                                    );
-                                })}
-                            </div>
+                        
+                        <div className="row gap-4">
+                            {  generos.length == 0 
+                                ? <Loading />
+                                :
+                                <FGeneroInput
+                                    className={"col"} 
+                                    atributo={ "generos" }
+                                    generos={ generos } 
+                                    valoresPorDefecto={ pelicula.genero } onSave={ onInputSave }
+                                    required={true}
+                                />
+                            }
+                            <FTextAreaInput className="col" atributo={"sinopsis"} valorPorDefecto={pelicula.sinopsis} label={"Sinopsis"} onSave={onInputSave} required={true} />
                         </div>
-                        {/*<FSelectInput atributo={ "genero" }
-                            opciones={ [ "Acción", "Animación", "Biográfico", "Ciencia ficción", "Comedia", "Drama", "Documental", "Terror", "Thriller" ] } 
-                            valorPorDefecto={ pelicula.genero.map(g => g.nombre).join(', ') } label={"Género"} onSave={ onInputSave }
-                        />*/}
+
+                        <div className="row">
+                        </div>
+
                     </div>
                 </div>
             </div>
