@@ -68,7 +68,7 @@ const FilmPanel = () => {
 
     return (<div className='film-panel d-flex flex-column'>
         <FilmTab query={query.get("tab")} />
-        <div className='peli-cuerpo d-flex justify-content-center flex-grow-1'>
+        <div className='peli-cuerpo d-flex justify-content-center flex-grow-1 rounded rounded-4'>
             {loading && <Loading />}
             {error && <div className="alert alert-danger h-25 w-50 text-center">Error :/... Intenta recargar la página</div>}
             {!loading && <FilmContainer peliculas={peliculas} />}
