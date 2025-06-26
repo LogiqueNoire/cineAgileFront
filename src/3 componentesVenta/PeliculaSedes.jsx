@@ -6,6 +6,8 @@ import Pelicula from "../servicios/Pelicula";
 import Loading from "../0 componentesGenerales/Loading";
 import axios from "axios";
 import { url } from "../configuracion/backend"
+import { differenceInCalendarDays } from "date-fns";
+import { es } from 'date-fns/locale';
 
 const PeliculaSedes = () => {
     const location = useLocation();
@@ -74,8 +76,8 @@ const PeliculaSedes = () => {
                 <div>
                     <div className="d-flex flex-column gap-2">
 
-                        <h1 className="display-4" style={{color: '#0A2B9C'}}><strong>{pelicula.nombre}</strong></h1>
-                        <h5 style={{color: '#01217B'}}>{pelicula.clasificacion}</h5>
+                        <h1 className="display-4" style={{ color: '#0A2B9C' }}><strong>{pelicula.nombre}</strong></h1>
+                        <h5 style={{ color: '#01217B' }}>{`${pelicula.clasificacion} | ${pelicula.genero.map(g => g.nombre).join(',')}`}</h5>
                         <div>
                             <p>{`Sinopsis`}</p>
                             <p>{pelicula.sinopsis}</p>
@@ -84,22 +86,31 @@ const PeliculaSedes = () => {
                         <h5>{`Actores principales. ${pelicula.actores}`}</h5>
                     </div>
 
-                    <div className='mt-5'>
-                        <h5 className='my-2'>Opciones</h5>
-                        <div>
-                            <span className="me-2">Selecciona una fecha:</span>
-                            <input
-                                type="date"
-                                className="mx-1 form-control"
-                                min={format(fechaReal, 'yyyy-MM-dd')}
-                                max={format(new Date(fechaReal).setMonth(fechaReal.getMonth() + 3), 'yyyy-MM-dd')}
-                                value={format(fechaElegida, 'yyyy-MM-dd')}
-                                onChange={onFechaChange}
-                                style={{ width: "150px" }}
-                                onKeyDown={(e) => e.preventDefault()}
-                            />
+                    {differenceInCalendarDays(pelicula.fechaInicioEstreno, fechaReal) < 8 ?
+
+                        <div className='mt-5'>
+                            <h5 className='my-2'>Opciones</h5>
+                            <div>
+                                <span className="me-2">Selecciona una fecha:</span>
+                                <input
+                                    type="date"
+                                    className="mx-1 form-control"
+                                    min={format(fechaReal, 'yyyy-MM-dd')}
+                                    max={format(new Date(fechaReal).setMonth(fechaReal.getMonth() + 3), 'yyyy-MM-dd')}
+                                    value={format(fechaElegida, 'yyyy-MM-dd')}
+                                    onChange={onFechaChange}
+                                    style={{ width: "150px" }}
+                                    onKeyDown={(e) => e.preventDefault()}
+                                />
+                            </div>
                         </div>
-                    </div>
+                        :
+                        <div className="mt-5">
+                            <h3 style={{ color: '#7b0101' }}>
+                                {`Aún falta más de 1 semana para el estreno. Disponible a partir del ${format(pelicula.fechaInicioEstreno, "dd 'de' MMMM 'de' yyyy", { locale: es })}`}
+                            </h3>
+                        </div>
+                    }
                 </div>
             </div>
             {fechaElegida && (

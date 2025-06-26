@@ -86,6 +86,7 @@ const BuscarFunciones = ({ handlePeliculaChange, handleSalaChange }) => {
                     <div className="">
                         <label className='d-flex text-nowrap'>Elige fecha dentro de una semana</label>
                         <input type='date' className='form-control' value={valoresBusqueda.fechaElegida} placeholder='Fecha'
+                            onKeyDown={(e) => e.preventDefault()}
                             onChange={
                                 (e) => {
                                     setValoresBusqueda(prev => ({

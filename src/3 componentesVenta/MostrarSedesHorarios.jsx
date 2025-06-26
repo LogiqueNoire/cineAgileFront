@@ -5,6 +5,9 @@ import './MostrarSedesHorarios.css';
 import Loading from '../0 componentesGenerales/Loading.jsx';
 import Toast  from '../Toast.jsx';
 import Fecha from '../servicios/Fecha.js';
+import { differenceInCalendarDays } from 'date-fns';
+import { url } from '../configuracion/backend.js';
+import axios from 'axios';
 
 const MostrarSedesHorarios = ({ pelicula, fechaFormateada }) => {
     const [sedes, setSedes] = useState([]);
@@ -13,10 +16,27 @@ const MostrarSedesHorarios = ({ pelicula, fechaFormateada }) => {
 
     const [toast, setToast] = useState({ visible: false });
 
+    const [fechaReal, setFechaReal] = useState();
+    console.log(pelicula);
+    const consultarFechaReal = async () =>{
+        try {
+            setFechaReal((await axios.get(`${url}/fecha-actual`)).data);
+        } catch (error) {
+            console.log(error)
+        } finally {
+            console.log(fechaReal)
+        }
+
+    }
+
     const mostrarToast = () => {
         setToast({ visible: true });
         setTimeout(() => setToast({ visible: false }), 3000);
     };
+
+    useEffect(()=>{
+        consultarFechaReal()
+    }, [])
 
     useEffect(() => {
 
@@ -82,8 +102,8 @@ const MostrarSedesHorarios = ({ pelicula, fechaFormateada }) => {
         return <p>No se encontró la película.</p>;
     }
 
-
-    if (sedes.length === 0) {
+    console.log("comparar", pelicula.fechaInicioEstreno, fechaReal)
+    if (sedes.length === 0 || differenceInCalendarDays(pelicula.fechaInicioEstreno, fechaReal) >= 8) {
         return <p className='text-center display-6 my-5'>No se encontraron funciones disponibles.</p>;
     }
 
@@ -99,7 +119,6 @@ const MostrarSedesHorarios = ({ pelicula, fechaFormateada }) => {
                 mensaje={'Ahora puedes ver la cantidad de funciones disponibles con el nuevo botón a lado de cada función'}
                 visible={toast.visible} />
         </div>
-
     );
 };
 

@@ -22,15 +22,11 @@ const FilmPanel = () => {
 
     const [location, query] = useUrlQuery()
 
-    const [fechaReal, setFechaReal] = useState()
-
-
     useEffect(() => {
     const obtenerPeliculas = async () => {
         try {
             const respuesta = await axios.get(`${url}/fecha-actual`);
             const fecha = new Date(respuesta.data);
-            setFechaReal(fecha); // Se guarda igual para renderizado si es necesario
 
             const estado = query?.get("tab") || "En cartelera";
             let caller;
