@@ -1,15 +1,13 @@
 .film-panel {
-    background-color: rgb(246, 246, 246);
     min-height: 900px;
 
-    margin: 2rem;
     padding: 2rem;
 
     box-sizing: border-box;
 }
 
 .peli-cuerpo {
-    background-color: rgb(204, 204, 204);
+    background-color: rgb(229, 229, 229);
     padding: 1rem;
     box-sizing: border-box;
     height: inherit;
