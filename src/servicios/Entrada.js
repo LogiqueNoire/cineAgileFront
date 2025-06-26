@@ -64,9 +64,8 @@ class Entrada {
             if (i !== 0) doc.addPage();
 
             const entrada = entradas[i];
-            console.log(tokens[i]);
 
-            const qrDataUrl = await QRCode.toDataURL(`${urlFront}/entrada/${tokens[i]}`);
+            const qrDataUrl = await QRCode.toDataURL(`${urlFront}/entrada/${encodeURIComponent(tokens[i])}`);
 
 
             doc.addImage(qrDataUrl, "PNG", 110, 40, 60, 60);
