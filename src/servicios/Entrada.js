@@ -3,6 +3,7 @@ import { url } from '../configuracion/backend'
 import jsPDF from 'jspdf';
 import imagenMarco from '../assets/marcoPNG.png'
 import QRCode from 'qrcode'
+const urlFront = import.meta.env.VITE_FRONT_URL
 
 class Entrada {
 
@@ -63,7 +64,9 @@ class Entrada {
             if (i !== 0) doc.addPage();
 
             const entrada = entradas[i];
-            const qrDataUrl = await QRCode.toDataURL(tokens[i]);
+            console.log(tokens[i]);
+
+            const qrDataUrl = await QRCode.toDataURL(`${urlFront}/entrada/${tokens[i]}`);
 
 
             doc.addImage(qrDataUrl, "PNG", 110, 40, 60, 60);
