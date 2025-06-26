@@ -25,22 +25,23 @@ class Entrada {
             doc.text(`Datos elegidos`, 80, 120);
             doc.setFontSize('16')
             doc.text(`Película: ${data.tituloPelicula}`, 40, 130);
-            doc.text(`Fecha y hora de la función: ${(new Date(data.fechaHoraInicio)).toLocaleString()}`, 40, 140);
-            doc.text(`Sede: ${data.nombreSede}`, 40, 150);
-            doc.text(`Sala: ${data.sala}`, 40, 160);
+            doc.text(`Clasificación: ${data.clasificacion}`, 40, 140);
+            doc.text(`Fecha y hora de la función: ${(new Date(data.fechaHoraInicio)).toLocaleString()}`, 40, 150);
+            doc.text(`Sede: ${data.nombreSede}`, 40, 160);
+            doc.text(`Sala: ${data.sala}`, 40, 170);
         }
         const escribirEntrada = (entrada, index) => {
             doc.setFontSize('20')
-            doc.text(`Entrada ${index + 1}`, 61, 80);
+            doc.text(`Entrada ${index + 1}`, 61, 90);
             doc.setFontSize('16')
             doc.text(`Butaca: ${String.fromCharCode('A'.charCodeAt(0) + entrada.butaca.fila)
-                + entrada.butaca.columna}`, 40, 170);
-            doc.text(`Tipo de entrada: ${entrada.persona}`, 40, 180);
+                + entrada.butaca.columna}`, 40, 180);
+            doc.text(`Tipo de entrada: ${entrada.persona}`, 40, 190);
             doc.setFontSize('20')
-            doc.text(`Datos de pago`, 80, 200);
+            doc.text(`Datos de pago`, 80, 210);
             doc.setFontSize('16')
-            doc.text(`Fecha y hora del pago: ${(new Date(entrada.tiempoRegistro)).toLocaleString()}`, 40, 210);
-            doc.text(`Precio final: S/ ${entrada.costoFinal.toFixed(2)}`, 40, 220);
+            doc.text(`Fecha y hora del pago: ${(new Date(entrada.tiempoRegistro)).toLocaleString()}`, 40, 220);
+            doc.text(`Precio final: S/ ${entrada.costoFinal.toFixed(2)}`, 40, 230);
         }
 
         const getImageDataURL = (src) =>
