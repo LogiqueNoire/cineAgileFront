@@ -57,6 +57,7 @@ const EntradaCard = ({ infoGeneral, entrada, token }) => {
                 <h2 className="text-center mt-4">Datos elegidos</h2>
 
                 <h5>Pelicula: {infoGeneral.tituloPelicula}</h5>
+                <h5>Clasificación: {infoGeneral.clasificacion}</h5>
                 <h5>Fecha y hora: {fechaHoraInicioCorrecto}</h5>
                 <h5>Sede: {infoGeneral.nombreSede} </h5>
                 <h5>Sala: {infoGeneral.sala}</h5>
