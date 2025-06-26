@@ -3,29 +3,50 @@ import { useState } from "react";
 import guardar from '../assets/guardar.svg';
 import pencilSvg from "../assets/pencil.svg"
 
-const FSelectInput = ({ valorPorDefecto, label, onSave, opciones, atributo }) => {
+const FSelectInput = ({ className, valorPorDefecto, label, onSave, opciones, atributo, required }) => {
     const [ modo, setModo ] = useState("read"); // read, edit, submitting
     const [ input, setInput ] = useState(valorPorDefecto);
+    const [ status, setStatus ] = useState({ error: false, msg: null });
 
     const onEditClick = () => {
         setModo("edit");
     }
 
     const onSaveClick = () => {
+        const trimmed = input.trim()
+        if (required && !opciones.includes(trimmed)) {
+            setStatus({ error: true, msg: "El campo es incorrecto." })
+            return;
+        }
+
         if (modo == "submitting") return;
         setModo("submitting");
 
         onSave({ [atributo]: input }).then(res => {
         }).catch(err => {
+            if (err.response?.data) {
+                setStatus({ error: true, msg: err.response.data })
+            } else {
+                setStatus({ error: true, msg: "Error del servidor" })
+            }
         }).finally(_ => {
             setModo("read");
         })
     };
 
+    const onChange = (evt) => {
+        setInput(evt.target.value);
+
+        if (status.error)
+            setStatus({ error: false, msg: null });
+    }
+
     return (
-        <div className="input-group">
-            <div className="form-floating">
-                <select className="form-select" id={ label } placeholder={ label } disabled={ modo != "edit" } value={ input } onChange={ (evt) => setInput(evt.target.value) }>
+        <>
+
+        <div className={`${className} input-group has-validation`}>
+            <div className={`form-floating ${ status.error && 'is-invalid' }`}>
+                <select className={`form-control ${ status.error && "is-invalid" }`} id={ label } placeholder={ label } disabled={ modo != "edit" } value={ input } onChange={ onChange }>
                     <option value="" selected disabled={true}>Selecciona un género</option>
                     { opciones.map(el => (
                         <option value={ el }>{el}</option>
@@ -45,7 +66,16 @@ const FSelectInput = ({ valorPorDefecto, label, onSave, opciones, atributo }) =>
                         <img src={guardar} style={{ "width": "32px", "height": "32px" }} /> : "" )
                 }
             </button>
+
+            { status.msg && 
+                <div class="invalid-feedback">
+                    { status.msg }
+                </div>
+            }
         </div>
+
+
+        </>
     )
 }
 

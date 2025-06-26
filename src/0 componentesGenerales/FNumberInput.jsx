@@ -3,7 +3,7 @@ import { useState } from "react";
 import guardar from '../assets/guardar.svg';
 import pencilSvg from "../assets/pencil.svg"
 
-const FTextInput = ({ className='', valorPorDefecto, label, onSave, atributo, required }) => {
+const FNumberInput = ({ className='', valorPorDefecto, label, onSave, atributo, required }) => {
     const [ modo, setModo ] = useState("read"); // read, edit, submitting
     const [ input, setInput ] = useState(valorPorDefecto);
     const [ status, setStatus ] = useState({ error: false, msg: null });
@@ -34,7 +34,12 @@ const FTextInput = ({ className='', valorPorDefecto, label, onSave, atributo, re
     };
 
     const onChange = (evt) => {
-        setInput(evt.target.value);
+        const input = evt.target.value;
+        const regex = /^\d*\.?\d{0}$/; // permite hasta 0 decimales
+
+        if (input === "" || regex.test(input)) {
+            setInput(input) 
+        };
 
         if (status.error)
             setStatus({ error: false, msg: null });
@@ -44,7 +49,9 @@ const FTextInput = ({ className='', valorPorDefecto, label, onSave, atributo, re
         <>
         <div className={`${className} input-group has-validation`}>
             <div className={`form-floating ${ status.error && 'is-invalid' }`}>
-                <input className={`form-control ${ status.error && "is-invalid" }`} id={ label } placeholder={ label } disabled={ modo != "edit" } value={ input } onChange={ onChange } type="text" />
+                <input type="number" min="1" max="500" step="0" 
+                    className={`form-control ${ status.error && "is-invalid" }`} id={ label } placeholder={ label } disabled={ modo != "edit" } value={ input }
+                    onChange={ onChange } />
                 <label htmlFor={ label }>{ label }</label>
             </div>
             <button className="btn btn-primary py-2 px-4" onClick={ modo == "read" ? onEditClick : onSaveClick } disabled={ modo == "submitting" }>
@@ -71,4 +78,4 @@ const FTextInput = ({ className='', valorPorDefecto, label, onSave, atributo, re
     )
 }
 
-export default FTextInput;
+export default FNumberInput;
