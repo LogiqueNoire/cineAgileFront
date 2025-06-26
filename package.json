@@ -17,6 +17,7 @@
     "html2pdf.js": "^0.10.3",
     "js-cookie": "^3.0.5",
     "jspdf": "^3.0.1",
+    "qrcode": "^1.5.4",
     "qrcode.react": "^4.2.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
