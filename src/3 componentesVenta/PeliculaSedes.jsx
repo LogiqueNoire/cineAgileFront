@@ -74,7 +74,7 @@ const PeliculaSedes = () => {
     return (
         <div>
             <div className="d-flex justify-content-start flex-wrap flex-sm-wrap flex-md-nowrap gap-4 align-items-center px-5 py-4 bg-light bg-gradient border shadow mb-4">
-                <img className="card col-12 col-sm-11 col-md-6 col-lg-2 shadow rounded img-film-card2" style={{ minHeight: "350px", aspectRatio: "3/5" }} src={pelicula.imageUrl} alt="imagen Peli" />
+                <img className="card col-12 col-sm-11 col-md-6 col-lg-2 shadow rounded img-film-card2" style={{ minHeight: "350px", aspectRatio: "3/5" }} src={pelicula.imageUrl} alt={pelicula.nombre} />
                 <div>
                     <div className="d-flex flex-column gap-2">
 
