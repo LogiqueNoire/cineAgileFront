@@ -369,7 +369,7 @@ export default function AddFilm({ onSucess }) {
                   value={sinopsis}
                   onChange={(e) => onInputChange(e)}
                   required
-
+                  maxLength={500}
                 ></textarea>
               </div>
             </div>
