@@ -12,7 +12,13 @@ const ScreeningButton = ({ funcion, pelicula }) => {
     const handleClick = () => {
         // Cambiar la ruta
         //navigate(`/pelicula/${pelicula.idPelicula}/${funcion.idFuncion}`, { state: { consultaSedesPorPelicula: ejemplo } });
-        navigate(`/compra`, { state: { funcion, pelicula } })
+        Funcion.estaDisponible(funcion.idFuncion).then(res => {
+            navigate(`/compra`, { state: { funcion, pelicula } })
+        }).catch(err => {
+            console.log(err);
+            navigate("/error", { state: { errorInfo: "Función cerrada." } });
+        });
+
     };
 
     const butacasDisponibles = async (idFuncion) => {
