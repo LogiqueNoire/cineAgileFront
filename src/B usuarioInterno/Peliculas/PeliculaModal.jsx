@@ -81,7 +81,7 @@ const PeliculaModal = ({ pelicula, onCerrar }) => {
                         </div>
                         
                         <div className="row">
-                            <FTextInput atributo={"imgUrl"} valorPorDefecto={pelicula.imageUrl} label={"Imagen URL"} onSave={onInputSave} required={true} />
+                            <FTextInput atributo={"urlImagen"} valorPorDefecto={pelicula.imageUrl} label={"Imagen URL"} onSave={onInputSave} required={true} />
                         </div>
                         
                         <div className="row gap-4">
