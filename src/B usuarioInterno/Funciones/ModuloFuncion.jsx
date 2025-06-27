@@ -367,7 +367,7 @@ const ModuloFuncion = ({ handlePeliculaChange, handleSalaChange }) => {
                 tipo: 'toast-danger',
                 visible: true,
                 titulo: 'Error al crear la función',
-                mensaje: 'Horario fuera de rango permitido o cruce detectado'
+                mensaje: 'Horario fuera de rango permitido, precio base cero o cruce detectado'
             });
             setTimeout(() => setToast({ visible: false }), 3000);
 
