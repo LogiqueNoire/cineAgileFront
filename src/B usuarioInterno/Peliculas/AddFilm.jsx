@@ -359,7 +359,7 @@ export default function AddFilm({ onSucess }) {
 
               <div className="mb-3 w-50">
                 <label htmlFor="sinopsis" className="form-label">
-                  Sinopsis
+                  Sinopsis (Máx 500 caracteres)
                 </label>
                 <textarea
                   style={{ height: '110px', overflowY: 'auto' }}
