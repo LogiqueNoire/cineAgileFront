@@ -35,6 +35,9 @@ const FNumberInput = ({ className='', valorPorDefecto, label, onSave, atributo, 
 
     const onChange = (evt) => {
         const input = evt.target.value;
+        if (input.length > 3)
+            return;
+
         const regex = /^\d*\.?\d{0}$/; // permite hasta 0 decimales
 
         if (input === "" || regex.test(input)) {
