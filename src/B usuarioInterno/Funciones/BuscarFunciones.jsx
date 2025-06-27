@@ -125,11 +125,11 @@ const BuscarFunciones = ({ handlePeliculaChange, handleSalaChange }) => {
 
                     {
                         valoresBusqueda.filtro === 'pelicula' ?
-                            valoresBusqueda.peliculasSede != '' ?
+                            valoresBusqueda.peliculasSede != undefined ?
                                 <div className="">
                                     <label className='d-flex text-nowrap'>Pelicula</label>
-                                    {valoresBusqueda.peliculasSede.length > 0 ?
-                                        <select value={valoresBusqueda.selectPelicula} className='form-select' onChange={(e) => handlePeliculaChange(e)}>
+                                    {valoresBusqueda.peliculasSede.length > 0 && valoresBusqueda.peliculasSede != undefined ?
+                                        <select value={valoresBusqueda.selectPelicula} className='form-select' onChange={(e) => { handlePeliculaChange(e), setLoading(e) }}>
                                             <option value="0">Elige una película por la sede</option>
                                             {valoresBusqueda.peliculasSede.map((el, id) => (
                                                 <option key={el.id || id} value={el.id} >{el.nombre}</option>
@@ -140,14 +140,15 @@ const BuscarFunciones = ({ handlePeliculaChange, handleSalaChange }) => {
                                             <option value="">No hay peliculas</option>
                                         </select>
                                     }
-                                </div> :
+                                </div>
+                                :
                                 <Loading style={{ 'margin': '0px', 'width': '62px', 'height': '62px' }}></Loading>
                             :
                             <></>
                     }
                     {
                         valoresBusqueda.filtro === 'sala' ?
-                            valoresBusqueda.salasSede != '' ?
+                            valoresBusqueda.salasSede != undefined ?
                                 <div>
                                     <label className='d-flex text-nowrap'>Sala</label>
                                     {valoresBusqueda.salasSede.length > 0 ?
