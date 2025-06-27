@@ -13,7 +13,7 @@ const FilmCard = ({ pelicula }) => {
     };
 
     return (
-        <button className="overflow-hidden filmcard-hover card col-10 col-sm-5 col-md-3 col-lg-2 p-1" onClick={handleClick} key={pelicula.id} type="button">
+        <button className="overflow-hidden filmcard-hover card col-8 col-sm-5 col-md-3 col-lg-2 p-1" onClick={handleClick} key={pelicula.id} type="button">
             <img src={pelicula.imageUrl} alt={pelicula.nombre} className='h-100 rounded img-fluid img-film-card2' />
             <div>
                 <div className='text-truncate fw-bold fs-6 text-secondary' >{pelicula.nombre}</div>

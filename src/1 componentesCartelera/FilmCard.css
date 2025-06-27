@@ -9,6 +9,7 @@
 
 .img-film-card2 {
   object-fit: cover;
+  aspect-ratio: 3/4.5;
   overflow: hidden;
 }
 
