@@ -22,7 +22,7 @@ class Entrada {
 
         const escribirInfoComun = (data) => {
             let tipoPersona = "";
-            switch (entrada.persona) {
+            switch (data.persona) {
                 case "general": tipoPersona = "General"; break;
                 case "mayores": tipoPersona = "Mayor de 60"; break;
                 case "niños": tipoPersona = "Niño"; break;
