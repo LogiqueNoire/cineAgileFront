@@ -18,6 +18,9 @@ const SeccionBotones = ({ onClick, row, col }) => {
 
 const EditorButacas = ({ cambios, setCambios, butacasExistentes }) => {
     const [ butacas ] = useState((() => {
+        if (butacasExistentes && butacasExistentes.length == 0)
+            return [];
+
         const [ max_row, max_col ] = SalaButaca.convButacasAMatriz(butacasExistentes);
         const but = new Array(max_row + 1).fill().map(el => new Array(max_col + 1).fill(null));
 
@@ -31,6 +34,14 @@ const EditorButacas = ({ cambios, setCambios, butacasExistentes }) => {
 
         return but;
     })());
+
+    if (butacas.length == 0) {
+        return (
+            <div className="fs-4 text-center">
+                Nada que mostrar.
+            </div>
+        )
+    }
 
     const btonOnClick = (evt) => {
         evt.preventDefault();
