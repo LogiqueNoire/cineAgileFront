@@ -22,14 +22,14 @@ const FTextInput = ({ className='', valorPorDefecto, label, onSave, atributo, re
         setModo("submitting");
 
         onSave({ [atributo]: input }).then(res => {
+            setModo("read");
         }).catch(err => {
             if (err.response?.data) {
                 setStatus({ error: true, msg: err.response.data })
             } else {
                 setStatus({ error: true, msg: "Error del servidor" })
             }
-        }).finally(_ => {
-            setModo("read");
+            setModo("edit")
         })
     };
 
@@ -44,7 +44,7 @@ const FTextInput = ({ className='', valorPorDefecto, label, onSave, atributo, re
         <>
         <div className={`${className} input-group has-validation`}>
             <div className={`form-floating ${ status.error && 'is-invalid' }`}>
-                <input className={`form-control ${ status.error && "is-invalid" }`} id={ label } placeholder={ label } disabled={ modo != "edit" } value={ input } onChange={ onChange } type="text" />
+                <input maxLength={255} className={`form-control ${ status.error && "is-invalid" }`} id={ label } placeholder={ label } disabled={ modo != "edit" } value={ input } onChange={ onChange } type="text" />
                 <label htmlFor={ label }>{ label }</label>
             </div>
             <button className="btn btn-primary py-2 px-4" onClick={ modo == "read" ? onEditClick : onSaveClick } disabled={ modo == "submitting" }>

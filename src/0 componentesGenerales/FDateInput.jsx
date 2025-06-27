@@ -24,14 +24,14 @@ const FDateInput = ({ className='', valorPorDefecto, label, onSave, atributo, re
         setModo("submitting");
 
         onSave({ [atributo]: input }).then(res => {
+            setModo("read");
         }).catch(err => {
             if (err.response?.data) {
                 setStatus({ error: true, msg: err.response.data })
             } else {
                 setStatus({ error: true, msg: "Error del servidor" })
             }
-        }).finally(_ => {
-            setModo("read");
+            setModo("edit")
         })
     };
 

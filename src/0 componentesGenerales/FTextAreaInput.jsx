@@ -22,14 +22,14 @@ const FTextAreaInput = ({ className='', valorPorDefecto, label, onSave, atributo
         setModo("submitting");
 
         onSave({ [atributo]: input }).then(res => {
+            setModo("read");
         }).catch(err => {
             if (err.response?.data) {
                 setStatus({ error: true, msg: err.response.data })
             } else {
                 setStatus({ error: true, msg: "Error del servidor" })
             }
-        }).finally(_ => {
-            setModo("read");
+            setModo("edit")
         })
     };
 
@@ -60,9 +60,9 @@ const FTextAreaInput = ({ className='', valorPorDefecto, label, onSave, atributo
 
         <div className={`input-group has-validation`}>
 
-
             <div className={`form-floating ${ status.error && 'is-invalid' }`}>
                 <textarea
+                  maxLength={501}
                   style={{ "min-height": '200px', overflowY: 'auto' }}
                   className={`form-control ${ status.error && "is-invalid" }`}
                   disabled={ modo != "edit" }
@@ -73,7 +73,6 @@ const FTextAreaInput = ({ className='', valorPorDefecto, label, onSave, atributo
                 ></textarea>
                 <label htmlFor={ label }>{ label }</label>
             </div>
-
             
             { status.msg && 
                 <div class="invalid-feedback">

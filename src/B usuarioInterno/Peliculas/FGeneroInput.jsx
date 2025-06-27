@@ -57,15 +57,15 @@ const FGeneroInput = ({ className, valoresPorDefecto, onSave, generos, atributo,
         if (modo == "submitting") return;
         setModo("submitting");
 
-        onSave({ [atributo]: generosSel }).then(res => {
+        onSave({ [atributo]: input }).then(res => {
+            setModo("read");
         }).catch(err => {
             if (err.response?.data) {
                 setStatus({ error: true, msg: err.response.data })
             } else {
                 setStatus({ error: true, msg: "Error del servidor" })
             }
-        }).finally(_ => {
-            setModo("read");
+            setModo("edit")
         })
     };
 

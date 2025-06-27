@@ -65,7 +65,7 @@ const PeliculaModal = ({ pelicula, onCerrar }) => {
                     <div className="d-flex flex-column gap-3 w-100">
                         <div className="row d-flex">
                             <FTextInput className="col" atributo={"nombre"} valorPorDefecto={pelicula.nombre} label={"Nombre"} onSave={onInputSave} required={true} />
-                            <FNumberInput className="col" atributo={"duracion"} valorPorDefecto={pelicula.duracion} label={"Duración"} onSave={onInputSave} required={true} />
+                            <FNumberInput className="col" atributo={"duracion"} valorPorDefecto={pelicula.duracion} label={"Duración (máx. 500 min)"} onSave={onInputSave} required={true} />
                             <FDateInput className="col" atributo={"fechaEstreno"} valorPorDefecto={pelicula.fechaInicioEstreno} label={"Fecha Inicio Estreno"} onSave={onInputSave} required={true} />
                         </div>
                         <div className="row">
