@@ -16,16 +16,18 @@ const Contador = ({ onCancelar }) => {
     const navigate = useNavigate();
     const { tiempo, setTiempo } = useContext(VentaContext).general;
     const [ estado, actualizar ] = useReducer((_, action) => actualizarTiempo(action), tiempo, actualizarTiempo);
+    const contexto = useContext(VentaContext);
 
     let timeOut = false;
     
     setTimeout(() => {
       if (estado.diff == 0 && !timeOut) {
+        if (contexto.butacaContext.seleccionadas.length != 0) onCancelar(() => {});
+        
         timeOut = true;
         const myModal = new bootstrap.Modal(document.getElementById("contadorBackdrop"));
         myModal.show();
 
-        if (contexto.butacaContext.seleccionadas.length != 0) onCancelar(() => {});
         return;
       }
 
