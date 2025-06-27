@@ -21,14 +21,6 @@ class Entrada {
             
 
         const escribirInfoComun = (data) => {
-            let tipoPersona = "";
-            switch (data.persona) {
-                case "general": tipoPersona = "General"; break;
-                case "mayores": tipoPersona = "Mayor de 60"; break;
-                case "niños": tipoPersona = "Niño"; break;
-                case "conadis": tipoPersona = "Conadis"; break;
-            }
-
             doc.setFontSize('20')
             doc.text(`Cine Agile`, 60, 70);
             doc.text(`Datos elegidos`, 80, 120);
@@ -40,6 +32,14 @@ class Entrada {
             doc.text(`Sala: ${data.sala}`, 40, 170);
         }
         const escribirEntrada = (entrada, index) => {
+            let tipoPersona = "";
+            switch (entrada.persona) {
+                case "general": tipoPersona = "General"; break;
+                case "mayores": tipoPersona = "Mayor de 60"; break;
+                case "niños": tipoPersona = "Niño"; break;
+                case "conadis": tipoPersona = "Conadis"; break;
+            }
+
             doc.setFontSize('20')
             doc.text(`Entrada`, 64, 80);
             doc.setFontSize('16')
