@@ -18,8 +18,17 @@ class Entrada {
         doc.setFont("Helvetica", "Bold");
 
         const entradas = entradasCompletas.entradas
+            
 
         const escribirInfoComun = (data) => {
+            let tipoPersona = "";
+            switch (entrada.persona) {
+                case "general": tipoPersona = "General"; break;
+                case "mayores": tipoPersona = "Mayor de 60"; break;
+                case "niños": tipoPersona = "Niño"; break;
+                case "conadis": tipoPersona = "Conadis"; break;
+            }
+
             doc.setFontSize('20')
             doc.text(`Cine Agile`, 60, 70);
             doc.text(`Datos elegidos`, 80, 120);
@@ -36,7 +45,7 @@ class Entrada {
             doc.setFontSize('16')
             doc.text(`Butaca: ${String.fromCharCode('A'.charCodeAt(0) + entrada.butaca.fila)
                 + Number(entrada.butaca.columna+1)}`, 40, 180);
-            doc.text(`Tipo de entrada: ${entrada.persona}`, 40, 190);
+            doc.text(`Tipo de entrada: ${tipoPersona}`, 40, 190);
             doc.setFontSize('20')
             doc.text(`Datos de pago`, 80, 210);
             doc.setFontSize('16')
