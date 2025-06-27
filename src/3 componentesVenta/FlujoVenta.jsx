@@ -157,7 +157,7 @@ const FlujoVenta = () => {
                 <div className="d-flex flex-column py-5 bg-white align-items-center flex-grow-1 px-4">
                     <div className="d-flex justify-content-between w-100 mb-2">
                         <Contador />
-                        <button className="btn btn-danger" onClick={() => onCancelar(() => { navigate(-1); })}>Cancelar</button>
+                        <button disabled={contexto.general.submitting} className="btn btn-danger" onClick={() => onCancelar(() => { navigate(-1); })}>Cancelar</button>
                     </div>
                     <div>
                         {ventana}
