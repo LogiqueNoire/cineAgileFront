@@ -57,7 +57,7 @@ export const VentanaPrecios = ({ prev, next, onCancelar }) => {
 
         return (
             <>
-                <div className="d-flex mb-4">
+                <div className="d-flex mb-4 justify-content-center">
                     <div className="ContieneEntradas gap-3 d-flex flex-column justify-content-center align-items-center">
                         <h3> PRECIOS DE LAS ENTRADAS </h3>
                         <FilaPrecioComJose1 nombre="General" precio={precioGeneral} />
@@ -78,7 +78,9 @@ export const VentanaPrecios = ({ prev, next, onCancelar }) => {
         );
     } else {
         return (
-            <Loading style={{ margin: "15rem" }}></Loading>
+            <div className='d-flex justify-content-center'>
+                <Loading style={{ margin: "15rem" }} />
+            </div>
         )
     }
 }

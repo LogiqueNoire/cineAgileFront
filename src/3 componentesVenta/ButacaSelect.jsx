@@ -81,7 +81,10 @@ const SeleccionButaca = ({ funcion, prev, next, onCancelar }) => {
   return (
     <>
       {error && <h2>Error!</h2>}
-      {loading ? <Loading style={{ margin: "15rem" }} /> :
+      {loading ? 
+      <div className='d-flex justify-content-center'>
+        <Loading style={{ margin: "15rem" }} />
+      </div> :
         <>
           <div className='d-flex flex-column gap-2'>
             <ButacaMap isSelectedFunc={estaEnSeleccionados} onButacaSelect={onButacaSelect} butacas={data} />
@@ -122,7 +125,7 @@ const SeleccionButaca = ({ funcion, prev, next, onCancelar }) => {
             </div>
           </div>
 
-          <div className="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+          <div className="modal col-12 fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div className="modal-dialog w-25 modal-dialog-centered">
               <div className="modal-content">
                 <div className="modal-header d-flex justify-content-center">
