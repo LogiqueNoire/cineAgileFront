@@ -264,7 +264,7 @@ const ModuloFuncion = ({ handlePeliculaChange, handleSalaChange }) => {
                 tipo: 'toast-danger',
                 visible: true,
                 titulo: 'Función no actualizada',
-                mensaje: 'Horario fuera de rango permitido, cruce detectado o función con entradas vendidas'
+                mensaje: 'Horario fuera de rango permitido, cruce detectado, precio base cero o función con entradas vendidas'
             });
             setTimeout(() => setToast({ visible: false }), 3000);
         }
