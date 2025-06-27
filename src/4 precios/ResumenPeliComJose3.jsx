@@ -14,7 +14,7 @@ const ResumenPeliComJose3 = ({ pelicula, catePeli, sedePeli, fechaPeli, salaPeli
     return (
         <div className="Rojo d-flex flex-column flex-sm-row flex-lg-column justify-content-center">
             <div className="d-flex justify-content-center col-12 col-sm-6 col-lg-12">
-                <img className="card img-fluid img-film-card2 shadow rounded" style={{ height: "350px", aspectRatio: "3/5" }} src={pelicula.imageUrl} alt="imagen"></img>
+                <img className="card img-fluid img-film-card2 shadow rounded" style={{ height: "350px", aspectRatio: "3/5" }} src={pelicula.imageUrl} alt={pelicula.nombre}></img>
             </div>
 
             <div className="d-flex flex-column align-items-center col-12 col-sm-6 col-lg-12">
