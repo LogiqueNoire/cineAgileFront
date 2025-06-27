@@ -74,11 +74,11 @@ const PeliculaSedes = () => {
     return (
         <div>
             <div className="d-flex justify-content-start flex-wrap flex-sm-wrap flex-md-nowrap gap-4 align-items-center px-5 py-4 bg-light bg-gradient border shadow mb-4">
-                <img className="card col-12 col-sm-11 col-md-6 col-lg-2 shadow rounded img-film-card2" style={{ minHeight: "350px", aspectRatio: "3/5" }} src={pelicula.imageUrl} alt={pelicula.nombre} />
-                <div>
+                <img className="card col-12 col-sm-12 col-md-6 col-lg-2 shadow rounded img-film-card2" style={{ minHeight: "350px", aspectRatio: "3/5" }} src={pelicula.imageUrl} alt={pelicula.nombre} />
+                <div className="col-12 col-sm-12 col-md-6 col-lg-8">
                     <div className="d-flex flex-column gap-2">
 
-                        <h1 className="display-4" style={{ color: '#0A2B9C' }}><strong>{pelicula.nombre}</strong></h1>
+                        <h1 className="display-4 text-truncate" style={{ color: '#0A2B9C' }}><strong>{pelicula.nombre}</strong></h1>
                         <h5 style={{ color: '#01217B' }}>{`${pelicula.clasificacion} | ${pelicula.genero.map(g => g.nombre).join(', ')}`}</h5>
                         <div>
                             <p>{`Sinopsis`}</p>
