@@ -134,9 +134,9 @@ const VentanaPeliculas = () => {
                                     <th className='td'>Sinopsis</th>
                                     <th className='td'>Clasificación</th>
                                     <th className='td'>Estado</th>
-                                    <th className='td'>Inicio de estreno</th>
+                                    <th className='td'>Fecha de estreno</th>
                                     <th className='td'>Imagen</th>
-                                    <th className='td'>Imagen</th>
+                                    <th className='td'>Acciones</th>
                                 </tr>
                             </thead>
                             <tbody className='tbody'>
