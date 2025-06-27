@@ -15,14 +15,16 @@ const FTextAreaInput = ({ className='', valorPorDefecto, label, onSave, atributo
     const onSaveClick = () => {
         if (required && input.trim() == '') {
             setStatus({ error: true, msg: "El campo no puede estar vacío." })
+            setInput(input.trim());
             return;
         }
 
         if (modo == "submitting") return;
         setModo("submitting");
 
-        onSave({ [atributo]: input }).then(res => {
+        onSave({ [atributo]: input.trim() }).then(res => {
             setModo("read");
+            setInput(input.trim());
         }).catch(err => {
             if (err.response?.data) {
                 setStatus({ error: true, msg: err.response.data })

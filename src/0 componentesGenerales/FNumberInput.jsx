@@ -5,7 +5,7 @@ import pencilSvg from "../assets/pencil.svg"
 
 const FNumberInput = ({ className='', valorPorDefecto, label, onSave, atributo, required }) => {
     const [ modo, setModo ] = useState("read"); // read, edit, submitting
-    const [ input, setInput ] = useState(valorPorDefecto);
+    const [ input, setInput ] = useState("" + valorPorDefecto);
     const [ status, setStatus ] = useState({ error: false, msg: null });
 
     const onEditClick = () => {
