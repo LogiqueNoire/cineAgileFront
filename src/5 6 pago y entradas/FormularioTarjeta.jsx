@@ -66,10 +66,12 @@ export const FormularioTarjeta = ({ tarjeta, setTarjeta, setSubmitting, setStatu
         <PayPalButtons
           onClick={(data, actions) => {
             setto.setTerminos(false);
+            contexto.general.setSubmitting(true);
             return actions.resolve();
           }}
           onCancel={(data, actions) => {
             setto.setTerminos(true);
+            contexto.general.setSubmitting(false);
             return actions.redirect()
           }}
           createOrder={(_, actions) => {

@@ -18,11 +18,15 @@ const VentaContextProvider = ({ children }) => {
     const [ pruebaInicial, setPruebaInicial ] = useState(0)
     const [ tiempo, setTiempo ] = useState(addSeconds(addMinutes(new Date(), 5), 0));
 
+    const [ submitting, setSubmitting ] = useState(false);
+
     const contextData = {
         general: {
             funcion,
             tiempo,
-            setTiempo
+            setTiempo,
+            submitting,
+            setSubmitting
         },
         butacaContext: {
             seleccionadas: butacasSeleccionadas,
