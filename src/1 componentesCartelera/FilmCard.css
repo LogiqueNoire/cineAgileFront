@@ -1,3 +1,6 @@
+* {
+}
+
 .img-film-card {
   width: 230px;
   aspect-ratio: 3/4.5;
@@ -10,8 +13,7 @@
 .img-film-card2 {
   object-fit: cover;
   aspect-ratio: 3/4.5;
-    outline: red solid 1px;
-    overflow: hidden;
+  overflow: hidden;
 }
 
 .img-film-card2::before {
