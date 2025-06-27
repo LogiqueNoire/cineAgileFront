@@ -4,7 +4,7 @@ import Loading from '../../0 componentesGenerales/Loading';
 import axios from 'axios';
 import { url } from "../../configuracion/backend"
 import Cookies from 'js-cookie';
-import { format } from "date-fns";
+import { format, isBefore } from "date-fns";
 import './ModuloFuncion.css'
 import SalaButaca from '../../servicios/SalaButaca';
 import Toast from '../../Toast'
@@ -34,9 +34,8 @@ const ModuloFuncion = ({ handlePeliculaChange, handleSalaChange }) => {
 
     useEffect(() => {
         if (primeraVez) {
-
-            consultarPeliculas()
             obtenerFecha();
+            consultarPeliculas()
         } else {
             setPrimeraVez(false);
         }
@@ -53,7 +52,17 @@ const ModuloFuncion = ({ handlePeliculaChange, handleSalaChange }) => {
 
     const [fechaReal, setFechaReal] = useState()
 
+    useEffect(() => {
+        console.log("fechareal", fechaReal)
+    }, [fechaReal])
 
+    useEffect(() => {
+        const intervalo = setInterval(() => {
+            obtenerFecha();
+        }, 40000); // 40 segundos
+
+        return () => clearInterval(intervalo); // limpia al desmontar
+    }, []);
 
     /*manejo de fecha*/
     let response
@@ -125,8 +134,20 @@ const ModuloFuncion = ({ handlePeliculaChange, handleSalaChange }) => {
     const actualizarFuncion = async () => {
         let nfhi;
         console.log("funcion a editar", funcion)
-        if (funcion.nuevaHoraInicio === '' || funcion.nuevaFecha === '' || funcion.nuevaHoraInicio === '' || funcion.nuevaDimension === '0' ||
-            funcion.nuevoPrecioBase === '0' || funcion.nuevaSalaId === '0' || funcion.nuevaSalaId === '' || funcion.nuevaPeliculaId === '0') {
+        const fechaHoraSeleccionada = new Date(`${funcion.nuevaFecha}T${funcion.nuevaHoraInicio}`);
+
+        if (
+            funcion.nuevaHoraInicio === '' ||
+            funcion.nuevaFecha === '' ||
+            funcion.nuevaDimension === '0' ||
+            funcion.nuevoPrecioBase === '0' ||
+            funcion.nuevaSalaId === '0' ||
+            funcion.nuevaSalaId === '' ||
+            funcion.nuevaPeliculaId === '0' ||
+            isBefore(fechaHoraSeleccionada, fechaReal)
+        ) {
+
+
             setToast({
                 tipo: 'toast-danger',
                 visible: true,
@@ -252,13 +273,25 @@ const ModuloFuncion = ({ handlePeliculaChange, handleSalaChange }) => {
     const crearFuncion = async () => {
         let nfhi;
         console.log("funcion a editar", funcion)
-        if (funcion.nuevaHoraInicio === '' || funcion.nuevaFecha === '' || funcion.nuevaHoraInicio === '' || funcion.nuevaDimension === '0' ||
-            funcion.nuevoPrecioBase === '0' || funcion.nuevaSalaId === '0' || funcion.nuevaSalaId === '' || funcion.nuevaPeliculaId === '0') {
+        console.log("fecha real", fechaReal)
+        const fechaHoraSeleccionada = new Date(`${funcion.nuevaFecha}T${funcion.nuevaHoraInicio}`);
+
+        if (
+            funcion.nuevaHoraInicio === '' ||
+            funcion.nuevaFecha === '' ||
+            funcion.nuevaDimension === '0' ||
+            funcion.nuevoPrecioBase === '0' ||
+            funcion.nuevaSalaId === '0' ||
+            funcion.nuevaSalaId === '' ||
+            funcion.nuevaPeliculaId === '0' ||
+            isBefore(fechaHoraSeleccionada, fechaReal)
+        ) {
+
             setToast({
                 tipo: 'toast-danger',
                 visible: true,
                 titulo: '¡Cuidado!',
-                mensaje: 'Faltan datos'
+                mensaje: 'Faltan datos o error en los datos'
             });
             setTimeout(() => setToast({ visible: false }), 3000);
             return;
@@ -443,7 +476,8 @@ const ModuloFuncion = ({ handlePeliculaChange, handleSalaChange }) => {
                                         ...prev,
                                         nuevaHoraInicio: e.target.value
                                     }))
-                                } />
+                                }
+                            />
                         </div>
                         <div className='d-flex w-100 align-items-center'>
                             <label className='w-100'>Sala</label>
@@ -565,7 +599,8 @@ const ModuloFuncion = ({ handlePeliculaChange, handleSalaChange }) => {
                                         ...prev,
                                         nuevaHoraInicio: e.target.value
                                     }))
-                                } />
+                                }
+                            />
                         </div>
                         <div className='d-flex w-100 align-items-center'>
                             <label className='w-100'>Sala</label>

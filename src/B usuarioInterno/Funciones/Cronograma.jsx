@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import MostrarSedesHorarios from "../../3 componentesVenta/MostrarSedesHorarios";
 import { useContext } from "react";
@@ -74,6 +74,10 @@ const Cronograma = () => {
     //    hora1.getMinutes() > hora2.getMinutes()));
     return hora1 > hora2
   }
+
+  useEffect(()=>{
+    console.log(listaFunciones)
+  }, [listaFunciones])
 
   function comparar(el, hora) {
     const fechaInicio = new Date(el.fechaHoraInicio);
