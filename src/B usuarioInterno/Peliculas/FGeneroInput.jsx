@@ -57,7 +57,7 @@ const FGeneroInput = ({ className, valoresPorDefecto, onSave, generos, atributo,
         if (modo == "submitting") return;
         setModo("submitting");
 
-        onSave({ [atributo]: input }).then(res => {
+        onSave({ [atributo]: generosSel }).then(res => {
             setModo("read");
         }).catch(err => {
             if (err.response?.data) {
