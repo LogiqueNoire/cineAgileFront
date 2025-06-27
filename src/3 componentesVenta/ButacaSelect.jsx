@@ -18,6 +18,8 @@ const SeleccionButaca = ({ funcion, prev, next, onCancelar }) => {
   const [error, setError] = useState(null)
   const { butacaContext } = context;
 
+  const [ moving, setMoving ] = useState(false);
+
   useEffect(() => {
     Funcion.mostrarButacasDeFuncion(funcion.idFuncion).then(data => {
       const butacas = data.map(el => ({ ...el.butaca, ocupado: el.ocupado }))
@@ -43,6 +45,9 @@ const SeleccionButaca = ({ funcion, prev, next, onCancelar }) => {
 
 
   const siguiente = () => {
+    if (moving) return;
+    setMoving(true);
+
     const fechaAhora = (new Date(Date.now()));
     const info = {
       id_funcion: funcion.idFuncion,
@@ -153,7 +158,7 @@ const SeleccionButaca = ({ funcion, prev, next, onCancelar }) => {
 
           <div className="d-flex justify-content-center gap-4 align-items-center">
           { /* <button className="btn btn-primary" onClick={volver} >Volver</button> */ }
-            <button className="btn btn-primary" disabled={context.butacaContext.seleccionadas.length === 0} onClick={siguiente}>Siguiente</button>
+            <button className="btn btn-primary" disabled={context.butacaContext.seleccionadas.length === 0 || moving} onClick={siguiente}>Siguiente</button>
           </div>
         </>
       }
