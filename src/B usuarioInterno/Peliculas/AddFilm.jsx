@@ -144,7 +144,14 @@ export default function AddFilm({ onSucess }) {
         });
 
         if (onSucess) {
-          onSucess()
+          onSucess();
+          setToast({
+            tipo: 'toast-info',
+            visible: true,
+            titulo: 'Película agregada correctamente',
+            mensaje: ''
+          });
+          setTimeout(() => setToast({ visible: false }), 3000);
         }
         setPelicula({
           nombre: '',
@@ -166,14 +173,6 @@ export default function AddFilm({ onSucess }) {
         });
         setTimeout(() => setToast({ visible: false }), 3000);
         console.error(error);
-      } finally {
-        setToast({
-          tipo: 'toast-info',
-          visible: true,
-          titulo: 'Película agregada correctamente',
-          mensaje: ''
-        });
-        setTimeout(() => setToast({ visible: false }), 3000);
       }
     } else {
       console.log('error 1')
