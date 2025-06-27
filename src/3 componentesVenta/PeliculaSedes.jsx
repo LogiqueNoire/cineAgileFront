@@ -9,6 +9,8 @@ import { url } from "../configuracion/backend"
 import { differenceInCalendarDays } from "date-fns";
 import { es } from 'date-fns/locale';
 
+import '../1 componentesCartelera/FilmCard.css';
+
 const PeliculaSedes = () => {
     const location = useLocation();
     const { consultaIdPelicula } = location.state || {};
@@ -71,8 +73,8 @@ const PeliculaSedes = () => {
 
     return (
         <div>
-            <div className="d-flex justify-content-center gap-4 align-items-center px-5 py-4 bg-light bg-gradient border shadow mb-4">
-                <img className="imagenPelicula shadow rounded" src={pelicula.imageUrl} alt="imagen Peli" />
+            <div className="d-flex justify-content-start flex-wrap flex-sm-wrap flex-md-nowrap gap-4 align-items-center px-5 py-4 bg-light bg-gradient border shadow mb-4">
+                <img className="card col-12 col-sm-11 col-md-6 col-lg-2 shadow rounded img-film-card2" style={{ minHeight: "350px", aspectRatio: "3/5" }} src={pelicula.imageUrl} alt="imagen Peli" />
                 <div>
                     <div className="d-flex flex-column gap-2">
 
