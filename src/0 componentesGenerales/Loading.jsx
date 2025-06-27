@@ -1,7 +1,7 @@
 import './Loading.css'
 
-const Loading = ({ style }) => {
-    return <span style={style} className="loader m-4"></span>
+const Loading = ({ className, style }) => {
+    return <span style={style} className={` ${className} loader m-4`}></span>
 }
 
 export default Loading;

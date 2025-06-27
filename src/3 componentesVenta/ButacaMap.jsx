@@ -40,16 +40,18 @@ const ButacaMap = ({ onButacaSelect, isSelectedFunc, butacas }) => {
             }
 
             fila.push(<td key={key}>
-                <input
-                    className={`butaca-celda ${libre} ${discapacitado}`}
-                    data-id={butaca ? butaca.id : 'x' }
-                    data-fila={butaca ? i : 'x'}
-                    data-columna={butaca ? j : 'x'}
-                    type='checkbox'
-                    disabled={disabled}
-                    checked={checked}
-                    onChange={inputOnChange}
-                />
+                <div className='butaca-celda-wrapper'>
+                    <input
+                        className={`butaca-celda ${libre} ${discapacitado}`}
+                        data-id={butaca ? butaca.id : 'x' }
+                        data-fila={butaca ? i : 'x'}
+                        data-columna={butaca ? j : 'x'}
+                        type='checkbox'
+                        disabled={disabled}
+                        checked={checked}
+                        onChange={inputOnChange}
+                    />
+                </div>
             </td>)
         }
 
@@ -58,11 +60,12 @@ const ButacaMap = ({ onButacaSelect, isSelectedFunc, butacas }) => {
     }
 
     return (
-        <div className='d-flex flex-column justify-align-center butaca-map'>
+        <div className='d-flex flex-column butaca-map col-12'>
             <h3 className='text-center mb-3'>Elección de butacas</h3>
             <h1 className='mb-0'>Pantalla</h1>
-            <div className='butaca-container d-flex justify-content-center'>
+            <div className='butaca-container p-1 d-flex justify-content-start justify-content-sm-start justify-content-md-center overflow-auto'>
                 {   butacas.length >= 1 ?
+                <div className='border-top border-5 pt-5 border-primary'>
                     <table className="butaca-table">
                         <thead>
                             <tr>{ head }</tr>
@@ -71,6 +74,7 @@ const ButacaMap = ({ onButacaSelect, isSelectedFunc, butacas }) => {
                             {tablaFilas}
                         </tbody>
                     </table>
+                </div>
                     : <div className='fw-bold'>No hay nada que mostrar.</div>
                 }
 

@@ -12,12 +12,12 @@ const ResumenPeliComJose3 = ({ pelicula, catePeli, sedePeli, fechaPeli, salaPeli
     }
     //${JSON.stringify(butacas.butacaContext.seleccionadas.length)}
     return (
-        <div className="Rojo">
-            <div className="d-flex justify-content-center">
-                <img className="img-fluid imagenPelicula shadow rounded" src={pelicula.imageUrl} alt="imagen"></img>
+        <div className="Rojo d-flex flex-column flex-sm-row flex-lg-column justify-content-center">
+            <div className="d-flex justify-content-center col-12 col-sm-6 col-lg-12">
+                <img className="card img-fluid .img-film-card2 shadow rounded" style={{ height: "350px", aspectRatio: "3/5" }} src={pelicula.imageUrl} alt="imagen"></img>
             </div>
 
-            <div className="d-flex flex-column align-items-center">
+            <div className="d-flex flex-column align-items-center col-12 col-sm-6 col-lg-12">
                 <h1 className="mt-4" style={{ fontSize:'36px', color: 'blue' }}>{pelicula.nombre}</h1>
                 <h3 className="m-2">{dimension+" "+categoria}</h3>
                 <h5 className="m-2">{"Sede: "+sedePeli}</h5>

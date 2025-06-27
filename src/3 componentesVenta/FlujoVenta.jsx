@@ -150,26 +150,22 @@ const FlujoVenta = () => {
     return (
         <>
             <div className="d-flex border border-2 flex-wrap justify-content-center">
-                <div className="d-flex flex-column justify-content-center p-4 bg-light">
-                    
+                <div className="d-flex flex-column justify-content-center p-sm-2 p-lg-4 bg-light col-12 col-lg-4 overflow-hidden">
                     <ResumenPeliComJose3 pelicula={pelicula} sedePeli={funcion.nombreSede} fechaPeli={funcion.fechaHoraInicio}
                         salaPeli={funcion.codigoSala} categoria={funcion.categoria} dimension={funcion.dimension} idFuncion={funcion.idFuncion} />
                 </div>
 
-                <div className="d-flex flex-column py-5 bg-white align-items-center flex-grow-1 px-4">
-                    <div className="d-flex justify-content-between w-100 mb-2">
+                <div className="d-flex flex-column py-2 bg-white align-items-center flex-grow-1 col-12 col-lg-8 px-4">
+                    <div className="d-flex justify-content-between w-100 mb-2 col-12">
                         <Contador />
                         <button disabled={contexto.general.submitting} className="btn btn-danger" onClick={() => onCancelar(() => { navigate(-1); })}>
                             <img src={cancelarSvg} alt="" />
                         </button>
                     </div>
-                    <div>
+                    <div className="col-12">
                         {ventana}
                     </div>
                 </div>
-
-
-
             </div>
 
         </>
