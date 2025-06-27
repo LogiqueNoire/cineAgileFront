@@ -94,13 +94,17 @@ const SeleccionButaca = ({ funcion, prev, next, onCancelar }) => {
                 <tbody>
                   <tr className=''>
                     <td className=''>
-                      <input type="checkbox" className="butaca-celda butaca-libre" readOnly onClick={(e) => e.preventDefault()} />
+                      <div className='butaca-celda-wrapper'>
+                        <input type="checkbox" className="butaca-celda butaca-libre" readOnly onClick={(e) => e.preventDefault()} />
+                      </div>
                     </td>
                     <td className=''>
                       <h4 className="butaca-label mx-2">Libre</h4>
                     </td>
                     <td className=''>
-                      <input type="checkbox" className="butaca-celda butaca-discapacitado" readOnly onClick={(e) => e.preventDefault()} />
+                      <div className='butaca-celda-wrapper'>
+                        <input type="checkbox" className="butaca-celda butaca-discapacitado" readOnly onClick={(e) => e.preventDefault()} />
+                      </div>
                     </td>
                     <td className=''>
                       <h4 className="butaca-label mx-2">Discapacitado</h4>
@@ -108,13 +112,17 @@ const SeleccionButaca = ({ funcion, prev, next, onCancelar }) => {
                   </tr>
                   <tr className=''>
                     <td>
-                      <input type="checkbox" className="butaca-celda butaca-ocupado" readOnly checked onClick={(e) => e.preventDefault()} />
+                      <div className='butaca-celda-wrapper'>
+                        <input type="checkbox" className="butaca-celda butaca-ocupado" readOnly checked onClick={(e) => e.preventDefault()} />
+                      </div>
                     </td>
                     <td>
                       <h4 className="butaca-label mx-2">Ocupado</h4>
                     </td>
                     <td>
-                      <input type="checkbox" className="butaca-celda butaca-libre" readOnly checked onClick={(e) => e.preventDefault()} />
+                      <div className='butaca-celda-wrapper'>
+                        <input type="checkbox" className="butaca-celda butaca-libre" readOnly checked onClick={(e) => e.preventDefault()} />
+                      </div>
                     </td>
                     <td>
                       <h4 className="butaca-label mx-2">Seleccionado</h4>
