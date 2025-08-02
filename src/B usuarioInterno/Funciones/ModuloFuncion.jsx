@@ -456,7 +456,7 @@ const ModuloFuncion = ({ handlePeliculaChange, handleSalaChange }) => {
                                 disabled={funcion.funcionElegida === undefined || funcion.codigoFuncion === ''}
                                 value={funcion.nuevaFecha}
                                 min={(funcion.nuevaPeliculaId != '' && funcion.nuevaPeliculaId != '0') ?
-                                    (new Date(listaPeliculas.find(item => item.idPelicula == funcion.nuevaPeliculaId).fechaInicioEstreno) > new Date(fechaReal) ?
+                                    (new Date(listaPeliculas.find(item => item.idPelicula == funcion.nuevaPeliculaId)?.fechaInicioEstreno) > new Date(fechaReal) ?
                                         listaPeliculas.find(item => item.idPelicula == funcion.nuevaPeliculaId).fechaInicioEstreno : format(fechaReal, "yyyy-MM-dd"))
                                     : ''}
                                 onChange={(e) =>
