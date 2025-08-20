@@ -9,7 +9,7 @@ const FilmContainer = ({ peliculas }) => {
                     return <FilmCard key={pelicula.idPelicula} pelicula={pelicula}></FilmCard>
                 })
             :
-            <label className="fs-3">No hay funciones programadas en cartelera por ahora.</label>
+            <span className="fs-3 px-3">No hay funciones programadas en cartelera por ahora.</span>
             }
         </div>
     );

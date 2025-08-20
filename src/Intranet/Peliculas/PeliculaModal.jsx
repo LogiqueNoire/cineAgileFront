@@ -58,22 +58,22 @@ const PeliculaModal = ({ pelicula, onCerrar }) => {
         <div>
             <div className="modal-terminos-overlay">
                 <div className="modal-terminos w-75 d-flex flex-column align-items-center p-5" style={{ "max-height": "80vh", "overflow-y": "auto" }}>
-                    <div className="d-flex align-items-center justify-content-between w-100 mb-3">
+                    <div className="d-flex align-items-center justify-content-between w-100 mb-3 gap-2">
                         <button className="btn btn-danger" onClick={onCerrar}>Cerrar</button>
-                        <h2>Detalles Pelicula</h2>
+                        <h2 className="text-wrap text-end">Detalles Pelicula</h2>
                     </div>
                     <div className="d-flex flex-column gap-3 w-100">
-                        <div className="row d-flex">
-                            <FTextInput className="col" atributo={"nombre"} valorPorDefecto={pelicula.nombre} label={"Nombre (máx. 255 caracteres)"} onSave={onInputSave} required={true} />
-                            <FNumberInput className="col" atributo={"duracion"} valorPorDefecto={pelicula.duracion} label={"Duración (máx. 500 min)"} onSave={onInputSave} required={true} />
-                            <FDateInput className="col" atributo={"fechaEstreno"} valorPorDefecto={pelicula.fechaInicioEstreno} label={"Fecha Inicio Estreno"} onSave={onInputSave} required={true} />
+                        <div className="row d-flex gap-3">
+                            <FTextInput className="col-xl" atributo={"nombre"} valorPorDefecto={pelicula.nombre} label={"Nombre (máx. 255 caracteres)"} onSave={onInputSave} required={true} />
+                            <FNumberInput className="col-lg" atributo={"duracion"} valorPorDefecto={pelicula.duracion} label={"Duración (máx. 500 min)"} onSave={onInputSave} required={true} />
+                            <FDateInput className="col-lg" atributo={"fechaEstreno"} valorPorDefecto={pelicula.fechaInicioEstreno} label={"Fecha Inicio Estreno"} onSave={onInputSave} required={true} />
                         </div>
                         <div className="row">
                             <FTextInput atributo={"actores"} valorPorDefecto={pelicula.actores} label={"Actores principales (opcional, máx. 255 caracteres)"} onSave={onInputSave} />
                         </div>
-                        <div className="row">
-                            <FTextInput className="col" atributo={"director"} valorPorDefecto={pelicula.director} label={"Director (máx. 255 caracteres)"} onSave={onInputSave} required={true} />
-                            <FSelectInput className="col" atributo={ "clasificacion" }
+                        <div className="row gap-3">
+                            <FTextInput className="col-lg" atributo={"director"} valorPorDefecto={pelicula.director} label={"Director (máx. 255 caracteres)"} onSave={onInputSave} required={true} />
+                            <FSelectInput className="col-lg" atributo={ "clasificacion" }
                                 opciones={ [ "Apto para todos", "+14", "+18" ] } 
                                 valorPorDefecto={ pelicula.clasificacion } label={"Clasificación"} onSave={ onInputSave }
                                 required={true}

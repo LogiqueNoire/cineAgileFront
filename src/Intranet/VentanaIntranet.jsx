@@ -3,7 +3,9 @@ import sede from '../assets/sede.svg'
 import funciones from '../assets/funciones.svg'
 import ajustes from '../assets/ajustes.svg'
 import usuariosInternos from '../assets/modulo_usuario_icono.svg'
+import statistics from '../assets/statistics.svg'
 import { useNavigate } from 'react-router-dom';
+
 const VentanaIntranet = () => {
     const navigate = useNavigate();
 
@@ -24,6 +26,10 @@ const VentanaIntranet = () => {
     
     const moverseHaciaAjustesGenerales = () => {
         navigate(`/intranet/ajustes`)
+    }
+
+    const moverseHaciaGraficos = () => {
+        navigate(`/intranet/analiticas`)
     }
 
     return (
@@ -51,6 +57,11 @@ const VentanaIntranet = () => {
                     <button className="btn btn-primary d-flex gap-3 align-items-center justify-content-center" onClick={moverseHaciaAjustesGenerales}>
                         <img src={ajustes} alt="" style={{ width: '90px' }} />
                         <h2 className="">Ajustes<br/>Generales</h2>
+                    </button>
+
+                    <button className="btn btn-primary d-flex gap-3 align-items-center justify-content-center" onClick={moverseHaciaGraficos}>
+                        <img src={statistics} alt="" style={{ width: '90px' }} />
+                        <h2 className="">Analíticas</h2>
                     </button>
 
                 </div>

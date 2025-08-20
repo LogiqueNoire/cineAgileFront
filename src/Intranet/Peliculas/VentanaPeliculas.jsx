@@ -105,14 +105,14 @@ const VentanaPeliculas = () => {
 
     return (
         <div>
-            <div className='d-flex flex-column gap-4 align-items-center'>
+            <div className='d-flex flex-column gap-4 align-items-center container-fluid'>
                 <AddFilm onSucess={consultarPeliculas}></AddFilm>
 
                 {loading === true
                     ? <div className='d-flex flex-column align-items-center container'><Loading></Loading></div> :
 
                     <div>
-                        <div className='hstack justify-content-center gap-2 m-4'>
+                        <div className='d-flex flex-wrap align-items-center justify-content-center gap-2 m-4'>
                             <h3>Buscar película</h3>
                             <div>
                                 <input
