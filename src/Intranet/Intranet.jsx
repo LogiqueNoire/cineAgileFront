@@ -4,6 +4,7 @@ import LoginForm from './LoginForm.jsx';
 import { useEffect, useMemo, useState } from 'react';
 import Cookies from 'js-cookie';
 import Auth from '../servicios/Auth.js';
+import './Intranet.css'
 
 const Intranet = () => {
     const navigate = useNavigate();
@@ -36,7 +37,7 @@ const Intranet = () => {
             <Header>
                 {
                     username &&
-                    <div className='d-flex align-items-center gap-5'>
+                    <div className='d-flex align-items-center gap-5 sesion-group'>
                         <h5>Usuario: { username }</h5>
                         <button className='btn btn-danger' onClick={onCerrarSesion}>Cerrar sesión</button>
                     </div>

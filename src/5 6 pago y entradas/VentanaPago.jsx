@@ -130,7 +130,7 @@ export const VentanaPago = ({ prev, next }) => {
 
           <div className="d-flex justify-content-center gap-4 align-items-center">
             <button className="btn btn-primary" disabled={aceptaTerminos} onClick={volver} >Volver</button>
-            {/*<button className="btn btn-warning" onClick={registrarTest}>Registrar (Test)</button>*/}
+            <button className="btn btn-warning" onClick={registrarTest}>Registrar (Test)</button>
           </div>
         </>
 

@@ -97,7 +97,7 @@ const VentanaFunciones = () => {
                 .then(data =>
                     setValoresBusqueda(prev => ({
                         ...prev,
-                        peliculasSede: data.sort(ordenamientoAlfa)
+                        peliculasSede: data
                     }))
                 )
                 .catch(err => console.error("Error al obtener peliculas por sede:", err));

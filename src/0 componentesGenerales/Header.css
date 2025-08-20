@@ -43,6 +43,5 @@ h1 {
     width: 100%;
     justify-content: center;
     flex-direction: column;
-    gap: 10px;
   }
 }

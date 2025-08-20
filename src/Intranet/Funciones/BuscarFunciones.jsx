@@ -5,6 +5,13 @@ import axios from 'axios';
 import { url } from "../../configuracion/backend"
 import Cookies from 'js-cookie';
 
+const ordenamientoAlfa = (a, b) => {
+    const x = a.nombre.toLowerCase();
+    const y = b.nombre.toLowerCase();
+
+    return x < y ? -1 : 1;
+}
+
 const BuscarFunciones = ({ handlePeliculaChange, handleSalaChange }) => {
     const [loading, setLoading] = useState(true);
     const {
@@ -35,7 +42,7 @@ const BuscarFunciones = ({ handlePeliculaChange, handleSalaChange }) => {
 
             setValoresBusqueda(prev => ({
                 ...prev,
-                sedesTodas: datos
+                sedesTodas: datos != undefined ? datos.sort(ordenamientoAlfa) : undefined
             }));
         } catch (error) {
             console.error(error);
@@ -52,7 +59,7 @@ const BuscarFunciones = ({ handlePeliculaChange, handleSalaChange }) => {
 
             setValoresBusqueda(prev => ({
                 ...prev,
-                sedesActivas: datos
+                sedesActivas: datos != undefined ? datos.sort(ordenamientoAlfa) : undefined
             }));
         } catch (error) {
             console.error(error);
