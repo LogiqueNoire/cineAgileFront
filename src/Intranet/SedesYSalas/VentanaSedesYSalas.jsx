@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import AddSede from './AddSede';
 import sala from '../../assets/sala2.svg';
-import guardar from '../../assets/guardar.svg'
-import iconoApagar from '../../assets/apagar.svg'
+import guardar from '../../assets/operaciones/guardar.svg'
+import iconoApagar from '../../assets/operaciones/apagar.svg'
 import axios from 'axios';
 import { url } from "../../configuracion/backend"
 import Loading from '../../0 componentesGenerales/Loading';

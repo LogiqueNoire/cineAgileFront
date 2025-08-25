@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { url } from '../../configuracion/backend.js'
 import Cookies from 'js-cookie';
-import sedeDark from '../../assets/sedeDarkIcon.svg';
+import sedeIcon from '../../assets/modulos/sedeIcon.svg';
 import BotonCarga from '../../0 componentesGenerales/BotonCarga.jsx';
 import Toast from '../../Toast.jsx';
 
@@ -86,7 +86,7 @@ export default function AddSede({ onSucess }) {
         <div className="border rounded p-4 mt-4 shadow">
           <div className='d-flex justify-content-center align-items-center gap-2'>
             <h2 className="text-center">Agregar Sede</h2>
-            <img src={sedeDark} alt="" />
+            <img src={sedeIcon} alt="" style={{ filter:'invert(100%)' }}/>
           </div>
           <form onSubmit={(e) => onSubmit(e)} className='d-flex justify-self-center flex-column'>
 

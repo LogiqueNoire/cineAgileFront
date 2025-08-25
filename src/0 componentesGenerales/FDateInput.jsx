@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 
-import guardar from '../assets/guardar.svg';
-import pencilSvg from "../assets/pencil.svg"
+import guardar from '../assets/operaciones/guardar.svg';
+import pencilSvg from "../assets/operaciones/pencil.svg"
 
 import { format } from "date-fns";
 
