@@ -22,16 +22,21 @@ const PeliculaSedes = () => {
     const [error, setError] = useState(null);
 
     useEffect(() => {
+        const generosDePelicula = async () => {
+            try {
+                response = await axios.get(`${url}/genero/pelicula?peliculaId=${consultaIdPelicula}`);
+                setPelicula(prev => ({ ...prev, genero: response.data }));
+            } catch (err) {
+                console.error("Error al obtener la fecha:", err);
+            }
+        };
+
         if (!consultaIdPelicula) return;
+
         Pelicula.mostrarPelicula(consultaIdPelicula)
-            .then(data => setPelicula(data))
+            .then(data => {setPelicula(data); generosDePelicula()})
             .catch(err => setError(err))
             .finally(() => setLoading(false));
-
-        return () => {
-            setError(null);
-            setLoading(true);
-        };
     }, [consultaIdPelicula]);
 
     /*****Logica fecha******/
@@ -52,8 +57,8 @@ const PeliculaSedes = () => {
 
     useEffect(() => {
         setFechaElegida(fechaReal)
-        console.log("respuesta fecha", fechaReal)
-        console.log("format fecha", format(new Date(fechaReal), `yyyy-MM-dd`))
+        //console.log("respuesta fecha", fechaReal)
+        //console.log("format fecha", format(new Date(fechaReal), `yyyy-MM-dd`))
     }, [fechaReal])
 
 
@@ -79,7 +84,7 @@ const PeliculaSedes = () => {
                     <div className="d-flex flex-column gap-2">
 
                         <h1 className="display-4 text-truncate" style={{ color: '#0A2B9C' }}><strong>{pelicula.nombre}</strong></h1>
-                        <h5 style={{ color: '#01217B' }}>{`${pelicula.clasificacion} | ${pelicula.genero.map(g => g.nombre).join(', ')}`}</h5>
+                        <h5 style={{ color: '#01217B' }}>{`${pelicula.clasificacion} | ${pelicula.genero != undefined && pelicula.genero.map(g => g.nombre).join(', ')}`}</h5>
                         <div>
                             <p>{`Sinopsis`}</p>
                             <p>{pelicula.sinopsis}</p>
