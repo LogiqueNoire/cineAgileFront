@@ -96,9 +96,20 @@ const FormularioUsuario = ({ actualizar }) => {
                         <label htmlFor="passwordConf" className="form-label" required={true}>Confirmar contraseña</label>
                         <input value={passwordConf} onChange={(e) => { setPasswordConf(e.target.value) }} type="password" className="form-control" id="passwordConf" />
                     </div>
-                    <h5 className="col-12 col-md-8">Políticas de seguridad</h5>
-                    <span className="col-12 col-md-8">Min. 3 caracteres alfanúmeros en el usuario</span>
-                    <span className="col-12 col-md-8">Mín. 8 caracteres alfanuméricos, un número, una mayúscula y una minúscula en la contraseña</span>
+                    <div>
+                        <div>El usuario debe:</div>
+                        <ul>
+                            <li>Tener mínimo 3 caracteres.</li>
+                            <li>Contener solo caracteres alfanuméricos.</li>
+                        </ul>
+                        <div>La contraseña debe:</div>
+                        <ul>
+                            <li>Tener mínimo 8 caracteres.</li>
+                            <li>Contener solo caracteres alfanuméricos.</li>
+                            <li>Combinar minúsculas y mayúsculas.</li>
+                            <li>Contener al menos un número.</li>
+                        </ul>
+                    </div>
                 </div>
 
 
