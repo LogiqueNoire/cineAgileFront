@@ -4,9 +4,9 @@ import { url } from '../../configuracion/backend.js'
 import Loading from '../../0 componentesGenerales/Loading';
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
-import pencilSvg from "../../assets/pencil.svg"
+import pencilSvg from "../../assets/operaciones/pencil.svg"
 import BotonCarga from "../../0 componentesGenerales/BotonCarga.jsx";
-import iconoApagar from '../../assets/apagar.svg'
+import iconoApagar from '../../assets/operaciones/apagar.svg'
 import SalaButaca from "../../servicios/SalaButaca.js";
 import Toast from "../../Toast.jsx";
 
@@ -115,7 +115,7 @@ export const ModalSalas = ({ onClose, sede }) => {
 
           <button className='btn btn-primary d-flex gap-3' onClick={(e) => agregarSala(e)}>
             <h3 className="mb-0">Guardar nueva sala</h3>
-            <img src={guardarBlanco} alt="" style={{ height: '22px' }} />
+            <img src={guardar} alt="" style={{ height: '22px' }} />
           </button>
 
           */ }

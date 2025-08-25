@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { url } from '../configuracion/backend'
 import jsPDF from 'jspdf';
-import imagenMarco from '../assets/marcoPNG.png'
+import imagenMarco from '../assets/marcoEntrada.png'
 import QRCode from 'qrcode'
 const urlFront = import.meta.env.VITE_FRONT_URL
 

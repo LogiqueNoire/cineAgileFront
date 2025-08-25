@@ -3,9 +3,9 @@ import Loading from "../../0 componentesGenerales/Loading";
 import axios from "axios";
 import { url } from "../../configuracion/backend";
 import Cookies from "js-cookie";
-import iconoGuardar from "../../assets/guardar.svg"
+import iconoGuardar from "../../assets/operaciones/guardar.svg"
 import Toast from "../../Toast";
-import genresIcon from '../../assets/genresDarkIcon.svg'
+import genresIcon from '../../assets/modulos/genresIcon.svg'
 
 const Generos = () => {
     const [loading, setLoading] = useState(true)
@@ -116,7 +116,7 @@ const Generos = () => {
         <div className="d-flex flex-column align-items-center container-fluid col-10 mt-4">
             <div className="d-flex align-items-center gap-4">
                 <h2>Géneros registrados</h2>
-                <img src={genresIcon} alt="" style={{ width: '90px' }} />
+                <img src={genresIcon} alt="" style={{ width: '90px', filter: "invert(90%)" }} />
             </div>
             {loading === true
                 ? <div className='d-flex flex-column align-items-center container'><Loading></Loading></div> :

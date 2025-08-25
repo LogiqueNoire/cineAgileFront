@@ -1,6 +1,6 @@
 import './ScreeningButton.css';
 import { useNavigate } from 'react-router-dom';
-import iconoButaca from '../assets/butacaFill.svg'
+import iconoButaca from '../assets/operaciones/butacaFill.svg'
 import Funcion from '../servicios/Funcion';
 import { useEffect, useState } from 'react';
 

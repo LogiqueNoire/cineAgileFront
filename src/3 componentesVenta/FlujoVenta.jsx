@@ -11,7 +11,7 @@ import Contador from "./Contador";
 import Entrada from "../servicios/Entrada";
 import { format, isBefore } from "date-fns";
 
-import cancelarSvg from "../assets/X.svg";
+import cancelarSvg from "../assets/operaciones/X.svg";
 
 const ventanas = [ButacaSelect, VentanaPrecios, VentanaPago];
 

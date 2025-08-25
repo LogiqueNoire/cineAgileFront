@@ -1,7 +1,7 @@
 import { useState } from "react";
 
-import guardar from '../assets/guardar.svg';
-import pencilSvg from "../assets/pencil.svg"
+import guardar from '../assets/operaciones/guardar.svg';
+import pencilSvg from "../assets/operaciones/pencil.svg"
 
 const FSelectInput = ({ className, valorPorDefecto, label, onSave, opciones, atributo, required }) => {
     const [ modo, setModo ] = useState("read"); // read, edit, submitting

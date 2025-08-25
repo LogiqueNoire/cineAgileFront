@@ -4,7 +4,7 @@ import { Link, UNSAFE_useScrollRestoration } from 'react-router-dom';
 import { url } from '../../configuracion/backend.js'
 import { format } from 'date-fns'
 
-import peliculaIcono from '../../assets/peliculaDark.svg'
+import peliculaIcono from '../../assets/modulos/pelicula.svg'
 import Loading from '../../0 componentesGenerales/Loading.jsx';
 import Cookies from 'js-cookie';
 import Toast from '../../Toast.jsx';
@@ -192,7 +192,7 @@ export default function AddFilm({ onSucess }) {
         <div className="border rounded p-4 mt-4 shadow">
           <div className="d-flex align-items-center p-2 gap-2 justify-content-center">
             <h2 className="text-center">Agregar película</h2>
-            <img src={peliculaIcono} alt="" style={{ height: '80px' }} />
+            <img src={peliculaIcono} alt="" style={{ height: '80px', filter: "invert(100%)" }} />
           </div>
           <form onSubmit={(e) => onSubmit(e)} >
             <div className='d-flex flex-wrap gap-3 justify-content-center'>

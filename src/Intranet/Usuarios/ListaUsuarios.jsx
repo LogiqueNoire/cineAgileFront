@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Usuario from "../../servicios/Usuario";
 import Loading from "../../0 componentesGenerales/Loading";
+import usuarioIcon from "../../assets/modulos/modulo_usuario_icono.svg"
 
 const listaUsuarios = [
     {
@@ -46,7 +47,10 @@ const ListaUsuarios = ({ actualizado }) => {
 
     return (
         <div className="d-flex flex-column bg-white p-5 border border-3 shadow rounded-4">
-            <h2 className="mb-3">Usuarios</h2>
+            <div className="d-flex flex-row align-items-center mb-3 gap-2 justify-content-center">
+                <h2 className="" style={{ color: '#01217B' }}>Usuarios</h2>
+                <img src={usuarioIcon} alt="usuarios" className="" style={{ filter: "invert(90%) sepia(70%) saturate(25000%) hue-rotate(225deg) brightness(52.5%) contrast(100%)", height: '60px' }} />
+            </div>
             <div className="overflow-x-auto rounded-3">
                 <div className="" style={{ width: 'max(max-content, 100%)', whiteSpace: "nowrap" }}>
                     {loading ? <Loading /> :
