@@ -55,7 +55,7 @@ const ListaUsuarios = ({ actualizado }) => {
                                 <tr>
                                     <td>Usuario</td>
                                     <td>Sede</td>
-                                    <td>Permisos</td>
+                                    <td>Módulos</td>
                                     {/*<td>Acciones</td>*/}
                                 </tr>
                             </thead>
@@ -64,10 +64,10 @@ const ListaUsuarios = ({ actualizado }) => {
                                 {usuarios.map(el => (
                                     <tr className="">
                                         <td className="w-50">{el.username}</td>
-                                        <td className="w-50">{el.nombreSede ? el.nombreSede : "Todos"}</td>
+                                        <td className="w-50 text-wrap">{el.nombreSede ? el.nombreSede : "Todos"}</td>
                                         <td className="d-flex flex-row" style={{ width: 'max-content' }}>
                                             <div className="d-flex flex-column" style={{ width: 'max-content' }}>
-                                                <span>Nivel 1</span>
+                                                <span>Operaciones</span>
                                                 <div className="align-items-center">
                                                     <label className="switch m-2">
                                                         <input type="checkbox" checked={{}} onChange={{}} />
@@ -98,7 +98,7 @@ const ListaUsuarios = ({ actualizado }) => {
                                                 </div>
                                             </div>
                                             <div className="d-flex flex-column">
-                                                <span>Nivel 2</span>
+                                                <span>Insights</span>
                                                 <div className="align-items-center">
                                                     <label className="switch m-2">
                                                         <input type="checkbox" checked={{}} onChange={{}} />
