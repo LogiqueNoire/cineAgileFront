@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { url } from '../../configuracion/backend.js'
 import Cookies from 'js-cookie';
-import sedeDark from '../../assets/sedeDark.svg';
+import sedeDark from '../../assets/sedeDarkIcon.svg';
 import BotonCarga from '../../0 componentesGenerales/BotonCarga.jsx';
 import Toast from '../../Toast.jsx';
 
