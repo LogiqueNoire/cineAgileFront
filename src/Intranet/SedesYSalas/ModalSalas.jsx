@@ -48,15 +48,15 @@ export const ModalSalas = ({ onClose, sede }) => {
 
   const crearOnCambiarEstadoSala = () => {
     let submitting = false;
-    
+
     return (sala) => {
       if (submitting) return;
       submitting = true;
 
       let confirmado = sala.activo === true ?
-      window.confirm('¿Estás seguro de que deseas desactivar esta sala? Las funciones asociadas se ocultarán y no se podrán crear nuevas funciones en esa sede')
-      : window.confirm('¿Estás seguro de que deseas activar esta sala?');
-      
+        window.confirm('¿Estás seguro de que deseas desactivar esta sala? Las funciones asociadas se ocultarán y no se podrán crear nuevas funciones en esa sede')
+        : window.confirm('¿Estás seguro de que deseas activar esta sala?');
+
       if (!confirmado) {
         submitting = false;
         return;
@@ -70,14 +70,14 @@ export const ModalSalas = ({ onClose, sede }) => {
             visible: true,
             titulo: 'Sala desactivada',
             mensaje: 'Las funciones asociadas también se ocultarán'
-        });
+          });
         } else {
           setToast({
             tipo: 'toast-info',
             visible: true,
             titulo: 'Sala activada',
             mensaje: 'Las funciones asociadas también se mostrarán'
-        });
+          });
         }
         consultar();
       }).catch(err => {
@@ -86,8 +86,8 @@ export const ModalSalas = ({ onClose, sede }) => {
           visible: true,
           titulo: 'Error al guardar la sala.',
           mensaje: err.data
-      });
-  
+        });
+
       }).finally(_ => {
         submitting = false;
         setTimeout(() => setToast({ visible: false }), 3000);
@@ -99,10 +99,10 @@ export const ModalSalas = ({ onClose, sede }) => {
 
   return (
     <div className="modal-terminos-overlay">
-      <div className="modal-terminos w-50 d-flex flex-column align-items-center" style={{ "max-height": "80vh", "overflow-y": "auto" }}>
+      <div className="modal-terminos mx-3 d-flex flex-column align-items-center" style={{ "max-height": "80vh", "overflow-y": "auto" }}>
         <h3 className="modal-terminos-title">Sede {sede.nombre}</h3>
 
-        <div className="w-100 d-flex justify-content-between">
+        <div className="w-100 d-flex justify-content-between gap-2">
           <button className="btn btn-danger" onClick={onClose}>
             Cerrar
           </button>
@@ -123,22 +123,23 @@ export const ModalSalas = ({ onClose, sede }) => {
 
         {loading ?
           <Loading></Loading> :
-          <table className='table table-striped border table-hover my-4'>
-            <thead className=''>
-              <tr className=''>
-                <td className=''>Sala</td>
-                <td className=''>Categoría</td>
-                <td className=''>Acciones</td>
-              </tr>
-            </thead>
+          salas.length > 0 ?
+            <table className='table table-striped border table-hover my-4'>
+              <thead className=''>
+                <tr className=''>
+                  <td className=''>Sala</td>
+                  <td className=''>Categoría</td>
+                  <td className=''>Acciones</td>
+                </tr>
+              </thead>
 
-            <tbody className=''>
+              <tbody className=''>
 
-              { error && <div className="text-danger text-center">{error}</div> }
+                {error && <div className="text-danger text-center">{error}</div>}
 
-              {salas.length > 0 ?
 
-                salas.map((el, id) => (
+
+                {salas.map((el, id) => (
 
                   <tr key={el.id}>
                     <td>
@@ -167,10 +168,10 @@ export const ModalSalas = ({ onClose, sede }) => {
                     </td>
                     <td>
                       <div className="d-flex gap-2">
-                        <button className="py-1 btn btn-primary py-1 px-2" onClick={() => { onDetallesClick(el) }}><img src={pencilSvg} width={"24px"} height={"24px"}/></button>
-                        <BotonCarga 
-                          onClick={ () => onCambiarEstadoSala(el) }
-                          className={`btn ${ el.activo ? "btn-success" : "btn-danger" } p-1`} >
+                        <button className="py-1 btn btn-primary py-1 px-2" onClick={() => { onDetallesClick(el) }}><img src={pencilSvg} width={"24px"} height={"24px"} /></button>
+                        <BotonCarga
+                          onClick={() => onCambiarEstadoSala(el)}
+                          className={`btn ${el.activo ? "btn-success" : "btn-danger"} p-1`} >
                           <img src={iconoApagar} style={{ height: '33px' }} />
                         </BotonCarga>
                       </div>
@@ -179,21 +180,21 @@ export const ModalSalas = ({ onClose, sede }) => {
                   </tr>
 
 
-                ))
-                : <></>
-              }
-
-            </tbody>
+                ))}
 
 
-          </table>
+              </tbody>
+
+
+            </table>
+            : <span className="mt-3">No hay salas para mostrar</span>
         }
       </div>
 
       {<Toast tipo={toast.tipo}
-                    titulo={toast.titulo}
-                    mensaje={toast.mensaje}
-                    visible={toast.visible} />}
+        titulo={toast.titulo}
+        mensaje={toast.mensaje}
+        visible={toast.visible} />}
     </div>
   );
 };

@@ -5,6 +5,7 @@ import { url } from "../../configuracion/backend";
 import Cookies from "js-cookie";
 import iconoGuardar from "../../assets/guardar.svg"
 import Toast from "../../Toast";
+import genresIcon from '../../assets/genresDarkIcon.svg'
 
 const Generos = () => {
     const [loading, setLoading] = useState(true)
@@ -112,8 +113,11 @@ const Generos = () => {
 
 
     return (
-        <div className="d-flex flex-column align-items-center container-fluid col-10 bg-white border border-3 p-5 rounded rounded-3 shadow mt-4">
-            <h2>Géneros registrados</h2>
+        <div className="d-flex flex-column align-items-center container-fluid col-10 mt-4">
+            <div className="d-flex align-items-center gap-4">
+                <h2>Géneros registrados</h2>
+                <img src={genresIcon} alt="" style={{ width: '90px' }} />
+            </div>
             {loading === true
                 ? <div className='d-flex flex-column align-items-center container'><Loading></Loading></div> :
                 <table className='table mytable table-striped border table-hover mt-4'>

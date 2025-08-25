@@ -3,16 +3,23 @@ import BotonCarga from "../../0 componentesGenerales/BotonCarga";
 import Sede from "../../servicios/Sede";
 import Usuario from "../../servicios/Usuario";
 
+const ordenamientoAlfa = (a, b) => {
+    const x = a.nombre.toLowerCase();
+    const y = b.nombre.toLowerCase();
+
+    return x < y ? -1 : 1;
+}
+
 const FormularioUsuario = ({ actualizar }) => {
-    const [ sedes, setSedes ] = useState([]);
+    const [sedes, setSedes] = useState([]);
 
-    const [ error, setError ] = useState(null);
-    const [ submitting, setSubmitting ] = useState(false);
+    const [error, setError] = useState(null);
+    const [submitting, setSubmitting] = useState(false);
 
-    const [ username, setUsername ] = useState("");
-    const [ password, setPassword  ] = useState("");
-    const [ passwordConf, setPasswordConf  ] = useState("");
-    const [ sedeSeleccionada, setSedeSeleccionada  ] = useState(null);
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
+    const [passwordConf, setPasswordConf] = useState("");
+    const [sedeSeleccionada, setSedeSeleccionada] = useState(null);
 
     useEffect(() => {
         Sede.mostrarSoloSedes().then(res => {
@@ -56,42 +63,46 @@ const FormularioUsuario = ({ actualizar }) => {
             {
                 error &&
                 <div className="bg-danger bg-opacity-10 border border-1 border-danger rounded p-3 mb-3">
-                    <div className="text-center text-danger">{ error }</div>
+                    <div className="text-center text-danger">{error}</div>
                 </div>
             }
 
             <form onSubmit={onSubmit} action="post" className="d-flex flex-column ">
                 <h2 className="mb-3">Nuevo Usuario</h2>
-                <div className="row mb-3">
-                    <div className="col-4">
+                <div className="row mb-3 gap-3">
+                    <div className="col-12 col-sm-5 col-md-4">
                         <label htmlFor="username" className="form-label">Nombre de usuario</label>
                         <input value={username} onChange={(e) => { setUsername(e.target.value) }} type="text" className="form-control" id="username" required={true} />
                     </div>
-                    
-                    <div className="col-4">
+
+                    <div className="col-12 col-sm-5 col-md-4">
                         <label htmlFor="sedeAsignada" className="form-label">Sede</label>
                         <select onChange={(e) => { setSedeSeleccionada(e.target.value) }} defaultValue={""} className="form-select" name="sedeAsignada" id="sedeAsignada" required={true}>
                             <option value={""} disabled={true}>Seleccionar sede</option>
-                            { sedes.map(sede => (
-                                <option key={sede.id} value={sede.id}>{ sede.nombre }</option>
+                            {sedes.sort(ordenamientoAlfa).map(sede => (
+                                <option key={sede.id} value={sede.id}>{sede.nombre}</option>
                             ))}
                         </select>
                     </div>
                 </div>
-                
-                <div className="row mb-3">
-                    <div className="col-4">
+
+                <div className="row mb-3 gap-3">
+                    <div className="col-12 col-sm-5 col-md-4">
                         <label htmlFor="password" className="form-label" required={true}>Contraseña</label>
                         <input value={password} onChange={(e) => { setPassword(e.target.value) }} type="password" className="form-control" id="password" />
                     </div>
-                    
-                    <div className="col-4">
+
+                    <div className="col-12 col-sm-5 col-md-4">
                         <label htmlFor="passwordConf" className="form-label" required={true}>Confirmar contraseña</label>
                         <input value={passwordConf} onChange={(e) => { setPasswordConf(e.target.value) }} type="password" className="form-control" id="passwordConf" />
                     </div>
+                    <h5 className="col-12 col-md-8">Políticas de seguridad</h5>
+                    <span className="col-12 col-md-8">Min. 3 caracteres alfanúmeros en el usuario</span>
+                    <span className="col-12 col-md-8">Mín. 8 caracteres alfanuméricos, un número, una mayúscula y una minúscula en la contraseña</span>
                 </div>
 
-                <BotonCarga submitting={submitting} type="submit" className="btn btn-primary col-2 align-self-center">
+
+                <BotonCarga submitting={submitting} type="submit" className="btn btn-primary col-12 col-md-2 align-self-center">
                     Grabar
                 </BotonCarga>
             </form>

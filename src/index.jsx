@@ -14,7 +14,7 @@ import FlujoVenta from './3 componentesVenta/FlujoVenta.jsx';
 import InfoEntradas from './5 6 pago y entradas/InfoEntradas.jsx';
 
 // Intranet
-import VentanaIntranet from './Intranet/VentanaIntranet.jsx';
+import IntranetPanel from './Intranet/IntranetPanel.jsx';
 import VentanaPeliculas from './Intranet/Peliculas/VentanaPeliculas.jsx';
 import VentanaSedesYSalas from './Intranet/SedesYSalas/VentanaSedesYSalas.jsx';
 import VentanaFunciones from './Intranet/Funciones/VentanaFunciones.jsx';
@@ -26,6 +26,8 @@ import Sala from './Intranet/SedesYSalas/Sala.jsx';
 import { FuncionesContextProvider } from './Intranet/Funciones/FuncionesContext.jsx';
 import Error from "./Error.jsx"
 import Analiticas from './Intranet/Analiticas/Analiticas.jsx';
+import Generos from './Intranet/Generos/Generos.jsx';
+import Auditoria from './Intranet/Auditoria/Auditoria.jsx';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
     <BrowserRouter>
@@ -44,15 +46,17 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 
 
             <Route path='/intranet' element={<Intranet />}>
-                <Route index element={<VentanaIntranet />}></Route>
+                <Route index element={<IntranetPanel />}></Route>
                 <Route path='login' element={<LoginForm />}></Route>
                 <Route path="peliculas" element={<VentanaPeliculas />}></Route>
                 <Route path="sedesysalas" element={<VentanaSedesYSalas />}></Route>
                 <Route path="sala" element={<Sala />}></Route>
                 <Route path="funciones" element={<FuncionesContextProvider><VentanaFunciones /></FuncionesContextProvider>}></Route>
-                { /* <Route path="usuarios" element={ <VentanaUsuario /> }></Route> */}
+                <Route path='generos' element={<Generos />}></Route>
+                <Route path="usuarios" element={ <VentanaUsuario /> }></Route>
                 <Route path='ajustes' element={<VentanaAjustes />}></Route>
                 <Route path='analiticas' element={<Analiticas />}></Route>
+                <Route path='auditoria' element={<Auditoria />}></Route>
                 <Route path="salas" /*element={<VentanaSedesYSalas></VentanaSedesYSalas>}*/></Route>
             </Route>
 
