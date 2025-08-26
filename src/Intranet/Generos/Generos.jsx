@@ -135,7 +135,7 @@ const Generos = () => {
                                     className="sinopsis form-control"
                                     placeholder="Nuevo nombre"
                                     name="nuevonombre"
-                                    value={generoNombre}
+                                    value={generoNombre || ""}
                                     onChange={(e) => setGeneroNombre(e.target.value)}
                                     required
                                 />
