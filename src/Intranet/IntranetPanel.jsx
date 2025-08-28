@@ -7,6 +7,7 @@ import passwordIcon from '../assets/modulos/password.svg'
 import usuariosInternos from '../assets/modulos/modulo_usuario_icono.svg'
 import statisticsIcon from '../assets/modulos/statisticsIcon.svg'
 import auditarIcono from '../assets/modulos/audit.svg'
+import desarrolladorIcono from '../assets/modulos/developer.svg'
 import { useNavigate } from 'react-router-dom';
 
 const IntranetPanel = () => {
@@ -27,6 +28,8 @@ const IntranetPanel = () => {
     const moverseHaciaGeneros = () => { navigate(`/intranet/generos`) }
 
     const moverseHaciaAuditoria = () => { navigate(`/intranet/auditoria`) }
+
+    const moverseHaciaOpcionesDeDesarrollador = () => { navigate(`/intranet/desarrollador`) }
 
     return (
         <div className="m-3">
@@ -74,7 +77,12 @@ const IntranetPanel = () => {
                         <img src={passwordIcon} alt="" style={{ height: '90px' }} />
                         <h2 className="">Ajustes<br />de cuenta</h2>
                     </button>
-
+                    {/* 
+                    <button className="btn btn-primary d-flex gap-3 align-items-center justify-content-center" onClick={moverseHaciaOpcionesDeDesarrollador}>
+                        <img src={desarrolladorIcono} alt="" style={{ height: '90px' }} />
+                        <h2 className="">Opciones de<br />desarrollador</h2>
+                    </button>
+                    */}
                 </div>
             </div>
         </div>

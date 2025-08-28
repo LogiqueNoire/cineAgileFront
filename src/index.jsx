@@ -28,6 +28,7 @@ import Error from "./Error.jsx"
 import Analiticas from './Intranet/Analiticas/Analiticas.jsx';
 import Generos from './Intranet/Generos/Generos.jsx';
 import Auditoria from './Intranet/Auditoria/Auditoria.jsx';
+import OpcionesDesarrollador from './Intranet/Desarrollador/OpcionesDesarrollador.jsx'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
     <BrowserRouter>
@@ -58,6 +59,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
                 <Route path='analiticas' element={<Analiticas />}></Route>
                 <Route path='auditoria' element={<Auditoria />}></Route>
                 <Route path="salas" /*element={<VentanaSedesYSalas></VentanaSedesYSalas>}*/></Route>
+                <Route path='desarrollador' element={<OpcionesDesarrollador />}></Route>
             </Route>
 
             <Route path='/butacas' element={<ButacaSelect idSala={5} />} />
