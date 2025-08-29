@@ -53,7 +53,7 @@ const ListaUsuarios = ({ actualizado }) => {
             </div>
             <div className="overflow-x-auto rounded-3">
                 <div className="" style={{ width: 'max(max-content, 100%)', whiteSpace: "nowrap" }}>
-                    {loading ? <Loading /> :
+                    {loading ? <div className="d-flex justify-content-center"><Loading /></div> :
                         <table className="table table-hover m-0">
                             <thead className="table-dark fw-bold">
                                 <tr>

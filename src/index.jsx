@@ -59,7 +59,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
                 <Route path='analiticas' element={<Analiticas />}></Route>
                 <Route path='auditoria' element={<Auditoria />}></Route>
                 <Route path="salas" /*element={<VentanaSedesYSalas></VentanaSedesYSalas>}*/></Route>
-                <Route path='desarrollador' element={<OpcionesDesarrollador />}></Route>
+                <Route path='dev' element={<OpcionesDesarrollador />}></Route>
             </Route>
 
             <Route path='/butacas' element={<ButacaSelect idSala={5} />} />
