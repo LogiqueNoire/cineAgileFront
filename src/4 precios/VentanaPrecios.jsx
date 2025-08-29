@@ -1,9 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
-import FilaPrecioComJose1 from "./FilaPrecioComJose1.jsx";
 import { useLocation } from "react-router-dom";
 import Funcion from "../servicios/Funcion.js";
 import Loading from "../0 componentesGenerales/Loading.jsx";
 import { VentaContext } from "../3 componentesVenta/VentaContextProvider.jsx";
+import FilaPrecio from "./FilaPrecio.jsx";
 
 export const VentanaPrecios = ({ prev, next, onCancelar }) => {
     const contexto = useContext(VentaContext)
@@ -60,12 +60,12 @@ export const VentanaPrecios = ({ prev, next, onCancelar }) => {
                 <div className="d-flex mb-4 justify-content-center">
                     <div className="ContieneEntradas gap-3 d-flex flex-column justify-content-center align-items-center">
                         <h3> PRECIOS DE LAS ENTRADAS </h3>
-                        <FilaPrecioComJose1 nombre="General" precio={precioGeneral} />
-                        <FilaPrecioComJose1 nombre="Mayores de 60" precio={precioMayores} />
+                        <FilaPrecio nombre="General" precio={precioGeneral} />
+                        <FilaPrecio nombre="Mayores de 60" precio={precioMayores} />
                         {pelicula.clasificacion == "Apto para todos" &&
-                            <FilaPrecioComJose1 nombre="Niños" texto="Para niños de 2 a 11 años. Menores de 2 años no pagan." precio={precioNiños} />
+                            <FilaPrecio nombre="Niños" texto="Para niños de 2 a 11 años. Menores de 2 años no pagan." precio={precioNiños} />
                         }
-                        <FilaPrecioComJose1 nombre="Conadis" texto="Es obligatorio presentar DNI y carnet Conadis" precio={precioConadis} />
+                        <FilaPrecio nombre="Conadis" texto="Es obligatorio presentar DNI y carnet Conadis" precio={precioConadis} />
                     </div>
                 </div>
 

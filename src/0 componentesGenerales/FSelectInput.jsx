@@ -46,7 +46,7 @@ const FSelectInput = ({ className, valorPorDefecto, label, onSave, opciones, atr
 
         <div className={`${className} input-group has-validation`}>
             <div className={`form-floating ${ status.error && 'is-invalid' }`}>
-                <select className={`form-control ${ status.error && "is-invalid" }`} id={ label } placeholder={ label } disabled={ modo != "edit" } value={ input } onChange={ onChange }>
+                <select className={`form-control ${ status.error && "is-invalid" }`} id={ label } placeholder={ label } disabled={ modo != "edit" } value={ input == " " ? "" : input } onChange={ onChange }>
                     <option value="" selected disabled={true}>Selecciona un género</option>
                     { opciones.map(el => (
                         <option value={ el }>{el}</option>

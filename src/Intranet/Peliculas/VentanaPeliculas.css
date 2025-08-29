@@ -3,73 +3,6 @@
     border-collapse: collapse;
 }
 
-.th,
-.td {
-    border: 1px solid #ccc;
-    text-align: left;
-}
-
-@media (max-width: 1023px) {
-
-
-    .mytable,
-    .thead,
-    .tbody,
-    .th,
-    .td,
-    .tr {
-        display: block;
-
-    }
-
-    .thead {
-        display: none;
-    }
-
-    .tr {
-        border: 1px solid #ddd;
-    }
-
-    .td {
-        position: relative;
-        padding-left: 50%;
-        text-align: right;
-        border: none;
-        border-bottom: 1px solid #eee;
-        display: flex;
-        justify-content: flex-end;
-    }
-
-    .ms-end{
-        text-align: right;
-    }
-
-    
-
-    .mytable>:not(caption)>*>* {
-        box-shadow: none;
-    }
-
-    .td::before {
-        text-align: left;
-        content: attr(data-label);
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 45%;
-        padding-top: 0.85rem;
-        padding-left: 0.75rem;
-        font-weight: bold;
-        white-space: nowrap;
-    }
-
-    .sinopsis {
-        display: flex;
-        justify-content:right;
-        justify-self: flex-end;
-        width: 80%;
-    }
-}
 .addFilm{
     justify-self: center;
     width: 70%;
@@ -79,4 +12,3 @@
         width: 100%;
     }
 }
-
