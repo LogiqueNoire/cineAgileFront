@@ -1,10 +1,8 @@
 import React from "react";
 import { useState, useContext } from "react";
-import "./Com.css"
 import { VentaContext } from "../3 componentesVenta/VentaContextProvider.jsx"
-import { ca } from "date-fns/locale";
 
-const FilaPrecioComJose1 = ({ nombre, texto, precio, seleccionadas }) => {
+const FilaPrecio = ({ nombre, texto, precio, seleccionadas }) => {
     //const [cantidad, setCantidad] = useState(0);
     const contexto = useContext(VentaContext);
     const entradasSeleccionadas = contexto.entradasContext.entradasSeleccionadas;
@@ -89,4 +87,4 @@ const FilaPrecioComJose1 = ({ nombre, texto, precio, seleccionadas }) => {
         </div>
     );
 }
-export default FilaPrecioComJose1;
+export default FilaPrecio;

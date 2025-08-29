@@ -127,7 +127,7 @@ const VentanaPeliculas = () => {
                         </div>
 
                         <table className='table mytable table-striped border table-hover mt-4'>
-                            <thead className='thead'>
+                            <thead className='thead table-white'>
                                 <tr>
                                     <th className='td'>Nombre</th>
                                     <th className='td'>Duración (min)</th>
