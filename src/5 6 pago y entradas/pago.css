@@ -114,8 +114,10 @@
   inset: 0;
   background: rgba(0, 0, 0, 0.5);
   display: flex;
-  justify-content: center; /* centra horizontalmente */
-  align-items: center; /* centra verticalmente */
+  justify-content: center;
+  /* centra horizontalmente */
+  align-items: center;
+  /* centra verticalmente */
   z-index: 999;
 }
 
@@ -124,8 +126,10 @@
   padding: 20px 30px;
   border-radius: 10px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-  text-align: left; /* texto alineado a la izquierda */
-  display: block; /* importante para evitar conflicto flex */
+  text-align: left;
+  /* texto alineado a la izquierda */
+  display: block;
+  /* importante para evitar conflicto flex */
 }
 
 .modal-terminos h3 {
@@ -223,4 +227,61 @@
 .input-row input:focus {
   outline: none;
   border-color: #2563eb;
+}
+
+.direction {
+  display: flex;
+  flex-direction: row;
+}
+
+.direction-inverse {
+  align-items: center;
+  flex-direction: column;
+}
+
+.qr {
+  width: 100%;
+  height: auto;
+}
+
+.qr>* {
+  width: 180px;
+}
+
+@media (max-width: 650px) {
+  .detalleEntrada {
+    font-size: 16px;
+  }
+
+  .direction {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .direction-inverse {
+    display: flex;
+    flex-direction: row;
+    width: 100% !important;
+  }
+
+  .direction-inverse > * {
+    width: 50% !important;
+  }
+
+  .qr {
+    width: 50% !important;
+  }
+
+  .qr>* {
+    width: 135px;
+  }
+}
+
+@media (max-width: 380px) {
+  .detalleEntrada {
+    font-size: 14px;
+  }
+  .qr>* {
+    width: 105px;
+  }
 }

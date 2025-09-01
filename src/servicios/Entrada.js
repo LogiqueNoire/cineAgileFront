@@ -1,7 +1,8 @@
 import axios from 'axios'
 import { url } from '../configuracion/backend'
 import jsPDF from 'jspdf';
-import imagenMarco from '../assets/marcoEntrada.png'
+import imagenMarco from '../assets/marcoEntrada4.png'
+import fondoEntrada from '../assets/fondoEntrada.jpg'
 import QRCode from 'qrcode'
 const urlFront = import.meta.env.VITE_FRONT_URL
 
@@ -14,22 +15,31 @@ class Entrada {
     }
 
     static async generarPdf(entradasCompletas, tokens) {
-        const doc = new jsPDF();
+        const doc = new jsPDF({
+            orientation: "l",
+            unit: "mm",
+            format: "a5", 
+            compress: true
+        });
         doc.setFont("Helvetica", "Bold");
 
         const entradas = entradasCompletas.entradas
-            
+
 
         const escribirInfoComun = (data) => {
+            doc.setFontSize('32')
+            doc.setTextColor('#01217B')
+            doc.text(`Cine Agile`, 21.5, 48);
+            doc.setTextColor('#01217B')
             doc.setFontSize('20')
-            doc.text(`Cine Agile`, 60, 70);
-            doc.text(`Datos elegidos`, 80, 120);
-            doc.setFontSize('16')
-            doc.text(`Película: ${data.tituloPelicula}`, 40, 130);
-            doc.text(`Clasificación: ${data.clasificacion}`, 40, 140);
-            doc.text(`Fecha y hora de la función: ${(new Date(data.fechaHoraInicio)).toLocaleString()}`, 40, 150);
-            doc.text(`Sede: ${data.nombreSede}`, 40, 160);
-            doc.text(`Sala: ${data.sala}`, 40, 170);
+            doc.text(`Datos de la función`, 105, 30);
+            //doc.setTextColor('#000000ff')
+            doc.setFontSize('15.5')
+            doc.text(`Película: ${data.tituloPelicula}`, 85, 39);
+            doc.text(`Clasificación: ${data.clasificacion}`, 85, 48);
+            doc.text(`Fecha y hora: ${(new Date(data.fechaHoraInicio)).toLocaleString()}`, 85, 57);
+            doc.text(`Sede: ${data.nombreSede}`, 85, 66);
+            doc.text(`Sala: ${data.sala}`, 85, 75);
         }
         const escribirEntrada = (entrada, index) => {
             let tipoPersona = "";
@@ -40,17 +50,21 @@ class Entrada {
                 case "conadis": tipoPersona = "Conadis"; break;
             }
 
-            doc.setFontSize('20')
-            doc.text(`Entrada`, 64, 80);
-            doc.setFontSize('16')
+            doc.setFontSize('32')
+            doc.setTextColor('#01217B')
+            doc.text(`Entrada`, 28, 62);
+            //doc.setTextColor('#000000ff')
+            doc.setFontSize('15.5')
             doc.text(`Butaca: ${String.fromCharCode('A'.charCodeAt(0) + entrada.butaca.fila)
-                + Number(entrada.butaca.columna+1)}`, 40, 180);
-            doc.text(`Tipo de entrada: ${tipoPersona}`, 40, 190);
+            + Number(entrada.butaca.columna + 1)}`, 85, 84);
+            doc.text(`Tipo de entrada: ${tipoPersona}`, 85, 93);
             doc.setFontSize('20')
-            doc.text(`Datos de pago`, 80, 210);
-            doc.setFontSize('16')
-            doc.text(`Fecha y hora del pago: ${(new Date(entrada.tiempoRegistro)).toLocaleString()}`, 40, 220);
-            doc.text(`Precio final: S/ ${entrada.costoFinal.toFixed(2)}`, 40, 230);
+            doc.setTextColor('#01217B')
+            doc.text(`Datos del pago`, 113, 105);
+            //doc.setTextColor('#000000ff')
+            doc.setFontSize('15.5')
+            doc.text(`Fecha y hora: ${(new Date(entrada.tiempoRegistro)).toLocaleString()}`,85, 114);
+            doc.text(`Precio final: S/ ${entrada.costoFinal.toFixed(2)}`, 85, 123);
         }
 
         const getImageDataURL = (src) =>
@@ -68,7 +82,40 @@ class Entrada {
                 img.src = src;
             });
 
+        function comprimirImagen(imgSrc, maxWidth, maxHeight, calidad = 0.7) {
+            return new Promise((resolve) => {
+                const img = new Image();
+                img.src = imgSrc;
+                img.onload = () => {
+                    const canvas = document.createElement("canvas");
+                    let { width, height } = img;
+
+                    // Redimensionamos si es necesario
+                    if (width > maxWidth) {
+                        height *= maxWidth / width;
+                        width = maxWidth;
+                    }
+                    if (height > maxHeight) {
+                        width *= maxHeight / height;
+                        height = maxHeight;
+                    }
+
+                    canvas.width = width;
+                    canvas.height = height;
+                    const ctx = canvas.getContext("2d");
+                    ctx.drawImage(img, 0, 0, width, height);
+
+                    // Convertimos a JPEG comprimido
+                    resolve(canvas.toDataURL("image/jpeg", calidad));
+                };
+            });
+        }
+
+
         const marcoImg = await getImageDataURL(imagenMarco);
+        const fondo = await getImageDataURL(fondoEntrada);
+
+        const fondoOptimizado = await comprimirImagen(fondo, 2480, 4000, 0.92);
 
         for (let i = 0; i < entradas.length; i++) {
             if (i !== 0) doc.addPage();
@@ -77,11 +124,11 @@ class Entrada {
 
             const qrDataUrl = await QRCode.toDataURL(`${urlFront}/entrada/${encodeURIComponent(tokens[i])}`);
 
+            doc.addImage(fondoOptimizado, "WEBP", 0, 0, 220, 360);
 
-            doc.addImage(qrDataUrl, "PNG", 110, 40, 60, 60);
+            doc.addImage(marcoImg, "SVG", 10, 10, 190, 127.5);
+            doc.addImage(qrDataUrl, "PNG", 23, 67, 52.5, 52.5);
 
-
-            doc.addImage(marcoImg, "PNG", 20, 20, 170, 260);
             escribirInfoComun(entradasCompletas);
             escribirEntrada(entrada, i);
         }

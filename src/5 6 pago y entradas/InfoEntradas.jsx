@@ -8,7 +8,8 @@ import { useRef, useEffect, useState } from "react";
 import jsPDF from "jspdf";
 import React from "react";
 import QRCode from 'qrcode';
-
+import iconoEntrada from "../assets/ticket.svg"
+import iconoDownload from "../assets/download.svg"
 
 const EntradaCard = ({ infoGeneral, entrada, token }) => {
     // Adherir 'Z' a la fecha UTC en formato ISO 8601 hará que new Date() transforme
@@ -42,31 +43,30 @@ const EntradaCard = ({ infoGeneral, entrada, token }) => {
     }, [token]);
 
     return (
-        <div className="border border-secondary p-3">
+        <div className="border border-2 border-secondary p-3">
 
-            <div>
-
-                <div className="d-flex align-items-center">
-                    <h2 className="w-50 text-center">CineAgile<br />Entrada</h2>
-                    <div className="w-50 d-flex justify-content-center">
-                        <img className="w-100 d-flex align-items-center" style={{ height: "auto", width: '256px' }}
+            <div className="align-items-center direction">
+                <div className="align-items-center direction-inverse">
+                    <h2 className="text-center">CineAgile<br />Entrada</h2>
+                    <div className="qr">
+                        <img className=""
                             src={qrUrl} alt="QR Entrada" />
                     </div>
                 </div>
+                <div>
+                    <h2 className="text-center">Datos de la función</h2>
+                    <h5 className="detalleEntrada">Pelicula: {infoGeneral.tituloPelicula}</h5>
+                    <h5 className="detalleEntrada">Clasificación: {infoGeneral.clasificacion}</h5>
+                    <h5 className="detalleEntrada">Fecha y hora: {fechaHoraInicioCorrecto}</h5>
+                    <h5 className="detalleEntrada">Sede: {infoGeneral.nombreSede} </h5>
+                    <h5 className="detalleEntrada">Sala: {infoGeneral.sala}</h5>
+                    <h5 className="detalleEntrada">Butaca: {letra + (columna + 1)}</h5>
+                    <h5 className="detalleEntrada">Tipo de entrada: {tipoPersona}</h5>
 
-                <h2 className="text-center mt-4">Datos elegidos</h2>
-
-                <h5>Pelicula: {infoGeneral.tituloPelicula}</h5>
-                <h5>Clasificación: {infoGeneral.clasificacion}</h5>
-                <h5>Fecha y hora: {fechaHoraInicioCorrecto}</h5>
-                <h5>Sede: {infoGeneral.nombreSede} </h5>
-                <h5>Sala: {infoGeneral.sala}</h5>
-                <h5>Butaca: {letra + (columna + 1)}</h5>
-                <h5>Tipo de entrada: {tipoPersona}</h5>
-
-                <h2 className="text-center mt-4">Datos del pago</h2>
-                <h5>Fecha y hora del pago: {tiempoRegistroCorrecto}</h5>
-                <h5>Precio final: S/ {entrada.costoFinal.toFixed(2)}</h5>
+                    <h2 className="text-center mt-4">Datos del pago</h2>
+                    <h5 className="detalleEntrada">Fecha y hora: {tiempoRegistroCorrecto}</h5>
+                    <h5 className="detalleEntrada">Precio final: S/ {entrada.costoFinal.toFixed(2)}</h5>
+                </div>
             </div>
         </div>
     )
@@ -108,8 +108,15 @@ const InfoEntradas = () => {
 
 
                 <div className="d-flex flex-column align-items-center gap-4 mb-4">
-                    <h1>Entradas</h1>
-                    <button className='btn btn-primary' onClick={() => handleGenerarPDF()}>Descargar PDF</button>
+                    <div className="d-flex gap-3 justify-content-center align-items-center flex-wrap">
+                        <div className="d-flex gap-2 align-items-center">
+                            <h1 className="fs-1" style={{ color: '#01217B' }}>Entradas</h1>
+                            <img src={iconoEntrada} alt="Password" className="" style={{ filter: "invert(90%) sepia(70%) saturate(25000%) hue-rotate(225deg) brightness(52.5%) contrast(100%)", height: '70px' }} />
+                        </div>
+                        <button className='btn btn-primary fw-bold fs-5 p-2 rounded-4' onClick={() => handleGenerarPDF()}>
+                            <img src={iconoDownload} alt="Password" className="" style={{ height: '45px' }} />
+                        </button>
+                    </div>
                 </div>
 
                 <div className="d-flex flex-column align-items-center gap-4">
