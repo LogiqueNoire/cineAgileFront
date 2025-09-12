@@ -1,15 +1,14 @@
 import './Inicio.css'
 
-const Toast = ({tipo, titulo, mensaje, visible}) => {
+const Toast = ({ tipo, titulo, mensaje, visible }) => {
 
     return (
-            visible && (
-                <div className={`${tipo} mx-4`}>
-                    <div>{titulo}</div>
-                    <div>{mensaje}</div>
-                </div>
-            )
-        
+        visible && (
+            <div className={`${tipo} mx-4`}>
+                <div>{titulo}</div>
+                <div>{mensaje}</div>
+            </div>
+        )
     );
 }
 

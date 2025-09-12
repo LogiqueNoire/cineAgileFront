@@ -14,7 +14,7 @@ class Entrada {
         return resultado;
     }
 
-    static async generarPdf(entradasCompletas, tokens) {
+    static async generarPdf(entradasCompletas, tokens, setDownloading) {
         const doc = new jsPDF({
             orientation: "l",
             unit: "mm",
@@ -136,9 +136,16 @@ class Entrada {
 
         doc.save("entrada.pdf");
 
+        console.time("PDF Blob");
         const blob = doc.output("blob");
+        console.timeEnd("PDF Blob");
+        console.time("create Blob");
         const url = URL.createObjectURL(blob);
+        console.timeEnd("create Blob");
+        console.time("open");
         window.open(url, "_blank");
+        console.timeEnd("open");
+        setDownloading(false)
     }
 
 
