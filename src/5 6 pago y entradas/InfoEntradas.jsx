@@ -10,11 +10,12 @@ import React from "react";
 import QRCode from 'qrcode';
 import iconoEntrada from "../assets/ticket.svg"
 import iconoDownload from "../assets/download.svg"
+import "./progressBar.css";
 
 const EntradaCard = ({ infoGeneral, entrada, token }) => {
     // Adherir 'Z' a la fecha UTC en formato ISO 8601 hará que new Date() transforme
     // dicha fecha a la zona horaria correcta.
-    console.log("token en info entrada", token.replace(/\//g, "%2F").replace(/=/g, "%3D"))
+    //console.log("token en info entrada", token.replace(/\//g, "%2F").replace(/=/g, "%3D"))
 
     const tiempoRegistroCorrecto = (new Date(entrada.tiempoRegistro)).toLocaleString()
     // Falta estandarizar todas las fechas de las funciones a UTC
@@ -75,17 +76,61 @@ const EntradaCard = ({ infoGeneral, entrada, token }) => {
 
 const InfoEntradas = () => {
     const { codigo } = useParams()
-
+    const frase = "Generando documento..."
     const location = useLocation();
     const [entradas, setEntradas] = useState(location.state?.entradas || null);
+    const [downloading, setDownloading] = useState(false)
+    const [progress, setProgress] = useState("")
+    const [percent, setPercent] = useState(0)
+    const [isLooping, setIsLooping] = useState(false);
+    const [isLooping2, setIsLooping2] = useState(false);
+    const [isLooping3, setIsLooping3] = useState(false);
+    useEffect(() => {
+        let interval1;
+        let interval2;
+
+        if (downloading) {
+            interval1 = setInterval(() => {
+                setProgress(prev => {
+                    if (prev.length < frase.length) {
+                        return frase.slice(0, prev.length + 1);
+                    } else {
+                        clearInterval(interval1);
+                        return prev;
+                    }
+                });
+            }, 100);
+
+            interval2 = setInterval(() => {
+                setPercent(prev => {
+                    if (prev < 100) {
+                        return prev + 1;
+                    } else {
+                        clearInterval(interval2);
+                        return prev;
+                    }
+                });
+            }, 22);
+        } else {
+            setProgress("");
+            setPercent(0);
+        }
+
+        return () => {
+            if (interval1) clearInterval(interval1);
+            if (interval2) clearInterval(interval2);
+        };
+    }, [downloading, entradas]);
+
 
     useEffect(() => {
         if (!entradas && codigo) {
             const fetchEntrada = async () => {
                 try {
-                    console.log(codigo)
+                    //console.log(codigo)
                     const response = await Entrada.buscarEntrada(decodeURIComponent(codigo));
-                    console.log(response);
+                    //console.log(response);
+
                     setEntradas(response.data);
                 } catch (error) {
                     console.error("Error al buscar entrada:", error);
@@ -97,15 +142,40 @@ const InfoEntradas = () => {
     }, [codigo, entradas]);
 
     const handleGenerarPDF = () => {
+        setDownloading(true)
         setTimeout(() => {
-            Entrada.generarPdf(entradas, entradas.tokens);
+            Entrada.generarPdf(entradas, entradas.tokens, setDownloading);
         }, 2500);
     };
+
+    useEffect(() => {
+        if (progress.length === frase.length) {
+            const timeout = setTimeout(() => {
+                setIsLooping(true);
+            }, 4000);
+            const timeout2 = setTimeout(() => {
+                setIsLooping2(true);
+            }, 350);
+            const timeout3 = setTimeout(() => {
+                setIsLooping3(true);
+            }, 2500);
+
+            return () => {
+                clearTimeout(timeout)
+                clearTimeout(timeout2)
+                clearTimeout(timeout3)
+            };
+        } else {
+            setIsLooping(false);
+            setIsLooping2(false);
+            setIsLooping3(false);
+        }
+    }, [progress]);
+
 
     return (
         <div className="w-100 p-4">
             <div className="container-fluid gap-4">
-
 
                 <div className="d-flex flex-column align-items-center gap-4 mb-4">
                     <div className="d-flex gap-3 justify-content-center align-items-center flex-wrap">
@@ -117,6 +187,16 @@ const InfoEntradas = () => {
                             <img src={iconoDownload} alt="Password" className="" style={{ height: '45px' }} />
                         </button>
                     </div>
+                    {progress != undefined && progress.length > 0 && progress.length <= frase.length &&
+                        <div className="progress-wrapper">
+                            <div className="progress-text">{progress}</div>
+                            <div className={`water-fill`} style={{ width: `${percent}%`, height: '100%' }}>
+                                <div className={`wave wave1 ${isLooping ? 'loop' : ''}`}></div>
+                                <div className={`wave wave2 ${isLooping2 ? 'loop' : ''}`}></div>
+                                <div className={`wave wave3 ${isLooping3 ? 'loop' : ''}`}></div>
+                                <div className="bubbles"></div>
+                            </div>
+                        </div>}
                 </div>
 
                 <div className="d-flex flex-column align-items-center gap-4">

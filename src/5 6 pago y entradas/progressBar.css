@@ -1,0 +1,159 @@
+@import url('https://fonts.googleapis.com/css2?family=Ancizar+Sans:ital,wght@0,100..1000;1,100..1000&display=swap');
+
+.progress-wrapper {
+    width: 80%;
+    max-width: 600px;
+    height: 50px;
+    background: #1e293b;
+    border-radius: 50px;
+    overflow: hidden;
+    box-shadow: 0 0 25px #0ea5e9;
+    position: relative;
+    box-sizing: border-box;
+}
+
+.progress-text {
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    color: #fff;
+    font-size: 1.5rem;
+    font-family: 'Ancizar Sans', sans-serif;
+    font-weight: bold;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    text-shadow: 0px 0px 10px #07d, 0px 0px 15px #07d;
+    box-sizing: border-box;
+
+}
+
+.water-fill {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(to top, #38bff8, #0ea5e9);
+    /*0cf*/
+    border-radius: 50px;
+    z-index: 1;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+.wave {
+    display: block;
+    position: absolute;
+    width: 200%;
+    height: 120px;
+    background-repeat: repeat-x;
+    background-size: cover;
+    pointer-events: none;
+    animation: waveUp 6s linear forwards;
+    box-sizing: border-box;
+    transform: translateX(0%);
+}
+
+.wave.loop {
+    animation: waveMove 6s linear infinite;
+}
+
+.wave1 {
+    position: absolute;
+    top: 50px;
+    width: 200%;
+    background-repeat: repeat-x;
+    background-image: url('../assets/wave.svg');
+    z-index: 2;
+    box-sizing: border-box;
+    opacity: 0.2;
+    background-size: cover;
+    transform: translateX(0%);
+}
+
+.wave2 {
+    top: 55px;
+    background-image: url('../assets/wave.svg');
+    z-index: 3;
+    animation-delay: -3s;
+    box-sizing: border-box;
+    background-size: cover;
+    opacity: 0.4;
+}
+
+.wave3 {
+    top: 60px;
+    background-image: url('../assets/wave.svg');
+    z-index: 4;
+    animation-delay: -1.5s;
+    box-sizing: border-box;
+    background-size: cover;
+    opacity: 0.1;
+}
+
+@keyframes waveUp {
+    from {
+        transform: translateX(-50%) translateY(0%);
+    }
+
+    to {
+        transform: translateX(0%) translateY(-50%);
+    }
+}
+
+@keyframes waveMove {
+    from {
+        transform: translateX(-50%) translateY(-50%);
+    }
+
+    to {
+        transform: translateX(0%) translateY(-50%);
+    }
+}
+
+@media (max-width: 600px) {
+
+    .wave1,
+    .wave2,
+    .wave3 {
+        background-size: contain;
+        top: 65px;
+    }
+}
+
+/*
+.bubbles {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 6;
+    pointer-events: none;
+    box-sizing: border-box;
+}
+
+.bubble {
+    position: absolute;
+    bottom: -20px;
+    width: 10px;
+    height: 10px;
+    background: white;
+    border-radius: 50%;
+    opacity: 0.6;
+    animation: bubbleUp 4s linear infinite;
+}
+
+@keyframes bubbleUp {
+    0% {
+        transform: translateY(0) scale(1);
+        opacity: 0.7;
+    }
+
+    100% {
+        transform: translate(-120px) scale(0.5);
+        opacity: 0;
+    }
+}*/
