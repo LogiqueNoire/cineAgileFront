@@ -68,7 +68,7 @@ const ModuloFuncion = ({ handlePeliculaChange, handleSalaChange }) => {
     let response
     const obtenerFecha = async () => {
         try {
-            response = await axios.get(`${url}/fecha-actual`);
+            response = await axios.get(`${url}/api/v1/fecha-actual`);
             setFechaReal(new Date(response.data));
 
         } catch (err) {
@@ -99,7 +99,7 @@ const ModuloFuncion = ({ handlePeliculaChange, handleSalaChange }) => {
 
     const consultarPeliculas = async () => {
         try {
-            const datos = (await axios.get(`${url}/intranet/soloPeliculas`, {
+            const datos = (await axios.get(`${url}/api/v1/intranet/peliculas`, {
                 headers: { Authorization: `Bearer ${Cookies.get("auth-token")}` }
             })).data;
 
@@ -209,7 +209,7 @@ const ModuloFuncion = ({ handlePeliculaChange, handleSalaChange }) => {
             //console.log("Nueva fecha y hora de inicio:", nfhi);
             let nfhiEnUTC = Fecha.tiempoLocalString_A_UTCString(nfhi);
 
-            const response = await axios.patch(`${url}/intranet/actualizarFuncion`, {
+            const response = await axios.patch(`${url}/api/v1/intranet/funciones`, {
                 idFuncion: funcion.codigoFuncion,
                 fechaHoraInicio: nfhi,
                 fechaHoraFin: null,
@@ -318,7 +318,7 @@ const ModuloFuncion = ({ handlePeliculaChange, handleSalaChange }) => {
         try {
             let nfhiEnUTC = Fecha.tiempoLocalString_A_UTCString(nfhi);
             console.log("Actualizando función con fecha UTC:", nfhi, nfhiEnUTC);
-            const response = await axios.post(`${url}/intranet/crearFuncion`, {
+            const response = await axios.post(`${url}/api/v1/intranet/funciones`, {
                 idFuncion: null,
                 fechaHoraInicio: nfhi,
                 fechaHoraFin: null,

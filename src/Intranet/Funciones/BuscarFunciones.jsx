@@ -36,7 +36,7 @@ const BuscarFunciones = ({ handlePeliculaChange, handleSalaChange }) => {
 
     const consultarSedesTodas = async () => {
         try {
-            const datos = (await axios.get(`${url}/intranet/sedesTodas`, {
+            const datos = (await axios.get(`${url}/api/v1/intranet/sedes`, {
                 headers: { Authorization: `Bearer ${Cookies.get("auth-token")}` }
             })).data;
 
@@ -53,7 +53,7 @@ const BuscarFunciones = ({ handlePeliculaChange, handleSalaChange }) => {
 
     const consultarSedesActivas = async () => {
         try {
-            const datos = (await axios.get(`${url}/intranet/soloSedes`, {
+            const datos = (await axios.get(`${url}/api/v1/intranet/sedes/activas`, {
                 headers: { Authorization: `Bearer ${Cookies.get("auth-token")}` }
             })).data;
 

@@ -46,7 +46,8 @@ const Analiticas = () => {
 
     const obtenerPeliculasMasTaquillerasDelAnio = async () => {
         try {
-            const datos = (await axios.get(`${url}/intranet/obtenerPeliculasMasTaquillerasDeMes?mes=${mesElegido}`, {
+            const datos = (await axios.get(`${url}/api/v1/intranet/peliculas/taquilleras
+                ?mes=${mesElegido}`, {
                 headers: { Authorization: `Bearer ${Cookies.get("auth-token")}` }
             })).data;
             //console.log(datos.reduce((acc, el) => acc + el[0], 0))

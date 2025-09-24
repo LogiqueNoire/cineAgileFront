@@ -9,7 +9,7 @@ const urlFront = import.meta.env.VITE_FRONT_URL
 class Entrada {
 
     static async comprarEntrada(datos) {
-        const resultado = await axios.post(`${url}/entrada`, datos);
+        const resultado = await axios.post(`${url}/api/v1/entradas`, datos);
         console.log("resultado entrada js", resultado)
         return resultado;
     }
@@ -151,16 +151,16 @@ class Entrada {
 
 
     static async buscarEntrada(token) {
-        return await axios.get(`${url}/entrada?token=${encodeURIComponent(token)}`)
+        return await axios.get(`${url}/api/v1/entradas?token=${encodeURIComponent(token)}`)
     }
 
     static async bloquearEntradas(info) {
-        const resultado = await axios.post(`${url}/entrada/lock`, info);
+        const resultado = await axios.post(`${url}/api/v1/entradas/lock`, info);
         return resultado;
     }
 
     static async desbloquearEntradas(info) {
-        const resultado = await axios.post(`${url}/entrada/unlock`, info);
+        const resultado = await axios.post(`${url}/api/v1/entradas/unlock`, info);
         return resultado;
     }
 

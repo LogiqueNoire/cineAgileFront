@@ -127,9 +127,9 @@ const VentanaFunciones = () => {
             const fechaElegidaUTC = Fecha.tiempoLocalString_A_UTCString(`${valoresBusqueda.fechaElegida}T00:00:00`);
 
             try {
-                const funciones = (await axios.get(`${url}/intranet/buscarFuncionesPorSemanaConPelicula`, {
+                const funciones = (await axios.get(`${url}/api/v1/intranet/funciones/porSemana`, {
                     params: {
-                        idPelicula: peliculaId,
+                        pelicula: peliculaId,
                         fecha: (new Date(`${valoresBusqueda.fechaElegida}T00:00:00Z`)).toISOString(),
                         idSede: valoresBusqueda.sedeElegida
                     },
@@ -156,9 +156,9 @@ const VentanaFunciones = () => {
             const fechaElegidaUTC = Fecha.tiempoLocalString_A_UTCString(`${valoresBusqueda.fechaElegida}T00:00:00`);
 
             try {
-                const funciones = (await axios.get(`${url}/intranet/buscarFuncionesPorSemanaConSala`, {
+                const funciones = (await axios.get(`${url}/api/v1/intranet/funciones/porSemana`, {
                     params: {
-                        idSala: salaId,
+                        sala: salaId,
                         fecha: `${valoresBusqueda.fechaElegida}T00:00:00`,
                         idSede: valoresBusqueda.sedeElegida
                     },

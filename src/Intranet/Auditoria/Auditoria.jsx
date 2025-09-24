@@ -27,7 +27,7 @@ const Auditoria = () => {
     const recuperarAuditoria = async () => {
         let response
         try {
-            response = (await axios.get(`${url}/intranet/registroaccion/get`, {
+            response = (await axios.get(`${url}/api/v1/intranet/registrosacciones`, {
                 headers: { Authorization: `Bearer ${Cookies.get("auth-token")}` }
             })).data;
             setData(response);

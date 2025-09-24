@@ -22,7 +22,7 @@ const Generos = () => {
 
     const consultarGeneros = async () => {
         try {
-            const datos = (await axios.get(`${url}/intranet/generos`, {
+            const datos = (await axios.get(`${url}/api/v1/intranet/generos`, {
                 headers: { Authorization: `Bearer ${Cookies.get("auth-token")}` }
             })).data;
 
@@ -38,7 +38,7 @@ const Generos = () => {
         e.preventDefault();
         let response;
         try {
-            response = await axios.post(`${url}/intranet/generos/agregar`, nombre.trim(), {
+            response = await axios.post(`${url}/api/v1/intranet/generos`, nombre.trim(), {
                 headers: {
                     Authorization: `Bearer ${Cookies.get("auth-token")}`,
                     'Content-Type': 'text/plain'
@@ -75,7 +75,7 @@ const Generos = () => {
         e.preventDefault();
         let response;
         try {
-            response = await axios.patch(`${url}/intranet/generos/editar`, { id: el.id, nombre: el.nombre.trim() }, {
+            response = await axios.patch(`${url}/api/v1/intranet/generos`, { id: el.id, nombre: el.nombre.trim() }, {
                 headers: {
                     Authorization: `Bearer ${Cookies.get("auth-token")}`
                 }
