@@ -28,7 +28,7 @@ const VentanaPeliculas = () => {
     useEffect(() => {
         const obtenerFecha = async () => {
             try {
-                response = await axios.get(`${url}/fecha-actual`);
+                response = await axios.get(`${url}/api/v1/fecha-actual`);
                 setFechaReal(new Date(response.data));
 
             } catch (err) {
@@ -50,7 +50,8 @@ const VentanaPeliculas = () => {
         setLoading(true);
 
         try {
-            setLista((await axios.get(`${url}/intranet/peliculas?fechaReal=${format(fechaReal, "yyyy-MM-dd'T'HH:mm:ss")}`, {
+            setLista((await axios.get(`${url}/api/v1/intranet/peliculas?
+                fecha=${format(fechaReal, "yyyy-MM-dd'T'HH:mm:ss")}`, {
                 headers: { Authorization: `Bearer ${Cookies.get("auth-token")}` }
             })).data.sort(ordenamientoFecha).reverse());
         } catch (error) {

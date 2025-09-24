@@ -5,7 +5,7 @@ import Cookies from 'js-cookie';
 class SalaButaca {
 
     static async getButacas(idSala) {
-        const urlReq = `${url}/sala/${idSala}/butacas`
+        const urlReq = `${url}/api/v1/salas/${idSala}/butacas`
         const res = await axios.get(urlReq)
         return res.data
     }
@@ -27,7 +27,7 @@ class SalaButaca {
     }
 
     static async salasPorSede(sedeElegida) {
-        const salas = await axios.get(`${url}/intranet/salasPorSede`, {
+        const salas = await axios.get(`${url}/api/v1/intranet/salas`, {
             params: { idSede: sedeElegida },
             headers: { Authorization: `Bearer ${Cookies.get("auth-token")}` }
         });
@@ -35,7 +35,7 @@ class SalaButaca {
     }
 
     static async crearSala(sala) {
-        const res = await axios.post(`${url}/intranet/crearsala`, sala, {
+        const res = await axios.post(`${url}/api/v1/intranet/salas`, sala, {
             headers: { Authorization: `Bearer ${Cookies.get("auth-token")}` }
         });
 
@@ -43,7 +43,7 @@ class SalaButaca {
     }
 
     static async editarSala(sala) {
-        const res = await axios.patch(`${url}/intranet/sala`, sala, {
+        const res = await axios.patch(`${url}/api/v1/intranet/salas`, sala, {
             headers: { Authorization: `Bearer ${Cookies.get("auth-token")}` }
         });
         
@@ -51,7 +51,7 @@ class SalaButaca {
     }
 
     static async cambiarEstado(idSala, nuevoEstado) {
-        const res = await axios.patch(`${url}/intranet/sala/cambiar-estado/${idSala}`, { activo: nuevoEstado }, {
+        const res = await axios.patch(`${url}/api/v1/intranet/salas/${idSala}/estado`, { activo: nuevoEstado }, {
             headers: { Authorization: `Bearer ${Cookies.get("auth-token")}` }
         });
         

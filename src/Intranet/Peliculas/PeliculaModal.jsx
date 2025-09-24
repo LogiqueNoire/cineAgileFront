@@ -28,7 +28,7 @@ const PeliculaModal = ({ pelicula, onCerrar }) => {
 
     const consultarGeneros = async () => {
         try {
-          const datos = (await axios.get(`${url}/intranet/generos`, {
+          const datos = (await axios.get(`${url}/api/v1/intranet/generos`, {
             headers: { Authorization: `Bearer ${Cookies.get("auth-token")}` }
           })).data;
     

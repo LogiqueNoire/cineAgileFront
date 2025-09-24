@@ -5,7 +5,7 @@ import Cookies from "js-cookie";
 class Auth {
     
     static async login(username, password) {
-        const res = await axios.post(`${url}/auth/login`, { username, password });
+        const res = await axios.post(`${url}/api/v1/auth/login`, { username, password });
         return res.data;
     }
 
@@ -15,7 +15,7 @@ class Auth {
         if (!token)
             throw new Error("Token no encontrado");
         
-        const res = await axios.get(`${url}/intranet/user`, { 
+        const res = await axios.get(`${url}/api/v1/intranet/usuarios/perfil`, { 
             headers: {
                 Authorization: `Bearer ${token}`
             }

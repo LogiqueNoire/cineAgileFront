@@ -20,7 +20,7 @@ export const ModalSalas = ({ onClose, sede }) => {
   const [toast, setToast] = useState({ tipo: '', visible: false, titulo: '', mensaje: '' });
 
   const consultar = () => {
-    axios.get(`${url}/sede/${sede.id}/salas`, {
+    axios.get(`${url}/api/v1/sedes/${sede.id}/salas`, {
       headers: { Authorization: `Bearer ${Cookies.get("auth-token")}` }
     }).then(res => {
       if (res.data) {

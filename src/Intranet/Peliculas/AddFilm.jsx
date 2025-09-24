@@ -61,7 +61,7 @@ export default function AddFilm({ onSucess }) {
 
   const consultarGeneros = async () => {
     try {
-      const datos = (await axios.get(`${url}/intranet/generos`, {
+      const datos = (await axios.get(`${url}/api/v1/intranet/generos`, {
         headers: { Authorization: `Bearer ${Cookies.get("auth-token")}` }
       })).data;
 
@@ -74,7 +74,7 @@ export default function AddFilm({ onSucess }) {
   let response
   const obtenerFecha = async () => {
     try {
-      response = await axios.get(`${url}/fecha-actual`);
+      response = await axios.get(`${url}/api/v1/fecha-actual`);
       setFechaReal(new Date(response.data));
 
     } catch (err) {
@@ -139,7 +139,7 @@ export default function AddFilm({ onSucess }) {
         fechaInicioEstreno: format(pelicula.fechaInicioEstreno, 'yyyy-MM-dd'),
       };
       try {
-        await axios.post(`${url}/intranet/peliculas/agregar`, peliculaFinal, {
+        await axios.post(`${url}/api/v1/intranet/peliculas`, peliculaFinal, {
           headers: { Authorization: `Bearer ${Cookies.get("auth-token")}` }
         });
 

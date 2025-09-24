@@ -20,7 +20,7 @@ const MostrarSedesHorarios = ({ pelicula, fechaFormateada }) => {
     console.log(pelicula);
     const consultarFechaReal = async () =>{
         try {
-            setFechaReal((await axios.get(`${url}/fecha-actual`)).data);
+            setFechaReal((await axios.get(`${url}/api/v1/fecha-actual`)).data);
         } catch (error) {
             console.log(error)
         } finally {
