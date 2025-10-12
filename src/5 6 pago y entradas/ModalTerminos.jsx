@@ -6,7 +6,7 @@ export const ModalTerminos = ({ onClose }) => {
       <div className="modal-terminos w-75">
         <h3 className="modal-terminos-title">Términos y Condiciones</h3>
         <div>
-          <strong>Aceptación de Términos:</strong> Al comprar en línea en CineAgile, el usuario acepta los términos y condiciones.
+          <strong>Aceptación de Términos:</strong> Al comprar en línea en cineagile, el usuario acepta los términos y condiciones.
         </div>
         <div>
           <strong>Compra y Devoluciones:</strong> Las compras no son reembolsables ni modificables.

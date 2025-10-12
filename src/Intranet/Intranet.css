@@ -4,6 +4,7 @@
 }
 
 @media (max-width: 1023px) {
+
     .mytable,
     .thead,
     .tbody,
@@ -32,11 +33,11 @@
         justify-content: flex-end;
     }
 
-    .ms-end{
+    .ms-end {
         text-align: right;
     }
 
-    
+
 
     .mytable>:not(caption)>*>* {
         box-shadow: none;
@@ -57,14 +58,18 @@
 
     .sinopsis {
         display: flex;
-        justify-content:right;
+        justify-content: right;
         justify-self: flex-end;
         width: 80%;
     }
 }
 
 @media (max-width: 552px) {
-    .sesion-group{
+    .sesion-group {
         padding-top: 10px;
     }
+}
+
+.placeholder-white::placeholder {
+    color: #FFF;
 }

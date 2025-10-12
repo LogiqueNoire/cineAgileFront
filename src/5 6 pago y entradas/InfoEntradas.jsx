@@ -48,7 +48,10 @@ const EntradaCard = ({ infoGeneral, entrada, token }) => {
 
             <div className="align-items-center direction">
                 <div className="align-items-center direction-inverse">
-                    <h2 className="text-center">CineAgile<br />Entrada</h2>
+                    <div className="d-flex flex-column">
+                        <span className="fs-2 saira-semibold w-100 text-center">cineagile</span>
+                        <h2 className="text-center">Entrada</h2>
+                    </div>
                     <div className="qr">
                         <img className=""
                             src={qrUrl} alt="QR Entrada" />

@@ -29,7 +29,7 @@ class Entrada {
         const escribirInfoComun = (data) => {
             doc.setFontSize('32')
             doc.setTextColor('#01217B')
-            doc.text(`Cine Agile`, 21.5, 48);
+            doc.text(`cineagile`, 25, 48);
             doc.setTextColor('#01217B')
             doc.setFontSize('20')
             doc.text(`Datos de la función`, 105, 30);

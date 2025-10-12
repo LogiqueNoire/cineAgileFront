@@ -3,6 +3,9 @@ import Auth from "../servicios/Auth";
 import Cookies from "js-cookie";
 import { useNavigate, Navigate } from "react-router-dom";
 import BotonCarga from "../0 componentesGenerales/BotonCarga"
+import videoFondo from "../assets/fondoLogin.mp4"
+import imagenFondo from "../assets/fondoLogin.png"
+import "./Intranet.css"
 
 const LoginForm = () => {
     const navigate = useNavigate();
@@ -10,7 +13,7 @@ const LoginForm = () => {
     const [password, setPassword] = useState("");
     const [status, setStatus] = useState({ isError: false, details: null });
 
-    const [ submitting, setSubmitting ] = useState(false);
+    const [submitting, setSubmitting] = useState(false);
 
     useEffect(() => {
         if (Cookies.get("auth-token")) {
@@ -52,31 +55,35 @@ const LoginForm = () => {
     }
 
     return (
-        <div className="d-flex justify-content-center">
-            <form className='d-flex flex-column align-items-center gap-3 m-4 border p-3 rounded' style={{ width: "max-content" }}
+        <div className="d-flex justify-content-center align-items-center" style={{ marginTop: '25vh', marginBottom: '25vh' }}>
+            <img src={imagenFondo} alt="" style={{ position: 'fixed', zIndex: '-30' }}/>
+            <video src={videoFondo} loop autoPlay muted playsInline style={{ position: 'fixed', zIndex: '-20' }}></video>
+            <form className='m-4 mt-0 border border-1 p-5 rounded rounded-4'
+                style={{
+                    width: "max-content", height: 'min-content',
+                    backdropFilter: 'blur(10px)', boxShadow: '0 0 10px rgba(0,0,0,0.2)'
+                }}
                 action="/intranet" method="post" onSubmit={tryLogin}>
-                { status.isError &&
-                    <div className="bg-danger bg-opacity-10 border border-1 border-danger w-100 p-2">
-                        <div className="text-center text-danger">{ status.details }</div>
+                <div className="d-flex flex-column justify-self-center align-items-center gap-3 m-2">
+                    <span className="saira-semibold text-white" style={{ fontSize: '40px'}}>cineagile</span>
+                    <div className='d-flex flex-column gap-4'>
+                        <input className='form-control text-white bg-transparent fw-bold placeholder-white py-2 px-3 rounded rounded-5' type="text" name="username" id="username"
+                            placeholder="Usuario" onChange={onUsernameChange} required />
+                        <input className='form-control text-white bg-transparent fw-bold placeholder-white py-2 px-3 rounded rounded-5' type="password" name="password" id="password"
+                            placeholder="Contraseña" onChange={onPasswordChange} required />
+                        <BotonCarga submitting={submitting} type="submit" className='btn btn-primary fw-bold rounded rounded-5'
+                            style={{ backgroundColor: '#FFFFFF', color: '#2F0022' }}>
+                            Enviar
+                        </BotonCarga>
+                    </div>
+                </div>
+                {status.isError &&
+                    <div className="bg-danger bg-opacity-50 border border-1 border-danger w-100 p-2 mt-3 rounded rounded-5">
+                        <div className="text-center fw-bold text-white">{status.details}</div>
                     </div>
                 }
-                <h2>Cine Agile</h2>
-                <div className='d-flex flex-column'>
-                    <label htmlFor="username">Usuario</label>
-                    <input className='form-control' type="text" name="username" id="username" onChange={onUsernameChange} required />
-                </div>
-
-                <div className='d-flex flex-column'>
-                    <label htmlFor="password">Contraseña</label>
-                    <input className='form-control' type="password" name="password" id="password" onChange={onPasswordChange} required />
-                </div>
-
-
-                <BotonCarga submitting={submitting} type="submit" className='btn btn-primary'>
-                    Enviar
-                </BotonCarga>
-
             </form>
+
         </div>
     )
 }
