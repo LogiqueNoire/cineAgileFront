@@ -59,10 +59,11 @@ const DesempeñoSemanal = ({ fechaConsultada }) => {
 
     const consultarPeliculas = async () => {
         try {
-            const datos = (await axios.get(`${url}/api/v1/intranet/peliculas/ventas
-                ?fecha=${format(fechaConsultada, "yyyy-MM-dd'T'HH:mm:ss")}`, {
-                headers: { Authorization: `Bearer ${Cookies.get("auth-token")}` }
-            })).data;
+            const f = format(fechaConsultada, "yyyy-MM-dd'T'HH:mm:ss")
+            const datos = (await axios.get(`${url}/api/v1/intranet/peliculas/ventas?fecha=${f}`,
+                {
+                    headers: { Authorization: `Bearer ${Cookies.get("auth-token")}` }
+                })).data;
 
             setListaPeliculas(datos?.sort(ordenamientoAlfa));
         } catch (error) {
@@ -72,9 +73,9 @@ const DesempeñoSemanal = ({ fechaConsultada }) => {
 
     const consultarVentasDetalladas = async () => {
         try {
-            const datos = (await axios.get(`${url}/api/v1/intranet/ventas/desempeno-semanal
-                ?idPelicula=${peliculaElegida}
-                &fecha=${format(fechaConsultada, "yyyy-MM-dd'T'HH:mm:ss")}`, {
+            const p = peliculaElegida
+            const f = format(fechaConsultada, "yyyy-MM-dd'T'HH:mm:ss")
+            const datos = (await axios.get(`${url}/api/v1/intranet/ventas/desempeno-semanal?idPelicula=${p}&fecha=${f}`, {
                 headers: { Authorization: `Bearer ${Cookies.get("auth-token")}` }
             })).data;
             console.log("consultado con peli", peliculaElegida)

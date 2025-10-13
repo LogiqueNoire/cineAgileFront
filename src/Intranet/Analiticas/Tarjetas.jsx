@@ -15,9 +15,8 @@ const Tarjetas = ({fechaConsultada, setFechaConsultada}) => {
 
     const consultarFuncionesPorProyectar = async (fecha) => {
         try {
-            const datos = (await axios.get(`${url}/api/v1/intranet/funciones
-                ?fecha=${format(fecha, "yyyy-MM-dd'T'HH:mm:ss")}
-                &estado=por_proyectar`, {
+            const f = format(fecha, "yyyy-MM-dd'T'HH:mm:ss")
+            const datos = (await axios.get(`${url}/api/v1/intranet/funciones?fecha=${f}&estado=por_proyectar`, {
                 headers: { Authorization: `Bearer ${Cookies.get("auth-token")}` }
             })).data;
             setFuncionesPorProyectar(datos)
@@ -30,9 +29,8 @@ const Tarjetas = ({fechaConsultada, setFechaConsultada}) => {
 
     const consultarFuncionesAgotadas = async (fecha) => {
         try {
-            const datos = (await axios.get(`${url}/api/v1/intranet/funciones
-                ?fechaReal=${format(fecha, "yyyy-MM-dd'T'HH:mm:ss")}
-                &estado=agotadas`, {
+            const f = format(fecha, "yyyy-MM-dd'T'HH:mm:ss")
+            const datos = (await axios.get(`${url}/api/v1/intranet/funciones?fecha=${f}&estado=agotadas`, {
                 headers: { Authorization: `Bearer ${Cookies.get("auth-token")}` }
             })).data;
             setFuncionesAgotadas(datos)
@@ -45,8 +43,8 @@ const Tarjetas = ({fechaConsultada, setFechaConsultada}) => {
 
     const consultarEntradasVendidas = async (fecha) => {
         try {
-            const datos = (await axios.get(`${url}/api/v1/intranet/ventas/entradas-vendidas
-                ?fecha=${format(fecha, "yyyy-MM-dd'T'HH:mm:ss")}`, {
+            const f = format(fecha, "yyyy-MM-dd'T'HH:mm:ss")
+            const datos = (await axios.get(`${url}/api/v1/intranet/ventas/entradas-vendidas?fecha=${f}`, {
                 headers: { Authorization: `Bearer ${Cookies.get("auth-token")}` }
             })).data;
             setEntradasVendidas(datos)
@@ -59,8 +57,8 @@ const Tarjetas = ({fechaConsultada, setFechaConsultada}) => {
 
      const consultarVentas = async (fecha) => {
         try {
-            const datos = (await axios.get(`${url}/api/v1/intranet/ventas/totales-periodo
-                ?fecha=${format(fecha, "yyyy-MM-dd'T'HH:mm:ss")}`, {
+            const f = format(fecha, "yyyy-MM-dd'T'HH:mm:ss")
+            const datos = (await axios.get(`${url}/api/v1/intranet/ventas/totales-periodo?fecha=${f}`, {
                 headers: { Authorization: `Bearer ${Cookies.get("auth-token")}` }
             })).data;
 

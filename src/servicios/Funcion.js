@@ -23,24 +23,24 @@ class Funcion {
         })
     }
 
-    static async mostrarButacasDeFuncion(funcion) {
-        const butacas = await axios.get(`${url}/api/v1/funciones/${funcion}/butacas`)
+    static async mostrarButacasDeFuncion(idFuncion) {
+        const butacas = await axios.get(`${url}/api/v1/funciones/${idFuncion}/butacas`)
         return butacas.data
+    }
+
+    static async cantidadButacasDisponibles(idFuncion) {
+        const cantidad = await axios.get(`${url}/api/v1/funciones/${idFuncion}/butacas/disponibles`)
+        return cantidad.data
+    }
+    
+    static async estaDisponible(idFuncion) {
+        const cantidad = await axios.get(`${url}/api/v1/funciones/${idFuncion}/disponibilidad`)
+        return cantidad.data
     }
 
     static async mostrarPreciosdeFuncion(idFuncion, persona) {
         const precios = await axios.get(`${url}/api/v1/funciones/precios?idFuncion=${idFuncion}&persona=${persona}`)  ///precios?idFuncion=225855&persona=22
         return precios.data
-    }
-
-    static async cantidadButacasDisponibles(funcion) {
-        const cantidad = await axios.get(`${url}/api/v1/funciones/cantidad-butacas-disponibles?idFuncion=${funcion}`)
-        return cantidad.data
-    }
-
-    static async estaDisponible(funcion) {
-        const cantidad = await axios.get(`${url}/api/v1/funciones/${funcion}/disponibilidad`)
-        return cantidad.data
     }
 }
 
