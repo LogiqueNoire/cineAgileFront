@@ -48,16 +48,15 @@ const VentanaPeliculas = () => {
 
     const consultarPeliculas = async () => {
         setLoading(true);
-
+        const f = format(fechaReal, "yyyy-MM-dd'T'HH:mm:ss")
         try {
-            setLista((await axios.get(`${url}/api/v1/intranet/peliculas?
-                fecha=${format(fechaReal, "yyyy-MM-dd'T'HH:mm:ss")}`, {
+            setLista((await axios.get(`${url}/api/v1/intranet/peliculas?fecha=${f}`, {
                 headers: { Authorization: `Bearer ${Cookies.get("auth-token")}` }
             })).data.sort(ordenamientoFecha).reverse());
         } catch (error) {
             console.error(error);
         } finally {
-            console.log(fechaReal.toISOString())
+            //console.log(fechaReal.toISOString())
             setLoading(false);
         }
     }
