@@ -72,7 +72,7 @@ const FilmPanel = () => {
             {loading 
                 ? <Loading />
                 : error
-                    ? <div className="alert alert-danger h-25 w-50 text-center">Error :/... Intenta recargar la página</div>
+                    ? <div className="h-25 w-50 text-center bg-danger bg-opacity-75 border border-1 border-danger p-2 mt-3 rounded rounded-3 fw-bold text-white">Error... Intenta recargar la página</div>
                     : <FilmContainer peliculas={peliculas} />
             }
         </div>

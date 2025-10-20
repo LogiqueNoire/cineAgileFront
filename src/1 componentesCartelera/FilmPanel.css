@@ -91,10 +91,6 @@ a.tab:active {
         padding-bottom: 1rem;
     }
 
-    .film-panel {
-        background-color: white;
-    }
-
     .filmCard {
         width: 40%;
         height: auto;

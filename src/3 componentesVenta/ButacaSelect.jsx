@@ -18,7 +18,7 @@ const SeleccionButaca = ({ funcion, prev, next, onCancelar }) => {
   const [error, setError] = useState(null)
   const { butacaContext } = context;
 
-  const [ moving, setMoving ] = useState(false);
+  const [moving, setMoving] = useState(false);
 
   useEffect(() => {
     Funcion.mostrarButacasDeFuncion(funcion.idFuncion).then(data => {
@@ -86,55 +86,57 @@ const SeleccionButaca = ({ funcion, prev, next, onCancelar }) => {
   return (
     <>
       {error && <h2>Error!</h2>}
-      {loading ? 
-      <div className='d-flex justify-content-center'>
-        <Loading style={{ margin: "15rem" }} />
-      </div> :
+      {loading ?
+        <div className='d-flex justify-content-center'>
+          <Loading style={{ margin: "15rem" }} />
+        </div> :
         <>
           <div className='d-flex flex-column gap-2'>
             <ButacaMap isSelectedFunc={estaEnSeleccionados} onButacaSelect={onButacaSelect} butacas={data} />
-            <div className='border border-dark butaca-leyenda p-2 mb-4'>
-              <h4 className="text-center mb-2">Leyenda</h4>
-              <table className="butaca-table butaca-hist d-flex justify-content-center">
-                <tbody>
-                  <tr className=''>
-                    <td className=''>
-                      <div className='butaca-celda-wrapper'>
-                        <input type="checkbox" className="butaca-celda butaca-libre" readOnly onClick={(e) => e.preventDefault()} />
-                      </div>
-                    </td>
-                    <td className=''>
-                      <h4 className="butaca-label mx-2">Libre</h4>
-                    </td>
-                    <td className=''>
-                      <div className='butaca-celda-wrapper'>
-                        <input type="checkbox" className="butaca-celda butaca-discapacitado" readOnly onClick={(e) => e.preventDefault()} />
-                      </div>
-                    </td>
-                    <td className=''>
-                      <h4 className="butaca-label mx-2">Discapacitado</h4>
-                    </td>
-                  </tr>
-                  <tr className=''>
-                    <td>
-                      <div className='butaca-celda-wrapper'>
-                        <input type="checkbox" className="butaca-celda butaca-ocupado" readOnly checked onClick={(e) => e.preventDefault()} />
-                      </div>
-                    </td>
-                    <td>
-                      <h4 className="butaca-label mx-2">Ocupado</h4>
-                    </td>
-                    <td>
-                      <div className='butaca-celda-wrapper'>
-                        <input type="checkbox" className="butaca-celda butaca-libre" readOnly checked onClick={(e) => e.preventDefault()} />
-                      </div>
-                    </td>
-                    <td>
-                      <h4 className="butaca-label mx-2">Seleccionado</h4>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+            <div className='d-flex justify-content-center'>
+              <div className='border border-2 rounded-3 p-3 mb-4' style={{ width: 'min-content' }}>
+                <h4 className="text-center mb-2">Leyenda</h4>
+                <table className="butaca-table butaca-hist d-flex justify-content-center">
+                  <tbody>
+                    <tr className=''>
+                      <td className=''>
+                        <div className='butaca-celda-wrapper'>
+                          <input type="checkbox" className="butaca-celda butaca-libre" readOnly onClick={(e) => e.preventDefault()} />
+                        </div>
+                      </td>
+                      <td className=''>
+                        <h4 className="butaca-label m-2">Libre</h4>
+                      </td>
+                      <td className=''>
+                        <div className='butaca-celda-wrapper'>
+                          <input type="checkbox" className="butaca-celda butaca-discapacitado" readOnly onClick={(e) => e.preventDefault()} />
+                        </div>
+                      </td>
+                      <td className=''>
+                        <h4 className="butaca-label m-2">Discapacitado</h4>
+                      </td>
+                    </tr>
+                    <tr className=''>
+                      <td>
+                        <div className='butaca-celda-wrapper'>
+                          <input type="checkbox" className="butaca-celda butaca-ocupado" readOnly checked onClick={(e) => e.preventDefault()} />
+                        </div>
+                      </td>
+                      <td>
+                        <h4 className="butaca-label m-2">Ocupado</h4>
+                      </td>
+                      <td>
+                        <div className='butaca-celda-wrapper'>
+                          <input type="checkbox" className="butaca-celda butaca-libre" readOnly checked onClick={(e) => e.preventDefault()} />
+                        </div>
+                      </td>
+                      <td>
+                        <h4 className="butaca-label m-2">Seleccionado</h4>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
 
@@ -157,7 +159,7 @@ const SeleccionButaca = ({ funcion, prev, next, onCancelar }) => {
           </div>
 
           <div className="d-flex justify-content-center gap-4 align-items-center">
-          { /* <button className="btn btn-primary" onClick={volver} >Volver</button> */ }
+            { /* <button className="btn btn-primary" onClick={volver} >Volver</button> */}
             <button className="btn btn-primary" disabled={context.butacaContext.seleccionadas.length === 0 || moving} onClick={siguiente}>Siguiente</button>
           </div>
         </>

@@ -27,7 +27,7 @@ const Contador = ({ onCancelar }) => {
         timeOut = true;
         const myModal = new bootstrap.Modal(document.getElementById("contadorBackdrop"));
         myModal.show();
-
+        
         return;
       }
 
@@ -62,7 +62,7 @@ const Contador = ({ onCancelar }) => {
     return (<>
     <div className="text-center p-1 px-3 text-primary border border-2 border-primary fs-4 rounded-4 d-flex align-items-center gap-2" style={{width: 'max-content'}}>
       <img src={iconotiempo} alt="" style={{height: '30px'}}/>
-      <h4>{format(tiempo, "mm:ss")}</h4>
+      <h4>{format(estado.contador, "mm:ss")}</h4>
         
     </div>
 

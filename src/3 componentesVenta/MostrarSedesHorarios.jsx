@@ -104,12 +104,11 @@ const MostrarSedesHorarios = ({ pelicula, fechaFormateada }) => {
 
     console.log("comparar", pelicula.fechaInicioEstreno, fechaReal)
     if (sedes.length === 0 || differenceInCalendarDays(pelicula.fechaInicioEstreno, fechaReal) >= 8) {
-        return <p className='text-center display-6 my-5'>No se encontraron funciones disponibles.</p>;
+        return <p className='text-center display-6 my-5 px-4'>No se encontraron funciones disponibles.</p>;
     }
 
     return (
-        <div className="sedes-horarios mx-5 p-5 my-1 border shadow">
-            <h1 className='display-5 text-center mb-5 round'>Sedes</h1>
+        <div className="sedes-horarios py-5 my-1">
             <div className="justify-content-center">
                 {sedes.map((sede) => (
                     <CinemaAcordion data={sede} pelicula={pelicula} />

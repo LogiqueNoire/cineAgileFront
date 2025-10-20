@@ -1,12 +1,13 @@
 import React from 'react';
 import "./Header.css"
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 const Header = ({ children }) => {
   const navigate = useNavigate();
+  const location = useLocation();
 
   return (
-    <header className="header shadow">
+    <header className={`header ${location.pathname == '/intranet/login' ? "shadow-black" : "shadow-gray"}`}>
       <div className='d-flex justify-content-between me-2 align-items-center'>
 
         <a href="/" className='text-decoration-none'>
