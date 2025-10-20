@@ -22,21 +22,31 @@ const VentasMensuales = () => {
             let i = 0
             let j = 0
             while (i <= (new Date()).getMonth()) {
+                //console.log(j)
+                //console.log(datos[j])
                 //console.log("mes", i, ((datos[j])[1])-1, (new Date()).getMonth())
-                if (i < (datos[j])[1] - 1) {
+                if (datos[j] != undefined) {
+                    if (i < (datos[j])[1] - 1) {
+                        resultado.push({
+                            ventas: 0,
+                            name: mesesCortos[i]
+                        })
+                        //console.log("cero agregado")
+                    } else {
+                        resultado.push({
+                            ventas: (datos[j])[0].toFixed(2),
+                            name: mesesCortos[(datos[j])[1] - 1]
+                        })
+                        j++
+                    }
+                } else {
                     resultado.push({
                         ventas: 0,
                         name: mesesCortos[i]
                     })
-                    //console.log("cero agregado")
-                } else {
-                    resultado.push({
-                        ventas: (datos[j])[0].toFixed(2),
-                        name: mesesCortos[(datos[j])[1] - 1]
-                    })
-                    j++
                 }
                 i++;
+                //console.log(resultado)
             }
             setVentasMensuales(resultado)
         } catch (error) {

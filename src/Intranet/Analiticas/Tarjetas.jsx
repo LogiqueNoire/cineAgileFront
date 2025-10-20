@@ -85,7 +85,7 @@ const Tarjetas = ({fechaConsultada, setFechaConsultada}) => {
             <div className='d-flex flex-column col-lg-2 align-items-center'>
                 <label className="text-center align-content-center fs-1 fw-bold">Analíticas</label>
                 {fechaConsultada && <input type="date" className='form-control m-0 fw-bold' style={{ width: 'min-content'}} value={format(fechaConsultada, "yyyy-MM-dd")}
-                    onChange={(e) => { setFechaConsultada(new Date(`${e.target.value}T00:00`)) }} max={format(new Date(), "yyyy-MM-dd")} />}
+                    onChange={(e) => { e.target.value != "" ? setFechaConsultada(new Date(`${e.target.value}T00:00`)) : setFechaConsultada(new Date()) }} />}
             </div>
             <div className="d-flex gap-3 overflow-x-auto justify-content-around w-100" >
             <article className='d-flex flex-column border border-3 border-info-subtle rounded rounded-4 p-3' style={{ /*width: 'min-content',*/ height: 'auto' }}>
