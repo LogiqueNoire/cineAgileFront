@@ -28,7 +28,7 @@ const LoginForm = () => {
 
         setSubmitting(true);
         setStatus({ isError: false, details: null });
-
+        
         if (!Cookies.get("auth-token")) {
             Auth.login(username, password).then(res => {
                 if (res.token) {
@@ -36,6 +36,7 @@ const LoginForm = () => {
                     navigate("/intranet");
                 }
             }).catch(err => {
+                //console.log("Intentando login con", err)
                 if (err.code == "ERR_NETWORK")
                     setStatus({ isError: true, details: "Conexión de red." });
                 else
@@ -79,7 +80,7 @@ const LoginForm = () => {
                 </div>
                 {status.isError &&
                     <div className="bg-danger bg-opacity-50 border border-1 border-danger w-100 p-2 mt-3 rounded rounded-5">
-                        <div className="text-center fw-bold text-white">{status.details}</div>
+                        <div className="text-center fw-bold text-white">{status.details != "" ? status.details : "Servicio no disponible"}</div>
                     </div>
                 }
             </form>
