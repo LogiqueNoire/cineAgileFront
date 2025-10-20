@@ -87,7 +87,7 @@ const PeliculaSedes = () => {
                     <div className="col-12 col-sm-12 col-md-6 col-lg-8 info-pelicula">
                         <div className="d-flex flex-column gap-2">
                             <h1 className="display-4 film-title" style={{ color: '#0A2B9C' }}><strong>{pelicula.nombre}</strong></h1>
-                            <h5 style={{ color: '#01217B' }}>{`${pelicula.clasificacion}${pelicula.genero != undefined ? " | " && pelicula.genero.map(g => g.nombre).join(', ') : ""}`}</h5>
+                            <h5 style={{ color: '#01217B' }}>{`${pelicula.clasificacion}${pelicula.genero != undefined ? " | " + pelicula.genero.map(g => g.nombre).join(', ') : ""}`}</h5>
                             <div>
                                 <p className="fs-4">{`Sinopsis`}</p>
                                 <p>{pelicula.sinopsis}</p>

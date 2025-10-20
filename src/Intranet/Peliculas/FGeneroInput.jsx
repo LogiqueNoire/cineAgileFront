@@ -26,7 +26,7 @@ const generoReducer = (state, action) => {
 const generoMakeInitialStatus = (totalGeneros, generosPelicula) => {
     return totalGeneros.map(genero => ({
         ...genero,
-        checked: generosPelicula.some(gp => gp.id == genero.id)
+        checked: (generosPelicula || []).some(gp => gp.id === genero.id)
     }));
 };
 
