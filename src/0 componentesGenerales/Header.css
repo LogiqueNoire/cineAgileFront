@@ -4,6 +4,16 @@
   justify-content: space-between;
   background-color: rgb(255, 255, 255);
   padding: 10px 20px;
+  position: relative;
+  z-index: 20;
+}
+
+.shadow-gray{
+  box-shadow: #bdbdbd 0px 0px 50px;
+}
+
+.shadow-black{
+  box-shadow: #000000 0px 0px 50px;
 }
 
 h1 {

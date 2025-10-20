@@ -34,7 +34,7 @@ const PeliculaSedes = () => {
         if (!consultaIdPelicula) return;
 
         Pelicula.mostrarPelicula(consultaIdPelicula)
-            .then(data => {setPelicula(data); generosDePelicula()})
+            .then(data => { setPelicula(data); generosDePelicula() })
             .catch(err => setError(err))
             .finally(() => setLoading(false));
     }, [consultaIdPelicula]);
@@ -77,54 +77,60 @@ const PeliculaSedes = () => {
     }
 
     return (
-        <div>
-            <div className="d-flex justify-content-start flex-wrap flex-sm-wrap flex-md-nowrap gap-4 align-items-center px-5 py-4 bg-light bg-gradient border shadow mb-4">
-                <img className="card col-12 col-sm-12 col-md-6 col-lg-2 shadow rounded img-film-card2" style={{ minHeight: "350px", aspectRatio: "3/5" }} src={pelicula.imageUrl} alt={pelicula.nombre} />
-                <div className="col-12 col-sm-12 col-md-6 col-lg-8">
-                    <div className="d-flex flex-column gap-2">
-
-                        <h1 className="display-4 text-truncate" style={{ color: '#0A2B9C' }}><strong>{pelicula.nombre}</strong></h1>
-                        <h5 style={{ color: '#01217B' }}>{`${pelicula.clasificacion} | ${pelicula.genero != undefined ? pelicula.genero.map(g => g.nombre).join(', ') : ""}`}</h5>
-                        <div>
-                            <p>{`Sinopsis`}</p>
-                            <p>{pelicula.sinopsis}</p>
-                        </div>
-                        <h5>{`Director. ${pelicula.director}`}</h5>
-                        <h5>{`Actores principales. ${pelicula.actores}`}</h5>
-                    </div>
-
-                    {differenceInCalendarDays(pelicula.fechaInicioEstreno, fechaReal) < 8 ?
-
-                        <div className='mt-5'>
-                            <h5 className='my-2'>Opciones</h5>
+        <div className="px-4">
+            <div className="d-flex justify-content-center">
+                <div className="d-flex justify-content-center flex-wrap flex-sm-wrap flex-md-nowrap align-items-end
+                col-12 col-xs-12 col-sm-12 col-md-10 col-lg-10
+                bg-body-secondary bg-opacity-50 gap-4 px-4 py-4 my-4 mt-5 rounded rounded-5">
+                    <img className="card col-12 col-xs-12 col-sm-6 col-md-5 col-lg-3 shadow rounded rounded-4 img-film-card2 justify-content-center"
+                        style={{ minHeight: "350px", aspectRatio: "3/5" }} src={pelicula.imageUrl} alt={pelicula.nombre} />
+                    <div className="col-12 col-sm-12 col-md-6 col-lg-8 info-pelicula">
+                        <div className="d-flex flex-column gap-2">
+                            <h1 className="display-4 film-title" style={{ color: '#0A2B9C' }}><strong>{pelicula.nombre}</strong></h1>
+                            <h5 style={{ color: '#01217B' }}>{`${pelicula.clasificacion}${pelicula.genero != undefined ? " | " && pelicula.genero.map(g => g.nombre).join(', ') : ""}`}</h5>
                             <div>
-                                <span className="me-2">Selecciona una fecha:</span>
-                                <input
-                                    type="date"
-                                    className="mx-1 form-control"
-                                    min={format(fechaReal, 'yyyy-MM-dd')}
-                                    max={format(new Date(fechaReal).setMonth(fechaReal.getMonth() + 3), 'yyyy-MM-dd')}
-                                    value={format(fechaElegida, 'yyyy-MM-dd')}
-                                    onChange={onFechaChange}
-                                    style={{ width: "150px" }}
-                                    onKeyDown={(e) => e.preventDefault()}
-                                />
+                                <p className="fs-4">{`Sinopsis`}</p>
+                                <p>{pelicula.sinopsis}</p>
                             </div>
+                            {pelicula.director != " " && <h5>{`Director. ${pelicula.director}`}</h5>}
+                            {pelicula.actores != " " && <h5>{`Actores principales. ${pelicula.actores}`}</h5>}
                         </div>
-                        :
-                        <div className="mt-5">
-                            <h3 style={{ color: '#7b0101' }}>
-                                {`Aún falta más de 1 semana para el estreno, el cual será a partir del ${format(pelicula.fechaInicioEstreno, "dd 'de' MMMM 'de' yyyy", { locale: es })}`}
-                            </h3>
-                        </div>
-                    }
+                    </div>
                 </div>
             </div>
-            {fechaElegida && (
-                <MostrarSedesHorarios
-                    pelicula={pelicula}
-                    fechaFormateada={format(fechaElegida, `yyyy-MM-dd.HH:mm`).replace('.', 'T')}
-                />)}
+            <div className="d-flex justify-content-center">
+                <div className="d-flex justify-content-center flex-column
+            col-12 col-xs-12 col-sm-12 col-md-10 col-lg-10">
+                {differenceInCalendarDays(pelicula.fechaInicioEstreno, fechaReal) < 8 ?
+                    <div className='mt-3'>
+                        <div className="d-flex justify-content-center flex-row gap-3 align-items-center">
+                            <h3 className="me-2 fw-bold fs-1">Tu fecha ideal</h3>
+                            <input
+                                type="date"
+                                className="mx-1 form-control"
+                                min={format(fechaReal, 'yyyy-MM-dd')}
+                                max={format(new Date(fechaReal).setMonth(fechaReal.getMonth() + 3), 'yyyy-MM-dd')}
+                                value={format(fechaElegida, 'yyyy-MM-dd')}
+                                onChange={onFechaChange}
+                                style={{ width: "150px", height: "min-content" }}
+                                onKeyDown={(e) => e.preventDefault()}
+                            />
+                        </div>
+                    </div>
+                    :
+                    <div className="mt-3">
+                        <h3 className="px-4 text-center" style={{ color: '#7b0101' }}>
+                            {`Aún falta más de 1 semana para el estreno, el cual será a partir del ${format(pelicula.fechaInicioEstreno, "dd 'de' MMMM 'de' yyyy", { locale: es })}`}
+                        </h3>
+                    </div>
+                }
+                {fechaElegida && (
+                    <MostrarSedesHorarios
+                        pelicula={pelicula}
+                        fechaFormateada={format(fechaElegida, `yyyy-MM-dd.HH:mm`).replace('.', 'T')}
+                    />)}
+                </div>
+            </div>
         </div>
     );
 };

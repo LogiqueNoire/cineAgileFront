@@ -164,7 +164,7 @@ const FlujoVenta = () => {
                         salaPeli={funcion.codigoSala} categoria={funcion.categoria} dimension={funcion.dimension} idFuncion={funcion.idFuncion} />
                 </div>
 
-                <div className="d-flex flex-column py-2 bg-white align-items-center flex-grow-1 col-12 col-lg-8 px-4">
+                <div className="d-flex flex-column py-2 pt-5 bg-white align-items-center flex-grow-1 col-12 col-lg-8 px-4">
                     <div className="d-flex justify-content-between w-100 mb-2 col-12">
                         <Contador onCancelar={onCancelar} />
                         <button disabled={contexto.general.submitting || cancelling} className="btn btn-danger rounded rounded-5 p-2" onClick={onCancelarBtn}>
