@@ -56,12 +56,6 @@
     transform: scaleX(1);
 }
 
-/*
-
-.activetab:hover::after {
-   transform: scaleX(0);
-}*/
-
 a.tab,
 a.tab:link,
 a.tab:visited,
