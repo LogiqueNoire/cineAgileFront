@@ -4,6 +4,7 @@ import Loading from '../../0 componentesGenerales/Loading';
 import axios from 'axios';
 import { url } from "../../configuracion/backend"
 import Cookies from 'js-cookie';
+import Sede from "../../servicios/Sede";
 
 const ordenamientoAlfa = (a, b) => {
     const x = a.nombre.toLowerCase();
@@ -36,9 +37,7 @@ const BuscarFunciones = ({ handlePeliculaChange, handleSalaChange }) => {
 
     const consultarSedesTodas = async () => {
         try {
-            const datos = (await axios.get(`${url}/api/v1/intranet/sedes`, {
-                headers: { Authorization: `Bearer ${Cookies.get("auth-token")}` }
-            })).data;
+            const datos = Sede.todasSedes()
 
             setValoresBusqueda(prev => ({
                 ...prev,
@@ -53,9 +52,7 @@ const BuscarFunciones = ({ handlePeliculaChange, handleSalaChange }) => {
 
     const consultarSedesActivas = async () => {
         try {
-            const datos = (await axios.get(`${url}/api/v1/intranet/sedes/activas`, {
-                headers: { Authorization: `Bearer ${Cookies.get("auth-token")}` }
-            })).data;
+            const datos = Sede.mostrarSedesActivas()
 
             setValoresBusqueda(prev => ({
                 ...prev,

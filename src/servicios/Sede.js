@@ -4,11 +4,19 @@ import Cookies from 'js-cookie';
 
 class Sede {
 
-    static async mostrarSoloSedes() {
-        const res = await axios.get(`${url}/api/v1/intranet/sedes/activas`, {
-            headers: { Authorization: `Bearer ${Cookies.get("auth-token")}`}});
+    static async mostrarSedesActivas() {
+        const res = await axios.get(`${url}/api/intranet/v1/sedes/activas`, {
+            headers: { Authorization: `Bearer ${Cookies.get("auth-token")}` }
+        });
 
         return res.data;
+    }
+
+    static async todasSedes() {
+        const datos = (await axios.get(`${url}/api/intranet/v1/sedes`, {
+            headers: { Authorization: `Bearer ${Cookies.get("auth-token")}` }
+        })).data;
+        return datos
     }
 
 }

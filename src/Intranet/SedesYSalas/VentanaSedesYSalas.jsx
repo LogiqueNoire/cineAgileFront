@@ -25,7 +25,7 @@ const VentanaSedesYSalas = () => {
     const [toast, setToast] = useState({ tipo: '', visible: false, titulo: '', mensaje: '' });
 
     const consultar = () => {
-        axios.get(`${url}/api/v1/intranet/sedes`, {
+        axios.get(`${url}/api/intranet/v1/sedes`, {
             headers: { Authorization: `Bearer ${Cookies.get("auth-token")}` }
         }).then(res => {
             setLista(res.data.reverse());
@@ -47,7 +47,7 @@ const VentanaSedesYSalas = () => {
 
         let response
         try {
-            response = await axios.patch(`${url}/api/v1/intranet/sedes`, el, {
+            response = await axios.patch(`${url}/api/intranet/v1/sedes`, el, {
                 headers: { Authorization: `Bearer ${Cookies.get("auth-token")}` }
             });
             consultar()
@@ -99,7 +99,7 @@ const VentanaSedesYSalas = () => {
         }
         if (confirmado) {
             try {
-                await axios.patch(`${url}/api/v1/intranet/sedes/estado`, el, {
+                await axios.patch(`${url}/api/intranet/v1/sedes/estado`, el, {
                     headers: { Authorization: `Bearer ${Cookies.get("auth-token")}` }
                 });
                 consultar()

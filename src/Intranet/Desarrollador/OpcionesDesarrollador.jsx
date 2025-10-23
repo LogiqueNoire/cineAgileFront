@@ -13,7 +13,7 @@ const OpcionesDesarrollador = () => {
     const poblarBD = async () => {
         let response;
         try {
-            response = await axios.post(`${url}/api/v1/intranet/dev/poblarBD`, {}, {
+            response = await axios.post(`${url}/api/intranet/v1/dev/poblarBD`, {}, {
                 headers: { Authorization: `Bearer ${Cookies.get("auth-token")}` }
             });
 

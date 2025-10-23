@@ -9,7 +9,7 @@ export const Tarjeta = ({ metodo, setMetodo, tarjeta, setTarjeta, setSubmitting,
 
   const obtenerTipoCambio = async (fecha) => {
     try {
-      const response = await axios.get(`http://localhost:8080/api/v1/tipo-cambio?date=${format(fecha, "yyyy-MM-dd")}`, { timeout: 5000 });
+      const response = await axios.get(`http://localhost:8080/api/venta/v1/tipo-cambio?date=${format(fecha, "yyyy-MM-dd")}`, { timeout: 5000 });
       console.log("Tipo de cambio:", response.data);
       setTipoCambio(response.data.precioVenta)
     } catch (error) {

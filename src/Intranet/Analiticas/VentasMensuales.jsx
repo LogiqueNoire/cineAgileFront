@@ -14,7 +14,7 @@ const VentasMensuales = () => {
 
     const consultarVentasMensuales = async () => {
         try {
-            const datos = (await axios.get(`${url}/api/v1/intranet/ventas/totales-mes`, {
+            const datos = (await axios.get(`${url}/api/intranet/v1/ventas/totales-mes`, {
                 headers: { Authorization: `Bearer ${Cookies.get("auth-token")}` }
             })).data;
             console.log("datos", datos)

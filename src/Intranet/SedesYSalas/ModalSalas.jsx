@@ -19,8 +19,8 @@ export const ModalSalas = ({ onClose, sede }) => {
   const [error, setError] = useState(null);
   const [toast, setToast] = useState({ tipo: '', visible: false, titulo: '', mensaje: '' });
 
-  const consultar = () => {
-    axios.get(`${url}/api/v1/sedes/${sede.id}/salas`, {
+  const consultarSalas = () => {
+    axios.get(`${url}/api/intranet/v1/salas?idSede=${sede.id}`, {
       headers: { Authorization: `Bearer ${Cookies.get("auth-token")}` }
     }).then(res => {
       if (res.data) {
@@ -35,7 +35,7 @@ export const ModalSalas = ({ onClose, sede }) => {
   }
 
   useEffect(() => {
-    consultar();
+    consultarSalas();
   }, [sede]);
 
   const irACrearSala = () => {

@@ -44,7 +44,7 @@ export default function AddSede({ onSucess }) {
     });
 
     try {
-      await axios.post(`${url}/api/v1/intranet/sedes`, sede, {
+      await axios.post(`${url}/api/intranet/v1/sedes`, sede, {
         headers: { Authorization: `Bearer ${Cookies.get("auth-token")}` }
       });
       if (onSucess) {

@@ -6,6 +6,7 @@ import Cookies from "js-cookie";
 import iconoGuardar from "../../assets/operaciones/guardar.svg"
 import Toast from "../../Toast";
 import genresIcon from '../../assets/modulos/genresIcon.svg'
+import Genero from "../../servicios/Genero";
 
 const Generos = () => {
     const [loading, setLoading] = useState(true)
@@ -22,10 +23,7 @@ const Generos = () => {
 
     const consultarGeneros = async () => {
         try {
-            const datos = (await axios.get(`${url}/api/v1/intranet/generos`, {
-                headers: { Authorization: `Bearer ${Cookies.get("auth-token")}` }
-            })).data;
-
+            const datos = await Genero.consultarGeneros()
             setGeneros(datos.sort(ordenamientoAlfa))
         } catch (error) {
             console.error(error);
@@ -38,7 +36,7 @@ const Generos = () => {
         e.preventDefault();
         let response;
         try {
-            response = await axios.post(`${url}/api/v1/intranet/generos`, nombre.trim(), {
+            response = await axios.post(`${url}/api/intranet/v1/generos`, nombre.trim(), {
                 headers: {
                     Authorization: `Bearer ${Cookies.get("auth-token")}`,
                     'Content-Type': 'text/plain'
@@ -75,7 +73,7 @@ const Generos = () => {
         e.preventDefault();
         let response;
         try {
-            response = await axios.patch(`${url}/api/v1/intranet/generos`, { id: el.id, nombre: el.nombre.trim() }, {
+            response = await axios.patch(`${url}/api/intranet/v1/generos`, { id: el.id, nombre: el.nombre.trim() }, {
                 headers: {
                     Authorization: `Bearer ${Cookies.get("auth-token")}`
                 }

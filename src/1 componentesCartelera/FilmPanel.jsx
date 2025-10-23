@@ -25,7 +25,7 @@ const FilmPanel = () => {
     useEffect(() => {
     const obtenerPeliculas = async () => {
         try {
-            const respuesta = await axios.get(`${url}/api/v1/fecha-actual`);
+            const respuesta = await axios.get(`${url}/api/tiempo/v1`);
             const fecha = new Date(respuesta.data);
 
             const estado = query?.get("tab") || "En cartelera";
