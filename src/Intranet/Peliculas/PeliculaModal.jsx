@@ -11,6 +11,7 @@ import axios from "axios";
 import { url } from "../../configuracion/backend";
 import { useState, useEffect } from "react";
 import Loading from "../../0 componentesGenerales/Loading";
+import Genero from "../../servicios/Genero";
 
 const ordenamientoAlfa = (a, b) => {
     const x = a.nombre.toLowerCase();
@@ -28,9 +29,7 @@ const PeliculaModal = ({ pelicula, onCerrar }) => {
 
     const consultarGeneros = async () => {
         try {
-          const datos = (await axios.get(`${url}/api/v1/intranet/generos`, {
-            headers: { Authorization: `Bearer ${Cookies.get("auth-token")}` }
-          })).data;
+          const datos = Genero.consultarGeneros()
     
           setGeneros(datos.sort(ordenamientoAlfa))
         } catch (error) {

@@ -24,7 +24,7 @@ const PeliculaSedes = () => {
     useEffect(() => {
         const generosDePelicula = async () => {
             try {
-                response = await axios.get(`${url}/api/v1/generos?pelicula=${consultaIdPelicula}`);
+                response = await axios.get(`${url}/api/venta/v1/generos?pelicula=${consultaIdPelicula}`);
                 setPelicula(prev => ({ ...prev, genero: response.data }));
             } catch (err) {
                 console.error("Error al obtener la fecha:", err);
@@ -44,7 +44,7 @@ const PeliculaSedes = () => {
     useEffect(() => {
         const obtenerFecha = async () => {
             try {
-                response = await axios.get(`${url}/api/v1/fecha-actual`);
+                response = await axios.get(`${url}/api/tiempo/v1`);
                 setFechaReal(new Date(response.data));
 
             } catch (err) {

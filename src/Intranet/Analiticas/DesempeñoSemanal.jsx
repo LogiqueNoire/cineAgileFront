@@ -60,7 +60,7 @@ const DesempeñoSemanal = ({ fechaConsultada }) => {
     const consultarPeliculas = async () => {
         try {
             const f = format(fechaConsultada, "yyyy-MM-dd'T'HH:mm:ss")
-            const datos = (await axios.get(`${url}/api/v1/intranet/peliculas/ventas?fecha=${f}`,
+            const datos = (await axios.get(`${url}/api/intranet/v1/peliculas/ventas?fecha=${f}`,
                 {
                     headers: { Authorization: `Bearer ${Cookies.get("auth-token")}` }
                 })).data;
@@ -75,7 +75,7 @@ const DesempeñoSemanal = ({ fechaConsultada }) => {
         try {
             const p = peliculaElegida
             const f = format(fechaConsultada, "yyyy-MM-dd'T'HH:mm:ss")
-            const datos = (await axios.get(`${url}/api/v1/intranet/ventas/desempeno-semanal?idPelicula=${p}&fecha=${f}`, {
+            const datos = (await axios.get(`${url}/api/intranet/v1/ventas/desempeno-semanal?idPelicula=${p}&fecha=${f}`, {
                 headers: { Authorization: `Bearer ${Cookies.get("auth-token")}` }
             })).data;
             console.log("consultado con peli", peliculaElegida)

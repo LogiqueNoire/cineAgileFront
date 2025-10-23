@@ -22,7 +22,7 @@ const FormularioUsuario = ({ actualizar }) => {
     const [sedeSeleccionada, setSedeSeleccionada] = useState(null);
 
     useEffect(() => {
-        Sede.mostrarSoloSedes().then(res => {
+        Sede.mostrarSedesActivas().then(res => {
             setSedes(res);
         }).catch(err => {
             console.log(err);
