@@ -5,7 +5,7 @@ import Cookies from "js-cookie";
 class Auth {
     
     static async login(username, password) {
-        const res = await axios.post(`${url}/api/intranet/v1/auth/login`, { username, password });
+        const res = await axios.post(`${url}/api/venta/v1/auth/login`, { username, password });
         return res.data;
     }
 
