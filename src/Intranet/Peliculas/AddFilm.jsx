@@ -62,7 +62,7 @@ export default function AddFilm({ onSucess }) {
 
   const consultarGeneros = async () => {
     try {
-      const datos = Genero.consultarGeneros()
+      const datos = await Genero.consultarGeneros()
 
       setGeneros(datos.sort(ordenamientoAlfa))
     } catch (error) {
