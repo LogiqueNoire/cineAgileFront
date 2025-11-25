@@ -14,7 +14,7 @@ pipeline {
     stages {
 
         stage('Checkout') {
-            agent { label 'git-aws-cli' }
+            agent { label 'git-awscli' }
             steps {
                 checkout scm
             }
