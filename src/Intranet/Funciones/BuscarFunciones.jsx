@@ -37,7 +37,7 @@ const BuscarFunciones = ({ handlePeliculaChange, handleSalaChange }) => {
 
     const consultarSedesTodas = async () => {
         try {
-            const datos = Sede.todasSedes()
+            const datos = await Sede.todasSedes()
 
             setValoresBusqueda(prev => ({
                 ...prev,
@@ -52,7 +52,7 @@ const BuscarFunciones = ({ handlePeliculaChange, handleSalaChange }) => {
 
     const consultarSedesActivas = async () => {
         try {
-            const datos = Sede.mostrarSedesActivas()
+            const datos = await Sede.mostrarSedesActivas()
 
             setValoresBusqueda(prev => ({
                 ...prev,
