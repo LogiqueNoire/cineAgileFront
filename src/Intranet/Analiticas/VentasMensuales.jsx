@@ -12,7 +12,7 @@ const VentasMensuales = () => {
     const mesesCortos = ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"];
 
 
-    const consultarVentasMensuales = async () => {
+    const  = async () => {
         try {
             const datos = (await axios.get(`${url}/api/intranet/v1/ventas/totales-mes`, {
                 headers: { Authorization: `Bearer ${Cookies.get("auth-token")}` }
