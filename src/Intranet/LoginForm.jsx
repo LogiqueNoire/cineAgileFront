@@ -56,7 +56,8 @@ const LoginForm = () => {
     }
 
     return (
-        <div className="d-flex justify-content-center align-items-center bg-dark" style={{ marginTop: '25vh', marginBottom: '25vh' }}>
+        <div className="d-flex justify-content-center align-items-center" style={{ marginTop: '25vh', marginBottom: '25vh' }}>
+            <div className="bg-dark" style={{ width: '100vw', height: '100vh', position: 'fixed', zIndex: '-50' }}></div>
             <img src={imagenFondo} alt="" style={{ position: 'fixed', zIndex: '-30' }}/>
             <video src={videoFondo} loop autoPlay muted playsInline style={{ position: 'fixed', zIndex: '-20' }}></video>
             <form className='m-4 mt-0 border border-1 p-5 rounded rounded-4'
