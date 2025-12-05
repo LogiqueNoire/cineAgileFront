@@ -22,7 +22,7 @@ class Pelicula {
     }
 
     static async mostrarPeliculasPorSede(sedeElegida) {
-        const peliculas = await axios.get(`${url}/api/venta/v1/intranet/peliculas`,
+        const peliculas = await axios.get(`${url}/api/intranet/v1/peliculas`,
             {
                 params: { idSede: sedeElegida },
                 headers: { Authorization: `Bearer ${Cookies.get("auth-token")}` }
@@ -31,7 +31,7 @@ class Pelicula {
     }
 
     static async editarPelicula(pelicula) {
-        const peliculas = await axios.patch(`${url}/api/venta/v1/intranet/peliculas`,
+        const peliculas = await axios.patch(`${url}/api/intranet/v1/peliculas`,
             pelicula,
             {
                 headers: { Authorization: `Bearer ${Cookies.get("auth-token")}` }
