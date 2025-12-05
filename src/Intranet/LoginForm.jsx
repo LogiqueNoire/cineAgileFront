@@ -56,7 +56,8 @@ const LoginForm = () => {
     }
 
     return (
-        <div className="d-flex justify-content-center align-items-center bg-dark" style={{ marginTop: '25vh', marginBottom: '25vh' }}>
+        <div className="d-flex justify-content-center align-items-center" style={{ marginTop: '25vh', marginBottom: '25vh' }}>
+            <div className="bg-black" style={{ width: '100vw', height: '100vh', position: 'fixed', zIndex: '-50' }}></div>
             <img src={imagenFondo} alt="" style={{ position: 'fixed', zIndex: '-30' }}/>
             <video src={videoFondo} loop autoPlay muted playsInline style={{ position: 'fixed', zIndex: '-20' }}></video>
             <form className='m-4 mt-0 border border-1 p-5 rounded rounded-4'
@@ -73,8 +74,8 @@ const LoginForm = () => {
                         <input className='form-control text-white bg-transparent fw-bold placeholder-white py-2 px-3 rounded rounded-5' type="password" name="password" id="password"
                             placeholder="Contraseña" onChange={onPasswordChange} required />
                         <BotonCarga submitting={submitting} type="submit" className='btn btn-primary fw-bold rounded rounded-5'
-                            style={{ backgroundColor: '#FFFFFF', color: '#2F0022' }}>
-                            Enviar
+                            style={{ backgroundColor: '#FFFFFF', color: '#01217B' }}>
+                            Ingresar
                         </BotonCarga>
                     </div>
                 </div>
