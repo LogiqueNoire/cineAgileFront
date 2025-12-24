@@ -1,7 +1,7 @@
 import { useState } from "react";
-import BotonCarga from "../../0 componentesGenerales/BotonCarga";
-import Usuario from "../../servicios/Usuario";
-import passwordIcon from "../../assets/modulos/password.svg";
+import BotonCarga from "@/components/BotonCarga";
+import Usuario from "@/services/Usuario";
+import passwordIcon from "@/assets/modulos/password.svg";
 
 const CambiarContra = () => {
     const [contraActual, setContraActual] = useState("");

@@ -1,11 +1,11 @@
 import { useState } from "react";
-import desarrolladorIcono from "../../assets/modulos/developer.svg"
-import Toast from "../../Toast";
+import desarrolladorIcono from "@/assets/modulos/developer.svg"
+import Toast from "@/components/Toast/Toast";
 import axios from "axios";
-import { url } from "../../configuracion/backend";
+import { url } from "@/configuracion/backend";
 import Cookies from "js-cookie";
-import MuyPronto from "../../Muypronto";
-import dbIcon from "../../assets/modulos/db.svg"
+import MuyPronto from "@/components/Muypronto";
+import dbIcon from "@/assets/modulos/db.svg"
 
 const OpcionesDesarrollador = () => {
     const [toast, setToast] = useState({ title: '', visible: false });

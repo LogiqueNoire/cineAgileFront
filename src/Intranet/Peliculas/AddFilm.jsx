@@ -1,14 +1,14 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Link, UNSAFE_useScrollRestoration } from 'react-router-dom';
-import { url } from '../../configuracion/backend.js'
+import { url } from '@/configuracion/backend.js'
 import { format } from 'date-fns'
 
-import peliculaIcono from '../../assets/modulos/pelicula.svg'
-import Loading from '../../0 componentesGenerales/Loading.jsx';
+import peliculaIcono from '@/assets/modulos/pelicula.svg'
+import Loading from '@/components/Loading/Loading.jsx';
 import Cookies from 'js-cookie';
-import Toast from '../../Toast.jsx';
-import Genero from '../../servicios/Genero.js';
+import Toast from '@/components/Toast/Toast.jsx';
+import Genero from '@/services/Genero.js';
 
 export default function AddFilm({ onSucess }) {
   const [toast, setToast] = useState({ tipo: '', visible: false, titulo: '', mensaje: '' });

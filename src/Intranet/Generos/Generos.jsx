@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
-import Loading from "../../0 componentesGenerales/Loading";
+import Loading from "@/components/Loading/Loading";
 import axios from "axios";
-import { url } from "../../configuracion/backend";
+import { url } from "@/configuracion/backend";
 import Cookies from "js-cookie";
-import iconoGuardar from "../../assets/operaciones/guardar.svg"
-import Toast from "../../Toast";
-import genresIcon from '../../assets/modulos/genresIcon.svg'
-import Genero from "../../servicios/Genero";
+import iconoGuardar from "@/assets/operaciones/guardar.svg"
+import Toast from "@/components/Toast/Toast";
+import genresIcon from '@/assets/modulos/genresIcon.svg'
+import Genero from "@/services/Genero";
 
 const Generos = () => {
     const [loading, setLoading] = useState(true)

@@ -1,10 +1,10 @@
 import { useContext, useState, useEffect } from "react";
 import { FuncionesContext } from "./FuncionesContext";
-import Loading from '../../0 componentesGenerales/Loading';
+import Loading from '@/components/Loading/Loading';
 import axios from 'axios';
-import { url } from "../../configuracion/backend"
+import { url } from "@/configuracion/backend"
 import Cookies from 'js-cookie';
-import Sede from "../../servicios/Sede";
+import Sede from "@/services/Sede";
 
 const ordenamientoAlfa = (a, b) => {
     const x = a.nombre.toLowerCase();

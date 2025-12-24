@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import AddSede from './AddSede';
-import sala from '../../assets/sala2.svg';
-import guardar from '../../assets/operaciones/guardar.svg'
-import iconoApagar from '../../assets/operaciones/apagar.svg'
+import sala from '@/assets/sala2.svg';
+import guardar from '@/assets/operaciones/guardar.svg'
+import iconoApagar from '@/assets/operaciones/apagar.svg'
 import axios from 'axios';
-import { url } from "../../configuracion/backend"
-import Loading from '../../0 componentesGenerales/Loading';
+import { url } from "@/configuracion/backend"
+import Loading from '@/components/Loading/Loading';
 import { ModalSalas } from './ModalSalas'
 import Cookies from 'js-cookie';
 import { useLocation } from 'react-router-dom';
 import "./VentanaSedesYSalas.css"
-import Toast from '../../Toast';
+import Toast from '@/components/Toast/Toast';
 
 const VentanaSedesYSalas = () => {
     const location = useLocation();

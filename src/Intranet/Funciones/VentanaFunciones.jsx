@@ -1,18 +1,18 @@
 import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
-import { url } from "../../configuracion/backend"
+import { url } from "@/configuracion/backend"
 import Cookies from 'js-cookie';
 import { se } from 'date-fns/locale';
 import { set } from 'date-fns';
-import SalaButaca from '../../servicios/SalaButaca';
-import Pelicula from '../../servicios/Pelicula';
+import SalaButaca from '@/services/SalaButaca';
+import Pelicula from '@/services/Pelicula';
 import Cronograma from './Cronograma';
 import { format } from 'date-fns'
 import { FuncionesContext } from './FuncionesContext';
 import BuscarFunciones from './BuscarFunciones';
 import ModuloFuncion from './ModuloFuncion';
-import Fecha from '../../servicios/Fecha';
-import Funcion from '../../servicios/Funcion';
+import Fecha from '@/services/Fecha';
+import Funcion from '@/services/Funcion';
 
 const ordenamientoAlfa = (a, b) => {
     const x = a.nombre.toLowerCase();

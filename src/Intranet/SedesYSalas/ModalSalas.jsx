@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
 import axios from 'axios';
-import { url } from '../../configuracion/backend.js'
-import Loading from '../../0 componentesGenerales/Loading';
+import { url } from '@/configuracion/backend.js'
+import Loading from '@/components/Loading/Loading.jsx';
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
-import pencilSvg from "../../assets/operaciones/pencil.svg"
-import BotonCarga from "../../0 componentesGenerales/BotonCarga.jsx";
-import iconoApagar from '../../assets/operaciones/apagar.svg'
-import SalaButaca from "../../servicios/SalaButaca.js";
-import Toast from "../../Toast.jsx";
+import pencilSvg from "@/assets/operaciones/pencil.svg"
+import BotonCarga from "@/components/BotonCarga.jsx";
+import iconoApagar from '@/assets/operaciones/apagar.svg'
+import SalaButaca from "@/services/SalaButaca.js";
+import Toast from "@/components/Toast/Toast.jsx";
 
 export const ModalSalas = ({ onClose, sede }) => {
   const navigate = useNavigate();

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import Usuario from "../../servicios/Usuario";
-import Loading from "../../0 componentesGenerales/Loading";
-import usuarioIcon from "../../assets/modulos/modulo_usuario_icono.svg"
+import Usuario from "@/services/Usuario";
+import Loading from "@/components/Loading/Loading";
+import usuarioIcon from "@/assets/modulos/modulo_usuario_icono.svg"
 
 const listaUsuarios = [
     {

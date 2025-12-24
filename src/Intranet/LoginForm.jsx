@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import Auth from "../servicios/Auth";
+import Auth from "@/services/Auth";
 import Cookies from "js-cookie";
 import { useNavigate, Navigate } from "react-router-dom";
-import BotonCarga from "../0 componentesGenerales/BotonCarga"
-import videoFondo from "../assets/fondoLogin.mp4"
-import imagenFondo from "../assets/fondoLogin.png"
+import BotonCarga from "@/components/BotonCarga"
+import videoFondo from "@/assets/fondoLogin.mp4"
+import imagenFondo from "@/assets/fondoLogin.png"
 import "./Intranet.css"
 
 const LoginForm = () => {

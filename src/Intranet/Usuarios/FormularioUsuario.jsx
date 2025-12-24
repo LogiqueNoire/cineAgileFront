@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import BotonCarga from "../../0 componentesGenerales/BotonCarga";
-import Sede from "../../servicios/Sede";
-import Usuario from "../../servicios/Usuario";
+import BotonCarga from "@/components/BotonCarga";
+import Sede from "@/services/Sede";
+import Usuario from "@/services/Usuario";
 
 const ordenamientoAlfa = (a, b) => {
     const x = a.nombre.toLowerCase();

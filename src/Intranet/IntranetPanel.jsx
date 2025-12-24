@@ -1,13 +1,13 @@
-import pelicula from '../assets/modulos/pelicula.svg'
-import sede from '../assets/modulos/sedeIcon.svg'
-import funciones from '../assets/modulos/funciones.svg'
-import genresIcon from '../assets/modulos/genresIcon.svg'
-import ajustes from '../assets/modulos/ajustes.svg'
-import passwordIcon from '../assets/modulos/password.svg'
-import usuariosInternos from '../assets/modulos/modulo_usuario_icono.svg'
-import statisticsIcon from '../assets/modulos/statisticsIcon.svg'
-import auditarIcono from '../assets/modulos/audit.svg'
-import desarrolladorIcono from '../assets/modulos/developer.svg'
+import pelicula from '@/assets/modulos/pelicula.svg'
+import sede from '@/assets/modulos/sedeIcon.svg'
+import funciones from '@/assets/modulos/funciones.svg'
+import genresIcon from '@/assets/modulos/genresIcon.svg'
+import ajustes from '@/assets/modulos/ajustes.svg'
+import passwordIcon from '@/assets/modulos/password.svg'
+import usuariosInternos from '@/assets/modulos/modulo_usuario_icono.svg'
+import statisticsIcon from '@/assets/modulos/statisticsIcon.svg'
+import auditarIcono from '@/assets/modulos/audit.svg'
+import desarrolladorIcono from '@/assets/modulos/developer.svg'
 import { useNavigate } from 'react-router-dom';
 
 const IntranetPanel = () => {

@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 import "./OrganizadorButacas.css";
-import SalaButaca from "../../servicios/SalaButaca";
+import SalaButaca from "@/services/SalaButaca";
 
 const SeccionBotones = ({ onClick, row, col }) => {
     return (

@@ -2,33 +2,33 @@ import React, { StrictMode } from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-import App from './App.jsx';
-import Inicio from './Inicio.jsx'
+import App from '@/App.jsx';
 
 // Componentes de venta
-import PeliculaSedes from './3 componentesVenta/PeliculaSedes.jsx';
-import ButacaSelect from './3 componentesVenta/ButacaSelect.jsx'
-import { VentaContextProvider } from './3 componentesVenta/VentaContextProvider.jsx';
-import FlujoVenta from './3 componentesVenta/FlujoVenta.jsx';
+import PeliculaSedes from '@/Venta/3 componentesVenta/PeliculaSedes.jsx';
+import ButacaSelect from '@/Venta/3 componentesVenta/ButacaSelect.jsx'
+import { VentaContextProvider } from '@/Venta/3 componentesVenta/VentaContextProvider.jsx';
+import FlujoVenta from '@/Venta/3 componentesVenta/FlujoVenta.jsx';
 
-import InfoEntradas from './5 6 pago y entradas/InfoEntradas.jsx';
+import InfoEntradas from '@/Venta/5 6 pago y entradas/InfoEntradas.jsx';
 
 // Intranet
-import IntranetPanel from './Intranet/IntranetPanel.jsx';
-import VentanaPeliculas from './Intranet/Peliculas/VentanaPeliculas.jsx';
-import VentanaSedesYSalas from './Intranet/SedesYSalas/VentanaSedesYSalas.jsx';
-import VentanaFunciones from './Intranet/Funciones/VentanaFunciones.jsx';
-import VentanaUsuario from './Intranet/Usuarios/VentanaUsuario.jsx';
-import VentanaAjustes from './Intranet/Ajustes/VentanaAjustes.jsx';
-import Intranet from './Intranet/Intranet.jsx';
-import LoginForm from './Intranet/LoginForm.jsx';
-import Sala from './Intranet/SedesYSalas/Sala.jsx';
-import { FuncionesContextProvider } from './Intranet/Funciones/FuncionesContext.jsx';
-import Error from "./Error.jsx"
-import Analiticas from './Intranet/Analiticas/Analiticas.jsx';
-import Generos from './Intranet/Generos/Generos.jsx';
-import Auditoria from './Intranet/Auditoria/Auditoria.jsx';
-import OpcionesDesarrollador from './Intranet/Desarrollador/OpcionesDesarrollador.jsx'
+import IntranetPanel from '@/Intranet/IntranetPanel.jsx';
+import VentanaPeliculas from '@/Intranet/Peliculas/VentanaPeliculas.jsx';
+import VentanaSedesYSalas from '@/Intranet/SedesYSalas/VentanaSedesYSalas.jsx';
+import VentanaFunciones from '@/Intranet/Funciones/VentanaFunciones.jsx';
+import VentanaUsuario from '@/Intranet/Usuarios/VentanaUsuario.jsx';
+import VentanaAjustes from '@/Intranet/Ajustes/VentanaAjustes.jsx';
+import Intranet from '@/Intranet/Intranet.jsx';
+import LoginForm from '@/Intranet/LoginForm.jsx';
+import Sala from '@/Intranet/SedesYSalas/Sala.jsx';
+import { FuncionesContextProvider } from '@/Intranet/Funciones/FuncionesContext.jsx';
+import Error from "@/components/Error.jsx"
+import Analiticas from '@/Intranet/Analiticas/Analiticas.jsx';
+import Generos from '@/Intranet/Generos/Generos.jsx';
+import Auditoria from '@/Intranet/Auditoria/Auditoria.jsx';
+import OpcionesDesarrollador from '@/Intranet/Desarrollador/OpcionesDesarrollador.jsx'
+import FilmPanel from '@/Venta/1 componentesCartelera/FilmPanel';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
     <BrowserRouter>
@@ -37,7 +37,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
                 hijas (ej: Inicio) dependiendo de la ruta. En este caso, Inicio es lo que se motrará en la
                 ruta por defecto. Esto nos permite cambiar entre páginas sin necesidad de recargar. */ }
             <Route path='/' element={<App />}>
-                <Route index element={<Inicio />} />
+                <Route index element={<FilmPanel />} />
                 <Route path='/funcion/pelicula/' element={<PeliculaSedes />} />
                 <Route path='/compra' element={<VentaContextProvider><FlujoVenta /></VentaContextProvider>} />
                 <Route path='/entradas' element={<InfoEntradas />} />

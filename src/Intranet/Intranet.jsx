@@ -1,9 +1,9 @@
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
-import Header from '../0 componentesGenerales/Header.jsx'
+import Header from '@/components/Header/Header.jsx'
 import LoginForm from './LoginForm.jsx';
 import { useEffect, useMemo, useState } from 'react';
 import Cookies from 'js-cookie';
-import Auth from '../servicios/Auth.js';
+import Auth from '@/services/Auth.js';
 import './Intranet.css'
 
 const Intranet = () => {

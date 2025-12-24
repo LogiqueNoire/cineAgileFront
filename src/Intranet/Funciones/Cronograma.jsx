@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
-import MostrarSedesHorarios from "../../3 componentesVenta/MostrarSedesHorarios";
+import MostrarSedesHorarios from "@/Venta/3 componentesVenta/MostrarSedesHorarios";
 import { useContext } from "react";
 import { FuncionesContext } from "./FuncionesContext";
 import './Cronograma.css'

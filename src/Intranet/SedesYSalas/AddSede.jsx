@@ -1,11 +1,11 @@
 import axios from 'axios';
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { url } from '../../configuracion/backend.js'
+import { url } from '@/configuracion/backend.js'
 import Cookies from 'js-cookie';
-import sedeIcon from '../../assets/modulos/sedeIcon.svg';
-import BotonCarga from '../../0 componentesGenerales/BotonCarga.jsx';
-import Toast from '../../Toast.jsx';
+import sedeIcon from '@/assets/modulos/sedeIcon.svg';
+import BotonCarga from '@/components/BotonCarga.jsx';
+import Toast from '@/components/Toast/Toast.jsx';
 
 export default function AddSede({ onSucess }) {
   const [toast, setToast] = useState({ tipo: '', visible: false, titulo: '', mensaje: '' });

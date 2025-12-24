@@ -1,16 +1,14 @@
 import { useEffect, useState } from "react";
-import { url } from "../../configuracion/backend";
+import { url } from "@/configuracion/backend";
 import axios from "axios";
 import Cookies from "js-cookie";
-import Loading from "../../0 componentesGenerales/Loading";
+import Loading from "@/components/Loading/Loading";
 import { Bar, BarChart, CartesianGrid, Rectangle, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 
 const VentasMensuales = () => {
-
     const [ventasMensuales, setVentasMensuales] = useState()
     const [loading, setLoading] = useState(true)
     const mesesCortos = ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"];
-
 
     const consultarVentasMensuales = async () => {
         try {

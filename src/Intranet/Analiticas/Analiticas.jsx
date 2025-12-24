@@ -6,12 +6,11 @@ import {
     ZAxis,
     Line
 } from 'recharts';
-import Loading from '../../0 componentesGenerales/Loading';
+import Loading from '@/components/Loading/Loading';
 import axios from 'axios';
-import { url } from '../../configuracion/backend';
+import { url } from '@/configuracion/backend';
 import Cookies from 'js-cookie';
 import "./Analiticas.css"
-import { format } from 'date-fns';
 import VentasMensuales from './VentasMensuales';
 import Tarjetas from './Tarjetas';
 import DesempeñoSemanal from './DesempeñoSemanal';
@@ -63,10 +62,6 @@ const Analiticas = () => {
             setLoading(false)
         }
     }
-
-
-
-
 
     useEffect(() => {
         obtenerPeliculasMasTaquillerasDelAnio()

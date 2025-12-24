@@ -1,17 +1,17 @@
-import Pelicula from "../../servicios/Pelicula";
-import FTextInput from "../../0 componentesGenerales/FTextInput";
-import FSelectInput from "../../0 componentesGenerales/FSelectInput";
-import FNumberInput from "../../0 componentesGenerales/FNumberInput";
-import FDateInput from "../../0 componentesGenerales/FDateInput";
-import FTextAreaInput from "../../0 componentesGenerales/FTextAreaInput";
+import Pelicula from "@/services/Pelicula";
+import FTextInput from "@/components/FTextInput";
+import FSelectInput from "@/components/FSelectInput";
+import FNumberInput from "@/components/FNumberInput";
+import FDateInput from "@/components/FDateInput";
+import FTextAreaInput from "@/components/FTextAreaInput";
 import FGeneroInput from "./FGeneroInput";
 
 import Cookies from "js-cookie";
 import axios from "axios";
-import { url } from "../../configuracion/backend";
+import { url } from "@/configuracion/backend";
 import { useState, useEffect } from "react";
-import Loading from "../../0 componentesGenerales/Loading";
-import Genero from "../../servicios/Genero";
+import Loading from "@/components/Loading/Loading";
+import Genero from "@/services/Genero";
 
 const ordenamientoAlfa = (a, b) => {
     const x = a.nombre.toLowerCase();

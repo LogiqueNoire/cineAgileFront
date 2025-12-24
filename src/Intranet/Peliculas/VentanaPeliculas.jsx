@@ -2,11 +2,11 @@ import React, { useContext, useEffect, useState } from 'react';
 import AddFilm from './AddFilm';
 import './VentanaPeliculas.css'
 import axios from 'axios';
-import { url } from "../../configuracion/backend"
-import Loading from '../../0 componentesGenerales/Loading';
+import { url } from "@/configuracion/backend"
+import Loading from '@/components/Loading/Loading';
 import Cookies from 'js-cookie';
 import { format, parse } from 'date-fns';
-import iconoEditar from '../../assets/operaciones/editar.svg'
+import iconoEditar from '@/assets/operaciones/editar.svg'
 import PeliculaModal from './PeliculaModal';
 
 const ordenamientoFecha = (a, b) => {

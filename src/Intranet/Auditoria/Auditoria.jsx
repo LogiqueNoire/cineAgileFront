@@ -1,10 +1,10 @@
 import axios from "axios"
 import { useEffect, useState } from "react";
-import { url } from "../../configuracion/backend";
+import { url } from "@/configuracion/backend";
 import Cookies from "js-cookie";
 import { format } from "date-fns";
-import auditIcon from "../../assets/modulos/audit.svg"
-import Loading from "../../0 componentesGenerales/Loading";
+import auditIcon from "@/assets/modulos/audit.svg"
+import Loading from "@/components/Loading/Loading";
 
 const Auditoria = () => {
     const [data, setData] = useState()

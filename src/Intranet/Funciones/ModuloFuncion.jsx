@@ -1,15 +1,15 @@
 import { useContext, useState, useEffect } from "react";
 import { FuncionesContext } from "./FuncionesContext";
-import Loading from '../../0 componentesGenerales/Loading';
+import Loading from '../../components/Loading/Loading';
 import axios from 'axios';
 import { url } from "../../configuracion/backend"
 import Cookies from 'js-cookie';
 import { format, isBefore } from "date-fns";
 import './ModuloFuncion.css'
-import SalaButaca from '../../servicios/SalaButaca';
-import Toast from '../../Toast'
+import SalaButaca from '../../services/SalaButaca';
+import Toast from '../../components/Toast/Toast'
 
-import Fecha from "../../servicios/Fecha";
+import Fecha from "../../services/Fecha";
 
 const ModuloFuncion = ({ handlePeliculaChange, handleSalaChange }) => {
     const [toast, setToast] = useState({ tipo: '', visible: false, titulo: '', mensaje: '' });

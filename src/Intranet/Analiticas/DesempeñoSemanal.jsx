@@ -1,6 +1,6 @@
 import axios from "axios";
 import { ResponsiveContainer, Scatter, ScatterChart, Tooltip, XAxis, YAxis, ZAxis } from "recharts";
-import { url } from "../../configuracion/backend";
+import { url } from "@/configuracion/backend";
 import { useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import { format } from "date-fns";

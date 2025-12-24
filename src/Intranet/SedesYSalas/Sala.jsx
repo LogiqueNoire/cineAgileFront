@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import OrganizadorButacas from "./OrganizadorButacas";
-import SalaButaca from "../../servicios/SalaButaca";
-import BotonCarga from "../../0 componentesGenerales/BotonCarga";
-import ButacaMap from "../../3 componentesVenta/ButacaMap";
+import SalaButaca from "@/services/SalaButaca";
+import BotonCarga from "@/components/BotonCarga";
+import ButacaMap from "@/Venta/3 componentesVenta/ButacaMap";
 import EditorButacas from "./EditorButacas";
 
 const Sala = () => {
