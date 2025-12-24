@@ -1,6 +1,7 @@
 import React from "react";
 import { useState, useContext } from "react";
 import { VentaContext } from "@/Venta/3 componentesVenta/VentaContextProvider.jsx"
+import { env } from "@/configuracion/backend";
 
 const FilaPrecio = ({ nombre, texto, precio, seleccionadas }) => {
     //const [cantidad, setCantidad] = useState(0);
@@ -13,7 +14,7 @@ const FilaPrecio = ({ nombre, texto, precio, seleccionadas }) => {
     } else {
         contexto.butacaContext.seleccionadas = seleccionadas;
     }
-        console.log("Seleccionadas", contexto.butacaContext)
+        env === "dev" && console.log("Seleccionadas", contexto.butacaContext)
 
     let cantidad, setCantidad
 
@@ -37,14 +38,14 @@ const FilaPrecio = ({ nombre, texto, precio, seleccionadas }) => {
         default:
             break;
     }
-    console.log("total", contexto.totalContext.total)
+    env === "dev" && console.log("total", contexto.totalContext.total)
 
     const agregar = () => {
         if (seleccionadas > entradasSeleccionadas) {
-            console.log("entradas seleccionadas", entradasSeleccionadas)
+            env === "dev" && console.log("entradas seleccionadas", entradasSeleccionadas)
             setCantidad(cantidad + 1);
             contexto.entradasContext.setEntradasSeleccionadas(entradasSeleccionadas + 1)
-            console.log("precio", precio)
+            env === "dev" && console.log("precio", precio)
             contexto.totalContext.setTotal(contexto.totalContext.total + parseFloat(precio));
         }
     };
@@ -53,7 +54,7 @@ const FilaPrecio = ({ nombre, texto, precio, seleccionadas }) => {
         if (cantidad > 0) {
             setCantidad(cantidad - 1);
             contexto.entradasContext.setEntradasSeleccionadas(entradasSeleccionadas - 1)
-            console.log("precio", precio)
+            env === "dev" && console.log("precio", precio)
             contexto.totalContext.setTotal(contexto.totalContext.total - parseFloat(precio));
         }
     };

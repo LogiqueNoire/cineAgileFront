@@ -5,6 +5,7 @@ import SalaButaca from "@/services/SalaButaca";
 import BotonCarga from "@/components/BotonCarga";
 import ButacaMap from "@/Venta/3 componentesVenta/ButacaMap";
 import EditorButacas from "./EditorButacas";
+import { env } from "@/configuracion/backend";
 
 const Sala = () => {
     const navigate = useNavigate();
@@ -57,7 +58,7 @@ const Sala = () => {
 
             SalaButaca.crearSala(crearSalaReq).then(res => {
                 navigate("/intranet/sedesysalas", { state: { sedeRedir: sede } });
-                console.log("Sala creada!");
+                env === "dev" && console.log("Sala creada!");
             }).catch(err => {
                 console.log(err);
                 if (err.response.status == 409) {
@@ -83,7 +84,7 @@ const Sala = () => {
 
             SalaButaca.editarSala(editarSalaReq).then(res => {
                 navigate("/intranet/sedesysalas", { state: { sedeRedir: sede } });
-                console.log("Sala editada!");
+                env === "dev" && console.log("Sala editada!");
             }).catch(err => {
                 setError(err.response.data);
             }).finally(_ => {
@@ -93,7 +94,7 @@ const Sala = () => {
         }
     }
 
-    console.log(butacas);
+    env === "dev" && console.log(butacas);
 
     return (
         <div className="container-fluid py-3 col-10">

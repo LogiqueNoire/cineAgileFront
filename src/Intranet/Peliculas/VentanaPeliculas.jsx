@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import AddFilm from './AddFilm';
 import './VentanaPeliculas.css'
 import axios from 'axios';
-import { url } from "@/configuracion/backend"
+import { env, url } from "@/configuracion/backend"
 import Loading from '@/components/Loading/Loading';
 import Cookies from 'js-cookie';
 import { format, parse } from 'date-fns';
@@ -42,7 +42,7 @@ const VentanaPeliculas = () => {
     useEffect(() => {
         if (fechaReal) {
             consultarPeliculas()
-            console.log("Fecha real obtenida:", fechaReal);
+            env === "dev" && console.log("Fecha real obtenida:", fechaReal);
         }
     }, [fechaReal]);
 
@@ -56,13 +56,13 @@ const VentanaPeliculas = () => {
         } catch (error) {
             console.error(error);
         } finally {
-            //console.log(fechaReal.toISOString())
+            env === "dev" && console.log(fechaReal.toISOString())
             setLoading(false);
         }
     }
 
     useEffect(() => {
-        console.log(lista)
+        env === "dev" && console.log(lista)
         setResultados(lista)
     }, [lista])
 
@@ -90,13 +90,15 @@ const VentanaPeliculas = () => {
         } else {
             setResultados(lista);
         }
-        console.log("resultados", resultados)
+        env === "dev" && console.log(resultados)
 
     };
 
     const seleccionar = (item) => {
         const datos = item.split('|').map(e => e.trim())
-        console.log(datos)
+        if(e)
+        
+        env === "dev" && console.log(datos)
         const encontrado = productos.find(el => el.nombre == datos[0])
         setResultados([]);
         setLista(prev => [...prev, encontrado]);

@@ -12,6 +12,7 @@ import Entrada from "@/services/Entrada";
 import { format, isBefore } from "date-fns";
 
 import cancelarSvg from "@/assets/operaciones/X.svg";
+import { env } from "@/configuracion/backend";
 
 const ventanas = [ButacaSelect, VentanaPrecios, VentanaPago];
 
@@ -28,7 +29,7 @@ const FlujoVenta = () => {
 
     const next = () => {
         Funcion.estaDisponible(funcion.idFuncion).then(res => {
-            console.log(funcion, res);
+            env === "dev" && console.log(funcion, res);
             setIndice(indice + 1);
         }).catch(err => {
             console.log(err);
@@ -97,7 +98,7 @@ const FlujoVenta = () => {
             if (indice === 0) {
                 if (contexto.butacaContext.seleccionadas.length === 0) {
                     setMsjError("No seleccionaste ninguna butaca")
-                    console.log("indice", indice)
+                    env === "dev" && console.log("indice", indice)
                     setError(true)
                 } else {
                     setMsjError("No")
@@ -108,7 +109,7 @@ const FlujoVenta = () => {
                 setError(false)
                 if (contexto.entradasContext.entradasSeleccionadas != contexto.butacaContext.seleccionadas.length) {
                     setError(true)
-                    console.log("indice", indice)
+                    env === "dev" && console.log("indice", indice)
                 } else {
                     setMsjError("No")
                     setError(false)
@@ -129,7 +130,7 @@ const FlujoVenta = () => {
     }, [ location ]);
 
     const retroceder = () => {
-        console.log("retrocediendo")
+        env === "dev" && console.log("retrocediendo")
         if (indice != 0) {
             if (indice == 1) {
                 contexto.entradasContext.setEntradasSeleccionadas(0)
@@ -140,10 +141,10 @@ const FlujoVenta = () => {
                 contexto.totalContext.setTotal(0)
             }
             setIndice(indice - 1)
-            console.log("indice", indice)
+            env === "dev" && console.log("indice", indice)
             setError(false)
         } else {
-            console.log("indice", indice)
+            env === "dev" && console.log("indice", indice)
         }
 
     }

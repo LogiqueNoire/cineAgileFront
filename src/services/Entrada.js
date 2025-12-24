@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { url } from '@/configuracion/backend'
+import { env, url } from '@/configuracion/backend'
 import jsPDF from 'jspdf';
 import imagenMarco from '@/assets/marcoEntrada4.png'
 import fondoEntrada from '@/assets/fondoEntrada.jpg'
@@ -10,7 +10,7 @@ class Entrada {
 
     static async comprarEntrada(datos) {
         const resultado = await axios.post(`${url}/api/venta/v1/entradas`, datos);
-        console.log("resultado entrada js", resultado)
+        env === "dev" && console.log("resultado entrada js", resultado)
         return resultado;
     }
 

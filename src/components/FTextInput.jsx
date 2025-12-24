@@ -2,13 +2,14 @@ import { useState } from "react";
 
 import guardar from '@/assets/operaciones/guardar.svg';
 import pencilSvg from "@/assets/operaciones/pencil.svg"
+import { env } from "@/configuracion/backend";
 
 const FTextInput = ({ className='', valorPorDefecto, label, onSave, atributo, required }) => {
     const [ modo, setModo ] = useState("read"); // read, edit, submitting
     const [ input, setInput ] = useState(valorPorDefecto);
     const [ status, setStatus ] = useState({ error: false, msg: null });
 
-    console.log(input.trim());
+    env === "dev" && console.log(input.trim());
 
     const onEditClick = () => {
         setModo("edit");

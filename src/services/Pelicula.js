@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { url } from '@/configuracion/backend'
+import { env, url } from '@/configuracion/backend'
 import Cookies from 'js-cookie';
 
 class Pelicula {
@@ -10,9 +10,8 @@ class Pelicula {
     }
 
     static async mostrarPeliculasEnCartelera(fechaReal) {
-        console.log("aqui")
         const peliculas = await axios.get(`${url}/api/venta/v1/peliculas/encartelera?fecha=${fechaReal}`)
-        console.log("peliculas", peliculas.data)
+        env === "dev" && console.log("peliculas", peliculas.data)
         return peliculas.data
     }
     

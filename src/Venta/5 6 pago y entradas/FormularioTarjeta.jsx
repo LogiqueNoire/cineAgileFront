@@ -45,7 +45,7 @@ export const FormularioTarjeta = ({ tarjeta, setTarjeta, setSubmitting, setStatu
       }
 
       Entrada.comprarEntrada(cuerpo).then(res => {
-        console.log(res);
+        env === "dev" && console.log(res);
         navigate("/entradas", { state: { entradas: res.data.entradasCompradasDTO } })
       }).catch(err => {
         console.log(err);
@@ -92,7 +92,7 @@ export const FormularioTarjeta = ({ tarjeta, setTarjeta, setSubmitting, setStatu
           onApprove={(_, actions) => {
             return actions.order.capture().then(details => {
               registrarTest()
-              console.log(details)
+              env === "dev" && console.log(details)
               setToast({
                 visible: true,
                 titulo: 'Pago exitoso',

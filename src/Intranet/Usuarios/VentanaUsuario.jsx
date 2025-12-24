@@ -6,7 +6,6 @@ const VentanaUsuario = () => {
     const [ actualizado, setActualizado ] = useState(true);
 
     const actualizar = () => {
-        console.log('hi')
         setActualizado(!actualizado);
     }
 

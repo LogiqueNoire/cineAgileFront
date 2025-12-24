@@ -6,7 +6,7 @@ import Pelicula from "@/services/Pelicula"
 import FilmTab from './FilmTab';
 import Loading from '@/components/Loading/Loading';
 import axios from 'axios';
-import { url } from '@/configuracion/backend';
+import { env, url } from '@/configuracion/backend';
 
 import '@/Inicio.css'
 import "./FilmPanel.css"
@@ -34,11 +34,11 @@ const FilmPanel = () => {
 
             switch (estado) {
                 case "En cartelera":
-                    console.log("Fecha enviada a EnCartelera:", fecha.toISOString());
+                    env === "dev" && console.log("Fecha enviada a EnCartelera:", fecha.toISOString());
                     caller = () => Pelicula.mostrarPeliculasEnCartelera(fecha.toISOString());
                     break;
                 case "Próximamente":
-                    console.log("Fecha enviada a Proximamente:", fecha.toISOString());
+                    env === "dev" && console.log("Fecha enviada a Proximamente:", fecha.toISOString());
                     caller = () => Pelicula.mostrarPeliculasProximas(fecha.toISOString());
                     break;
                 default:

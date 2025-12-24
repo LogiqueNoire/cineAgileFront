@@ -44,7 +44,7 @@ const FormularioUsuario = ({ actualizar }) => {
             sedeId: sedeSeleccionada
         }
 
-        console.log(form);
+        env === "dev" && console.log(form);
 
         Usuario.crearUsuario(form).then(() => {
             actualizar();
@@ -54,8 +54,6 @@ const FormularioUsuario = ({ actualizar }) => {
         }).finally(_ => {
             setSubmitting(false);
         })
-        console.log('hi')
-
     }
 
     return (

@@ -1,6 +1,6 @@
 import axios from "axios";
 import { ResponsiveContainer, Scatter, ScatterChart, Tooltip, XAxis, YAxis, ZAxis } from "recharts";
-import { url } from "@/configuracion/backend";
+import { env, url } from "@/configuracion/backend";
 import { useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import { format } from "date-fns";
@@ -78,7 +78,7 @@ const DesempeñoSemanal = ({ fechaConsultada }) => {
             const datos = (await axios.get(`${url}/api/intranet/v1/ventas/desempeno-semanal?idPelicula=${p}&fecha=${f}`, {
                 headers: { Authorization: `Bearer ${Cookies.get("auth-token")}` }
             })).data;
-            console.log("consultado con peli", peliculaElegida)
+            env === "dev" && console.log(peliculaElegida)
             setVentasDetalladas(datos);
         } catch (error) {
             console.error(error);
@@ -97,8 +97,7 @@ const DesempeñoSemanal = ({ fechaConsultada }) => {
 
     useEffect(() => {
         if (ventasDetalladas != undefined) {
-            console.log(ventasDetalladas)
-            console.log("editando data")
+            env === "dev" && console.log(ventasDetalladas)
             const parseada = ventasDetalladas.map(el => ({ hour: el.hora, index: el.dia, value: el.ventas.toFixed(2) }))
             const array = []
             for (let i = 0; i < 7; i++) {
@@ -115,11 +114,11 @@ const DesempeñoSemanal = ({ fechaConsultada }) => {
     }, [ventasDetalladas])
 
     useEffect(() => {
-        console.log(data)
+        env === "dev" && console.log(data)
     }, [data])
 
     useEffect(() => {
-        console.log(listaPeliculas)
+        env === "dev" && console.log(listaPeliculas)
     }, [listaPeliculas])
 
     return (

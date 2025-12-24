@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
-import { url } from "@/configuracion/backend"
+import { env, url } from "@/configuracion/backend"
 import Cookies from 'js-cookie';
 import { se } from 'date-fns/locale';
 import { set } from 'date-fns';
@@ -38,7 +38,7 @@ const VentanaFunciones = () => {
     } = useContext(FuncionesContext);
 
     useEffect(() => {
-        console.log("Funcion:", funcion.funcionElegida);
+        env === "dev" && console.log("Funcion:", funcion.funcionElegida);
         if (funcion.funcionElegida) {
             const fhi = new Date(funcion.funcionElegida.fechaHoraInicio);
 

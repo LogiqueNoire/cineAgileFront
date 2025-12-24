@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Link, UNSAFE_useScrollRestoration } from 'react-router-dom';
-import { url } from '@/configuracion/backend.js'
+import { env, url } from '@/configuracion/backend.js'
 import { format } from 'date-fns'
 
 import peliculaIcono from '@/assets/modulos/pelicula.svg'
@@ -89,7 +89,7 @@ export default function AddFilm({ onSucess }) {
         await Promise.all([consultarGeneros(), obtenerFecha()]);
 
         // Aquí puedes ejecutar lógica adicional si ambas funciones terminaron bien
-        console.log("Generos y fecha obtenidos con éxito");
+        env === "dev" && console.log("Generos y fecha obtenidos con éxito");
 
         if (fechaReal !== undefined && generos !== undefined) {
           // Aquí va tu código
@@ -107,7 +107,7 @@ export default function AddFilm({ onSucess }) {
   useEffect(() => {
     if (fechaReal) {
       /*setFechaElegida(fechaReal)*/
-      console.log("Fecha real obtenida:", fechaReal);
+      env === "dev" && console.log("Fecha real obtenida:", fechaReal);
       setPelicula((prev) => ({
         ...prev,
         fechaInicioEstreno: fechaReal,
@@ -129,7 +129,7 @@ export default function AddFilm({ onSucess }) {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    console.log(pelicula)
+    env === "dev" && console.log(pelicula)
 
     if (!(genero.length == 0 || clasificacion.trim() === '' || duracion === 0
       || director.trim() === '' || imageUrl.trim() === '' || sinopsis.trim() === '')) {
@@ -174,7 +174,7 @@ export default function AddFilm({ onSucess }) {
         console.error(error);
       }
     } else {
-      console.log('error 1')
+      env === "dev" && console.log('error 1')
       setToast({
         tipo: 'toast-danger',
         visible: true,

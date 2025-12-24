@@ -8,7 +8,7 @@ import {
 } from 'recharts';
 import Loading from '@/components/Loading/Loading';
 import axios from 'axios';
-import { url } from '@/configuracion/backend';
+import { env, url } from '@/configuracion/backend';
 import Cookies from 'js-cookie';
 import "./Analiticas.css"
 import VentasMensuales from './VentasMensuales';
@@ -48,7 +48,7 @@ const Analiticas = () => {
             const datos = (await axios.get(`${url}/api/intranet/v1/peliculas/taquilleras?mes=${mesElegido}`, {
                 headers: { Authorization: `Bearer ${Cookies.get("auth-token")}` }
             })).data;
-            //console.log(datos.reduce((acc, el) => acc + el[0], 0))
+            env === "dev" && console.log(datos.reduce((acc, el) => acc + el[0], 0))
             setPelisTaquilleras(datos.map((el, i) => ({
                 ventas: el[0].toFixed(2),
                 pv: el[0] / (datos.reduce((acc, e) => acc + e[0], 0)) * 100,

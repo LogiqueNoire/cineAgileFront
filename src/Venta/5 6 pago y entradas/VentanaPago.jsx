@@ -8,6 +8,7 @@ import { ModalTerminos } from "./ModalTerminos.jsx";
 import Entrada from "@/services/Entrada.js";
 import { format } from "date-fns";
 import Loading from "@/components/Loading/Loading.jsx";
+import { env } from "@/configuracion/backend.js";
 
 export const VentanaPago = ({ prev, next }) => {
   const navigate = useNavigate();
@@ -34,7 +35,7 @@ export const VentanaPago = ({ prev, next }) => {
   const [submitting, setSubmitting] = useState(false);
   const [status, setStatus] = useState({ error: false, msg: null });
 
-  console.log(terminos);
+  env === "dev" && console.log(terminos);
 
   const volver = () => {
     prev();
@@ -69,10 +70,10 @@ export const VentanaPago = ({ prev, next }) => {
         tiempoRegistro: format(fechaAhora, "yyyy-MM-dd.HH:mm:ss").replace(".", "T")// .toISOString()
       }
 
-      console.log(cuerpo);
+      env === "dev" && console.log(cuerpo);
 
       Entrada.comprarEntrada(cuerpo).then(res => {
-        console.log(res);
+        env === "dev" && console.log(res);
         navigate("/entradas", { state: { entradas: res.data.entradasCompradasDTO } })
       }).catch(err => {
         console.log(err);

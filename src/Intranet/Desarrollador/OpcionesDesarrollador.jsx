@@ -2,7 +2,7 @@ import { useState } from "react";
 import desarrolladorIcono from "@/assets/modulos/developer.svg"
 import Toast from "@/components/Toast/Toast";
 import axios from "axios";
-import { url } from "@/configuracion/backend";
+import { env, url } from "@/configuracion/backend";
 import Cookies from "js-cookie";
 import MuyPronto from "@/components/Muypronto";
 import dbIcon from "@/assets/modulos/db.svg"
@@ -21,7 +21,7 @@ const OpcionesDesarrollador = () => {
             console.log(error)
             setToast(prev => ({...prev, title: "toast-danger", visible: true }))
         } finally {
-            console.log(response)
+            env === "dev" && console.log(response)
             setToast(prev => ({...prev, title: "toast-info", visible: true }))
         }
     }

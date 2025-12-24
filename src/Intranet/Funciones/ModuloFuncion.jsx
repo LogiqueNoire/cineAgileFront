@@ -2,7 +2,7 @@ import { useContext, useState, useEffect } from "react";
 import { FuncionesContext } from "./FuncionesContext";
 import Loading from '../../components/Loading/Loading';
 import axios from 'axios';
-import { url } from "../../configuracion/backend"
+import { env, url } from "../../configuracion/backend"
 import Cookies from 'js-cookie';
 import { format, isBefore } from "date-fns";
 import './ModuloFuncion.css'
@@ -107,9 +107,6 @@ const ModuloFuncion = ({ handlePeliculaChange, handleSalaChange }) => {
         } catch (error) {
             console.error(error);
         }
-        finally {
-            console.log('hola')
-        }
     }
 
     useEffect(() => {
@@ -133,7 +130,7 @@ const ModuloFuncion = ({ handlePeliculaChange, handleSalaChange }) => {
 
     const actualizarFuncion = async () => {
         let nfhi;
-        console.log("funcion a editar", funcion)
+        env === "dev" && console.log("funcion a editar", funcion)
         const fechaHoraSeleccionada = new Date(`${funcion.nuevaFecha}T${funcion.nuevaHoraInicio}`);
 
         if (
@@ -272,8 +269,8 @@ const ModuloFuncion = ({ handlePeliculaChange, handleSalaChange }) => {
 
     const crearFuncion = async () => {
         let nfhi;
-        console.log("funcion a editar", funcion)
-        console.log("fecha real", fechaReal)
+        env === "dev" && console.log("funcion a crear", funcion)
+        env === "dev" && console.log("fecha real", fechaReal)
         const fechaHoraSeleccionada = new Date(`${funcion.nuevaFecha}T${funcion.nuevaHoraInicio}`);
 
         if (
@@ -301,8 +298,8 @@ const ModuloFuncion = ({ handlePeliculaChange, handleSalaChange }) => {
             // Si se ha proporcionado una nueva fecha, combinarla con la nueva hora
             const [anio, mes, dia] = funcion.nuevaFecha.split('-').map(Number);
             nfhi = new Date(anio, mes - 1, dia);
-            console.log("Nueva fecha:", funcion.nuevaFecha);
-            console.log("Nueva fecha h i:", nfhi);
+            env === "dev" && console.log("Nueva fecha:", funcion.nuevaFecha);
+            env === "dev" && console.log("Nueva fecha h i:", nfhi);
             nfhi.setHours(funcion.nuevaHoraInicio.split(':')[0]);
             nfhi.setMinutes(funcion.nuevaHoraInicio.split(':')[1]);
         }
@@ -313,11 +310,11 @@ const ModuloFuncion = ({ handlePeliculaChange, handleSalaChange }) => {
         //console.log("Nueva fecha de inicio con minutos:", nfhi);
 
         //console.log(funcion.nuevaSalaId, funcion.nuevaPeliculaId)
-        console.log(funcion)
+        env === "dev" && console.log(funcion)
 
         try {
             let nfhiEnUTC = Fecha.tiempoLocalString_A_UTCString(nfhi);
-            console.log("Actualizando función con fecha UTC:", nfhi, nfhiEnUTC);
+            env === "dev" && console.log("Actualizando función con fecha UTC:", nfhi, nfhiEnUTC);
             const response = await axios.post(`${url}/api/intranet/v1/funciones`, {
                 idFuncion: null,
                 fechaHoraInicio: nfhi,

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Usuario from "@/services/Usuario";
 import Loading from "@/components/Loading/Loading";
 import usuarioIcon from "@/assets/modulos/modulo_usuario_icono.svg"
+import { env } from "@/configuracion/backend";
 
 const listaUsuarios = [
     {
@@ -27,7 +28,7 @@ const ListaUsuarios = ({ actualizado }) => {
 
     useEffect(() => {
         Usuario.mostrarUsuarios().then(lista => {
-            console.log(lista);
+            env === "dev" && console.log(lista);
             setUsuarios(lista);
         }).catch(err => {
             setError("Error!")
@@ -35,15 +36,13 @@ const ListaUsuarios = ({ actualizado }) => {
         }).finally(_ => {
             setLoading(false);
         })
-        console.log('hi')
-
         return () => {
             setLoading(true);
             setError(null);
         }
     }, [actualizado])
 
-    console.log(usuarios)
+    env === "dev" && console.log(usuarios)
 
     return (
         <div className="d-flex flex-column bg-white p-5 border border-3 shadow rounded-4">

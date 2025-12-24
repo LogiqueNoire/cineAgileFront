@@ -4,6 +4,7 @@ import MostrarSedesHorarios from "@/Venta/3 componentesVenta/MostrarSedesHorario
 import { useContext } from "react";
 import { FuncionesContext } from "./FuncionesContext";
 import './Cronograma.css'
+import { env } from "@/configuracion/backend";
 
 const Cronograma = () => {
   const {
@@ -76,7 +77,7 @@ const Cronograma = () => {
   }
 
   useEffect(()=>{
-    console.log(listaFunciones)
+    env === "dev" && console.log(listaFunciones)
   }, [listaFunciones])
 
   function comparar(el, hora) {

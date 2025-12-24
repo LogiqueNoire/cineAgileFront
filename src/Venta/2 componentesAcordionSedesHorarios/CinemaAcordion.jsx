@@ -1,8 +1,9 @@
+import { env } from '@/configuracion/backend';
 import './CinemaAcordion.css';
 import ScreeningButton from './ScreeningButton.jsx';
 
 const CinemaAcordion = ({ data, pelicula }) => {
-    console.log(data);
+    env === "dev" && console.log(data);
     return (
         <div className="mx-3">
             {data.funciones.map((sede) => (

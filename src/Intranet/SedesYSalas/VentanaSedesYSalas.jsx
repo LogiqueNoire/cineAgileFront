@@ -4,7 +4,7 @@ import sala from '@/assets/sala2.svg';
 import guardar from '@/assets/operaciones/guardar.svg'
 import iconoApagar from '@/assets/operaciones/apagar.svg'
 import axios from 'axios';
-import { url } from "@/configuracion/backend"
+import { env, url } from "@/configuracion/backend"
 import Loading from '@/components/Loading/Loading';
 import { ModalSalas } from './ModalSalas'
 import Cookies from 'js-cookie';
@@ -42,7 +42,7 @@ const VentanaSedesYSalas = () => {
     }
 
     const actualizarSede = async (el) => {
-        console.log(el);
+        env === "dev" && console.log(el);
         el.nombre = el.nombre.trim();
 
         let response
@@ -82,7 +82,7 @@ const VentanaSedesYSalas = () => {
     }
 
     const apagarPrender = async (el) => {
-        console.log(el);
+        env === "dev" && console.log(el);
         let msj, title, type
         let confirmado
         if (el.activo === true) {

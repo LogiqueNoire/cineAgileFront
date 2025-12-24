@@ -15,7 +15,7 @@ const VentasMensuales = () => {
             const datos = (await axios.get(`${url}/api/intranet/v1/ventas/totales-mes`, {
                 headers: { Authorization: `Bearer ${Cookies.get("auth-token")}` }
             })).data;
-            console.log("datos", datos)
+            env === "dev" && console.log("datos", datos)
             let resultado = []
             let i = 0
             let j = 0

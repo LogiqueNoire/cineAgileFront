@@ -76,7 +76,7 @@ const Tarjetas = ({fechaConsultada, setFechaConsultada}) => {
             consultarFuncionesAgotadas(fechaConsultada)
             consultarEntradasVendidas(fechaConsultada)
             consultarVentas(fechaConsultada)
-            console.log(fechaConsultada)
+            env === "dev" && console.log(fechaConsultada)
         }
     }, [fechaConsultada])
 

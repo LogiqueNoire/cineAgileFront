@@ -2,6 +2,7 @@ import { useReducer, useState } from "react";
 
 import guardar from '@/assets/operaciones/guardar.svg';
 import pencilSvg from "@/assets/operaciones/pencil.svg"
+import { env } from "@/configuracion/backend";
 
 const generoReducer = (state, action) => {
     switch(action.tipo) {
@@ -52,7 +53,7 @@ const FGeneroInput = ({ className, valoresPorDefecto, onSave, generos, atributo,
             return;
         }
 
-        console.log(generosSel);
+        env === "dev" && console.log(generosSel);
 
         if (modo == "submitting") return;
         setModo("submitting");

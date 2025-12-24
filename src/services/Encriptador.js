@@ -1,4 +1,5 @@
 //import { url } from '../configuracion/backend'
+import { env } from '@/configuracion/backend';
 import CryptoJS from 'crypto-js';
 
 class Encriptador {
@@ -28,7 +29,7 @@ class Encriptador {
  
          /*Generar la cadena que será convertida en QR*/
          const cadenaPaConvertirEnQR = `${Codsede}${CodSala}${filaChar}${columnaChar}${CodEntrada}`;
-         console.log("Código sin encriptar:", cadenaPaConvertirEnQR); // Ejemplo: TRU03BE234
+         env === "dev" && console.log("Código sin encriptar:", cadenaPaConvertirEnQR); // Ejemplo: TRU03BE234
  
          /*Clave secreta para encriptarxd es parte del algoritmo AES*/
          const claveSecreta = 'mi_clave_secreta_123';
@@ -36,7 +37,7 @@ class Encriptador {
          /*Encriptar la cadena */
          const codigoEncriptado = CryptoJS.AES.encrypt(cadenaPaConvertirEnQR, claveSecreta).toString();
          
-         console.log("Código Encriptado:", codigoEncriptado);
+         env === "dev" && console.log("Código Encriptado:", codigoEncriptado);
  
          return codigoEncriptado; // Devolver el código encriptado
     }
@@ -49,7 +50,7 @@ class Encriptador {
     }
 
     static desencriptar(codigo){
-        console.log(CryptoJS.AES.decrypt(codigo))
+        env === "dev" && console.log(CryptoJS.AES.decrypt(codigo))
     }
  }
 

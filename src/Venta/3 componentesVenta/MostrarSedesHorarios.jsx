@@ -6,7 +6,7 @@ import Loading from '@/components/Loading/Loading.jsx';
 import Toast  from '@/components/Toast/Toast.jsx';
 import Fecha from '@/services/Fecha.js';
 import { differenceInCalendarDays } from 'date-fns';
-import { url } from '@/configuracion/backend.js';
+import { env, url } from '@/configuracion/backend.js';
 import axios from 'axios';
 
 const MostrarSedesHorarios = ({ pelicula, fechaFormateada }) => {
@@ -17,14 +17,14 @@ const MostrarSedesHorarios = ({ pelicula, fechaFormateada }) => {
     const [toast, setToast] = useState({ visible: false });
 
     const [fechaReal, setFechaReal] = useState();
-    console.log(pelicula);
+    env === "dev" && console.log(pelicula);
     const consultarFechaReal = async () =>{
         try {
             setFechaReal((await axios.get(`${url}/api/tiempo/v1`)).data);
         } catch (error) {
             console.log(error)
         } finally {
-            console.log(fechaReal)
+            env === "dev" && console.log(fechaReal)
         }
 
     }
@@ -46,7 +46,7 @@ const MostrarSedesHorarios = ({ pelicula, fechaFormateada }) => {
         const obtenerFunciones = async () => {
             try {
                 const fechaUtc = Fecha.tiempoLocalString_A_UTCString(fechaFormateada);
-                console.log("formateada: "  + fechaFormateada + ", utc: " + fechaUtc)
+                env === "dev" && console.log("formateada: "  + fechaFormateada + ", utc: " + fechaUtc)
                 const funciones = await Funcion.mostrarSedesFuncionesPorPelicula(pelicula.idPelicula, fechaUtc);
 
                 const agrupadasPorSede = funciones.reduce((acc, funcion) => {
