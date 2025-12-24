@@ -29,7 +29,7 @@ const PeliculaModal = ({ pelicula, onCerrar }) => {
 
     const consultarGeneros = async () => {
         try {
-          const datos = Genero.consultarGeneros()
+          const datos = await Genero.consultarGeneros()
     
           setGeneros(datos.sort(ordenamientoAlfa))
         } catch (error) {
