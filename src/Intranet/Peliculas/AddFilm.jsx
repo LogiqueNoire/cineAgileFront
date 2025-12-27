@@ -188,9 +188,9 @@ export default function AddFilm({ onSucess }) {
   return (
     <div className="addFilm">
       {fechaReal !== undefined && generos !== undefined ?
-        <div className="border rounded p-4 mt-4 shadow">
-          <div className="d-flex align-items-center p-2 gap-2 justify-content-center">
-            <h2 className="text-center">Agregar película</h2>
+        <div className="rounded-4 p-4 mt-4 shadow">
+          <div className="d-flex align-items-center p-2 gap-3 justify-content-center">
+            <h2 className="text-center">Nueva película</h2>
             <img src={peliculaIcono} alt="" style={{ height: '80px', filter: "invert(100%)" }} />
           </div>
           <form onSubmit={(e) => onSubmit(e)} >
@@ -380,7 +380,7 @@ export default function AddFilm({ onSucess }) {
 
             <div className='d-flex gap-2 justify-content-center'>
 
-              <button type="submit" className="btn btn-outline-primary">
+              <button type="submit" className="btn btn-primary btn-primary-gradient">
                 Agregar película
               </button>
               {/*

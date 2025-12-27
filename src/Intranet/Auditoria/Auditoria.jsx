@@ -101,12 +101,12 @@ const Auditoria = () => {
                     </div >
                     <div className="d-flex flex-row gap-3 justify-content-center my-3">
                         {paginaActual - cantidadFilasMostrar > 0 ?
-                            <button className="btn-primary rounded-3" onClick={() => { setPaginaActual(paginaActual - cantidadFilasMostrar) }}>Anterior</button>
+                            <button className="btn-primary btn-primary-gradient" onClick={() => { setPaginaActual(paginaActual - cantidadFilasMostrar) }}>Anterior</button>
                             :
                             <></>
                         }
                         {paginaActual + cantidadFilasMostrar < data.length ?
-                            <button className="btn-primary rounded-3" onClick={() => { setPaginaActual(paginaActual + cantidadFilasMostrar) }}>Siguiente</button>
+                            <button className="btn-primary btn-primary-gradient" onClick={() => { setPaginaActual(paginaActual + cantidadFilasMostrar) }}>Siguiente</button>
                             :
                             <></>
                         }

@@ -79,7 +79,7 @@ const Contador = ({ onCancelar }) => {
                   </h2>
                 </div>
                 <div className="modal-footer d-flex justify-content-center">
-                  <button type="button" className="btn btn-primary" data-bs-dismiss="modal" onClick={onVolver}>Volver</button>
+                  <button type="button" className="btn btn-primary btn-primary-gradient" data-bs-dismiss="modal" onClick={onVolver}>Volver</button>
                 </div>
               </div>
             </div>

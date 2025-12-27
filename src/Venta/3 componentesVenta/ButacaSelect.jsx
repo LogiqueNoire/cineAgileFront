@@ -160,7 +160,7 @@ const SeleccionButaca = ({ funcion, prev, next, onCancelar }) => {
 
           <div className="d-flex justify-content-center gap-4 align-items-center">
             { /* <button className="btn btn-primary" onClick={volver} >Volver</button> */}
-            <button className="btn btn-primary" disabled={context.butacaContext.seleccionadas.length === 0 || moving} onClick={siguiente}>Siguiente</button>
+            <button className="btn btn-primary btn-primary-gradient" disabled={context.butacaContext.seleccionadas.length === 0 || moving} onClick={siguiente}>Siguiente</button>
           </div>
         </>
       }

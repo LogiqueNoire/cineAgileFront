@@ -32,7 +32,7 @@ const IntranetPanel = () => {
     const moverseHaciaOpcionesDeDesarrollador = () => { navigate(`/intranet/desarrollador`) }
 
     return (
-        <div className="m-3">
+        <div className="m-3 mt-4">
             <div className="row">
                 <h1 className="display-5 text-center"><strong>Bienvenido a la vista interna de cineagile</strong></h1>
                 <div className="d-flex p-3 justify-content-center gap-4 flex-wrap">

@@ -139,9 +139,10 @@ const VentanaSedesYSalas = () => {
         <div>
             <div className='d-flex flex-column align-items-center container-fluid'>
                 <AddSede onSucess={consultar}></AddSede>
+                <h2 className="text-center mt-5">Sedes registradas</h2>
                 {loading === true
                     ? <Loading></Loading> :
-                    <table className='mytable2 table table-striped border table-hover m-4'>
+                    <table className='mytable2 table table-striped border table-hover m-4 mt-2'>
                         <thead className='thead2'>
                             <tr className='tr2'>
                                 <td className='td2'>Nombre de sede</td>
@@ -168,14 +169,14 @@ const VentanaSedesYSalas = () => {
                                                 <img src={guardar} alt="" style={{ height: '25px' }} />
                                             </button>
 
-                                            <button className={el.activo ? 'btn btn-success d-flex gap-2' : 'btn btn-danger d-flex gap-2'}
+                                            <button className={el.activo ? 'btn btn-success rounded-circle d-flex gap-2' : 'btn btn-danger rounded-circle d-flex gap-2'}
                                                 onClick={() => apagarPrender(el)}
                                                 style={{ padding: '6px' }}>
                                                 <img className='' src={iconoApagar} alt="" style={{ height: '33px' }} />
                                             </button>
 
-                                            <button className='btn btn-primary d-flex gap-2 px-3' onClick={() => moverse(id)}>
-                                                <label className="">Salas</label>
+                                            <button className='btn btn-primary btn-primary-gradient d-flex gap-2 px-3' style={{paddingTop:"10px", paddingBottom:"10px"}} onClick={() => moverse(id)}>
+                                                <label className="" style={{fontSize: "20px", lineHeight: "1.2"}}>Salas</label>
                                                 <img src={sala} alt="" style={{ height: '25px' }} />
                                             </button>
                                         </div>

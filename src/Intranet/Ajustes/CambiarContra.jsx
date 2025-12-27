@@ -55,7 +55,7 @@ const CambiarContra = () => {
 
     return (
         <form action="" onSubmit={onSubmit}>
-            <div className="d-flex flex-column align-items-center container-fluid col-10 bg-white border border-3 p-5 rounded rounded-3 shadow">
+            <div className="d-flex flex-column align-items-center container-fluid col-10 bg-white p-5 rounded-4 shadow">
                 <div className="d-flex flex-row align-items-center mb-3 gap-2">
                     <h2 className="" style={{ color: '#01217B' }}>Cambiar contraseña</h2>
                     <img src={passwordIcon} alt="Password" className="" style={{ filter: "invert(90%) sepia(70%) saturate(25000%) hue-rotate(225deg) brightness(52.5%) contrast(100%)" }} />
@@ -94,8 +94,8 @@ const CambiarContra = () => {
                         </ul>
                     </div>
 
-                    <BotonCarga submitting={submitting} type="submit" className="btn btn-primary align-self-center">
-                        Grabar
+                    <BotonCarga submitting={submitting} type="submit" className="btn btn-primary btn-primary-gradient align-self-center">
+                        Guardar contraseña
                     </BotonCarga>
 
                 </div>

@@ -129,9 +129,9 @@ export const VentanaPago = ({ prev, next }) => {
             {modalAbierto && <ModalTerminos onClose={() => setModalAbierto(false)} />}
           </div>
 
-          <div className="d-flex justify-content-center gap-4 align-items-center">
-            <button className="btn btn-primary" disabled={aceptaTerminos} onClick={volver} >Volver</button>
-            <button className="btn btn-warning" onClick={registrarTest}>Registrar (Test)</button>
+          <div className="d-flex justify-content-center gap-4 align-items-center mt-2">
+            <button className="btn btn-primary btn-primary-gradient" disabled={aceptaTerminos} onClick={volver} >Volver</button>
+            <button className="btn btn-warning btn-warning-gradient" onClick={registrarTest}>Registrar (test)</button>
           </div>
         </>
 

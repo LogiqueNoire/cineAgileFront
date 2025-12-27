@@ -56,7 +56,7 @@ const PeliculaModal = ({ pelicula, onCerrar }) => {
             <div className="modal-terminos-overlay">
                 <div className="modal-terminos w-75 d-flex flex-column align-items-center p-5" style={{ "max-height": "80vh", "overflow-y": "auto" }}>
                     <div className="d-flex align-items-center justify-content-between w-100 mb-3 gap-2">
-                        <button className="btn btn-danger" onClick={onCerrar}>Cerrar</button>
+                        <button className="btn btn-danger btn-danger btn-danger-gradient fs-5" onClick={onCerrar}>Cerrar</button>
                         <h2 className="text-wrap text-end">Detalles Pelicula</h2>
                     </div>
                     <div className="d-flex flex-column gap-3 w-100">

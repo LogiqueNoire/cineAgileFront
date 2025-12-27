@@ -45,9 +45,9 @@ const ListaUsuarios = ({ actualizado }) => {
     env === "dev" && console.log(usuarios)
 
     return (
-        <div className="d-flex flex-column bg-white p-5 border border-3 shadow rounded-4">
+        <div className="d-flex flex-column bg-white p-5 shadow rounded-4">
             <div className="d-flex flex-row align-items-center mb-3 gap-2 justify-content-center">
-                <h2 className="" style={{ color: '#01217B' }}>Usuarios</h2>
+                <h2 className="fs-1" style={{ color: '#01217B' }}>Usuarios</h2>
                 <img src={usuarioIcon} alt="usuarios" className="" style={{ filter: "invert(90%) sepia(70%) saturate(25000%) hue-rotate(225deg) brightness(52.5%) contrast(100%)", height: '60px' }} />
             </div>
             <div className="overflow-x-auto rounded-3">

@@ -24,6 +24,11 @@
   font-style: normal;
 }
 
+.ancizar-sans-regular {
+  font-family: 'Ancizar Sans', sans-serif;
+  font-weight: 600;
+}
+
 h1,
 h2,
 h3,
@@ -47,10 +52,38 @@ p {
   padding: 10px 20px;
   text-decoration: none;
   border: none;
+
 }
+
+.btn-primary-gradient {
+  color: white;
+  text-decoration: none;
+  border: none;
+
+  padding: 8px 30px;
+  border-radius: 999px;
+  background: linear-gradient(to right, #0A2B9C, #01217B);
+  font-family: 'Ancizar Sans', sans-serif;
+  font-weight: 600;
+  font-size: 1.25rem;
+}
+
 .btn-primary:hover {
   background-color: #0A2B9C;
 }
+
+.btn-primary-gradient:hover {
+  box-shadow: 0 2px 15.4px 0.6px #0040ffbb;
+}
+
+.btn-danger-gradient:hover {
+  box-shadow: 0 2px 15.4px 0.6px #c70000bb;
+}
+
+.btn-warning-gradient:hover {
+  box-shadow: 0 2px 15.4px 0.6px #e4ac06bb;
+}
+
 .btn-primary:active {
   background-color: #011A5C;
 }
@@ -72,6 +105,41 @@ p {
   border: none;
 }
 
+.btn-danger-gradient {
+  color: white;
+  text-decoration: none;
+  border: none;
+
+  padding: 8px 30px;
+  border-radius: 999px;
+  background: linear-gradient(to right, #9c0a0a, #7b0101);
+  font-family: 'Ancizar Sans', sans-serif;
+  font-weight: 600;
+  font-size: 1.25rem;
+}
+
+.btn-warning-gradient {
+  color: white;
+  text-decoration: none;
+  border: none;
+
+  padding: 8px 30px;
+  border-radius: 999px;
+  background: linear-gradient(to right, #e4ac06, #c69501);
+  font-family: 'Ancizar Sans', sans-serif;
+  font-weight: 600;
+  font-size: 1.25rem;
+}
+
+
+@media (max-width: 400px) {
+  .btn-primary-gradient,
+  .btn-danger-gradient,
+  .btn-warning-gradient {
+    padding: 8px 20px;
+  }
+}
+
 .btn-success:hover {
   background-color: #0a9c19;
 }
@@ -88,5 +156,3 @@ p {
   text-decoration: none;
   border: none;
 }
-
-

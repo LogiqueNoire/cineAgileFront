@@ -39,7 +39,7 @@ const Intranet = () => {
                     username &&
                     <div className='d-flex align-items-center gap-5 sesion-group'>
                         <h5>Usuario: { username }</h5>
-                        <button className='btn btn-danger' onClick={onCerrarSesion}>Cerrar sesión</button>
+                        <button className='btn btn-danger btn-danger-gradient fs-5' onClick={onCerrarSesion}>Cerrar sesión</button>
                     </div>
                 }
                 

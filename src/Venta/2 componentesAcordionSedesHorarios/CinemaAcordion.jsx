@@ -7,9 +7,9 @@ const CinemaAcordion = ({ data, pelicula }) => {
     return (
         <div className="mx-3">
             {data.funciones.map((sede) => (
-                <div key={sede.idSede} className="card mb-3">
+                <div key={sede.idSede} className="card mb-3 border-0 shadow">
                     <button
-                        className="card-header"
+                        className="card-header p-3"
                         type="button"
                         data-bs-toggle="collapse"
                         data-bs-target={ "#s" + sede.idSede } //`#${sede.nombreSede.replace(/\s+/g, '')}`}
@@ -19,7 +19,7 @@ const CinemaAcordion = ({ data, pelicula }) => {
                         <h5 className='text-start h5'>{sede.nombreSede}</h5>
                     </button>
 
-                    <div className="card-body collapse" 
+                    <div className="card-body collapse p-3" 
                         id={ `s${sede.idSede}` } // sede.nombreSede.replace(/\s+/g, '')  }>
                     >
                         {["2D Regular", "2D Prime", "3D Regular", "3D Prime"].map((tipo) => {

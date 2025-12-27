@@ -100,15 +100,15 @@ export const ModalSalas = ({ onClose, sede }) => {
   return (
     <div className="modal-terminos-overlay">
       <div className="modal-terminos mx-3 d-flex flex-column align-items-center" style={{ "max-height": "80vh", "overflow-y": "auto" }}>
-        <h3 className="modal-terminos-title">Sede {sede.nombre}</h3>
+        <h3 className="modal-terminos-title fs-3 my-2">Sede {sede.nombre}</h3>
 
         <div className="w-100 d-flex justify-content-between gap-2">
-          <button className="btn btn-danger" onClick={onClose}>
+          <button className="btn btn-danger btn-danger-gradient fs-5" onClick={onClose}>
             Cerrar
           </button>
 
-          <button className='btn btn-primary d-flex gap-3' onClick={irACrearSala}>
-            <h3 className="mb-0">Crear nueva sala</h3>
+          <button className='btn btn-primary btn-primary-gradient' onClick={irACrearSala}>
+            Crear nueva sala
           </button>
 
           { /*
@@ -124,7 +124,7 @@ export const ModalSalas = ({ onClose, sede }) => {
         {loading ?
           <Loading></Loading> :
           salas.length > 0 ?
-            <table className='table table-striped border table-hover my-4'>
+            <table className='table table-striped border table-hover mt-3'>
               <thead className=''>
                 <tr className=''>
                   <td className=''>Sala</td>
@@ -171,7 +171,7 @@ export const ModalSalas = ({ onClose, sede }) => {
                         <button className="py-1 btn btn-primary py-1 px-2" onClick={() => { onDetallesClick(el) }}><img src={pencilSvg} width={"24px"} height={"24px"} /></button>
                         <BotonCarga
                           onClick={() => onCambiarEstadoSala(el)}
-                          className={`btn ${el.activo ? "btn-success" : "btn-danger"} p-1`} >
+                          className={`btn ${el.activo ? "btn-success rounded-circle" : "btn-danger rounded-circle"} p-1`} >
                           <img src={iconoApagar} style={{ height: '33px' }} />
                         </BotonCarga>
                       </div>

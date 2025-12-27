@@ -70,8 +70,8 @@ export const VentanaPrecios = ({ prev, next, onCancelar }) => {
                 </div>
 
                 <div className="d-flex justify-content-center gap-4 align-items-center">
-                    <button className="btn btn-primary" onClick={volver} >Volver</button>
-                    <button className="btn btn-primary" disabled={!puedeContinuar} onClick={siguiente}>Siguiente</button>
+                    <button className="btn btn-primary btn-primary-gradient" onClick={volver} >Volver</button>
+                    <button className="btn btn-primary btn-primary-gradient" disabled={!puedeContinuar} onClick={siguiente}>Siguiente</button>
                 </div>
             </>
 

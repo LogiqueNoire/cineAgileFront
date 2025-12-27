@@ -9,14 +9,16 @@ export const TerminosCondiciones = ({
 }) => {
   return (
     <div className="terms">
-      <input
-        type="checkbox"
-        id="terminos"
-        checked={aceptaTerminos}
-        onChange={(e) => setAceptaTerminos(e.target.checked)}
-        disabled={!setto.terminos}
-      />
-      <label htmlFor="terminos">
+      <label className="switch m-2">
+        <input
+          type="checkbox"
+          id="terminos"
+          checked={aceptaTerminos}
+          onChange={(e) => setAceptaTerminos(e.target.checked) }
+          disabled={!setto.terminos} />
+        <span className="slider round"></span>
+      </label>
+      <label htmlFor="terminos" className="ancizar-sans-regular fs-5">
         Acepto los{" "}
         <a
           href="#"

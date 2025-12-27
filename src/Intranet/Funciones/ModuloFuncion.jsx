@@ -376,7 +376,7 @@ const ModuloFuncion = ({ handlePeliculaChange, handleSalaChange }) => {
 
     return (
 
-        <div className='d-flex flex-column align-items-center gap-4 m-3 border p-4 rounded'>
+        <div className='d-flex flex-column align-items-center gap-4 m-3 mt-4 p-4 rounded-4 shadow'>
             <div className='d-flex flex-column align-items-center gap-3'>
                 <h3 className='d-flex text-nowrap'>Módulo ágil de funciones</h3>
                 <div className="d-flex align-items-center">
@@ -464,7 +464,7 @@ const ModuloFuncion = ({ handlePeliculaChange, handleSalaChange }) => {
                                 } />
                         </div>
                         <div className='d-flex w-100 align-items-center'>
-                            <label className='w-100'>Nueva hora de inicio<br></br>(formato según dispositivo)</label>
+                            <label className='w-100'>Nueva hora de inicio<br></br><span style={{fontSize: "0.9rem"}}>(formato según dispositivo)</span></label>
                             <input className='form-control w-100' type="time"
                                 disabled={funcion.funcionElegida === undefined || funcion.codigoFuncion === ''}
                                 value={funcion.nuevaHoraInicio}
@@ -531,7 +531,7 @@ const ModuloFuncion = ({ handlePeliculaChange, handleSalaChange }) => {
                                 } />
                         </div>
 
-                        <button className='btn btn-primary' onClick={(e) => {
+                        <button className='btn btn-primary btn-primary-gradient' onClick={(e) => {
                             e.preventDefault();
                             actualizarFuncion()
                         }}>Actualizar</button>
@@ -587,7 +587,7 @@ const ModuloFuncion = ({ handlePeliculaChange, handleSalaChange }) => {
                                 } />
                         </div>
                         <div className='d-flex w-100 align-items-center'>
-                            <label className='w-100'>Nueva hora de inicio<br></br>(formato según sistema)</label>
+                            <label className='w-100'>Nueva hora de inicio<br></br><span style={{fontSize: "0.9rem"}}>(formato según dispositivo)</span></label>
                             <input className='form-control w-100' type="time"
                                 disabled={funcion.nuevaPeliculaId == '' || funcion.nuevaPeliculaId == 0}
                                 value={funcion.nuevaHoraInicio}
@@ -651,7 +651,7 @@ const ModuloFuncion = ({ handlePeliculaChange, handleSalaChange }) => {
                                 } />
                         </div>
 
-                        <button className='btn btn-primary' onClick={(e) => {
+                        <button className='btn btn-primary btn-primary-gradient' onClick={(e) => {
                             e.preventDefault();
                             crearFuncion()
                         }}>Crear</button>

@@ -74,7 +74,7 @@ const BuscarFunciones = ({ handlePeliculaChange, handleSalaChange }) => {
     return (
         loading === true
             ? <Loading></Loading> :
-            <div className='d-flex flex-column align-items-center gap-4 m-3 border p-4 rounded'>
+            <div className='d-flex flex-column align-items-center gap-4 m-3 mt-4 p-4 rounded-4 shadow'>
                 <h3>Búsqueda de funciones</h3>
                 <div>
                     <label className='d-flex text-nowrap'>Elige sede</label>

@@ -44,7 +44,7 @@ const EntradaCard = ({ infoGeneral, entrada, token }) => {
     }, [token]);
 
     return (
-        <div className="border border-2 border-secondary p-3">
+        <div className="border border-2 border-secondary rounded-4 p-3">
 
             <div className="align-items-center direction">
                 <div className="align-items-center direction-inverse">

@@ -159,11 +159,8 @@ const Sala = () => {
                     }
 
                     </div>
-                </div>
-
-                <div className="bg-white row rounded border shadow p-5 overflow-auto d-flex flex-column">
-                    <BotonCarga type={"submit"} className={"btn btn-primary w-25 align-self-center"} submitting={submitting}>
-                        Grabar
+                    <BotonCarga type={"submit"} className={"btn btn-primary btn-primary-gradient w-25 align-self-center"} submitting={submitting}>
+                        Guardar sala
                     </BotonCarga>
                 </div>
 
