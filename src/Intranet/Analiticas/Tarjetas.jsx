@@ -1,5 +1,5 @@
 import { format } from "date-fns";
-import { url } from "@/configuracion/backend";
+import { env, url } from "@/configuracion/backend";
 import axios from "axios";
 import Cookies from "js-cookie";
 import { useEffect, useState } from "react";

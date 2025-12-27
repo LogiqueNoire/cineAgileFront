@@ -51,8 +51,6 @@ const PeliculaModal = ({ pelicula, onCerrar }) => {
     }, []);
 
 
-    // console.log('Pelicula Modal: ', pelicula, generos);
-
     return (
         <div>
             <div className="modal-terminos-overlay">
