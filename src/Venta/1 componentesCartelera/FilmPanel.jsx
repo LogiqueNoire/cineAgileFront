@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
 import FilmContainer from "./FilmContainer";
-import Pelicula from "@/services/Pelicula"
+import PeliculaService from "@/services/PeliculaService"
 import FilmTab from './FilmTab';
 import Loading from '@/components/Loading/Loading';
 import axios from 'axios';
@@ -10,6 +10,7 @@ import { env, url } from '@/configuracion/backend';
 
 import '@/Inicio.css'
 import "./FilmPanel.css"
+import TimeService from '@/services/TimeService';
 
 const useUrlQuery = () => {
     const location = useLocation()
@@ -26,8 +27,7 @@ const FilmPanel = () => {
     useEffect(() => {
     const obtenerPeliculas = async () => {
         try {
-            const respuesta = await axios.get(`${url}/api/tiempo/v1`);
-            const fecha = new Date(respuesta.data);
+            const fecha = await TimeService.obtenerFecha()
 
             const estado = query?.get("tab") || "En cartelera";
             let caller;
@@ -35,11 +35,11 @@ const FilmPanel = () => {
             switch (estado) {
                 case "En cartelera":
                     env === "dev" && console.log("Fecha enviada a EnCartelera:", fecha.toISOString());
-                    caller = () => Pelicula.mostrarPeliculasEnCartelera(fecha.toISOString());
+                    caller = () => PeliculaService.mostrarPeliculasEnCartelera(fecha.toISOString());
                     break;
                 case "Próximamente":
                     env === "dev" && console.log("Fecha enviada a Proximamente:", fecha.toISOString());
-                    caller = () => Pelicula.mostrarPeliculasProximas(fecha.toISOString());
+                    caller = () => PeliculaService.mostrarPeliculasProximas(fecha.toISOString());
                     break;
                 default:
                     caller = null;

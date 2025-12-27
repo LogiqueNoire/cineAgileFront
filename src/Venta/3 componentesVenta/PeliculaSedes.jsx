@@ -2,7 +2,7 @@ import { useLocation } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import MostrarSedesHorarios from "./MostrarSedesHorarios";
 import { format } from 'date-fns';
-import Pelicula from "@/services/Pelicula";
+import PeliculaService from "@/services/PeliculaService";
 import Loading from "@/components/Loading/Loading";
 import axios from "axios";
 import { url } from "@/configuracion/backend"
@@ -10,6 +10,7 @@ import { differenceInCalendarDays } from "date-fns";
 import { es } from 'date-fns/locale';
 
 import '../1 componentesCartelera/FilmCard.css';
+import TimeService from "@/services/TimeService";
 
 const PeliculaSedes = () => {
     const location = useLocation();
@@ -24,7 +25,7 @@ const PeliculaSedes = () => {
     useEffect(() => {
         const generosDePelicula = async () => {
             try {
-                response = await axios.get(`${url}/api/venta/v1/generos?pelicula=${consultaIdPelicula}`);
+                let response = await axios.get(`${url}/api/venta/v1/generos?pelicula=${consultaIdPelicula}`);
                 setPelicula(prev => ({ ...prev, genero: response.data }));
             } catch (err) {
                 console.error("Error al obtener la fecha:", err);
@@ -33,26 +34,17 @@ const PeliculaSedes = () => {
 
         if (!consultaIdPelicula) return;
 
-        Pelicula.mostrarPelicula(consultaIdPelicula)
+        PeliculaService.mostrarPelicula(consultaIdPelicula)
             .then(data => { setPelicula(data); generosDePelicula() })
             .catch(err => setError(err))
             .finally(() => setLoading(false));
     }, [consultaIdPelicula]);
 
-    /*****Logica fecha******/
-    let response
     useEffect(() => {
-        const obtenerFecha = async () => {
-            try {
-                response = await axios.get(`${url}/api/tiempo/v1`);
-                setFechaReal(new Date(response.data));
-
-            } catch (err) {
-                console.error("Error al obtener la fecha:", err);
-            }
-        };
-
-        obtenerFecha();
+        (async () => {
+            const data = await TimeService.obtenerFecha();
+            setFechaReal(data);
+        })();
     }, []);
 
     useEffect(() => {
@@ -99,34 +91,34 @@ const PeliculaSedes = () => {
             <div className="d-flex justify-content-center">
                 <div className="d-flex justify-content-center flex-column
             col-12 col-xs-12 col-sm-12 col-md-10 col-lg-10">
-                {differenceInCalendarDays(pelicula.fechaInicioEstreno, fechaReal) < 8 ?
-                    <div className='mt-3'>
-                        <div className="d-flex justify-content-center flex-row gap-3 align-items-center">
-                            <h3 className="me-2 fw-bold fs-1">Tu fecha ideal</h3>
-                            <input
-                                type="date"
-                                className="mx-1 form-control"
-                                min={format(fechaReal, 'yyyy-MM-dd')}
-                                max={format(new Date(fechaReal).setMonth(fechaReal.getMonth() + 3), 'yyyy-MM-dd')}
-                                value={format(fechaElegida, 'yyyy-MM-dd')}
-                                onChange={onFechaChange}
-                                style={{ width: "150px", height: "min-content" }}
-                                onKeyDown={(e) => e.preventDefault()}
-                            />
+                    {differenceInCalendarDays(pelicula.fechaInicioEstreno, fechaReal) < 8 ?
+                        <div className='mt-3'>
+                            <div className="d-flex justify-content-center flex-row gap-3 align-items-center">
+                                <h3 className="me-2 fw-bold fs-1">Tu fecha ideal</h3>
+                                <input
+                                    type="date"
+                                    className="mx-1 form-control"
+                                    min={format(fechaReal, 'yyyy-MM-dd')}
+                                    max={format(new Date(fechaReal).setMonth(fechaReal.getMonth() + 3), 'yyyy-MM-dd')}
+                                    value={format(fechaElegida, 'yyyy-MM-dd')}
+                                    onChange={onFechaChange}
+                                    style={{ width: "150px", height: "min-content" }}
+                                    onKeyDown={(e) => e.preventDefault()}
+                                />
+                            </div>
                         </div>
-                    </div>
-                    :
-                    <div className="mt-3">
-                        <h3 className="px-4 text-center" style={{ color: '#7b0101' }}>
-                            {`Aún falta más de 1 semana para el estreno, el cual será a partir del ${format(pelicula.fechaInicioEstreno, "dd 'de' MMMM 'de' yyyy", { locale: es })}`}
-                        </h3>
-                    </div>
-                }
-                {fechaElegida && (
-                    <MostrarSedesHorarios
-                        pelicula={pelicula}
-                        fechaFormateada={format(fechaElegida, `yyyy-MM-dd.HH:mm`).replace('.', 'T')}
-                    />)}
+                        :
+                        <div className="mt-3">
+                            <h3 className="px-4 text-center" style={{ color: '#7b0101' }}>
+                                {`Aún falta más de 1 semana para el estreno, el cual será a partir del ${format(pelicula.fechaInicioEstreno, "dd 'de' MMMM 'de' yyyy", { locale: es })}`}
+                            </h3>
+                        </div>
+                    }
+                    {fechaElegida && (
+                        <MostrarSedesHorarios
+                            pelicula={pelicula}
+                            fechaFormateada={format(fechaElegida, `yyyy-MM-dd.HH:mm`).replace('.', 'T')}
+                        />)}
                 </div>
             </div>
         </div>

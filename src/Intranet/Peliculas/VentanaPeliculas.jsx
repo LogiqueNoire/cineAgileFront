@@ -6,8 +6,10 @@ import { env, url } from "@/configuracion/backend"
 import Loading from '@/components/Loading/Loading';
 import Cookies from 'js-cookie';
 import { format, parse } from 'date-fns';
-import iconoEditar from '@/assets/operaciones/editar.svg'
+import iconoEditar from '@/assets/operaciones/pencil.svg'
+import link from '@/assets/operaciones/link.svg'
 import PeliculaModal from './PeliculaModal';
+import TimeService from '@/services/TimeService';
 
 const ordenamientoFecha = (a, b) => {
     const x = a.fechaInicioEstreno;
@@ -23,20 +25,11 @@ const VentanaPeliculas = () => {
     const [loading, setLoading] = useState(true);
     const [pelicula, setPelicula] = useState(null);
 
-    /*manejo de fecha*/
-    let response
     useEffect(() => {
-        const obtenerFecha = async () => {
-            try {
-                response = await axios.get(`${url}/api/tiempo/v1`);
-                setFechaReal(new Date(response.data));
-
-            } catch (err) {
-                console.error("Error al obtener la fecha:", err);
-            }
-        };
-
-        obtenerFecha();
+        (async () => {
+            const data = await TimeService.obtenerFecha();
+            setFechaReal(data);
+        })();
     }, []);
 
     useEffect(() => {
@@ -72,7 +65,6 @@ const VentanaPeliculas = () => {
 
     const onPeliModalCerrar = () => {
         setPelicula(null);
-        consultarPeliculas();
     }
 
     const [busqueda, setBusqueda] = useState('');
@@ -96,9 +88,9 @@ const VentanaPeliculas = () => {
 
     const seleccionar = (item) => {
         const datos = item.split('|').map(e => e.trim())
-        if(e)
-        
-        env === "dev" && console.log(datos)
+        if (e)
+
+            env === "dev" && console.log(datos)
         const encontrado = productos.find(el => el.nombre == datos[0])
         setResultados([]);
         setLista(prev => [...prev, encontrado]);
@@ -158,13 +150,13 @@ const VentanaPeliculas = () => {
                                             {el.fechaInicioEstreno ? format(parse(el.fechaInicioEstreno, 'yyyy-MM-dd', new Date()), 'dd/MM/yyyy') : ''}
                                         </td>
                                         <td className='td' data-label='Imagen'>
-                                            <a href={el.imageUrl} target="_blank" rel="noopener noreferrer">
-                                                <strong>Enlace</strong>
+                                            <a href={el.imageUrl} target="_blank" rel="noopener noreferrer" className='d-flex btn btn-primary btn-primary-gradient p-2' style={{ width: "min-content" }}>
+                                                <img src={link} alt="" style={{ height: '20px' }} />
                                             </a>
 
                                         </td>
                                         <td>
-                                            <button className='d-flex align-items-center btn btn-primary p-2 mx-2' onClick={() => editarOnClick(el)}>
+                                            <button className='d-flex align-items-center btn btn-primary btn-primary-gradient p-2 mx-2' onClick={() => editarOnClick(el)}>
                                                 <img src={iconoEditar} alt="" style={{ height: '20px' }} />
                                             </button>
                                         </td>
@@ -179,7 +171,7 @@ const VentanaPeliculas = () => {
             </div>
 
 
-            {pelicula && <PeliculaModal pelicula={pelicula} onCerrar={onPeliModalCerrar} />}
+            {pelicula && <PeliculaModal pelicula={pelicula} onCerrar={onPeliModalCerrar} consultarPeliculas={consultarPeliculas} />}
         </div>
     )
 }

@@ -2,7 +2,7 @@ import axios from 'axios'
 import { env, url } from '@/configuracion/backend'
 import Cookies from 'js-cookie';
 
-class Pelicula {
+class PeliculaService {
     
     static async mostrarPelicula(idPelicula) {
         const peliculas = await axios.get(`${url}/api/venta/v1/peliculas/${idPelicula}`)
@@ -40,4 +40,4 @@ class Pelicula {
 
 }
 
-export default Pelicula;
+export default PeliculaService;

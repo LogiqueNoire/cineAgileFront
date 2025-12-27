@@ -10,6 +10,7 @@ import SalaButaca from '../../services/SalaButaca';
 import Toast from '../../components/Toast/Toast'
 
 import Fecha from "../../services/Fecha";
+import TimeService from "@/services/TimeService";
 
 const ModuloFuncion = ({ handlePeliculaChange, handleSalaChange }) => {
     const [toast, setToast] = useState({ tipo: '', visible: false, titulo: '', mensaje: '' });
@@ -65,15 +66,8 @@ const ModuloFuncion = ({ handlePeliculaChange, handleSalaChange }) => {
     }, []);
 
     /*manejo de fecha*/
-    let response
     const obtenerFecha = async () => {
-        try {
-            response = await axios.get(`${url}/api/tiempo/v1`);
-            setFechaReal(new Date(response.data));
-
-        } catch (err) {
-            console.error("Error al obtener la fecha:", err);
-        }
+        setFechaReal(await TimeService.obtenerFecha());
     };
 
 
@@ -112,7 +106,7 @@ const ModuloFuncion = ({ handlePeliculaChange, handleSalaChange }) => {
     useEffect(() => {
         if (funcion.nuevaSedeId !== '') {
 
-            SalaButaca.salasPorSede(funcion.nuevaSedeId)
+            SalaButaca.salasActivasPorSede(funcion.nuevaSedeId)
                 .then(data =>
                     setSalasNuevaSede(data)
                 )

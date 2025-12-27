@@ -139,7 +139,8 @@ const Generos = () => {
                                 />
                             </td>
                             <td className='td' data-label='Opciones'>
-                                <button className='d-flex align-items-center btn btn-primary p-2 mx-2' onClick={(e) => agregarGenero(e, generoNombre)}>
+                                <button className='btn btn-primary btn-primary-gradient d-flex gap-2' onClick={() => agregarGenero(e, generoNombre)}
+                                    style={{ 'padding': '10px' }}>
                                     <img src={iconoGuardar} alt="" style={{ height: '20px' }} />
                                 </button>
                             </td>
@@ -166,7 +167,8 @@ const Generos = () => {
                                     />
                                 </td>
                                 <td className='td' data-label='Opciones'>
-                                    <button className='d-flex align-items-center btn btn-primary p-2 mx-2' onClick={(e) => editarGenero(e, el)}>
+                                    <button className='btn btn-primary btn-primary-gradient d-flex gap-2' onClick={() => editarGenero(e, el)}
+                                        style={{ 'padding': '10px' }}>
                                         <img src={iconoGuardar} alt="" style={{ height: '20px' }} />
                                     </button>
                                 </td>

@@ -3,11 +3,12 @@ import CinemaAcordion from '@/Venta/2 componentesAcordionSedesHorarios/CinemaAco
 import Funcion from '@/services/Funcion.js';
 import './MostrarSedesHorarios.css';
 import Loading from '@/components/Loading/Loading.jsx';
-import Toast  from '@/components/Toast/Toast.jsx';
+import Toast from '@/components/Toast/Toast.jsx';
 import Fecha from '@/services/Fecha.js';
 import { differenceInCalendarDays } from 'date-fns';
 import { env, url } from '@/configuracion/backend.js';
 import axios from 'axios';
+import TimeService from '@/services/TimeService';
 
 const MostrarSedesHorarios = ({ pelicula, fechaFormateada }) => {
     const [sedes, setSedes] = useState([]);
@@ -18,24 +19,17 @@ const MostrarSedesHorarios = ({ pelicula, fechaFormateada }) => {
 
     const [fechaReal, setFechaReal] = useState();
     env === "dev" && console.log(pelicula);
-    const consultarFechaReal = async () =>{
-        try {
-            setFechaReal((await axios.get(`${url}/api/tiempo/v1`)).data);
-        } catch (error) {
-            console.log(error)
-        } finally {
-            env === "dev" && console.log(fechaReal)
-        }
-
-    }
 
     const mostrarToast = () => {
         setToast({ visible: true });
         setTimeout(() => setToast({ visible: false }), 3000);
     };
 
-    useEffect(()=>{
-        consultarFechaReal()
+    useEffect(() => {
+        (async () => {
+            const data = await TimeService.obtenerFecha();
+            setFechaReal(data);
+        })();
     }, [])
 
     useEffect(() => {
@@ -46,7 +40,7 @@ const MostrarSedesHorarios = ({ pelicula, fechaFormateada }) => {
         const obtenerFunciones = async () => {
             try {
                 const fechaUtc = Fecha.tiempoLocalString_A_UTCString(fechaFormateada);
-                env === "dev" && console.log("formateada: "  + fechaFormateada + ", utc: " + fechaUtc)
+                env === "dev" && console.log("formateada: " + fechaFormateada + ", utc: " + fechaUtc)
                 const funciones = await Funcion.mostrarSedesFuncionesPorPelicula(pelicula.idPelicula, fechaUtc);
 
                 const agrupadasPorSede = funciones.reduce((acc, funcion) => {

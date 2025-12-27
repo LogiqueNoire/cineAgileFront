@@ -34,6 +34,14 @@ class SalaButaca {
         return salas.data
     }
 
+    static async salasActivasPorSede(sedeElegida) {
+        const salas = await axios.get(`${url}/api/intranet/v1/salas/activas`, {
+            params: { idSede: sedeElegida },
+            headers: { Authorization: `Bearer ${Cookies.get("auth-token")}` }
+        });
+        return salas.data
+    }
+
     static async crearSala(sala) {
         const res = await axios.post(`${url}/api/intranet/v1/salas`, sala, {
             headers: { Authorization: `Bearer ${Cookies.get("auth-token")}` }

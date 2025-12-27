@@ -79,8 +79,9 @@ export const ModalSalas = ({ onClose, sede }) => {
             mensaje: 'Las funciones asociadas también se mostrarán'
           });
         }
-        consultar();
+        consultarSalas();
       }).catch(err => {
+        console.error(err)
         setToast({
           tipo: 'toast-danger',
           visible: true,
@@ -168,7 +169,7 @@ export const ModalSalas = ({ onClose, sede }) => {
                     </td>
                     <td>
                       <div className="d-flex gap-2">
-                        <button className="py-1 btn btn-primary py-1 px-2" onClick={() => { onDetallesClick(el) }}><img src={pencilSvg} width={"24px"} height={"24px"} /></button>
+                        <button className="btn btn-primary btn-primary-gradient py-0 px-2" onClick={() => { onDetallesClick(el) }} style={{lineHeight: "0.9"}}><img src={pencilSvg} width={"25px"} height={"25px"} /></button>
                         <BotonCarga
                           onClick={() => onCambiarEstadoSala(el)}
                           className={`btn ${el.activo ? "btn-success rounded-circle" : "btn-danger rounded-circle"} p-1`} >

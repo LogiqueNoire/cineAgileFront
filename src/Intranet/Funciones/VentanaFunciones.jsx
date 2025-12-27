@@ -5,7 +5,7 @@ import Cookies from 'js-cookie';
 import { se } from 'date-fns/locale';
 import { set } from 'date-fns';
 import SalaButaca from '@/services/SalaButaca';
-import Pelicula from '@/services/Pelicula';
+import PeliculaService from '@/services/PeliculaService';
 import Cronograma from './Cronograma';
 import { format } from 'date-fns'
 import { FuncionesContext } from './FuncionesContext';
@@ -93,7 +93,7 @@ const VentanaFunciones = () => {
 
     useEffect(() => {
         if (valoresBusqueda.sedeElegida !== '') {
-            Pelicula.mostrarPeliculasPorSede(valoresBusqueda.sedeElegida)
+            PeliculaService.mostrarPeliculasPorSede(valoresBusqueda.sedeElegida)
                 .then(data =>
                     setValoresBusqueda(prev => ({
                         ...prev,

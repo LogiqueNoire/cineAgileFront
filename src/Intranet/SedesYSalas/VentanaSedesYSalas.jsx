@@ -146,7 +146,7 @@ const VentanaSedesYSalas = () => {
                         <thead className='thead2'>
                             <tr className='tr2'>
                                 <td className='td2'>Nombre de sede</td>
-                                <td className='td2'>Opciones</td>
+                                <td className='td2'>Acciones</td>
                             </tr>
                         </thead>
                         <tbody className='tbody2'>
@@ -164,9 +164,9 @@ const VentanaSedesYSalas = () => {
                                     <td className='td2 tdOpciones' data-label='Opciones'>
 
                                         <div className='d-flex justify-content-center gap-2' style={{ 'width': 'min-content' }} >
-                                            <button className='btn btn-primary d-flex gap-2' onClick={() => actualizarSede(el)}
-                                                style={{ 'paddingInline': '12px' }}>
-                                                <img src={guardar} alt="" style={{ height: '25px' }} />
+                                            <button className='btn btn-primary btn-primary-gradient d-flex gap-2' onClick={() => actualizarSede(el)}
+                                                style={{ 'padding': '11px' }}>
+                                                <img src={guardar} alt="" style={{ height: '23px' }} />
                                             </button>
 
                                             <button className={el.activo ? 'btn btn-success rounded-circle d-flex gap-2' : 'btn btn-danger rounded-circle d-flex gap-2'}

@@ -4,11 +4,12 @@ import { Link, UNSAFE_useScrollRestoration } from 'react-router-dom';
 import { env, url } from '@/configuracion/backend.js'
 import { format } from 'date-fns'
 
-import peliculaIcono from '@/assets/modulos/pelicula.svg'
+import peliculaIcono from '@/assets/modulos/peliculas.svg'
 import Loading from '@/components/Loading/Loading.jsx';
 import Cookies from 'js-cookie';
 import Toast from '@/components/Toast/Toast.jsx';
 import Genero from '@/services/Genero.js';
+import TimeService from '@/services/TimeService';
 
 export default function AddFilm({ onSucess }) {
   const [toast, setToast] = useState({ tipo: '', visible: false, titulo: '', mensaje: '' });
@@ -70,23 +71,10 @@ export default function AddFilm({ onSucess }) {
     }
   }
 
-  let response
-  const obtenerFecha = async () => {
-    try {
-      response = await axios.get(`${url}/api/tiempo/v1`);
-      setFechaReal(new Date(response.data));
-
-    } catch (err) {
-      console.error("Error al obtener la fecha:", err);
-    }
-  };
-
-  /*manejo de fecha*/
-
   useEffect(() => {
     const obtenerDatos = async () => {
       try {
-        await Promise.all([consultarGeneros(), obtenerFecha()]);
+        await Promise.all([consultarGeneros(), setFechaReal(await TimeService.obtenerFecha())]);
 
         // Aquí puedes ejecutar lógica adicional si ambas funciones terminaron bien
         env === "dev" && console.log("Generos y fecha obtenidos con éxito");
@@ -190,8 +178,8 @@ export default function AddFilm({ onSucess }) {
       {fechaReal !== undefined && generos !== undefined ?
         <div className="rounded-4 p-4 mt-4 shadow">
           <div className="d-flex align-items-center p-2 gap-3 justify-content-center">
-            <h2 className="text-center">Nueva película</h2>
-            <img src={peliculaIcono} alt="" style={{ height: '80px', filter: "invert(100%)" }} />
+            <h2 className="text-center" style={{color: "#01217B"}}>Nueva película</h2>
+            <img src={peliculaIcono} alt="" style={{ height: '80px', filter: "invert(90%) sepia(70%) saturate(25000%) hue-rotate(225deg) brightness(52.5%) contrast(100%)" }} />
           </div>
           <form onSubmit={(e) => onSubmit(e)} >
             <div className='d-flex flex-wrap gap-3 justify-content-center'>

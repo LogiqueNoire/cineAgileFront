@@ -1,4 +1,4 @@
-import Pelicula from "@/services/Pelicula";
+import PeliculaService from "@/services/PeliculaService";
 import FTextInput from "@/components/FTextInput";
 import FSelectInput from "@/components/FSelectInput";
 import FNumberInput from "@/components/FNumberInput";
@@ -20,11 +20,12 @@ const ordenamientoAlfa = (a, b) => {
     return x < y ? -1 : 1;
 }
 
-const PeliculaModal = ({ pelicula, onCerrar }) => {
+const PeliculaModal = ({ pelicula, onCerrar, consultarPeliculas }) => {
     const [generos, setGeneros] = useState([])
 
     const onInputSave = async (keyValue) => {
-        await Pelicula.editarPelicula({ idPelicula: pelicula.idPelicula, ...keyValue });
+        await PeliculaService.editarPelicula({ idPelicula: pelicula.idPelicula, ...keyValue });
+        consultarPeliculas()
     };
 
     const consultarGeneros = async () => {
