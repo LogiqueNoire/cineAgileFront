@@ -1,12 +1,11 @@
 import { useState } from "react";
-import desarrolladorIcono from "@/assets/modulos/developer.svg"
 import Toast from "@/components/Toast/Toast";
 import axios from "axios";
 import { env, url } from "@/configuracion/backend";
 import Cookies from "js-cookie";
 import MuyPronto from "@/components/Muypronto";
-import dbIcon from "@/assets/modulos/db.svg"
 import truncateDBicon from "@/assets/modulos/truncateDB.svg"
+import { dbIcon, developerIcon } from "@/assets/modulos";
 
 const OpcionesDesarrollador = () => {
     const [toast, setToast] = useState({ tipo: '', title: '', mensaje: '', visible: false });
@@ -47,7 +46,7 @@ const OpcionesDesarrollador = () => {
         <div className="container-fluid col-11 p-2 d-flex flex-column gap-4 align-items-center">
             <div className="d-flex justify-content-center align-items-center gap-2">
                 <h2 className="fs-1 fw-bold">Opciones de desarrollador</h2>
-                <img src={desarrolladorIcono} alt="" style={{ height: '90px', filter: 'invert(99%)' }} />
+                <img src={developerIcon} alt="" style={{ height: '90px', filter: 'invert(99%)' }} />
             </div>
             <button className="btn btn-primary btn-primary-gradient d-flex gap-3 align-items-center justify-content-center" onClick={poblarBD} style={{width: 'max-content'}}>
                 <h2 className="">Poblar la BD con datos de prueba</h2>

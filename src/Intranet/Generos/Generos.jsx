@@ -7,19 +7,13 @@ import iconoGuardar from "@/assets/operaciones/guardar.svg"
 import Toast from "@/components/Toast/Toast";
 import genresIcon from '@/assets/modulos/genresIcon.svg'
 import Genero from "@/services/Genero";
+import { ordenamientoAlfa } from "@/utils";
 
 const Generos = () => {
     const [loading, setLoading] = useState(true)
     const [generos, setGeneros] = useState({});
     const [generoNombre, setGeneroNombre] = useState(null)
     const [toast, setToast] = useState({ visible: false, tipo: '', titulo: '', mensaje: '' })
-
-    const ordenamientoAlfa = (a, b) => {
-        const x = a.nombre.toLowerCase();
-        const y = b.nombre.toLowerCase();
-
-        return x < y ? -1 : 1;
-    }
 
     const consultarGeneros = async () => {
         try {
@@ -142,7 +136,7 @@ const Generos = () => {
                     </thead>
                     <tbody className=''>
                         {generos.map((el, id) => (
-                            <tr className='' key={id}>
+                            <tr className='' key={`${el}${id}`}>
                                 <td className='' data-label='Nombre'>
                                     <input
                                         type="text"
@@ -176,9 +170,7 @@ const Generos = () => {
             }
             <Toast tipo={toast.tipo} titulo={toast.titulo} mensaje={toast.mensaje} visible={toast.visible}></Toast>
         </div>
-
     )
-
 }
 
 export default Generos;

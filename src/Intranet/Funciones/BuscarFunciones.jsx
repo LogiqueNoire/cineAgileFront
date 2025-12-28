@@ -1,17 +1,8 @@
 import { useContext, useState, useEffect } from "react";
 import { FuncionesContext } from "./FuncionesContext";
 import Loading from '@/components/Loading/Loading';
-import axios from 'axios';
-import { url } from "@/configuracion/backend"
-import Cookies from 'js-cookie';
 import Sede from "@/services/Sede";
-
-const ordenamientoAlfa = (a, b) => {
-    const x = a.nombre.toLowerCase();
-    const y = b.nombre.toLowerCase();
-
-    return x < y ? -1 : 1;
-}
+import { ordenamientoAlfa } from "@/utils";
 
 const BuscarFunciones = ({ handlePeliculaChange, handleSalaChange }) => {
     const [loading, setLoading] = useState(true);
@@ -41,7 +32,7 @@ const BuscarFunciones = ({ handlePeliculaChange, handleSalaChange }) => {
 
             setValoresBusqueda(prev => ({
                 ...prev,
-                sedesTodas: datos != undefined ? datos.sort(ordenamientoAlfa) : undefined
+                sedesTodas: datos == undefined ? undefined : datos.sort(ordenamientoAlfa)
             }));
         } catch (error) {
             console.error(error);

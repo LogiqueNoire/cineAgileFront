@@ -2,7 +2,7 @@ import './ScreeningButton.css';
 import { useNavigate } from 'react-router-dom';
 import iconoButaca from '@/assets/operaciones/butacaFill.svg'
 import Funcion from '@/services/Funcion';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 const ScreeningButton = ({ funcion, pelicula }) => {
     const [cantButacasDisponibles, setCantButacasDisponibles] = useState();

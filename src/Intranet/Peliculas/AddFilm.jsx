@@ -1,6 +1,5 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { Link, UNSAFE_useScrollRestoration } from 'react-router-dom';
 import { env, url } from '@/configuracion/backend.js'
 import { format } from 'date-fns'
 
@@ -10,6 +9,7 @@ import Cookies from 'js-cookie';
 import Toast from '@/components/Toast/Toast.jsx';
 import Genero from '@/services/Genero.js';
 import TimeService from '@/services/TimeService';
+import { ordenamientoAlfa } from '@/utils';
 
 export default function AddFilm({ onSucess }) {
   const [toast, setToast] = useState({ tipo: '', visible: false, titulo: '', mensaje: '' });
@@ -47,13 +47,6 @@ export default function AddFilm({ onSucess }) {
       [e.target.name]: e.target.value,
     });
   };
-
-  const ordenamientoAlfa = (a, b) => {
-        const x = a.nombre.toLowerCase();
-        const y = b.nombre.toLowerCase();
-
-        return x < y ? -1 : 1;
-    }
 
   useEffect(() => {
     if (duracion > 500 || duracion <= 0) {
@@ -119,8 +112,8 @@ export default function AddFilm({ onSucess }) {
     e.preventDefault();
     env === "dev" && console.log(pelicula)
 
-    if (!(genero.length == 0 || clasificacion.trim() === '' || duracion === 0
-      || director.trim() === '' || imageUrl.trim() === '' || sinopsis.trim() === '')) {
+    if (genero.length != 0 && clasificacion.trim() !== '' && duracion != 0
+      && director.trim() !== '' && imageUrl.trim() !== '' && sinopsis.trim() !== '') {
       const peliculaFinal = {
         ...pelicula,
         fechaInicioEstreno: format(pelicula.fechaInicioEstreno, 'yyyy-MM-dd'),
@@ -314,7 +307,7 @@ export default function AddFilm({ onSucess }) {
             <div className='d-flex flex-wrap gap-3 justify-content-center'>
 
               <div className="mb-3">
-                <label className="form-label">Género(s)</label>
+                <span className="form-label">Género(s)</span>
                 <div className="border rounded p-3 bg-light" style={{ maxHeight: '110px', overflowY: 'auto' }}>
                   {generos.map((genre, id) => {
                     const isChecked = pelicula.genero.some(g => g.id === genre.id);

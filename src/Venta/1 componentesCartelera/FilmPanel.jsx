@@ -5,8 +5,7 @@ import FilmContainer from "./FilmContainer";
 import PeliculaService from "@/services/PeliculaService"
 import FilmTab from './FilmTab';
 import Loading from '@/components/Loading/Loading';
-import axios from 'axios';
-import { env, url } from '@/configuracion/backend';
+import { env } from '@/configuracion/backend';
 
 import '@/Inicio.css'
 import "./FilmPanel.css"

@@ -4,6 +4,7 @@ import { env, url } from "@/configuracion/backend";
 import { useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import { format } from "date-fns";
+import { ordenamientoAlfa } from "@/utils";
 
 const DesempeñoSemanal = ({ fechaConsultada }) => {
 
@@ -50,13 +51,6 @@ const DesempeñoSemanal = ({ fechaConsultada }) => {
         return null;
     };
 
-    const ordenamientoAlfa = (a, b) => {
-        const x = a.nombre.toLowerCase();
-        const y = b.nombre.toLowerCase();
-
-        return x < y ? -1 : 1;
-    }
-
     const consultarPeliculas = async () => {
         try {
             const f = format(fechaConsultada, "yyyy-MM-dd'T'HH:mm:ss")
@@ -96,7 +90,9 @@ const DesempeñoSemanal = ({ fechaConsultada }) => {
     }, [peliculaElegida])
 
     useEffect(() => {
-        if (ventasDetalladas != undefined) {
+        if (ventasDetalladas == undefined) {
+            setData([])
+        } else {
             env === "dev" && console.log(ventasDetalladas)
             const parseada = ventasDetalladas.map(el => ({ hour: el.hora, index: el.dia, value: el.ventas.toFixed(2) }))
             const array = []
@@ -108,8 +104,6 @@ const DesempeñoSemanal = ({ fechaConsultada }) => {
                 setData(array)
             else
                 setData([])
-        } else {
-            setData([])
         }
     }, [ventasDetalladas])
 

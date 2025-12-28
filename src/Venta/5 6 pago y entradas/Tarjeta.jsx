@@ -3,6 +3,7 @@ import "./pago.css";
 import { FormularioTarjeta } from "./FormularioTarjeta";
 import axios from "axios";
 import { format } from "date-fns";
+import MuyPronto from "@/components/Muypronto";
 
 export const Tarjeta = ({ metodo, setMetodo, tarjeta, setTarjeta, setSubmitting, setStatus, setto }) => {
   const [tipocambio, setTipoCambio] = useState();
@@ -24,24 +25,25 @@ export const Tarjeta = ({ metodo, setMetodo, tarjeta, setTarjeta, setSubmitting,
 
   return (
     <>
-      <button
-        onClick={() =>
-          setMetodo((prev) => (prev === "tarjeta" ? "" : "tarjeta"))
-        }
-        className={`payment-method ${metodo === "tarjeta" ? "selected tarjeta" : ""
-          }`}
-          disabled={!tipocambio}
-      >
-        {!tipocambio ? <span className="">Obteniendo tipo de cambio actual...</span> : <span className="">Elegir forma de pago</span>}
+      <button onClick={() => setMetodo((prev) => (prev === "soles" ? "" : "soles"))}
+        className={`payment-method ancizar-sans-regular ${metodo === "soles" ? "selected soles" : ""}`}>
+          <span className="">Soles</span>
+      </button>
+      <button onClick={() => setMetodo((prev) => (prev === "dolares" ? "" : "dolares"))}
+        className={`payment-method ancizar-sans-regular ${metodo === "dolares" ? "selected dolares" : ""}`}
+        disabled={!tipocambio}>
+        {tipocambio ? <span className="">Dólares</span> : <span className="">Obteniendo tipo de cambio actual...</span>}
         {/*<div className="card-images">
           <img src="/visa.png" alt="Visa" className="card-icon" />
           <img src="/mastercard.png" alt="MasterCard" className="card-icon" />
         </div>*/}
       </button>
-
-      {metodo === "tarjeta" && (
+      {metodo === "soles" && (
+        <MuyPronto></MuyPronto>
+      )}
+      {metodo === "dolares" && (
         <FormularioTarjeta tarjeta={tarjeta} setTarjeta={setTarjeta} setSubmitting={setSubmitting} setStatus={setStatus}
-         setto={setto} tipoCambio={tipocambio}/>
+          setto={setto} tipoCambio={tipocambio} />
       )}
     </>
   );

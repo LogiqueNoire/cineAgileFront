@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Auth from "@/services/Auth";
 import Cookies from "js-cookie";
-import { useNavigate, Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import BotonCarga from "@/components/BotonCarga"
 import videoFondo from "@/assets/fondoLogin.mp4"
 import imagenFondo from "@/assets/fondoLogin.png"
@@ -81,7 +81,7 @@ const LoginForm = () => {
                 </div>
                 {status.isError &&
                     <div className="bg-danger bg-opacity-50 border border-1 border-danger w-100 p-2 mt-3 rounded rounded-5">
-                        <div className="text-center fw-bold text-white">{status.details != "" ? status.details : "Servicio no disponible"}</div>
+                        <div className="text-center fw-bold text-white">{status.details == "" ? "Servicio no disponible" : status.details}</div>
                     </div>
                 }
             </form>

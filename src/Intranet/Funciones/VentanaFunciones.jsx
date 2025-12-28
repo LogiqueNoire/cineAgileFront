@@ -2,8 +2,6 @@ import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import { env, url } from "@/configuracion/backend"
 import Cookies from 'js-cookie';
-import { se } from 'date-fns/locale';
-import { set } from 'date-fns';
 import SalaButaca from '@/services/SalaButaca';
 import PeliculaService from '@/services/PeliculaService';
 import Cronograma from './Cronograma';
@@ -14,16 +12,7 @@ import ModuloFuncion from './ModuloFuncion';
 import Fecha from '@/services/Fecha';
 import Funcion from '@/services/Funcion';
 
-const ordenamientoAlfa = (a, b) => {
-    const x = a.nombre.toLowerCase();
-    const y = b.nombre.toLowerCase();
-
-    return x < y ? -1 : 1;
-}
-
 const VentanaFunciones = () => {
-    const [loading, setLoading] = useState(true);
-
     const {
         valoresBusqueda,
         setValoresBusqueda,
@@ -177,15 +166,11 @@ const VentanaFunciones = () => {
     return (
         <div>
             <div className='d-flex flex-column align-items-center'>
-
                 <div className='d-flex flex-wrap justify-content-center gap-4'>
                     <BuscarFunciones handlePeliculaChange={handlePeliculaChange} handleSalaChange={handleSalaChange}></BuscarFunciones>
 
                     <ModuloFuncion handlePeliculaChange={handlePeliculaChange} handleSalaChange={handleSalaChange}></ModuloFuncion>
-
                 </div>
-
-
             </div>
             {
                 listaFunciones.length > 0 ?
@@ -194,8 +179,7 @@ const VentanaFunciones = () => {
                         <h3>No hay funciones para mostrar</h3>
                     </div>
             }
-
-        </div >
+        </div>
     )
 }
 

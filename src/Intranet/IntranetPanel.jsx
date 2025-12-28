@@ -1,13 +1,4 @@
-import pelicula from '@/assets/modulos/peliculas.svg'
-import sede from '@/assets/modulos/sedeIcon.svg'
-import funciones from '@/assets/modulos/recorder.svg'
-import genresIcon from '@/assets/modulos/genresIcon.svg'
-import ajustes from '@/assets/modulos/ajustes.svg'
-import passwordIcon from '@/assets/modulos/password.svg'
-import usuariosInternos from '@/assets/modulos/modulo_usuario_icono.svg'
-import statisticsIcon from '@/assets/modulos/statisticsIcon.svg'
-import auditarIcono from '@/assets/modulos/audit.svg'
-import desarrolladorIcono from '@/assets/modulos/developer.svg'
+import { auditIcon, funcionesIcon, genresIcon, passwordIcon, peliculaIcon, sedeIcon, statisticsIcon, usuariosInternosIcon } from "@/assets/modulos"
 import { useNavigate } from 'react-router-dom';
 
 const IntranetPanel = () => {
@@ -28,9 +19,7 @@ const IntranetPanel = () => {
     const moverseHaciaGeneros = () => { navigate(`/intranet/generos`) }
 
     const moverseHaciaAuditoria = () => { navigate(`/intranet/auditoria`) }
-
-    const moverseHaciaOpcionesDeDesarrollador = () => { navigate(`/intranet/desarrollador`) }
-
+    
     return (
         <div className="m-3 mt-4">
             <div className="row">
@@ -39,17 +28,17 @@ const IntranetPanel = () => {
 
 
                     <button className="btn btn-primary d-flex gap-3 align-items-center justify-content-center" onClick={moverseHaciaVentanaPeliculas}>
-                        <img src={pelicula} alt="" style={{ width: '90px' }} />
+                        <img src={peliculaIcon} alt="" style={{ width: '90px' }} />
                         <h2 className="">Películas</h2>
                     </button>
 
                     <button className="btn btn-primary d-flex gap-3 align-items-center justify-content-center" onClick={moverseHaciaVentanaSedesYSalas}>
-                        <img src={sede} alt="" style={{ width: '90px', height: "auto" }} />
+                        <img src={sedeIcon} alt="" style={{ width: '90px', height: "auto" }} />
                         <h2 className="text-start">Sedes, salas<br></br>y butacas</h2>
                     </button>
 
                     <button className="btn btn-primary d-flex gap-3 align-items-center justify-content-center" onClick={moverseHaciaFunciones}>
-                        <img src={funciones} alt="" style={{ width: '90px' }} />
+                        <img src={funcionesIcon} alt="" style={{ width: '90px' }} />
                         <h2 className="">Funciones</h2>
                     </button>
 
@@ -64,12 +53,12 @@ const IntranetPanel = () => {
                     </button>
 
                     <button className="btn btn-primary d-flex gap-3 align-items-center justify-content-center" onClick={moverseHaciaUsuarios}>
-                        <img src={usuariosInternos} alt="" style={{ width: '90px' }} />
+                        <img src={usuariosInternosIcon} alt="" style={{ width: '90px' }} />
                         <h2 className="">Usuarios</h2>
                     </button>
 
                     <button className="btn btn-primary d-flex gap-3 align-items-center justify-content-center" onClick={moverseHaciaAuditoria}>
-                        <img src={auditarIcono} alt="" style={{ height: '85px' }} />
+                        <img src={auditIcon} alt="" style={{ height: '85px' }} />
                         <h2 className="">Auditorías</h2>
                     </button>
 

@@ -3,13 +3,7 @@ import BotonCarga from "@/components/BotonCarga";
 import Sede from "@/services/Sede";
 import Usuario from "@/services/Usuario";
 import { env } from "@/configuracion/backend";
-
-const ordenamientoAlfa = (a, b) => {
-    const x = a.nombre.toLowerCase();
-    const y = b.nombre.toLowerCase();
-
-    return x < y ? -1 : 1;
-}
+import { ordenamientoAlfa } from "@/utils";
 
 const FormularioUsuario = ({ actualizar }) => {
     const [sedes, setSedes] = useState([]);

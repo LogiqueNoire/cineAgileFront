@@ -6,19 +6,10 @@ import FDateInput from "@/components/FDateInput";
 import FTextAreaInput from "@/components/FTextAreaInput";
 import FGeneroInput from "./FGeneroInput";
 
-import Cookies from "js-cookie";
-import axios from "axios";
-import { url } from "@/configuracion/backend";
 import { useState, useEffect } from "react";
 import Loading from "@/components/Loading/Loading";
 import Genero from "@/services/Genero";
-
-const ordenamientoAlfa = (a, b) => {
-    const x = a.nombre.toLowerCase();
-    const y = b.nombre.toLowerCase();
-
-    return x < y ? -1 : 1;
-}
+import { ordenamientoAlfa } from "@/utils";
 
 const PeliculaModal = ({ pelicula, onCerrar, consultarPeliculas }) => {
     const [generos, setGeneros] = useState([])
