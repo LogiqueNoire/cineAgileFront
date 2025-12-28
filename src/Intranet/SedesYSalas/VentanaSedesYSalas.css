@@ -1,5 +1,5 @@
 .mytable2 {
-    width: 100%;
+    width: 600px;
 }
 
 .th2,
@@ -20,7 +20,18 @@
     width: 250px;
 }
 
+.mycontrol {
+    width: 100% !important;
+}
+
 @media (max-width: 685px) {
+    .mytable2 {
+        width: 100%;
+    }
+
+    .mycontrol {
+        width: auto !important;
+    }
 
     .mytable2,
     .thead2,
@@ -29,7 +40,6 @@
     .td2,
     .tr2 {
         display: block;
-
     }
 
     .thead2 {
@@ -45,9 +55,11 @@
         padding-left: 50%;
         text-align: right;
         border: none;
-        border-bottom: 1px solid #eee;
         display: flex;
         justify-content: flex-end;
+    }
+    .td2:nth-child(1) {
+        border-bottom: 1px solid #eee;
     }
 
     .ms-end {
@@ -72,6 +84,10 @@
         padding-left: 0.75rem;
         font-weight: bold;
         white-space: nowrap;
+    }
+
+    .td2:nth-child(2):before {
+        padding-top: 1.05rem;
     }
 
     .sinopsis {

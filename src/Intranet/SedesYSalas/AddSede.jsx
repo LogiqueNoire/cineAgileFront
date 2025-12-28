@@ -85,8 +85,8 @@ export default function AddSede({ onSucess }) {
       <div className="row">
         <div className="rounded-4 p-4 mt-4 shadow">
           <div className='d-flex justify-content-center align-items-center gap-2'>
-            <h2 className="text-center">Nueva sede</h2>
-            <img src={sedeIcon} alt="" style={{ filter:'invert(100%)' }}/>
+            <h2 className="text-center" style={{color: "#01217B"}}>Nueva sede</h2>
+            <img src={sedeIcon} alt="" style={{ filter: "invert(90%) sepia(70%) saturate(25000%) hue-rotate(225deg) brightness(52.5%) contrast(100%)" }}/>
           </div>
           <form onSubmit={(e) => onSubmit(e)} className='d-flex justify-self-center flex-column'>
 

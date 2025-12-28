@@ -9,7 +9,7 @@ const FilmContainer = ({ peliculas }) => {
                     return <FilmCard key={pelicula.idPelicula} pelicula={pelicula}></FilmCard>
                 })
             :
-            <span className="fs-3 px-3">No hay películas para mostrar por ahora.</span>
+            <span className="fs-3 px-3 ancizar-sans-regular text-center">No hay películas para mostrar por ahora.</span>
             }
         </div>
     );

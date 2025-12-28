@@ -118,44 +118,39 @@ const Generos = () => {
             </div>
             {loading === true
                 ? <div className='d-flex flex-column align-items-center container'><Loading></Loading></div> :
-                <table className='table mytable table-striped border table-hover mt-4'>
-                    <thead className='thead'>
-                        <tr className="tr">
-                            <th className='td'>Nombre</th>
-                            <th className='td'></th>
-                        </tr>
-                    </thead>
-                    <tbody className='tbody'>
-                        <tr className='tr'>
-                            <td className='td' data-label='Nombre'>
+                <table className='table table-hover mt-4 ' style={{width:"300px"}}>
+                    <thead className=''>
+                        <tr className=''>
+                            <th className='' data-label='Nombre'>
                                 <input
                                     type="text"
-                                    className="sinopsis form-control"
+                                    className="form-control"
                                     placeholder="Nuevo nombre"
                                     name="nuevonombre"
                                     value={generoNombre || ""}
                                     onChange={(e) => setGeneroNombre(e.target.value)}
                                     required
                                 />
-                            </td>
-                            <td className='td' data-label='Opciones'>
+                            </th>
+                            <th className='' data-label='Opciones'>
                                 <button className='btn btn-primary btn-primary-gradient d-flex gap-2' onClick={() => agregarGenero(e, generoNombre)}
-                                    style={{ 'padding': '10px' }}>
-                                    <img src={iconoGuardar} alt="" style={{ height: '20px' }} />
+                                    style={{ 'padding': '11px' }}>
+                                    <span className="fs-3" style={{lineHeight:"0.67"}}>+</span>
                                 </button>
-                            </td>
-
+                            </th>
                         </tr>
+                    </thead>
+                    <tbody className=''>
                         {generos.map((el, id) => (
-
-                            <tr className='tr' key={id}>
-                                <td className='td' data-label='Nombre'>
+                            <tr className='' key={id}>
+                                <td className='' data-label='Nombre'>
                                     <input
                                         type="text"
-                                        className="sinopsis form-control"
+                                        className="form-control"
                                         placeholder="Nuevo nombre"
                                         name="nuevonombre"
                                         value={el.nombre}
+                                        
                                         onChange={
                                             (e) => {
                                                 const nuevaLista = [...generos];
@@ -166,7 +161,7 @@ const Generos = () => {
                                         required
                                     />
                                 </td>
-                                <td className='td' data-label='Opciones'>
+                                <td className='' data-label='Opciones'>
                                     <button className='btn btn-primary btn-primary-gradient d-flex gap-2' onClick={() => editarGenero(e, el)}
                                         style={{ 'padding': '10px' }}>
                                         <img src={iconoGuardar} alt="" style={{ height: '20px' }} />

@@ -142,18 +142,21 @@ const VentanaSedesYSalas = () => {
                 <h2 className="text-center mt-5">Sedes registradas</h2>
                 {loading === true
                     ? <Loading></Loading> :
-                    <table className='mytable2 table table-striped border table-hover m-4 mt-2'>
+                    edicion.length == 0 ?
+                    <p className='mt-3 fs-4'>¡No hay sedes registradas!</p>
+                    :
+                    <table className='mytable2 table table-striped table-hover m-4 mt-2'>
                         <thead className='thead2'>
                             <tr className='tr2'>
-                                <td className='td2'>Nombre de sede</td>
-                                <td className='td2'>Acciones</td>
+                                <td className='td2 fw-bold'>Nombre de sede</td>
+                                <td className='td2 fw-bold'>Acciones</td>
                             </tr>
                         </thead>
                         <tbody className='tbody2'>
                             {edicion.map((el, id) => (
                                 <tr key={el.id || id} className='tr2'>
                                     <td className='align-content-center td2' data-label='Nombre' >
-                                        <input className='form-control ms-end' type="text" value={el.nombre} style={{ width: '250px' }}
+                                        <input className='form-control mycontrol ms-end' type="text" value={el.nombre} style={{ width: '250px' }}
                                             onChange={(e) => {
                                                 const nuevaLista = [...lista];
                                                 nuevaLista[id] = { ...el, nombre: e.target.value };
@@ -161,8 +164,7 @@ const VentanaSedesYSalas = () => {
                                             }} />
 
                                     </td>
-                                    <td className='td2 tdOpciones' data-label='Opciones'>
-
+                                    <td className='td2 tdOpciones' data-label='Acciones'>
                                         <div className='d-flex justify-content-center gap-2' style={{ 'width': 'min-content' }} >
                                             <button className='btn btn-primary btn-primary-gradient d-flex gap-2' onClick={() => actualizarSede(el)}
                                                 style={{ 'padding': '11px' }}>

@@ -18,6 +18,21 @@ const ordenamientoFecha = (a, b) => {
     return x < y ? -1 : 1;
 }
 
+const estrenoColores = [
+    ["En cartelera", "#b8f8ffff", "#007683ff"], //celeste
+    ["Próximamente", "#fcffa8", "#928100ff"], //amarillo
+    ["Estreno", "#b3f0c1", "#00771cff"], //verde
+    ["Finalizada", "#b3d6f0", "#01518fff"], //azul
+]
+
+const clasificacionColores = [
+    [" ", "#b8f8ffff", "#007683ff"],
+    ["+14", "#fcffa8", "#928100ff"], //amarillo
+    ["Apto para todos", "#b3f0c1", "#00771cff"], //verde
+    ["", "#b3d6f0", "#01518fff"], //azul
+    ["+18", "#f1bcb3ff", "#8a1500ff"], //rojo
+]
+
 const VentanaPeliculas = () => {
     const [fechaReal, setFechaReal] = useState()
 
@@ -101,71 +116,89 @@ const VentanaPeliculas = () => {
         <div>
             <div className='d-flex flex-column gap-4 align-items-center container-fluid'>
                 <AddFilm onSucess={consultarPeliculas}></AddFilm>
-
+                <h2 className="text-center mt-4">Películas registradas</h2>
                 {loading === true
                     ? <div className='d-flex flex-column align-items-center container'><Loading></Loading></div> :
 
                     <div>
-                        <div className='d-flex flex-wrap align-items-center justify-content-center gap-2 m-4'>
-                            <h3>Buscar película</h3>
-                            <div>
-                                <input
-                                    type="text"
-                                    placeholder='Nombre de película'
-                                    className='form-control'
-                                    value={busqueda}
-                                    onChange={manejarCambio}
-                                    style={{ width: '300px' }}
-                                />
-                            </div>
-                        </div>
+                        
+                        {resultados.length == 0 ?
+                            <p className='mb-4 fs-4 text-center'>¡No hay películas registradas!</p>
+                            :
 
-                        <table className='table mytable table-striped border table-hover mt-4'>
-                            <thead className='thead table-white'>
-                                <tr>
-                                    <th className='td'>Nombre</th>
-                                    <th className='td'>Duración (min)</th>
-                                    <th className='td'>Sinopsis</th>
-                                    <th className='td'>Clasificación</th>
-                                    <th className='td'>Estado</th>
-                                    <th className='td'>Fecha de estreno</th>
-                                    <th className='td'>Imagen</th>
-                                    <th className='td'>Acciones</th>
-                                </tr>
-                            </thead>
-                            <tbody className='tbody'>
-                                {resultados.map((el, id) => (
+                            <>
+                                <div className='d-flex flex-wrap align-items-center justify-content-center gap-2 m-4'>
+                                    <h3>Buscar película</h3>
+                                    <div>
+                                        <input
+                                            type="text"
+                                            placeholder='Nombre de película'
+                                            className='form-control'
+                                            value={busqueda}
+                                            onChange={manejarCambio}
+                                            style={{ width: '300px' }}
+                                        />
+                                    </div>
+                                </div>
 
-                                    <tr className='tr' key={id}>
-                                        <td className='td' data-label='Nombre'>
-                                            {el.nombre}
-                                        </td>
-                                        <td className='td' data-label='Duración'>
-                                            {el.duracion}
-                                        </td>
-                                        <td className='td' data-label='Sinopsis'><div className='sinopsis' style={{ width: '200px' }}>{el.sinopsis}</div></td>
-                                        <td className='td' data-label='Clasificación'>{el.clasificacion === "" | el.clasificacion === " " ? "-" : el.clasificacion}</td>
-                                        <td className='td' data-label='Estado'>{el.estado}</td>
-                                        <td className='td' data-label='Inicio de estreno'>
-                                            {el.fechaInicioEstreno ? format(parse(el.fechaInicioEstreno, 'yyyy-MM-dd', new Date()), 'dd/MM/yyyy') : ''}
-                                        </td>
-                                        <td className='td' data-label='Imagen'>
-                                            <a href={el.imageUrl} target="_blank" rel="noopener noreferrer" className='d-flex btn btn-primary btn-primary-gradient p-2' style={{ width: "min-content" }}>
-                                                <img src={link} alt="" style={{ height: '20px' }} />
-                                            </a>
+                                <table className='table mytable table-striped border table-hover mt-4'>
+                                    <thead className='thead table-white'>
+                                        <tr>
+                                            <th className='td'>Nombre</th>
+                                            <th className='td'>Duración (min)</th>
+                                            <th className='td'>Sinopsis</th>
+                                            <th className='td'>Clasificación</th>
+                                            <th className='td'>Estado</th>
+                                            <th className='td'>Fecha de estreno</th>
+                                            <th className='td'>Imagen</th>
+                                            <th className='td'>Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody className='tbody'>
+                                        {resultados.map((el, id) => (
 
-                                        </td>
-                                        <td>
-                                            <button className='d-flex align-items-center btn btn-primary btn-primary-gradient p-2 mx-2' onClick={() => editarOnClick(el)}>
-                                                <img src={iconoEditar} alt="" style={{ height: '20px' }} />
-                                            </button>
-                                        </td>
-                                    </tr>
+                                            <tr className='tr' key={id}>
+                                                <td className='td' data-label='Nombre'>
+                                                    {el.nombre}
+                                                </td>
+                                                <td className='td' data-label='Duración'>
+                                                    {el.duracion}
+                                                </td>
+                                                <td className='td' data-label='Sinopsis'><div className='sinopsis' style={{ width: '200px' }}>{el.sinopsis === "" | el.sinopsis === " " ? "-" : el.sinopsis}</div></td>
+                                                <td className='td' data-label='Clasificación'>
+                                                    <span className={`rounded-5 fw-bold p-1 px-2`} style={{
+                                                        whiteSpace: "nowrap",
+                                                        textOverflow: "ellipsis",
+                                                        backgroundColor: clasificacionColores[clasificacionColores.findIndex(e => e[0] === el.clasificacion)][1],
+                                                        color: clasificacionColores[clasificacionColores.findIndex(e => e[0] === el.clasificacion)][2]
+                                                    }}>{el.clasificacion === "" | el.clasificacion === " " ? "-" : el.clasificacion}</span>
+                                                </td>
+                                                <td className='td' data-label='Estado'>
+                                                    <span className={`rounded-5 fw-bold p-1 px-2`} style={{
+                                                        backgroundColor: estrenoColores[estrenoColores.findIndex(e => e[0] === el.estado)][1],
+                                                        color: estrenoColores[estrenoColores.findIndex(e => e[0] === el.estado)][2]
+                                                    }}>{el.estado}</span></td>
+                                                <td className='td' data-label='Inicio de estreno'>
 
-                                ))}
-                            </tbody>
+                                                    {el.fechaInicioEstreno ? format(parse(el.fechaInicioEstreno, 'yyyy-MM-dd', new Date()), 'dd/MM/yyyy') : ''}
+                                                </td>
+                                                <td className='td td-button' data-label='Imagen'>
+                                                    <a href={el.imageUrl} target="_blank" rel="noopener noreferrer" className='d-flex btn btn-primary btn-primary-gradient p-2' style={{ width: "min-content" }}>
+                                                        <img src={link} alt="" style={{ height: '20px' }} />
+                                                    </a>
+                                                </td>
+                                                <td className='td td-button' data-label="Acciones">
+                                                    <button className='d-flex align-items-center btn btn-primary btn-primary-gradient p-2' onClick={() => editarOnClick(el)}>
+                                                        <img src={iconoEditar} alt="" style={{ height: '20px' }} />
+                                                    </button>
+                                                </td>
+                                            </tr>
 
-                        </table>
+                                        ))}
+                                    </tbody>
+
+                                </table>
+                            </>}
                     </div>
                 }
             </div>
