@@ -8,7 +8,7 @@ const Error = () => {
 
     return (
         <div className="my-5">
-            <h2 className="display-2 text-center">Lo sentimos.</h2>
+            <h2 className="display-2 text-center ancizar-sans-regular mb-0">Lo sentimos.</h2>
             { errorInfo && 
             <div className="display-6 fw-bold text-danger text-center">
                 { errorInfo }

@@ -59,7 +59,7 @@ export const VentanaPrecios = ({ prev, next, onCancelar }) => {
             <>
                 <div className="d-flex mb-4 justify-content-center">
                     <div className="ContieneEntradas gap-3 d-flex flex-column justify-content-center align-items-center">
-                        <h3> PRECIOS DE LAS ENTRADAS </h3>
+                        <h3 className="ancizar-sans-regular mb-0"> PRECIOS DE LAS ENTRADAS </h3>
                         <FilaPrecio nombre="General" precio={precioGeneral} />
                         <FilaPrecio nombre="Mayores de 60" precio={precioMayores} />
                         {pelicula.clasificacion == "Apto para todos" &&

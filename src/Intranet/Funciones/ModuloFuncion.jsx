@@ -17,11 +17,9 @@ const ModuloFuncion = ({ handlePeliculaChange, handleSalaChange }) => {
 
     const {
         valoresBusqueda,
-        setValoresBusqueda,
         funcion,
         setFuncion,
         listaFunciones,
-        setListaFunciones,
         listaPeliculas,
         setListaPeliculas,
         salasNuevaSede,
@@ -30,25 +28,11 @@ const ModuloFuncion = ({ handlePeliculaChange, handleSalaChange }) => {
 
     const [checked, setChecked] = useState(true)
 
-    const [primeraVez, setPrimeraVez] = useState(true)
 
     useEffect(() => {
-        if (primeraVez) {
-            obtenerFecha();
-            consultarPeliculas()
-        } else {
-            setPrimeraVez(false);
-        }
-    }, [primeraVez])
-
-    const onFechaChange = (e) => {
-        const { name, value } = e.target;
-
-        setPelicula({
-            ...pelicula,
-            [name]: value ? new Date(`${value}T00:00`) : null,
-        });
-    };
+        obtenerFecha();
+        consultarPeliculas()
+    }, [])
 
     const [fechaReal, setFechaReal] = useState()
 
@@ -355,16 +339,16 @@ const ModuloFuncion = ({ handlePeliculaChange, handleSalaChange }) => {
     return (
         <div className='d-flex flex-column align-items-center gap-4 m-3 mt-4 p-4 rounded-4 shadow'>
             <div className='d-flex flex-column align-items-center gap-3'>
-                <h3 className='d-flex text-nowrap'>Módulo ágil de funciones</h3>
+                <h3 className='d-flex text-nowrap ancizar-sans-regular mb-0'>Módulo ágil de funciones</h3>
                 <div className="d-flex align-items-center">
                     <label className="fs-4">{checked === true ?  /*true = actualizar */
-                        "Crear" : <strong style={{ "color": "#01217B" }}>Crear</strong>}
+                        "Crear" : <strong className="cineagile-blue-500">Crear</strong>}
                     </label>
                     <label className="switch m-2">
                         <input type="checkbox" checked={checked} onChange={(e) => { cambiarEstado(e.target.checked) }} />
                         <span className="slider round"></span>
                     </label>
-                    <label className="fs-4">{checked === true ? <strong style={{ "color": "#01217B" }}>Actualizar</strong>
+                    <label className="fs-4">{checked === true ? <strong className="cineagile-blue-500">Actualizar</strong>
                         : "Actualizar"}
                     </label>
                 </div>

@@ -1,6 +1,5 @@
 import React, { useContext, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { BilleteraElectronica } from "./BilleteraElectronica.jsx";
 import { Tarjeta } from "./Tarjeta.jsx";
 import { VentaContext } from "@/Venta/3 componentesVenta/VentaContextProvider.jsx";
 import { TerminosCondiciones } from "./TerminosCondiciones.jsx";
@@ -10,7 +9,7 @@ import { format } from "date-fns";
 import Loading from "@/components/Loading/Loading.jsx";
 import { env } from "@/configuracion/backend.js";
 
-export const VentanaPago = ({ prev, next }) => {
+export const VentanaPago = ({ prev }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const { pelicula, funcion } = location.state || {};
@@ -41,8 +40,6 @@ export const VentanaPago = ({ prev, next }) => {
     prev();
   }
 
-  //////////////////////ver
-  // Temporal
   let bloquearSolicitud = false;
 
   const registrarTest = () => {
@@ -97,9 +94,9 @@ export const VentanaPago = ({ prev, next }) => {
         <Loading /> :
         <>
           <div className="container-fluid d-flex flex-column justify-content-center align-items-center gap-4">
-            <h2 className="">Módulo de pago</h2>
+            <h2 className="ancizar-sans-regular mb-0">Módulo de pago</h2>
             <div className="d-flex flex-column justify-content-center align-items-center">
-              <h3>{"Total: S/ " + total.toFixed(2)}</h3>
+              <h3 className="ancizar-sans-regular mb-0">{"Total: S/ " + total.toFixed(2)}</h3>
             </div>
             <TerminosCondiciones
               aceptaTerminos={aceptaTerminos}

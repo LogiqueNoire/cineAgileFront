@@ -16,7 +16,7 @@ const CinemaAcordion = ({ data, pelicula }) => {
                         aria-expanded="false"
                         aria-controls={ `s${sede.idSede}` } //sede.nombreSede.replace(/\s+/g, '')}
                     >
-                        <h5 className='text-start h5'>{sede.nombreSede}</h5>
+                        <h5 className='ancizar-sans-regular mb-0 text-start h5'>{sede.nombreSede}</h5>
                     </button>
 
                     <div className="card-body collapse p-3" 
@@ -32,7 +32,7 @@ const CinemaAcordion = ({ data, pelicula }) => {
 
                             return funcionesFiltradas.length > 0 ? (
                                 <div className='d-flex flex-column gap-2' key={tipo}>
-                                    <h5 className="card-title h5">{tipo}</h5>
+                                    <h5 className="ancizar-sans-regular mb-0 card-title h5">{tipo}</h5>
                                     <div className="row mb-2">
                                         {funcionesFiltradas.map(funcion => (
                                             <ScreeningButton key={funcion.idFuncion} pelicula={pelicula} funcion={funcion}/>

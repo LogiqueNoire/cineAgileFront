@@ -1,10 +1,9 @@
 import React from "react";
-import { useState, useContext } from "react";
+import { useContext } from "react";
 import { VentaContext } from "@/Venta/3 componentesVenta/VentaContextProvider.jsx"
 import { env } from "@/configuracion/backend";
 
 const FilaPrecio = ({ nombre, texto, precio, seleccionadas }) => {
-    //const [cantidad, setCantidad] = useState(0);
     const contexto = useContext(VentaContext);
     const entradasSeleccionadas = contexto.entradasContext.entradasSeleccionadas;
 
@@ -61,11 +60,11 @@ const FilaPrecio = ({ nombre, texto, precio, seleccionadas }) => {
     return (
         <div className="FilaPrecio w-100 d-flex justify-content-between align-items-center">
             <div className="ms-2 ps-1 nombre w-50">
-                <h2 className="m-0">{nombre}</h2>
+                <h2 className="m-0 ancizar-sans-regular">{nombre}</h2>
                 <div className="texto w-100">
-                    <p className="">{texto}</p>
+                    <p className="ancizar-sans-regular mb-0">{texto}</p>
                     <div className="precio w-100">
-                        <h5 className="m-0">{"S/ " + precio} </h5>
+                        <h5 className="m-0 ancizar-sans-regular">{"S/ " + precio} </h5>
                     </div>
                 </div>
             </div>
@@ -77,7 +76,7 @@ const FilaPrecio = ({ nombre, texto, precio, seleccionadas }) => {
                     </div>
                 </button>
 
-                <h3 className="contador align-middle m-2 ">{cantidad}</h3>
+                <h3 className="contador align-middle m-2 ancizar-sans-regular mb-0">{cantidad}</h3>
 
                 <button className="botonAgregar d-flex m-2 border-0 bg-transparent" onClick={agregar}>
                     <div className="botonsuma d-flex">

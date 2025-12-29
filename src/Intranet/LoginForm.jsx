@@ -74,7 +74,7 @@ const LoginForm = () => {
                         <input className='form-control text-white bg-transparent fw-bold placeholder-white py-2 px-3 rounded rounded-5' type="password" name="password" id="password"
                             placeholder="Contraseña" onChange={onPasswordChange} required />
                         <BotonCarga submitting={submitting} type="submit" className='btn btn-primary fw-bold rounded rounded-5'
-                            style={{ backgroundColor: '#FFFFFF', color: '#01217B' }}>
+                            style={{ backgroundColor: '#FFFFFF', color: "var(--cineagile-blue-500)" }}>
                             Ingresar
                         </BotonCarga>
                     </div>

@@ -17,7 +17,7 @@ const DesempeñoSemanal = ({ fechaConsultada }) => {
         0,
         Math.max.apply(
             null,
-            ventasDetalladas.map((entry) => entry.ventas),
+            ventasDetalladas?.map((entry) => entry.ventas),
         ),
     ];
 
@@ -27,7 +27,7 @@ const DesempeñoSemanal = ({ fechaConsultada }) => {
     const renderTooltip = (props) => {
         const { active, payload } = props;
 
-        if (active && payload && payload.length) {
+        if (active && payload?.length) {
             const data = payload[0] && payload[0].payload;
 
             return (
@@ -39,8 +39,8 @@ const DesempeñoSemanal = ({ fechaConsultada }) => {
                         padding: 10,
                     }}
                 >
-                    <p>{data.hour}</p>
-                    <p>
+                    <p className="ancizar-sans-regular mb-0">{data.hour}</p>
+                    <p className="ancizar-sans-regular mb-0">
                         <span>value: </span>
                         {data.value}
                     </p>
@@ -118,7 +118,7 @@ const DesempeñoSemanal = ({ fechaConsultada }) => {
     return (
         <article className='d-flex flex-column border border-3 border-info-subtle rounded rounded-5 p-3' >
             <div className="d-flex flex-row flex-wrap gap-3 align-items-center justify-content-center">
-                <h4 className="text-center col-12 p-0 col-sm-4">Desempeño por día/hora de</h4>
+                <h4 className="ancizar-sans-regular mb-0 text-center col-12 p-0 col-sm-4">Desempeño por día/hora de</h4>
                 <div className="col-12 p-0 col-sm-6">
                     <select value={peliculaElegida}
                         disabled={listaPeliculas.length == 0}

@@ -1,11 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import { Outlet } from "react-router";
 
 import Header from '@/components/Header/Header.jsx'
-import Encriptador from "@/services/Encriptador";
-
-import "./App.css"
-
 
 function App() {
     return (<>

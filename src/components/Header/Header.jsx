@@ -11,7 +11,7 @@ const Header = ({ children }) => {
       <div className='d-flex justify-content-between me-2 align-items-center'>
 
         <a href="/" className='text-decoration-none'>
-          <h1 className='saira-semibold fw-bold'>cineagile</h1>
+          <h1 className='saira-semibold fw-bold mb-0'>cineagile</h1>
         </a>
 
 

@@ -36,8 +36,6 @@ export const FuncionesContextProvider = ({ children }) => {
 
     const [salasNuevaSede, setSalasNuevaSede] = useState([])
 
-
-
     return (
         <FuncionesContext.Provider
             value={{

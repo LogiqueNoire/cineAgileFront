@@ -79,8 +79,6 @@ const FGeneroInput = ({ className, valoresPorDefecto, onSave, generos, atributo,
     }
 
     return (
-        <>
-
         <div className={`${className} py-2 px-4 border border-3 rounded`}>
             <div className="d-flex justify-content-between">
                 <div className="fs-2">Géneros</div>
@@ -133,9 +131,6 @@ const FGeneroInput = ({ className, valoresPorDefecto, onSave, generos, atributo,
                 </div>
             }
         </div>
-
-
-        </>
     )
 }
 

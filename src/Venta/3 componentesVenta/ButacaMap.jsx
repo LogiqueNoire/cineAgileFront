@@ -1,10 +1,7 @@
 import './ButacaMap.css'
 import SalaButaca from '@/services/SalaButaca';
-import { useState } from 'react';
 
 const ButacaMap = ({ onButacaSelect, isSelectedFunc, butacas }) => {
-    //if (butacas.length == 0)
-    //    return <div>No hay nada que mostrar.</div>
 
     const inputOnChange = (el) => {
         if (onButacaSelect) {
@@ -61,7 +58,7 @@ const ButacaMap = ({ onButacaSelect, isSelectedFunc, butacas }) => {
 
     return (
         <div className='d-flex flex-column butaca-map col-12'>
-            <h3 className='text-center mb-3'>Elección de butacas</h3>
+            <h3 className='text-center mb-3 ancizar-sans-regular mb-0'>Elección de butacas</h3>
             <h1 className='mb-0'>Pantalla</h1>
             <div className='butaca-container p-1 d-flex justify-content-start justify-content-sm-start justify-content-md-center overflow-auto'>
                 {   butacas.length >= 1 ?

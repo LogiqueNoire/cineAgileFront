@@ -1,11 +1,10 @@
 import { PayPalButtons, PayPalScriptProvider } from "@paypal/react-paypal-js";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { VentaContext } from "@/Venta/3 componentesVenta/VentaContextProvider.jsx";
 import Entrada from "@/services/Entrada.js";
 import { useLocation, useNavigate } from "react-router-dom";
 import Toast from "@/components/Toast/Toast.jsx";
 import { format } from "date-fns";
-import axios from 'axios';
 const TOKEN = import.meta.env.VITE_TOKEN;
 
 export const FormularioTarjeta = ({ tarjeta, setTarjeta, setSubmitting, setStatus, setto, tipoCambio }) => {

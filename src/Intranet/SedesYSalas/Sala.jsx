@@ -3,7 +3,6 @@ import { useLocation, useNavigate } from "react-router-dom";
 import OrganizadorButacas from "./OrganizadorButacas";
 import SalaButaca from "@/services/SalaButaca";
 import BotonCarga from "@/components/BotonCarga";
-import ButacaMap from "@/Venta/3 componentesVenta/ButacaMap";
 import EditorButacas from "./EditorButacas";
 import { env } from "@/configuracion/backend";
 
@@ -99,15 +98,12 @@ const Sala = () => {
     return (
         <div className="container-fluid py-3 col-10">
             <form method="post" onSubmit={onGrabar} className="d-flex flex-column gap-3">
-                {
-                    error &&
+                {error &&
                     <div className="row bg-danger bg-opacity-10 border border-danger rounded shadow p-3">
                         <div className="text-center text-danger">{error}</div>
-                    </div>
-                }
-
+                    </div>}
                 <div className="row rounded shadow p-5 bg-white row">
-                    <h2>Sede</h2>
+                    <h2 className="ancizar-sans-regular mb-0">Sede</h2>
                     <div className="row my-4">
                         <div className="mb-3 col-4">
                             <label htmlFor="sede" className="form-label">Nombre</label>
@@ -117,7 +113,7 @@ const Sala = () => {
 
                     <hr />
 
-                    <h2>Sala</h2>
+                    <h2 className="ancizar-sans-regular mb-0">Sala</h2>
                     <div className="row my-4">
                         <div className="mb-3 col-4">
                             <label htmlFor="codigoSala" className="form-label">Código</label>
@@ -150,14 +146,12 @@ const Sala = () => {
                 </div>
 
                 <div className="bg-white row rounded border shadow p-5 overflow-auto d-flex flex-column">
-                    <h2>Organización de la sala</h2>
+                    <h2 className="ancizar-sans-regular mb-0">Organización de la sala</h2>
                     <div className="my-5 col-10 align-self-center">
-
-                    { modo != "editar" ? 
-                        <OrganizadorButacas setButacasExt={setButacas} /> :
-                        <EditorButacas cambios={butacas} setCambios={setButacas} butacasExistentes={sala.butacas} />
-                    }
-
+                        {modo != "editar" ?
+                            <OrganizadorButacas setButacasExt={setButacas} /> :
+                            <EditorButacas cambios={butacas} setCambios={setButacas} butacasExistentes={sala.butacas} />
+                        }
                     </div>
                     <BotonCarga type={"submit"} className={"btn btn-primary btn-primary-gradient w-25 align-self-center"} submitting={submitting}>
                         Guardar sala

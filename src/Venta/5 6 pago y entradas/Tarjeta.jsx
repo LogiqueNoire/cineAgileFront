@@ -26,11 +26,11 @@ export const Tarjeta = ({ metodo, setMetodo, tarjeta, setTarjeta, setSubmitting,
   return (
     <>
       <button onClick={() => setMetodo((prev) => (prev === "soles" ? "" : "soles"))}
-        className={`payment-method ancizar-sans-regular ${metodo === "soles" ? "selected soles" : ""}`}>
+        className={`payment-method ancizar-sans-regular fs-2 ${metodo === "soles" ? "selected soles" : ""}`}>
           <span className="">Soles</span>
       </button>
       <button onClick={() => setMetodo((prev) => (prev === "dolares" ? "" : "dolares"))}
-        className={`payment-method ancizar-sans-regular ${metodo === "dolares" ? "selected dolares" : ""}`}
+        className={`payment-method ancizar-sans-regular fs-2 ${metodo === "dolares" ? "selected dolares" : ""}`}
         disabled={!tipocambio}>
         {tipocambio ? <span className="">Dólares</span> : <span className="">Obteniendo tipo de cambio actual...</span>}
         {/*<div className="card-images">

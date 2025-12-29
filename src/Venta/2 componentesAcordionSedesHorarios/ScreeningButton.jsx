@@ -53,7 +53,7 @@ const ScreeningButton = ({ funcion, pelicula }) => {
                         padding: '0 0.5rem',
                         fontSize: '1rem',
                         fontWeight: 'bold',
-                        'backgroundColor': '#01217B',
+                        'backgroundColor': 'var(--cineagile-blue-500)',
                         'borderRadius': '14px',
                         color: 'white'
                     }}>

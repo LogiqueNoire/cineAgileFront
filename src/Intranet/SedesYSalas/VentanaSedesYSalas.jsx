@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import AddSede from './AddSede';
 import sala from '@/assets/sala2.svg';
-import guardar from '@/assets/operaciones/guardar.svg'
-import iconoApagar from '@/assets/operaciones/apagar.svg'
+import { saveIcon, apagarIcon } from '@/assets/operaciones';
 import axios from 'axios';
 import { env, url } from "@/configuracion/backend"
 import Loading from '@/components/Loading/Loading';
@@ -118,32 +117,19 @@ const VentanaSedesYSalas = () => {
 
     }
 
-    const moverse = (id) => {
-        setSede(lista[id]);
-
-    }
-
     useEffect(() => {
         consultar();
-
-        return () => {
-            setLoading(true);
-        }
+        return () => { setLoading(true); }
     }, [])
 
-    const onCerrarModal = () => {
-        setSede(null);
-    }
-
     return (
-        <div>
-            <div className='d-flex flex-column align-items-center container-fluid'>
-                <AddSede onSucess={consultar}></AddSede>
-                <h2 className="text-center mt-5">Sedes registradas</h2>
-                {loading === true
-                    ? <Loading></Loading> :
-                    edicion.length == 0 ?
-                    <p className='mt-3 fs-4'>¡No hay sedes registradas!</p>
+        <div className='d-flex flex-column align-items-center container-fluid'>
+            <AddSede onSucess={consultar}></AddSede>
+            <h2 className="text-center mt-5 ancizar-sans-regular mb-0">Sedes registradas</h2>
+            {loading === true
+                ? <Loading></Loading> :
+                (edicion.length == 0 ?
+                    <p className='mt-3 fs-4 ancizar-sans-regular'>¡No hay sedes registradas!</p>
                     :
                     <table className='mytable2 table table-striped table-hover m-4 mt-2'>
                         <thead className='thead2'>
@@ -168,36 +154,29 @@ const VentanaSedesYSalas = () => {
                                         <div className='d-flex justify-content-center gap-2' style={{ 'width': 'min-content' }} >
                                             <button className='btn btn-primary btn-primary-gradient d-flex gap-2' onClick={() => actualizarSede(el)}
                                                 style={{ 'padding': '11px' }}>
-                                                <img src={guardar} alt="" style={{ height: '23px' }} />
+                                                <img src={saveIcon} alt="" style={{ height: '23px' }} />
                                             </button>
 
                                             <button className={el.activo ? 'btn btn-success rounded-circle d-flex gap-2' : 'btn btn-danger rounded-circle d-flex gap-2'}
                                                 onClick={() => apagarPrender(el)}
                                                 style={{ padding: '6px' }}>
-                                                <img className='' src={iconoApagar} alt="" style={{ height: '33px' }} />
+                                                <img src={apagarIcon} alt="" style={{ height: '33px' }} />
                                             </button>
 
-                                            <button className='btn btn-primary btn-primary-gradient d-flex gap-2 px-3' style={{paddingTop:"10px", paddingBottom:"10px"}} onClick={() => moverse(id)}>
-                                                <label className="" style={{fontSize: "20px", lineHeight: "1.2"}}>Salas</label>
+                                            <button className='btn btn-primary btn-primary-gradient d-flex gap-2 px-3' style={{ paddingTop: "10px", paddingBottom: "10px" }} onClick={() => setSede(lista[id])}>
+                                                <label className="" style={{ fontSize: "20px", lineHeight: "1.2" }}>Salas</label>
                                                 <img src={sala} alt="" style={{ height: '25px' }} />
                                             </button>
                                         </div>
                                     </td>
                                 </tr>
-
-
                             ))}
                         </tbody>
 
-                    </table>
-
-                }
-                {<Toast tipo={toast.tipo}
-                    titulo={toast.titulo}
-                    mensaje={toast.mensaje}
-                    visible={toast.visible} />}
-                {sede && <ModalSalas onClose={onCerrarModal} sede={sede} />}
-            </div>
+                    </table>)
+            }
+            {<Toast tipo={toast.tipo} titulo={toast.titulo} mensaje={toast.mensaje} visible={toast.visible} />}
+            {sede && <ModalSalas onClose={() => setSede(null)} sede={sede} />}
         </div>
     )
 }

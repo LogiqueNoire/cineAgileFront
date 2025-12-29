@@ -65,7 +65,7 @@ const VentasMensuales = () => {
             </div>
             :
             <article className='d-flex flex-column border border-3 border-info-subtle rounded rounded-5 pt-3' >
-                <h4 className="text-center">Ventas por mes del último año</h4>
+                <h4 className="ancizar-sans-regular mb-0 text-center">Ventas por mes del último año</h4>
                 <figure className='d-flex m-0 align-self-center w-flex' style={{ height: '25vh', alignItems: 'center', position: 'relative' }}>
                     <ResponsiveContainer width="100%" height="100%">
                         <BarChart

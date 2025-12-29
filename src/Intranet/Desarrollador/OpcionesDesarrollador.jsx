@@ -45,15 +45,15 @@ const OpcionesDesarrollador = () => {
     return (
         <div className="container-fluid col-11 p-2 d-flex flex-column gap-4 align-items-center">
             <div className="d-flex justify-content-center align-items-center gap-2">
-                <h2 className="fs-1 fw-bold">Opciones de desarrollador</h2>
+                <h2 className="fs-1 fw-bold ancizar-sans-regular mb-0">Opciones de desarrollador</h2>
                 <img src={developerIcon} alt="" style={{ height: '90px', filter: 'invert(99%)' }} />
             </div>
             <button className="btn btn-primary btn-primary-gradient d-flex gap-3 align-items-center justify-content-center" onClick={poblarBD} style={{width: 'max-content'}}>
-                <h2 className="">Poblar la BD con datos de prueba</h2>
+                <h2 className="ancizar-sans-regular mb-0">Poblar la BD con datos de prueba</h2>
                 <img src={dbIcon} alt="" style={{ height: '50px' }} />
             </button>
             <button className="btn btn-danger btn-danger-gradient d-flex gap-3 align-items-center justify-content-center" onClick={reiniciarBD} style={{width: 'max-content'}}>
-                <h2 className="">Reiniciar la BD</h2>
+                <h2 className="ancizar-sans-regular mb-0">Reiniciar la BD</h2>
                 <img src={truncateDBicon} alt="" style={{ height: '50px' }} />
             </button>
             <MuyPronto></MuyPronto>

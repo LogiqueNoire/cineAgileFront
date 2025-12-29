@@ -6,8 +6,7 @@ import Loading from '@/components/Loading/Loading.jsx';
 import Toast from '@/components/Toast/Toast.jsx';
 import Fecha from '@/services/Fecha.js';
 import { differenceInCalendarDays } from 'date-fns';
-import { env, url } from '@/configuracion/backend.js';
-import axios from 'axios';
+import { env } from '@/configuracion/backend.js';
 import TimeService from '@/services/TimeService';
 
 const MostrarSedesHorarios = ({ pelicula, fechaFormateada }) => {
@@ -93,12 +92,12 @@ const MostrarSedesHorarios = ({ pelicula, fechaFormateada }) => {
     }
 
     if (!pelicula) {
-        return <p>No se encontró la película.</p>;
+        return <p className='ancizar-sans-regular mb-0'>No se encontró la película.</p>;
     }
 
     console.log("comparar", pelicula.fechaInicioEstreno, fechaReal)
     if (sedes.length === 0 || differenceInCalendarDays(pelicula.fechaInicioEstreno, fechaReal) >= 8) {
-        return <p className='text-center display-6 my-5 px-4'>No se encontraron funciones disponibles.</p>;
+        return <p className='text-center display-6 my-5 px-4 ancizar-sans-regular'>No se encontraron funciones disponibles.</p>;
     }
 
     return (

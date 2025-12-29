@@ -4,7 +4,7 @@ export const ModalTerminos = ({ onClose }) => {
   return (
     <div className="modal-terminos-overlay">
       <div className="modal-terminos w-75">
-        <h3 className="modal-terminos-title">Términos y Condiciones</h3>
+        <h3 className="modal-terminos-title ancizar-sans-regular mb-0">Términos y Condiciones</h3>
         <div>
           <strong>Aceptación de Términos:</strong> Al comprar en línea en cineagile, el usuario acepta los términos y condiciones.
         </div>

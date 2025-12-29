@@ -61,7 +61,7 @@ const FormularioUsuario = ({ actualizar }) => {
             }
 
             <form onSubmit={onSubmit} action="post" className="d-flex flex-column shadow rounded-4 p-5 gap-3 col-12 col-lg-6">
-                <h2 className="fs-1 text-center">Nuevo usuario</h2>
+                <h2 className="fs-1 text-center ancizar-sans-regular mb-0">Nuevo usuario</h2>
                 <div className="d-flex flex-row flex-wrap gap-3">
                     <div className="col-12 col-sm-5 col-md-5">
                         <label htmlFor="username" className="form-label">Nombre de usuario</label>

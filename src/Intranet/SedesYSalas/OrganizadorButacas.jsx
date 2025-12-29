@@ -162,7 +162,7 @@ const OrganizadorButacas = ({ setButacasExt }) => {
             </table>
 
             <div className='border border-dark p-2'>
-                <h4 className="text-center mb-4">Leyenda</h4>
+                <h4 className="ancizar-sans-regular text-center mb-4">Leyenda</h4>
                 <table className="d-flex justify-content-center">
                     <tbody>
                         <tr className=''>
@@ -172,7 +172,7 @@ const OrganizadorButacas = ({ setButacasExt }) => {
                                 </div>
                             </td>
                             <td>
-                                <h4 className="mx-2">Vacío</h4>
+                                <h4 className="ancizar-sans-regular mb-0 mx-2">Vacío</h4>
                             </td>
                             <td>
                                 <div className="celda">
@@ -180,7 +180,7 @@ const OrganizadorButacas = ({ setButacasExt }) => {
                                 </div>
                             </td>
                             <td>
-                                <h4 className="mx-2">Discapacitado</h4>
+                                <h4 className="ancizar-sans-regular mb-0 mx-2">Discapacitado</h4>
                             </td>
                         </tr>
                         <tr>
@@ -190,7 +190,7 @@ const OrganizadorButacas = ({ setButacasExt }) => {
                                 </div>
                             </td>
                             <td>
-                                <h4 className="mx-2">Butaca normal</h4>
+                                <h4 className="ancizar-sans-regular mb-0 mx-2">Butaca normal</h4>
                             </td>
                         </tr>
                     </tbody>

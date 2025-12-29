@@ -94,7 +94,7 @@ const EditorButacas = ({ cambios, setCambios, butacasExistentes }) => {
             let key = `${i}-${j}`
 
             const enCambio = cambios.find(el => el.row == i && el.col == j);
-            const enCambioClase = `${enCambio ? ("cambiar-a-" +  (celda && !celda.activo ? "activo" : "inactivo") ) : "" }`
+            const enCambioClase = `${enCambio && ("cambiar-a-" +  (celda && !celda.activo ? "activo" : "inactivo") ) }`
 
             let td = (
                 <td key={key}>
@@ -154,7 +154,7 @@ const EditorButacas = ({ cambios, setCambios, butacasExistentes }) => {
             </table>
 
             <div className='border border-dark p-2'>
-                <h4 className="text-center mb-4">Leyenda</h4>
+                <h4 className="ancizar-sans-regular text-center mb-4">Leyenda</h4>
                 <table className="d-flex justify-content-center">
                     <tbody>
                         <tr className=''>
@@ -164,7 +164,7 @@ const EditorButacas = ({ cambios, setCambios, butacasExistentes }) => {
                                 </div>
                             </td>
                             <td>
-                                <h4 className="mx-2">Vacío</h4>
+                                <h4 className="ancizar-sans-regular mb-0 mx-2">Vacío</h4>
                             </td>
                             <td>
                                 <div className="celda">
@@ -172,7 +172,7 @@ const EditorButacas = ({ cambios, setCambios, butacasExistentes }) => {
                                 </div>
                             </td>
                             <td>
-                                <h4 className="mx-2">Discapacitado</h4>
+                                <h4 className="ancizar-sans-regular mb-0 mx-2">Discapacitado</h4>
                             </td>
                         </tr>
                         <tr>
@@ -182,7 +182,7 @@ const EditorButacas = ({ cambios, setCambios, butacasExistentes }) => {
                                 </div>
                             </td>
                             <td>
-                                <h4 className="mx-2">Butaca normal</h4>
+                                <h4 className="ancizar-sans-regular mb-0 mx-2">Butaca normal</h4>
                             </td>
                             <td>
                                 <div className="celda">
@@ -190,7 +190,7 @@ const EditorButacas = ({ cambios, setCambios, butacasExistentes }) => {
                                 </div>
                             </td>
                             <td>
-                                <h4 className="mx-2">Celda desactivada</h4>
+                                <h4 className="ancizar-sans-regular mb-0 mx-2">Celda desactivada</h4>
                             </td>
                         </tr>
 
@@ -201,7 +201,7 @@ const EditorButacas = ({ cambios, setCambios, butacasExistentes }) => {
                                 </div>
                             </td>
                             <td>
-                                <h4 className="mx-2">Activando</h4>
+                                <h4 className="ancizar-sans-regular mb-0 mx-2">Activando</h4>
                             </td>
                             <td>
                                 <div className="celda">
@@ -209,7 +209,7 @@ const EditorButacas = ({ cambios, setCambios, butacasExistentes }) => {
                                 </div>
                             </td>
                             <td>
-                                <h4 className="mx-2">Desactivando</h4>
+                                <h4 className="ancizar-sans-regular mb-0 mx-2">Desactivando</h4>
                             </td>
                         </tr>
                     </tbody>

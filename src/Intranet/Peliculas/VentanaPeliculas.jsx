@@ -6,8 +6,7 @@ import { env, url } from "@/configuracion/backend"
 import Loading from '@/components/Loading/Loading';
 import Cookies from 'js-cookie';
 import { format, parse } from 'date-fns';
-import iconoEditar from '@/assets/operaciones/pencil.svg'
-import link from '@/assets/operaciones/link.svg'
+import { editIcon, linkIcon } from '@/assets/operaciones';
 import PeliculaModal from './PeliculaModal';
 import TimeService from '@/services/TimeService';
 
@@ -64,7 +63,7 @@ const VentanaPeliculas = () => {
         } catch (error) {
             console.error(error);
         } finally {
-            env === "dev" && console.log(fechaReal.toISOString())
+            env === "dev" && console.log(fechaReal?.toISOString())
             setLoading(false);
         }
     }
@@ -101,34 +100,21 @@ const VentanaPeliculas = () => {
 
     };
 
-    const seleccionar = (item) => {
-        const datos = item.split('|').map(e => e.trim())
-        if (e)
-
-            env === "dev" && console.log(datos)
-        const encontrado = productos.find(el => el.nombre == datos[0])
-        setResultados([]);
-        setLista(prev => [...prev, encontrado]);
-        setBusqueda()
-    };
-
     return (
         <div>
             <div className='d-flex flex-column gap-4 align-items-center container-fluid'>
                 <AddFilm onSucess={consultarPeliculas}></AddFilm>
-                <h2 className="text-center mt-4">Películas registradas</h2>
+                <h2 className="text-center mt-4 ancizar-sans-regular mb-0">Películas registradas</h2>
                 {loading === true
                     ? <div className='d-flex flex-column align-items-center container'><Loading></Loading></div> :
 
                     <div>
-                        
-                        {resultados.length == 0 ?
-                            <p className='mb-4 fs-4 text-center'>¡No hay películas registradas!</p>
+                        {resultados === null || resultados?.length == 0 ?
+                            <p className='mb-4 fs-4 text-center ancizar-sans-regular'>¡No hay películas registradas!</p>
                             :
-
                             <>
                                 <div className='d-flex flex-wrap align-items-center justify-content-center gap-2 m-4'>
-                                    <h3>Buscar película</h3>
+                                    <h3 className='ancizar-sans-regular mb-0'>Buscar película</h3>
                                     <div>
                                         <input
                                             type="text"
@@ -155,16 +141,16 @@ const VentanaPeliculas = () => {
                                         </tr>
                                     </thead>
                                     <tbody className='tbody'>
-                                        {resultados.map((el, id) => (
+                                        {resultados?.map((el, id) => (
 
                                             <tr className='tr' key={id}>
-                                                <td className='td' data-label='Nombre'>
-                                                    {el.nombre}
+                                                <td className='td' data-label='Nombre'>{el.nombre}</td>
+                                                <td className='td' data-label='Duración'>{el.duracion}</td>
+                                                <td className='td' data-label='Sinopsis'>
+                                                    <div className='sinopsis' style={{ width: '200px' }}>
+                                                        {el.sinopsis === "" | el.sinopsis === " " ? "-" : el.sinopsis}
+                                                    </div>
                                                 </td>
-                                                <td className='td' data-label='Duración'>
-                                                    {el.duracion}
-                                                </td>
-                                                <td className='td' data-label='Sinopsis'><div className='sinopsis' style={{ width: '200px' }}>{el.sinopsis === "" | el.sinopsis === " " ? "-" : el.sinopsis}</div></td>
                                                 <td className='td' data-label='Clasificación'>
                                                     <span className={`rounded-5 fw-bold p-1 px-2`} style={{
                                                         whiteSpace: "nowrap",
@@ -179,17 +165,16 @@ const VentanaPeliculas = () => {
                                                         color: estrenoColores[estrenoColores.findIndex(e => e[0] === el.estado)][2]
                                                     }}>{el.estado}</span></td>
                                                 <td className='td' data-label='Inicio de estreno'>
-
                                                     {el.fechaInicioEstreno ? format(parse(el.fechaInicioEstreno, 'yyyy-MM-dd', new Date()), 'dd/MM/yyyy') : ''}
                                                 </td>
                                                 <td className='td td-button' data-label='Imagen'>
                                                     <a href={el.imageUrl} target="_blank" rel="noopener noreferrer" className='d-flex btn btn-primary btn-primary-gradient p-2' style={{ width: "min-content" }}>
-                                                        <img src={link} alt="" style={{ height: '20px' }} />
+                                                        <img src={linkIcon} alt="" style={{ height: '20px' }} />
                                                     </a>
                                                 </td>
                                                 <td className='td td-button' data-label="Acciones">
                                                     <button className='d-flex align-items-center btn btn-primary btn-primary-gradient p-2' onClick={() => editarOnClick(el)}>
-                                                        <img src={iconoEditar} alt="" style={{ height: '20px' }} />
+                                                        <img src={editIcon} alt="" style={{ height: '20px' }} />
                                                     </button>
                                                 </td>
                                             </tr>

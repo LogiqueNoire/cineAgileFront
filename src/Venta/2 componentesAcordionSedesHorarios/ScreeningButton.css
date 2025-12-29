@@ -6,16 +6,16 @@
 }
 
 .mybtn-outline-primary {
-    color: #01217B;
-    border-color: #01217B;
+    color: var(--cineagile-blue-500);
+    border-color: var(--cineagile-blue-500);
     border-width: 2px;
     font-weight: 500;
 }
 
 .mybtn-outline-primary:active,
 .mybtn-outline-primary:hover {
-    color: #0A2B9C;
-    border-color: #0A2B9C;
+    color: var(--cineagile-blue-400);
+    border-color: var(--cineagile-blue-400);
     background-color: aliceblue;
     border-width: 2px;
     font-weight: 500;

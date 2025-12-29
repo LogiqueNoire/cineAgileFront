@@ -171,7 +171,7 @@ export default function AddFilm({ onSucess }) {
       {fechaReal !== undefined && generos !== undefined ?
         <div className="rounded-4 p-4 mt-4 shadow">
           <div className="d-flex align-items-center p-2 gap-3 justify-content-center">
-            <h2 className="text-center" style={{color: "#01217B"}}>Nueva película</h2>
+            <h2 className="text-center cineagile-blue-500 ancizar-sans-regular mb-0">Nueva película</h2>
             <img src={peliculaIcono} alt="" style={{ height: '80px', filter: "invert(90%) sepia(70%) saturate(25000%) hue-rotate(225deg) brightness(52.5%) contrast(100%)" }} />
           </div>
           <form onSubmit={(e) => onSubmit(e)} >
@@ -324,10 +324,7 @@ export default function AddFilm({ onSucess }) {
                               ? [...pelicula.genero, genre]
                               : pelicula.genero.filter(g => g.id !== genre.id);
 
-                            setPelicula(prev => ({
-                              ...prev,
-                              genero: nuevosGeneros
-                            }));
+                            setPelicula(prev => ({ ...prev, genero: nuevosGeneros }));
                           }}
                         />
                         <label className="form-check-label" htmlFor={`genre-${genre.id}`}>
@@ -374,13 +371,10 @@ export default function AddFilm({ onSucess }) {
         </div>
         :
         <div className="d-flex justify-content-center">
-          <Loading ></Loading>
+          <Loading></Loading>
         </div>
       }
-      {<Toast tipo={toast.tipo}
-        titulo={toast.titulo}
-        mensaje={toast.mensaje}
-        visible={toast.visible} />}
+      {<Toast tipo={toast.tipo} titulo={toast.titulo} mensaje={toast.mensaje} visible={toast.visible} />}
     </div>
 
   );

@@ -1,12 +1,11 @@
 import { useLocation } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import MostrarSedesHorarios from "./MostrarSedesHorarios";
-import { format } from 'date-fns';
+import { format, differenceInCalendarDays } from 'date-fns';
 import PeliculaService from "@/services/PeliculaService";
 import Loading from "@/components/Loading/Loading";
 import axios from "axios";
 import { url } from "@/configuracion/backend"
-import { differenceInCalendarDays } from "date-fns";
 import { es } from 'date-fns/locale';
 
 import '../1 componentesCartelera/FilmCard.css';
@@ -63,7 +62,7 @@ const PeliculaSedes = () => {
     }
 
     if (error) {
-        return <h1>Error cargando datos</h1>;
+        return <h1 className="mb-0">Error cargando datos</h1>;
     }
 
     return (
@@ -76,14 +75,14 @@ const PeliculaSedes = () => {
                         style={{ minHeight: "350px", aspectRatio: "3/5" }} src={pelicula.imageUrl} alt={pelicula.nombre} />
                     <div className="col-12 col-sm-12 col-md-6 col-lg-8 info-pelicula">
                         <div className="d-flex flex-column gap-2">
-                            <h1 className="display-4 film-title" style={{ color: '#0A2B9C' }}><strong>{pelicula.nombre}</strong></h1>
-                            <h5 style={{ color: '#01217B' }}>{`${pelicula.clasificacion}${pelicula.genero != undefined && pelicula.genero.length != 0 ? " | " + pelicula.genero.map(g => g.nombre).join(', ') : ""}`}</h5>
+                            <h1 className="display-4 film-title cineagile-blue-400 ancizar-sans-regular mb-0">{pelicula.nombre}</h1>
+                            <h5 className="cineagile-blue-500 ancizar-sans-regular mb-0">{`${pelicula.clasificacion}${pelicula.genero != undefined && pelicula.genero.length != 0 ? " | " + pelicula.genero.map(g => g.nombre).join(', ') : ""}`}</h5>
                             <div>
-                                <p className="fs-4">{`Sinopsis`}</p>
-                                <p>{pelicula.sinopsis}</p>
+                                <p className="fs-4 ancizar-sans-regular mb-0">{`Sinopsis`}</p>
+                                <p className="ancizar-sans-regular mb-0">{pelicula.sinopsis}</p>
                             </div>
-                            {pelicula.director != " " && <h5>{`Director. ${pelicula.director}`}</h5>}
-                            {pelicula.actores != " " && <h5>{`Actores principales. ${pelicula.actores}`}</h5>}
+                            {pelicula.director != " " && <h5 className="ancizar-sans-regular mb-0">{`Director. ${pelicula.director}`}</h5>}
+                            {pelicula.actores != " " && <h5 className="ancizar-sans-regular mb-0">{`Actores principales. ${pelicula.actores}`}</h5>}
                         </div>
                     </div>
                 </div>
@@ -94,7 +93,7 @@ const PeliculaSedes = () => {
                     {differenceInCalendarDays(pelicula.fechaInicioEstreno, fechaReal) < 8 ?
                         <div className='mt-3'>
                             <div className="d-flex justify-content-center flex-row gap-3 align-items-center">
-                                <h3 className="me-2 fw-bold fs-1">Tu fecha ideal</h3>
+                                <h3 className="me-2 fw-bold fs-1 ancizar-sans-regular mb-0">Tu fecha ideal</h3>
                                 <input
                                     type="date"
                                     className="mx-1 form-control"
@@ -109,7 +108,7 @@ const PeliculaSedes = () => {
                         </div>
                         :
                         <div className="mt-3">
-                            <h3 className="px-4 text-center" style={{ color: '#7b0101' }}>
+                            <h3 className="px-4 text-center ancizar-sans-regular mb-0" style={{ color: 'var(--red-danger-500)' }}>
                                 {`Aún falta más de 1 semana para el estreno, el cual será a partir del ${format(pelicula.fechaInicioEstreno, "dd 'de' MMMM 'de' yyyy", { locale: es })}`}
                             </h3>
                         </div>

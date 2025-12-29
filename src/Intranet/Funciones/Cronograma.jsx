@@ -1,6 +1,4 @@
 import React, { useEffect } from "react";
-import { useState } from "react";
-import MostrarSedesHorarios from "@/Venta/3 componentesVenta/MostrarSedesHorarios";
 import { useContext } from "react";
 import { FuncionesContext } from "./FuncionesContext";
 import './Cronograma.css'
@@ -9,12 +7,13 @@ import { env } from "@/configuracion/backend";
 const Cronograma = () => {
   const {
     valoresBusqueda,
-    setValoresBusqueda,
-    funcion,
     setFuncion,
     listaFunciones,
-    setListaFunciones
   } = useContext(FuncionesContext);
+
+  useEffect(() => {
+    env === "dev" && console.log(listaFunciones)
+  }, [listaFunciones])
 
   const colores = [
     "#f0c9b3", // anaranjado claro (hue 20)
@@ -64,37 +63,12 @@ const Cronograma = () => {
   }
 
   function AdespuesB(hora1, hora2) {
-    //console.log(hora1, hora2)
-    /*const [horas, minutos] = hora1.split(':').map(Number);
-    const hora1conFechahora2 = new Date(hora2);
-    hora1conFechahora2.setHours(horas, minutos, 0, 0);
-    return hora1conFechahora2 > hora2;*/
-    //if (hora1.getDate)
-    //return (hora1.getHours() > hora2.getHours() ||
-    //  (hora1.getHours() == hora2.getHours() &&
-    //    hora1.getMinutes() > hora2.getMinutes()));
     return hora1 > hora2
-  }
-
-  useEffect(()=>{
-    env === "dev" && console.log(listaFunciones)
-  }, [listaFunciones])
-
-  function comparar(el, hora) {
-    const fechaInicio = new Date(el.fechaHoraInicio);
-    const fechaFin = new Date(el.fechaHoraFin);
-
-    // Clona hora y le suma una hora
-    const horaMasUna = new Date(hora);
-    horaMasUna.setHours(hora.getHours() + 1, hora.getMinutes(), 0, 0);
-
-    return AdespuesB(horaMasUna, fechaInicio) &&
-      AdespuesB(fechaFin, hora);
   }
 
   return (
     <section className=''>
-      <h2 className='d-none d-lg-block mr-4'>Funciones de la semana</h2>
+      <h2 className='d-none d-lg-block mr-4 ancizar-sans-regular mb-0'>Funciones de la semana</h2>
       <div className="table-responsive">
         <table className="table tableCronograma">
           <thead>
@@ -110,79 +84,51 @@ const Cronograma = () => {
           </thead>
           <tbody>
             <tr style={{ 'height': '20px' }}>
-              {fechasSemana.map((_, __) => (
-                <td></td>
-              ))}
+              {fechasSemana.map((_, __) => (<td></td>))}
               <td></td>
             </tr>
             {
               horas.map((hora, i) => (
                 <tr >
-                  <td style={{
-                    position: 'relative', padding: '1.5rem', width: '80px',
+                  <td className="p-4" style={{
+                    position: 'relative', width: '80px',
                     borderBottom: (i === horas.length - 1) ? 'none' : ''
                   }}>
-                    <div className='hora'>
-                      {formatearHora(hora)}
-                    </div>
+                    <div className='hora'>{formatearHora(hora)}</div>
                   </td>
 
-                  {
-
-
-                    fechasSemana.map((fs, index) => (
-                      <td key={index} style={{
-                        borderBottom: (i === horas.length - 1) ? 'none' : ''
-                      }}>
-                        <div className={`d-flex justify-content-center align-items-center gap-2 ${valoresBusqueda.filtro === "sala" ? "flex-column" : ""}`}>
-                          {listaFunciones.map((el, key) => {
-                            const horaDelDia = new Date(fs);
-                            horaDelDia.setHours(hora.getHours(), hora.getMinutes(), 0, 0);
-                            return (
-                              AdespuesB((new Date(horaDelDia)).setHours(horaDelDia.getHours() + 1, horaDelDia.getMinutes(), 0, 0), new Date(el.fechaHoraInicio))
-                              && AdespuesB(new Date(el.fechaHoraFin), horaDelDia))
-                              ?
-                              <div className='text-center p-2'
-                                onClick={(e) => {
-                                  e.preventDefault();
-                                  setFuncion(
-                                    prev => ({
-                                      ...prev,
-                                      funcionElegida: el
-                                    })
-                                  )
-                                }}
-                                style={{ backgroundColor: `${colores[el.idFuncion % colores.length]}` }}>
-                                <h6>{'#' + el.idFuncion}</h6>
-                                <h6>{formatearHora(el.fechaHoraInicio) + '-' + formatearHora(el.fechaHoraFin)}</h6>
-                                {valoresBusqueda.filtro === 'pelicula' ?
-                                  <h6>{'Sala ' + el.codigoSala}</h6>
-                                  :
-                                  <h6>{el.nombrePelicula}</h6>
-                                }
-                                <h6>{el.categoria + ' ' + el.dimension}</h6>
-                                <h6>{'S/ ' + el.precioBase.toFixed(2)}</h6>
-                                <h6></h6>
-                              </div>
-                              :
-                              <></>
-                          })
-                          }
-                        </div>
-                      </td>
-                    ))
-
-
-                  }
+                  {fechasSemana.map((fs, index) => (
+                    <td key={index} style={{ borderBottom: (i === horas.length - 1) ? 'none' : '' }}>
+                      <div className={`d-flex justify-content-center align-items-center gap-2 ${valoresBusqueda.filtro === "sala" && "flex-column"}`}>
+                        {listaFunciones.map((el) => {
+                          const horaDelDia = new Date(fs);
+                          horaDelDia.setHours(hora.getHours(), hora.getMinutes(), 0, 0);
+                          return (
+                            AdespuesB((new Date(horaDelDia)).setHours(horaDelDia.getHours() + 1, horaDelDia.getMinutes(), 0, 0), new Date(el.fechaHoraInicio))
+                            && AdespuesB(new Date(el.fechaHoraFin), horaDelDia)) &&
+                            <div className='text-center p-2'
+                              onClick={(e) => { e.preventDefault(); setFuncion(prev => ({ ...prev, funcionElegida: el })) }}
+                              style={{ backgroundColor: `${colores[el.idFuncion % colores.length]}` }}>
+                              <h6 className="ancizar-sans-regular mb-0">{'#' + el.idFuncion}</h6>
+                              <h6 className="ancizar-sans-regular mb-0">{formatearHora(el.fechaHoraInicio) + '-' + formatearHora(el.fechaHoraFin)}</h6>
+                              <h6 className="ancizar-sans-regular mb-0">
+                                {valoresBusqueda.filtro === 'pelicula' && `Sala ${el.codigoSala}`}
+                                {valoresBusqueda.filtro === 'sala' && el.nombrePelicula}
+                              </h6>
+                              <h6 className="ancizar-sans-regular mb-0">{el.categoria + ' ' + el.dimension}</h6>
+                              <h6 className="ancizar-sans-regular mb-0">{'S/ ' + el.precioBase.toFixed(2)}</h6>
+                            </div>
+                        })}
+                      </div>
+                    </td>
+                  ))}
                 </tr>
-              ))
-            }
+              ))}
           </tbody>
         </table>
       </div>
     </section>
   );
 };
-
 
 export default Cronograma;      

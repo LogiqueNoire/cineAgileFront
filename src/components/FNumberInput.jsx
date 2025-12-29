@@ -1,24 +1,18 @@
 import { useState } from "react";
+import { saveIcon, editIcon } from "@/assets/operaciones";
 
-import guardar from '@/assets/operaciones/guardar.svg';
-import pencilSvg from "@/assets/operaciones/pencil.svg"
-
-const FNumberInput = ({ className='', valorPorDefecto, label, onSave, atributo, required }) => {
-    const [ modo, setModo ] = useState("read"); // read, edit, submitting
-    const [ input, setInput ] = useState("" + valorPorDefecto);
-    const [ status, setStatus ] = useState({ error: false, msg: null });
-
-    const onEditClick = () => {
-        setModo("edit");
-    }
+const FNumberInput = ({ className = '', valorPorDefecto, label, onSave, atributo, required }) => {
+    const [modo, setModo] = useState<"read" | "edit" | "submitting">("read");
+    const [input, setInput] = useState("" + valorPorDefecto);
+    const [status, setStatus] = useState({ error: false, msg: null });
 
     const onSaveClick = () => {
-        if (required && input.trim() == '') {
+        if (required && input.trim() === '') {
             setStatus({ error: true, msg: "El campo no puede estar vacío." })
             return;
         }
 
-        if (modo == "submitting") return;
+        if (modo === "submitting") return;
         setModo("submitting");
 
         onSave({ [atributo]: input }).then(res => {
@@ -41,7 +35,7 @@ const FNumberInput = ({ className='', valorPorDefecto, label, onSave, atributo, 
         const regex = /^\d*\.?\d{0}$/; // permite hasta 0 decimales
 
         if (input === "" || regex.test(input)) {
-            setInput(input) 
+            setInput(input)
         };
 
         if (status.error)
@@ -49,35 +43,32 @@ const FNumberInput = ({ className='', valorPorDefecto, label, onSave, atributo, 
     }
 
     return (
-        <>
         <div className={`${className} input-group has-validation`}>
-            <div className={`form-floating ${ status.error && 'is-invalid' }`}>
-                <input type="number" min="1" max="500" step="0" 
-                    className={`form-control ${ status.error && "is-invalid" }`} id={ label } placeholder={ label } disabled={ modo != "edit" } value={ input }
-                    onChange={ onChange } />
-                <label htmlFor={ label }>{ label }</label>
+            <div className={`form-floating ${status.error && 'is-invalid'}`}>
+                <input type="number" min="1" max="500" step="0"
+                    className={`form-control ${status.error && "is-invalid"}`} id={label} placeholder={label} disabled={modo != "edit"} value={input}
+                    onChange={onChange} />
+                <label htmlFor={label}>{label}</label>
             </div>
-            <button className="btn btn-primary py-2 px-4" onClick={ modo == "read" ? onEditClick : onSaveClick } disabled={ modo == "submitting" }>
-                { modo == "submitting" ? 
-                <span className="d-flex align-items-center mx-2 my-2 spinner-border spinner-border-sm" role="status">
-                    <span className="visually-hidden">Cargando...</span>
-                </span> 
-                : 
-                ( modo == "read" ? 
-                    <img src={pencilSvg} /> 
-                    : modo == "edit" ? 
-                        <img src={guardar} style={{ "width": "32px", "height": "32px" }} /> : "" )
+            <button className="btn btn-primary py-2 px-4" onClick={modo === "read" ? () => setModo("edit") : onSaveClick} disabled={modo === "submitting"}>
+                {modo === "submitting" ?
+                    <span className="d-flex align-items-center mx-2 my-2 spinner-border spinner-border-sm" role="status">
+                        <span className="visually-hidden">Cargando...</span>
+                    </span>
+                    :
+                    <>
+                        {modo === "read" && <img src={editIcon} alt="editar" />}
+                        {modo === "edit" && <img src={saveIcon} alt="guardar" style={{ "width": "32px", "height": "32px" }} />}
+                    </>
                 }
             </button>
-            
-            { status.msg && 
+
+            {status.msg &&
                 <div class="invalid-feedback">
-                    { status.msg }
+                    {status.msg}
                 </div>
             }
         </div>
-        
-        </>
     )
 }
 

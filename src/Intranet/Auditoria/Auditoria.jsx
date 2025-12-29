@@ -42,7 +42,6 @@ const Auditoria = () => {
 
     useEffect(() => {
         if (data != undefined) {
-            const cantidadTotalPag = Math.ceil(data.length / cantidadFilasMostrar)
             setDatos(data.reverse().slice(paginaActual, paginaActual + cantidadFilasMostrar))
         }
     }, [data, startIndex])
@@ -50,7 +49,7 @@ const Auditoria = () => {
     return (
         <div className="mt-4">
             <div className="d-flex flex-row align-items-center mb-3 gap-3 justify-content-center">
-                <h2 className="fs-1" style={{ color: '#01217B' }}>Auditorías</h2>
+                <h2 className="fs-1 cineagile-blue-500 ancizar-sans-regular mb-0">Auditorías</h2>
                 <img src={auditIcon} alt="audit" className="" style={{ filter: "invert(90%) sepia(70%) saturate(25000%) hue-rotate(225deg) brightness(52.5%) contrast(100%)", height: '70px' }} />
             </div>
             {datos != undefined && datos.length > 0 ?
@@ -71,7 +70,7 @@ const Auditoria = () => {
                                 </thead>
                                 <tbody>
                                     {datos.map((el) => (
-                                        <tr className="">
+                                        <tr className="" key={el}>
                                             <td className="">
                                                 <span className={`rounded-5 fw-bold p-1 px-2`}
                                                     style={{
@@ -100,16 +99,10 @@ const Auditoria = () => {
 
                     </div >
                     <div className="d-flex flex-row gap-3 justify-content-center my-3">
-                        {paginaActual - cantidadFilasMostrar > 0 ?
-                            <button className="btn-primary btn-primary-gradient" onClick={() => { setPaginaActual(paginaActual - cantidadFilasMostrar) }}>Anterior</button>
-                            :
-                            <></>
-                        }
-                        {paginaActual + cantidadFilasMostrar < data.length ?
-                            <button className="btn-primary btn-primary-gradient" onClick={() => { setPaginaActual(paginaActual + cantidadFilasMostrar) }}>Siguiente</button>
-                            :
-                            <></>
-                        }
+                        {paginaActual - cantidadFilasMostrar > 0 &&
+                            <button className="btn-primary btn-primary-gradient" onClick={() => { setPaginaActual(paginaActual - cantidadFilasMostrar) }}>Anterior</button>}
+                        {paginaActual + cantidadFilasMostrar < data.length &&
+                            <button className="btn-primary btn-primary-gradient" onClick={() => { setPaginaActual(paginaActual + cantidadFilasMostrar) }}>Siguiente</button>}
                     </div>
                 </>
                 :

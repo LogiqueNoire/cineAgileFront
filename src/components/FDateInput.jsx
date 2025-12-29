@@ -1,24 +1,19 @@
 import { useState } from "react";
-import guardar from '@/assets/operaciones/guardar.svg';
-import pencilSvg from "@/assets/operaciones/pencil.svg"
 import { format } from "date-fns";
+import { editIcon, saveIcon } from "@/assets/operaciones";
 
 const FDateInput = ({ className = '', valorPorDefecto, label, onSave, atributo, required }) => {
-    const [modo, setModo] = useState("read"); // read, edit, submitting
+    const [modo, setModo] = useState<"read" | "edit" | "submitting">("read");
     const [input, setInput] = useState(valorPorDefecto || '');
     const [status, setStatus] = useState({ error: false, msg: null });
 
-    const onEditClick = () => {
-        setModo("edit");
-    }
-
     const onSaveClick = () => {
-        if (required && input.trim() == '') {
+        if (required && input.trim() === '') {
             setStatus({ error: true, msg: "El campo no puede estar vacío." })
             return;
         }
 
-        if (modo == "submitting") return;
+        if (modo === "submitting") return;
         setModo("submitting");
 
         onSave({ [atributo]: input }).then(res => {
@@ -51,15 +46,15 @@ const FDateInput = ({ className = '', valorPorDefecto, label, onSave, atributo, 
                     value={input} onChange={onChange} />
                 <label htmlFor={label}>{label}</label>
             </div>
-            <button className="btn btn-primary py-2 px-4" onClick={modo == "read" ? onEditClick : onSaveClick} disabled={modo == "submitting"}>
-                {modo == "submitting" ?
+            <button className="btn btn-primary py-2 px-4" onClick={modo === "read" ? () => setModo("edit") : onSaveClick} disabled={modo === "submitting"}>
+                {modo === "submitting" ?
                     <span className="d-flex align-items-center mx-2 my-2 spinner-border spinner-border-sm" role="status">
                         <span className="visually-hidden">Cargando...</span>
                     </span>
                     :
                     <>
-                        {modo === "read" && <img src={pencilSvg} />}
-                        {modo === "edit" && <img src={guardar} style={{ "width": "32px", "height": "32px" }} />}
+                        {modo === "read" && <img src={editIcon} alt="editar" />}
+                        {modo === "edit" && <img src={saveIcon} alt="guardar" style={{ "width": "32px", "height": "32px" }} />}
                     </>
                 }
             </button>

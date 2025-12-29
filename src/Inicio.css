@@ -3,6 +3,24 @@
 @import url('https://fonts.googleapis.com/css2?family=Russo+One&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Saira:ital,wght@0,100..900;1,100..900&display=swap');
 
+:root{
+  --cineagile-blue-600: #011A5C;
+  --cineagile-blue-500: #01217B;
+  --cineagile-blue-400: #0A2B9C;
+  --cineagile-blue-300: #2563eb;
+  --green-sucess-500: #015c04;
+  --green-sucess-400: #0a9c19;
+  --red-danger-500: #7b0101;
+}
+
+.cineagile-blue-500{
+  color: var(--cineagile-blue-500)
+}
+
+.cineagile-blue-400{
+  color: var(--cineagile-blue-400)
+}
+
 .saira-semibold {
   font-family: "Saira", sans-serif;
   font-optical-sizing: auto;
@@ -29,30 +47,13 @@
   font-weight: 600;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p {
-  font-family: 'Ancizar Sans', sans-serif;
-  font-weight: 600;
-  margin-bottom: 0%;
-}
-
-.azulOscuro {
-  color: #01217B;
-}
-
 .btn-primary {
-  background-color: #01217B;
+  background-color: var(--cineagile-blue-500);
   color: white;
   border-radius: 5px;
   padding: 10px 20px;
   text-decoration: none;
   border: none;
-
 }
 
 .btn-primary-gradient {
@@ -62,14 +63,14 @@ p {
 
   padding: 8px 30px;
   border-radius: 999px;
-  background: linear-gradient(to right, #0A2B9C, #01217B);
+  background: linear-gradient(to right, var(--cineagile-blue-400), var(--cineagile-blue-500));
   font-family: 'Ancizar Sans', sans-serif;
   font-weight: 600;
   font-size: 1.25rem;
 }
 
 .btn-primary:hover {
-  background-color: #0A2B9C;
+  background-color: var(--cineagile-blue-400);
 }
 
 .btn-primary-gradient:hover {
@@ -85,7 +86,7 @@ p {
 }
 
 .btn-primary:active {
-  background-color: #011A5C;
+  background-color: var(--cineagile-blue-600);
 }
 
 .btn-danger:hover {
@@ -93,11 +94,11 @@ p {
 }
 
 .btn-danger:active {
-  background-color: #7b0101;
+  background-color: var(--red-danger-500);
 }
 
 .btn-danger {
-  background-color: #7b0101;
+  background-color: var(--red-danger-500);
   color: white;
   border-radius: 5px;
   padding: 10px 20px;
@@ -112,7 +113,7 @@ p {
 
   padding: 8px 30px;
   border-radius: 999px;
-  background: linear-gradient(to right, #9c0a0a, #7b0101);
+  background: linear-gradient(to right, #9c0a0a, var(--red-danger-500));
   font-family: 'Ancizar Sans', sans-serif;
   font-weight: 600;
   font-size: 1.25rem;
@@ -142,15 +143,15 @@ p {
 }
 
 .btn-success:hover {
-  background-color: #0a9c19;
+  background-color: var(--green-sucess-400);
 }
 
 .btn-success:active {
-  background-color: #015c04;
+  background-color: var(--green-sucess-500);
 }
 
 .btn-success {
-  background-color: #015c04;
+  background-color: var(--green-sucess-500);
   color: white;
   border-radius: 5px;
   padding: 10px 20px;

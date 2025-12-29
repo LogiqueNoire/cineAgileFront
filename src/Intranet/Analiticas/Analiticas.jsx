@@ -1,11 +1,5 @@
 import { useEffect, useState } from 'react';
-import {
-    RadialBarChart, RadialBar, Legend, ResponsiveContainer,
-    BarChart, CartesianGrid, XAxis, YAxis, Rectangle, Tooltip, Bar,
-    Cell, ScatterChart, Scatter,
-    ZAxis,
-    Line
-} from 'recharts';
+import { RadialBarChart, RadialBar, Legend, ResponsiveContainer, Tooltip } from 'recharts';
 import Loading from '@/components/Loading/Loading';
 import axios from 'axios';
 import { env, url } from '@/configuracion/backend';
@@ -82,7 +76,7 @@ const Analiticas = () => {
                         </div>
                         :
                         <article className='d-flex flex-column border border-3 border-info-subtle rounded rounded-5 p-3 h-100'>
-                            <h4 className="text-center">{"Ventas de las 7 películas"}
+                            <h4 className="ancizar-sans-regular mb-0 text-center">{"Ventas de las 7 películas"}
                                 <br />{"más taquilleras del mes de"}
                                 <select name="" id="" className='form-select w-75 selector-mes fs-5'
                                     style={{ display: 'inline' }} value={mesElegido} onChange={(e) => { setMesElegido(e.target.value) }}>
@@ -120,7 +114,7 @@ const Analiticas = () => {
                                         </RadialBarChart>
                                     </ResponsiveContainer>
                                     :
-                                    <p className='fs-2 text-center my-4'>No hay datos</p>
+                                    <p className='fs-2 text-center my-4 ancizar-sans-regular'>No hay datos</p>
                                 }
                             </figure>
 

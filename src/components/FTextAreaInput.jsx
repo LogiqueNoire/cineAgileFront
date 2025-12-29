@@ -1,25 +1,19 @@
 import { useState } from "react";
+import { editIcon, saveIcon } from "@/assets/operaciones";
 
-import guardar from '@/assets/operaciones/guardar.svg';
-import pencilSvg from "@/assets/operaciones/pencil.svg"
-
-const FTextAreaInput = ({ className='', valorPorDefecto, label, onSave, atributo, required }) => {
-    const [ modo, setModo ] = useState("read"); // read, edit, submitting
-    const [ input, setInput ] = useState(valorPorDefecto);
-    const [ status, setStatus ] = useState({ error: false, msg: null });
-
-    const onEditClick = () => {
-        setModo("edit");
-    }
+const FTextAreaInput = ({ className = '', valorPorDefecto, label, onSave, atributo, required }) => {
+    const [modo, setModo] = useState<"read" | "edit" | "submitting">("read");
+    const [input, setInput] = useState(valorPorDefecto);
+    const [status, setStatus] = useState({ error: false, msg: null });
 
     const onSaveClick = () => {
-        if (required && input.trim() == '') {
+        if (required && input.trim() === '') {
             setStatus({ error: true, msg: "El campo no puede estar vacío." })
             setInput(input.trim());
             return;
         }
 
-        if (modo == "submitting") return;
+        if (modo === "submitting") return;
         setModo("submitting");
 
         onSave({ [atributo]: input.trim() }).then(res => {
@@ -44,45 +38,45 @@ const FTextAreaInput = ({ className='', valorPorDefecto, label, onSave, atributo
 
     return (
         <div className={`${className} py-2 px-4 border border-3 rounded`}>
-        <div className="d-flex justify-content-between mb-3">
-            <div className="fs-2">Sinopsis</div>
-            <button className="btn btn-primary py-2 px-4 align-self-start" onClick={ modo == "read" ? onEditClick : onSaveClick } disabled={ modo == "submitting" }>
-            { modo == "submitting" ? 
-            <span className="d-flex align-items-center mx-2 my-2 spinner-border spinner-border-sm" role="status">
-                <span className="visually-hidden">Cargando...</span>
-            </span> 
-            : 
-            ( modo == "read" ? 
-                <img src={pencilSvg} /> 
-                : modo == "edit" ? 
-                    <img src={guardar} style={{ "width": "32px", "height": "32px" }} /> : "" )
-            }
-            </button>
-        </div>
-
-        <div className={`input-group has-validation`}>
-
-            <div className={`form-floating ${ status.error && 'is-invalid' }`}>
-                <textarea
-                  maxLength={501}
-                  style={{ "min-height": '200px', overflowY: 'auto' }}
-                  className={`form-control ${ status.error && "is-invalid" }`}
-                  disabled={ modo != "edit" }
-                  id={ label } 
-                  placeholder={ label }
-                  value={input}
-                  onChange={onChange}
-                ></textarea>
-                <label htmlFor={ label }>{ label }</label>
+            <div className="d-flex justify-content-between mb-3">
+                <div className="fs-2">Sinopsis</div>
+                <button className="btn btn-primary py-2 px-4 align-self-start" onClick={modo === "read" ? () => setModo("edit") : onSaveClick} disabled={modo == "submitting"}>
+                    {modo === "submitting" ?
+                        <span className="d-flex align-items-center mx-2 my-2 spinner-border spinner-border-sm" role="status">
+                            <span className="visually-hidden">Cargando...</span>
+                        </span>
+                        :
+                        <>
+                            {modo === "read" && <img src={editIcon} alt="editar" />}
+                            {modo === "edit" && <img src={saveIcon} alt="guardar" style={{ "width": "32px", "height": "32px" }} />}
+                        </>
+                    }
+                </button>
             </div>
-            
-            { status.msg && 
-                <div class="invalid-feedback">
-                    { status.msg }
+
+            <div className={`input-group has-validation`}>
+
+                <div className={`form-floating ${status.error && 'is-invalid'}`}>
+                    <textarea
+                        maxLength={501}
+                        style={{ "min-height": '200px', overflowY: 'auto' }}
+                        className={`form-control ${status.error && "is-invalid"}`}
+                        disabled={modo != "edit"}
+                        id={label}
+                        placeholder={label}
+                        value={input}
+                        onChange={onChange}
+                    ></textarea>
+                    <label htmlFor={label}>{label}</label>
                 </div>
-            }
-        </div>
-        
+
+                {status.msg &&
+                    <div class="invalid-feedback">
+                        {status.msg}
+                    </div>
+                }
+            </div>
+
         </div>
     )
 }

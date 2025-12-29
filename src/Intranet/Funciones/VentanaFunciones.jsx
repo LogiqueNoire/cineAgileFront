@@ -21,9 +21,6 @@ const VentanaFunciones = () => {
         listaFunciones,
         setListaFunciones,
         listaPeliculas,
-        setListaPeliculas,
-        salasNuevaSede,
-        setSalasNuevaSede
     } = useContext(FuncionesContext);
 
     useEffect(() => {
@@ -176,7 +173,7 @@ const VentanaFunciones = () => {
                 listaFunciones.length > 0 ?
                     <Cronograma />
                     : <div className='d-flex justify-content-center align-items-center m-4'>
-                        <h3>No hay funciones para mostrar</h3>
+                        <h3 className='ancizar-sans-regular mb-0'>No hay funciones para mostrar</h3>
                     </div>
             }
         </div>

@@ -4,21 +4,6 @@ import Loading from "@/components/Loading/Loading";
 import usuarioIcon from "@/assets/modulos/modulo_usuario_icono.svg"
 import { env } from "@/configuracion/backend";
 
-const listaUsuarios = [
-    {
-        username: "spiderdog",
-        sedeNombre: null
-    },
-    {
-        username: "conejo_anonimo",
-        sedeNombre: "Casa"
-    },
-    {
-        username: "lizardog",
-        sedeNombre: "Beach"
-    }
-
-];
 
 const ListaUsuarios = ({ actualizado }) => {
     const [usuarios, setUsuarios] = useState([]);
@@ -47,7 +32,7 @@ const ListaUsuarios = ({ actualizado }) => {
     return (
         <div className="d-flex flex-column bg-white p-5 shadow rounded-4">
             <div className="d-flex flex-row align-items-center mb-3 gap-2 justify-content-center">
-                <h2 className="fs-1" style={{ color: '#01217B' }}>Usuarios</h2>
+                <h2 className="fs-1 cineagile-blue-500 ancizar-sans-regular mb-0">Usuarios</h2>
                 <img src={usuarioIcon} alt="usuarios" className="" style={{ filter: "invert(90%) sepia(70%) saturate(25000%) hue-rotate(225deg) brightness(52.5%) contrast(100%)", height: '60px' }} />
             </div>
             <div className="overflow-x-auto rounded-3">

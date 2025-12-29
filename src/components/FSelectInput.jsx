@@ -1,16 +1,10 @@
 import { useState } from "react";
-
-import guardar from '@/assets/operaciones/guardar.svg';
-import pencilSvg from "@/assets/operaciones/pencil.svg"
+import { editIcon, saveIcon } from "@/assets/operaciones";
 
 const FSelectInput = ({ className, valorPorDefecto, label, onSave, opciones, atributo, required }) => {
-    const [ modo, setModo ] = useState("read"); // read, edit, submitting
-    const [ input, setInput ] = useState(valorPorDefecto);
-    const [ status, setStatus ] = useState({ error: false, msg: null });
-
-    const onEditClick = () => {
-        setModo("edit");
-    }
+    const [modo, setModo] = useState<"read" | "edit" | "submitting">("read");
+    const [input, setInput] = useState(valorPorDefecto);
+    const [status, setStatus] = useState({ error: false, msg: null });
 
     const onSaveClick = () => {
         const trimmed = input.trim()
@@ -42,40 +36,35 @@ const FSelectInput = ({ className, valorPorDefecto, label, onSave, opciones, atr
     }
 
     return (
-        <>
-
         <div className={`${className} input-group has-validation`}>
-            <div className={`form-floating ${ status.error && 'is-invalid' }`}>
-                <select className={`form-control ${ status.error && "is-invalid" }`} id={ label } placeholder={ label } disabled={ modo != "edit" } value={ input == " " ? "" : input } onChange={ onChange }>
+            <div className={`form-floating ${status.error && 'is-invalid'}`}>
+                <select className={`form-control ${status.error && "is-invalid"}`} id={label} placeholder={label} disabled={modo != "edit"} value={input == " " ? "" : input} onChange={onChange}>
                     <option value="" selected disabled={true}>Selecciona un género</option>
-                    { opciones.map(el => (
-                        <option value={ el }>{el}</option>
-                    )) }
+                    {opciones.map(el => (
+                        <option value={el}>{el}</option>
+                    ))}
                 </select>
-                <label htmlFor={ label }>{ label }</label>
+                <label htmlFor={label}>{label}</label>
             </div>
-            <button className="btn btn-primary py-2 px-4" onClick={ modo == "read" ? onEditClick : onSaveClick } disabled={ modo == "submitting" }>
-                { modo == "submitting" ? 
-                <span className="d-flex align-items-center mx-2 my-2 spinner-border spinner-border-sm" role="status">
-                    <span className="visually-hidden">Cargando...</span>
-                </span> 
-                : 
-                ( modo == "read" ? 
-                    <img src={pencilSvg} /> 
-                    : modo == "edit" ? 
-                        <img src={guardar} style={{ "width": "32px", "height": "32px" }} /> : "" )
+            <button className="btn btn-primary py-2 px-4" onClick={modo == "read" ? () => setModo("edit") : onSaveClick} disabled={modo == "submitting"}>
+                {modo === "submitting" ?
+                    <span className="d-flex align-items-center mx-2 my-2 spinner-border spinner-border-sm" role="status">
+                        <span className="visually-hidden">Cargando...</span>
+                    </span>
+                    :
+                    <>
+                        {modo === "read" && <img src={editIcon} alt="editar" />}
+                        {modo === "edit" && <img src={saveIcon} alt="guardar" style={{ "width": "32px", "height": "32px" }} />}
+                    </>
                 }
             </button>
 
-            { status.msg && 
+            {status.msg &&
                 <div class="invalid-feedback">
-                    { status.msg }
+                    {status.msg}
                 </div>
             }
         </div>
-
-
-        </>
     )
 }
 

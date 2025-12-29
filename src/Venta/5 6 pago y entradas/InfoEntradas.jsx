@@ -1,11 +1,7 @@
 import { useLocation, useParams } from "react-router-dom";
-import html2pdf from "html2pdf.js";
 import Entrada from '@/services/Entrada'
-import { QRCodeCanvas } from "qrcode.react";
-const url = import.meta.env.VITE_FRONT_URL;
-import Encriptador from "@/services/Encriptador";
-import { useRef, useEffect, useState } from "react";
-import jsPDF from "jspdf";
+import { url } from "@/configuracion/backend";
+import { useEffect, useState } from "react";
 import React from "react";
 import QRCode from 'qrcode';
 import iconoEntrada from "@/assets/ticket.svg"
@@ -50,26 +46,25 @@ const EntradaCard = ({ infoGeneral, entrada, token }) => {
                 <div className="align-items-center direction-inverse">
                     <div className="d-flex flex-column">
                         <span className="fs-2 saira-semibold w-100 text-center">cineagile</span>
-                        <h2 className="text-center">Entrada</h2>
+                        <h2 className="text-center ancizar-sans-regular mb-0">Entrada</h2>
                     </div>
                     <div className="qr">
-                        <img className=""
-                            src={qrUrl} alt="QR Entrada" />
+                        <img src={qrUrl} alt="QR Entrada" />
                     </div>
                 </div>
                 <div>
-                    <h2 className="text-center">Datos de la función</h2>
-                    <h5 className="detalleEntrada">Pelicula: {infoGeneral.tituloPelicula}</h5>
-                    <h5 className="detalleEntrada">Clasificación: {infoGeneral.clasificacion}</h5>
-                    <h5 className="detalleEntrada">Fecha y hora: {fechaHoraInicioCorrecto}</h5>
-                    <h5 className="detalleEntrada">Sede: {infoGeneral.nombreSede} </h5>
-                    <h5 className="detalleEntrada">Sala: {infoGeneral.sala}</h5>
-                    <h5 className="detalleEntrada">Butaca: {letra + (columna + 1)}</h5>
-                    <h5 className="detalleEntrada">Tipo de entrada: {tipoPersona}</h5>
+                    <h2 className="text-center ancizar-sans-regular mb-0">Datos de la función</h2>
+                    <h5 className="detalleEntrada ancizar-sans-regular mb-0">Pelicula: {infoGeneral.tituloPelicula}</h5>
+                    <h5 className="detalleEntrada ancizar-sans-regular mb-0">Clasificación: {infoGeneral.clasificacion}</h5>
+                    <h5 className="detalleEntrada ancizar-sans-regular mb-0">Fecha y hora: {fechaHoraInicioCorrecto}</h5>
+                    <h5 className="detalleEntrada ancizar-sans-regular mb-0">Sede: {infoGeneral.nombreSede} </h5>
+                    <h5 className="detalleEntrada ancizar-sans-regular mb-0">Sala: {infoGeneral.sala}</h5>
+                    <h5 className="detalleEntrada ancizar-sans-regular mb-0">Butaca: {letra + (columna + 1)}</h5>
+                    <h5 className="detalleEntrada ancizar-sans-regular mb-0">Tipo de entrada: {tipoPersona}</h5>
 
-                    <h2 className="text-center mt-4">Datos del pago</h2>
-                    <h5 className="detalleEntrada">Fecha y hora: {tiempoRegistroCorrecto}</h5>
-                    <h5 className="detalleEntrada">Precio final: S/ {entrada.costoFinal.toFixed(2)}</h5>
+                    <h2 className="text-center mt-4 ancizar-sans-regular mb-0">Datos del pago</h2>
+                    <h5 className="detalleEntrada ancizar-sans-regular mb-0">Fecha y hora: {tiempoRegistroCorrecto}</h5>
+                    <h5 className="detalleEntrada ancizar-sans-regular mb-0">Precio final: S/ {entrada.costoFinal.toFixed(2)}</h5>
                 </div>
             </div>
         </div>
@@ -130,9 +125,7 @@ const InfoEntradas = () => {
         if (!entradas && codigo) {
             const fetchEntrada = async () => {
                 try {
-                    //console.log(codigo)
                     const response = await Entrada.buscarEntrada(decodeURIComponent(codigo));
-                    //console.log(response);
 
                     setEntradas(response.data);
                 } catch (error) {
@@ -183,7 +176,7 @@ const InfoEntradas = () => {
                 <div className="d-flex flex-column align-items-center gap-4 mb-4">
                     <div className="d-flex gap-3 justify-content-center align-items-center flex-wrap">
                         <div className="d-flex gap-2 align-items-center">
-                            <h1 className="fs-1" style={{ color: '#01217B' }}>Entradas</h1>
+                            <h1 className="fs-1 cineagile-blue-500 mb-0">Entradas</h1>
                             <img src={iconoEntrada} alt="Password" className="" style={{ filter: "invert(90%) sepia(70%) saturate(25000%) hue-rotate(225deg) brightness(52.5%) contrast(100%)", height: '70px' }} />
                         </div>
                         <button className='btn btn-primary fw-bold fs-5 p-2 rounded-4' onClick={() => handleGenerarPDF()}>

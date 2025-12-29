@@ -9,7 +9,7 @@ export const TerminosCondiciones = ({
 }) => {
   return (
     <div className="terms">
-      <label className="switch m-2">
+      <span className="switch m-2">
         <input
           type="checkbox"
           id="terminos"
@@ -17,7 +17,7 @@ export const TerminosCondiciones = ({
           onChange={(e) => setAceptaTerminos(e.target.checked) }
           disabled={!setto.terminos} />
         <span className="slider round"></span>
-      </label>
+      </span>
       <label htmlFor="terminos" className="ancizar-sans-regular fs-5">
         Acepto los{" "}
         <a

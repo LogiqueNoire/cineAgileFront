@@ -1,5 +1,3 @@
-import { format } from "date-fns"
-
 class Fecha {
     // Transforma una fecha local a UTC 
     static tiempoLocalDate_A_UTCString(date) {

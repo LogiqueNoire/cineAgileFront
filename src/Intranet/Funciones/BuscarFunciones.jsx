@@ -9,22 +9,13 @@ const BuscarFunciones = ({ handlePeliculaChange, handleSalaChange }) => {
     const {
         valoresBusqueda,
         setValoresBusqueda,
-        funcion,
-        setFuncion,
-        listaFunciones,
         setListaFunciones
     } = useContext(FuncionesContext);
 
-    const [primeraVez, setPrimeraVez] = useState(true)
-
     useEffect(() => {
-        if (primeraVez) {
-            consultarSedesTodas()
-            consultarSedesActivas()
-        } else {
-            setPrimeraVez(false);
-        }
-    }, [primeraVez])
+        consultarSedesTodas()
+        consultarSedesActivas()
+    }, [])
 
     const consultarSedesTodas = async () => {
         try {
@@ -47,7 +38,7 @@ const BuscarFunciones = ({ handlePeliculaChange, handleSalaChange }) => {
 
             setValoresBusqueda(prev => ({
                 ...prev,
-                sedesActivas: datos != undefined ? datos.sort(ordenamientoAlfa) : undefined
+                sedesActivas: datos == undefined ? undefined : datos.sort(ordenamientoAlfa)
             }));
         } catch (error) {
             console.error(error);
@@ -55,18 +46,38 @@ const BuscarFunciones = ({ handlePeliculaChange, handleSalaChange }) => {
     }
 
     const cambiarSede = (e) => {
-        setPrimeraVez(false)
         setValoresBusqueda(prev => ({
             ...prev,
             sedeElegida: e.target.value
         }));
     }
 
+    const configPorFiltro = {
+        pelicula: {
+            opciones: valoresBusqueda.peliculasSede,
+            selected: valoresBusqueda.selectPelicula,
+            onChange: handlePeliculaChange,
+            label: "Película",
+            empty: "No hay películas",
+            optionLabel: el => el.nombre,
+        },
+        sala: {
+            opciones: valoresBusqueda.salasSede,
+            selected: valoresBusqueda.selectSala,
+            onChange: handleSalaChange,
+            label: "Sala",
+            empty: "No hay salas",
+            optionLabel: el => el.codigoSala,
+        },
+    };
+
+    const filtroActual = configPorFiltro[valoresBusqueda.filtro];
+
     return (
         loading === true
             ? <Loading></Loading> :
             <div className='d-flex flex-column align-items-center gap-4 m-3 mt-4 p-4 rounded-4 shadow'>
-                <h3>Búsqueda de funciones</h3>
+                <h3 className="ancizar-sans-regular mb-0">Búsqueda de funciones</h3>
                 <div>
                     <label className='d-flex text-nowrap'>Elige sede</label>
                     <select className='form-select' onChange={(e) => cambiarSede(e)}>
@@ -77,17 +88,13 @@ const BuscarFunciones = ({ handlePeliculaChange, handleSalaChange }) => {
                     </select>
                 </div>
                 <div className="d-flex gap-4">
-
-                    <div className="">
+                    <div>
                         <label className='d-flex text-nowrap'>Elige fecha dentro de una semana</label>
                         <input type='date' className='form-control' value={valoresBusqueda.fechaElegida} placeholder='Fecha'
                             onKeyDown={(e) => e.preventDefault()}
                             onChange={
                                 (e) => {
-                                    setValoresBusqueda(prev => ({
-                                        ...prev,
-                                        fechaElegida: e.target.value
-                                    }));
+                                    setValoresBusqueda(prev => ({ ...prev, fechaElegida: e.target.value }));
                                     setListaFunciones([]) // Limpiar funciones al cambiar la fecha
                                 }
                             } />
@@ -117,56 +124,36 @@ const BuscarFunciones = ({ handlePeliculaChange, handleSalaChange }) => {
                 </div>
 
                 <div className='d-flex gap-4 w-100 align-items-center justify-content-center'>
-
-                    {
-                        valoresBusqueda.filtro === 'pelicula' ?
-                            valoresBusqueda.peliculasSede != undefined ?
-                                <div className="">
-                                    <label className='d-flex text-nowrap'>Pelicula</label>
-                                    {valoresBusqueda.peliculasSede.length > 0 && valoresBusqueda.peliculasSede != undefined ?
-                                        <select value={valoresBusqueda.selectPelicula} className='form-select' onChange={(e) => { handlePeliculaChange(e), setLoading(e) }}>
-                                            <option value="0">Elige una película por la sede</option>
-                                            {valoresBusqueda.peliculasSede.map((el, id) => (
-                                                <option key={el.id || id} value={el.id} >{el.nombre}</option>
-                                            ))}
-                                        </select>
-                                        :
-                                        <select className='form-select' disabled>
-                                            <option value="">No hay peliculas</option>
-                                        </select>
-                                    }
-                                </div>
-                                :
-                                <Loading style={{ 'margin': '0px', 'width': '62px', 'height': '62px' }}></Loading>
+                    {filtroActual &&
+                        (filtroActual.opciones == undefined ?
+                            <Loading style={{ 'margin': '0px', 'width': '62px', 'height': '62px' }}></Loading>
                             :
-                            <></>
-                    }
-                    {
-                        valoresBusqueda.filtro === 'sala' ?
-                            valoresBusqueda.salasSede != undefined ?
-                                <div>
-                                    <label className='d-flex text-nowrap'>Sala</label>
-                                    {valoresBusqueda.salasSede.length > 0 ?
-                                        <select value={valoresBusqueda.selectSala}
-                                            className='form-select' onChange={(e) => handleSalaChange(e)}>
-                                            <option value="">Elige una sala de la sede</option>
-                                            {valoresBusqueda.salasSede.map((el, id) => (
-                                                <option key={el.id || id} value={el.id} >{el.codigoSala}</option>
-                                            ))}
-                                        </select>
-                                        :
-                                        <select className='form-select' disabled>
-                                            <option value="">No hay salas</option>
-                                        </select>
-                                    }
-                                </div> :
-
-                                <Loading style={{ 'margin': '0px', 'width': '62px', 'height': '62px' }}></Loading>
-                            :
-                            <></>
+                            <div>
+                                <label className='d-flex text-nowrap'>
+                                    {valoresBusqueda.filtro === 'pelicula' && 'Película'}
+                                    {valoresBusqueda.filtro === 'sala' && 'Sala'}
+                                </label>
+                                {filtroActual.opciones.length > 0 ?
+                                    <select value={filtroActual.selected}
+                                        className='form-select' onChange={(e) => filtroActual.onChange(e)}>
+                                        <option value="">
+                                            {"Elige una "}
+                                            {valoresBusqueda.filtro === 'pelicula' && 'película por'}
+                                            {valoresBusqueda.filtro === 'sala' && 'sala de'}
+                                            {" la sede"}
+                                        </option>
+                                        {filtroActual.opciones.map((el, id) => (
+                                            <option key={el.id || id} value={el.id} >{filtroActual.optionLabel(el)}</option>
+                                        ))}
+                                    </select>
+                                    :
+                                    <select className='form-select' disabled>
+                                        <option value="">{filtroActual.empty}</option>
+                                    </select>
+                                }
+                            </div>)
                     }
                 </div>
-
             </div>
 
     )

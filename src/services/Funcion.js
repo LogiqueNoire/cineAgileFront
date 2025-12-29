@@ -1,6 +1,5 @@
 import axios from 'axios'
 import { url } from '@/configuracion/backend'
-import { format } from 'date-fns'
 import Fecha from './Fecha'
 
 class Funcion {

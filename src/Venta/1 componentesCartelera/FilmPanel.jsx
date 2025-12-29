@@ -24,59 +24,58 @@ const FilmPanel = () => {
     const [location, query] = useUrlQuery()
 
     useEffect(() => {
-    const obtenerPeliculas = async () => {
-        try {
-            const fecha = await TimeService.obtenerFecha()
+        const obtenerPeliculas = async () => {
+            try {
+                const fecha = await TimeService.obtenerFecha()
 
-            const estado = query?.get("tab") || "En cartelera";
-            let caller;
+                const estado = query?.get("tab") || "En cartelera";
+                let caller;
 
-            switch (estado) {
-                case "En cartelera":
-                    env === "dev" && console.log("Fecha enviada a EnCartelera:", fecha.toISOString());
-                    caller = () => PeliculaService.mostrarPeliculasEnCartelera(fecha.toISOString());
-                    break;
-                case "Próximamente":
-                    env === "dev" && console.log("Fecha enviada a Proximamente:", fecha.toISOString());
-                    caller = () => PeliculaService.mostrarPeliculasProximas(fecha.toISOString());
-                    break;
-                default:
-                    caller = null;
+                switch (estado) {
+                    case "En cartelera":
+                        env === "dev" && console.log("Fecha enviada a EnCartelera:", fecha.toISOString());
+                        caller = () => PeliculaService.mostrarPeliculasEnCartelera(fecha.toISOString());
+                        break;
+                    case "Próximamente":
+                        env === "dev" && console.log("Fecha enviada a Proximamente:", fecha.toISOString());
+                        caller = () => PeliculaService.mostrarPeliculasProximas(fecha.toISOString());
+                        break;
+                    default:
+                        caller = null;
+                }
+
+                if (caller) {
+                    const pelis = await caller();
+                    setPeliculas(pelis.reverse());
+                }
+            } catch (err) {
+                console.error("Error al obtener las películas:", err);
+                setError("Error :(... Intenta recargar la página!");
+            } finally {
+                setLoading(false);
             }
+        };
 
-            if (caller) {
-                const pelis = await caller();
-                setPeliculas(pelis.reverse());
-            }
-        } catch (err) {
-            console.error("Error al obtener las películas:", err);
-            setError("Error :(... Intenta recargar la página!");
-        } finally {
-            setLoading(false);
-        }
-    };
+        obtenerPeliculas();
 
-    obtenerPeliculas();
+        return () => {
+            setLoading(true);
+            setError(null);
+        };
+    }, [location]);
 
-    return () => {
-        setLoading(true);
-        setError(null);
-    };
-}, [location]);
-
-
-
-    return (<div className='film-panel d-flex flex-column'>
-        <FilmTab query={query.get("tab")} />
-        <div className='peli-cuerpo d-flex justify-content-center flex-grow-1 rounded rounded-4'>
-            {loading 
-                ? <Loading />
-                : error
-                    ? <div className="h-25 w-50 text-center bg-danger bg-opacity-75 border border-1 border-danger p-2 mt-3 rounded rounded-3 fw-bold text-white">Error... Intenta recargar la página</div>
-                    : <FilmContainer peliculas={peliculas} />
-            }
+    return (
+        <div className='film-panel d-flex flex-column'>
+            <FilmTab query={query.get("tab")} />
+            <div className='peli-cuerpo d-flex justify-content-center flex-grow-1 rounded rounded-4'>
+                {loading && <Loading />}
+                {!loading && error &&
+                        <div className="h-25 w-50 text-center bg-danger bg-opacity-75 border border-1 border-danger p-2 mt-3 rounded rounded-3 fw-bold text-white">Error... Intenta recargar la página</div>}
+                {!loading && !error && <FilmContainer peliculas={peliculas} />
+                }
+            </div>
         </div>
-    </div>)
+    )
 }
 
 export default FilmPanel;

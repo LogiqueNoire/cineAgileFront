@@ -23,53 +23,53 @@ const IntranetPanel = () => {
     return (
         <div className="m-3 mt-4">
             <div className="row">
-                <h1 className="display-5 text-center"><strong>Bienvenido a la vista interna de cineagile</strong></h1>
+                <h1 className="display-5 text-center ancizar-sans-regular mb-0"><strong>Bienvenido a la vista interna de cineagile</strong></h1>
                 <div className="d-flex p-3 justify-content-center gap-4 flex-wrap">
 
 
                     <button className="btn btn-primary d-flex gap-3 align-items-center justify-content-center" onClick={moverseHaciaVentanaPeliculas}>
                         <img src={peliculaIcon} alt="" style={{ width: '90px' }} />
-                        <h2 className="">Películas</h2>
+                        <h2 className="ancizar-sans-regular mb-0">Películas</h2>
                     </button>
 
                     <button className="btn btn-primary d-flex gap-3 align-items-center justify-content-center" onClick={moverseHaciaVentanaSedesYSalas}>
                         <img src={sedeIcon} alt="" style={{ width: '90px', height: "auto" }} />
-                        <h2 className="text-start">Sedes, salas<br></br>y butacas</h2>
+                        <h2 className="ancizar-sans-regular mb-0 text-start">Sedes, salas<br></br>y butacas</h2>
                     </button>
 
                     <button className="btn btn-primary d-flex gap-3 align-items-center justify-content-center" onClick={moverseHaciaFunciones}>
                         <img src={funcionesIcon} alt="" style={{ width: '90px' }} />
-                        <h2 className="">Funciones</h2>
+                        <h2 className="ancizar-sans-regular mb-0">Funciones</h2>
                     </button>
 
                     <button className="btn btn-primary d-flex gap-3 align-items-center justify-content-center" onClick={moverseHaciaGeneros}>
                         <img src={genresIcon} alt="" style={{ width: '80px' }} />
-                        <h2 className="">Géneros</h2>
+                        <h2 className="ancizar-sans-regular mb-0">Géneros</h2>
                     </button>
 
                     <button className="btn btn-primary d-flex gap-3 align-items-center justify-content-center" onClick={moverseHaciaGraficos}>
                         <img src={statisticsIcon} alt="" style={{ height: '85px' }} />
-                        <h2 className="">Analíticas</h2>
+                        <h2 className="ancizar-sans-regular mb-0">Analíticas</h2>
                     </button>
 
                     <button className="btn btn-primary d-flex gap-3 align-items-center justify-content-center" onClick={moverseHaciaUsuarios}>
                         <img src={usuariosInternosIcon} alt="" style={{ width: '90px' }} />
-                        <h2 className="">Usuarios</h2>
+                        <h2 className="ancizar-sans-regular mb-0">Usuarios</h2>
                     </button>
 
                     <button className="btn btn-primary d-flex gap-3 align-items-center justify-content-center" onClick={moverseHaciaAuditoria}>
                         <img src={auditIcon} alt="" style={{ height: '85px' }} />
-                        <h2 className="">Auditorías</h2>
+                        <h2 className="ancizar-sans-regular mb-0">Auditorías</h2>
                     </button>
 
                     <button className="btn btn-primary d-flex gap-3 align-items-center justify-content-center" onClick={moverseHaciaAjustesGenerales}>
                         <img src={passwordIcon} alt="" style={{ height: '90px' }} />
-                        <h2 className="">Ajustes<br />de cuenta</h2>
+                        <h2 className="ancizar-sans-regular mb-0">Ajustes<br />de cuenta</h2>
                     </button>
                     {/* 
                     <button className="btn btn-primary d-flex gap-3 align-items-center justify-content-center" onClick={moverseHaciaOpcionesDeDesarrollador}>
                         <img src={desarrolladorIcono} alt="" style={{ height: '90px' }} />
-                        <h2 className="">Opciones de<br />desarrollador</h2>
+                        <h2 className="ancizar-sans-regular mb-0">Opciones de<br />desarrollador</h2>
                     </button>
                     */}
                 </div>

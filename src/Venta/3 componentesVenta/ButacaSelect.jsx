@@ -85,7 +85,7 @@ const SeleccionButaca = ({ funcion, prev, next, onCancelar }) => {
 
   return (
     <>
-      {error && <h2>Error!</h2>}
+      {error && <h2 className='ancizar-sans-regular mb-0'>Error!</h2>}
       {loading ?
         <div className='d-flex justify-content-center'>
           <Loading style={{ margin: "15rem" }} />
@@ -95,7 +95,7 @@ const SeleccionButaca = ({ funcion, prev, next, onCancelar }) => {
             <ButacaMap isSelectedFunc={estaEnSeleccionados} onButacaSelect={onButacaSelect} butacas={data} />
             <div className='d-flex justify-content-center'>
               <div className='border border-2 rounded-3 p-3 mb-4' style={{ width: 'min-content' }}>
-                <h4 className="text-center mb-2">Leyenda</h4>
+                <h4 className="ancizar-sans-regular text-center mb-2">Leyenda</h4>
                 <table className="butaca-table butaca-hist d-flex justify-content-center">
                   <tbody>
                     <tr className=''>
@@ -105,7 +105,7 @@ const SeleccionButaca = ({ funcion, prev, next, onCancelar }) => {
                         </div>
                       </td>
                       <td className=''>
-                        <h4 className="butaca-label m-2">Libre</h4>
+                        <h4 className="ancizar-sans-regular butaca-label m-2">Libre</h4>
                       </td>
                       <td className=''>
                         <div className='butaca-celda-wrapper'>
@@ -113,7 +113,7 @@ const SeleccionButaca = ({ funcion, prev, next, onCancelar }) => {
                         </div>
                       </td>
                       <td className=''>
-                        <h4 className="butaca-label m-2">Discapacitado</h4>
+                        <h4 className="ancizar-sans-regular butaca-label m-2">Discapacitado</h4>
                       </td>
                     </tr>
                     <tr className=''>
@@ -123,7 +123,7 @@ const SeleccionButaca = ({ funcion, prev, next, onCancelar }) => {
                         </div>
                       </td>
                       <td>
-                        <h4 className="butaca-label m-2">Ocupado</h4>
+                        <h4 className="ancizar-sans-regular butaca-label m-2">Ocupado</h4>
                       </td>
                       <td>
                         <div className='butaca-celda-wrapper'>
@@ -131,7 +131,7 @@ const SeleccionButaca = ({ funcion, prev, next, onCancelar }) => {
                         </div>
                       </td>
                       <td>
-                        <h4 className="butaca-label m-2">Seleccionado</h4>
+                        <h4 className="ancizar-sans-regular butaca-label m-2">Seleccionado</h4>
                       </td>
                     </tr>
                   </tbody>
@@ -144,10 +144,10 @@ const SeleccionButaca = ({ funcion, prev, next, onCancelar }) => {
             <div className="modal-dialog w-25 modal-dialog-centered">
               <div className="modal-content">
                 <div className="modal-header d-flex justify-content-center">
-                  <h1 className="modal-title fs-2" id="staticBackdropLabel">Aviso</h1>
+                  <h1 className="modal-title fs-2 mb-0" id="staticBackdropLabel">Aviso</h1>
                 </div>
                 <div className="modal-body">
-                  <h2 className='text-center'>
+                  <h2 className='text-center ancizar-sans-regular mb-0'>
                     ¡Máximo de butacas seleccionadas!
                   </h2>
                 </div>

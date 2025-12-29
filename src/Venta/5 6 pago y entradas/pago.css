@@ -21,7 +21,7 @@
 }
 
 .amount {
-  color: #2563eb;
+  color: var(--cineagile-blue-300);
   font-weight: bold;
   margin-bottom: 20px;
 }
@@ -55,9 +55,9 @@
 
 .selected.tarjeta,
 .selected.billetera {
-  border-color: #2563eb;
+  border-color: var(--cineagile-blue-300);
   background-color: #ebf4ff;
-  color: #2563eb;
+  color: var(--cineagile-blue-300);
 }
 
 .wallet-images,
@@ -82,7 +82,7 @@
 }
 
 .link {
-  color: #2563eb;
+  color: var(--cineagile-blue-300);
   text-decoration: none;
 }
 
@@ -97,7 +97,7 @@
   font-size: 15px;
   border-radius: 8px;
   border: none;
-  background-color: #2563eb;
+  background-color: var(--cineagile-blue-300);
   color: white;
   transition: background-color 0.3s;
 }
@@ -149,7 +149,7 @@
   font-weight: bold;
   border-radius: 6px;
   border: none;
-  background-color: #2563eb;
+  background-color: var(--cineagile-blue-300);
   color: white;
   cursor: pointer;
   transition: background-color 0.3s;
@@ -184,7 +184,7 @@
 
 .formulario-contacto input:focus {
   outline: none;
-  border-bottom-color: #2563eb;
+  border-bottom-color: var(--cineagile-blue-300);
   background-color: #f9fbff;
 }
 
@@ -225,7 +225,7 @@
 .input-row select:focus,
 .input-row input:focus {
   outline: none;
-  border-color: #2563eb;
+  border-color: var(--cineagile-blue-300);
 }
 
 .direction {
