@@ -107,7 +107,7 @@ const Generos = () => {
     return (
         <div className="d-flex flex-column align-items-center container-fluid col-10 mt-4">
             <div className="d-flex align-items-center gap-4">
-                <h2 className="fs-1 cineagile-blue-500 ancizar-sans-regular mb-0">Géneros registrados</h2>
+                <h2 className="fs-1 cineagile-blue-600 ancizar-sans-regular mb-0">Géneros registrados</h2>
                 <img src={genresIcon} alt="" style={{ width: "90px", filter: "invert(90%) sepia(70%) saturate(25000%) hue-rotate(225deg) brightness(52.5%) contrast(100%)" }} />
             </div>
             {loading === true

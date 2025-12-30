@@ -56,7 +56,7 @@
 }
 
 .butaca-discapacitado {
-    border-color: rgb(104, 139, 255);
+    border-color: #4B90FF;
 }
 
 .butaca-ocupado {
@@ -65,12 +65,12 @@
 
 .butaca-celda::before {
     --butaca-size: 0rem;
-    --butaca-color: rgb(104, 139, 255);
+    --butaca-color: #4B90FF;
 
     content: " ";
     width: var(--butaca-size);
     height: var(--butaca-size);
-    box-shadow: inset var(--butaca-size) var(--butaca-size) rgb(104, 139, 255);
+    box-shadow: inset var(--butaca-size) var(--butaca-size) #4B90FF;
 
     border-radius: 50%;
     transition-property: width height;

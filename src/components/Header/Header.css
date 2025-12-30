@@ -13,12 +13,7 @@
 }
 
 .shadow-black{
-  box-shadow: #000000 0px 0px 50px;
-}
-
-h1 {
-  font-size: 24px;
-  color: #003366;
+  box-shadow: black 0px 0px 50px;
 }
 
 .nav-links a {
@@ -37,7 +32,6 @@ h1 {
 .icon-button {
   background: none;
   border: none;
-  margin-left: 15px; 
   cursor: pointer;
 }
 

@@ -171,7 +171,7 @@ export default function AddFilm({ onSucess }) {
       {fechaReal !== undefined && generos !== undefined ?
         <div className="rounded-4 p-4 mt-4 shadow">
           <div className="d-flex align-items-center p-2 gap-3 justify-content-center">
-            <h2 className="text-center cineagile-blue-500 ancizar-sans-regular mb-0">Nueva película</h2>
+            <h2 className="text-center cineagile-blue-600 ancizar-sans-regular mb-0">Nueva película</h2>
             <img src={peliculaIcono} alt="" style={{ height: '80px', filter: "invert(90%) sepia(70%) saturate(25000%) hue-rotate(225deg) brightness(52.5%) contrast(100%)" }} />
           </div>
           <form onSubmit={(e) => onSubmit(e)} >

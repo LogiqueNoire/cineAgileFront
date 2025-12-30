@@ -59,10 +59,10 @@ const ButacaMap = ({ onButacaSelect, isSelectedFunc, butacas }) => {
     return (
         <div className='d-flex flex-column butaca-map col-12'>
             <h3 className='text-center mb-3 ancizar-sans-regular mb-0'>Elección de butacas</h3>
-            <h1 className='mb-0'>Pantalla</h1>
+            <h1 className='ancizar-sans-regular mb-0 fs-4 text-secondary'>Pantalla</h1>
             <div className='butaca-container p-1 d-flex justify-content-start justify-content-sm-start justify-content-md-center overflow-auto'>
                 {   butacas.length >= 1 ?
-                <div className='border-top border-5 pt-5 border-primary'>
+                <div className='border-top border-5 pt-5 border-secondary'>
                     <table className="butaca-table">
                         <thead>
                             <tr>{ head }</tr>

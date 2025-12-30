@@ -18,7 +18,7 @@ const ResumenPeliComJose3 = ({ pelicula, catePeli, sedePeli, fechaPeli, salaPeli
             </div>
 
             <div className="d-flex flex-column align-items-center col-12 col-sm-6 col-lg-12">
-                <h2 className="mb-0 ancizar-sans-regular display-4 film-title text-center cineagile-blue-400 fs-1">{pelicula.nombre}</h2>
+                <h2 className="mb-0 ancizar-sans-regular display-4 film-title text-center cineagile-blue-500 fs-1">{pelicula.nombre}</h2>
                 <h3 className="m-2 ancizar-sans-regular">{dimension+" "+categoria}</h3>
                 <h5 className="m-2 ancizar-sans-regular text-center">{"Sede: "+sedePeli}</h5>
                 <h5 className="m-2 ancizar-sans-regular">{"Fecha: "+format(parseISO(fechaPeli.slice(0, 10)), "dd/MM/yyyy")}</h5>

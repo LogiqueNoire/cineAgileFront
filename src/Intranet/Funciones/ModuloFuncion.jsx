@@ -342,13 +342,13 @@ const ModuloFuncion = ({ handlePeliculaChange, handleSalaChange }) => {
                 <h3 className='d-flex text-nowrap ancizar-sans-regular mb-0'>Módulo ágil de funciones</h3>
                 <div className="d-flex align-items-center">
                     <label className="fs-4">{checked === true ?  /*true = actualizar */
-                        "Crear" : <strong className="cineagile-blue-500">Crear</strong>}
+                        "Crear" : <strong className="cineagile-blue-600">Crear</strong>}
                     </label>
                     <label className="switch m-2">
                         <input type="checkbox" checked={checked} onChange={(e) => { cambiarEstado(e.target.checked) }} />
                         <span className="slider round"></span>
                     </label>
-                    <label className="fs-4">{checked === true ? <strong className="cineagile-blue-500">Actualizar</strong>
+                    <label className="fs-4">{checked === true ? <strong className="cineagile-blue-600">Actualizar</strong>
                         : "Actualizar"}
                     </label>
                 </div>

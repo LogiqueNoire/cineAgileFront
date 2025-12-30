@@ -3,22 +3,41 @@
 @import url('https://fonts.googleapis.com/css2?family=Russo+One&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Saira:ital,wght@0,100..900;1,100..900&display=swap');
 
-:root{
-  --cineagile-blue-600: #011A5C;
-  --cineagile-blue-500: #01217B;
-  --cineagile-blue-400: #0A2B9C;
-  --cineagile-blue-300: #2563eb;
+:root {
+  --cineagile-blue-900: #00052F; /*ok*/
+  --cineagile-blue-800: #020E4C;
+  --cineagile-blue-700: #001466;
+  --cineagile-blue-600: #001C7F; /*ok*/
+  --cineagile-blue-500: #0020A6; /*ok*/
+  --cineagile-blue-400: #0133DB;
+  --cineagile-blue-350: #0044FE; /*ok*/
+  --cineagile-blue-300: #005FF5; /*ok*/
+  --cineagile-blue-200: #0378FB; /*ok*/
+  --cineagile-blue-100: #059AF1;
+
   --green-sucess-500: #015c04;
   --green-sucess-400: #0a9c19;
   --red-danger-500: #7b0101;
 }
 
-.cineagile-blue-500{
+.cineagile-blue-600 {
+  color: var(--cineagile-blue-600)
+}
+
+.cineagile-blue-500 {
   color: var(--cineagile-blue-500)
 }
 
-.cineagile-blue-400{
+.cineagile-blue-400 {
   color: var(--cineagile-blue-400)
+}
+
+.cineagile-blue-300 {
+  color: var(--cineagile-blue-300)
+}
+
+.cineagile-blue-350 {
+  color: var(--cineagile-blue-350);
 }
 
 .saira-semibold {
@@ -48,7 +67,7 @@
 }
 
 .btn-primary {
-  background-color: var(--cineagile-blue-500);
+  background-color: var(--cineagile-blue-600);
   color: white;
   border-radius: 5px;
   padding: 10px 20px;
@@ -63,14 +82,14 @@
 
   padding: 8px 30px;
   border-radius: 999px;
-  background: linear-gradient(to right, var(--cineagile-blue-400), var(--cineagile-blue-500));
+  background: linear-gradient(to right, var(--cineagile-blue-500), var(--cineagile-blue-600));
   font-family: 'Ancizar Sans', sans-serif;
   font-weight: 600;
   font-size: 1.25rem;
 }
 
 .btn-primary:hover {
-  background-color: var(--cineagile-blue-400);
+  background-color: var(--cineagile-blue-500);
 }
 
 .btn-primary-gradient:hover {
@@ -86,7 +105,7 @@
 }
 
 .btn-primary:active {
-  background-color: var(--cineagile-blue-600);
+  background-color: var(--cineagile-blue-700);
 }
 
 .btn-danger:hover {
@@ -135,6 +154,7 @@
 
 
 @media (max-width: 400px) {
+
   .btn-primary-gradient,
   .btn-danger-gradient,
   .btn-warning-gradient {

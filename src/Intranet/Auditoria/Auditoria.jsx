@@ -49,7 +49,7 @@ const Auditoria = () => {
     return (
         <div className="mt-4">
             <div className="d-flex flex-row align-items-center mb-3 gap-3 justify-content-center">
-                <h2 className="fs-1 cineagile-blue-500 ancizar-sans-regular mb-0">Auditorías</h2>
+                <h2 className="fs-1 cineagile-blue-600 ancizar-sans-regular mb-0">Auditorías</h2>
                 <img src={auditIcon} alt="audit" className="" style={{ filter: "invert(90%) sepia(70%) saturate(25000%) hue-rotate(225deg) brightness(52.5%) contrast(100%)", height: '70px' }} />
             </div>
             {datos != undefined && datos.length > 0 ?

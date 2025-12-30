@@ -51,7 +51,7 @@
 
 .org-tabla tbody .boton-sec-add:hover::before {
     content: " ";
-    background-color: #0d6efd;
+    background-color: var(--cineagile-blue-200);
     box-shadow: 1px 1px 5px 1px #0d6dfd97;
     width: 100vw;
     height: 2px;
@@ -73,7 +73,7 @@
 
 .org-tabla thead .boton-sec-add:hover::before {
     content: " ";
-    background-color: #0d6efd;
+    background-color: var(--cineagile-blue-200);
     box-shadow: 1px 1px 5px 1px #0d6dfd97;
     left: -0.9px;
     top: 1.3rem;

@@ -57,7 +57,7 @@ const CambiarContra = () => {
         <form action="" onSubmit={onSubmit}>
             <div className="d-flex flex-column align-items-center container-fluid col-10 bg-white p-5 rounded-4 shadow">
                 <div className="d-flex flex-row align-items-center mb-3 gap-2">
-                    <h2 className="ancizar-sans-regular mb-0 cineagile-blue-500">Cambiar contraseña</h2>
+                    <h2 className="ancizar-sans-regular mb-0 cineagile-blue-600">Cambiar contraseña</h2>
                     <img src={passwordIcon} alt="Password" className="" style={{ filter: "invert(90%) sepia(70%) saturate(25000%) hue-rotate(225deg) brightness(52.5%) contrast(100%)" }} />
                 </div>
                 {

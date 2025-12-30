@@ -103,7 +103,7 @@
 }
 
 .pay-button:hover {
-  background-color: #1d4ed8;
+  background-color: var(--cineagile-blue-350);
   cursor: pointer;
 }
 
@@ -156,7 +156,7 @@
 }
 
 .close-button:hover {
-  background-color: #1d4ed8;
+  background-color: var(--cineagile-blue-350);
 }
 
 /* FORMULARIO */

@@ -75,8 +75,8 @@ const PeliculaSedes = () => {
                         style={{ minHeight: "350px", aspectRatio: "3/5" }} src={pelicula.imageUrl} alt={pelicula.nombre} />
                     <div className="col-12 col-sm-12 col-md-6 col-lg-8 info-pelicula">
                         <div className="d-flex flex-column gap-2">
-                            <h1 className="display-4 film-title cineagile-blue-400 ancizar-sans-regular mb-0">{pelicula.nombre}</h1>
-                            <h5 className="cineagile-blue-500 ancizar-sans-regular mb-0">{`${pelicula.clasificacion}${pelicula.genero != undefined && pelicula.genero.length != 0 ? " | " + pelicula.genero.map(g => g.nombre).join(', ') : ""}`}</h5>
+                            <h1 className="display-4 film-title cineagile-blue-500 ancizar-sans-regular mb-0">{pelicula.nombre}</h1>
+                            <h5 className="cineagile-blue-600 ancizar-sans-regular mb-0">{`${pelicula.clasificacion}${pelicula.genero != undefined && pelicula.genero.length != 0 ? " | " + pelicula.genero.map(g => g.nombre).join(', ') : ""}`}</h5>
                             <div>
                                 <p className="fs-4 ancizar-sans-regular mb-0">{`Sinopsis`}</p>
                                 <p className="ancizar-sans-regular mb-0">{pelicula.sinopsis}</p>

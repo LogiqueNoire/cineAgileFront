@@ -6,8 +6,8 @@
 }
 
 .mybtn-outline-primary {
-    color: var(--cineagile-blue-500);
-    border-color: var(--cineagile-blue-500);
+    color: var(--cineagile-blue-600);
+    border-color: var(--cineagile-blue-600);
     border-width: 2px;
     font-weight: 500;
 }

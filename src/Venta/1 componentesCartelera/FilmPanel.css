@@ -18,7 +18,7 @@
     display: inline-block;
     position: relative;
     font-weight: 600;
-    color: var(--cineagile-blue-500);
+    color: var(--cineagile-blue-600);
     text-decoration: none;
 }
 
@@ -29,7 +29,7 @@
     width: 70%;
     bottom: 0;
     left: 0;
-    background: linear-gradient(to right, var(--cineagile-blue-500) 10%, #023B99 50%);
+    background: linear-gradient(to right, var(--cineagile-blue-600) 10%, var(--cineagile-blue-500) 50%);
     transform: scaleX(1);
     transform-origin: left;
     transition: transform 0.8s;
@@ -46,7 +46,7 @@
     width: 70%;
     bottom: 0;
     left: 0;
-    background: linear-gradient(to right, var(--cineagile-blue-500) 10%, #023B99 50%);
+    background: linear-gradient(to right, var(--cineagile-blue-600) 10%, var(--cineagile-blue-500) 50%);
     transform: scaleX(0);
     transform-origin: left;
     transition: transform 0.8s;
@@ -64,7 +64,7 @@ a.tab:hover,
 a.tab:active {
     text-decoration: none;
     text-emphasis: none;
-    color: var(--cineagile-blue-500);
+    color: var(--cineagile-blue-600);
 }
 
 @media (max-width: 600px) {

@@ -14,7 +14,7 @@ export const TerminosCondiciones = ({
           type="checkbox"
           id="terminos"
           checked={aceptaTerminos}
-          onChange={(e) => setAceptaTerminos(e.target.checked) }
+          onChange={(e) => setAceptaTerminos(e.target.checked)}
           disabled={!setto.terminos} />
         <span className="slider round"></span>
       </span>
@@ -28,7 +28,7 @@ export const TerminosCondiciones = ({
             onVerDetalles();
           }}
         >
-          Términos y Condiciones
+          términos y condiciones
         </a>
       </label>
     </div>

@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import React from "react";
 import QRCode from 'qrcode';
 import iconoEntrada from "@/assets/ticket.svg"
-import iconoDownload from "@/assets/download.svg"
+import iconoDownload from "@/assets/operaciones/download.svg"
 import "./progressBar.css";
 
 const EntradaCard = ({ infoGeneral, entrada, token }) => {
@@ -176,7 +176,7 @@ const InfoEntradas = () => {
                 <div className="d-flex flex-column align-items-center gap-4 mb-4">
                     <div className="d-flex gap-3 justify-content-center align-items-center flex-wrap">
                         <div className="d-flex gap-2 align-items-center">
-                            <h1 className="fs-1 cineagile-blue-500 mb-0">Entradas</h1>
+                            <h1 className="fs-1 cineagile-blue-600 mb-0">Entradas</h1>
                             <img src={iconoEntrada} alt="Password" className="" style={{ filter: "invert(90%) sepia(70%) saturate(25000%) hue-rotate(225deg) brightness(52.5%) contrast(100%)", height: '70px' }} />
                         </div>
                         <button className='btn btn-primary fw-bold fs-5 p-2 rounded-4' onClick={() => handleGenerarPDF()}>
