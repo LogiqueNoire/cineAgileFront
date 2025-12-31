@@ -3,7 +3,7 @@ import { env } from "@/configuracion/backend";
 import { editIcon, saveIcon } from "@/assets/operaciones";
 
 const FTextInput = ({ className = '', valorPorDefecto, label, onSave, atributo, required }) => {
-    const [modo, setModo] = useState < "read" | "edit" | "submitting" > ("read");
+    const [modo, setModo] = useState("read"); //"read" || "edit" || "submitting"
     const [input, setInput] = useState(valorPorDefecto);
     const [status, setStatus] = useState({ error: false, msg: null });
 
@@ -43,33 +43,30 @@ const FTextInput = ({ className = '', valorPorDefecto, label, onSave, atributo, 
     }
 
     return (
-        <>
-            <div className={`${className} input-group has-validation`}>
-                <div className={`form-floating ${status.error && 'is-invalid'}`}>
-                    <input maxLength={255} className={`form-control ${status.error && "is-invalid"}`} id={label} placeholder={label} disabled={modo != "edit"} value={input} onChange={onChange} type="text" />
-                    <label htmlFor={label}>{label}</label>
-                </div>
-                <button className="btn btn-primary py-2 px-4" onClick={modo == "read" ? () => setModo("edit") : onSaveClick} disabled={modo == "submitting"}>
-                    {modo == "submitting" ?
-                        <span className="d-flex align-items-center mx-2 my-2 spinner-border spinner-border-sm" role="status">
-                            <span className="visually-hidden">Cargando...</span>
-                        </span>
-                        :
-                        <>
-                            {modo === "read" && <img src={editIcon} alt="editar" />}
-                            {modo === "edit" && <img src={saveIcon} alt="guardar" style={{ "width": "32px", "height": "32px" }} />}
-                        </>
-                    }
-                </button>
-
-                {status.msg &&
-                    <div class="invalid-feedback">
-                        {status.msg}
-                    </div>
-                }
+        <div className={`${className} input-group has-validation`}>
+            <div className={`form-floating ${status.error && 'is-invalid'}`}>
+                <input maxLength={255} className={`form-control ${status.error && "is-invalid"}`} id={label} placeholder={label} disabled={modo != "edit"} value={input} onChange={onChange} type="text" />
+                <label htmlFor={label}>{label}</label>
             </div>
+            <button className="btn btn-primary py-2 px-4" onClick={modo == "read" ? () => setModo("edit") : onSaveClick} disabled={modo == "submitting"}>
+                {modo == "submitting" ?
+                    <span className="d-flex align-items-center mx-2 my-2 spinner-border spinner-border-sm" role="status">
+                        <span className="visually-hidden">Cargando...</span>
+                    </span>
+                    :
+                    <>
+                        {modo === "read" && <img src={editIcon} alt="editar" style={{ "width": "32px", "height": "32px" }} />}
+                        {modo === "edit" && <img src={saveIcon} alt="guardar" style={{ "width": "32px", "height": "32px" }} />}
+                    </>
+                }
+            </button>
 
-        </>
+            {status.msg &&
+                <div class="invalid-feedback">
+                    {status.msg}
+                </div>
+            }
+        </div>
     )
 }
 

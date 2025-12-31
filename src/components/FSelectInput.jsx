@@ -2,7 +2,7 @@ import { useState } from "react";
 import { editIcon, saveIcon } from "@/assets/operaciones";
 
 const FSelectInput = ({ className, valorPorDefecto, label, onSave, opciones, atributo, required }) => {
-    const [modo, setModo] = useState<"read" | "edit" | "submitting">("read");
+    const [modo, setModo] = useState("read"); //"read" || "edit" || "submitting"
     const [input, setInput] = useState(valorPorDefecto);
     const [status, setStatus] = useState({ error: false, msg: null });
 
@@ -53,7 +53,7 @@ const FSelectInput = ({ className, valorPorDefecto, label, onSave, opciones, atr
                     </span>
                     :
                     <>
-                        {modo === "read" && <img src={editIcon} alt="editar" />}
+                        {modo === "read" && <img src={editIcon} alt="editar" style={{ "width": "32px", "height": "32px" }} />}
                         {modo === "edit" && <img src={saveIcon} alt="guardar" style={{ "width": "32px", "height": "32px" }} />}
                     </>
                 }

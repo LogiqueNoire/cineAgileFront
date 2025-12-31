@@ -3,7 +3,7 @@ import { format } from "date-fns";
 import { editIcon, saveIcon } from "@/assets/operaciones";
 
 const FDateInput = ({ className = '', valorPorDefecto, label, onSave, atributo, required }) => {
-    const [modo, setModo] = useState<"read" | "edit" | "submitting">("read");
+    const [modo, setModo] = useState("read"); //"read" || "edit" || "submitting"
     const [input, setInput] = useState(valorPorDefecto || '');
     const [status, setStatus] = useState({ error: false, msg: null });
 
@@ -53,7 +53,7 @@ const FDateInput = ({ className = '', valorPorDefecto, label, onSave, atributo, 
                     </span>
                     :
                     <>
-                        {modo === "read" && <img src={editIcon} alt="editar" />}
+                        {modo === "read" && <img src={editIcon} alt="editar" style={{ "width": "32px", "height": "32px" }} />}
                         {modo === "edit" && <img src={saveIcon} alt="guardar" style={{ "width": "32px", "height": "32px" }} />}
                     </>
                 }
