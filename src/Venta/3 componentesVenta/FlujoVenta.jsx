@@ -5,7 +5,7 @@ import { VentaContext } from './VentaContextProvider'
 import ResumenPeliComJose3 from '@/Venta/4 precios/ResumenPeliComJose3'
 import { VentanaPrecios } from '@/Venta/4 precios/VentanaPrecios'
 import React, { useEffect, useState, useContext } from "react";
-import { VentanaPago } from "@/Venta/5 6 pago y entradas/VentanaPago";
+import { VentanaPago } from "@/Venta/5 pago/VentanaPago";
 import Funcion from "@/services/Funcion";
 import Contador from "./Contador";
 import Entrada from "@/services/Entrada";
@@ -23,7 +23,7 @@ const FlujoVenta = () => {
     const location = useLocation()
     const { pelicula } = location.state
     const contexto = useContext(VentaContext);
-    const [ cancelling, setCancelling ] = useState(false);
+    const [cancelling, setCancelling] = useState(false);
 
     const funcion = contexto.general.funcion;
 
@@ -92,32 +92,32 @@ const FlujoVenta = () => {
     const [msjError, setMsjError] = useState("")
 
     useEffect(() => {
-        if (contexto.pruebaInicialContext.pruebaInicial === 0) {
+        if (contexto.pruebaInicialContext.pruebaInicial == 0) {
+            return
         }
-        else {
-            if (indice === 0) {
-                if (contexto.butacaContext.seleccionadas.length === 0) {
-                    setMsjError("No seleccionaste ninguna butaca")
-                    env === "dev" && console.log("indice", indice)
-                    setError(true)
-                } else {
-                    setMsjError("No")
-                    console.log("msj", msjError)
-                    setError(false)
-                }
-            } else if (indice === 1) {
+        if (indice === 0) {
+            if (contexto.butacaContext.seleccionadas.length === 0) {
+                setMsjError("No seleccionaste ninguna butaca")
+                env === "dev" && console.log("indice", indice)
+                setError(true)
+            } else {
+                setMsjError("No")
+                console.log("msj", msjError)
                 setError(false)
-                if (contexto.entradasContext.entradasSeleccionadas != contexto.butacaContext.seleccionadas.length) {
-                    setError(true)
-                    env === "dev" && console.log("indice", indice)
-                } else {
-                    setMsjError("No")
-                    setError(false)
-                }
-            } else if (indice === 2) {
-                //por agregar
             }
+        } else if (indice === 1) {
+            setError(false)
+            if (contexto.entradasContext.entradasSeleccionadas != contexto.butacaContext.seleccionadas.length) {
+                setError(true)
+                env === "dev" && console.log("indice", indice)
+            } else {
+                setMsjError("No")
+                setError(false)
+            }
+        } else if (indice === 2) {
+            //por agregar
         }
+
     }, [contexto.butacaContext.seleccionadas, contexto.entradasContext.entradasSeleccionadas])
 
     console.log()
@@ -126,8 +126,8 @@ const FlujoVenta = () => {
         const tiempoInicio = new Date(contexto.general.funcion.fechaHoraInicio);
         if (isBefore(tiempoInicio, new Date())) {
             navigate(-1);
-        } 
-    }, [ location ]);
+        }
+    }, [location]);
 
     const retroceder = () => {
         env === "dev" && console.log("retrocediendo")
@@ -152,33 +152,30 @@ const FlujoVenta = () => {
     const onCancelarBtn = () => {
         if (cancelling) return;
         setCancelling(true);
-        
+
         let res = confirm("¿Estás seguro que deseas cancelar la compra?")
         if (res) onCancelar(() => { navigate(-1); });
     }
 
     return (
-        <>
-            <div className="d-flex border border-2 flex-wrap justify-content-center">
-                <div className="d-flex flex-column justify-content-center p-sm-2 p-lg-4 bg-light col-12 col-lg-4 overflow-hidden">
-                    <ResumenPeliComJose3 pelicula={pelicula} sedePeli={funcion.nombreSede} fechaPeli={funcion.fechaHoraInicio}
-                        salaPeli={funcion.codigoSala} categoria={funcion.categoria} dimension={funcion.dimension} idFuncion={funcion.idFuncion} />
-                </div>
-
-                <div className="d-flex flex-column py-2 py-5 bg-white align-items-center flex-grow-1 col-12 col-lg-8 px-4">
-                    <div className="d-flex justify-content-between w-100 mb-2 col-12">
-                        <Contador onCancelar={onCancelar} />
-                        <button disabled={contexto.general.submitting || cancelling} className="btn btn-danger rounded rounded-5 p-2" onClick={onCancelarBtn}>
-                            <img src={cancelarSvg} alt="" />
-                        </button>
-                    </div>
-                    <div className="col-12">
-                        {ventana}
-                    </div>
-                </div>
+        <div className="d-flex border border-2 flex-wrap justify-content-center">
+            <div className="d-flex flex-column justify-content-center p-sm-2 p-lg-4 bg-light col-12 col-lg-4 overflow-hidden">
+                <ResumenPeliComJose3 pelicula={pelicula} sedePeli={funcion.nombreSede} fechaPeli={funcion.fechaHoraInicio}
+                    salaPeli={funcion.codigoSala} categoria={funcion.categoria} dimension={funcion.dimension} idFuncion={funcion.idFuncion} />
             </div>
 
-        </>
+            <div className="d-flex flex-column py-2 py-5 bg-white align-items-center flex-grow-1 col-12 col-lg-8 px-4">
+                <div className="d-flex justify-content-between w-100 mb-2 col-12">
+                    <Contador onCancelar={onCancelar} />
+                    <button disabled={contexto.general.submitting || cancelling} className="btn btn-danger rounded rounded-5 p-2" onClick={onCancelarBtn}>
+                        <img src={cancelarSvg} alt="" />
+                    </button>
+                </div>
+                <div className="col-12">
+                    {ventana}
+                </div>
+            </div>
+        </div>
     )
 }
 /*Envuelto por el provider para que funcione el contexto*/

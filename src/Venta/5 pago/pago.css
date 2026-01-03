@@ -6,33 +6,6 @@
   width: 50%;
 }
 
-.payment-box {
-  width: 300px;
-  background: white;
-  padding: 30px;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(247, 1, 1, 0.1);
-  text-align: center;
-}
-
-.payment-box h2 {
-  font-size: 24px;
-  margin-bottom: 10px;
-}
-
-.amount {
-  color: var(--cineagile-blue-300);
-  font-weight: bold;
-  margin-bottom: 20px;
-}
-
-.buttons {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  margin-bottom: 20px;
-}
-
 .payment-method {
   width: 100%;
   max-width: 300px;
@@ -60,19 +33,6 @@
   color: var(--cineagile-blue-300);
 }
 
-.wallet-images,
-.card-images {
-  display: flex;
-  gap: 8px;
-}
-
-.wallet-icon,
-.card-icon {
-  width: 30px;
-  height: 30px;
-  object-fit: contain;
-}
-
 .terms {
   display: flex;
   align-items: center;
@@ -84,27 +44,17 @@
 .link {
   color: var(--cineagile-blue-300);
   text-decoration: none;
+
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  font: inherit;
 }
 
 .link:hover {
   text-decoration: underline;
-}
-
-.pay-button {
-  width: 100%;
-  padding: 12px;
-  font-weight: bold;
-  font-size: 15px;
-  border-radius: 8px;
-  border: none;
-  background-color: var(--cineagile-blue-300);
-  color: white;
-  transition: background-color 0.3s;
-}
-
-.pay-button:hover {
-  background-color: var(--cineagile-blue-350);
-  cursor: pointer;
 }
 
 /* MODAL CENTRADO Y ESTILOS */
@@ -155,10 +105,6 @@
   transition: background-color 0.3s;
 }
 
-.close-button:hover {
-  background-color: var(--cineagile-blue-350);
-}
-
 /* FORMULARIO */
 .formulario-contacto {
   width: 100%;
@@ -166,7 +112,6 @@
   display: flex;
   flex-direction: column;
   gap: 15px;
-  margin-bottom: 20px;
 }
 
 .formulario-contacto input {
@@ -186,46 +131,6 @@
   outline: none;
   border-bottom-color: var(--cineagile-blue-300);
   background-color: #f9fbff;
-}
-
-/* INPUT GRUPOS TARJETA */
-.input-row {
-  display: flex;
-  gap: 10px;
-  width: 100%;
-  max-width: 300px;
-  margin-bottom: 10px;
-}
-
-.input-numero {
-  flex: 2;
-}
-
-.input-tipo {
-  flex: 1;
-}
-
-.input-mes,
-.input-anio,
-.input-cvv {
-  flex: 1;
-}
-
-.input-row select,
-.input-row input {
-  height: 40px;
-  font-size: 14px;
-  padding: 0 10px;
-  border: 1px solid #d1d5db;
-  border-radius: 8px;
-  width: 100%;
-  box-sizing: border-box;
-}
-
-.input-row select:focus,
-.input-row input:focus {
-  outline: none;
-  border-color: var(--cineagile-blue-300);
 }
 
 .direction {

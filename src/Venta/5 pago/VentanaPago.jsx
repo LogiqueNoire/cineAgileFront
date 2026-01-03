@@ -2,7 +2,6 @@ import React, { useContext, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Tarjeta } from "./Tarjeta.jsx";
 import { VentaContext } from "@/Venta/3 componentesVenta/VentaContextProvider.jsx";
-import { TerminosCondiciones } from "./TerminosCondiciones.jsx";
 import { ModalTerminos } from "./ModalTerminos.jsx";
 import Entrada from "@/services/Entrada.js";
 import { format } from "date-fns";
@@ -98,12 +97,25 @@ export const VentanaPago = ({ prev }) => {
             <div className="d-flex flex-column justify-content-center align-items-center">
               <h3 className="ancizar-sans-regular mb-0">{"Total: S/ " + total.toFixed(2)}</h3>
             </div>
-            <TerminosCondiciones
-              aceptaTerminos={aceptaTerminos}
-              setAceptaTerminos={setAceptaTerminos}
-              onVerDetalles={() => setModalAbierto(true)}
-              setto={{ terminos, setTerminos }}
-            />
+            {/* terminos y condiciones */}
+            <div className="terms">
+              <label className="switch m-2">
+                <input
+                  type="checkbox"
+                  id="terminos"
+                  checked={aceptaTerminos}
+                  onChange={(e) => setAceptaTerminos(e.target.checked)}
+                  disabled={!{ terminos, setTerminos }.terminos} />
+                <span className="slider round"></span>
+              </label>
+              <label htmlFor="terminos" className="ancizar-sans-regular fs-5">
+                Acepto los{" "}
+                <button className="link"
+                  onClick={(e) => { e.preventDefault(); setModalAbierto(true) }}>
+                  términos y condiciones
+                </button>
+              </label>
+            </div>
 
             {aceptaTerminos &&
               <div className="formulario-contacto">
@@ -126,7 +138,7 @@ export const VentanaPago = ({ prev }) => {
             {modalAbierto && <ModalTerminos onClose={() => setModalAbierto(false)} />}
           </div>
 
-          <div className="d-flex justify-content-center gap-4 align-items-center mt-2">
+          <div className="d-flex justify-content-center gap-4 align-items-center mt-4">
             <button className="btn btn-primary btn-primary-gradient" disabled={aceptaTerminos} onClick={volver} >Volver</button>
             <button className="btn btn-warning btn-warning-gradient" onClick={registrarTest}>Registrar (test)</button>
           </div>

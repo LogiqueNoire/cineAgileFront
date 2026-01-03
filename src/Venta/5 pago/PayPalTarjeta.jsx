@@ -2,12 +2,11 @@ import { PayPalButtons, PayPalScriptProvider } from "@paypal/react-paypal-js";
 import { useContext, useState } from "react";
 import { VentaContext } from "@/Venta/3 componentesVenta/VentaContextProvider.jsx";
 import Entrada from "@/services/Entrada.js";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Toast from "@/components/Toast/Toast.jsx";
 import { format } from "date-fns";
-const TOKEN = import.meta.env.VITE_TOKEN;
 
-export const FormularioTarjeta = ({ tarjeta, setTarjeta, setSubmitting, setStatus, setto, tipoCambio }) => {
+const PayPalTarjeta = ({ tarjeta, setTarjeta, setSubmitting, setStatus, setto, tipoCambio }) => {
   const contexto = useContext(VentaContext)
   const total = Number(contexto.totalContext.total.toFixed(2));
 
@@ -109,3 +108,5 @@ export const FormularioTarjeta = ({ tarjeta, setTarjeta, setSubmitting, setStatu
     </div>
   );
 };
+
+export default PayPalTarjeta

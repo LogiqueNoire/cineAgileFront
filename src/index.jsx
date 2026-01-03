@@ -10,7 +10,7 @@ import ButacaSelect from '@/Venta/3 componentesVenta/ButacaSelect.jsx'
 import { VentaContextProvider } from '@/Venta/3 componentesVenta/VentaContextProvider.jsx';
 import FlujoVenta from '@/Venta/3 componentesVenta/FlujoVenta.jsx';
 
-import InfoEntradas from '@/Venta/5 6 pago y entradas/InfoEntradas.jsx';
+import InfoEntradas from '@/Venta/6 entradas/InfoEntradas.jsx';
 
 // Intranet
 import IntranetPanel from '@/Intranet/IntranetPanel.jsx';

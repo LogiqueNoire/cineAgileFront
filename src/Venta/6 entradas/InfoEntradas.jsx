@@ -196,9 +196,10 @@ const InfoEntradas = () => {
                 </div>
 
                 <div className="d-flex flex-column align-items-center gap-4">
-                    {entradas && entradas.entradas.map((el, i) => {
+                    {entradas?.entradas.map((el, i) => {
                         return (
                             <EntradaCard
+                                key={i}
                                 infoGeneral={{ ...entradas }}
                                 entrada={el}
                                 token={entradas.tokens ? entradas.tokens[i] : null}

@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import "./pago.css";
-import { FormularioTarjeta } from "./FormularioTarjeta";
+import PayPalTarjeta from "./PayPalTarjeta";
 import axios from "axios";
 import { format } from "date-fns";
 import MuyPronto from "@/components/Muypronto";
-
+import MercadoPagoTarjeta from "./MercadoPagoTarjeta"
+import mercadoPagoIcon from "@/assets/pasarelas/mercado_pago.png"
+import paypalIcon from "@/assets/pasarelas/paypal.svg"
 export const Tarjeta = ({ metodo, setMetodo, tarjeta, setTarjeta, setSubmitting, setStatus, setto }) => {
   const [tipocambio, setTipoCambio] = useState();
 
@@ -27,22 +29,23 @@ export const Tarjeta = ({ metodo, setMetodo, tarjeta, setTarjeta, setSubmitting,
     <>
       <button onClick={() => setMetodo((prev) => (prev === "soles" ? "" : "soles"))}
         className={`payment-method ancizar-sans-regular fs-4 py-2 ${metodo === "soles" ? "selected soles" : ""}`}>
-          <span className="">Soles</span>
+        <span className="">Soles</span>
+        <img src={mercadoPagoIcon} alt="mercadoPagoIcon" style={{ height: "25px" }} />
       </button>
       <button onClick={() => setMetodo((prev) => (prev === "dolares" ? "" : "dolares"))}
         className={`payment-method ancizar-sans-regular fs-4 py-2 ${metodo === "dolares" ? "selected dolares" : ""}`}
         disabled={!tipocambio}>
-        {tipocambio ? <span className="">Dólares</span> : <span className="fs-5">Obteniendo tipo de cambio...</span>}
-        {/*<div className="card-images">
-          <img src="/visa.png" alt="Visa" className="card-icon" />
-          <img src="/mastercard.png" alt="MasterCard" className="card-icon" />
-        </div>*/}
+        {tipocambio ? <span className="">Dólares</span> : <span className="fs-5 text-start">Obteniendo tipo de cambio actual...</span>}
+        <img src={paypalIcon} alt="paypalIcon" style={{ height: "25px" }} />
       </button>
       {metodo === "soles" && (
-        <MuyPronto></MuyPronto>
+        <>
+          <MuyPronto></MuyPronto>
+          <MercadoPagoTarjeta></MercadoPagoTarjeta>
+        </>
       )}
       {metodo === "dolares" && (
-        <FormularioTarjeta tarjeta={tarjeta} setTarjeta={setTarjeta} setSubmitting={setSubmitting} setStatus={setStatus}
+        <PayPalTarjeta tarjeta={tarjeta} setTarjeta={setTarjeta} setSubmitting={setSubmitting} setStatus={setStatus}
           setto={setto} tipoCambio={tipocambio} />
       )}
     </>
