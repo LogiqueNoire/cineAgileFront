@@ -3,7 +3,7 @@ import AddSede from './AddSede';
 import sala from '@/assets/sala2.svg';
 import { saveIcon, apagarIcon } from '@/assets/operaciones';
 import axios from 'axios';
-import { env, url } from "@/configuracion/backend"
+import { backend_url, env } from "@/configuracion/backend"
 import Loading from '@/components/Loading/Loading';
 import { ModalSalas } from './ModalSalas'
 import Cookies from 'js-cookie';
@@ -24,7 +24,7 @@ const VentanaSedesYSalas = () => {
     const [toast, setToast] = useState({ tipo: '', visible: false, titulo: '', mensaje: '' });
 
     const consultar = () => {
-        axios.get(`${url}/api/intranet/v1/sedes`, {
+        axios.get(`${backend_url}/api/intranet/v1/sedes`, {
             headers: { Authorization: `Bearer ${Cookies.get("auth-token")}` }
         }).then(res => {
             setLista(res.data.reverse());
@@ -46,7 +46,7 @@ const VentanaSedesYSalas = () => {
 
         let response
         try {
-            response = await axios.patch(`${url}/api/intranet/v1/sedes`, el, {
+            response = await axios.patch(`${backend_url}/api/intranet/v1/sedes`, el, {
                 headers: { Authorization: `Bearer ${Cookies.get("auth-token")}` }
             });
             consultar()
@@ -98,7 +98,7 @@ const VentanaSedesYSalas = () => {
         }
         if (confirmado) {
             try {
-                await axios.patch(`${url}/api/intranet/v1/sedes/estado`, el, {
+                await axios.patch(`${backend_url}/api/intranet/v1/sedes/estado`, el, {
                     headers: { Authorization: `Bearer ${Cookies.get("auth-token")}` }
                 });
                 consultar()

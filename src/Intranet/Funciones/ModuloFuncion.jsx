@@ -1,13 +1,12 @@
 import { useContext, useState, useEffect } from "react";
 import { FuncionesContext } from "./FuncionesContext";
 import axios from 'axios';
-import { env, url } from "@/configuracion/backend"
+import { backend_url, env } from "@/configuracion/backend"
 import Cookies from 'js-cookie';
 import { format, isBefore } from "date-fns";
 import './ModuloFuncion.css'
 import SalaButaca from '@/services/SalaButaca';
 import Toast from '@/components/Toast/Toast'
-
 import Fecha from "@/services/Fecha";
 import TimeService from "@/services/TimeService";
 import { ordenamientoAlfa } from "@/utils";
@@ -17,17 +16,13 @@ const ModuloFuncion = ({ handlePeliculaChange, handleSalaChange }) => {
 
     const {
         valoresBusqueda,
-        funcion,
-        setFuncion,
+        funcion, setFuncion,
         listaFunciones,
-        listaPeliculas,
-        setListaPeliculas,
-        salasNuevaSede,
-        setSalasNuevaSede
+        listaPeliculas, setListaPeliculas,
+        salasNuevaSede, setSalasNuevaSede
     } = useContext(FuncionesContext);
 
     const [checked, setChecked] = useState(true)
-
 
     useEffect(() => {
         obtenerFecha();
@@ -62,12 +57,11 @@ const ModuloFuncion = ({ handlePeliculaChange, handleSalaChange }) => {
             nuevoCodigoSala: '',
             nuevaPeliculaId: ''
         });
-
     }
 
     const consultarPeliculas = async () => {
         try {
-            const datos = (await axios.get(`${url}/api/intranet/v1/peliculas`, {
+            const datos = (await axios.get(`${backend_url}/api/intranet/v1/peliculas`, {
                 headers: { Authorization: `Bearer ${Cookies.get("auth-token")}` }
             })).data;
 
@@ -79,161 +73,17 @@ const ModuloFuncion = ({ handlePeliculaChange, handleSalaChange }) => {
 
     useEffect(() => {
         if (funcion.nuevaSedeId !== '') {
-
             SalaButaca.salasActivasPorSede(funcion.nuevaSedeId)
-                .then(data =>
-                    setSalasNuevaSede(data)
-                )
-                .catch(err => console.error("Error al obtener salas por sede:", err));
+                .then(data => setSalasNuevaSede(data))
+                .catch(err => console.error("Error al obtener salas por sede:", err))
         } else {
-            setFuncion(prev => ({
-                ...prev,
-                nuevaSalaId: '0'
-            }))
+            setFuncion(prev => ({ ...prev, nuevaSalaId: '0' }))
         }
     }, [funcion.nuevaSedeId])
 
-    const actualizarFuncion = async () => {
+    const enviarFuncion = async () => {
         let nfhi;
-        env === "dev" && console.log("funcion a editar", funcion)
-        const fechaHoraSeleccionada = new Date(`${funcion.nuevaFecha}T${funcion.nuevaHoraInicio}`);
-
-        if (
-            funcion.nuevaHoraInicio === '' ||
-            funcion.nuevaFecha === '' ||
-            funcion.nuevaDimension === '0' ||
-            funcion.nuevoPrecioBase === '0' ||
-            funcion.nuevaSalaId === '0' ||
-            funcion.nuevaSalaId === '' ||
-            funcion.nuevaPeliculaId === '0' ||
-            isBefore(fechaHoraSeleccionada, fechaReal)
-        ) {
-            setToast({
-                tipo: 'toast-danger',
-                visible: true,
-                titulo: '¡Cuidado!',
-                mensaje: 'Faltan datos obligatorios o son incorrectos.'
-            });
-            setTimeout(() => setToast({ visible: false }), 3000);
-            return;
-        }
-
-        listaFunciones.map((el) => {
-            if (el.idFuncion === Number(funcion.codigoFuncion)) {
-                const [horaRef, minutoRef] = funcion.nuevaHoraInicio.split(':').map(Number);
-                if ((new Date(el.fechaHoraInicio)).getHours() === horaRef && (new Date(el.fechaHoraInicio)).getMinutes() === minutoRef
-                    && funcion.nuevaFecha === '') {
-                    setToast({
-                        tipo: 'toast-danger',
-                        visible: true,
-                        titulo: '¡Cuidado!',
-                        mensaje: 'La hora de inicio es la misma que la actual'
-                    });
-                    setTimeout(() => setToast({ visible: false }), 3000);
-                    return;
-                } else {
-                    if (funcion.nuevaFecha !== '') {
-                        // Si se ha proporcionado una nueva fecha, combinarla con la nueva hora
-                        const [anio, mes, dia] = funcion.nuevaFecha.split('-').map(Number);
-                        nfhi = new Date(anio, mes - 1, dia);
-                        //console.log("Nueva fecha:", funcion.nuevaFecha);
-                        //console.log("Nueva fecha h i:", nfhi);
-                        nfhi.setHours(funcion.nuevaHoraInicio.split(':')[0]);
-                        nfhi.setMinutes(funcion.nuevaHoraInicio.split(':')[1]);
-                    }
-                    nfhi.setHours(funcion.nuevaHoraInicio.split(':')[0]);
-                    nfhi.setMinutes(funcion.nuevaHoraInicio.split(':')[1]);
-                    //formatear
-                    nfhi = format(nfhi, "yyyy-MM-dd'T'HH:mm:ss");
-                    //console.log("Nueva fecha de inicio con minutos:", nfhi);
-                }
-            }
-
-            if (!el.fechaHoraInicio) {
-                setToast({
-                    tipo: 'toast-danger',
-                    visible: true,
-                    titulo: '¡Cuidado!',
-                    mensaje: 'La función no tiene una fecha de inicio válida'
-                });
-                setTimeout(() => setToast({ visible: false }), 3000);
-                return;
-            }
-
-        })
-        //console.log(funcion.nuevaSalaId, funcion.nuevaPeliculaId)
-        //console.log(funcion.funcionElegida)
-
-        try {
-            //console.log("Actualizando función con código:", funcion.codigoFuncion);
-            //console.log("Nueva fecha y hora de inicio:", nfhi);
-            let nfhiEnUTC = Fecha.tiempoLocalString_A_UTCString(nfhi);
-
-            const response = await axios.patch(`${url}/api/intranet/v1/funciones`, {
-                idFuncion: funcion.codigoFuncion,
-                fechaHoraInicio: nfhi,
-                fechaHoraFin: null,
-                dimension: funcion.nuevaDimension,
-                precioBase: funcion.nuevoPrecioBase,
-                idSede: null,
-                nombreSede: null,
-                idSala: funcion.nuevaSalaId,
-                categoria: null,
-                codigoSala: null,
-                idPelicula: funcion.nuevaPeliculaId,
-                nombrePelicula: null
-            }, {
-                headers: { Authorization: `Bearer ${Cookies.get("auth-token")}` }
-            });
-
-            if (response.status === 200) {
-                setToast({
-                    tipo: 'toast-info',
-                    visible: true,
-                    titulo: '¡Función editada!',
-                    mensaje: ''
-                });
-                setTimeout(() => setToast({ visible: false }), 3000);
-                if (valoresBusqueda.selectSala) {
-                    handleSalaChange({ target: { value: valoresBusqueda.selectSala } });
-                } else if (valoresBusqueda.selectPelicula) {
-                    handlePeliculaChange({ target: { value: valoresBusqueda.selectPelicula } });
-                }
-
-                setFuncion(prev => ({
-                    ...prev,
-                    funcionElegida: '',
-                    codigoFuncion: '',
-                    nuevaHoraInicio: '',
-                    nuevaFecha: '',
-                    nuevaPeliculaId: '',
-                    nuevaSalaId: '',
-                    nuevaSedeId: ''
-                }));
-            }
-            if (response.status === 400) {
-                setToast({
-                    tipo: 'toast-danger',
-                    visible: true,
-                    titulo: 'Función no actualizada',
-                    mensaje: response.data
-                });
-            }
-        } catch (error) {
-            console.error(error)
-            setToast({
-                tipo: 'toast-danger',
-                visible: true,
-                titulo: 'Función no actualizada',
-                mensaje: 'Horario fuera de rango permitido, cruce detectado, precio base cero o función con entradas vendidas'
-            });
-            setTimeout(() => setToast({ visible: false }), 3000);
-        }
-    }
-
-    const crearFuncion = async () => {
-        let nfhi;
-        env === "dev" && console.log("funcion a crear", funcion)
+        env === "dev" && console.log("Función:", funcion, "Modo:", checked ? "actualizar" : "crear")
         env === "dev" && console.log("fecha real", fechaReal)
         const fechaHoraSeleccionada = new Date(`${funcion.nuevaFecha}T${funcion.nuevaHoraInicio}`);
 
@@ -247,43 +97,52 @@ const ModuloFuncion = ({ handlePeliculaChange, handleSalaChange }) => {
             funcion.nuevaPeliculaId === '0' ||
             isBefore(fechaHoraSeleccionada, fechaReal)
         ) {
-
             setToast({
                 tipo: 'toast-danger',
                 visible: true,
                 titulo: '¡Cuidado!',
-                mensaje: 'Faltan datos o error en los datos'
+                mensaje: 'Faltan datos o hay error en ellos.'
             });
             setTimeout(() => setToast({ visible: false }), 3000);
             return;
         }
-
-        if (funcion.nuevaFecha !== '') {
-            // Si se ha proporcionado una nueva fecha, combinarla con la nueva hora
-            const [anio, mes, dia] = funcion.nuevaFecha.split('-').map(Number);
-            nfhi = new Date(anio, mes - 1, dia);
-            env === "dev" && console.log("Nueva fecha:", funcion.nuevaFecha);
-            env === "dev" && console.log("Nueva fecha h i:", nfhi);
-            nfhi.setHours(funcion.nuevaHoraInicio.split(':')[0]);
-            nfhi.setMinutes(funcion.nuevaHoraInicio.split(':')[1]);
+        if (checked) {
+            const mismaHora = listaFunciones.some((el) => {
+                if (el.idFuncion === Number(funcion.codigoFuncion)) {
+                    const [horaRef, minutoRef] = funcion.nuevaHoraInicio.split(':').map(Number);
+                    return ((new Date(el.fechaHoraInicio)).getHours() === horaRef && (new Date(el.fechaHoraInicio)).getMinutes() === minutoRef)
+                }
+            })
+            if (mismaHora) {
+                setToast({
+                    tipo: 'toast-danger',
+                    visible: true,
+                    titulo: '¡Cuidado!',
+                    mensaje: 'La hora de inicio es la misma que la actual'
+                });
+                setTimeout(() => setToast({ visible: false }), 3000);
+                return;
+            }
         }
+
+        // Como se ha proporcionado una nueva fecha, combinarla con la nueva hora
+        const [anio, mes, dia] = funcion.nuevaFecha.split('-').map(Number);
+        nfhi = new Date(anio, mes - 1, dia);
+        env === "dev" && console.log("Nueva fecha:", funcion.nuevaFecha);
+        env === "dev" && console.log("Nueva fecha h i:", nfhi);
         nfhi.setHours(funcion.nuevaHoraInicio.split(':')[0]);
         nfhi.setMinutes(funcion.nuevaHoraInicio.split(':')[1]);
-        //formatear
         nfhi = format(nfhi, "yyyy-MM-dd'T'HH:mm:ss");
-        //console.log("Nueva fecha de inicio con minutos:", nfhi);
-
-        //console.log(funcion.nuevaSalaId, funcion.nuevaPeliculaId)
-        env === "dev" && console.log(funcion)
+        env === "dev" && console.log("Nueva fecha de inicio con minutos:", nfhi);
 
         try {
             let nfhiEnUTC = Fecha.tiempoLocalString_A_UTCString(nfhi);
             env === "dev" && console.log("Actualizando función con fecha UTC:", nfhi, nfhiEnUTC);
-            const response = await axios.post(`${url}/api/intranet/v1/funciones`, {
-                idFuncion: null,
+            const body = {
+                idFuncion: checked ? funcion.codigoFuncion : null,
                 fechaHoraInicio: nfhi,
                 fechaHoraFin: null,
-                dimension: funcion.nuevaDimension, //dimension 
+                dimension: funcion.nuevaDimension,
                 precioBase: funcion.nuevoPrecioBase,
                 idSede: null,
                 nombreSede: null,
@@ -292,15 +151,20 @@ const ModuloFuncion = ({ handlePeliculaChange, handleSalaChange }) => {
                 codigoSala: null,
                 idPelicula: funcion.nuevaPeliculaId,
                 nombrePelicula: null
-            }, {
-                headers: { Authorization: `Bearer ${Cookies.get("auth-token")}` }
-            });
+            }
+            const response = checked
+                ? await axios.patch(`${backend_url}/api/intranet/v1/funciones`, body, {
+                    headers: { Authorization: `Bearer ${Cookies.get("auth-token")}` }
+                })
+                : await axios.post(`${backend_url}/api/intranet/v1/funciones`, body, {
+                    headers: { Authorization: `Bearer ${Cookies.get("auth-token")}` }
+                })
 
             if (response.status === 200) {
                 setToast({
                     tipo: 'toast-info',
                     visible: true,
-                    titulo: '¡Función creada!',
+                    titulo: checked ? '¡Función actualizada!' : '¡Función creada!',
                     mensaje: ''
                 });
                 setTimeout(() => setToast({ visible: false }), 3000);
@@ -320,19 +184,28 @@ const ModuloFuncion = ({ handlePeliculaChange, handleSalaChange }) => {
                     nuevaSalaId: '',
                     nuevaSedeId: '',
                     nuevaDimension: '',
-                    nuevoPrecioBase: 0
+                    nuevoPrecioBase: '0'
                 }));
             }
+
         } catch (error) {
+            if (checked && error.response?.status === 400) {
+                setToast({
+                    tipo: 'toast-danger',
+                    visible: true,
+                    titulo: 'Función no actualizada',
+                    mensaje: error.response.data
+                });
+                return;
+            }
             console.error(error)
             setToast({
                 tipo: 'toast-danger',
                 visible: true,
-                titulo: 'Error al crear la función',
-                mensaje: 'Tal vez hay algún cruce entre las funciones, horario fuera de rango permitido o precio base cero.'
+                titulo: checked ? 'Función no actualizada' : 'Error al crear la función',
+                mensaje: `Horario fuera de rango permitido, cruce detectado${checked ? ", precio base cero o función con entradas vendidas." : " o precio base cero."}`
             });
             setTimeout(() => setToast({ visible: false }), 3000);
-
         }
     }
 
@@ -358,16 +231,16 @@ const ModuloFuncion = ({ handlePeliculaChange, handleSalaChange }) => {
                         <label className='d-flex text-nowrap w-100'>Elige sede</label>
                         <select className='form-select w-100' value={funcion.nuevaSedeId}
                             disabled={checked && (funcion.funcionElegida === undefined || funcion.codigoFuncion === '')}
-                            onChange={(e) =>
-                                checked ? setFuncion(prev => ({
+                            onChange={(e) => checked
+                                ? setFuncion(prev => ({
                                     ...prev,
                                     nuevaSedeId: e.target.value,
                                     nuevaSalaId: ''
                                 })) :
-                                    setFuncion(prev => ({
-                                        ...prev,
-                                        nuevaSedeId: e.target.value
-                                    }))
+                                setFuncion(prev => ({
+                                    ...prev,
+                                    nuevaSedeId: e.target.value
+                                }))
                             }>
                             <option value='0'>Elija una sede</option>
                             {valoresBusqueda.sedesActivas.map((el, id) => (
@@ -407,12 +280,7 @@ const ModuloFuncion = ({ handlePeliculaChange, handleSalaChange }) => {
                                 (new Date(listaPeliculas.find(item => item.idPelicula == funcion.nuevaPeliculaId)?.fechaInicioEstreno) > new Date(fechaReal) ?
                                     listaPeliculas.find(item => item.idPelicula == funcion.nuevaPeliculaId).fechaInicioEstreno : format(fechaReal, "yyyy-MM-dd"))
                                 : ''}
-                            onChange={(e) =>
-                                setFuncion(prev => ({
-                                    ...prev,
-                                    nuevaFecha: e.target.value
-                                }))
-                            } />
+                            onChange={(e) => setFuncion(prev => ({ ...prev, nuevaFecha: e.target.value }))} />
                     </div>
                     <div className='d-flex w-100 align-items-center'>
                         <span className='w-100'>Nueva hora de inicio<br></br><span style={{ fontSize: "0.9rem" }}>(formato según dispositivo)</span></span>
@@ -430,10 +298,9 @@ const ModuloFuncion = ({ handlePeliculaChange, handleSalaChange }) => {
                     </div>
                     <div className='d-flex w-100 align-items-center'>
                         <span className='w-100'>Sala</span>
-
                         <select value={funcion.nuevaSalaId}
                             className='form-select w-100'
-                            disabled={funcion.funcionElegida === undefined || funcion.codigoFuncion === ''}
+                            disabled={checked && (funcion.funcionElegida === undefined || funcion.codigoFuncion === '')}
                             onChange={(e) => setFuncion(prev => ({
                                 ...prev,
                                 nuevaSalaId: e.target.value
@@ -450,7 +317,7 @@ const ModuloFuncion = ({ handlePeliculaChange, handleSalaChange }) => {
                     <div className='d-flex w-100 align-items-center'>
                         <label className='w-100'>Dimensión</label>
                         <select value={funcion.nuevaDimension}
-                            disabled={funcion.funcionElegida === undefined || funcion.codigoFuncion === ''}
+                            disabled={checked && (funcion.funcionElegida === undefined || funcion.codigoFuncion === '')}
                             className='form-select w-100'
                             onChange={(e) =>
                                 setFuncion(prev => ({
@@ -468,7 +335,7 @@ const ModuloFuncion = ({ handlePeliculaChange, handleSalaChange }) => {
                     <div className='d-flex w-100 align-items-center'>
                         <label className='w-100'>Precio base</label>
                         <input value={funcion.nuevoPrecioBase} step="0.1" min="0"
-                            disabled={funcion.funcionElegida === undefined || funcion.codigoFuncion === ''}
+                            disabled={checked && (funcion.funcionElegida === undefined || funcion.codigoFuncion === '')}
                             className='form-control w-100' type="number"
                             onChange={(e) => {
                                 const input = e.target.value;
@@ -483,10 +350,8 @@ const ModuloFuncion = ({ handlePeliculaChange, handleSalaChange }) => {
                             } />
                     </div>
 
-                    <button className='btn btn-primary btn-primary-gradient' onClick={(e) => {
-                        e.preventDefault();
-                        { checked ? actualizarFuncion() : crearFuncion() }
-                    }}>{checked ? "Actualizar" : "Crear"}</button>
+                    <button className='btn btn-primary btn-primary-gradient' onClick={(e) => { e.preventDefault(); enviarFuncion() }}>
+                        {checked ? "Actualizar" : "Crear"}</button>
                 </div>
             </div>
             <Toast tipo={toast.tipo} titulo={toast.titulo} mensaje={toast.mensaje} visible={toast.visible} />

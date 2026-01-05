@@ -3,8 +3,8 @@ import Auth from "@/services/Auth";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
 import BotonCarga from "@/components/BotonCarga"
-import videoFondo from "@/assets/fondoLogin.mp4"
-import imagenFondo from "@/assets/fondoLogin.png"
+import videoFondo from "@/assets/login/fondoLogin.mp4"
+import imagenFondo from "@/assets/login/fondoLogin.png"
 import "./Intranet.css"
 
 const LoginForm = () => {

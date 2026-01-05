@@ -1,6 +1,6 @@
 import axios from "axios"
 import { useEffect, useState } from "react";
-import { url } from "@/configuracion/backend";
+import { backend_url } from "@/configuracion/backend";
 import Cookies from "js-cookie";
 import { format } from "date-fns";
 import auditIcon from "@/assets/modulos/audit.svg"
@@ -27,7 +27,7 @@ const Auditoria = () => {
     const recuperarAuditoria = async () => {
         let response
         try {
-            response = (await axios.get(`${url}/api/intranet/v1/registrosacciones`, {
+            response = (await axios.get(`${backend_url}/api/intranet/v1/registrosacciones`, {
                 headers: { Authorization: `Bearer ${Cookies.get("auth-token")}` }
             })).data;
             setData(response);

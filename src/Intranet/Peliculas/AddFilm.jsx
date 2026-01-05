@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { env, url } from '@/configuracion/backend.js'
+import { backend_url, env } from '@/configuracion/backend.js'
 import { format } from 'date-fns'
 
 import peliculaIcono from '@/assets/modulos/peliculas.svg'
@@ -119,7 +119,7 @@ export default function AddFilm({ onSucess }) {
         fechaInicioEstreno: format(pelicula.fechaInicioEstreno, 'yyyy-MM-dd'),
       };
       try {
-        await axios.post(`${url}/api/intranet/v1/peliculas`, peliculaFinal, {
+        await axios.post(`${backend_url}/api/intranet/v1/peliculas`, peliculaFinal, {
           headers: { Authorization: `Bearer ${Cookies.get("auth-token")}` }
         });
 

@@ -1,10 +1,10 @@
 import axios from 'axios'
-import { url } from '@/configuracion/backend'
+import { backend_url } from '@/configuracion/backend'
 import Fecha from './Fecha'
 
 class Funcion {
     static async mostrarSedesFuncionesPorPelicula(idPelicula, fecha) {
-        const funciones = await axios(`${url}/api/venta/v1/funciones/${idPelicula}?fecha=${fecha}`)
+        const funciones = await axios(`${backend_url}/api/venta/v1/funciones/${idPelicula}?fecha=${fecha}`)
         
         if (funciones.data) {
             funciones.data.forEach(el => {
@@ -23,22 +23,22 @@ class Funcion {
     }
 
     static async mostrarButacasDeFuncion(idFuncion) {
-        const butacas = await axios.get(`${url}/api/venta/v1/funciones/${idFuncion}/butacas`)
+        const butacas = await axios.get(`${backend_url}/api/venta/v1/funciones/${idFuncion}/butacas`)
         return butacas.data
     }
 
     static async cantidadButacasDisponibles(idFuncion) {
-        const cantidad = await axios.get(`${url}/api/venta/v1/funciones/${idFuncion}/butacas/disponibles`)
+        const cantidad = await axios.get(`${backend_url}/api/venta/v1/funciones/${idFuncion}/butacas/disponibles`)
         return cantidad.data
     }
     
     static async estaDisponible(idFuncion) {
-        const cantidad = await axios.get(`${url}/api/venta/v1/funciones/${idFuncion}/disponibilidad`)
+        const cantidad = await axios.get(`${backend_url}/api/venta/v1/funciones/${idFuncion}/disponibilidad`)
         return cantidad.data
     }
 
     static async mostrarPreciosdeFuncion(idFuncion, persona) {
-        const precios = await axios.get(`${url}/api/venta/v1/funciones/precios?idFuncion=${idFuncion}&persona=${persona}`)  ///precios?idFuncion=225855&persona=22
+        const precios = await axios.get(`${backend_url}/api/venta/v1/funciones/precios?idFuncion=${idFuncion}&persona=${persona}`)  ///precios?idFuncion=225855&persona=22
         return precios.data
     }
 }

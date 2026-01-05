@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import AddFilm from './AddFilm';
 import './VentanaPeliculas.css'
 import axios from 'axios';
-import { env, url } from "@/configuracion/backend"
+import { backend_url, env } from "@/configuracion/backend"
 import Loading from '@/components/Loading/Loading';
 import Cookies from 'js-cookie';
 import { format, parse } from 'date-fns';
@@ -57,7 +57,7 @@ const VentanaPeliculas = () => {
         setLoading(true);
         const f = format(fechaReal, "yyyy-MM-dd'T'HH:mm:ss")
         try {
-            setLista((await axios.get(`${url}/api/intranet/v1/peliculas?fecha=${f}`, {
+            setLista((await axios.get(`${backend_url}/api/intranet/v1/peliculas?fecha=${f}`, {
                 headers: { Authorization: `Bearer ${Cookies.get("auth-token")}` }
             })).data.sort(ordenamientoFecha).reverse());
         } catch (error) {

@@ -9,8 +9,9 @@ import genresIcon from '@/assets/modulos/genresIcon.svg'
 import passwordIcon from '@/assets/modulos/password.svg'
 import usuariosInternosIcon from '@/assets/modulos/modulo_usuario_icono.svg'
 import statisticsIcon from '@/assets/modulos/statisticsIcon.svg'
+import ticketIcon from '@/assets/modulos/ticketIcon.svg'
 
 export {
     ajustesIcon, auditIcon, dbIcon, developerIcon, peliculaIcon, sedeIcon,
-    funcionesIcon, genresIcon, passwordIcon, usuariosInternosIcon, statisticsIcon
+    funcionesIcon, genresIcon, passwordIcon, usuariosInternosIcon, statisticsIcon, ticketIcon
 };

@@ -5,7 +5,7 @@ import { format, differenceInCalendarDays } from 'date-fns';
 import PeliculaService from "@/services/PeliculaService";
 import Loading from "@/components/Loading/Loading";
 import axios from "axios";
-import { url } from "@/configuracion/backend"
+import { backend_url } from "@/configuracion/backend"
 import { es } from 'date-fns/locale';
 
 import '../1 componentesCartelera/FilmCard.css';
@@ -24,7 +24,7 @@ const PeliculaSedes = () => {
     useEffect(() => {
         const generosDePelicula = async () => {
             try {
-                let response = await axios.get(`${url}/api/venta/v1/generos?pelicula=${consultaIdPelicula}`);
+                let response = await axios.get(`${backend_url}/api/venta/v1/generos?pelicula=${consultaIdPelicula}`);
                 setPelicula(prev => ({ ...prev, genero: response.data }));
             } catch (err) {
                 console.error("Error al obtener la fecha:", err);

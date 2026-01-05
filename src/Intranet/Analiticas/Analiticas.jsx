@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { RadialBarChart, RadialBar, Legend, ResponsiveContainer, Tooltip } from 'recharts';
 import Loading from '@/components/Loading/Loading';
 import axios from 'axios';
-import { env, url } from '@/configuracion/backend';
+import { backend_url, env } from '@/configuracion/backend';
 import Cookies from 'js-cookie';
 import "./Analiticas.css"
 import VentasMensuales from './VentasMensuales';
@@ -39,7 +39,7 @@ const Analiticas = () => {
 
     const obtenerPeliculasMasTaquillerasDelAnio = async () => {
         try {
-            const datos = (await axios.get(`${url}/api/intranet/v1/peliculas/taquilleras?mes=${mesElegido}`, {
+            const datos = (await axios.get(`${backend_url}/api/intranet/v1/peliculas/taquilleras?mes=${mesElegido}`, {
                 headers: { Authorization: `Bearer ${Cookies.get("auth-token")}` }
             })).data;
             env === "dev" && console.log(datos.reduce((acc, el) => acc + el[0], 0))

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { env, url } from "@/configuracion/backend";
+import { env, backend_url } from "@/configuracion/backend";
 import axios from "axios";
 import Cookies from "js-cookie";
 import Loading from "@/components/Loading/Loading";
@@ -12,7 +12,7 @@ const VentasMensuales = () => {
 
     const consultarVentasMensuales = async () => {
         try {
-            const datos = (await axios.get(`${url}/api/intranet/v1/ventas/totales-mes`, {
+            const datos = (await axios.get(`${backend_url}/api/intranet/v1/ventas/totales-mes`, {
                 headers: { Authorization: `Bearer ${Cookies.get("auth-token")}` }
             })).data;
             env === "dev" && console.log("datos", datos)

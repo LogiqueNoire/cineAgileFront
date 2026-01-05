@@ -91,20 +91,6 @@
   line-height: 1.6;
 }
 
-.terminos-close-button {
-  margin-top: 20px;
-  width: 100%;
-  max-width: 150px;
-  padding: 10px 16px;
-  font-weight: bold;
-  border-radius: 6px;
-  border: none;
-  background-color: var(--cineagile-blue-300);
-  color: white;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
 /* FORMULARIO */
 .formulario-contacto {
   width: 100%;
