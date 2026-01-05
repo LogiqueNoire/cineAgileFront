@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from 'axios';
-import { url } from '@/configuracion/backend.js'
+import { backend_url } from '@/configuracion/backend.js'
 import Loading from '@/components/Loading/Loading.jsx';
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
@@ -19,7 +19,7 @@ export const ModalSalas = ({ onClose, sede }) => {
   const [toast, setToast] = useState({ tipo: '', visible: false, titulo: '', mensaje: '' });
 
   const consultarSalas = () => {
-    axios.get(`${url}/api/intranet/v1/salas?idSede=${sede.id}`, {
+    axios.get(`${backend_url}/api/intranet/v1/salas?idSede=${sede.id}`, {
       headers: { Authorization: `Bearer ${Cookies.get("auth-token")}` }
     }).then(res => {
       if (res.data) {

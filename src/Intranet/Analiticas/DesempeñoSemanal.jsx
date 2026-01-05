@@ -1,6 +1,6 @@
 import axios from "axios";
 import { ResponsiveContainer, Scatter, ScatterChart, Tooltip, XAxis, YAxis, ZAxis } from "recharts";
-import { env, url } from "@/configuracion/backend";
+import { backend_url, env } from "@/configuracion/backend";
 import { useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import { format } from "date-fns";
@@ -54,7 +54,7 @@ const DesempeñoSemanal = ({ fechaConsultada }) => {
     const consultarPeliculas = async () => {
         try {
             const f = format(fechaConsultada, "yyyy-MM-dd'T'HH:mm:ss")
-            const datos = (await axios.get(`${url}/api/intranet/v1/peliculas/ventas?fecha=${f}`,
+            const datos = (await axios.get(`${backend_url}/api/intranet/v1/peliculas/ventas?fecha=${f}`,
                 {
                     headers: { Authorization: `Bearer ${Cookies.get("auth-token")}` }
                 })).data;
@@ -69,7 +69,7 @@ const DesempeñoSemanal = ({ fechaConsultada }) => {
         try {
             const p = peliculaElegida
             const f = format(fechaConsultada, "yyyy-MM-dd'T'HH:mm:ss")
-            const datos = (await axios.get(`${url}/api/intranet/v1/ventas/desempeno-semanal?idPelicula=${p}&fecha=${f}`, {
+            const datos = (await axios.get(`${backend_url}/api/intranet/v1/ventas/desempeno-semanal?idPelicula=${p}&fecha=${f}`, {
                 headers: { Authorization: `Bearer ${Cookies.get("auth-token")}` }
             })).data;
             env === "dev" && console.log(peliculaElegida)

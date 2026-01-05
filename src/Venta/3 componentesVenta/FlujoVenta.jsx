@@ -79,15 +79,6 @@ const FlujoVenta = () => {
         onCancelar
     });
 
-    const navigatePrecios = () => {
-        navigate(`/funcion/precios`,
-            {
-                state: {
-                    pelicula: pelicula, funcion: funcion
-                }
-            });
-    };
-
     const [error, setError] = useState(false)
     const [msjError, setMsjError] = useState("")
 
@@ -129,26 +120,6 @@ const FlujoVenta = () => {
         }
     }, [location]);
 
-    const retroceder = () => {
-        env === "dev" && console.log("retrocediendo")
-        if (indice != 0) {
-            if (indice == 1) {
-                contexto.entradasContext.setEntradasSeleccionadas(0)
-                contexto.entradasContext.setGeneralesSeleccionadas(0)
-                contexto.entradasContext.setNiñosSeleccionadas(0)
-                contexto.entradasContext.setConadisSeleccionadas(0)
-                contexto.entradasContext.setMayoresSeleccionadas(0)
-                contexto.totalContext.setTotal(0)
-            }
-            setIndice(indice - 1)
-            env === "dev" && console.log("indice", indice)
-            setError(false)
-        } else {
-            env === "dev" && console.log("indice", indice)
-        }
-
-    }
-
     const onCancelarBtn = () => {
         if (cancelling) return;
         setCancelling(true);
@@ -178,6 +149,6 @@ const FlujoVenta = () => {
         </div>
     )
 }
-/*Envuelto por el provider para que funcione el contexto*/
+
 export default FlujoVenta;
 

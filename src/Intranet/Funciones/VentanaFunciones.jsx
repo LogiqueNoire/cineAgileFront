@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
-import { env, url } from "@/configuracion/backend"
+import { backend_url, env } from "@/configuracion/backend"
 import Cookies from 'js-cookie';
 import SalaButaca from '@/services/SalaButaca';
 import PeliculaService from '@/services/PeliculaService';
@@ -113,7 +113,7 @@ const VentanaFunciones = () => {
             const fechaElegidaUTC = Fecha.tiempoLocalString_A_UTCString(`${valoresBusqueda.fechaElegida}T00:00:00`);
 
             try {
-                const funciones = (await axios.get(`${url}/api/intranet/v1/funciones/porSemana`, {
+                const funciones = (await axios.get(`${backend_url}/api/intranet/v1/funciones/porSemana`, {
                     params: {
                         pelicula: peliculaId,
                         fecha: (new Date(`${valoresBusqueda.fechaElegida}T00:00:00Z`)).toISOString(),
@@ -142,7 +142,7 @@ const VentanaFunciones = () => {
             const fechaElegidaUTC = Fecha.tiempoLocalString_A_UTCString(`${valoresBusqueda.fechaElegida}T00:00:00`);
 
             try {
-                const funciones = (await axios.get(`${url}/api/intranet/v1/funciones/porSemana`, {
+                const funciones = (await axios.get(`${backend_url}/api/intranet/v1/funciones/porSemana`, {
                     params: {
                         sala: salaId,
                         fecha: `${valoresBusqueda.fechaElegida}T00:00:00`,

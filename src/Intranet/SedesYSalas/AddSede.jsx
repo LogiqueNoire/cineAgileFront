@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useState } from 'react';
-import { url } from '@/configuracion/backend.js'
+import { backend_url } from '@/configuracion/backend.js'
 import Cookies from 'js-cookie';
 import sedeIcon from '@/assets/modulos/sedeIcon.svg';
 import BotonCarga from '@/components/BotonCarga.jsx';
@@ -35,7 +35,7 @@ export default function AddSede({ onSucess }) {
     });
 
     try {
-      await axios.post(`${url}/api/intranet/v1/sedes`, sede, {
+      await axios.post(`${backend_url}/api/intranet/v1/sedes`, sede, {
         headers: { Authorization: `Bearer ${Cookies.get("auth-token")}` }
       });
       if (onSucess) {

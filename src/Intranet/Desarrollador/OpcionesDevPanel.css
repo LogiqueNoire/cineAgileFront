@@ -1,0 +1,13 @@
+.opcionesDev{
+    
+}
+
+@media (max-width: 850px) {
+    .lineaVertical{
+        display: none;
+    }
+    .opcionesDevPanel{
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+}

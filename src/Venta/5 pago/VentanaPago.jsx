@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Tarjeta } from "./Tarjeta.jsx";
 import { VentaContext } from "@/Venta/3 componentesVenta/VentaContextProvider.jsx";
 import { ModalTerminos } from "./ModalTerminos.jsx";
@@ -10,27 +10,15 @@ import { env } from "@/configuracion/backend.js";
 
 export const VentanaPago = ({ prev }) => {
   const navigate = useNavigate();
-  const location = useLocation();
-  const { pelicula, funcion } = location.state || {};
   const contexto = useContext(VentaContext);
   const total = Number(contexto.totalContext.total.toFixed(2));
 
-  const [nombre, setNombre] = useState("");
-  const [correo, setCorreo] = useState("");
   const [metodo, setMetodo] = useState("");
-  const [tarjeta, setTarjeta] = useState({
-    numero: "",
-    tipo: "",
-    mes: "",
-    anio: "",
-    cvv: "",
-  });
 
   const [terminos, setTerminos] = useState(true);
   const [aceptaTerminos, setAceptaTerminos] = useState(false);
   const [modalAbierto, setModalAbierto] = useState(false);
 
-  const [submitting, setSubmitting] = useState(false);
   const [status, setStatus] = useState({ error: false, msg: null });
 
   env === "dev" && console.log(terminos);
@@ -41,38 +29,45 @@ export const VentanaPago = ({ prev }) => {
 
   let bloquearSolicitud = false;
 
-  const registrarTest = () => {
+  const generarBodyRequest = () => {
+    let tiposEntradas = [];
+    const entradasContext = contexto.entradasContext;
+
+    tiposEntradas = tiposEntradas.concat(new Array(entradasContext.generalesSeleccionadas).fill("general"));
+    tiposEntradas = tiposEntradas.concat(new Array(entradasContext.niñosSeleccionadas).fill("niños"));
+    tiposEntradas = tiposEntradas.concat(new Array(entradasContext.conadisSeleccionadas).fill("conadis"));
+    tiposEntradas = tiposEntradas.concat(new Array(entradasContext.mayoresSeleccionadas).fill("mayores"));
+
+    const entradas = contexto.butacaContext.seleccionadas.map(el => ({
+      id_butaca: el.id,
+      persona: tiposEntradas.shift()
+    }));
+
+    return {
+      id_funcion: contexto.general.funcion.idFuncion,
+      entradas: entradas,
+      tiempoRegistro: format(new Date(Date.now()), "yyyy-MM-dd.HH:mm:ss").replace(".", "T")
+    }
+  }
+
+  const registrarEntrada = () => {
     if (!bloquearSolicitud) {
       bloquearSolicitud = true;
+      contexto.general.setSubmitting(true);
 
-      let tiposEntradas = [];
-      const entradasContext = contexto.entradasContext;
-
-      tiposEntradas = tiposEntradas.concat(new Array(entradasContext.generalesSeleccionadas).fill("general"));
-      tiposEntradas = tiposEntradas.concat(new Array(entradasContext.niñosSeleccionadas).fill("niños"));
-      tiposEntradas = tiposEntradas.concat(new Array(entradasContext.conadisSeleccionadas).fill("conadis"));
-      tiposEntradas = tiposEntradas.concat(new Array(entradasContext.mayoresSeleccionadas).fill("mayores"));
-
-      const entradas = contexto.butacaContext.seleccionadas.map(el => ({
-        id_butaca: el.id,
-        persona: tiposEntradas.shift()
-      }));
-
-      const fechaAhora = (new Date(Date.now()));
-
-      const cuerpo = {
-        id_funcion: contexto.general.funcion.idFuncion,
-        entradas: entradas,
-        tiempoRegistro: format(fechaAhora, "yyyy-MM-dd.HH:mm:ss").replace(".", "T")// .toISOString()
-      }
-
-      env === "dev" && console.log(cuerpo);
+      const cuerpo = generarBodyRequest()
 
       Entrada.comprarEntrada(cuerpo).then(res => {
         env === "dev" && console.log(res);
         navigate("/entradas", { state: { entradas: res.data.entradasCompradasDTO } })
       }).catch(err => {
         console.log(err);
+        if (err.response?.data.estado)
+          setStatus({ error: true, msg: err.response.data.estado })
+        else
+          setStatus({ error: true, msg: "No se pudo conectar con el servidor." });
+      }).finally(_ => {
+        contexto.general.setSubmitting(false);
       })
     }
   }
@@ -89,8 +84,11 @@ export const VentanaPago = ({ prev }) => {
         </div>
       }
 
-      {submitting ?
-        <Loading /> :
+      {contexto.general.submitting ?
+        <div className="d-flex justify-content-center">
+          <Loading />
+        </div>
+        :
         <>
           <div className="container-fluid d-flex flex-column justify-content-center align-items-center gap-4">
             <h2 className="ancizar-sans-regular mb-0">Módulo de pago</h2>
@@ -100,10 +98,7 @@ export const VentanaPago = ({ prev }) => {
             {/* terminos y condiciones */}
             <div className="terms">
               <label className="switch m-2">
-                <input
-                  type="checkbox"
-                  id="terminos"
-                  checked={aceptaTerminos}
+                <input type="checkbox" id="terminos" checked={aceptaTerminos}
                   onChange={(e) => setAceptaTerminos(e.target.checked)}
                   disabled={!{ terminos, setTerminos }.terminos} />
                 <span className="slider round"></span>
@@ -117,39 +112,22 @@ export const VentanaPago = ({ prev }) => {
               </label>
             </div>
 
-            {aceptaTerminos &&
-              <div className="formulario-contacto">
-                <Tarjeta
-                  metodo={metodo}
-                  setMetodo={setMetodo}
-                  tarjeta={tarjeta}
-                  setTarjeta={setTarjeta}
-                  setSubmitting={setSubmitting}
-                  setStatus={setStatus}
-                  setto={{ setTerminos }}
-                />
-              </div>
-            }
+            {aceptaTerminos && <div className="formulario-contacto">
+              <Tarjeta metodo={metodo} setMetodo={setMetodo}
+                setto={{ setTerminos }} registrarEntrada={registrarEntrada} generarBodyRequest={generarBodyRequest} />
+            </div>}
 
-            {/*
-          <BilleteraElectronica metodo={metodo} setMetodo={setMetodo} />
-        */}
+            {/*<BilleteraElectronica metodo={metodo} setMetodo={setMetodo} />*/}
 
             {modalAbierto && <ModalTerminos onClose={() => setModalAbierto(false)} />}
           </div>
 
           <div className="d-flex justify-content-center gap-4 align-items-center mt-4">
             <button className="btn btn-primary btn-primary-gradient" disabled={aceptaTerminos} onClick={volver} >Volver</button>
-            <button className="btn btn-warning btn-warning-gradient" onClick={registrarTest}>Registrar (test)</button>
+            <button className="btn btn-warning btn-warning-gradient" onClick={registrarEntrada}>Registrar (test)</button>
           </div>
         </>
-
       }
-
-
-
-
     </>
-
   );
 };

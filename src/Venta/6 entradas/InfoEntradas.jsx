@@ -1,12 +1,13 @@
 import { useLocation, useParams } from "react-router-dom";
 import Entrada from '@/services/Entrada'
-import { url } from "@/configuracion/backend";
+import { backend_url } from "@/configuracion/backend";
 import { useEffect, useState } from "react";
 import React from "react";
 import QRCode from 'qrcode';
-import iconoEntrada from "@/assets/ticket.svg"
+import iconoEntrada from "@/assets/modulos/ticketIcon.svg"
 import iconoDownload from "@/assets/operaciones/download.svg"
 import "./progressBar.css";
+import Loading from "@/components/Loading/Loading";
 
 const EntradaCard = ({ infoGeneral, entrada, token }) => {
     // Adherir 'Z' a la fecha UTC en formato ISO 8601 hará que new Date() transforme
@@ -32,7 +33,7 @@ const EntradaCard = ({ infoGeneral, entrada, token }) => {
 
     useEffect(() => {
         const generarQr = async () => {
-            const urlCompleta = `${url}/entrada/${encodeURIComponent(token)}`;
+            const urlCompleta = `${backend_url}/entrada/${encodeURIComponent(token)}`;
             const dataUrl = await QRCode.toDataURL(urlCompleta);
             setQrUrl(dataUrl);
         };
@@ -40,7 +41,7 @@ const EntradaCard = ({ infoGeneral, entrada, token }) => {
     }, [token]);
 
     return (
-        <div className="border border-2 border-secondary rounded-4 p-3">
+        <div className="border border-3 border-secondary-subtle rounded-4 p-3">
 
             <div className="align-items-center direction">
                 <div className="align-items-center direction-inverse">
@@ -49,7 +50,7 @@ const EntradaCard = ({ infoGeneral, entrada, token }) => {
                         <h2 className="text-center ancizar-sans-regular mb-0">Entrada</h2>
                     </div>
                     <div className="qr">
-                        <img src={qrUrl} alt="QR Entrada" />
+                        {qrUrl === "" ? <Loading></Loading> : <img src={qrUrl} alt="QR Entrada" />}
                     </div>
                 </div>
                 <div>

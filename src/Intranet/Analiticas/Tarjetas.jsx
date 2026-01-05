@@ -1,5 +1,5 @@
 import { format } from "date-fns";
-import { env, url } from "@/configuracion/backend";
+import { backend_url, env } from "@/configuracion/backend";
 import axios from "axios";
 import Cookies from "js-cookie";
 import { useEffect, useState } from "react";
@@ -16,7 +16,7 @@ const Tarjetas = ({fechaConsultada, setFechaConsultada}) => {
     const consultarFuncionesPorProyectar = async (fecha) => {
         try {
             const f = format(fecha, "yyyy-MM-dd'T'HH:mm:ss")
-            const datos = (await axios.get(`${url}/api/intranet/v1/funciones?fecha=${f}&estado=por_proyectar`, {
+            const datos = (await axios.get(`${backend_url}/api/intranet/v1/funciones?fecha=${f}&estado=por_proyectar`, {
                 headers: { Authorization: `Bearer ${Cookies.get("auth-token")}` }
             })).data;
             setFuncionesPorProyectar(datos)
@@ -30,7 +30,7 @@ const Tarjetas = ({fechaConsultada, setFechaConsultada}) => {
     const consultarFuncionesAgotadas = async (fecha) => {
         try {
             const f = format(fecha, "yyyy-MM-dd'T'HH:mm:ss")
-            const datos = (await axios.get(`${url}/api/intranet/v1/funciones?fecha=${f}&estado=agotadas`, {
+            const datos = (await axios.get(`${backend_url}/api/intranet/v1/funciones?fecha=${f}&estado=agotadas`, {
                 headers: { Authorization: `Bearer ${Cookies.get("auth-token")}` }
             })).data;
             setFuncionesAgotadas(datos)
@@ -44,7 +44,7 @@ const Tarjetas = ({fechaConsultada, setFechaConsultada}) => {
     const consultarEntradasVendidas = async (fecha) => {
         try {
             const f = format(fecha, "yyyy-MM-dd'T'HH:mm:ss")
-            const datos = (await axios.get(`${url}/api/intranet/v1/ventas/entradas-vendidas?fecha=${f}`, {
+            const datos = (await axios.get(`${backend_url}/api/intranet/v1/ventas/entradas-vendidas?fecha=${f}`, {
                 headers: { Authorization: `Bearer ${Cookies.get("auth-token")}` }
             })).data;
             setEntradasVendidas(datos)
@@ -58,7 +58,7 @@ const Tarjetas = ({fechaConsultada, setFechaConsultada}) => {
      const consultarVentas = async (fecha) => {
         try {
             const f = format(fecha, "yyyy-MM-dd'T'HH:mm:ss")
-            const datos = (await axios.get(`${url}/api/intranet/v1/ventas/totales-periodo?fecha=${f}`, {
+            const datos = (await axios.get(`${backend_url}/api/intranet/v1/ventas/totales-periodo?fecha=${f}`, {
                 headers: { Authorization: `Bearer ${Cookies.get("auth-token")}` }
             })).data;
 

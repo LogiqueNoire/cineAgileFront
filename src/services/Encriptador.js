@@ -1,4 +1,3 @@
-//import { url } from '../configuracion/backend'
 import { env } from '@/configuracion/backend';
 import CryptoJS from 'crypto-js';
 

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Loading from "@/components/Loading/Loading";
 import axios from "axios";
-import { url } from "@/configuracion/backend";
+import { backend_url } from "@/configuracion/backend";
 import Cookies from "js-cookie";
 import iconoGuardar from "@/assets/operaciones/guardar.svg"
 import Toast from "@/components/Toast/Toast";
@@ -30,7 +30,7 @@ const Generos = () => {
         e.preventDefault();
         let response;
         try {
-            response = await axios.post(`${url}/api/intranet/v1/generos`, nombre.trim(), {
+            response = await axios.post(`${backend_url}/api/intranet/v1/generos`, nombre.trim(), {
                 headers: {
                     Authorization: `Bearer ${Cookies.get("auth-token")}`,
                     'Content-Type': 'text/plain'
@@ -67,7 +67,7 @@ const Generos = () => {
         e.preventDefault();
         let response;
         try {
-            response = await axios.patch(`${url}/api/intranet/v1/generos`, { id: el.id, nombre: el.nombre.trim() }, {
+            response = await axios.patch(`${backend_url}/api/intranet/v1/generos`, { id: el.id, nombre: el.nombre.trim() }, {
                 headers: {
                     Authorization: `Bearer ${Cookies.get("auth-token")}`
                 }

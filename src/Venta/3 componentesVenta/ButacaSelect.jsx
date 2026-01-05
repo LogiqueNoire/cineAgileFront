@@ -140,7 +140,7 @@ const SeleccionButaca = ({ funcion, prev, next, onCancelar }) => {
             </div>
           </div>
 
-          <div className="modal col-12 fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+          <div className="modal col-12 fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div className="modal-dialog w-25 modal-dialog-centered">
               <div className="modal-content">
                 <div className="modal-header d-flex justify-content-center">

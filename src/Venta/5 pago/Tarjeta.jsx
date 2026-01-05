@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import "./pago.css";
-import PayPalTarjeta from "./PayPalTarjeta";
+import PasarelaPayPal from "./PasarelaPayPal";
 import axios from "axios";
 import { format } from "date-fns";
-import MuyPronto from "@/components/Muypronto";
-import MercadoPagoTarjeta from "./MercadoPagoTarjeta"
+import PasarelaMercadoPago from "./PasarelaMetodoPago"
 import mercadoPagoIcon from "@/assets/pasarelas/mercado_pago.png"
 import paypalIcon from "@/assets/pasarelas/paypal.svg"
-export const Tarjeta = ({ metodo, setMetodo, tarjeta, setTarjeta, setSubmitting, setStatus, setto }) => {
-  const [tipocambio, setTipoCambio] = useState();
+
+export const Tarjeta = ({ metodo, setMetodo, setto, registrarEntrada, generarBodyRequest }) => {
+  const [tipoCambio, setTipoCambio] = useState();
 
   const obtenerTipoCambio = async (fecha) => {
     try {
@@ -34,19 +34,15 @@ export const Tarjeta = ({ metodo, setMetodo, tarjeta, setTarjeta, setSubmitting,
       </button>
       <button onClick={() => setMetodo((prev) => (prev === "dolares" ? "" : "dolares"))}
         className={`payment-method ancizar-sans-regular fs-4 py-2 ${metodo === "dolares" ? "selected dolares" : ""}`}
-        disabled={!tipocambio}>
-        {tipocambio ? <span className="">Dólares</span> : <span className="fs-5 text-start">Obteniendo tipo de cambio actual...</span>}
+        disabled={!tipoCambio}>
+        {tipoCambio ? <span className="">Dólares</span> : <span className="fs-5 text-start">Obteniendo tipo de cambio actual...</span>}
         <img src={paypalIcon} alt="paypalIcon" style={{ height: "25px" }} />
       </button>
       {metodo === "soles" && (
-        <>
-          <MuyPronto></MuyPronto>
-          <MercadoPagoTarjeta></MercadoPagoTarjeta>
-        </>
+        <PasarelaMercadoPago generarBodyRequest={generarBodyRequest} />
       )}
       {metodo === "dolares" && (
-        <PayPalTarjeta tarjeta={tarjeta} setTarjeta={setTarjeta} setSubmitting={setSubmitting} setStatus={setStatus}
-          setto={setto} tipoCambio={tipocambio} />
+        <PasarelaPayPal setto={setto} tipoCambio={tipoCambio} registrarEntrada={registrarEntrada} />
       )}
     </>
   );

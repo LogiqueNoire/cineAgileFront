@@ -1,11 +1,11 @@
 import axios from "axios";
-import { url } from "@/configuracion/backend";
+import { backend_url } from "@/configuracion/backend";
 import Cookies from "js-cookie";
 
 class Auth {
     
     static async login(username, password) {
-        const res = await axios.post(`${url}/api/venta/v1/auth/login`, { username, password });
+        const res = await axios.post(`${backend_url}/api/venta/v1/auth/login`, { username, password });
         return res.data;
     }
 
@@ -15,7 +15,7 @@ class Auth {
         if (!token)
             throw new Error("Token no encontrado");
         
-        const res = await axios.get(`${url}/api/intranet/v1/usuarios/perfil`, { 
+        const res = await axios.get(`${backend_url}/api/intranet/v1/usuarios/perfil`, { 
             headers: {
                 Authorization: `Bearer ${token}`
             }

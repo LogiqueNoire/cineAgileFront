@@ -1,5 +1,3 @@
-import axios from "axios"
-
-const url = import.meta.env.VITE_BACKEND_URL
+const backend_url = import.meta.env.VITE_BACKEND_URL
 const env = import.meta.env.VITE_ENV
-export { url, env }
+export { backend_url, env }
