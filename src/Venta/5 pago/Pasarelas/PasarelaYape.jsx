@@ -49,7 +49,9 @@ const PasarelaYape = ({ generarBodyRequest }) => {
                 transaction_amount: Number(contexto.totalContext.total.toFixed(2)),
                 payment_method_id: "yape",
             }
+            env === "dev" && console.log(bodyPago)
             const data = await PagoService.procesarPago(bodyPago, bodyEntradas)
+            env === "dev" && console.log(data)
             if (data.status === "Pago aprobado" && data.statusDetail === "Pago recibido") {
                 showToast({ tipo: 'toast-info', titulo: 'Pago exitoso', mensaje: '' });
                 setTimeout(() => {
