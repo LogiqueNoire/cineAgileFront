@@ -49,7 +49,9 @@ const PasarelaYape = ({ generarBodyRequest }) => {
                 transaction_amount: Number(contexto.totalContext.total.toFixed(2)),
                 payment_method_id: "yape",
             }
+            env === "dev" && console.log(bodyPago)
             const data = await PagoService.procesarPago(bodyPago, bodyEntradas)
+            env === "dev" && console.log(data)
             if (data.status === "Pago aprobado" && data.statusDetail === "Pago recibido") {
                 showToast({ tipo: 'toast-info', titulo: 'Pago exitoso', mensaje: '' });
                 setTimeout(() => {
@@ -64,6 +66,7 @@ const PasarelaYape = ({ generarBodyRequest }) => {
             }
         } catch (err) {
             console.error("Error generando token Yape:", err);
+            showToast({ tipo: 'toast-danger', titulo: 'Error en el pago', mensaje: `Código de error: ${err.status}` });
         } finally {
             contexto.general.setSubmitting(false)
         }
@@ -101,14 +104,19 @@ const PasarelaYape = ({ generarBodyRequest }) => {
                         />
                     ))}
                 </div>
+                <span style={{fontSize:"13px"}}>Encuéntralo en tu app de Yape</span>
+            </div>
+
+            <div className="border-start border-4 border-primary px-3 py-2 bg-light">
+                <span style={{fontSize:"13px"}}>Verifica en Yape que la opción compras por internet esté activada.</span>
             </div>
             <div className="d-flex flex-column gap-2">
                 <label htmlFor="email">Email para envío de constancia</label>
                 <input type="email" value={email} onChange={(e) => setEmail(e.target.value)}
-                    className="border-secondary-subtle text-center rounded ancizar-sans-regular fs-4" style={{ borderStyle: "solid" }} />
+                    className="border-secondary-subtle text-center rounded ancizar-sans-regular fs-5" style={{ borderStyle: "solid" }} />
             </div>
             <div>
-                <button className="btn-primary btn-primary-gradient" onClick={(e) => handleYape(e)}>Create YAPE</button>
+                <button className="btn-primary btn-primary-gradient w-100" onClick={(e) => handleYape(e)}>Pagar con Yape</button>
             </div>
         </div>
     );

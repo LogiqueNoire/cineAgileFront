@@ -44,6 +44,7 @@ const PasarelaMetodoPago = ({ generarBodyRequest }) => {
                             showToast({ tipo: 'toast-danger', titulo: 'Error en el pago', mensaje: data.statusDetail });
                         }
                     } catch (error) {
+                        showToast({ tipo: 'toast-danger', titulo: 'Error en el pago', mensaje: `Código de error: ${err.status}` });
                         console.error("Error procesando pago:", error);
                     } finally {
                         contexto.general.setSubmitting(false);

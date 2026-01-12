@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useCallback, useContext, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { MetodosPago } from "./MetodosPago.jsx";
 import { VentaContext } from "@/Venta/3 componentesVenta/VentaContextProvider.jsx";
@@ -21,15 +21,11 @@ export const VentanaPago = ({ prev }) => {
 
   const [status, setStatus] = useState({ error: false, msg: null });
 
-  env === "dev" && console.log(terminos);
+  const volver = () => { prev(); }
 
-  const volver = () => {
-    prev();
-  }
+  const bloquearSolicitud = useRef(false);
 
-  let bloquearSolicitud = false;
-
-  const generarBodyRequest = () => {
+  const generarBodyRequest = useCallback(() => {
     let tiposEntradas = [];
     const entradasContext = contexto.entradasContext;
 
@@ -48,11 +44,11 @@ export const VentanaPago = ({ prev }) => {
       entradas: entradas,
       tiempoRegistro: format(new Date(Date.now()), "yyyy-MM-dd.HH:mm:ss").replace(".", "T")
     }
-  }
+  }, [contexto])
 
   const registrarEntrada = () => {
-    if (!bloquearSolicitud) {
-      bloquearSolicitud = true;
+    if (!bloquearSolicitud.current) {
+      bloquearSolicitud.current = true;
       contexto.general.setSubmitting(true);
 
       const cuerpo = generarBodyRequest()
@@ -84,47 +80,47 @@ export const VentanaPago = ({ prev }) => {
         </div>
       }
 
-      {contexto.general.submitting ?
-        <div className="d-flex justify-content-center">
+
+      <>
+        {contexto.general.submitting && <div className="d-flex justify-content-center align-items-center bg-loading"
+        style={{ zIndex: "100", position:"fixed", inset:"0"}}>
           <Loading />
+        </div>}
+        <div className="container-fluid d-flex flex-column justify-content-center align-items-center gap-4">
+          <h2 className="ancizar-sans-regular mb-0">Módulo de pago</h2>
+          <div className="d-flex flex-column justify-content-center align-items-center">
+            <h3 className="ancizar-sans-regular mb-0">{"Total: S/ " + total.toFixed(2)}</h3>
+          </div>
+          {/* terminos y condiciones */}
+          <div className="terms">
+            <label className="switch m-2">
+              <input type="checkbox" id="terminos" checked={aceptaTerminos}
+                onChange={(e) => setAceptaTerminos(e.target.checked)}
+                disabled={!{ terminos, setTerminos }.terminos} />
+              <span className="slider round"></span>
+            </label>
+            <label htmlFor="terminos" className="ancizar-sans-regular fs-5">
+              Acepto los{" "}
+              <button className="link"
+                onClick={(e) => { e.preventDefault(); setModalAbierto(true) }}>
+                términos y condiciones
+              </button>
+            </label>
+          </div>
+
+          {aceptaTerminos && <div className="formulario-contacto">
+            <MetodosPago metodo={metodo} setMetodo={setMetodo}
+              setto={{ setTerminos }} registrarEntrada={registrarEntrada} generarBodyRequest={generarBodyRequest} />
+          </div>}
+          {modalAbierto && <ModalTerminos onClose={() => setModalAbierto(false)} />}
         </div>
-        :
-        <>
-          <div className="container-fluid d-flex flex-column justify-content-center align-items-center gap-4">
-            <h2 className="ancizar-sans-regular mb-0">Módulo de pago</h2>
-            <div className="d-flex flex-column justify-content-center align-items-center">
-              <h3 className="ancizar-sans-regular mb-0">{"Total: S/ " + total.toFixed(2)}</h3>
-            </div>
-            {/* terminos y condiciones */}
-            <div className="terms">
-              <label className="switch m-2">
-                <input type="checkbox" id="terminos" checked={aceptaTerminos}
-                  onChange={(e) => setAceptaTerminos(e.target.checked)}
-                  disabled={!{ terminos, setTerminos }.terminos} />
-                <span className="slider round"></span>
-              </label>
-              <label htmlFor="terminos" className="ancizar-sans-regular fs-5">
-                Acepto los{" "}
-                <button className="link"
-                  onClick={(e) => { e.preventDefault(); setModalAbierto(true) }}>
-                  términos y condiciones
-                </button>
-              </label>
-            </div>
 
-            {aceptaTerminos && <div className="formulario-contacto">
-              <MetodosPago metodo={metodo} setMetodo={setMetodo}
-                setto={{ setTerminos }} registrarEntrada={registrarEntrada} generarBodyRequest={generarBodyRequest} />
-            </div>}
-            {modalAbierto && <ModalTerminos onClose={() => setModalAbierto(false)} />}
-          </div>
+        <div className="d-flex justify-content-center gap-4 align-items-center mt-4">
+          <button className="btn btn-primary btn-primary-gradient" disabled={aceptaTerminos} onClick={volver} >Volver</button>
+          <button className="btn btn-warning btn-warning-gradient" onClick={registrarEntrada}>Registrar (test)</button>
+        </div>
+      </>
 
-          <div className="d-flex justify-content-center gap-4 align-items-center mt-4">
-            <button className="btn btn-primary btn-primary-gradient" disabled={aceptaTerminos} onClick={volver} >Volver</button>
-            <button className="btn btn-warning btn-warning-gradient" onClick={registrarEntrada}>Registrar (test)</button>
-          </div>
-        </>
-      }
     </>
   );
 };
