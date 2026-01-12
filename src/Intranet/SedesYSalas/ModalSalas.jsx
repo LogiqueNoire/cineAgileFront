@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import axios from 'axios';
 import { backend_url } from '@/configuracion/backend.js'
 import Loading from '@/components/Loading/Loading.jsx';
@@ -6,17 +6,17 @@ import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
 import BotonCarga from "@/components/BotonCarga.jsx";
 import SalaButaca from "@/services/SalaButaca.js";
-import Toast from "@/components/Toast/Toast.jsx";
 import { apagarIcon, editIcon } from "@/assets/operaciones";
+import { ToastContext } from "@/context/ToastContextProvider";
 
 export const ModalSalas = ({ onClose, sede }) => {
+  const { showToast } = useContext(ToastContext)
   const navigate = useNavigate();
   const [codigoSalaGuardar, setCodigoSalaGuardar] = useState('')
   const [salas, setSalas] = useState()
   const [categoriaGuardar, setCategoriaGuardar] = useState('')
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [toast, setToast] = useState({ tipo: '', visible: false, titulo: '', mensaje: '' });
 
   const consultarSalas = () => {
     axios.get(`${backend_url}/api/intranet/v1/salas?idSede=${sede.id}`, {
@@ -64,33 +64,17 @@ export const ModalSalas = ({ onClose, sede }) => {
       SalaButaca.cambiarEstado(sala.id, !sala.activo).then((res) => {
 
         if (sala.activo) {
-          setToast({
-            tipo: 'toast-info',
-            visible: true,
-            titulo: 'Sala desactivada',
-            mensaje: 'Las funciones asociadas también se ocultarán'
-          });
+          showToast({ tipo: 'toast-info', titulo: 'Sala desactivada', mensaje: 'Las funciones asociadas también se ocultarán' });
         } else {
-          setToast({
-            tipo: 'toast-info',
-            visible: true,
-            titulo: 'Sala activada',
-            mensaje: 'Las funciones asociadas también se mostrarán'
-          });
+          showToast({ tipo: 'toast-info', titulo: 'Sala activada', mensaje: 'Las funciones asociadas también se mostrarán' });
         }
         consultarSalas();
       }).catch(err => {
         console.error(err)
-        setToast({
-          tipo: 'toast-danger',
-          visible: true,
-          titulo: 'Error al guardar la sala.',
-          mensaje: err.data
-        });
+        showToast({ tipo: 'toast-danger', titulo: 'Error al guardar la sala.', mensaje: err.data });
 
       }).finally(_ => {
         submitting = false;
-        setTimeout(() => setToast({ visible: false }), 3000);
       })
     }
   }
@@ -171,8 +155,6 @@ export const ModalSalas = ({ onClose, sede }) => {
             : <span className="mt-3">No hay salas para mostrar</span>
         }
       </div>
-
-      {<Toast tipo={toast.tipo} titulo={toast.titulo} mensaje={toast.mensaje} visible={toast.visible} />}
     </div>
   );
 };

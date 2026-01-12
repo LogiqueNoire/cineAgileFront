@@ -1,14 +1,13 @@
 import axios from 'axios';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { backend_url } from '@/configuracion/backend.js'
 import Cookies from 'js-cookie';
 import sedeIcon from '@/assets/modulos/sedeIcon.svg';
 import BotonCarga from '@/components/BotonCarga.jsx';
-import Toast from '@/components/Toast/Toast.jsx';
+import { ToastContext } from '@/context/ToastContextProvider';
 
 export default function AddSede({ onSucess }) {
-  const [toast, setToast] = useState({ tipo: '', visible: false, titulo: '', mensaje: '' });
-
+  const { showToast } = useContext(ToastContext)
   const [submitting, setSubmitting] = useState(false);
   const [sede, setSede] = useState({ nombre: '' });
 
@@ -39,31 +38,13 @@ export default function AddSede({ onSucess }) {
         headers: { Authorization: `Bearer ${Cookies.get("auth-token")}` }
       });
       if (onSucess) {
-        setToast({
-          tipo: 'toast-info',
-          visible: true,
-          titulo: 'Sede agregada',
-          mensaje: ''
-        });
-        setTimeout(() => setToast({ visible: false }), 3000); onSucess()
+        showToast({ tipo: 'toast-info', titulo: 'Sede agregada', mensaje: '' });
       }
     } catch (error) {
       if (error.status == 409) {
-        setToast({
-          tipo: 'toast-danger',
-          visible: true,
-          titulo: 'Error al agregar la sede',
-          mensaje: error.response.data
-        });
-        setTimeout(() => setToast({ visible: false }), 3000);
+        showToast({ tipo: 'toast-danger', titulo: 'Error al agregar la sede', mensaje: error.response.data });
       } else {
-        setToast({
-          tipo: 'toast-danger',
-          visible: true,
-          titulo: 'Error al agregar la sede',
-          mensaje: ''
-        });
-        setTimeout(() => setToast({ visible: false }), 3000);
+        showToast({ tipo: 'toast-danger', visible: true, titulo: 'Error al agregar la sede', mensaje: '' });
       }
       console.error(error);
     } finally {
@@ -103,10 +84,6 @@ export default function AddSede({ onSucess }) {
           </form>
         </div>
       </div>
-      {<Toast tipo={toast.tipo}
-        titulo={toast.titulo}
-        mensaje={toast.mensaje}
-        visible={toast.visible} />}
     </div>
   );
 }

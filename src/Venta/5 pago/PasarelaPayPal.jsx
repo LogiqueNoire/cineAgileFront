@@ -1,12 +1,12 @@
 import { PayPalButtons, PayPalScriptProvider } from "@paypal/react-paypal-js";
 import { useContext, useState } from "react";
 import { VentaContext } from "@/Venta/3 componentesVenta/VentaContextProvider.jsx";
-import Toast from "@/components/Toast/Toast.jsx";
+import { ToastContext } from "@/context/ToastContextProvider";
 
 const PasarelaPayPal = ({ setto, tipoCambio, registrarEntrada }) => {
   const contexto = useContext(VentaContext)
   const total = Number(contexto.totalContext.total.toFixed(2));
-  const [toast, setToast] = useState({ visible: false, titulo: '', mensaje: '' });
+  const { showToast } = useContext(ToastContext)
 
   return (
     <div>
@@ -41,17 +41,11 @@ const PasarelaPayPal = ({ setto, tipoCambio, registrarEntrada }) => {
             return actions.order.capture().then(details => {
               registrarEntrada()
               env === "dev" && console.log(details)
-              setToast({
-                visible: true,
-                titulo: 'Pago exitoso',
-                mensaje: ''
-              });
-              setTimeout(() => setToast({ visible: false }), 3000);
+              showToast({ titulo: 'Pago exitoso', mensaje: '' });
             })
           }}
         />
       </PayPalScriptProvider>
-      <Toast tipo={'toast-info'} titulo={toast.titulo} mensaje={toast.mensaje} visible={toast.visible} />
     </div>
   );
 };
