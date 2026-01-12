@@ -10,14 +10,15 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@mercadopago/sdk-js": "^0.0.3",
     "@mercadopago/sdk-react": "^1.0.7",
     "@paypal/react-paypal-js": "^8.8.3",
     "axios": "^1.9.0",
     "crypto-js": "^4.2.0",
     "date-fns": "^4.1.0",
-    "html2pdf.js": "^0.10.3",
+    "html2pdf.js": "^0.13.0",
     "js-cookie": "^3.0.5",
-    "jspdf": "^3.0.1",
+    "jspdf": "^4.0.0",
     "qrcode": "^1.5.4",
     "qrcode.react": "^4.2.0",
     "react": "^19.2.3",
