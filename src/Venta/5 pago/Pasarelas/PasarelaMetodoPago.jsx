@@ -2,10 +2,9 @@ import { CardPayment, initMercadoPago } from '@mercadopago/sdk-react';
 import { useContext, useEffect, useState } from 'react';
 import { VentaContext } from '@/Venta/3 componentesVenta/VentaContextProvider';
 import PagoService from '@/services/PagoService';
-import { env } from '@/configuracion/backend';
+import { env, publicKeyMercadoPago } from '@/configuracion/backend';
 import { useNavigate } from 'react-router-dom';
 import { ToastContext } from '@/context/ToastContextProvider';
-const publicKey = import.meta.env.VITE_MERCADO_PAGO_PUBLIC_KEY
 
 const PasarelaMetodoPago = ({ generarBodyRequest }) => {
     const { showToast } = useContext(ToastContext)
@@ -15,8 +14,8 @@ const PasarelaMetodoPago = ({ generarBodyRequest }) => {
     const navigate = useNavigate()
 
     useEffect(() => {
-        if (publicKey) {
-            initMercadoPago(publicKey, { locale: 'es-PE' });
+        if (publicKeyMercadoPago) {
+            initMercadoPago(publicKeyMercadoPago, { locale: 'es-PE' });
         } else {
             console.warn("No se encontró la clave pública de MercadoPago.");
         }

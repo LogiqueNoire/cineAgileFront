@@ -1,8 +1,7 @@
 import { useState, useEffect, useRef, useContext } from "react";
 import { loadMercadoPago } from "@mercadopago/sdk-js";
-const publicKey = import.meta.env.VITE_MERCADO_PAGO_PUBLIC_KEY;
 import "../pago.css"
-import { env } from "@/configuracion/backend";
+import { env, publicKeyMercadoPago } from "@/configuracion/backend";
 import { VentaContext } from "../../3 componentesVenta/VentaContextProvider";
 import PagoService from "@/services/PagoService";
 import { useNavigate } from "react-router-dom";
@@ -22,7 +21,7 @@ const PasarelaYape = ({ generarBodyRequest }) => {
     useEffect(() => {
         const initMercadoPago = async () => {
             await loadMercadoPago();
-            const instance = new globalThis.MercadoPago(publicKey, { locale: "es-PE", });
+            const instance = new globalThis.MercadoPago(publicKeyMercadoPago, { locale: "es-PE", });
             setMp(instance);
         };
 
