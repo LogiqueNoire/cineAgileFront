@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Tarjeta } from "./Tarjeta.jsx";
+import { MetodosPago } from "./MetodosPago.jsx";
 import { VentaContext } from "@/Venta/3 componentesVenta/VentaContextProvider.jsx";
 import { ModalTerminos } from "./ModalTerminos.jsx";
 import Entrada from "@/services/Entrada.js";
@@ -113,7 +113,7 @@ export const VentanaPago = ({ prev }) => {
             </div>
 
             {aceptaTerminos && <div className="formulario-contacto">
-              <Tarjeta metodo={metodo} setMetodo={setMetodo}
+              <MetodosPago metodo={metodo} setMetodo={setMetodo}
                 setto={{ setTerminos }} registrarEntrada={registrarEntrada} generarBodyRequest={generarBodyRequest} />
             </div>}
             {modalAbierto && <ModalTerminos onClose={() => setModalAbierto(false)} />}

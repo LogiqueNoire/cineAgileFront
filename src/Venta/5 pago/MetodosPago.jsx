@@ -1,21 +1,22 @@
 import React, { useState, useEffect } from "react";
 import "./pago.css";
-import PasarelaPayPal from "./PasarelaPayPal";
+import PasarelaPayPal from "./Pasarelas/PasarelaPayPal";
 import axios from "axios";
 import { format } from "date-fns";
-import PasarelaMercadoPago from "./PasarelaMetodoPago"
+import PasarelaMercadoPago from "./Pasarelas/PasarelaMetodoPago"
 import mercadoPagoIcon from "@/assets/pasarelas/mercado_pago.png"
 import paypalIcon from "@/assets/pasarelas/paypal.svg"
 import yapeIcon from "@/assets/pasarelas/yape2.png"
-import PasarelaYape from "./PasarelaYape";
+import PasarelaYape from "./Pasarelas/PasarelaYape";
+import { env } from "@/configuracion/backend";
 
-export const Tarjeta = ({ metodo, setMetodo, setto, registrarEntrada, generarBodyRequest }) => {
+export const MetodosPago = ({ metodo, setMetodo, setto, registrarEntrada, generarBodyRequest }) => {
   const [tipoCambio, setTipoCambio] = useState();
 
   const obtenerTipoCambio = async (fecha) => {
     try {
       const response = await axios.get(`http://localhost:8080/api/venta/v1/tipo-cambio?date=${format(fecha, "yyyy-MM-dd")}`, { timeout: 5000 });
-      console.log("Tipo de cambio:", response.data);
+      env === "dev" && console.log("Tipo de cambio:", response.data);
       setTipoCambio(response.data.precioVenta)
     } catch (error) {
       setTipoCambio(3.6)
