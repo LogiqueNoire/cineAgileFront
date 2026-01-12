@@ -109,7 +109,6 @@ const ModuloFuncion = ({ handlePeliculaChange, handleSalaChange }) => {
             })
             if (mismaHora) {
                 showToast({ tipo: 'toast-danger', titulo: '¡Cuidado!', mensaje: 'La hora de inicio es la misma que la actual' });
-                return;
             }
         }
 
