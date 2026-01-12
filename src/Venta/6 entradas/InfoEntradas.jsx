@@ -2,7 +2,6 @@ import { useLocation, useParams } from "react-router-dom";
 import Entrada from '@/services/Entrada'
 import { backend_url } from "@/configuracion/backend";
 import { useEffect, useState } from "react";
-import React from "react";
 import QRCode from 'qrcode';
 import iconoEntrada from "@/assets/modulos/ticketIcon.svg"
 import iconoDownload from "@/assets/operaciones/download.svg"
