@@ -65,6 +65,7 @@ const PasarelaYape = ({ generarBodyRequest }) => {
                 showToast({ tipo: 'toast-danger', titulo: 'Error en el pago', mensaje: data.statusDetail });
             }
         } catch (err) {
+            showToast({ tipo: 'toast-danger', titulo: 'Error en el pago', mensaje: data.statusDetail });
             console.error("Error generando token Yape:", err);
         } finally {
             contexto.general.setSubmitting(false)
@@ -103,6 +104,11 @@ const PasarelaYape = ({ generarBodyRequest }) => {
                         />
                     ))}
                 </div>
+                <span style={{fontSize:"13px"}}>Encuéntralo en tu app de Yape</span>
+            </div>
+
+            <div className="border-start border-4 border-primary px-3 py-2 bg-light">
+                <span style={{fontSize:"13px"}}>Verifica en Yape que la opción compras por internet esté activada.</span>
             </div>
             <div className="d-flex flex-column gap-2">
                 <label htmlFor="email">Email para envío de constancia</label>
@@ -110,7 +116,7 @@ const PasarelaYape = ({ generarBodyRequest }) => {
                     className="border-secondary-subtle text-center rounded ancizar-sans-regular fs-4" style={{ borderStyle: "solid" }} />
             </div>
             <div>
-                <button className="btn-primary btn-primary-gradient" onClick={(e) => handleYape(e)}>Create YAPE</button>
+                <button className="btn-primary btn-primary-gradient w-100" onClick={(e) => handleYape(e)}>Pagar con Yape</button>
             </div>
         </div>
     );
