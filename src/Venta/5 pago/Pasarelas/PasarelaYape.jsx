@@ -1,9 +1,9 @@
 import { useState, useEffect, useRef, useContext } from "react";
 import { loadMercadoPago } from "@mercadopago/sdk-js";
 const publicKey = import.meta.env.VITE_MERCADO_PAGO_PUBLIC_KEY;
-import "./pago.css"
+import "../pago.css"
 import { env } from "@/configuracion/backend";
-import { VentaContext } from "../3 componentesVenta/VentaContextProvider";
+import { VentaContext } from "../../3 componentesVenta/VentaContextProvider";
 import PagoService from "@/services/PagoService";
 import { useNavigate } from "react-router-dom";
 import { ToastContext } from "@/context/ToastContextProvider";
@@ -29,10 +29,6 @@ const PasarelaYape = ({ generarBodyRequest }) => {
         initMercadoPago();
     }, []);
 
-    useEffect(() => {
-        console.log(otp)
-    }, [otp])
-
     const handleYape = async (e) => {
         e.preventDefault();
         if (!mp) return;
@@ -55,7 +51,6 @@ const PasarelaYape = ({ generarBodyRequest }) => {
                 payment_method_id: "yape",
             }
             const data = await PagoService.procesarPago(bodyPago, bodyEntradas)
-            console.log(data)
             if (data.status === "Pago aprobado" && data.statusDetail === "Pago recibido") {
                 showToast({ tipo: 'toast-info', titulo: 'Pago exitoso', mensaje: '' });
                 setTimeout(() => {
