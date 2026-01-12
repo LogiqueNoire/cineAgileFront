@@ -26,6 +26,20 @@
   z-index: 1000;
 }
 
+.toast-warning {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #9c810ad6;
+  color: black;
+  padding: 1rem 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+  opacity: 1;
+  animation: fadeOut 3s forwards;
+  z-index: 1000;
+}
+
 @keyframes fadeOut {
   0% { opacity: 1; transform: translateY(0); }
   80% { opacity: 1; transform: translateY(0); }
