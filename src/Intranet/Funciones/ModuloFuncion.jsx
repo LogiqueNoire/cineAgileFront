@@ -97,7 +97,7 @@ const ModuloFuncion = ({ handlePeliculaChange, handleSalaChange }) => {
             funcion.nuevaPeliculaId === '0' ||
             isBefore(fechaHoraSeleccionada, fechaReal)
         ) {
-            showToast({tipo: 'toast-danger',titulo: '¡Cuidado!',mensaje: 'Faltan datos o hay error en ellos.'});
+            showToast({ tipo: 'toast-danger', titulo: '¡Cuidado!', mensaje: 'Faltan datos o hay error en ellos.' });
             return;
         }
         if (checked) {
@@ -108,7 +108,7 @@ const ModuloFuncion = ({ handlePeliculaChange, handleSalaChange }) => {
                 }
             })
             if (mismaHora) {
-                showToast({tipo: 'toast-danger',titulo: '¡Cuidado!',mensaje: 'La hora de inicio es la misma que la actual'});
+                showToast({ tipo: 'toast-danger', titulo: '¡Cuidado!', mensaje: 'La hora de inicio es la misma que la actual' });
                 return;
             }
         }
@@ -149,7 +149,7 @@ const ModuloFuncion = ({ handlePeliculaChange, handleSalaChange }) => {
                 })
 
             if (response.status === 200) {
-                showToast({tipo: 'toast-info',titulo: checked ? '¡Función actualizada!' : '¡Función creada!',mensaje: ''});
+                showToast({ tipo: 'toast-info', titulo: checked ? '¡Función actualizada!' : '¡Función creada!', mensaje: '' });
                 if (valoresBusqueda.selectSala) {
                     handleSalaChange({ target: { value: valoresBusqueda.selectSala } });
                 } else if (valoresBusqueda.selectPelicula) {
@@ -172,11 +172,11 @@ const ModuloFuncion = ({ handlePeliculaChange, handleSalaChange }) => {
 
         } catch (error) {
             if (checked && error.response?.status === 400) {
-                showToast({tipo: 'toast-danger',titulo: 'Función no actualizada',mensaje: error.response.data});
+                showToast({ tipo: 'toast-danger', titulo: 'Función no actualizada', mensaje: error.response.data });
                 return;
             }
             console.error(error)
-            showToast({tipo: 'toast-danger',titulo: checked ? 'Función no actualizada' : 'Error al crear la función',mensaje: `Horario fuera de rango permitido, cruce detectado${checked ? ", precio base cero o función con entradas vendidas." : " o precio base cero."}`});
+            showToast({ tipo: 'toast-danger', titulo: checked ? 'Función no actualizada' : 'Error al crear la función', mensaje: `Horario fuera de rango permitido, cruce detectado${checked ? ", precio base cero o función con entradas vendidas." : " o precio base cero."}` });
         }
     }
 
