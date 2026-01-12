@@ -116,9 +116,6 @@ export const VentanaPago = ({ prev }) => {
               <Tarjeta metodo={metodo} setMetodo={setMetodo}
                 setto={{ setTerminos }} registrarEntrada={registrarEntrada} generarBodyRequest={generarBodyRequest} />
             </div>}
-
-            {/*<BilleteraElectronica metodo={metodo} setMetodo={setMetodo} />*/}
-
             {modalAbierto && <ModalTerminos onClose={() => setModalAbierto(false)} />}
           </div>
 

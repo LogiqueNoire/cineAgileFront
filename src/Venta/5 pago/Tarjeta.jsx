@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import "./pago.css";
 import PasarelaPayPal from "./PasarelaPayPal";
 import axios from "axios";
@@ -6,6 +6,8 @@ import { format } from "date-fns";
 import PasarelaMercadoPago from "./PasarelaMetodoPago"
 import mercadoPagoIcon from "@/assets/pasarelas/mercado_pago.png"
 import paypalIcon from "@/assets/pasarelas/paypal.svg"
+import yapeIcon from "@/assets/pasarelas/yape2.png"
+import PasarelaYape from "./PasarelaYape";
 
 export const Tarjeta = ({ metodo, setMetodo, setto, registrarEntrada, generarBodyRequest }) => {
   const [tipoCambio, setTipoCambio] = useState();
@@ -27,6 +29,7 @@ export const Tarjeta = ({ metodo, setMetodo, setto, registrarEntrada, generarBod
 
   return (
     <>
+      <h2 className="ancizar-sans-regular fs-5 mb-0">Tarjeta</h2>
       <button onClick={() => setMetodo((prev) => (prev === "soles" ? "" : "soles"))}
         className={`payment-method ancizar-sans-regular fs-4 py-2 ${metodo === "soles" ? "selected soles" : ""}`}>
         <span className="">Soles</span>
@@ -38,12 +41,19 @@ export const Tarjeta = ({ metodo, setMetodo, setto, registrarEntrada, generarBod
         {tipoCambio ? <span className="">Dólares</span> : <span className="fs-5 text-start">Obteniendo tipo de cambio actual...</span>}
         <img src={paypalIcon} alt="paypalIcon" style={{ height: "25px" }} />
       </button>
-      {metodo === "soles" && (
-        <PasarelaMercadoPago generarBodyRequest={generarBodyRequest} />
-      )}
-      {metodo === "dolares" && (
-        <PasarelaPayPal setto={setto} tipoCambio={tipoCambio} registrarEntrada={registrarEntrada} />
-      )}
+      <h2 className="ancizar-sans-regular fs-5 mb-0">Billetera digital</h2>
+      <button onClick={() => setMetodo((prev) => (prev === "yape" ? "" : "yape"))}
+        className={`payment-method ancizar-sans-regular fs-4 py-2 ${metodo === "yape" ? "selected yape" : ""}`}>
+        <span className="d-flex flex-column align-items-start">
+          <span>Yape</span>
+          <span className="fs-6">¡Nueva función!</span>
+        </span>
+        <img src={yapeIcon} alt="paypalIcon" style={{ height: "55px" }} />
+      </button>
+
+      {metodo === "soles" && (<PasarelaMercadoPago generarBodyRequest={generarBodyRequest} />)}
+      {metodo === "dolares" && (<PasarelaPayPal setto={setto} tipoCambio={tipoCambio} registrarEntrada={registrarEntrada} />)}
+      {metodo === "yape" && (<PasarelaYape generarBodyRequest={generarBodyRequest} />)}
     </>
   );
 };

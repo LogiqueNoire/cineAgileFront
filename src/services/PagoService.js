@@ -2,16 +2,16 @@ import axios from 'axios'
 import { backend_url, env } from '../configuracion/backend'
 
 class PagoService {
-    static async procesarPago(formData, body) {
+    static async procesarPago(bodyPago, bodyEntradas) {
         const id = crypto.randomUUID()
         const res = (await axios.post(`${backend_url}/api/venta/v1/pagos`, {
-            token: formData.token,
-            email: formData.payer.email,
-            monto: formData.transaction_amount,
-            paymentMethodId: formData.payment_method_id,
-            issuerId: formData.issuer_id,
+            token: bodyPago.token,
+            email: bodyPago?.payer?.email || bodyPago.email, //para yape el segundo
+            monto: bodyPago.transaction_amount,
+            paymentMethodId: bodyPago.payment_method_id,
+            issuerId: bodyPago.issuer_id,
             idOperacion: id,
-            entradas: body
+            entradas: bodyEntradas
         }));
         env === "dev" && console.log(res.data)
         return res.data

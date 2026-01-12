@@ -1,5 +1,4 @@
-import { useState } from "react";
-import Toast from "@/components/Toast/Toast";
+import { useContext } from "react";
 import axios from "axios";
 import { env, backend_url } from "@/configuracion/backend";
 import Cookies from "js-cookie";
@@ -9,9 +8,10 @@ import { dbIcon, developerIcon } from "@/assets/modulos";
 import payPalIcon from "@/assets/pasarelas/paypal.svg"
 import mercadoPagoIcon from "@/assets/pasarelas/mercado_pago.png"
 import "./OpcionesDevPanel.css"
+import { ToastContext } from "@/context/ToastContextProvider";
 
 const OpcionesDesarrollador = () => {
-    const [toast, setToast] = useState({ tipo: '', title: '', mensaje: '', visible: false });
+    const { showToast } = useContext(ToastContext)
 
     const poblarBD = async () => {
         let response;
@@ -22,10 +22,10 @@ const OpcionesDesarrollador = () => {
 
         } catch (error) {
             console.log(error)
-            setToast(prev => ({ ...prev, tipo: "toast-danger", title: 'Datos cargados', mensaje: '¡Ya puede empezar a usar el sistema!', visible: true }))
+            showToast({ tipo: "toast-danger", title: 'Datos cargados', mensaje: '¡Ya puede empezar a usar el sistema!' })
         } finally {
             env === "dev" && console.log(response)
-            setToast(prev => ({ ...prev, tipo: "toast-info", title: 'Base de datos reiniciada', mensaje: 'Se dejó el superusuario.', visible: true }))
+            showToast({ tipo: "toast-info", title: 'Base de datos reiniciada', mensaje: 'Se dejó el superusuario.' })
         }
     }
 
@@ -38,10 +38,10 @@ const OpcionesDesarrollador = () => {
 
         } catch (error) {
             console.log(error)
-            setToast(prev => ({ ...prev, title: "toast-danger", visible: true }))
+            showToast({ title: "toast-danger", mensaje: 'INSERTS DE PRUEBA EJECUTADOS' })
         } finally {
             env === "dev" && console.log(response)
-            setToast(prev => ({ ...prev, title: "toast-danger", visible: true }))
+            showToast({ title: "toast-danger", mensaje: 'INSERTS DE PRUEBA EJECUTADOS' })
         }
     }
 
@@ -64,7 +64,7 @@ const OpcionesDesarrollador = () => {
                     </button>
 
                 </div>
-                <div className="bg-secondary-subtle lineaVertical" style={{width:"3px"}}></div>
+                <div className="bg-secondary-subtle lineaVertical" style={{ width: "3px" }}></div>
                 <div className="d-flex flex-column gap-4 align-items-center">
                     <h2 className="ancizar-sans-regular text-start mb-0 w-100">Credenciales de prueba</h2>
                     <div className="border-secondary-subtle border border-3 rounded-4 p-4 w-100">
@@ -170,9 +170,6 @@ const OpcionesDesarrollador = () => {
 
             </div>
             <MuyPronto></MuyPronto>
-            <Toast tipo={toast.title}
-                mensaje={'INSERTS DE PRUEBA EJECUTADOS'}
-                visible={toast.visible} />
         </div >
     )
 };
