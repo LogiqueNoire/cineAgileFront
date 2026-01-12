@@ -1,19 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import CinemaAcordion from '@/Venta/2 componentesAcordionSedesHorarios/CinemaAcordion.jsx';
 import Funcion from '@/services/Funcion.js';
 import './MostrarSedesHorarios.css';
 import Loading from '@/components/Loading/Loading.jsx';
-import Toast from '@/components/Toast/Toast.jsx';
 import { differenceInCalendarDays, format, isSameDay } from 'date-fns';
 import { env } from '@/configuracion/backend.js';
 import TimeService from '@/services/TimeService';
+import { ToastContext } from '@/context/ToastContextProvider';
 
 const MostrarSedesHorarios = ({ pelicula, fechaFormateada }) => {
+    const { showToast } = useContext(ToastContext)
     const [sedes, setSedes] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-
-    const [toast, setToast] = useState({ visible: false });
     const [fechaReal, setFechaReal] = useState();
 
     useEffect(() => {
@@ -22,8 +21,7 @@ const MostrarSedesHorarios = ({ pelicula, fechaFormateada }) => {
             setFechaReal(data);
         };
         obtenerFecha();
-        setToast({ visible: true });
-        setTimeout(() => setToast({ visible: false }), 3000);
+        showToast({ tipo:'toast-info', mensaje:'Ahora puedes ver la cantidad de funciones disponibles con el nuevo botón a lado de cada función'});
     }, [])
 
     useEffect(() => {
@@ -101,9 +99,6 @@ const MostrarSedesHorarios = ({ pelicula, fechaFormateada }) => {
                 <div className="justify-content-center">
                     {sedes.map((sede, i) => (<CinemaAcordion key={sede.idSede} data={sede} pelicula={pelicula} />))}
                 </div>
-                <Toast tipo={'toast-info'}
-                    mensaje={'Ahora puedes ver la cantidad de funciones disponibles con el nuevo botón a lado de cada función'}
-                    visible={toast.visible} />
             </div>)
     );
 };

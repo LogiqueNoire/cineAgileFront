@@ -1,18 +1,18 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { backend_url, env } from '@/configuracion/backend.js'
 import { format } from 'date-fns'
 
 import peliculaIcono from '@/assets/modulos/peliculas.svg'
 import Loading from '@/components/Loading/Loading.jsx';
 import Cookies from 'js-cookie';
-import Toast from '@/components/Toast/Toast.jsx';
 import Genero from '@/services/Genero.js';
 import TimeService from '@/services/TimeService';
 import { ordenamientoAlfa } from '@/utils';
+import { ToastContext } from '@/context/ToastContextProvider';
 
 export default function AddFilm({ onSucess }) {
-  const [toast, setToast] = useState({ tipo: '', visible: false, titulo: '', mensaje: '' });
+  const { showToast } = useContext(ToastContext)
   const [generos, setGeneros] = useState([])
 
   const [fechaReal, setFechaReal] = useState()
@@ -27,7 +27,6 @@ export default function AddFilm({ onSucess }) {
     imageUrl: '',
     sinopsis: '',
   });
-
 
   const {
     nombre,
@@ -57,7 +56,6 @@ export default function AddFilm({ onSucess }) {
   const consultarGeneros = async () => {
     try {
       const datos = await Genero.consultarGeneros()
-
       setGeneros(datos.sort(ordenamientoAlfa))
     } catch (error) {
       console.error(error);
@@ -125,13 +123,7 @@ export default function AddFilm({ onSucess }) {
 
         if (onSucess) {
           onSucess();
-          setToast({
-            tipo: 'toast-info',
-            visible: true,
-            titulo: 'Película agregada correctamente',
-            mensaje: ''
-          });
-          setTimeout(() => setToast({ visible: false }), 3000);
+          showToast({ tipo: 'toast-info', titulo: 'Película agregada correctamente', mensaje: '' });
         }
         setPelicula({
           nombre: '',
@@ -145,24 +137,12 @@ export default function AddFilm({ onSucess }) {
           sinopsis: '',
         });
       } catch (error) {
-        setToast({
-          tipo: 'toast-danger',
-          visible: true,
-          titulo: 'Error al agregar la película',
-          mensaje: ''
-        });
-        setTimeout(() => setToast({ visible: false }), 3000);
+        showToast({ tipo: 'toast-danger', titulo: 'Error al agregar la película', mensaje: '' });
         console.error(error);
       }
     } else {
       env === "dev" && console.log('error 1')
-      setToast({
-        tipo: 'toast-danger',
-        visible: true,
-        titulo: 'Error',
-        mensaje: 'Falta llenar campos.'
-      });
-      setTimeout(() => setToast({ visible: false }), 3000);
+      showToast({ tipo: 'toast-danger', titulo: 'Error', mensaje: 'Falta llenar campos.' });
     }
   };
 
@@ -374,7 +354,6 @@ export default function AddFilm({ onSucess }) {
           <Loading></Loading>
         </div>
       }
-      {<Toast tipo={toast.tipo} titulo={toast.titulo} mensaje={toast.mensaje} visible={toast.visible} />}
     </div>
 
   );

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import AddSede from './AddSede';
 import sala from '@/assets/sala2.svg';
 import { saveIcon, apagarIcon } from '@/assets/operaciones';
@@ -9,9 +9,10 @@ import { ModalSalas } from './ModalSalas'
 import Cookies from 'js-cookie';
 import { useLocation } from 'react-router-dom';
 import "./VentanaSedesYSalas.css"
-import Toast from '@/components/Toast/Toast';
+import { ToastContext } from '@/context/ToastContextProvider';
 
 const VentanaSedesYSalas = () => {
+    const { showToast } = useContext(ToastContext)
     const location = useLocation();
     const { sedeRedir = null } = location.state || {};
 
@@ -20,8 +21,6 @@ const VentanaSedesYSalas = () => {
 
     const [sede, setSede] = useState(null);
     const [loading, setLoading] = useState(true);
-
-    const [toast, setToast] = useState({ tipo: '', visible: false, titulo: '', mensaje: '' });
 
     const consultar = () => {
         axios.get(`${backend_url}/api/intranet/v1/sedes`, {
@@ -51,31 +50,13 @@ const VentanaSedesYSalas = () => {
             });
             consultar()
         } catch (error) {
-            setToast({
-                tipo: 'toast-danger',
-                visible: true,
-                titulo: 'Error al guardar la sede.',
-                mensaje: 'Tal vez ya existe una sede con el mismo nombre.'
-            });
-            setTimeout(() => setToast({ visible: false }), 3000);
+            showToast({ tipo: 'toast-danger', titulo: 'Error al guardar la sede.', mensaje: 'Tal vez ya existe una sede con el mismo nombre.' });
             console.error(error);
         } finally {
             if (response.status === 200) {
-                setToast({
-                    tipo: 'toast-info',
-                    visible: true,
-                    titulo: '¡Sede editada!',
-                    mensaje: ''
-                });
-                setTimeout(() => setToast({ visible: false }), 3000);
+                showToast({ tipo: 'toast-info', titulo: '¡Sede editada!', mensaje: '' });
             } else {
-                setToast({
-                    tipo: 'toast-danger',
-                    visible: true,
-                    titulo: 'Error al editar',
-                    mensaje: response.data
-                });
-                setTimeout(() => setToast({ visible: false }), 3000);
+                showToast({ tipo: 'toast-danger', titulo: 'Error al editar', mensaje: response.data });
             }
         }
     }
@@ -105,13 +86,7 @@ const VentanaSedesYSalas = () => {
             } catch (error) {
                 console.error(error);
             } finally {
-                setToast({
-                    tipo: type,
-                    visible: true,
-                    titulo: 'Estado de sede cambiado',
-                    mensaje: msj
-                });
-                setTimeout(() => setToast({ visible: false }), 3000);
+                showToast({ tipo: type, titulo: 'Estado de sede cambiado', mensaje: msj });
             }
         }
 
@@ -175,7 +150,6 @@ const VentanaSedesYSalas = () => {
 
                     </table>)
             }
-            {<Toast tipo={toast.tipo} titulo={toast.titulo} mensaje={toast.mensaje} visible={toast.visible} />}
             {sede && <ModalSalas onClose={() => setSede(null)} sede={sede} />}
         </div>
     )

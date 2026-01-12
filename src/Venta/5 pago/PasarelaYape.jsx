@@ -3,7 +3,6 @@ import { loadMercadoPago } from "@mercadopago/sdk-js";
 const publicKey = import.meta.env.VITE_MERCADO_PAGO_PUBLIC_KEY;
 import "./pago.css"
 import { env } from "@/configuracion/backend";
-import Toast from "@/components/Toast/Toast";
 import { VentaContext } from "../3 componentesVenta/VentaContextProvider";
 import PagoService from "@/services/PagoService";
 import { useNavigate } from "react-router-dom";

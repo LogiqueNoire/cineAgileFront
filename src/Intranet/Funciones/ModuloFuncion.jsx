@@ -6,13 +6,13 @@ import Cookies from 'js-cookie';
 import { format, isBefore } from "date-fns";
 import './ModuloFuncion.css'
 import SalaButaca from '@/services/SalaButaca';
-import Toast from '@/components/Toast/Toast'
 import Fecha from "@/services/Fecha";
 import TimeService from "@/services/TimeService";
 import { ordenamientoAlfa } from "@/utils";
+import { ToastContext } from "@/context/ToastContextProvider";
 
 const ModuloFuncion = ({ handlePeliculaChange, handleSalaChange }) => {
-    const [toast, setToast] = useState({ tipo: '', visible: false, titulo: '', mensaje: '' });
+    const { showToast } = useContext(ToastContext)
 
     const {
         valoresBusqueda,
@@ -97,13 +97,7 @@ const ModuloFuncion = ({ handlePeliculaChange, handleSalaChange }) => {
             funcion.nuevaPeliculaId === '0' ||
             isBefore(fechaHoraSeleccionada, fechaReal)
         ) {
-            setToast({
-                tipo: 'toast-danger',
-                visible: true,
-                titulo: '¡Cuidado!',
-                mensaje: 'Faltan datos o hay error en ellos.'
-            });
-            setTimeout(() => setToast({ visible: false }), 3000);
+            showToast({tipo: 'toast-danger',titulo: '¡Cuidado!',mensaje: 'Faltan datos o hay error en ellos.'});
             return;
         }
         if (checked) {
@@ -114,13 +108,7 @@ const ModuloFuncion = ({ handlePeliculaChange, handleSalaChange }) => {
                 }
             })
             if (mismaHora) {
-                setToast({
-                    tipo: 'toast-danger',
-                    visible: true,
-                    titulo: '¡Cuidado!',
-                    mensaje: 'La hora de inicio es la misma que la actual'
-                });
-                setTimeout(() => setToast({ visible: false }), 3000);
+                showToast({tipo: 'toast-danger',titulo: '¡Cuidado!',mensaje: 'La hora de inicio es la misma que la actual'});
                 return;
             }
         }
@@ -161,13 +149,7 @@ const ModuloFuncion = ({ handlePeliculaChange, handleSalaChange }) => {
                 })
 
             if (response.status === 200) {
-                setToast({
-                    tipo: 'toast-info',
-                    visible: true,
-                    titulo: checked ? '¡Función actualizada!' : '¡Función creada!',
-                    mensaje: ''
-                });
-                setTimeout(() => setToast({ visible: false }), 3000);
+                showToast({tipo: 'toast-info',titulo: checked ? '¡Función actualizada!' : '¡Función creada!',mensaje: ''});
                 if (valoresBusqueda.selectSala) {
                     handleSalaChange({ target: { value: valoresBusqueda.selectSala } });
                 } else if (valoresBusqueda.selectPelicula) {
@@ -190,22 +172,11 @@ const ModuloFuncion = ({ handlePeliculaChange, handleSalaChange }) => {
 
         } catch (error) {
             if (checked && error.response?.status === 400) {
-                setToast({
-                    tipo: 'toast-danger',
-                    visible: true,
-                    titulo: 'Función no actualizada',
-                    mensaje: error.response.data
-                });
+                showToast({tipo: 'toast-danger',titulo: 'Función no actualizada',mensaje: error.response.data});
                 return;
             }
             console.error(error)
-            setToast({
-                tipo: 'toast-danger',
-                visible: true,
-                titulo: checked ? 'Función no actualizada' : 'Error al crear la función',
-                mensaje: `Horario fuera de rango permitido, cruce detectado${checked ? ", precio base cero o función con entradas vendidas." : " o precio base cero."}`
-            });
-            setTimeout(() => setToast({ visible: false }), 3000);
+            showToast({tipo: 'toast-danger',titulo: checked ? 'Función no actualizada' : 'Error al crear la función',mensaje: `Horario fuera de rango permitido, cruce detectado${checked ? ", precio base cero o función con entradas vendidas." : " o precio base cero."}`});
         }
     }
 
@@ -354,7 +325,6 @@ const ModuloFuncion = ({ handlePeliculaChange, handleSalaChange }) => {
                         {checked ? "Actualizar" : "Crear"}</button>
                 </div>
             </div>
-            <Toast tipo={toast.tipo} titulo={toast.titulo} mensaje={toast.mensaje} visible={toast.visible} />
         </div >
 
     )

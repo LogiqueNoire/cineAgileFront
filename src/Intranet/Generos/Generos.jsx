@@ -1,19 +1,19 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Loading from "@/components/Loading/Loading";
 import axios from "axios";
 import { backend_url } from "@/configuracion/backend";
 import Cookies from "js-cookie";
 import iconoGuardar from "@/assets/operaciones/guardar.svg"
-import Toast from "@/components/Toast/Toast";
 import genresIcon from '@/assets/modulos/genresIcon.svg'
 import Genero from "@/services/Genero";
 import { ordenamientoAlfa } from "@/utils";
+import { ToastContext } from "@/context/ToastContextProvider";
 
 const Generos = () => {
+    const { showToast } = useContext(ToastContext)
     const [loading, setLoading] = useState(true)
     const [generos, setGeneros] = useState({});
     const [generoNombre, setGeneroNombre] = useState(null)
-    const [toast, setToast] = useState({ visible: false, tipo: '', titulo: '', mensaje: '' })
 
     const consultarGeneros = async () => {
         try {
@@ -43,21 +43,9 @@ const Generos = () => {
             consultarGeneros()
             if (response) {
                 setGeneroNombre('')
-                setToast({
-                    visible: true,
-                    tipo: 'toast-info',
-                    titulo: 'Género agregado',
-                    mensaje: ''
-                })
-                setTimeout(() => setToast({ visible: false }), 3000);
+                showToast({ tipo: 'toast-info', titulo: 'Género agregado', mensaje: '' })
             } else {
-                setToast({
-                    visible: true,
-                    tipo: 'toast-danger',
-                    titulo: 'Error con el género',
-                    mensaje: 'Nombre repetido'
-                })
-                setTimeout(() => setToast({ visible: false }), 3000);
+                showToast({ tipo: 'toast-danger', titulo: 'Error con el género', mensaje: 'Nombre repetido' })
             }
 
         }
@@ -78,24 +66,10 @@ const Generos = () => {
         } finally {
             consultarGeneros()
             if (response) {
-
-                setToast({
-                    visible: true,
-                    tipo: 'toast-info',
-                    titulo: 'Género modificado',
-                    mensaje: ''
-                })
-                setTimeout(() => setToast({ visible: false }), 3000);
+                showToast({ tipo: 'toast-info', titulo: 'Género modificado', mensaje: '' })
             } else {
-                setToast({
-                    visible: true,
-                    tipo: 'toast-danger',
-                    titulo: 'Error con el género',
-                    mensaje: 'Nombre repetido'
-                })
-                setTimeout(() => setToast({ visible: false }), 3000);
+                showToast({ tipo: 'toast-danger', titulo: 'Error con el género', mensaje: 'Nombre repetido' })
             }
-
         }
     }
 
@@ -112,7 +86,7 @@ const Generos = () => {
             </div>
             {loading === true
                 ? <div className='d-flex flex-column align-items-center container'><Loading></Loading></div> :
-                <table className='table table-hover mt-4 ' style={{width:"300px"}}>
+                <table className='table table-hover mt-4 ' style={{ width: "300px" }}>
                     <thead className=''>
                         <tr className=''>
                             <th className='' data-label='Nombre'>
@@ -129,7 +103,7 @@ const Generos = () => {
                             <th className='' data-label='Opciones'>
                                 <button className='btn btn-primary btn-primary-gradient d-flex gap-2' onClick={() => agregarGenero(e, generoNombre)}
                                     style={{ 'padding': '11px' }}>
-                                    <span className="fs-3" style={{lineHeight:"0.67"}}>+</span>
+                                    <span className="fs-3" style={{ lineHeight: "0.67" }}>+</span>
                                 </button>
                             </th>
                         </tr>
@@ -144,7 +118,7 @@ const Generos = () => {
                                         placeholder="Nuevo nombre"
                                         name="nuevonombre"
                                         value={el.nombre}
-                                        
+
                                         onChange={
                                             (e) => {
                                                 const nuevaLista = [...generos];
@@ -168,7 +142,6 @@ const Generos = () => {
 
                 </table>
             }
-            <Toast tipo={toast.tipo} titulo={toast.titulo} mensaje={toast.mensaje} visible={toast.visible}></Toast>
         </div>
     )
 }
