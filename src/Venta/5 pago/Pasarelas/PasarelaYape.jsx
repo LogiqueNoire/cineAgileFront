@@ -65,8 +65,8 @@ const PasarelaYape = ({ generarBodyRequest }) => {
                 showToast({ tipo: 'toast-danger', titulo: 'Error en el pago', mensaje: data.statusDetail });
             }
         } catch (err) {
-            showToast({ tipo: 'toast-danger', titulo: 'Error en el pago', mensaje: data.statusDetail });
             console.error("Error generando token Yape:", err);
+            showToast({ tipo: 'toast-danger', titulo: 'Error en el pago', mensaje: `Código de error: ${err.status}` });
         } finally {
             contexto.general.setSubmitting(false)
         }
@@ -113,7 +113,7 @@ const PasarelaYape = ({ generarBodyRequest }) => {
             <div className="d-flex flex-column gap-2">
                 <label htmlFor="email">Email para envío de constancia</label>
                 <input type="email" value={email} onChange={(e) => setEmail(e.target.value)}
-                    className="border-secondary-subtle text-center rounded ancizar-sans-regular fs-4" style={{ borderStyle: "solid" }} />
+                    className="border-secondary-subtle text-center rounded ancizar-sans-regular fs-5" style={{ borderStyle: "solid" }} />
             </div>
             <div>
                 <button className="btn-primary btn-primary-gradient w-100" onClick={(e) => handleYape(e)}>Pagar con Yape</button>
