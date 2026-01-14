@@ -34,10 +34,31 @@ export const VentanaPago = ({ prev }) => {
     tiposEntradas = tiposEntradas.concat(new Array(entradasContext.conadisSeleccionadas).fill("conadis"));
     tiposEntradas = tiposEntradas.concat(new Array(entradasContext.mayoresSeleccionadas).fill("mayores"));
 
-    const entradas = contexto.butacaContext.seleccionadas.map(el => ({
-      id_butaca: el.id,
-      persona: tiposEntradas.shift()
-    }));
+    const entradas = contexto.butacaContext.seleccionadas.map(el => {
+      let tipoEntrada = tiposEntradas.shift()
+      let precio
+      switch (tipoEntrada) {
+        case "general":
+          precio = contexto.precios.precioGeneral
+          break;
+        case "niños":
+          precio = contexto.precios.precioNiños
+          break;
+        case "mayores":
+          precio = contexto.precios.precioMayores
+          break;
+        case "conadis":
+          precio = contexto.precios.precioConadis
+          break;
+        default:
+          0
+      }
+      return {
+        id_butaca: el.id,
+        persona: tipoEntrada,
+        precio: precio
+      }
+    });
 
     return {
       id_funcion: contexto.general.funcion.idFuncion,
@@ -83,7 +104,7 @@ export const VentanaPago = ({ prev }) => {
 
       <>
         {contexto.general.submitting && <div className="d-flex justify-content-center align-items-center bg-loading"
-        style={{ zIndex: "100", position:"fixed", inset:"0"}}>
+          style={{ zIndex: "100", position: "fixed", inset: "0" }}>
           <Loading />
         </div>}
         <div className="container-fluid d-flex flex-column justify-content-center align-items-center gap-4 my-3">

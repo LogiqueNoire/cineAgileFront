@@ -75,7 +75,7 @@ const MostrarSedesHorarios = ({ pelicula, fechaFormateada }) => {
 
     if (error) {
         return <div className='w-100 d-flex justify-content-center'>
-            <div className='alert alert-danger h-70 w-50 text-center justify-self-center mt-4'>No se pudo cargar las funciones... Intenta recargar la página!</div>
+            <div className='alert alert-danger h-70 text-center justify-self-center mt-4 border-0'>No se pudo cargar las funciones... Intenta recargar la página!</div>
         </div>
     }
 
