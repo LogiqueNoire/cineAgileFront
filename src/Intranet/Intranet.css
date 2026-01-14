@@ -1,6 +1,21 @@
-@media (max-width: 552px) {
+@media (max-width: 505px) {
+    .sesion-group {
+        gap: 0.75rem !important;
+    }
+    .sesion-group > * {
+        font-size: medium !important;
+    }
+    .sesion-group > button {
+        padding-inline: 15px;
+    }
+}
+
+@media (max-width: 425px) {
     .sesion-group {
         padding-top: 10px;
+    }
+    .sesion-group > * {
+        font-size: large !important;
     }
 }
 

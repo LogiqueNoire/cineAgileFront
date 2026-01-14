@@ -4,6 +4,7 @@ import axios from "axios";
 import Cookies from "js-cookie";
 import Loading from "@/components/Loading/Loading";
 import { Bar, BarChart, CartesianGrid, Rectangle, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
+import "@/Inicio.css"
 
 const VentasMensuales = () => {
     const [ventasMensuales, setVentasMensuales] = useState()
@@ -64,8 +65,8 @@ const VentasMensuales = () => {
                 <Loading></Loading>
             </div>
             :
-            <article className='d-flex flex-column border border-3 border-info-subtle rounded rounded-5 pt-3' >
-                <h4 className="ancizar-sans-regular mb-0 text-center">Ventas por mes del último año</h4>
+            <article className='d-flex flex-column border border-3 border-primary-subtle rounded rounded-5 pt-3' >
+                <h4 className="ancizar-sans-regular mb-0 text-center">Ventas por mes del año actual</h4>
                 <figure className='d-flex m-0 align-self-center w-flex' style={{ height: '25vh', alignItems: 'center', position: 'relative' }}>
                     <ResponsiveContainer width="100%" height="100%">
                         <BarChart
@@ -86,7 +87,7 @@ const VentasMensuales = () => {
                             <Tooltip />
                             {/*<Legend />*/}
                             {/*<Bar dataKey="totalRecaudado" fill="#8884d8" activeBar={<Rectangle fill="purple" stroke="#8884d8" />} />*/}
-                            <Bar dataKey="ventas" fill="#82ca9d" activeBar={<Rectangle fill="green" stroke="#82ca9d" />}
+                            <Bar dataKey="ventas" fill="#005FF5" activeBar={<Rectangle fill="#0133DB" stroke="#0044FE" />}
                                 label={{ position: 'top', fontWeight: 'bold' }} />
                         </BarChart>
                     </ResponsiveContainer>

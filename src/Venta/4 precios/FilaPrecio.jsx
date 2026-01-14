@@ -59,12 +59,12 @@ const FilaPrecio = ({ nombre, texto, precio, seleccionadas }) => {
     };
     return (
         <div className="FilaPrecio w-100 d-flex justify-content-between align-items-center">
-            <div className="ms-2 ps-1 nombre w-50">
-                <h2 className="m-0 ancizar-sans-regular">{nombre}</h2>
+            <div className="ms-2 ps-1 nombre w-75">
+                <span className="m-0 ancizar-sans-regular fs-4 lh-1">{nombre}</span>
                 <div className="texto w-100">
-                    <p className="ancizar-sans-regular mb-0">{texto}</p>
+                    <span className="ancizar-sans-regular mb-0">{texto}</span>
                     <div className="precio w-100">
-                        <h5 className="m-0 ancizar-sans-regular">{"S/ " + precio} </h5>
+                        <span className="m-0 ancizar-sans-regular fs-3">{"S/ " + precio} </span>
                     </div>
                 </div>
             </div>

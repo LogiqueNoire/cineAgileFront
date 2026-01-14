@@ -36,8 +36,8 @@ const Intranet = () => {
             <Header>
                 {
                     username &&
-                    <div className='d-flex align-items-center gap-5 sesion-group'>
-                        <h5 className='ancizar-sans-regular mb-0'>Usuario: { username }</h5>
+                    <div className='d-flex align-items-center gap-4 sesion-group'>
+                        <span className='ancizar-sans-regular mb-0 text-end fs-5'>Usuario: { username }</span>
                         <button className='btn btn-danger btn-danger-gradient fs-5' onClick={onCerrarSesion}>Cerrar sesión</button>
                     </div>
                 }

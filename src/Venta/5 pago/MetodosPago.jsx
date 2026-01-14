@@ -36,12 +36,14 @@ export const MetodosPago = ({ metodo, setMetodo, setto, registrarEntrada, genera
         <span className="">Soles</span>
         <img src={mercadoPagoIcon} alt="mercadoPagoIcon" style={{ height: "25px" }} />
       </button>
+      {metodo === "soles" && (<PasarelaMercadoPago generarBodyRequest={generarBodyRequest} />)}
       <button onClick={() => setMetodo((prev) => (prev === "dolares" ? "" : "dolares"))}
         className={`payment-method ancizar-sans-regular fs-4 py-2 ${metodo === "dolares" ? "selected dolares" : ""}`}
         disabled={!tipoCambio}>
         {tipoCambio ? <span className="">Dólares</span> : <span className="fs-5 text-start">Obteniendo tipo de cambio actual...</span>}
         <img src={paypalIcon} alt="paypalIcon" style={{ height: "25px" }} />
       </button>
+      {metodo === "dolares" && (<PasarelaPayPal setto={setto} tipoCambio={tipoCambio} registrarEntrada={registrarEntrada} />)}
       <h2 className="ancizar-sans-regular fs-5 mb-0">Billetera digital</h2>
       <button onClick={() => setMetodo((prev) => (prev === "yape" ? "" : "yape"))}
         className={`payment-method ancizar-sans-regular fs-4 py-2 ${metodo === "yape" ? "selected yape" : ""}`}>
@@ -52,8 +54,6 @@ export const MetodosPago = ({ metodo, setMetodo, setto, registrarEntrada, genera
         <img src={yapeIcon} alt="paypalIcon" style={{ height: "55px" }} />
       </button>
 
-      {metodo === "soles" && (<PasarelaMercadoPago generarBodyRequest={generarBodyRequest} />)}
-      {metodo === "dolares" && (<PasarelaPayPal setto={setto} tipoCambio={tipoCambio} registrarEntrada={registrarEntrada} />)}
       {metodo === "yape" && (<PasarelaYape generarBodyRequest={generarBodyRequest} />)}
     </>
   );

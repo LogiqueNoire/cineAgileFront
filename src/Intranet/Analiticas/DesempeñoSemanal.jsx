@@ -116,7 +116,7 @@ const DesempeñoSemanal = ({ fechaConsultada }) => {
     }, [listaPeliculas])
 
     return (
-        <article className='d-flex flex-column border border-3 border-info-subtle rounded rounded-5 p-3' >
+        <article className='d-flex flex-column border border-3 border-primary-subtle rounded rounded-5 p-3' >
             <div className="d-flex flex-row flex-wrap gap-3 align-items-center justify-content-center">
                 <h4 className="ancizar-sans-regular mb-0 text-center col-12 p-0 col-sm-4">Desempeño por día/hora de</h4>
                 <div className="col-12 p-0 col-sm-6">

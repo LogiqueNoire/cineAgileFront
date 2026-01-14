@@ -3,12 +3,13 @@
     border-collapse: collapse;
 }
 
-.addFilm{
+.addFilm {
     justify-self: center;
     width: 70%;
 }
+
 @media (max-width: 768px) {
-    .addFilm{
+    .addFilm {
         width: 100%;
     }
 }
@@ -79,5 +80,34 @@
         justify-content: right;
         justify-self: flex-end;
         width: 80%;
+    }
+}
+
+.width-inputImage {
+    width: 70%;
+}
+
+@media (max-width:1023px) {
+    .width-inputImage {
+        width: 65%;
+    }
+}
+
+@media (max-width:888px) {
+    .width-inputImage {
+        width: 58%;
+    }
+}
+
+@media (max-width:768px) {
+    .width-inputImage {
+        width: 55%;
+    }
+}
+
+@media (max-width:704px) {
+    .width-inputImage {
+        width: 100%;
+        margin-bottom: 20px;
     }
 }

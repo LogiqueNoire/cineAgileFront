@@ -69,7 +69,7 @@ const PeliculaSedes = () => {
         <div className="px-4">
             <div className="d-flex justify-content-center">
                 <div className="d-flex justify-content-center flex-wrap flex-sm-wrap flex-md-nowrap align-items-end
-                col-12 col-xs-12 col-sm-12 col-md-10 col-lg-10
+                col-12 col-xs-12 col-sm-12 col-md-10 col-lg-10 col-xl-8
                 bg-body-secondary bg-opacity-50 gap-4 px-4 py-4 my-4 mt-5 rounded rounded-5">
                     <img className="card col-12 col-xs-12 col-sm-6 col-md-5 col-lg-3 shadow rounded rounded-4 img-film-card2 justify-content-center"
                         style={{ minHeight: "350px", aspectRatio: "3/5" }} src={pelicula.imageUrl} alt={pelicula.nombre} />
@@ -93,7 +93,7 @@ const PeliculaSedes = () => {
                     {differenceInCalendarDays(pelicula.fechaInicioEstreno, fechaReal) < 8 ?
                         <div className='mt-3'>
                             <div className="d-flex justify-content-center flex-row gap-3 align-items-center">
-                                <h3 className="me-2 fw-bold fs-1 ancizar-sans-regular mb-0">Tu fecha ideal</h3>
+                                <h3 className="me-2 fw-bold fs-1 ancizar-sans-regular mb-0 text-center fs-sm-2">Tu fecha ideal</h3>
                                 <input
                                     type="date"
                                     className="mx-1 form-control"

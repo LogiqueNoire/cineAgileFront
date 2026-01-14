@@ -129,19 +129,39 @@ const FlujoVenta = () => {
     }
 
     return (
-        <div className="d-flex border border-2 flex-wrap justify-content-center">
+        <div className="d-flex flex-wrap justify-content-center">
             <div className="d-flex flex-column justify-content-center p-sm-2 p-lg-4 bg-light col-12 col-lg-4 overflow-hidden">
                 <ResumenPeliComJose3 pelicula={pelicula} sedePeli={funcion.nombreSede} fechaPeli={funcion.fechaHoraInicio}
                     salaPeli={funcion.codigoSala} categoria={funcion.categoria} dimension={funcion.dimension} idFuncion={funcion.idFuncion} />
             </div>
 
-            <div className="d-flex flex-column py-2 py-5 bg-white align-items-center flex-grow-1 col-12 col-lg-8 px-4">
-                <div className="d-flex justify-content-between w-100 mb-2 col-12">
-                    <Contador onCancelar={onCancelar} />
-                    <button disabled={contexto.general.submitting || cancelling} className="btn btn-danger rounded rounded-5 p-2" onClick={onCancelarBtn}>
-                        <img src={cancelarSvg} alt="" />
-                    </button>
+            <div className="d-flex flex-column p-4 pt-5 bg-white align-items-center flex-grow-1 col-12 col-lg-8">
+                <div className="container d-flex flex-row justify-content-between w-100 mb-2 col-12 flex-wrap-reverse flex-md-nowrap width-fila-header-venta">
+                    <div className="d-flex justify-content-start gap-3">
+                        <span className="d-flex gap-2 align-items-center">
+                            <div className={`ancizar-sans-regular fs-5 p-1 rounded-circle text-white fw-bold d-flex justify-content-center align-items-center ${indice == 0 ? "bg-cineagile-blue-500" : "bg-dark-subtle"}`}
+                            style={{ width: "35px", aspectRatio: "1/1", lineHeight: "0.95" }}>1</div>
+                            <span className={`ancizar-sans-regular fs-5 ${indice == 0 ? "cineagile-blue-500" : "color-dark-sutble"}`}>Butacas</span>
+                        </span>
+                        <span className="d-flex gap-2 justify-content-center align-items-center">
+                            <div className={`ancizar-sans-regular fs-5 p-1 rounded-circle text-white fw-bold d-flex justify-content-center align-items-center ${indice == 1 ? "bg-cineagile-blue-500" : "bg-dark-subtle"}`}
+                            style={{ width: "35px", aspectRatio: "1/1", lineHeight: "0.95" }}>2</div>
+                            <span className={`ancizar-sans-regular fs-5 ${indice == 1 ? "cineagile-blue-500" : "color-dark-sutble"}`}>Precios</span>
+                        </span>
+                        <span className="d-flex gap-2 justify-content-center align-items-center">
+                            <div className={`ancizar-sans-regular fs-5 p-1 rounded-circle text-white fw-bold d-flex justify-content-center align-items-center ${indice == 2 ? "bg-cineagile-blue-500" : "bg-dark-subtle"}`}
+                            style={{ width: "35px", aspectRatio: "1/1", lineHeight: "0.95" }}>3</div>
+                            <span className={`ancizar-sans-regular fs-5 ${indice == 2 ? "cineagile-blue-500" : "color-dark-sutble"}`}>Pago</span>
+                        </span>
+                    </div>
+                    <div className="d-flex justify-content-end gap-3">
+                        <Contador onCancelar={onCancelar} />
+                        <button disabled={contexto.general.submitting || cancelling} className="btn btn-danger rounded rounded-5 p-2" onClick={onCancelarBtn}>
+                            <img src={cancelarSvg} alt="" />
+                        </button>
+                    </div>
                 </div>
+
                 <div className="col-12">
                     {ventana}
                 </div>

@@ -101,3 +101,15 @@ a.tab:active {
     }
 
 }
+
+@media (max-width: 390px) {
+    .nav-link {
+        font-size: large;
+    }
+}
+
+@media (max-width: 319px) {
+    .nav-link {
+        font-size: medium;
+    }
+}

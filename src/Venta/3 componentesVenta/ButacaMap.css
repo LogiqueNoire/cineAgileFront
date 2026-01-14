@@ -1,4 +1,3 @@
-
 .butaca-map {
     margin: 1rem 0;
 }
@@ -17,7 +16,11 @@
 }
 
 .butaca-table:not(.butaca-hist) tbody td:first-child {
-    padding-right: 2rem;
+    padding-right: 1rem;
+}
+
+.butaca-table:not(.butaca-hist) tbody td:last-child {
+    padding-left: 1rem;
 }
 
 .butaca-celda-wrapper {
@@ -35,7 +38,7 @@
     border-color: rgb(41, 41, 41);
 
     overflow: hidden;
-    
+
     display: grid;
     place-content: center;
 
@@ -75,13 +78,49 @@
     border-radius: 50%;
     transition-property: width height;
     transition-duration: 0.1s;
- }
+}
 
- .butaca-ocupado::before {
+.butaca-ocupado::before {
     box-shadow: inset var(--butaca-size) var(--butaca-size) rgb(255, 104, 104);
- }
+}
 
 .butaca-celda:checked::before {
     --butaca-size: 1.2em;
 
- }
+}
+
+.width-fila-header-venta>* {
+    width: 50%;
+}
+
+.width-fila-header-venta>*:nth-child(1) {
+    padding-left: 1.5rem;
+}
+
+.width-fila-header-venta>*:nth-child(2) {
+    padding-right: 1.5rem;
+}
+
+.width-pantalla {
+    width: 400px;
+}
+
+@media (max-width: 768px) {
+    .width-fila-header-venta>* {
+        width: 100%;
+        padding: 0% !important;
+    }
+}
+
+@media (max-width: 425px) {
+    .width-pantalla {
+        width: 350px;
+    }
+}
+
+
+@media (max-width: 375px) {
+    .width-pantalla {
+        width: 300px;
+    }
+}
