@@ -1,0 +1,24 @@
+.mybtn-outline-primary {
+    color: var(--cineagile-blue-600);
+    border-color: var(--cineagile-blue-600);
+    border-width: 2px;
+    font-weight: 500;
+}
+
+.mybtn-outline-primary:active,
+.mybtn-outline-primary:hover {
+    color: var(--cineagile-blue-400);
+    border-color: var(--cineagile-blue-400);
+    background-color: aliceblue;
+    border-width: 2px;
+    font-weight: 500;
+}
+    
+.cantidad-disponible.fade {
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
+
+.cantidad-disponible.fade.show {
+  opacity: 1;
+}

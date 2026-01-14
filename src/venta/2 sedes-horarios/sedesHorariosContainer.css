@@ -1,0 +1,39 @@
+.imagenPelicula {
+    width: 18vw;
+    height: auto;
+}
+
+.infoPelicula {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+@media (max-width: 768px) {
+
+    .h2,
+    .h3,
+    .h4,
+    .h5 {
+        text-align: center;
+    }
+
+    input {
+        justify-self: center;
+    }
+
+    .card-title {
+        text-align: left;
+    }
+
+    .infoPelicula {
+        padding-top: 0%;
+        padding-bottom: 0%;
+    }
+
+}
+
+@media (max-width: 768px) {
+    .film-title {
+        text-align: center;
+    }
+}
