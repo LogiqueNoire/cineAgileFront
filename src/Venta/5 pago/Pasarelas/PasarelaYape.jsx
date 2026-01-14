@@ -91,7 +91,7 @@ const PasarelaYape = ({ generarBodyRequest }) => {
                             value={d} onChange={(e) => {
                                 if (e.target.value.length > 1) {
                                     const lista = e.target.value.replaceAll(/\D/g, "").slice(0, 6).split("")
-                                    const newOtp = [lista[0] || "", lista[2] || "", lista[2] || "",
+                                    const newOtp = [lista[0] || "", lista[1] || "", lista[2] || "",
                                     lista[3] || "", lista[4] || "", lista[5] || ""]
                                     setOtp(newOtp)
                                 } else {
