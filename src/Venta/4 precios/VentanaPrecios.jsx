@@ -9,18 +9,14 @@ export const VentanaPrecios = ({ prev, next, onCancelar }) => {
     const contexto = useContext(VentaContext)
     const location = useLocation();
     const { pelicula, funcion } = location.state || {};
-    const [precioGeneral, setPrecioGeneral] = React.useState();
-    const [precioNiños, setPrecioNiños] = React.useState();
-    const [precioMayores, setPrecioMayores] = React.useState();
-    const [precioConadis, setPrecioConadis] = React.useState();
     const [cargandoPrecios, setCargandoPrecios] = React.useState(true);
 
     const fetchData = async () => {
         try {
-            setPrecioGeneral((parseFloat(await Funcion.mostrarPreciosdeFuncion(funcion.idFuncion, "general"))).toFixed(2));
-            setPrecioNiños((parseFloat(await Funcion.mostrarPreciosdeFuncion(funcion.idFuncion, "niños"))).toFixed(2));
-            setPrecioMayores((parseFloat(await Funcion.mostrarPreciosdeFuncion(funcion.idFuncion, "mayores"))).toFixed(2));
-            setPrecioConadis((parseFloat(await Funcion.mostrarPreciosdeFuncion(funcion.idFuncion, "conadis"))).toFixed(2));
+            contexto.precios.setPrecioGeneral((parseFloat(await Funcion.mostrarPreciosdeFuncion(funcion.idFuncion, "general"))).toFixed(2));
+            contexto.precios.setPrecioNiños((parseFloat(await Funcion.mostrarPreciosdeFuncion(funcion.idFuncion, "niños"))).toFixed(2));
+            contexto.precios.setPrecioMayores((parseFloat(await Funcion.mostrarPreciosdeFuncion(funcion.idFuncion, "mayores"))).toFixed(2));
+            contexto.precios.setPrecioConadis((parseFloat(await Funcion.mostrarPreciosdeFuncion(funcion.idFuncion, "conadis"))).toFixed(2));
         }
         catch (error) {
             console.error("Error con los precios:", error);
@@ -60,12 +56,12 @@ export const VentanaPrecios = ({ prev, next, onCancelar }) => {
                 <div className="d-flex my-3 justify-content-center">
                     <div className="ContieneEntradas gap-3 d-flex flex-column justify-content-center align-items-center">
                         <h2 className="ancizar-sans-regular mb-0 cineagile-blue-500">Precios de entradas</h2>
-                        <FilaPrecio nombre="General" precio={precioGeneral} />
-                        <FilaPrecio nombre="Mayores de 60" precio={precioMayores} />
+                        <FilaPrecio nombre="General" precio={contexto.precios.precioGeneral} />
+                        <FilaPrecio nombre="Mayores de 60" precio={contexto.precios.precioMayores} />
                         {pelicula.clasificacion == "Apto para todos" &&
-                            <FilaPrecio nombre="Niños" texto="Para niños de 2 a 11 años. Menores de 2 años no pagan." precio={precioNiños} />
+                            <FilaPrecio nombre="Niños" texto="Para niños de 2 a 11 años. Menores de 2 años no pagan." precio={contexto.precios.precioNiños} />
                         }
-                        <FilaPrecio nombre="Conadis" texto="Es obligatorio presentar DNI y carnet Conadis" precio={precioConadis} />
+                        <FilaPrecio nombre="Conadis" texto="Es obligatorio presentar DNI y carnet Conadis" precio={contexto.precios.precioConadis} />
                     </div>
                 </div>
 
