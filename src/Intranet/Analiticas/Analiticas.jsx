@@ -75,7 +75,7 @@ const Analiticas = () => {
                             <Loading></Loading>
                         </div>
                         :
-                        <article className='d-flex flex-column border border-3 border-info-subtle rounded rounded-5 p-3 h-100'>
+                        <article className='d-flex flex-column border border-3 border-primary-subtle rounded rounded-5 p-3 h-100'>
                             <h4 className="ancizar-sans-regular mb-0 text-center">{"Ventas de las 7 películas"}
                                 <br />{"más taquilleras del mes de"}
                                 <select name="" id="" className='form-select w-75 selector-mes fs-5'

@@ -86,8 +86,8 @@ export const VentanaPago = ({ prev }) => {
         style={{ zIndex: "100", position:"fixed", inset:"0"}}>
           <Loading />
         </div>}
-        <div className="container-fluid d-flex flex-column justify-content-center align-items-center gap-4">
-          <h2 className="ancizar-sans-regular mb-0">Módulo de pago</h2>
+        <div className="container-fluid d-flex flex-column justify-content-center align-items-center gap-4 my-3">
+          <h2 className="ancizar-sans-regular mb-0 cineagile-blue-500">Pago en línea</h2>
           <div className="d-flex flex-column justify-content-center align-items-center">
             <h3 className="ancizar-sans-regular mb-0">{"Total: S/ " + total.toFixed(2)}</h3>
           </div>

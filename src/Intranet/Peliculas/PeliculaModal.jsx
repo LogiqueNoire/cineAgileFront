@@ -5,7 +5,7 @@ import FNumberInput from "@/components/FNumberInput";
 import FDateInput from "@/components/FDateInput";
 import FTextAreaInput from "@/components/FTextAreaInput";
 import FGeneroInput from "./FGeneroInput";
-
+import FTextInputImage from "@/components/FTextInputImage";
 import { useState, useEffect } from "react";
 import Loading from "@/components/Loading/Loading";
 import Genero from "@/services/Genero";
@@ -13,6 +13,7 @@ import { ordenamientoAlfa } from "@/utils";
 
 const PeliculaModal = ({ pelicula, onCerrar, consultarPeliculas }) => {
     const [generos, setGeneros] = useState([])
+    const [imageSource, setImageSource] = useState(pelicula.imageUrl)
 
     const onInputSave = async (keyValue) => {
         await PeliculaService.editarPelicula({ idPelicula: pelicula.idPelicula, ...keyValue });
@@ -21,11 +22,11 @@ const PeliculaModal = ({ pelicula, onCerrar, consultarPeliculas }) => {
 
     const consultarGeneros = async () => {
         try {
-          const datos = await Genero.consultarGeneros()
-    
-          setGeneros(datos.sort(ordenamientoAlfa))
+            const datos = await Genero.consultarGeneros()
+
+            setGeneros(datos.sort(ordenamientoAlfa))
         } catch (error) {
-          console.error(error);
+            console.error(error);
         }
     }
 
@@ -49,7 +50,7 @@ const PeliculaModal = ({ pelicula, onCerrar, consultarPeliculas }) => {
                 <div className="modal-terminos w-75 d-flex flex-column align-items-center p-5" style={{ "max-height": "80vh", "overflow-y": "auto" }}>
                     <div className="d-flex align-items-center justify-content-between w-100 mb-3 gap-2">
                         <button className="btn btn-danger btn-danger btn-danger-gradient fs-5" onClick={onCerrar}>Cerrar</button>
-                        <h2 className="text-wrap text-end ancizar-sans-regular mb-0">Detalles Pelicula</h2>
+                        <h2 className="text-wrap text-end ancizar-sans-regular mb-0">Detalles de la película</h2>
                     </div>
                     <div className="d-flex flex-column gap-3 w-100">
                         <div className="row d-flex gap-3">
@@ -62,26 +63,35 @@ const PeliculaModal = ({ pelicula, onCerrar, consultarPeliculas }) => {
                         </div>
                         <div className="row gap-3">
                             <FTextInput className="col-lg" atributo={"director"} valorPorDefecto={pelicula.director} label={"Director (máx. 255 caracteres)"} onSave={onInputSave} required={true} />
-                            <FSelectInput className="col-lg" atributo={ "clasificacion" }
-                                opciones={ [ "Apto para todos", "+14", "+18" ] } 
-                                valorPorDefecto={ pelicula.clasificacion } label={"Clasificación"} onSave={ onInputSave }
+                            <FSelectInput className="col-lg" atributo={"clasificacion"}
+                                opciones={["Apto para todos", "+14", "+18"]}
+                                valorPorDefecto={pelicula.clasificacion} label={"Clasificación"} onSave={onInputSave}
                                 required={true}
                             />
                         </div>
-                        
-                        <div className="row">
-                            <FTextInput atributo={"urlImagen"} valorPorDefecto={pelicula.imageUrl} label={"Imagen URL (máx. 255 caracteres)"} onSave={onInputSave} required={true} />
+
+                        <div className="row align-items-center justify-content-between gap-1">
+                            <div className="d-flex flex-column gap-2 width-inputImage">
+                                <FTextInputImage atributo={"urlImagen"} valorPorDefecto={pelicula.imageUrl} label={"Imagen URL (máx. 255 caracteres)"} onSave={onInputSave} required={true} setImage={setImageSource}/>
+                                <span className="text-start px-2">Si el valor no contiene imagen alguna, se mostrará un fondo gris tenue.</span>
+                            </div>
+                            <div className="d-flex flex-column justify-content-center gap-2" style={{ width: "200px", overflow: "hidden" }}>
+                                <div className="d-flex justify-content-center rounded-4 bg-light" style={{ overflow: "hidden", aspectRatio: "3/4" }}>
+                                    <img src={imageSource} alt="" style={{ height: "auto" }} />
+                                </div>
+                                <span className="text-center">Vista previa</span>
+                            </div>
                         </div>
-                        
+
                         <div className="row gap-4">
-                            {  generos.length == 0 
+                            {generos.length == 0
                                 ? <Loading />
                                 :
                                 <FGeneroInput
-                                    className={"col"} 
-                                    atributo={ "generos" }
-                                    generos={ generos } 
-                                    valoresPorDefecto={ pelicula.genero } onSave={ onInputSave }
+                                    className={"col"}
+                                    atributo={"generos"}
+                                    generos={generos}
+                                    valoresPorDefecto={pelicula.genero} onSave={onInputSave}
                                     required={true}
                                 />
                             }

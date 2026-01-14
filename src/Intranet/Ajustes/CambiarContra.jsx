@@ -63,7 +63,7 @@ const CambiarContra = () => {
                 {
                     status.msg != null &&
                     <div
-                        className={`${!status.isError ? "bg-success" : "bg-danger"} w-100 mb-3 bg-opacity-10 border border-1 ${!status.isError ? "border-success" : "border-danger"} rounded p-3 mb-3`}>
+                        className={`${!status.isError ? "bg-success" : "bg-danger"} w-100 mb-3 bg-opacity-10 ${!status.isError ? "border-success" : "border-danger"} rounded p-3 mb-3`}>
                         <div className={`text-center ${!status.isError ? "text-success" : "text-danger"}`}>{status.msg}</div>
                     </div>
                 }

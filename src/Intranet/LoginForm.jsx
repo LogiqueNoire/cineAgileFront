@@ -80,7 +80,7 @@ const LoginForm = () => {
                     </div>
                 </div>
                 {status.isError &&
-                    <div className="bg-danger bg-opacity-50 border border-1 border-danger w-100 p-2 mt-3 rounded rounded-5">
+                    <div className="bg-danger bg-opacity-50 w-100 p-2 mt-4 rounded rounded-5">
                         <div className="text-center fw-bold text-white">{status.details == "" ? "Servicio no disponible" : status.details}</div>
                     </div>
                 }

@@ -30,6 +30,14 @@
   color: var(--cineagile-blue-500)
 }
 
+.bg-cineagile-blue-500 {
+  background-color: var(--cineagile-blue-500)
+}
+
+.color-dark-sutble{
+  color: #ced4da;
+}
+
 .cineagile-blue-400 {
   color: var(--cineagile-blue-400)
 }
