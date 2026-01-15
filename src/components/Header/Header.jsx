@@ -1,5 +1,5 @@
 import React from 'react';
-import "./Header.css"
+import "./header.css"
 import { useNavigate, useLocation } from 'react-router-dom';
 import shield from "@/assets/escudos/shield.svg"
 

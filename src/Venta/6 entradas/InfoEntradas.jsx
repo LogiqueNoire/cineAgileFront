@@ -6,7 +6,7 @@ import QRCode from 'qrcode';
 import iconoEntrada from "@/assets/modulos/ticketIcon.svg"
 import iconoDownload from "@/assets/operaciones/download.svg"
 import "./progressBar.css";
-import Loading from "@/components/Loading/Loading";
+import Loading from "@/components/loading/Loading";
 
 const EntradaCard = ({ infoGeneral, entrada, token }) => {
     // Adherir 'Z' a la fecha UTC en formato ISO 8601 hará que new Date() transforme

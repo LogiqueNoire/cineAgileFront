@@ -4,7 +4,7 @@ import { backend_url, env } from '@/configuracion/backend.js'
 import { format } from 'date-fns'
 
 import peliculaIcono from '@/assets/modulos/peliculas.svg'
-import Loading from '@/components/Loading/Loading.jsx';
+import Loading from '@/components/loading/Loading.jsx';
 import Cookies from 'js-cookie';
 import Genero from '@/services/Genero.js';
 import TimeService from '@/services/TimeService';

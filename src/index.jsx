@@ -14,20 +14,20 @@ import InfoEntradas from '@/Venta/6 entradas/InfoEntradas.jsx';
 
 // Intranet
 import IntranetPanel from '@/Intranet/IntranetPanel.jsx';
-import VentanaPeliculas from '@/Intranet/Peliculas/VentanaPeliculas.jsx';
-import VentanaSedesYSalas from '@/Intranet/SedesYSalas/VentanaSedesYSalas.jsx';
-import VentanaFunciones from '@/Intranet/Funciones/VentanaFunciones.jsx';
-import VentanaUsuario from '@/Intranet/Usuarios/VentanaUsuario.jsx';
-import VentanaAjustes from '@/Intranet/Ajustes/VentanaAjustes.jsx';
+import VentanaPeliculas from '@/intranet/peliculas/VentanaPeliculas.jsx';
+import VentanaSedesYSalas from '@/intranet/sedes-salas/VentanaSedesYSalas.jsx';
+import VentanaFunciones from '@/intranet/funciones/VentanaFunciones.jsx';
+import VentanaUsuario from '@/intranet/usuarios/VentanaUsuario.jsx';
+import VentanaAjustes from '@/intranet/ajustes/VentanaAjustes.jsx';
 import Intranet from '@/Intranet/Intranet.jsx';
 import LoginForm from '@/Intranet/LoginForm.jsx';
-import Sala from '@/Intranet/SedesYSalas/Sala.jsx';
-import { FuncionesContextProvider } from '@/Intranet/Funciones/FuncionesContext.jsx';
+import Sala from '@/intranet/sedes-salas/Sala.jsx';
+import { FuncionesContextProvider } from '@/intranet/funciones/FuncionesContext.jsx';
 import Error from "@/components/Error.jsx"
-import Analiticas from '@/Intranet/Analiticas/Analiticas.jsx';
-import Generos from '@/Intranet/Generos/Generos.jsx';
-import Auditoria from '@/Intranet/Auditoria/Auditoria.jsx';
-import OpcionesDesarrollador from '@/Intranet/Desarrollador/OpcionesDesarrollador.jsx'
+import Analiticas from '@/intranet/analiticas/Analiticas.jsx';
+import Generos from '@/intranet/generos/Generos.jsx';
+import Auditoria from '@/intranet/auditoria/Auditoria.jsx';
+import OpcionesDesarrollador from '@/intranet/dev/OpcionesDesarrollador.jsx'
 import FilmPanel from '@/Venta/1 componentesCartelera/FilmPanel';
 import { ToastContextProvider } from "./context/ToastContextProvider";
 

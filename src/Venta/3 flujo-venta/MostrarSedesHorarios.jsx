@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import CinemaAcordion from '@/Venta/2 componentesAcordionSedesHorarios/CinemaAcordion.jsx';
 import Funcion from '@/services/Funcion.js';
 import './MostrarSedesHorarios.css';
-import Loading from '@/components/Loading/Loading.jsx';
+import Loading from '@/components/loading/Loading.jsx';
 import { differenceInCalendarDays, format, isSameDay } from 'date-fns';
 import { env } from '@/configuracion/backend.js';
 import TimeService from '@/services/TimeService';

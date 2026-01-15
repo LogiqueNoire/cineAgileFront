@@ -5,7 +5,7 @@ import { VentaContext } from "@/Venta/3 componentesVenta/VentaContextProvider.js
 import { ModalTerminos } from "./ModalTerminos.jsx";
 import Entrada from "@/services/Entrada.js";
 import { format } from "date-fns";
-import Loading from "@/components/Loading/Loading.jsx";
+import Loading from "@/components/loading/Loading.jsx";
 import { env } from "@/configuracion/backend.js";
 
 export const VentanaPago = ({ prev }) => {

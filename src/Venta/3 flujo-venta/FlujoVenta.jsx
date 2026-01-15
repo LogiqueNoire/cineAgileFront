@@ -1,7 +1,7 @@
 import { useLocation, useNavigate } from "react-router";
 
 import ButacaSelect from './ButacaSelect'
-import { VentaContext } from './VentaContextProvider'
+import { VentaContext } from './venta/VentaContextProvider'
 import ResumenPeliComJose3 from '@/Venta/4 precios/ResumenPeliComJose3'
 import { VentanaPrecios } from '@/Venta/4 precios/VentanaPrecios'
 import React, { useEffect, useState, useContext } from "react";

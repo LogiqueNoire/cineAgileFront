@@ -2,7 +2,7 @@ import { useContext } from "react";
 import axios from "axios";
 import { env, backend_url } from "@/configuracion/backend";
 import Cookies from "js-cookie";
-import MuyPronto from "@/components/Muypronto";
+import MuyPronto from "@/components/MuyPronto";
 import truncateDBicon from "@/assets/modulos/truncateDB.svg"
 import { dbIcon, developerIcon } from "@/assets/modulos";
 import payPalIcon from "@/assets/pasarelas/paypal.svg"

@@ -2,8 +2,8 @@ import './ButacaMap'
 import ButacaMap from './ButacaMap';
 import SalaButaca from '@/services/SalaButaca';
 import Funcion from '@/services/Funcion';
-import { VentaContext } from './VentaContextProvider';
-import Loading from '@/components/Loading/Loading';
+import { VentaContext } from './venta/VentaContextProvider';
+import Loading from '@/components/loading/Loading';
 import Entrada from '@/services/Entrada';
 
 import { useState, useEffect, useContext } from 'react';

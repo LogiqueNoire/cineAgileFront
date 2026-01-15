@@ -4,10 +4,10 @@ import { useLocation } from 'react-router-dom';
 import FilmContainer from "./FilmContainer";
 import PeliculaService from "@/services/PeliculaService"
 import FilmTab from './FilmTab';
-import Loading from '@/components/Loading/Loading';
+import Loading from '@/components/loading/Loading';
 import { env } from '@/configuracion/backend';
 
-import '@/Inicio.css'
+import '@/inicio.css'
 import "./FilmPanel.css"
 import TimeService from '@/services/TimeService';
 

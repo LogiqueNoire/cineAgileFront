@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import "./pago.css";
-import PasarelaPayPal from "./Pasarelas/PasarelaPayPal";
+import PasarelaPayPal from "./pasarelas/PasarelaPayPal";
 import axios from "axios";
 import { format } from "date-fns";
-import PasarelaMercadoPago from "./Pasarelas/PasarelaMetodoPago"
+import PasarelaMercadoPago from "./pasarelas/PasarelaMetodoPago"
 import mercadoPagoIcon from "@/assets/pasarelas/mercado_pago.png"
 import paypalIcon from "@/assets/pasarelas/paypal.svg"
 import yapeIcon from "@/assets/pasarelas/yape2.png"
-import PasarelaYape from "./Pasarelas/PasarelaYape";
+import PasarelaYape from "./pasarelas/PasarelaYape";
 import { env } from "@/configuracion/backend";
 
 export const MetodosPago = ({ metodo, setMetodo, setto, registrarEntrada, generarBodyRequest }) => {

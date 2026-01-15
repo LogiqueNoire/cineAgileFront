@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import MostrarSedesHorarios from "./MostrarSedesHorarios";
 import { format, differenceInCalendarDays } from 'date-fns';
 import PeliculaService from "@/services/PeliculaService";
-import Loading from "@/components/Loading/Loading";
+import Loading from "@/components/loading/Loading";
 import axios from "axios";
 import { backend_url } from "@/configuracion/backend"
 import { es } from 'date-fns/locale';

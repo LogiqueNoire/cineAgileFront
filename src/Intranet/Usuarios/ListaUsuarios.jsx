@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Usuario from "@/services/Usuario";
-import Loading from "@/components/Loading/Loading";
+import Loading from "@/components/loading/Loading";
 import usuarioIcon from "@/assets/modulos/modulo_usuario_icono.svg"
 import { env } from "@/configuracion/backend";
 
