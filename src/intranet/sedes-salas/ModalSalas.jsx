@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import axios from 'axios';
 import { backend_url } from '@/configuracion/backend.js'
-import Loading from '@/components/loading/Loading.jsx';
+import Loading from '@/components/loadingt/Loading.jsx';
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
 import BotonCarga from "@/components/BotonCarga.jsx";

@@ -4,7 +4,7 @@ import { backend_url } from "@/configuracion/backend";
 import Cookies from "js-cookie";
 import { format } from "date-fns";
 import auditIcon from "@/assets/modulos/audit.svg"
-import Loading from "@/components/loading/Loading";
+import Loading from "@/components/loadingt/Loading";
 
 const Auditoria = () => {
     const [data, setData] = useState()

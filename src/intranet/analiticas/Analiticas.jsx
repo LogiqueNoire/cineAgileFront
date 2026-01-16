@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { RadialBarChart, RadialBar, Legend, ResponsiveContainer, Tooltip } from 'recharts';
-import Loading from '@/components/loading/Loading';
+import Loading from '@/components/loadingt/Loading';
 import axios from 'axios';
 import { backend_url, env } from '@/configuracion/backend';
 import Cookies from 'js-cookie';

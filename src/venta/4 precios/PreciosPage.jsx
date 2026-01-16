@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import Funcion from "@/services/Funcion.js";
-import Loading from "@/components/loading/Loading.jsx";
+import Loading from "@/components/loadingt/Loading.jsx";
 import { VentaContext } from "@/venta/VentaContextProvider.jsx";
 import FilaPrecio from "./FilaPrecio.jsx";
 

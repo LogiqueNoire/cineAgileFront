@@ -1,6 +1,6 @@
 import { useContext, useState, useEffect } from "react";
 import { FuncionesContext } from "./FuncionesContext";
-import Loading from '@/components/loading/Loading';
+import Loading from '@/components/loadingt/Loading';
 import Sede from "@/services/Sede";
 import { ordenamientoAlfa } from "@/utils";
 

@@ -5,7 +5,7 @@ import { env } from '@/configuracion/backend';
 import FilmContainer from "@/venta/1 cartelera/components/FilmContainer";
 import PeliculaService from "@/services/PeliculaService"
 import FilmTab from '@/venta/1 cartelera/components/film-tab/FilmTab';
-import Loading from '@/components/loading/Loading';
+import Loading from '@/components/loadingt/Loading';
 import TimeService from '@/services/TimeService';
 
 import '@/globals.css'

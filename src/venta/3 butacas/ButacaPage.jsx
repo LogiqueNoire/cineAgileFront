@@ -2,7 +2,7 @@ import './ButacaMap.css'
 import ButacaMap from './ButacaMap';
 import Funcion from '@/services/Funcion';
 import { VentaContext } from '@/venta/VentaContextProvider';
-import Loading from '@/components/loading/Loading';
+import Loading from '@/components/loadingt/Loading';
 import Entrada from '@/services/Entrada';
 
 import { useState, useEffect, useContext } from 'react';
