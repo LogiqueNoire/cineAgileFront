@@ -142,11 +142,11 @@ const OrganizadorButacas = ({ setButacasExt }) => {
 
     return (
         <div>
-            <div className="mb-5">
+            <div className="mb-4">
                 Instrucciones:
                 <ul>
                     <li>Para cambiar el tipo de butaca, hacer clic en una celda.</li>
-                    <li>Al pasar el cursor debajo del los números de cada columna, o a la derecha de cada letra, aparecerán dos botones.</li>
+                    <li>Al pasar el cursor debajo del los números de cada columna,<br></br>o a la derecha de cada letra, aparecerán dos botones.</li>
                     <li>Utilice estos botones para agregar o eliminar filas/columnas.</li>
                 </ul>
             </div>
@@ -161,8 +161,8 @@ const OrganizadorButacas = ({ setButacasExt }) => {
                 </tbody>
             </table>
 
-            <div className='border border-dark p-2'>
-                <h4 className="ancizar-sans-regular text-center mb-4">Leyenda</h4>
+            <div className='border border-2 rounded-3 p-3'>
+                <h4 className="ancizar-sans-regular text-center mb-2">Leyenda</h4>
                 <table className="d-flex justify-content-center">
                     <tbody>
                         <tr className=''>
@@ -172,7 +172,7 @@ const OrganizadorButacas = ({ setButacasExt }) => {
                                 </div>
                             </td>
                             <td>
-                                <h4 className="ancizar-sans-regular mb-0 mx-2">Vacío</h4>
+                                <h4 className="ancizar-sans-regular m-2">Vacío</h4>
                             </td>
                             <td>
                                 <div className="celda">
@@ -180,7 +180,7 @@ const OrganizadorButacas = ({ setButacasExt }) => {
                                 </div>
                             </td>
                             <td>
-                                <h4 className="ancizar-sans-regular mb-0 mx-2">Discapacitado</h4>
+                                <h4 className="ancizar-sans-regular m-2">Discapacitado</h4>
                             </td>
                         </tr>
                         <tr>
@@ -190,7 +190,7 @@ const OrganizadorButacas = ({ setButacasExt }) => {
                                 </div>
                             </td>
                             <td>
-                                <h4 className="ancizar-sans-regular mb-0 mx-2">Butaca normal</h4>
+                                <h4 className="ancizar-sans-regular m-2">Butaca normal</h4>
                             </td>
                         </tr>
                     </tbody>

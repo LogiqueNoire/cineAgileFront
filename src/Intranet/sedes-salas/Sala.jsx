@@ -5,6 +5,7 @@ import SalaButaca from "@/services/SalaButaca";
 import BotonCarga from "@/components/BotonCarga";
 import EditorButacas from "./EditorButacas";
 import { env } from "@/configuracion/backend";
+import salaIcon from '@/assets/sala2.svg';
 
 const Sala = () => {
     const navigate = useNavigate();
@@ -96,64 +97,61 @@ const Sala = () => {
     env === "dev" && console.log(butacas);
 
     return (
-        <div className="container-fluid py-3 col-10">
-            <form method="post" onSubmit={onGrabar} className="d-flex flex-column gap-3">
+        <div className="container-fluid py-3 col-10 pt-4">
+            <form method="post" onSubmit={onGrabar} className="d-flex flex-column gap-3 align-items-center">
                 {error &&
-                    <div className="row bg-danger bg-opacity-10 border border-danger rounded shadow p-3">
+                    <div className="row bg-danger bg-opacity-10 border border-danger rounded-4 shadow p-3">
                         <div className="text-center text-danger">{error}</div>
                     </div>}
-                <div className="row rounded shadow p-5 bg-white row">
-                    <h2 className="ancizar-sans-regular mb-0">Sede</h2>
-                    <div className="row my-4">
-                        <div className="mb-3 col-4">
-                            <label htmlFor="sede" className="form-label">Nombre</label>
-                            <input type="text" className="form-control" id="sede" value={sede.nombre} disabled={true} />
-                        </div>
+                <div className="col-12 col-sm-11 col-sm-9 col-md-8 col-lg-7 col-xl-5 rounded-4 shadow p-5 bg-white d-flex flex-column gap-4">
+                    <div className="d-flex flex-row align-items-center gap-3 justify-content-center">
+                        <h2 className="ancizar-sans-regular mb-0 cineagile-blue-500">Sala</h2>
+                        <img src={salaIcon} alt="" style={{
+                            height: '35px',
+                            filter: "invert(90%) sepia(70%) saturate(25000%) hue-rotate(225deg) brightness(52.5%) contrast(100%)"
+                        }} />
                     </div>
-
-                    <hr />
-
-                    <h2 className="ancizar-sans-regular mb-0">Sala</h2>
-                    <div className="row my-4">
-                        <div className="mb-3 col-4">
-                            <label htmlFor="codigoSala" className="form-label">Código</label>
-                            <input
-                                onChange={codigoSalaOnChange}
-                                value={codigoSala}
-                                type="text"
-                                className="form-control"
-                                id="codigoSala"
-                                placeholder="Código"
-                                required={true}
-                            />
-                        </div>
-
-                        <div className="col-4">
-                            <label htmlFor="categoria" className="form-label">Categoría</label>
-                            <select
-                                onChange={categoriaOnChange}
-                                value={categoria}
-                                className="form-select"
-                                id="categoria"
-                                required={true}
-                            >
-                                <option value="" disabled={true}>Selecciona una categoría</option>
-                                <option value="Regular">Regular</option>
-                                <option value="Prime">Prime</option>
-                            </select>
-                        </div>
+                    <div className="d-flex flex-row gap-3 align-items-center">
+                        <label htmlFor="codigoSala" className="form-label mb-0">Código</label>
+                        <input
+                            onChange={codigoSalaOnChange}
+                            value={codigoSala}
+                            type="text"
+                            className="form-control"
+                            id="codigoSala"
+                            placeholder="Código"
+                            required={true}
+                        />
+                    </div>
+                    <div className="d-flex flex-row gap-3 align-items-center">
+                        <label htmlFor="categoria" className="form-label mb-0">Categoría</label>
+                        <select
+                            onChange={categoriaOnChange}
+                            value={categoria}
+                            className="form-select"
+                            id="categoria"
+                            required={true}
+                        >
+                            <option value="" disabled={true}>Selecciona una categoría</option>
+                            <option value="Regular">Regular</option>
+                            <option value="Prime">Prime</option>
+                        </select>
+                    </div>
+                    <div className="d-flex flex-row gap-3 align-items-center">
+                        <label htmlFor="sede" className="form-label mb-0">Sede</label>
+                        <input type="text" className="form-control" id="sede" value={sede.nombre} disabled={true} />
                     </div>
                 </div>
 
-                <div className="bg-white row rounded border shadow p-5 overflow-auto d-flex flex-column">
-                    <h2 className="ancizar-sans-regular mb-0">Organización de la sala</h2>
-                    <div className="my-5 col-10 align-self-center">
+                <div className="bg-white row rounded-4 shadow p-5 overflow-auto d-flex flex-column">
+                    <h2 className="ancizar-sans-regular mb-0 cineagile-blue-500 text-center">Organización de la sala</h2>
+                    <div className="my-4 align-self-center">
                         {modo != "editar" ?
                             <OrganizadorButacas setButacasExt={setButacas} /> :
                             <EditorButacas cambios={butacas} setCambios={setButacas} butacasExistentes={sala.butacas} />
                         }
                     </div>
-                    <BotonCarga type={"submit"} className={"btn btn-primary btn-primary-gradient w-25 align-self-center"} submitting={submitting}>
+                    <BotonCarga type={"submit"} className={"btn btn-primary btn-primary-gradient w-100 align-self-center"} submitting={submitting}>
                         Guardar sala
                     </BotonCarga>
                 </div>

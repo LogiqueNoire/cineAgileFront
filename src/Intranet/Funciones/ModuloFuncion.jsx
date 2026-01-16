@@ -226,7 +226,7 @@ const ModuloFuncion = ({ handlePeliculaChange, handleSalaChange }) => {
                             } />
                     </div>}
                     <div className='d-flex w-100 align-items-center'>
-                        <label className='w-100'>Pelicula</label>
+                        <label className='w-100'>Película</label>
                         <select value={funcion.nuevaPeliculaId}
                             disabled={checked && (funcion.funcionElegida === undefined || funcion.codigoFuncion === '')}
                             className='form-select w-100'
@@ -242,7 +242,7 @@ const ModuloFuncion = ({ handlePeliculaChange, handleSalaChange }) => {
                         </select>
                     </div>
                     <div className='d-flex w-100 align-items-center'>
-                        <label className='w-100'>Nueva fecha</label>
+                        <label className='w-100'>Fecha</label>
                         <input className='form-control w-100' type="date" value={funcion.nuevaFecha} onKeyDown={(e) => e.preventDefault()}
                             disabled={checked ? (funcion.funcionElegida === undefined || funcion.codigoFuncion === '')
                                 : (funcion.nuevaPeliculaId == '' || funcion.nuevaPeliculaId == 0)}
@@ -253,7 +253,7 @@ const ModuloFuncion = ({ handlePeliculaChange, handleSalaChange }) => {
                             onChange={(e) => setFuncion(prev => ({ ...prev, nuevaFecha: e.target.value }))} />
                     </div>
                     <div className='d-flex w-100 align-items-center'>
-                        <span className='w-100'>Nueva hora de inicio<br></br><span style={{ fontSize: "0.9rem" }}>(formato según dispositivo)</span></span>
+                        <span className='w-100'>Hora de inicio<br></br><span style={{ fontSize: "0.9rem" }}>(formato según dispositivo)</span></span>
                         <input className='form-control w-100' type="time"
                             disabled={checked ? (funcion.funcionElegida === undefined || funcion.codigoFuncion === '')
                                 : (funcion.nuevaPeliculaId == '' || funcion.nuevaPeliculaId == 0)}

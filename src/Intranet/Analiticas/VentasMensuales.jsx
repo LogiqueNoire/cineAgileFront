@@ -4,7 +4,7 @@ import axios from "axios";
 import Cookies from "js-cookie";
 import Loading from "@/components/loading/Loading";
 import { Bar, BarChart, CartesianGrid, Rectangle, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
-import "@/inicio.css"
+import "@/globals.css"
 
 const VentasMensuales = () => {
     const [ventasMensuales, setVentasMensuales] = useState()

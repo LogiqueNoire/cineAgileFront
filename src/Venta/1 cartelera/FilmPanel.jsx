@@ -8,7 +8,7 @@ import FilmTab from '@/venta/1 cartelera/components/film-tab/FilmTab';
 import Loading from '@/components/loading/Loading';
 import TimeService from '@/services/TimeService';
 
-import '@/inicio.css'
+import '@/globals.css'
 import "./FilmPanel.css"
 
 const useUrlQuery = () => {

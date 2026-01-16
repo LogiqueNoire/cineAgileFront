@@ -84,7 +84,7 @@ export const ModalSalas = ({ onClose, sede }) => {
   return (
     <div className="modal-terminos-overlay">
       <div className="modal-terminos mx-3 d-flex flex-column align-items-center" style={{ "max-height": "80vh", "overflow-y": "auto" }}>
-        <h3 className="modal-terminos-title fs-3 my-2 ancizar-sans-regular mb-0">Sede {sede.nombre}</h3>
+        <h3 className="modal-terminos-title fs-3 my-2 ancizar-sans-regular">Sede {sede.nombre}</h3>
 
         <div className="w-100 d-flex justify-content-between gap-2">
           <button className="btn btn-danger btn-danger-gradient fs-5" onClick={onClose}>
@@ -99,12 +99,12 @@ export const ModalSalas = ({ onClose, sede }) => {
         {loading ?
           <Loading></Loading> :
           salas.length > 0 ?
-            <table className='table table-striped border table-hover mt-3'>
+            <table className='table table-striped table-hover mt-3'>
               <thead className=''>
                 <tr className=''>
-                  <td className=''>Sala</td>
-                  <td className=''>Categoría</td>
-                  <td className=''>Acciones</td>
+                  <td className='fw-bold'>Sala</td>
+                  <td className='fw-bold'>Categoría</td>
+                  <td className='fw-bold'>Acciones</td>
                 </tr>
               </thead>
 

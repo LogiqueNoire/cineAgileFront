@@ -6,7 +6,7 @@ import SalaButaca from "@/services/SalaButaca";
 const SeccionBotones = ({ onClick, row, col }) => {
     return (
         <div className="boton-sec" data-row={row} data-col={col}>
-            { false &&
+            {false &&
                 <>
                     <button tabIndex={-1} className="boton-sec-substract" onClick={onClick}>-</button>
                     <button tabIndex={-1} className="boton-sec-add" onClick={onClick}>+</button>
@@ -17,19 +17,19 @@ const SeccionBotones = ({ onClick, row, col }) => {
 }
 
 const EditorButacas = ({ cambios, setCambios, butacasExistentes }) => {
-    const [ butacas ] = useState((() => {
+    const [butacas] = useState((() => {
         if (butacasExistentes && butacasExistentes.length == 0)
             return [];
 
-        const [ max_row, max_col ] = SalaButaca.convButacasAMatriz(butacasExistentes);
+        const [max_row, max_col] = SalaButaca.convButacasAMatriz(butacasExistentes);
         const but = new Array(max_row + 1).fill().map(el => new Array(max_col + 1).fill(null));
 
         butacasExistentes.forEach(el => {
-            but[el.fila][el.columna] = { 
+            but[el.fila][el.columna] = {
                 tipo: el.discapacitado ? "discapacitado" : "activo",
                 activo: el.activo,
                 id: el.id
-             };
+            };
         })
 
         return but;
@@ -51,13 +51,13 @@ const EditorButacas = ({ cambios, setCambios, butacasExistentes }) => {
         const row = +evt.target.dataset.row;
         const col = +evt.target.dataset.col;
         const id = +evt.target.dataset.id;
-        
+
         if (butacas[row][col]) {
             if (cambios.find(el => el.id == id)) {
-                setCambios(cambios.filter(el => el.id != id ));
+                setCambios(cambios.filter(el => el.id != id));
             }
             else {
-                setCambios([ ...cambios, { row, col, id, accion: butacas[row][col].activo ? "desactivar" : "activar" } ]);
+                setCambios([...cambios, { row, col, id, accion: butacas[row][col].activo ? "desactivar" : "activar" }]);
             }
         }
     }
@@ -67,23 +67,23 @@ const EditorButacas = ({ cambios, setCambios, butacasExistentes }) => {
 
     const filas = [];
 
-    const numerosCol = [ <td></td>, <td></td> ];
+    const numerosCol = [<td></td>, <td></td>];
     for (let i = 0; i < maxCols; i++)
-        numerosCol.push(<td key={"xi" + i}><div className="d-flex justify-content-center">{i + 1}</div></td>)
+        numerosCol.push(<td key={"xi" + i}><div className="d-flex justify-content-center fw-bold">{i + 1}</div></td>)
 
-    const thead = [ <td></td> ];
-    for (let i = 0; i < maxCols; i++) 
+    const thead = [<td></td>];
+    for (let i = 0; i < maxCols; i++)
         thead.push(<td key={"i" + i}><SeccionBotones onClick={btonOnClick} col={i} /></td>)
     thead.push(<td key={"i" + maxCols}><SeccionBotones onClick={btonOnClick} col={maxCols} /></td>)
- 
+
     for (let i = 0; i < maxRows; i++) {
         const columnas = [];
-        
+
         columnas.push(<>
             <td key="--x--_">
-                <div className="px-2">{ String.fromCharCode('A'.charCodeAt(0) + i) }</div>
+                <div className="px-2 fw-bold">{String.fromCharCode('A'.charCodeAt(0) + i)}</div>
             </td>
-        
+
             <td key="--x--">
                 <SeccionBotones onClick={btonOnClick} row={i} />
             </td>
@@ -94,17 +94,17 @@ const EditorButacas = ({ cambios, setCambios, butacasExistentes }) => {
             let key = `${i}-${j}`
 
             const enCambio = cambios.find(el => el.row == i && el.col == j);
-            const enCambioClase = `${enCambio && ("cambiar-a-" +  (celda && !celda.activo ? "activo" : "inactivo") ) }`
+            const enCambioClase = `${enCambio && ("cambiar-a-" + (celda && !celda.activo ? "activo" : "inactivo"))}`
 
             let td = (
                 <td key={key}>
                     <div className="celda">
-                        <input 
+                        <input
                             className={`${enCambioClase} ${celda && !celda.activo ? "celda-desactivada" : ""}`}
-                            type="checkbox" 
-                            data-estado={celda ? celda.tipo : "none"} 
+                            type="checkbox"
+                            data-estado={celda ? celda.tipo : "none"}
                             checked={celda ? true : false}
-                            onChange={inputOnChange} 
+                            onChange={inputOnChange}
                             data-row={i}
                             data-col={j}
                             data-id={celda ? celda.id : ''}
@@ -135,12 +135,9 @@ const EditorButacas = ({ cambios, setCambios, butacasExistentes }) => {
 
     return (
         <div>
-            <div className="mb-5">
-                Instrucciones:
-                <ul>
-                    <li>Clic en una celda inactiva para activarla.</li>
-                    <li>Clic en una celda activa para desactivarla.</li>
-                </ul>
+            <div className="mb-4 d-flex flex-row gap-4">
+                <span className="text-center w-50 fw-bold fs-5">Presiona en una celda<br></br>inactiva para activarla.</span>
+                <span className="text-center w-50 fw-bold fs-5">Presiona en una celda<br></br>activa para desactivarla.</span>
             </div>
 
             <table className="org-tabla mb-4">
@@ -149,11 +146,11 @@ const EditorButacas = ({ cambios, setCambios, butacasExistentes }) => {
                     <tr>{thead}</tr>
                 </thead>
                 <tbody>
-                    { filas }
+                    {filas}
                 </tbody>
             </table>
 
-            <div className='border border-dark p-2'>
+            <div className='border border-2 rounded-3 p-3'>
                 <h4 className="ancizar-sans-regular text-center mb-4">Leyenda</h4>
                 <table className="d-flex justify-content-center">
                     <tbody>
@@ -164,7 +161,7 @@ const EditorButacas = ({ cambios, setCambios, butacasExistentes }) => {
                                 </div>
                             </td>
                             <td>
-                                <h4 className="ancizar-sans-regular mb-0 mx-2">Vacío</h4>
+                                <h4 className="ancizar-sans-regular m-2">Vacío</h4>
                             </td>
                             <td>
                                 <div className="celda">
@@ -172,7 +169,7 @@ const EditorButacas = ({ cambios, setCambios, butacasExistentes }) => {
                                 </div>
                             </td>
                             <td>
-                                <h4 className="ancizar-sans-regular mb-0 mx-2">Discapacitado</h4>
+                                <h4 className="ancizar-sans-regular m-2">Discapacitado</h4>
                             </td>
                         </tr>
                         <tr>
@@ -182,7 +179,7 @@ const EditorButacas = ({ cambios, setCambios, butacasExistentes }) => {
                                 </div>
                             </td>
                             <td>
-                                <h4 className="ancizar-sans-regular mb-0 mx-2">Butaca normal</h4>
+                                <h4 className="ancizar-sans-regular m-2">Butaca normal</h4>
                             </td>
                             <td>
                                 <div className="celda">
@@ -190,7 +187,7 @@ const EditorButacas = ({ cambios, setCambios, butacasExistentes }) => {
                                 </div>
                             </td>
                             <td>
-                                <h4 className="ancizar-sans-regular mb-0 mx-2">Celda desactivada</h4>
+                                <h4 className="ancizar-sans-regular m-2">Celda desactivada</h4>
                             </td>
                         </tr>
 
