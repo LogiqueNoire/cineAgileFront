@@ -1,10 +1,13 @@
-#CineAgile Frontend
+# CineAgile Frontend
 
-Frontend del sistema CineAgile, una aplicación web para la gestión y visualización de películas, funciones y ventas de un cine, incluyendo un módulo público y un módulo de intranet (administración).
+Frontend del sistema **CineAgile**, una aplicación web para la gestión y visualización de películas, funciones y ventas de un cine, que incluye un **módulo público** y un **módulo de intranet (administración)**.
 
-El proyecto está desarrollado con React y organizado por dominios funcionales, facilitando el mantenimiento y la escalabilidad.
+El proyecto está desarrollado con **React** y organizado por **dominios funcionales**, facilitando el mantenimiento, la escalabilidad y la optimización de procesos del negocio.
 
-Tecnologías usadas
+---
+
+## Tecnologías usadas
+
 - React
 - JavaScript (ES6+)
 - CSS
@@ -12,8 +15,13 @@ Tecnologías usadas
 - Context API (manejo de estado global)
 - Fetch / Axios (consumo de API REST)
 - ESLint
+- Jenkins (CI)
 
-Estructura del proyecto
+---
+
+## Estructura del proyecto
+
+```text
 cineAgileFront/
 ├── public/
 ├── src/
@@ -37,14 +45,14 @@ cineAgileFront/
 │   │   └── LoginForm.jsx
 │   ├── services/          # Servicios para consumo de la API
 │   ├── venta/             # Módulo de ventas
-│   │   ├── 1 cartelera
-│   │   ├── 2 sedes-horarios
-│   │   ├── 3 butacas
-│   │   ├── 4 precios
-│   │   ├── 5 pago
-│   │   ├── 6 entradas
+│   │   ├── 1-cartelera
+│   │   ├── 2-sedes-horarios
+│   │   ├── 3-butacas
+│   │   ├── 4-precios
+│   │   ├── 5-pago
+│   │   └── 6-entradas
 │   ├── index.jsx          # Punto de entrada de React
-│   ├── globals.css        # Estilos de la página principal
+│   ├── globals.css        # Estilos globales
 │   └── utils.jsx          # Funciones utilitarias
 │
 ├── .env
@@ -54,76 +62,71 @@ cineAgileFront/
 ├── index.html
 ├── Jenkinsfile
 └── jsconfig.json
+```
 
-Módulos principales
-Módulo Público
-- Visualización de películas
-- Consulta de funciones
-- Flujo de venta de entradas
+## Módulos principales
 
-Módulo Intranet (Administración)
-- Acceso restringido para gestión interna del cine:
-- Gestión de películas
-- Gestión de géneros
-- Gestión de funciones
-- Gestión de sedes y salas
-- Gestión de usuarios
-- Auditoría
-- Analíticas
-- Opciones para desarrollador
+### Módulo Público
+- Visualización de películas  
+- Consulta de funciones por sede y fecha  
+- Flujo de venta de entradas  
 
-Variables de entorno
+### Módulo Intranet (Administración)
+Acceso restringido para la gestión interna del cine:
 
-El proyecto usa variables de entorno para conectarse al backend.
+- Gestión de películas  
+- Gestión de géneros  
+- Gestión de funciones  
+- Gestión de sedes y salas  
+- Gestión de usuarios  
+- Auditoría  
+- Analíticas  
+- Opciones para desarrollador  
+
+---
+
+## Variables de entorno
+
+El proyecto utiliza variables de entorno para conectarse al backend.
 
 Archivo base:
+```bash
 .env.template
+```
 
+## Ejecución en desarrollo
 
-Ejemplo:
-VITE_API_URL=http://localhost:8080/api
-
-
-Copia el archivo:
-cp .env.template .env
-
-
-Y ajusta la URL según tu backend.
-
-Ejecución en desarrollo
+Instalar dependencias:
+```bash
 npm install
+```
+Ejecutar proyecto:
+```bash
 npm run dev
+```
 
-
-Luego abre:
+Abrir en el navegador:
+```bash
 
 http://localhost:5173
-
+```
 Build de producción
+```bash
 npm run build
+```
 
-Los archivos se generarán en la carpeta dist/.
-
-Autenticación
-
-El módulo Intranet utiliza un formulario de login (LoginForm.jsx) y manejo de sesión mediante Context API, restringiendo el acceso a funcionalidades administrativas.
-
-Calidad y CI
-
-ESLint configurado para mantener buenas prácticas
-
-Jenkinsfile incluido para integración continua
-
-Backend
-
-Este frontend consume un backend REST (por ejemplo, Spring Boot), encargado de:
+Los archivos de producción se generarán en la carpeta:
+```bash
+dist/
+```
 
 Autenticación
 
-Gestión de películas, funciones y ventas
+El módulo Intranet utiliza un formulario de login (LoginForm.jsx) y manejo de sesión mediante Context API, restringiendo el acceso a funcionalidades administrativas según el estado de autenticación.
 
-Persistencia de datos
 
-Arquitectura cliente-servidor
+✔ Jerarquía correcta  
+✔ Bloques de código bien definidos  
+✔ Estilo estándar de GitHub  
 
-Optimización de procesos
+Si quieres, seguimos con otra sección o armamos el **README completo final** en una sola pieza.
