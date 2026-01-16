@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { env, backend_url } from "@/configuracion/backend";
 import axios from "axios";
 import Cookies from "js-cookie";
-import Loading from "@/components/loadingt/Loading";
+import Loading from "@/components/loading/Loading";
 import { Bar, BarChart, CartesianGrid, Rectangle, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import "@/globals.css"
 

@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import Loading from "@/components/loadingt/Loading";
+import Loading from "@/components/loading/Loading";
 import axios from "axios";
 import { backend_url } from "@/configuracion/backend";
 import Cookies from "js-cookie";

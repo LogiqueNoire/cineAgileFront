@@ -7,7 +7,7 @@ import FTextAreaInput from "@/components/FTextAreaInput";
 import FGeneroInput from "./FGeneroInput";
 import FTextInputImage from "@/components/FTextInputImage";
 import { useState, useEffect } from "react";
-import Loading from "@/components/loadingt/Loading";
+import Loading from "@/components/loading/Loading";
 import Genero from "@/services/Genero";
 import { ordenamientoAlfa } from "@/utils";
 

@@ -4,7 +4,7 @@ import sala from '@/assets/sala2.svg';
 import { saveIcon, apagarIcon } from '@/assets/operaciones';
 import axios from 'axios';
 import { backend_url, env } from "@/configuracion/backend"
-import Loading from '@/components/loadingt/Loading';
+import Loading from '@/components/loading/Loading';
 import { ModalSalas } from './ModalSalas'
 import Cookies from 'js-cookie';
 import { useLocation } from 'react-router-dom';

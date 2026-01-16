@@ -3,7 +3,7 @@ import AddFilm from './AddFilm';
 import './VentanaPeliculas.css'
 import axios from 'axios';
 import { backend_url, env } from "@/configuracion/backend"
-import Loading from '@/components/loadingt/Loading';
+import Loading from '@/components/loading/Loading';
 import Cookies from 'js-cookie';
 import { format, parse } from 'date-fns';
 import { editIcon, linkIcon } from '@/assets/operaciones';

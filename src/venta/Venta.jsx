@@ -1,7 +1,7 @@
 import React from "react";
 import { Outlet } from "react-router";
 
-import Header from '@/components/headert/Header.jsx'
+import Header from '@/components/header/Header.jsx'
 
 function Venta() {
     return (
