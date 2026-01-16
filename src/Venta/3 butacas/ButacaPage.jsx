@@ -1,8 +1,7 @@
-import './ButacaMap'
+import './ButacaMap.css'
 import ButacaMap from './ButacaMap';
-import SalaButaca from '@/services/SalaButaca';
 import Funcion from '@/services/Funcion';
-import { VentaContext } from './venta/VentaContextProvider';
+import { VentaContext } from '@/venta/VentaContextProvider';
 import Loading from '@/components/loading/Loading';
 import Entrada from '@/services/Entrada';
 
@@ -10,7 +9,7 @@ import { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { format } from 'date-fns';
 
-const SeleccionButaca = ({ funcion, prev, next, onCancelar }) => {
+const ButacaPage = ({ funcion, prev, next, onCancelar }) => {
   const navigate = useNavigate();
   const context = useContext(VentaContext)
   const [data, setData] = useState(null)
@@ -36,14 +35,6 @@ const SeleccionButaca = ({ funcion, prev, next, onCancelar }) => {
     }
   }, [funcion])
 
-  const volver = () => {
-    onCancelar(() => {
-      navigate(-1);
-      prev();
-    })
-  }
-
-
   const siguiente = () => {
     if (moving) return;
     setMoving(true);
@@ -55,11 +46,9 @@ const SeleccionButaca = ({ funcion, prev, next, onCancelar }) => {
       tiempoRegistro: format(fechaAhora, "yyyy-MM-dd.HH:mm:ss").replace(".", "T")
     };
 
-    Entrada.bloquearEntradas(info).then(res => {
-      next();
-    }).catch(err => {
-      console.log(err);
-    })
+    Entrada.bloquearEntradas(info)
+      .then(res => { next(); })
+      .catch(err => { console.log(err); })
   }
 
 
@@ -168,4 +157,4 @@ const SeleccionButaca = ({ funcion, prev, next, onCancelar }) => {
     </>)
 };
 
-export default SeleccionButaca;
+export default ButacaPage;

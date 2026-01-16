@@ -35,34 +35,31 @@ const ScreeningButton = ({ funcion, pelicula }) => {
     return (
 
         <div className='w-auto'>
-            <button className="btn mybtn-outline-primary"
+            <button className="btn mybtn-outline-primary text-decoration-none"
                 onClick={handleClick} key={funcion.idFuncion}
-                type='button' style={{ 'borderBottomRightRadius': '0px', 'borderTopRightRadius': '0px', 'borderRight': '0px' }}>{
-                    funcion.fechaHoraInicio.slice(11, 16)}
+                type='button' style={{ 'borderBottomRightRadius': '0px', 'borderTopRightRadius': '0px', 'borderRight': '0px',
+                        fontFamily: 'system-ui', fontWeight: '500'}}>
+                    {funcion.fechaHoraInicio.slice(11, 16)}
             </button>
             <button className='btn mybtn-outline-primary'
                 onClick={() => { butacasDisponibles(funcion.idFuncion) }}
                 type='button' style={{ 'position': 'relative', 'borderBottomLeftRadius': '0px', 'borderTopLeftRadius': '0px' }}>
                 <img src={iconoButaca} alt="" style={{ 'height': '20px' }} />
 
-                <div className={`cantidad-disponible fade ${mostrarCantidad === true ? 'show' : ''}`}
+                <div className={`cantidad-disponible position-absolute fw-bold text-white px-2 fade ${mostrarCantidad === true ? 'show' : ''}`}
                     style={{
-                        position: 'absolute',
                         top: '-1rem',
                         left: '1.5rem',
-                        padding: '0 0.5rem',
                         fontSize: '1rem',
-                        fontWeight: 'bold',
                         'backgroundColor': 'var(--cineagile-blue-600)',
                         'borderRadius': '14px',
-                        color: 'white'
                     }}>
                     <div>{cantButacasDisponibles}</div>
                 </div>
 
 
             </button>
-        </div>
+        </div >
     );
 }
 

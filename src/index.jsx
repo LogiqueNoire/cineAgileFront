@@ -2,34 +2,32 @@ import React, { StrictMode } from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-import App from '@/Venta/App.jsx';
+import { ToastContextProvider } from "./context/ToastContextProvider";
 
 // Componentes de venta
-import PeliculaSedes from '@/Venta/3 componentesVenta/PeliculaSedes.jsx';
-import ButacaSelect from '@/Venta/3 componentesVenta/ButacaSelect.jsx'
-import { VentaContextProvider } from '@/Venta/3 componentesVenta/VentaContextProvider.jsx';
-import FlujoVenta from '@/Venta/3 componentesVenta/FlujoVenta.jsx';
-
-import InfoEntradas from '@/Venta/6 entradas/InfoEntradas.jsx';
+import Venta from '@/venta/Venta.jsx';
+import FilmPanel from '@/venta/1 cartelera/FilmPanel';
+import FilmPage from '@/venta/2 sedes-horarios/FilmPage';
+import { VentaContextProvider } from '@/venta/VentaContextProvider';
+import FlujoVenta from '@/venta/FlujoVenta';
+import InfoEntradas from '@/venta/6 entradas/InfoEntradas.jsx';
+import Error from "@/components/Error.jsx"
 
 // Intranet
-import IntranetPanel from '@/Intranet/IntranetPanel.jsx';
+import LoginForm from '@/intranet/LoginForm.jsx';
+import Intranet from '@/intranet/Intranet.jsx';
+import IntranetPanel from '@/intranet/IntranetPanel.jsx';
 import VentanaPeliculas from '@/intranet/peliculas/VentanaPeliculas.jsx';
 import VentanaSedesYSalas from '@/intranet/sedes-salas/VentanaSedesYSalas.jsx';
+import { FuncionesContextProvider } from '@/intranet/funciones/FuncionesContext.jsx';
 import VentanaFunciones from '@/intranet/funciones/VentanaFunciones.jsx';
 import VentanaUsuario from '@/intranet/usuarios/VentanaUsuario.jsx';
 import VentanaAjustes from '@/intranet/ajustes/VentanaAjustes.jsx';
-import Intranet from '@/Intranet/Intranet.jsx';
-import LoginForm from '@/Intranet/LoginForm.jsx';
 import Sala from '@/intranet/sedes-salas/Sala.jsx';
-import { FuncionesContextProvider } from '@/intranet/funciones/FuncionesContext.jsx';
-import Error from "@/components/Error.jsx"
-import Analiticas from '@/intranet/analiticas/Analiticas.jsx';
 import Generos from '@/intranet/generos/Generos.jsx';
+import Analiticas from '@/intranet/analiticas/Analiticas.jsx';
 import Auditoria from '@/intranet/auditoria/Auditoria.jsx';
 import OpcionesDesarrollador from '@/intranet/dev/OpcionesDesarrollador.jsx'
-import FilmPanel from '@/Venta/1 componentesCartelera/FilmPanel';
-import { ToastContextProvider } from "./context/ToastContextProvider";
 
 ReactDOM.createRoot(document.getElementById('root')).render(
     <ToastContextProvider>
@@ -38,9 +36,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
                 { /* Ruta principal: La idea es que el componente App muestra el contenido de las rutas
                 hijas (ej: Inicio) dependiendo de la ruta. En este caso, Inicio es lo que se motrará en la
                 ruta por defecto. Esto nos permite cambiar entre páginas sin necesidad de recargar. */ }
-                <Route path='/' element={<App />}>
+                <Route path='/' element={<Venta />}>
                     <Route index element={<FilmPanel />} />
-                    <Route path='/funcion/pelicula/' element={<PeliculaSedes />} />
+                    <Route path='/funcion/pelicula/' element={<FilmPage />} />
                     <Route path='/compra' element={<VentaContextProvider><FlujoVenta /></VentaContextProvider>} />
                     <Route path='/entradas' element={<InfoEntradas />} />
                     <Route path='/error' element={<Error />} />
@@ -60,12 +58,8 @@ ReactDOM.createRoot(document.getElementById('root')).render(
                     <Route path='ajustes' element={<VentanaAjustes />}></Route>
                     <Route path='analiticas' element={<Analiticas />}></Route>
                     <Route path='auditoria' element={<Auditoria />}></Route>
-                    <Route path="salas" /*element={<VentanaSedesYSalas></VentanaSedesYSalas>}*/></Route>
                     <Route path='dev' element={<OpcionesDesarrollador />}></Route>
                 </Route>
-
-                <Route path='/butacas' element={<ButacaSelect idSala={5} />} />
-
 
             </Routes>
         </BrowserRouter>

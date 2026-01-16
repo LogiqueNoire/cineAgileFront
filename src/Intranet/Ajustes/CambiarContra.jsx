@@ -55,7 +55,7 @@ const CambiarContra = () => {
 
     return (
         <form action="" onSubmit={onSubmit}>
-            <div className="d-flex flex-column align-items-center container-fluid col-10 bg-white p-5 rounded-4 shadow">
+            <div className="d-flex flex-column align-items-center container-fluid col-10 col-lg-5 col-xl-5 col-xxl-4 bg-white p-5 rounded-4 shadow">
                 <div className="d-flex flex-row align-items-center mb-3 gap-2">
                     <h2 className="ancizar-sans-regular mb-0 cineagile-blue-600">Cambiar contraseña</h2>
                     <img src={passwordIcon} alt="Password" className="" style={{ filter: "invert(90%) sepia(70%) saturate(25000%) hue-rotate(225deg) brightness(52.5%) contrast(100%)" }} />
@@ -68,7 +68,7 @@ const CambiarContra = () => {
                     </div>
                 }
 
-                <div className="d-flex flex-column gap-3 col-12 col-sm-9 col-md-8 col-lg-5 col-xl-5 col-xxl-4">
+                <div className="d-flex flex-column gap-3 col-12">
                     <div>
                         <label htmlFor="contraActual" className="form-label">Contraseña actual</label>
                         <input value={contraActual} onChange={(evt) => setContraActual(evt.target.value)} type="password" className="form-control" id="contraActual" name="contraActual" required={true} />

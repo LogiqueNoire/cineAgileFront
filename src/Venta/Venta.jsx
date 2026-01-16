@@ -3,7 +3,7 @@ import { Outlet } from "react-router";
 
 import Header from '@/components/header/Header.jsx'
 
-function App() {
+function Venta() {
     return (
         <>
             <Header></Header>
@@ -14,4 +14,4 @@ function App() {
         </>
     );
 }
-export default App;
+export default Venta;

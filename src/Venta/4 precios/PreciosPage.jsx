@@ -1,11 +1,11 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import Funcion from "@/services/Funcion.js";
 import Loading from "@/components/loading/Loading.jsx";
-import { VentaContext } from "@/Venta/3 componentesVenta/VentaContextProvider.jsx";
+import { VentaContext } from "@/venta/VentaContextProvider.jsx";
 import FilaPrecio from "./FilaPrecio.jsx";
 
-export const VentanaPrecios = ({ prev, next, onCancelar }) => {
+export const PreciosPage = ({ prev, next, onCancelar }) => {
     const contexto = useContext(VentaContext)
     const location = useLocation();
     const { pelicula, funcion } = location.state || {};

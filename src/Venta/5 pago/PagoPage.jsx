@@ -1,14 +1,14 @@
 import React, { useCallback, useContext, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { MetodosPago } from "./MetodosPago.jsx";
-import { VentaContext } from "@/Venta/3 componentesVenta/VentaContextProvider.jsx";
+import { VentaContext } from "@/venta/VentaContextProvider.jsx";
 import { ModalTerminos } from "./ModalTerminos.jsx";
 import Entrada from "@/services/Entrada.js";
 import { format } from "date-fns";
 import Loading from "@/components/loading/Loading.jsx";
 import { env } from "@/configuracion/backend.js";
 
-export const VentanaPago = ({ prev }) => {
+export const PagoPage = ({ prev }) => {
   const navigate = useNavigate();
   const contexto = useContext(VentaContext);
   const total = Number(contexto.totalContext.total.toFixed(2));

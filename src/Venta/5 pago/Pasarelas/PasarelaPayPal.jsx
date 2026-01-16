@@ -1,6 +1,6 @@
 import { PayPalButtons, PayPalScriptProvider } from "@paypal/react-paypal-js";
 import { useContext } from "react";
-import { VentaContext } from "@/Venta/3 componentesVenta/VentaContextProvider.jsx";
+import { VentaContext } from "@/venta/VentaContextProvider.jsx";
 import { ToastContext } from "@/context/ToastContextProvider";
 
 const PasarelaPayPal = ({ setto, tipoCambio, registrarEntrada }) => {

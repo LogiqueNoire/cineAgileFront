@@ -1,20 +1,20 @@
 import { useLocation, useNavigate } from "react-router";
 
-import ButacaSelect from './ButacaSelect'
-import { VentaContext } from './venta/VentaContextProvider'
-import ResumenPeliComJose3 from '@/Venta/4 precios/ResumenPeliComJose3'
-import { VentanaPrecios } from '@/Venta/4 precios/VentanaPrecios'
+import { VentaContext } from '@/venta/VentaContextProvider'
+import ButacaPage from '@/venta/3 butacas/ButacaPage'
+import ResumenPeli from '@/venta/ResumenPeli'
+import { PreciosPage } from '@/venta/4 precios/PreciosPage'
 import React, { useEffect, useState, useContext } from "react";
-import { VentanaPago } from "@/Venta/5 pago/VentanaPago";
+import { PagoPage } from "@/venta/5 pago/PagoPage";
 import Funcion from "@/services/Funcion";
-import Contador from "./Contador";
+import Contador from "@/components/contador/Contador";
 import Entrada from "@/services/Entrada";
 import { format, isBefore } from "date-fns";
 
 import cancelarSvg from "@/assets/operaciones/X.svg";
 import { env } from "@/configuracion/backend";
 
-const ventanas = [ButacaSelect, VentanaPrecios, VentanaPago];
+const ventanas = [ButacaPage, PreciosPage, PagoPage];
 
 const FlujoVenta = () => {
     const [indice, setIndice] = useState(0);
@@ -64,12 +64,9 @@ const FlujoVenta = () => {
             tiempoRegistro: format(fechaAhora, "yyyy-MM-dd.HH:mm:ss").replace(".", "T")
         };
 
-        Entrada.desbloquearEntradas(info).then(res => {
-            accion();
-        }).catch(err => {
-            console.log(err);
-        });
-
+        Entrada.desbloquearEntradas(info)
+            .then(res => { accion(); })
+            .catch(err => { console.log(err); });
     };
 
     let ventana = React.createElement(ventanas[indice], {
@@ -131,7 +128,7 @@ const FlujoVenta = () => {
     return (
         <div className="d-flex flex-wrap justify-content-center">
             <div className="d-flex flex-column justify-content-center p-sm-2 p-lg-4 bg-light col-12 col-lg-4 overflow-hidden">
-                <ResumenPeliComJose3 pelicula={pelicula} sedePeli={funcion.nombreSede} fechaPeli={funcion.fechaHoraInicio}
+                <ResumenPeli pelicula={pelicula} sedePeli={funcion.nombreSede} fechaPeli={funcion.fechaHoraInicio}
                     salaPeli={funcion.codigoSala} categoria={funcion.categoria} dimension={funcion.dimension} idFuncion={funcion.idFuncion} />
             </div>
 
@@ -140,17 +137,17 @@ const FlujoVenta = () => {
                     <div className="d-flex justify-content-start gap-3">
                         <span className="d-flex gap-2 align-items-center">
                             <div className={`ancizar-sans-regular fs-5 p-1 rounded-circle text-white fw-bold d-flex justify-content-center align-items-center ${indice == 0 ? "bg-cineagile-blue-500" : "bg-dark-subtle"}`}
-                            style={{ width: "35px", aspectRatio: "1/1", lineHeight: "0.95" }}>1</div>
+                                style={{ width: "35px", aspectRatio: "1/1", lineHeight: "0.95" }}>1</div>
                             <span className={`ancizar-sans-regular fs-5 ${indice == 0 ? "cineagile-blue-500" : "color-dark-sutble"}`}>Butacas</span>
                         </span>
                         <span className="d-flex gap-2 justify-content-center align-items-center">
                             <div className={`ancizar-sans-regular fs-5 p-1 rounded-circle text-white fw-bold d-flex justify-content-center align-items-center ${indice == 1 ? "bg-cineagile-blue-500" : "bg-dark-subtle"}`}
-                            style={{ width: "35px", aspectRatio: "1/1", lineHeight: "0.95" }}>2</div>
+                                style={{ width: "35px", aspectRatio: "1/1", lineHeight: "0.95" }}>2</div>
                             <span className={`ancizar-sans-regular fs-5 ${indice == 1 ? "cineagile-blue-500" : "color-dark-sutble"}`}>Precios</span>
                         </span>
                         <span className="d-flex gap-2 justify-content-center align-items-center">
                             <div className={`ancizar-sans-regular fs-5 p-1 rounded-circle text-white fw-bold d-flex justify-content-center align-items-center ${indice == 2 ? "bg-cineagile-blue-500" : "bg-dark-subtle"}`}
-                            style={{ width: "35px", aspectRatio: "1/1", lineHeight: "0.95" }}>3</div>
+                                style={{ width: "35px", aspectRatio: "1/1", lineHeight: "0.95" }}>3</div>
                             <span className={`ancizar-sans-regular fs-5 ${indice == 2 ? "cineagile-blue-500" : "color-dark-sutble"}`}>Pago</span>
                         </span>
                     </div>

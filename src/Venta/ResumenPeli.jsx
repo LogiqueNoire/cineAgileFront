@@ -1,8 +1,8 @@
 import React, { useContext} from "react";
-import { VentaContext } from "@/Venta/3 componentesVenta/VentaContextProvider.jsx"
+import { VentaContext } from "@/venta/VentaContextProvider.jsx"
 import { format, parseISO } from "date-fns";
 
-const ResumenPeliComJose3 = ({ pelicula, catePeli, sedePeli, fechaPeli, salaPeli, categoria, butacasSeleccionadas, dimension, idFuncion}) => {
+const ResumenPeli = ({ pelicula, catePeli, sedePeli, fechaPeli, salaPeli, categoria, butacasSeleccionadas, dimension, idFuncion}) => {
     const contexto = useContext(VentaContext);
     
     if (butacasSeleccionadas === undefined) {
@@ -30,4 +30,4 @@ const ResumenPeliComJose3 = ({ pelicula, catePeli, sedePeli, fechaPeli, salaPeli
 
     );
 }
-export default ResumenPeliComJose3
+export default ResumenPeli

@@ -1,5 +1,5 @@
 import React from 'react';
-import './FilmCard.css';
+import './filmCard.css';
 import { useNavigate } from 'react-router-dom';
 
 

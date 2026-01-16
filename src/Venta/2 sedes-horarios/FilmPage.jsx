@@ -1,6 +1,6 @@
 import { useLocation } from "react-router-dom";
 import React, { useEffect, useState } from "react";
-import MostrarSedesHorarios from "./MostrarSedesHorarios";
+import SedesHorariosContainer from "./SedesHorariosContainer";
 import { format, differenceInCalendarDays } from 'date-fns';
 import PeliculaService from "@/services/PeliculaService";
 import Loading from "@/components/loading/Loading";
@@ -8,10 +8,10 @@ import axios from "axios";
 import { backend_url } from "@/configuracion/backend"
 import { es } from 'date-fns/locale';
 
-import '../1 componentesCartelera/FilmCard.css';
+import '@/venta/1 cartelera/components/film-card/filmCard.css';
 import TimeService from "@/services/TimeService";
 
-const PeliculaSedes = () => {
+const FilmPage = () => {
     const location = useLocation();
     const { consultaIdPelicula } = location.state || {};
 
@@ -93,7 +93,7 @@ const PeliculaSedes = () => {
                     {differenceInCalendarDays(pelicula.fechaInicioEstreno, fechaReal) < 8 ?
                         <div className='mt-3'>
                             <div className="d-flex justify-content-center flex-row gap-3 align-items-center">
-                                <h3 className="me-2 fw-bold fs-1 ancizar-sans-regular mb-0 text-center fs-sm-2">Tu fecha ideal</h3>
+                                <h2 className="me-2 fw-bold fs-1 ancizar-sans-regular mb-0 text-center fs-sm-2">Tu fecha ideal</h2>
                                 <input
                                     type="date"
                                     className="mx-1 form-control"
@@ -114,7 +114,7 @@ const PeliculaSedes = () => {
                         </div>
                     }
                     {fechaElegida && (
-                        <MostrarSedesHorarios
+                        <SedesHorariosContainer
                             pelicula={pelicula}
                             fechaFormateada={format(fechaElegida, `yyyy-MM-dd.HH:mm`).replace('.', 'T')}
                         />)}
@@ -124,4 +124,4 @@ const PeliculaSedes = () => {
     );
 };
 
-export default PeliculaSedes;
+export default FilmPage;

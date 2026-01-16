@@ -1,5 +1,5 @@
 import React from "react";
-import FilmCard from "./FilmCard.jsx";
+import FilmCard from "./film-card/FilmCard.jsx";
 
 const FilmContainer = ({ peliculas }) => {
     return (

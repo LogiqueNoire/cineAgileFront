@@ -1,25 +1,24 @@
 import { env } from '@/configuracion/backend';
-import './CinemaAcordion.css';
-import ScreeningButton from './ScreeningButton.jsx';
+import ScreeningButton from '../screening-button/ScreeningButton.jsx';
 
 const CinemaAcordion = ({ data, pelicula }) => {
     env === "dev" && console.log(data);
     return (
         <div className="mx-3">
             {data.funciones.map((sede) => (
-                <div key={sede.idSede} className="card mb-3 border-0 shadow">
+                <div key={sede.idSede} className="card mb-3 border-0 shadow ancizar-sans-regular">
                     <button
-                        className="card-header p-3"
+                        className="card-header p-3 border-0"
                         type="button"
                         data-bs-toggle="collapse"
-                        data-bs-target={ "#s" + sede.idSede } //`#${sede.nombreSede.replace(/\s+/g, '')}`}
+                        data-bs-target={ "#s" + sede.idSede }
                         aria-expanded="false"
-                        aria-controls={ `s${sede.idSede}` } //sede.nombreSede.replace(/\s+/g, '')}
+                        aria-controls={ `s${sede.idSede}` }
                     >
                         <h5 className='ancizar-sans-regular mb-0 text-start h5'>{sede.nombreSede}</h5>
                     </button>
 
-                    <div className="card-body collapse p-3" 
+                    <div className="card-body collapse p-3 border-0" 
                         id={ `s${sede.idSede}` } // sede.nombreSede.replace(/\s+/g, '')  }>
                     >
                         {["2D Regular", "2D Prime", "3D Regular", "3D Prime"].map((tipo) => {
