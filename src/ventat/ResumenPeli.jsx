@@ -1,5 +1,5 @@
 import React, { useContext} from "react";
-import { VentaContext } from "@/venta/VentaContextProvider.jsx"
+import { VentaContext } from "@/ventat/VentaContextProvider.jsx"
 import { format, parseISO } from "date-fns";
 
 const ResumenPeli = ({ pelicula, catePeli, sedePeli, fechaPeli, salaPeli, categoria, butacasSeleccionadas, dimension, idFuncion}) => {

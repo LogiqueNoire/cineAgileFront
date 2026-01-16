@@ -1,11 +1,11 @@
 import { useLocation, useNavigate } from "react-router";
 
-import { VentaContext } from '@/venta/VentaContextProvider'
-import ButacaPage from '@/venta/3 butacas/ButacaPage'
-import ResumenPeli from '@/venta/ResumenPeli'
-import { PreciosPage } from '@/venta/4 precios/PreciosPage'
+import { VentaContext } from '@/ventat/VentaContextProvider'
+import ButacaPage from '@/ventat/3 butacas/ButacaPage'
+import ResumenPeli from '@/ventat/ResumenPeli'
+import { PreciosPage } from '@/ventat/4 precios/PreciosPage'
 import React, { useEffect, useState, useContext } from "react";
-import { PagoPage } from "@/venta/5 pago/PagoPage";
+import { PagoPage } from "@/ventat/5 pago/PagoPage";
 import Funcion from "@/services/Funcion";
 import Contador from "@/components/contador/Contador";
 import Entrada from "@/services/Entrada";

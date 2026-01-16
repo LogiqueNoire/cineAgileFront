@@ -5,29 +5,29 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { ToastContextProvider } from "./context/ToastContextProvider";
 
 // Componentes de venta
-import Venta from '@/venta/Venta.jsx';
-import FilmPanel from '@/venta/1 cartelera/FilmPanel';
-import FilmPage from '@/venta/2 sedes-horarios/FilmPage';
-import { VentaContextProvider } from '@/venta/VentaContextProvider';
-import FlujoVenta from '@/venta/FlujoVenta';
-import InfoEntradas from '@/venta/6 entradas/InfoEntradas.jsx';
+import Venta from '@/ventat/Venta.jsx';
+import FilmPanel from '@/ventat/1 cartelera/FilmPanel';
+import FilmPage from '@/ventat/2 sedes-horarios/FilmPage';
+import { VentaContextProvider } from '@/ventat/VentaContextProvider';
+import FlujoVenta from '@/ventat/FlujoVenta';
+import InfoEntradas from '@/ventat/6 entradas/InfoEntradas.jsx';
 import Error from "@/components/Error.jsx"
 
 // Intranet
-import LoginForm from '@/intranet/LoginForm.jsx';
-import Intranet from '@/intranet/Intranet.jsx';
-import IntranetPanel from '@/intranet/IntranetPanel.jsx';
-import VentanaPeliculas from '@/intranet/peliculas/VentanaPeliculas.jsx';
-import VentanaSedesYSalas from '@/intranet/sedes-salas/VentanaSedesYSalas.jsx';
-import { FuncionesContextProvider } from '@/intranet/funciones/FuncionesContext.jsx';
-import VentanaFunciones from '@/intranet/funciones/VentanaFunciones.jsx';
-import VentanaUsuario from '@/intranet/usuarios/VentanaUsuario.jsx';
-import VentanaAjustes from '@/intranet/cuenta/VentanaAjustes.jsx';
-import Sala from '@/intranet/sedes-salas/Sala.jsx';
-import Generos from '@/intranet/generos/Generos.jsx';
-import Analiticas from '@/intranet/analiticas/Analiticas.jsx';
-import Auditoria from '@/intranet/auditoria/Auditoria.jsx';
-import OpcionesDesarrollador from '@/intranet/dev/OpcionesDesarrollador.jsx'
+import LoginForm from '@/intranett/LoginForm.jsx';
+import Intranet from '@/intranett/Intranet.jsx';
+import IntranetPanel from '@/intranett/IntranetPanel.jsx';
+import VentanaPeliculas from '@/intranett/peliculas/VentanaPeliculas.jsx';
+import VentanaSedesYSalas from '@/intranett/sedes-salas/VentanaSedesYSalas.jsx';
+import { FuncionesContextProvider } from '@/intranett/funciones/FuncionesContext.jsx';
+import VentanaFunciones from '@/intranett/funciones/VentanaFunciones.jsx';
+import VentanaUsuario from '@/intranett/usuarios/VentanaUsuario.jsx';
+import VentanaAjustes from '@/intranett/cuenta/VentanaAjustes.jsx';
+import Sala from '@/intranett/sedes-salas/Sala.jsx';
+import Generos from '@/intranett/generos/Generos.jsx';
+import Analiticas from '@/intranett/analiticas/Analiticas.jsx';
+import Auditoria from '@/intranett/auditoria/Auditoria.jsx';
+import OpcionesDesarrollador from '@/intranett/dev/OpcionesDesarrollador.jsx'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
     <ToastContextProvider>
