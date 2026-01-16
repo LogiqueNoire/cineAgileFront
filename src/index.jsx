@@ -17,16 +17,16 @@ import Error from "@/components/Error.jsx"
 import LoginForm from '@/intranet/LoginForm.jsx';
 import Intranet from '@/intranet/Intranet.jsx';
 import IntranetPanel from '@/intranet/IntranetPanel.jsx';
-import VentanaPeliculas from '@/intranet/peliculast/VentanaPeliculas.jsx';
+import VentanaPeliculas from '@/intranet/peliculas/VentanaPeliculas.jsx';
 import VentanaSedesYSalas from '@/intranet/sedes-salas/VentanaSedesYSalas.jsx';
-import { FuncionesContextProvider } from '@/intranet/funcionest/FuncionesContext.jsx';
-import VentanaFunciones from '@/intranet/funcionest/VentanaFunciones.jsx';
-import VentanaUsuario from '@/intranet/usuariost/VentanaUsuario.jsx';
+import { FuncionesContextProvider } from '@/intranet/funciones/FuncionesContext.jsx';
+import VentanaFunciones from '@/intranet/funciones/VentanaFunciones.jsx';
+import VentanaUsuario from '@/intranet/usuarios/VentanaUsuario.jsx';
 import VentanaAjustes from '@/intranet/cuenta/VentanaAjustes.jsx';
 import Sala from '@/intranet/sedes-salas/Sala.jsx';
-import Generos from '@/intranet/generost/Generos.jsx';
-import Analiticas from '@/intranet/analiticast/Analiticas.jsx';
-import Auditoria from '@/intranet/auditoriat/Auditoria.jsx';
+import Generos from '@/intranet/generos/Generos.jsx';
+import Analiticas from '@/intranet/analiticas/Analiticas.jsx';
+import Auditoria from '@/intranet/auditoria/Auditoria.jsx';
 import OpcionesDesarrollador from '@/intranet/dev/OpcionesDesarrollador.jsx'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
