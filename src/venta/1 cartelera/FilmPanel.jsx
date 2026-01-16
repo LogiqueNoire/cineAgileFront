@@ -2,9 +2,9 @@ import { useEffect, useMemo, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { env } from '@/configuracion/backend';
 
-import FilmContainer from "@/ventat/1 cartelera/components/FilmContainer";
+import FilmContainer from "@/venta/1 cartelera/components/FilmContainer";
 import PeliculaService from "@/services/PeliculaService"
-import FilmTab from '@/ventat/1 cartelera/components/film-tab/FilmTab';
+import FilmTab from '@/venta/1 cartelera/components/film-tab/FilmTab';
 import Loading from '@/components/loading/Loading';
 import TimeService from '@/services/TimeService';
 

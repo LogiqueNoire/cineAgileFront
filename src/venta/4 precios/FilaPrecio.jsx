@@ -1,6 +1,6 @@
 import React from "react";
 import { useContext } from "react";
-import { VentaContext } from "@/ventat/VentaContextProvider.jsx"
+import { VentaContext } from "@/venta/VentaContextProvider.jsx"
 import { env } from "@/configuracion/backend";
 
 const FilaPrecio = ({ nombre, texto, precio, seleccionadas }) => {

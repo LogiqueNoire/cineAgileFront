@@ -1,7 +1,7 @@
 import { useContext, useReducer } from "react";
 import { differenceInSeconds, addSeconds, format } from 'date-fns';
 import { useNavigate } from "react-router-dom";
-import { VentaContext } from "@/ventat/VentaContextProvider";
+import { VentaContext } from "@/venta/VentaContextProvider";
 import iconotiempo from "@/assets/time.svg"
 
 const actualizarTiempo = (aPartirDe) => {

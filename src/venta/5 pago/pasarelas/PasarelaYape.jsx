@@ -2,7 +2,7 @@ import { useState, useEffect, useRef, useContext } from "react";
 import { loadMercadoPago } from "@mercadopago/sdk-js";
 import "../pago.css"
 import { env, publicKeyMercadoPago } from "@/configuracion/backend";
-import { VentaContext } from "@/ventat/VentaContextProvider";
+import { VentaContext } from "@/venta/VentaContextProvider";
 import PagoService from "@/services/PagoService";
 import { useNavigate } from "react-router-dom";
 import { ToastContext } from "@/context/ToastContextProvider";

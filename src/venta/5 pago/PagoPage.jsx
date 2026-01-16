@@ -1,7 +1,7 @@
 import React, { useCallback, useContext, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { MetodosPago } from "./MetodosPago.jsx";
-import { VentaContext } from "@/ventat/VentaContextProvider.jsx";
+import { VentaContext } from "@/venta/VentaContextProvider.jsx";
 import { ModalTerminos } from "./ModalTerminos.jsx";
 import Entrada from "@/services/Entrada.js";
 import { format } from "date-fns";

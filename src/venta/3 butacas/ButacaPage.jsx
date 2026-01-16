@@ -1,7 +1,7 @@
 import './ButacaMap.css'
 import ButacaMap from './ButacaMap';
 import Funcion from '@/services/Funcion';
-import { VentaContext } from '@/ventat/VentaContextProvider';
+import { VentaContext } from '@/venta/VentaContextProvider';
 import Loading from '@/components/loading/Loading';
 import Entrada from '@/services/Entrada';
 

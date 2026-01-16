@@ -1,6 +1,6 @@
 import { CardPayment, initMercadoPago } from '@mercadopago/sdk-react';
 import { useContext, useEffect, useState } from 'react';
-import { VentaContext } from '@/ventat/VentaContextProvider';
+import { VentaContext } from '@/venta/VentaContextProvider';
 import PagoService from '@/services/PagoService';
 import { env, publicKeyMercadoPago } from '@/configuracion/backend';
 import { useNavigate } from 'react-router-dom';

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import CinemaAcordion from '@/ventat/2 sedes-horarios/components/acordion/CinemaAcordion';
+import CinemaAcordion from '@/venta/2 sedes-horarios/components/acordion/CinemaAcordion';
 import Funcion from '@/services/Funcion.js';
 import './sedesHorariosContainer.css';
 import Loading from '@/components/loading/Loading.jsx';
