@@ -26,3 +26,4 @@ dist-ssr
 _redirects
 .env
 .vercel
+.env*.local
