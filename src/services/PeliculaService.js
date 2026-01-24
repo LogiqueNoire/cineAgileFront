@@ -38,6 +38,14 @@ class PeliculaService {
         return peliculas.data
     }
 
+    static async obtenerFechas(fechaReal, idPelicula){
+        console.log(fechaReal.toISOString(),idPelicula)
+        const fechas = await axios.get(`${backend_url}/api/venta/v1/peliculas/${idPelicula}/fechas?fecha=${fechaReal.toISOString()}`,
+            {
+                headers: { Authorization: `Bearer ${Cookies.get("auth-token")}` }
+            })
+        return fechas;
+    }
 }
 
 export default PeliculaService;

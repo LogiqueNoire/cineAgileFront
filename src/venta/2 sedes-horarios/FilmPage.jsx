@@ -5,11 +5,16 @@ import { format, differenceInCalendarDays } from 'date-fns';
 import PeliculaService from "@/services/PeliculaService";
 import Loading from "@/components/loading/Loading";
 import axios from "axios";
-import { backend_url } from "@/configuracion/backend"
+import { backend_url, env } from "@/configuracion/backend"
 import { es } from 'date-fns/locale';
 
 import '@/venta/1 cartelera/components/film-card/filmCard.css';
 import TimeService from "@/services/TimeService";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import { registerLocale, setDefaultLocale } from "react-datepicker";
+import "./filmPage.css"
+registerLocale('es', es)
 
 const FilmPage = () => {
     const location = useLocation();
@@ -20,6 +25,12 @@ const FilmPage = () => {
     const [pelicula, setPelicula] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [fechas, setFechas] = useState([])
+
+    const obtenerFechas = async () => {
+        const fechas = await PeliculaService.obtenerFechas(fechaReal, consultaIdPelicula);
+        return fechas
+    }
 
     useEffect(() => {
         const generosDePelicula = async () => {
@@ -37,12 +48,31 @@ const FilmPage = () => {
             .then(data => { setPelicula(data); generosDePelicula() })
             .catch(err => setError(err))
             .finally(() => setLoading(false));
+
+
     }, [consultaIdPelicula]);
+
+    useEffect(() => {
+        if (consultaIdPelicula !== undefined && fechaReal != undefined) {
+            (async () => {
+                const response = await obtenerFechas();
+                env === "dev" && console.log("Fechas backend:", consultaIdPelicula, response.data);
+                const fechasParseadas = response.data.map(row => {
+                    const fecha = row[0]; // ← viene como ["2026-01-16"]
+                    const [y, m, d] = fecha.split("-");
+                    return new Date(y, m - 1, d);
+                });
+
+                setFechas(fechasParseadas);
+            })();
+        }
+    }, [consultaIdPelicula, fechaReal])
 
     useEffect(() => {
         (async () => {
             const data = await TimeService.obtenerFecha();
             setFechaReal(data);
+
         })();
     }, []);
 
@@ -53,8 +83,9 @@ const FilmPage = () => {
     }, [fechaReal])
 
 
-    const onFechaChange = (e) => {
-        setFechaElegida(new Date(`${e.target.value}T00:00`));
+    const onFechaChange = (date) => {
+        setFechaElegida(format(new Date(date.getFullYear(), date.getMonth(), date.getDate(), 0, 0, 0),
+            "yyyy-MM-dd'T'HH:mm:ss"));
     };
 
     if (loading || !fechaReal) {
@@ -94,16 +125,23 @@ const FilmPage = () => {
                         <div className='mt-3'>
                             <div className="d-flex justify-content-center flex-row gap-3 align-items-center">
                                 <h2 className="me-2 fw-bold fs-1 ancizar-sans-regular mb-0 text-center fs-sm-2">Tu fecha ideal</h2>
-                                <input
-                                    type="date"
+                                <div style={{ width: "150px", height: "min-content" }}>
+                                <DatePicker
+                                    selected={fechaElegida}
+                                    onSelect={onFechaChange}
+                                    onKeyDown={(e) => e.preventDefault()}
+                                    filterDate={date =>
+                                        fechas.some(
+                                            f => f.toDateString() === date.toDateString()
+                                        )
+                                    }
                                     className="mx-1 form-control"
+                                    locale={"es"}
+                                    dateFormat="dd/MM/yyyy"
                                     min={format(fechaReal, 'yyyy-MM-dd')}
                                     max={format(new Date(fechaReal).setMonth(fechaReal.getMonth() + 3), 'yyyy-MM-dd')}
-                                    value={format(fechaElegida, 'yyyy-MM-dd')}
-                                    onChange={onFechaChange}
-                                    style={{ width: "150px", height: "min-content" }}
-                                    onKeyDown={(e) => e.preventDefault()}
                                 />
+                                </div>
                             </div>
                         </div>
                         :
