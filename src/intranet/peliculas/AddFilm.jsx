@@ -199,7 +199,7 @@ export default function AddFilm({ onSucess }) {
 
               <div className="mb-3">
                 <label htmlFor="fechaInicioEstreno" className="form-label">
-                  Fecha Inicio Estreno
+                  Fecha de estreno
                 </label>
                 <input
                   type="date"

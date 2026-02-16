@@ -38,7 +38,7 @@ const FSelectInput = ({ className, valorPorDefecto, label, onSave, opciones, atr
     return (
         <div className={`${className} input-group has-validation`}>
             <div className={`form-floating ${status.error && 'is-invalid'}`}>
-                <select className={`form-control ${status.error && "is-invalid"}`} id={label} placeholder={label} disabled={modo != "edit"} value={input == " " ? "" : input} onChange={onChange}>
+                <select className={`form-control rounded-start-pill ${status.error && "is-invalid"}`} id={label} placeholder={label} disabled={modo != "edit"} value={input == " " ? "" : input} onChange={onChange}>
                     <option value="" selected disabled={true}>Selecciona un género</option>
                     {opciones.map(el => (
                         <option value={el}>{el}</option>
@@ -46,14 +46,14 @@ const FSelectInput = ({ className, valorPorDefecto, label, onSave, opciones, atr
                 </select>
                 <label htmlFor={label}>{label}</label>
             </div>
-            <button className="btn btn-primary py-2 px-4" onClick={modo == "read" ? () => setModo("edit") : onSaveClick} disabled={modo == "submitting"}>
+            <button className="btn btn-primary py-2 px-4 rounded-end-pill" onClick={modo == "read" ? () => setModo("edit") : onSaveClick} disabled={modo == "submitting"}>
                 {modo === "submitting" ?
                     <span className="d-flex align-items-center mx-2 my-2 spinner-border spinner-border-sm" role="status">
                         <span className="visually-hidden">Cargando...</span>
                     </span>
                     :
                     <>
-                        {modo === "read" && <img src={editIcon} alt="editar" style={{ "width": "32px", "height": "32px" }} />}
+                        {modo === "read" && <img src={editIcon} alt="editar" style={{ "width": "36px", "height": "36px" }} />}
                         {modo === "edit" && <img src={saveIcon} alt="guardar" style={{ "width": "32px", "height": "32px" }} />}
                     </>
                 }

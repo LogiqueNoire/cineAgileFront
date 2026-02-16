@@ -42,18 +42,18 @@ const FDateInput = ({ className = '', valorPorDefecto, label, onSave, atributo, 
                 <input type="date"
                     onKeyDown={(e) => e.preventDefault()}
                     min={format(new Date(), 'yyyy-MM-dd')}
-                    className={`form-control ${status.error && "is-invalid"}`} id={label} placeholder={label} disabled={modo != "edit"}
+                    className={`form-control rounded-start-pill ${status.error && "is-invalid"}`} id={label} placeholder={label} disabled={modo != "edit"}
                     value={input} onChange={onChange} />
                 <label htmlFor={label}>{label}</label>
             </div>
-            <button className="btn btn-primary py-2 px-4" onClick={modo === "read" ? () => setModo("edit") : onSaveClick} disabled={modo === "submitting"}>
+            <button className="btn btn-primary py-2 px-4 rounded-end-pill" onClick={modo === "read" ? () => setModo("edit") : onSaveClick} disabled={modo === "submitting"}>
                 {modo === "submitting" ?
                     <span className="d-flex align-items-center mx-2 my-2 spinner-border spinner-border-sm" role="status">
                         <span className="visually-hidden">Cargando...</span>
                     </span>
                     :
                     <>
-                        {modo === "read" && <img src={editIcon} alt="editar" style={{ "width": "32px", "height": "32px" }} />}
+                        {modo === "read" && <img src={editIcon} alt="editar" style={{ "width": "36px", "height": "36px" }} />}
                         {modo === "edit" && <img src={saveIcon} alt="guardar" style={{ "width": "32px", "height": "32px" }} />}
                     </>
                 }

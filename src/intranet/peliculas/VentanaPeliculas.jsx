@@ -73,14 +73,6 @@ const VentanaPeliculas = () => {
         setResultados(lista)
     }, [lista])
 
-    const editarOnClick = (pelicula) => {
-        setPelicula(pelicula);
-    };
-
-    const onPeliModalCerrar = () => {
-        setPelicula(null);
-    }
-
     const [busqueda, setBusqueda] = useState('');
     const [resultados, setResultados] = useState();
 
@@ -102,17 +94,16 @@ const VentanaPeliculas = () => {
 
     return (
         <div>
-            <div className='d-flex flex-column gap-4 align-items-center container-fluid'>
+            <div className='d-flex flex-column gap-5 align-items-center container-fluid'>
                 <AddFilm onSucess={consultarPeliculas}></AddFilm>
-                <h2 className="text-center mt-4 ancizar-sans-regular mb-0">Películas registradas</h2>
-                {loading === true
-                    ? <div className='d-flex flex-column align-items-center container'><Loading></Loading></div> :
-
-                    <div>
-                        {resultados === null || resultados?.length == 0 ?
-                            <p className='mb-4 fs-4 text-center ancizar-sans-regular'>¡No hay películas registradas!</p>
-                            :
-                            <>
+                <div>
+                    <h2 className="text-center ancizar-sans-regular mb-0">Películas registradas</h2>
+                    {loading === true
+                        ?
+                        <div className='d-flex flex-column align-items-center container'><Loading></Loading></div>
+                        :
+                        <div>
+                            {(lista !== null && lista?.length != 0) &&
                                 <div className='d-flex flex-wrap align-items-center justify-content-center gap-2 m-4'>
                                     <h3 className='ancizar-sans-regular mb-0'>Buscar película</h3>
                                     <div>
@@ -125,8 +116,10 @@ const VentanaPeliculas = () => {
                                             style={{ width: '300px' }}
                                         />
                                     </div>
-                                </div>
-
+                                </div>}
+                            {resultados === null || resultados?.length == 0 ?
+                                <p className='mb-4 fs-4 text-center ancizar-sans-regular'>¡No hay películas registradas!</p>
+                                :
                                 <table className='table mytable table-striped border table-hover mt-4'>
                                     <thead className='thead table-white'>
                                         <tr>
@@ -173,8 +166,8 @@ const VentanaPeliculas = () => {
                                                     </a>
                                                 </td>
                                                 <td className='td td-button' data-label="Acciones">
-                                                    <button className='d-flex align-items-center btn btn-primary btn-primary-gradient p-2' onClick={() => editarOnClick(el)}>
-                                                        <img src={editIcon} alt="" style={{ height: '20px' }} />
+                                                    <button className='d-flex align-items-center btn btn-primary btn-primary-gradient px-2' onClick={() => setPelicula(el)}>
+                                                        <img src={editIcon} alt="" style={{ height: '25px' }} />
                                                     </button>
                                                 </td>
                                             </tr>
@@ -183,13 +176,14 @@ const VentanaPeliculas = () => {
                                     </tbody>
 
                                 </table>
-                            </>}
-                    </div>
-                }
+                            }
+                        </div>
+                    }
+                </div>
             </div>
 
 
-            {pelicula && <PeliculaModal pelicula={pelicula} onCerrar={onPeliModalCerrar} consultarPeliculas={consultarPeliculas} />}
+            {pelicula && <PeliculaModal pelicula={pelicula} onCerrar={() => { setPelicula(null) }} consultarPeliculas={consultarPeliculas} />}
         </div>
     )
 }

@@ -37,10 +37,10 @@ const FTextAreaInput = ({ className = '', valorPorDefecto, label, onSave, atribu
     }
 
     return (
-        <div className={`${className} py-2 px-4 border border-3 rounded`}>
-            <div className="d-flex justify-content-between mb-3">
-                <div className="fs-2">Sinopsis</div>
-                <button className="btn btn-primary py-2 px-4 align-self-start" onClick={modo === "read" ? () => setModo("edit") : onSaveClick} disabled={modo == "submitting"}>
+        <div className={`${className} p-4 shadow rounded-4 d-flex gap-3`}>
+            <header className="d-flex flex-column justify-content-between">
+                <div className="fs-2 ancizar-sans-regular">Sinopsis</div>
+                <button className="btn btn-primary p-2 align-self-start rounded-circle" onClick={modo === "read" ? () => setModo("edit") : onSaveClick} disabled={modo == "submitting"}>
                     {modo === "submitting" ?
                         <span className="d-flex align-items-center mx-2 my-2 spinner-border spinner-border-sm" role="status">
                             <span className="visually-hidden">Cargando...</span>
@@ -52,15 +52,15 @@ const FTextAreaInput = ({ className = '', valorPorDefecto, label, onSave, atribu
                         </>
                     }
                 </button>
-            </div>
+            </header>
 
             <div className={`input-group has-validation`}>
 
                 <div className={`form-floating ${status.error && 'is-invalid'}`}>
                     <textarea
                         maxLength={501}
-                        style={{ "min-height": '200px', overflowY: 'auto' }}
-                        className={`form-control ${status.error && "is-invalid"}`}
+                        style={{ "min-height": '100px', overflowY: 'auto' }}
+                        className={`form-control rounded-4 ${status.error && "is-invalid"}`}
                         disabled={modo != "edit"}
                         id={label}
                         placeholder={label}

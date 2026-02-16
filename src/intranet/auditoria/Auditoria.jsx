@@ -59,11 +59,11 @@ const Auditoria = () => {
                             <table className="table table-hover">
                                 <thead className="">
                                     <tr>
+                                        <th className="">Fecha</th>
+                                        <th className="">Hora</th>
                                         <th className="">Acción</th>
                                         <th className="">Módulo/entidad</th>
                                         {/*<th className="">ID entidad afectada</th>*/}
-                                        <th className="">Fecha</th>
-                                        <th className="">Hora</th>
                                         <th className="">Usuario</th>
                                         <th className="">Detalles</th>
                                     </tr>
@@ -71,8 +71,9 @@ const Auditoria = () => {
                                 <tbody>
                                     {datos.map((el) => (
                                         <tr className="" key={el.id}>
+                                            <td className="" > {format(el.fecha, "yyyy-MM-dd")}</td>
+                                            <td className="">{format(el.fecha, "HH:mm:ss")}</td>
                                             <td className="">
-                                                <span>{el.id}</span>
                                                 <span className={`rounded-5 fw-bold p-1 px-2`}
                                                     style={{
                                                         backgroundColor: `${accionesColores[
@@ -87,8 +88,7 @@ const Auditoria = () => {
                                             </td>
                                             <td className="">{el.entidadAfectada == "" ? "-" : el.entidadAfectada}</td>
                                             {/*<td className="">{el.idEntidad}</td>*/}
-                                            <td className="" > {format(el.fecha, "yyyy-MM-dd")}</td>
-                                            <td className="">{format(el.fecha, "HH:mm:ss")}</td>
+                                            
                                             <td className="">{el.usuario}</td>
                                             <td className="">{el.detalles}</td>
                                         </tr>
