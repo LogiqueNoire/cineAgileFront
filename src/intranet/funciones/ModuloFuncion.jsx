@@ -10,6 +10,8 @@ import Fecha from "@/services/Fecha";
 import TimeService from "@/services/TimeService";
 import { ordenamientoAlfa } from "@/utils";
 import { ToastContext } from "@/context/ToastContextProvider";
+import { infoIcon } from "@/assets/operaciones";
+import cancelarSvg from "@/assets/operaciones/X.svg";
 
 const ModuloFuncion = ({ handlePeliculaChange, handleSalaChange }) => {
     const { showToast } = useContext(ToastContext)
@@ -23,6 +25,7 @@ const ModuloFuncion = ({ handlePeliculaChange, handleSalaChange }) => {
     } = useContext(FuncionesContext);
 
     const [checked, setChecked] = useState(true)
+    const [showInfoPrecio, setShowInfoPrecio] = useState(false)
 
     useEffect(() => {
         obtenerFecha();
@@ -303,7 +306,93 @@ const ModuloFuncion = ({ handlePeliculaChange, handleSalaChange }) => {
                     </div>
 
                     <div className='d-flex w-100 align-items-center'>
-                        <label className='w-100'>Precio base</label>
+                        <div className="d-flex gap-2 w-100 justify-content-start">
+                            <label className=''>Precio base</label>
+                            <button className="btn p-0" onClick={() => { setShowInfoPrecio(!showInfoPrecio) }}>
+                                <img src={infoIcon} alt="info icon" className="" style={{ width: "28px", filter: "invert(100%)" }} />
+                            </button>
+                            {showInfoPrecio && <div className="modal-terminos-overlay">
+                                <div className="modal-terminos w-75 d-flex flex-column align-items-center p-5 rounded-5 ancizar-sans-regular" style={{ "max-height": "80vh", "overflow-y": "auto" }}>
+                                    <div className="w-100 position-relative">
+                                        <button className="btn btn-danger rounded rounded-5 p-2 position-absolute end-0" onClick={() => { setShowInfoPrecio(!showInfoPrecio) }}>
+                                            <img src={cancelarSvg} alt="" />
+                                        </button>
+                                    </div>
+                                    <span className="fs-1 cineagile-blue-500">Fórmula de cálculo de precios</span>
+                                    <div className="d-flex align-items-center justify-content-center w-100 mb-3 gap-2">
+                                        <span className="fs-1 d-flex gap-2 align-items-center text-center">
+                                            <span className="fs-1 cineagile-blue-500">Precio final =</span>
+                                            <span className="" style={{ fontSize: "90px" }}>(</span>
+                                            <span className="fs-2" style={{ lineHeight: "1" }}>Precio<br />base</span>
+                                            <span className="" style={{ fontSize: "90px" }}>+</span>
+                                            <span className="fs-2 text-green-sucess-500" style={{ lineHeight: "1" }}>Aumento<br /><span className="fs-3">por categoría</span></span>
+                                            <span className="" style={{ fontSize: "90px" }}>+</span>
+                                            <span className="fs-2 cineagile-blue-300" style={{ lineHeight: "1" }}>Aumento<br /><span className="fs-3">por dimensión</span></span>
+                                            <span className="" style={{ fontSize: "90px" }}>)</span>
+                                            <span className="" style={{ fontSize: "90px" }}>-</span>
+                                            <span className="fs-2 text-red-danger-500" style={{ lineHeight: "1" }}>Descuento<br />por persona</span>
+                                        </span>
+                                    </div>
+                                    <div className="d-flex">
+                                        <div className="d-flex flex-column align-items-center justify-content-center w-100 mb-3 gap-2 text-green-sucess-500 px-3">
+                                            <span className="fs-2 " style={{ lineHeight: "1" }}>Aumento por categoria</span>
+                                            <span className="fs-3 " style={{ lineHeight: "1" }}>sobre precio base</span>
+                                            <table>
+                                                <tbody>
+                                                    <tr>
+                                                        <td className="fs-3 pe-3">Regular</td>
+                                                        <td className="fs-3 text-end">0%</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td className="fs-3 pe-3">Prime</td>
+                                                        <td className="fs-3 text-end">50%</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div className="d-flex flex-column align-items-center justify-content-center w-100 mb-3 gap-2 cineagile-blue-300 px-3">
+                                            <span className="fs-2 text-nowrap">Aumento por dimensión</span>
+                                            <table>
+                                                <tbody className="">
+                                                    <tr>
+                                                        <td className="fs-3 pe-4">2D</td>
+                                                        <td className="fs-3 ps-4">0 soles</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td className="fs-3 pe-4">3D</td>
+                                                        <td className="fs-3 ps-4">5 soles</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div className="d-flex flex-column align-items-center justify-content-center w-100 mb-3 gap-2 text-red-danger-500 px-3">
+                                            <span className="fs-2 text-nowrap" style={{ lineHeight: "1" }}>Descuento por persona</span>
+                                            <span className="fs-3 " style={{ lineHeight: "1" }}>sobre la suma</span>
+                                            <table>
+                                                <tbody className="">
+                                                    <tr>
+                                                        <td className="fs-3 pe-3">General</td>
+                                                        <td className="fs-3 text-end">0%</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td className="fs-3 pe-3">Niños</td>
+                                                        <td className="fs-3 text-end">50%</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td className="fs-3 pe-3">Mayores de 60</td>
+                                                        <td className="fs-3 text-end">50%</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td className="fs-3 pe-3">CONADIS</td>
+                                                        <td className="fs-3 text-end">70%</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>}
+                        </div>
                         <input value={funcion.nuevoPrecioBase} step="0.1" min="0"
                             disabled={checked && (funcion.funcionElegida === undefined || funcion.codigoFuncion === '')}
                             className='form-control w-100' type="number"

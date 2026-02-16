@@ -50,6 +50,10 @@
   color: var(--cineagile-blue-350);
 }
 
+.cineagile-blue-100 {
+  color: var(--cineagile-blue-100);
+}
+
 .bg-loading{
   background-color: var(--cineagile-blue-200-50)
 }
@@ -191,4 +195,12 @@
   padding: 10px 20px;
   text-decoration: none;
   border: none;
+}
+
+.text-green-sucess-500{
+  color: var(--green-sucess-500);
+}
+
+.text-red-danger-500{
+  color: var(--red-danger-500);
 }

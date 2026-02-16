@@ -4,7 +4,7 @@ import dbIcon from "@/assets/modulos/db.svg"
 import developerIcon from "@/assets/modulos/developer.svg"
 import peliculaIcon from '@/assets/modulos/peliculas.svg'
 import sedeIcon from '@/assets/modulos/sedeIcon.svg'
-import funcionesIcon from '@/assets/modulos/recorder.svg'
+import funcionesIcon from '@/assets/modulos/funciones.svg'
 import genresIcon from '@/assets/modulos/genresIcon.svg'
 import passwordIcon from '@/assets/modulos/password.svg'
 import usuariosInternosIcon from '@/assets/modulos/modulo_usuario_icono.svg'

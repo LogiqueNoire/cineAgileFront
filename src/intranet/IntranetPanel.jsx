@@ -38,7 +38,7 @@ const IntranetPanel = () => {
                     </button>
 
                     <button className="btn btn-primary btn-primary-gradient px-3 d-flex flex-column align-items-center justify-content-center rounded-4 py-3 gap-2" onClick={moverseHaciaFunciones}>
-                        <img src={funcionesIcon} alt="" style={{ width: '90px' }} />
+                        <img src={funcionesIcon} alt="" style={{ width: '95px' }} />
                         <h2 className="ancizar-sans-regular mb-0" style={{lineHeight: "0.8"}}>Funciones</h2>
                     </button>
 
