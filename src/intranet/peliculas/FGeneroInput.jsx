@@ -30,7 +30,7 @@ const generoMakeInitialStatus = (totalGeneros, generosPelicula) => {
     }));
 };
 
-const FGeneroInput = ({ className, valoresPorDefecto, onSave, generos, atributo, required }) => {
+const FGeneroInput = ({ className, valoresPorDefecto, onSave, generos, atributo, required, readOnly }) => {
     const [modo, setModo] = useState("read"); // read, edit, submitting
     // const [ input, setInput ] = useState(valoresPorDefecto);
     const [status, setStatus] = useState({ error: false, msg: null });
@@ -82,7 +82,7 @@ const FGeneroInput = ({ className, valoresPorDefecto, onSave, generos, atributo,
             <div className="d-flex justify-content-between gap-3">
                 <div className="fs-2 ancizar-sans-regular">Géneros</div>
 
-                <button className="btn btn-primary p-2 align-self-start rounded-circle" onClick={modo == "read" ? onEditClick : onSaveClick} disabled={modo == "submitting"}>
+                {!readOnly && <button className="btn btn-primary p-2 align-self-start rounded-circle" onClick={modo == "read" ? onEditClick : onSaveClick} disabled={modo == "submitting"}>
                     {modo == "submitting" ?
                         <output className="d-flex align-items-center mx-2 my-2 spinner-border spinner-border-sm">
                             <span className="visually-hidden">Cargando...</span>
@@ -93,7 +93,7 @@ const FGeneroInput = ({ className, valoresPorDefecto, onSave, generos, atributo,
                             : modo == "edit" ?
                                 <img className="p-1" src={saveIcon} style={{ "width": "32px", "height": "32px" }} /> : "")
                     }
-                </button>
+                </button>}
             </div>
 
             <div className={`col ${status.error && ''}`}>

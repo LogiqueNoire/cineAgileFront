@@ -38,7 +38,7 @@ const LoginForm = () => {
             }).catch(err => {
                 //console.log("Intentando login con", err)
                 if (err.code == "ERR_NETWORK")
-                    setStatus({ isError: true, details: "Conexión de red." });
+                    setStatus({ isError: true, details: "Conexión de red" });
                 else
                     setStatus({ isError: true, details: err.response.data.error });
             }).finally(_ => {

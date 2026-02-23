@@ -11,7 +11,7 @@ import Contador from "@/components/contador/Contador";
 import Entrada from "@/services/Entrada";
 import { format, isBefore } from "date-fns";
 
-import cancelarSvg from "@/assets/operaciones/X.svg";
+import { cancelIcon } from "@/assets/operaciones";
 import { env } from "@/configuracion/backend";
 
 const ventanas = [ButacaPage, PreciosPage, PagoPage];
@@ -154,7 +154,7 @@ const FlujoVenta = () => {
                     <div className="d-flex justify-content-end gap-3">
                         <Contador onCancelar={onCancelar} />
                         <button disabled={contexto.general.submitting || cancelling} className="btn btn-danger rounded rounded-5 p-2" onClick={onCancelarBtn}>
-                            <img src={cancelarSvg} alt="" />
+                            <img src={cancelIcon} alt="" />
                         </button>
                     </div>
                 </div>

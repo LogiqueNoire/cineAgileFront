@@ -9,7 +9,7 @@ import SalaButaca from "@/services/SalaButaca.js";
 import { apagarIcon, editIcon } from "@/assets/operaciones";
 import { ToastContext } from "@/context/ToastContextProvider";
 
-export const ModalSalas = ({ onClose, sede }) => {
+export const ModalSalas = ({ onClose, sede, user }) => {
   const { showToast } = useContext(ToastContext)
   const navigate = useNavigate();
   const [codigoSalaGuardar, setCodigoSalaGuardar] = useState('')
@@ -83,7 +83,7 @@ export const ModalSalas = ({ onClose, sede }) => {
 
   return (
     <div className="modal-terminos-overlay">
-      <div className="modal-terminos mx-3 d-flex flex-column align-items-center" style={{ "max-height": "80vh", "overflow-y": "auto" }}>
+      <div className="modal-terminos mx-3 d-flex flex-column align-items-center" style={{ maxHeight: "80vh", overflowY: "auto" }}>
         <h3 className="modal-terminos-title fs-3 my-2 ancizar-sans-regular">Sede {sede.nombre}</h3>
 
         <div className="w-100 d-flex justify-content-between gap-2">
@@ -91,9 +91,10 @@ export const ModalSalas = ({ onClose, sede }) => {
             Cerrar
           </button>
 
-          <button className='btn btn-primary btn-primary-gradient' onClick={irACrearSala}>
-            Crear nueva sala
-          </button>
+          {(user?.role.includes("ROLE_ADMIN") || (user?.role.includes("ROLE_SEDE_ADMIN") && user?.sede.includes(sede.nombre))) &&
+            <button className='btn btn-primary btn-primary-gradient' onClick={irACrearSala}>
+              Crear nueva sala
+            </button>}
         </div>
 
         {loading ?
@@ -104,7 +105,8 @@ export const ModalSalas = ({ onClose, sede }) => {
                 <tr className=''>
                   <td className='fw-bold'>Sala</td>
                   <td className='fw-bold'>Categoría</td>
-                  <td className='fw-bold'>Acciones</td>
+                  {(user?.role.includes("ROLE_ADMIN") || (user?.role.includes("ROLE_SEDE_ADMIN") && user?.sede.includes(sede.nombre))) &&
+                  <td className='fw-bold'>Acciones</td>}
                 </tr>
               </thead>
 
@@ -136,7 +138,7 @@ export const ModalSalas = ({ onClose, sede }) => {
                         disabled
                       />
                     </td>
-                    <td>
+                    {(user?.role.includes("ROLE_ADMIN") || (user?.role.includes("ROLE_SEDE_ADMIN") && user?.sede.includes(sede.nombre))) && <td>
                       <div className="d-flex gap-2">
                         <button className="btn btn-primary btn-primary-gradient py-0 px-2" onClick={() => { onDetallesClick(el) }} style={{ lineHeight: "0.9" }}>
                           <img src={editIcon} width={"25px"} height={"25px"} alt="edit" />
@@ -147,7 +149,7 @@ export const ModalSalas = ({ onClose, sede }) => {
                           <img src={apagarIcon} style={{ height: '33px' }} alt="apagar" />
                         </BotonCarga>
                       </div>
-                    </td>
+                    </td>}
                   </tr>
                 ))}
               </tbody>

@@ -11,7 +11,7 @@ import TimeService from "@/services/TimeService";
 import { ordenamientoAlfa } from "@/utils";
 import { ToastContext } from "@/context/ToastContextProvider";
 import { infoIcon } from "@/assets/operaciones";
-import cancelarSvg from "@/assets/operaciones/X.svg";
+import { cancelIcon } from "@/assets/operaciones";
 
 const ModuloFuncion = ({ handlePeliculaChange, handleSalaChange }) => {
     const { showToast } = useContext(ToastContext)
@@ -26,6 +26,7 @@ const ModuloFuncion = ({ handlePeliculaChange, handleSalaChange }) => {
 
     const [checked, setChecked] = useState(true)
     const [showInfoPrecio, setShowInfoPrecio] = useState(false)
+    const [showInfoHoraInicio, setShowInfoHoraInicio] = useState(false)
 
     useEffect(() => {
         obtenerFecha();
@@ -256,7 +257,55 @@ const ModuloFuncion = ({ handlePeliculaChange, handleSalaChange }) => {
                             onChange={(e) => setFuncion(prev => ({ ...prev, nuevaFecha: e.target.value }))} />
                     </div>
                     <div className='d-flex w-100 align-items-center'>
-                        <span className='w-100'>Hora de inicio<br></br><span style={{ fontSize: "0.9rem" }}>(formato según dispositivo)</span></span>
+                        <div className="d-flex gap-2 w-100 justify-content-start">
+                            <span className='d-flex align-items-center' style={{ lineHeight: 1 }}>Hora de inicio</span>
+                            <button className="btn p-0" onClick={() => { setShowInfoHoraInicio(!showInfoHoraInicio) }}>
+                                <img src={infoIcon} alt="info icon" className="" style={{ width: "28px", filter: "invert(100%)" }} />
+                            </button>
+                        </div>
+                        {showInfoHoraInicio &&
+                            <div className="modal-terminos-overlay">
+                                <div className="modal-terminos w-75 d-flex flex-column align-items-center p-5 rounded-5 ancizar-sans-regular" style={{ "max-height": "80vh", "overflow-y": "auto" }}>
+                                    <div className="w-100 position-relative">
+                                        <button className="btn btn-danger rounded rounded-5 p-2 position-absolute end-0" onClick={() => { setShowInfoHoraInicio(!showInfoHoraInicio) }}>
+                                            <img src={cancelIcon} alt="" />
+                                        </button>
+                                    </div>
+                                    <div className="d-flex flex-column gap-3 w-100">
+                                        <span className="w-100 fs-1 cineagile-blue-500 pe-5">
+                                            El formato y la apariencia del timepicker<br></br>dependen del navegador y del sistema operativo.
+                                        </span>
+                                        <span className="w-100 fs-3 cineagile-blue-300">¿Qué lo determina?</span>
+
+                                        <span className="w-100 fs-4">{"1) Sistema operativo (Windows, Android, iOS)"}</span>
+                                        <span className="w-100 fs-4">{"2) Navegador (Chrome, Edge, Safari, Firefox)"}</span>
+                                        <span className="w-100 fs-4">{"3) Configuración regional del usuario"}</span>
+                                        <span className="w-100 fs-4">{"4) Formato de hora del sistema (12h vs 24h)"}</span>
+
+                                        <span className="w-100 fs-3 cineagile-blue-300">{"Ejemplos reales ->"}</span>
+                                        <div className="d-flex w-100 overflow-x-auto gap-3">
+                                            <div className="d-flex flex-column" style={{ width: "420px" }}>
+                                                <span className="w-100 fs-3 text-nowrap cineagile-blue-500">En Android (Chrome)</span>
+                                                <span className="w-100 fs-5 text-nowrap">Selector tipo reloj o spinner</span>
+                                                <span className="w-100 fs-5 text-nowrap">Puede mostrarse en formato 12h (AM/PM)</span>
+                                            </div>
+                                            <div className="d-flex flex-column" style={{ width: "450px" }}>
+                                                <span className="w-100 fs-3 text-nowrap cineagile-blue-500">En iPhone (Safari)</span>
+                                                <span className="w-100 fs-5 text-nowrap">Spinner vertical estilo iOS</span>
+                                                <span className="w-100 fs-5 text-nowrap">Normalmente 12h si el sistema está en ese formato</span>
+                                            </div>
+                                            <div className="d-flex flex-column" style={{ width: "450px" }}>
+                                                <span className="w-100 fs-3 text-nowrap cineagile-blue-500">En Windows (Chrome)</span>
+                                                <span className="w-100 fs-5 text-nowrap">Selector desplegable</span>
+                                                <span className="w-100 fs-5 text-nowrap">Puede mostrar 24h dependiendo de la región</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+
+
                         <input className='form-control w-100' type="time"
                             disabled={checked ? (funcion.funcionElegida === undefined || funcion.codigoFuncion === '')
                                 : (funcion.nuevaPeliculaId == '' || funcion.nuevaPeliculaId == 0)}
@@ -307,87 +356,93 @@ const ModuloFuncion = ({ handlePeliculaChange, handleSalaChange }) => {
 
                     <div className='d-flex w-100 align-items-center'>
                         <div className="d-flex gap-2 w-100 justify-content-start">
-                            <label className=''>Precio base</label>
+                            <label className='d-flex align-items-center' style={{ lineHeight: 1 }}>Precio base</label>
                             <button className="btn p-0" onClick={() => { setShowInfoPrecio(!showInfoPrecio) }}>
                                 <img src={infoIcon} alt="info icon" className="" style={{ width: "28px", filter: "invert(100%)" }} />
                             </button>
                             {showInfoPrecio && <div className="modal-terminos-overlay">
-                                <div className="modal-terminos w-75 d-flex flex-column align-items-center p-5 rounded-5 ancizar-sans-regular" style={{ "max-height": "80vh", "overflow-y": "auto" }}>
+                                <div className="modal-terminos w-75 d-flex flex-column align-items-center p-5 rounded-5 ancizar-sans-regular"
+                                    style={{ "max-height": "80vh", "overflow-y": "auto" }}>
                                     <div className="w-100 position-relative">
-                                        <button className="btn btn-danger rounded rounded-5 p-2 position-absolute end-0" onClick={() => { setShowInfoPrecio(!showInfoPrecio) }}>
-                                            <img src={cancelarSvg} alt="" />
+                                        <p className="fs-1 cineagile-blue-500 pe-5 mb-0">Fórmula de cálculo de precios</p>
+                                        <button className="btn btn-danger rounded rounded-5 p-2 position-absolute end-0 top-0" onClick={() => { setShowInfoPrecio(!showInfoPrecio) }}>
+                                            <img src={cancelIcon} alt="" />
                                         </button>
                                     </div>
-                                    <span className="fs-1 cineagile-blue-500">Fórmula de cálculo de precios</span>
-                                    <div className="d-flex align-items-center justify-content-center w-100 mb-3 gap-2">
-                                        <span className="fs-1 d-flex gap-2 align-items-center text-center">
-                                            <span className="fs-1 cineagile-blue-500">Precio final =</span>
-                                            <span className="" style={{ fontSize: "90px" }}>(</span>
-                                            <span className="fs-2" style={{ lineHeight: "1" }}>Precio<br />base</span>
-                                            <span className="" style={{ fontSize: "90px" }}>+</span>
-                                            <span className="fs-2 text-green-sucess-500" style={{ lineHeight: "1" }}>Aumento<br /><span className="fs-3">por categoría</span></span>
-                                            <span className="" style={{ fontSize: "90px" }}>+</span>
-                                            <span className="fs-2 cineagile-blue-300" style={{ lineHeight: "1" }}>Aumento<br /><span className="fs-3">por dimensión</span></span>
-                                            <span className="" style={{ fontSize: "90px" }}>)</span>
-                                            <span className="" style={{ fontSize: "90px" }}>-</span>
-                                            <span className="fs-2 text-red-danger-500" style={{ lineHeight: "1" }}>Descuento<br />por persona</span>
-                                        </span>
-                                    </div>
-                                    <div className="d-flex">
-                                        <div className="d-flex flex-column align-items-center justify-content-center w-100 mb-3 gap-2 text-green-sucess-500 px-3">
-                                            <span className="fs-2 " style={{ lineHeight: "1" }}>Aumento por categoria</span>
-                                            <span className="fs-3 " style={{ lineHeight: "1" }}>sobre precio base</span>
-                                            <table>
-                                                <tbody>
-                                                    <tr>
-                                                        <td className="fs-3 pe-3">Regular</td>
-                                                        <td className="fs-3 text-end">0%</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td className="fs-3 pe-3">Prime</td>
-                                                        <td className="fs-3 text-end">50%</td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                        <div className="d-flex flex-column align-items-center justify-content-center w-100 mb-3 gap-2 cineagile-blue-300 px-3">
-                                            <span className="fs-2 text-nowrap">Aumento por dimensión</span>
-                                            <table>
-                                                <tbody className="">
-                                                    <tr>
-                                                        <td className="fs-3 pe-4">2D</td>
-                                                        <td className="fs-3 ps-4">0 soles</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td className="fs-3 pe-4">3D</td>
-                                                        <td className="fs-3 ps-4">5 soles</td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                        <div className="d-flex flex-column align-items-center justify-content-center w-100 mb-3 gap-2 text-red-danger-500 px-3">
-                                            <span className="fs-2 text-nowrap" style={{ lineHeight: "1" }}>Descuento por persona</span>
-                                            <span className="fs-3 " style={{ lineHeight: "1" }}>sobre la suma</span>
-                                            <table>
-                                                <tbody className="">
-                                                    <tr>
-                                                        <td className="fs-3 pe-3">General</td>
-                                                        <td className="fs-3 text-end">0%</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td className="fs-3 pe-3">Niños</td>
-                                                        <td className="fs-3 text-end">50%</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td className="fs-3 pe-3">Mayores de 60</td>
-                                                        <td className="fs-3 text-end">50%</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td className="fs-3 pe-3">CONADIS</td>
-                                                        <td className="fs-3 text-end">70%</td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
+                                    <div className="d-flex w-100 overflow-x-auto justify-content-around">
+                                        <div className="d-flex flex-column">
+                                            <div className="d-flex align-items-center justify-content-center w-100 mb-3 gap-2">
+                                                <span className="fs-1 d-flex gap-2 align-items-center text-center">
+                                                    <span className="fs-1 cineagile-blue-500 " style={{ lineHeight: "1" }}>Precio<br></br>final</span>
+                                                    <span className="cineagile-blue-500" style={{ fontSize: "65px", fontFamily: "Arial" }}>=</span>
+                                                    <span className="cineagile-blue-500" style={{ fontSize: "110px" }}>(</span>
+                                                    <span className="fs-1" style={{ lineHeight: "1" }}>Precio<br />base</span>
+                                                    <span className="cineagile-blue-500" style={{ fontSize: "90px", fontFamily: "Arial" }}>+</span>
+                                                    <span className="fs-2 text-green-sucess-500" style={{ lineHeight: "1" }}>Aumento<br /><span className="fs-4 text-nowrap">por categoría</span><br /><span className="fs-4">de sala</span></span>
+                                                    <span className="cineagile-blue-500" style={{ fontSize: "90px", fontFamily: "Arial", lineHeight: "0.4" }}>+</span>
+                                                    <span className="fs-2 cineagile-blue-300" style={{ lineHeight: "1" }}>Aumento<br /><span className="fs-4 text-nowrap">por dimensión</span><br /><span className="fs-4">de película</span></span>
+                                                    <span className="cineagile-blue-500" style={{ fontSize: "110px" }}>)</span>
+                                                    <span className="cineagile-blue-500" style={{ fontSize: "85px", fontFamily: "Arial" }}>–</span>
+                                                    <span className="fs-2 text-red-danger-500" style={{ lineHeight: "1" }}>Descuento<br />por persona</span>
+                                                </span>
+                                            </div>
+                                            <div className="d-flex">
+                                                <div className="d-flex flex-column align-items-center justify-content-center w-100 mb-3 gap-2 text-green-sucess-500 px-3">
+                                                    <span className="fs-2 text-center" style={{ lineHeight: "1" }}>Aumento por<br></br>categoría de sala</span>
+                                                    <span className="fs-3 " style={{ lineHeight: "1" }}>sobre precio base</span>
+                                                    <table>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td className="fs-3 pe-3">Regular</td>
+                                                                <td className="fs-3 text-end">0%</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td className="fs-3 pe-3">Prime</td>
+                                                                <td className="fs-3 text-end">50%</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <div className="d-flex flex-column align-items-center justify-content-center w-100 mb-3 gap-2 cineagile-blue-300 px-3">
+                                                    <span className="fs-2 text-nowrap text-center" style={{ lineHeight: "1" }}>Aumento por<br></br>dimensión de función</span>
+                                                    <table>
+                                                        <tbody className="">
+                                                            <tr>
+                                                                <td className="fs-3 pe-4">2D</td>
+                                                                <td className="fs-3 ps-4">0 soles</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td className="fs-3 pe-4">3D</td>
+                                                                <td className="fs-3 ps-4">5 soles</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <div className="d-flex flex-column align-items-center justify-content-center w-100 mb-3 gap-2 text-red-danger-500 px-3">
+                                                    <span className="fs-2 text-nowrap" style={{ lineHeight: "1" }}>Descuento por persona</span>
+                                                    <span className="fs-3 " style={{ lineHeight: "1" }}>sobre la suma</span>
+                                                    <table>
+                                                        <tbody className="">
+                                                            <tr>
+                                                                <td className="fs-3 pe-3">General</td>
+                                                                <td className="fs-3 text-end">0%</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td className="fs-3 pe-3">Niños</td>
+                                                                <td className="fs-3 text-end">50%</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td className="fs-3 pe-3">Mayores de 60</td>
+                                                                <td className="fs-3 text-end">50%</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td className="fs-3 pe-3">CONADIS</td>
+                                                                <td className="fs-3 text-end">70%</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

@@ -9,7 +9,7 @@ class Usuario {
             headers: { Authorization: `Bearer ${Cookies.get("auth-token")}` }
         })
 
-        return res.data;
+        return res;
     }
 
     static async crearUsuario(datosFormulario) {

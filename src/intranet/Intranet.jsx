@@ -7,12 +7,13 @@ import './Intranet.css'
 
 const Intranet = () => {
     const navigate = useNavigate();
-    const [ username, setUsername ] = useState(null);
+    const [ user, setUser ] = useState(null);
 
     useEffect(() => {
         if (Cookies.get("auth-token")) {
             Auth.getUser().then((u) => {
-                setUsername(u);
+                setUser(u);
+                console.log(u)
             }).catch(err => {
                 console.log(err);
                 Cookies.remove("auth-token");
@@ -27,7 +28,7 @@ const Intranet = () => {
 
     const onCerrarSesion = () => {
         Cookies.remove("auth-token");
-        setUsername(null);
+        setUser(null);
         navigate("/intranet/login")
     }
 
@@ -35,9 +36,9 @@ const Intranet = () => {
         <>
             <Header>
                 {
-                    username &&
+                    user?.username &&
                     <div className='d-flex align-items-center gap-4 sesion-group'>
-                        <span className='ancizar-sans-regular mb-0 text-end fs-5'>Usuario: { username }</span>
+                        <span className='ancizar-sans-regular mb-0 text-end fs-5'>Usuario: { user.username }</span>
                         <button className='btn btn-danger btn-danger-gradient fs-5' onClick={onCerrarSesion}>Cerrar sesión</button>
                     </div>
                 }
@@ -46,7 +47,7 @@ const Intranet = () => {
 
             {
                 <div className="contenedor container-fluid">
-                    <Outlet context={{ setUsername }} />
+                    <Outlet context={{ user, setUser }} />
                 </div>
             }
 

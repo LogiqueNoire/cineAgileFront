@@ -3,6 +3,7 @@ import { useContext } from "react";
 import { FuncionesContext } from "./FuncionesContext";
 import './Cronograma.css'
 import { env } from "@/configuracion/backend";
+import { coloresCronograma } from "../colorsConfig";
 
 const Cronograma = () => {
   const {
@@ -15,28 +16,7 @@ const Cronograma = () => {
     env === "dev" && console.log(listaFunciones)
   }, [listaFunciones])
 
-  const colores = [
-    "#f0c9b3", // anaranjado claro (hue 20)
-    "#f1d5b3", // durazno claro (hue 35)
-    "#f1deb3", // amarillo cálido (hue 45)
-    "#f1e6b3", // amarillo claro (hue 55)
-    "#fcffa8", // amarillo puro
-    "#edf0b3", // lima pálido (hue 65)
-    "#e3f0b3", // verde lima claro (hue 75)
-    "#caf0b3", // verde suave (hue 100)
-    "#b3f0c1", // verde menta (hue 125)
-    "#b3f0cc", // verde agua (hue 135)
-    "#b3f0d8", // turquesa claro (hue 145)
-    "#b3eee6", // cian pálido (hue 160)
-    "#b3e6e6", // cian suave (hue 180)
-    "#b3d6f0", // celeste (hue 200)
-    "#b3cdf0", // azul claro (hue 210)
-    "#c1b3f0", // violeta suave (hue 230)
-    "#d6b3f0",  // lila claro (hue 250)
-    "#a7bdcd", // azul grisáceo (hue 270)
-    "#c5ac87", // marrón claro (hue 290)
-    "#cccccc" // gris claro (hue 0)
-  ];
+  
 
   if (!listaFunciones.length) return null;
   const diasDeLaSemana = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'];
@@ -108,7 +88,7 @@ const Cronograma = () => {
                             && AdespuesB(new Date(el.fechaHoraFin), horaDelDia)) &&
                             <div className='text-center p-2'
                               onClick={(e) => { e.preventDefault(); setFuncion(prev => ({ ...prev, funcionElegida: el })) }}
-                              style={{ backgroundColor: `${colores[el.idFuncion % colores.length]}` }}>
+                              style={{ backgroundColor: `${coloresCronograma[el.idFuncion % coloresCronograma.length]}` }}>
                               <h6 className="ancizar-sans-regular mb-0">{'#' + el.idFuncion}</h6>
                               <h6 className="ancizar-sans-regular mb-0">{formatearHora(el.fechaHoraInicio) + '-' + formatearHora(el.fechaHoraFin)}</h6>
                               <h6 className="ancizar-sans-regular mb-0">

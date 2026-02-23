@@ -7,7 +7,7 @@ import { backend_url, env } from "@/configuracion/backend"
 import Loading from '@/components/loading/Loading';
 import { ModalSalas } from './ModalSalas'
 import Cookies from 'js-cookie';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useOutletContext } from 'react-router-dom';
 import "./VentanaSedesYSalas.css"
 import { ToastContext } from '@/context/ToastContextProvider';
 
@@ -21,6 +21,8 @@ const VentanaSedesYSalas = () => {
 
     const [sede, setSede] = useState(null);
     const [loading, setLoading] = useState(true);
+
+    const { user } = useOutletContext()
 
     const consultar = () => {
         axios.get(`${backend_url}/api/intranet/v1/sedes`, {
@@ -99,7 +101,7 @@ const VentanaSedesYSalas = () => {
 
     return (
         <div className='d-flex flex-column align-items-center container-fluid'>
-            <AddSede onSucess={consultar}></AddSede>
+            {user.role.includes("ROLE_ADMIN") && <AddSede onSucess={consultar}></AddSede>}
             <h2 className="text-center mt-5 ancizar-sans-regular mb-0">Sedes registradas</h2>
             {loading === true
                 ? <Loading></Loading> :
@@ -127,16 +129,16 @@ const VentanaSedesYSalas = () => {
                                     </td>
                                     <td className='td2 tdOpciones' data-label='Acciones'>
                                         <div className='d-flex justify-content-center gap-2' style={{ 'width': 'min-content' }} >
-                                            <button className='btn btn-primary btn-primary-gradient d-flex gap-2' onClick={() => actualizarSede(el)}
+                                            {user.role.includes("ROLE_ADMIN") && <button className='btn btn-primary btn-primary-gradient d-flex gap-2' onClick={() => actualizarSede(el)}
                                                 style={{ 'padding': '11px' }}>
                                                 <img src={saveIcon} alt="" style={{ height: '23px' }} />
-                                            </button>
+                                            </button>}
 
-                                            <button className={el.activo ? 'btn btn-success rounded-circle d-flex gap-2' : 'btn btn-danger rounded-circle d-flex gap-2'}
+                                            {user.role.includes("ROLE_ADMIN") && <button className={el.activo ? 'btn btn-success rounded-circle d-flex gap-2' : 'btn btn-danger rounded-circle d-flex gap-2'}
                                                 onClick={() => apagarPrender(el)}
                                                 style={{ padding: '6px' }}>
                                                 <img src={apagarIcon} alt="" style={{ height: '33px' }} />
-                                            </button>
+                                            </button>}
 
                                             <button className='btn btn-primary btn-primary-gradient d-flex gap-2 px-3' style={{ paddingTop: "10px", paddingBottom: "10px" }} onClick={() => setSede(lista[id])}>
                                                 <label className="" style={{ fontSize: "20px", lineHeight: "1.2" }}>Salas</label>
@@ -150,7 +152,7 @@ const VentanaSedesYSalas = () => {
 
                     </table>)
             }
-            {sede && <ModalSalas onClose={() => setSede(null)} sede={sede} />}
+            {sede && <ModalSalas onClose={() => setSede(null)} sede={sede} user={user} />}
         </div>
     )
 }

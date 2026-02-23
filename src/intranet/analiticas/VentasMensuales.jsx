@@ -49,6 +49,8 @@ const VentasMensuales = () => {
             }
             setVentasMensuales(resultado)
         } catch (error) {
+            if (error.response.status === 403)
+                navigate("/intranet")
             console.error(error);
         } finally {
             setLoading(false)

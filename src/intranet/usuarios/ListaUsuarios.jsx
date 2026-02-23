@@ -3,7 +3,7 @@ import Usuario from "@/services/Usuario";
 import Loading from "@/components/loading/Loading";
 import usuarioIcon from "@/assets/modulos/modulo_usuario_icono.svg"
 import { env } from "@/configuracion/backend";
-
+import { rolesColors } from "../colorsConfig";
 
 const ListaUsuarios = ({ actualizado }) => {
     const [usuarios, setUsuarios] = useState([]);
@@ -12,9 +12,9 @@ const ListaUsuarios = ({ actualizado }) => {
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        Usuario.mostrarUsuarios().then(lista => {
-            env === "dev" && console.log(lista);
-            setUsuarios(lista);
+        Usuario.mostrarUsuarios().then(response => {
+            env === "dev" && console.log(response);
+            setUsuarios(response.data);
         }).catch(err => {
             setError("Error!")
             console.log(err);
@@ -43,72 +43,24 @@ const ListaUsuarios = ({ actualizado }) => {
                                 <tr>
                                     <td>Usuario</td>
                                     <td>Sede</td>
-                                    <td>Módulos</td>
+                                    <td>Rol</td>
+                                    {/*<td>Módulos</td>*/}
                                     {/*<td>Acciones</td>*/}
                                 </tr>
                             </thead>
 
                             <tbody>
-                                {usuarios.map(el => (
-                                    <tr className="">
+                                {usuarios.length > 0 && usuarios.map(el => (
+                                    <tr className="" key={el.username}>
                                         <td className="w-50">{el.username}</td>
                                         <td className="w-50 text-wrap">{el.nombreSede ? el.nombreSede : "Todos"}</td>
-                                        <td className="d-flex flex-row" style={{ width: 'max-content' }}>
-                                            <div className="d-flex flex-column" style={{ width: 'max-content' }}>
-                                                <span>Operaciones</span>
-                                                <div className="align-items-center">
-                                                    <label className="switch m-2">
-                                                        <input type="checkbox" checked={{}} onChange={{}} />
-                                                        <span className="slider round"></span>
-                                                    </label>
-                                                    <span className="d-block-inline">Películas</span>
-                                                </div>
-                                                <div className="align-items-center">
-                                                    <label className="switch m-2">
-                                                        <input type="checkbox" checked={{}} onChange={{}} />
-                                                        <span className="slider round"></span>
-                                                    </label>
-                                                    <span className="d-inline-grid">Sedes, salas y butacas</span>
-                                                </div>
-                                                <div className="align-items-center">
-                                                    <label className="switch m-2">
-                                                        <input type="checkbox" checked={{}} onChange={{}} />
-                                                        <span className="slider round"></span>
-                                                    </label>
-                                                    <span className="d-inline-grid">Funciones</span>
-                                                </div>
-                                                <div className="align-items-center">
-                                                    <label className="switch m-2">
-                                                        <input type="checkbox" checked={{}} onChange={{}} />
-                                                        <span className="slider round"></span>
-                                                    </label>
-                                                    <span className="d-inline-grid">Géneros</span>
-                                                </div>
-                                            </div>
-                                            <div className="d-flex flex-column">
-                                                <span>Insights</span>
-                                                <div className="align-items-center">
-                                                    <label className="switch m-2">
-                                                        <input type="checkbox" checked={{}} onChange={{}} />
-                                                        <span className="slider round"></span>
-                                                    </label>
-                                                    <span>Analíticas</span>
-                                                </div>
-                                                <div className="align-items-center">
-                                                    <label className="switch m-2">
-                                                        <input type="checkbox" checked={{}} onChange={{}} />
-                                                        <span className="slider round"></span>
-                                                    </label>
-                                                    <span>Usuarios</span>
-                                                </div>
-                                                <div className="align-items-center">
-                                                    <label className="switch m-2">
-                                                        <input type="checkbox" checked={{}} onChange={{}} />
-                                                        <span className="slider round"></span>
-                                                    </label>
-                                                    <span>Auditorías</span>
-                                                </div>
-                                            </div>
+                                        <td className="d-flex">
+                                            <span className="rounded-5 fw-bold p-1 px-2 d-flex"
+                                                style={{ background: rolesColors[rolesColors.findIndex((rol) => rol[0] === el.role)][1],
+                                                    color: rolesColors[rolesColors.findIndex((rol) => rol[0] === el.role)][2]
+                                                 }}>
+                                                {el.role ? el.role.replace("_", " ") : "-"}
+                                            </span>
                                         </td>
                                         {/*<td className="col-4 text-center"><button className="btn btn-primary">Detalles</button></td>*/}
                                     </tr>
@@ -118,7 +70,7 @@ const ListaUsuarios = ({ actualizado }) => {
                     }
                 </div>
             </div>
-        </div>
+        </div >
     );
 
 }

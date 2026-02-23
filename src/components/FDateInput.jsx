@@ -2,7 +2,7 @@ import { useState } from "react";
 import { format } from "date-fns";
 import { editIcon, saveIcon } from "@/assets/operaciones";
 
-const FDateInput = ({ className = '', valorPorDefecto, label, onSave, atributo, required }) => {
+const FDateInput = ({ className = '', valorPorDefecto, label, onSave, atributo, required, readOnly }) => {
     const [modo, setModo] = useState("read"); //"read" || "edit" || "submitting"
     const [input, setInput] = useState(valorPorDefecto || '');
     const [status, setStatus] = useState({ error: false, msg: null });
@@ -42,11 +42,12 @@ const FDateInput = ({ className = '', valorPorDefecto, label, onSave, atributo, 
                 <input type="date"
                     onKeyDown={(e) => e.preventDefault()}
                     min={format(new Date(), 'yyyy-MM-dd')}
-                    className={`form-control rounded-start-pill ${status.error && "is-invalid"}`} id={label} placeholder={label} disabled={modo != "edit"}
+                    className={`form-control rounded-start-pill ${status.error && "is-invalid"} ${readOnly && "rounded-end-pill"}`}
+                     id={label} placeholder={label} disabled={modo != "edit"}
                     value={input} onChange={onChange} />
                 <label htmlFor={label}>{label}</label>
             </div>
-            <button className="btn btn-primary py-2 px-4 rounded-end-pill" onClick={modo === "read" ? () => setModo("edit") : onSaveClick} disabled={modo === "submitting"}>
+            {!readOnly && <button className="btn btn-primary py-2 px-4 rounded-end-pill" onClick={modo === "read" ? () => setModo("edit") : onSaveClick} disabled={modo === "submitting"}>
                 {modo === "submitting" ?
                     <span className="d-flex align-items-center mx-2 my-2 spinner-border spinner-border-sm" role="status">
                         <span className="visually-hidden">Cargando...</span>
@@ -57,7 +58,7 @@ const FDateInput = ({ className = '', valorPorDefecto, label, onSave, atributo, 
                         {modo === "edit" && <img src={saveIcon} alt="guardar" style={{ "width": "32px", "height": "32px" }} />}
                     </>
                 }
-            </button>
+            </button>}
 
             {status.msg &&
                 <div className="invalid-feedback">

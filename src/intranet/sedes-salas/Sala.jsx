@@ -145,7 +145,7 @@ const Sala = () => {
 
                 <div className="bg-white row rounded-4 shadow p-5 overflow-auto d-flex flex-column">
                     <h2 className="ancizar-sans-regular mb-0 cineagile-blue-500 text-center">Organización de la sala</h2>
-                    <div className="my-4 align-self-center">
+                    <div className="my-4 align-self-center justify-content-around">
                         {modo != "editar" ?
                             <OrganizadorButacas setButacasExt={setButacas} /> :
                             <EditorButacas cambios={butacas} setCambios={setButacas} butacasExistentes={sala.butacas} />

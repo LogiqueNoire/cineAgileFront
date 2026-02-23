@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { editIcon, saveIcon } from "@/assets/operaciones";
 
-const FTextAreaInput = ({ className = '', valorPorDefecto, label, onSave, atributo, required }) => {
+const FTextAreaInput = ({ className = '', valorPorDefecto, label, onSave, atributo, required, readOnly }) => {
     const [modo, setModo] = useState("read"); //"read" || "edit" || "submitting"
     const [input, setInput] = useState(valorPorDefecto);
     const [status, setStatus] = useState({ error: false, msg: null });
@@ -40,7 +40,7 @@ const FTextAreaInput = ({ className = '', valorPorDefecto, label, onSave, atribu
         <div className={`${className} p-4 shadow rounded-4 d-flex gap-3`}>
             <header className="d-flex flex-column justify-content-between">
                 <div className="fs-2 ancizar-sans-regular">Sinopsis</div>
-                <button className="btn btn-primary p-2 align-self-start rounded-circle" onClick={modo === "read" ? () => setModo("edit") : onSaveClick} disabled={modo == "submitting"}>
+                {!readOnly && <button className="btn btn-primary p-2 align-self-start rounded-circle" onClick={modo === "read" ? () => setModo("edit") : onSaveClick} disabled={modo == "submitting"}>
                     {modo === "submitting" ?
                         <span className="d-flex align-items-center mx-2 my-2 spinner-border spinner-border-sm" role="status">
                             <span className="visually-hidden">Cargando...</span>
@@ -51,7 +51,7 @@ const FTextAreaInput = ({ className = '', valorPorDefecto, label, onSave, atribu
                             {modo === "edit" && <img src={saveIcon} alt="guardar" style={{ "width": "32px", "height": "32px" }} />}
                         </>
                     }
-                </button>
+                </button>}
             </header>
 
             <div className={`input-group has-validation`}>

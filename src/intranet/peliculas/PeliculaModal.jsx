@@ -11,7 +11,7 @@ import Loading from "@/components/loading/Loading";
 import Genero from "@/services/Genero";
 import { ordenamientoAlfa } from "@/utils";
 
-const PeliculaModal = ({ pelicula, onCerrar, consultarPeliculas }) => {
+const PeliculaModal = ({ pelicula, onCerrar, consultarPeliculas, readOnly }) => {
     const [generos, setGeneros] = useState([])
     const [imageSource, setImageSource] = useState(pelicula.imageUrl)
 
@@ -54,23 +54,24 @@ const PeliculaModal = ({ pelicula, onCerrar, consultarPeliculas }) => {
                     </div>
                     <div className="d-flex flex-column gap-3 w-100">
                         <div className="row d-flex gap-3">
-                            <FTextInput className="col-xl" atributo={"nombre"} valorPorDefecto={pelicula.nombre} label={"Nombre (máx. 255 caracteres)"} onSave={onInputSave} required={true} />
-                            <FNumberInput className="col-lg" atributo={"duracion"} valorPorDefecto={pelicula.duracion} label={"Duración (máx. 500 min)"} onSave={onInputSave} required={true} />
-                            <FDateInput className="col-lg" atributo={"fechaEstreno"} valorPorDefecto={pelicula.fechaInicioEstreno} label={"Fecha de estreno"} onSave={onInputSave} required={true} />
+                            <FTextInput className="col-xl" atributo={"nombre"} valorPorDefecto={pelicula.nombre} label={"Nombre (máx. 255 caracteres)"} onSave={onInputSave} required={true} readOnly={readOnly} />
+                            <FNumberInput className="col-lg" atributo={"duracion"} valorPorDefecto={pelicula.duracion} label={"Duración (máx. 500 min)"} onSave={onInputSave} required={true} readOnly={readOnly} />
+                            <FDateInput className="col-lg" atributo={"fechaEstreno"} valorPorDefecto={pelicula.fechaInicioEstreno} label={"Fecha de estreno"} onSave={onInputSave} required={true} readOnly={readOnly} />
                         </div>
                         <div className="row gap-3">
-                            <FTextInput className="col-xl" atributo={"actores"} valorPorDefecto={pelicula.actores} label={"Actores (opcional, máx. 255 caracteres)"} onSave={onInputSave} />
-                            <FTextInput className="col-lg" atributo={"director"} valorPorDefecto={pelicula.director} label={"Director (máx. 255 caracteres)"} onSave={onInputSave} required={true} />
+                            <FTextInput className="col-xl" atributo={"actores"} valorPorDefecto={pelicula.actores} label={"Actores (opcional, máx. 255 caracteres)"} onSave={onInputSave} readOnly={readOnly} />
+                            <FTextInput className="col-lg" atributo={"director"} valorPorDefecto={pelicula.director} label={"Director (máx. 255 caracteres)"} onSave={onInputSave} required={true} readOnly={readOnly} />
                             <FSelectInput className="col-lg" atributo={"clasificacion"}
                                 opciones={["Apto para todos", "+14", "+18"]}
                                 valorPorDefecto={pelicula.clasificacion} label={"Clasificación"} onSave={onInputSave}
                                 required={true}
+                                readOnly={readOnly}
                             />
                         </div>
 
                         <div className="row align-items-center justify-content-between gap-1">
                             <div className="d-flex flex-column gap-2 width-inputImage col-lg">
-                                <FTextInputImage atributo={"urlImagen"} valorPorDefecto={pelicula.imageUrl} label={"Imagen URL (máx. 255 caracteres)"} onSave={onInputSave} required={true} setImage={setImageSource} />
+                                <FTextInputImage atributo={"urlImagen"} valorPorDefecto={pelicula.imageUrl} label={"Imagen URL (máx. 255 caracteres)"} onSave={onInputSave} required={true} setImage={setImageSource} readOnly={readOnly}/>
                                 <span className="text-start px-2">Si el valor no contiene imagen alguna, se mostrará un fondo gris tenue.</span>
                             </div>
                             <div className="d-flex flex-column justify-content-center gap-2" style={{ width: "200px", overflow: "hidden" }}>
@@ -89,12 +90,14 @@ const PeliculaModal = ({ pelicula, onCerrar, consultarPeliculas }) => {
                                         generos={generos}
                                         valoresPorDefecto={pelicula.genero} onSave={onInputSave}
                                         required={true}
+                                        readOnly={readOnly}
                                     />
                                 }
 
                             </div>
                         </div>
-                        <FTextAreaInput className="col" atributo={"sinopsis"} valorPorDefecto={pelicula.sinopsis} label={"Sinopsis (máx. 500 caracteres)"} onSave={onInputSave} required={true} />
+                        <FTextAreaInput className="col" atributo={"sinopsis"} valorPorDefecto={pelicula.sinopsis}
+                            label={"Sinopsis (máx. 500 caracteres)"} onSave={onInputSave} required={true} readOnly={readOnly} />
 
 
                         <div className="row">

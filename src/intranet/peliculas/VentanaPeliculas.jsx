@@ -6,9 +6,11 @@ import { backend_url, env } from "@/configuracion/backend"
 import Loading from '@/components/loading/Loading';
 import Cookies from 'js-cookie';
 import { format, parse } from 'date-fns';
-import { editIcon, linkIcon } from '@/assets/operaciones';
+import { editIcon, linkIcon, seeIcon } from '@/assets/operaciones';
 import PeliculaModal from './PeliculaModal';
 import TimeService from '@/services/TimeService';
+import { estrenoColores, clasificacionColores } from '../colorsConfig';
+import { useOutletContext } from 'react-router-dom';
 
 const ordenamientoFecha = (a, b) => {
     const x = a.fechaInicioEstreno;
@@ -17,22 +19,8 @@ const ordenamientoFecha = (a, b) => {
     return x < y ? -1 : 1;
 }
 
-const estrenoColores = [
-    ["En cartelera", "#b8f8ffff", "#007683ff"], //celeste
-    ["Próximamente", "#fcffa8", "#928100ff"], //amarillo
-    ["Estreno", "#b3f0c1", "#00771cff"], //verde
-    ["Finalizada", "#b3d6f0", "#01518fff"], //azul
-]
-
-const clasificacionColores = [
-    [" ", "#b8f8ffff", "#007683ff"],
-    ["+14", "#fcffa8", "#928100ff"], //amarillo
-    ["Apto para todos", "#b3f0c1", "#00771cff"], //verde
-    ["", "#b3d6f0", "#01518fff"], //azul
-    ["+18", "#f1bcb3ff", "#8a1500ff"], //rojo
-]
-
 const VentanaPeliculas = () => {
+    const { user } = useOutletContext()
     const [fechaReal, setFechaReal] = useState()
 
     const [lista, setLista] = useState([]);
@@ -94,9 +82,9 @@ const VentanaPeliculas = () => {
 
     return (
         <div>
-            <div className='d-flex flex-column gap-5 align-items-center container-fluid'>
-                <AddFilm onSucess={consultarPeliculas}></AddFilm>
-                <div>
+            <div className='d-flex flex-column align-items-center container-fluid'>
+                {user.role.includes("ROLE_ADMIN") && <AddFilm onSucess={consultarPeliculas}></AddFilm>}
+                <div className='mt-5'>
                     <h2 className="text-center ancizar-sans-regular mb-0">Películas registradas</h2>
                     {loading === true
                         ?
@@ -166,8 +154,13 @@ const VentanaPeliculas = () => {
                                                     </a>
                                                 </td>
                                                 <td className='td td-button' data-label="Acciones">
+
                                                     <button className='d-flex align-items-center btn btn-primary btn-primary-gradient px-2' onClick={() => setPelicula(el)}>
-                                                        <img src={editIcon} alt="" style={{ height: '25px' }} />
+                                                        {user?.role.includes("ROLE_ADMIN") ?
+                                                            <img src={editIcon} alt="" style={{ height: '25px' }} />
+                                                            :
+                                                            <img src={seeIcon} alt="" style={{ height: '25px' }} />
+                                                        }
                                                     </button>
                                                 </td>
                                             </tr>
@@ -183,7 +176,8 @@ const VentanaPeliculas = () => {
             </div>
 
 
-            {pelicula && <PeliculaModal pelicula={pelicula} onCerrar={() => { setPelicula(null) }} consultarPeliculas={consultarPeliculas} />}
+            {pelicula && <PeliculaModal pelicula={pelicula} onCerrar={() => { setPelicula(null) }}
+                consultarPeliculas={consultarPeliculas} readOnly={!user?.role.includes("ROLE_ADMIN")} />}
         </div>
     )
 }

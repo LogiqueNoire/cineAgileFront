@@ -134,7 +134,7 @@ const EditorButacas = ({ cambios, setCambios, butacasExistentes }) => {
     }
 
     return (
-        <div>
+        <div className="overflow-x-auto">
             <div className="mb-4 d-flex flex-row gap-4">
                 <span className="text-center w-50 fw-bold fs-5">Presiona en una celda<br></br>inactiva para activarla.</span>
                 <span className="text-center w-50 fw-bold fs-5">Presiona en una celda<br></br>activa para desactivarla.</span>

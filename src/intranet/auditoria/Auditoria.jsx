@@ -5,18 +5,12 @@ import Cookies from "js-cookie";
 import { format } from "date-fns";
 import auditIcon from "@/assets/modulos/audit.svg"
 import Loading from "@/components/loading/Loading";
+import { accionesColores } from "../colorsConfig";
 
 const Auditoria = () => {
     const [data, setData] = useState()
     const [datos, setDatos] = useState()
     const [startIndex, setStartIndex] = useState()
-    const accionesColores = [
-        ["CONSULTAR", "#b8f8ffff", "#007683ff"],
-        ["EDITAR", "#fcffa8", "#928100ff"],
-        ["CREAR", "#b3f0c1", "#00771cff"],
-        ["LOGIN", "#b3d6f0", "#01518fff"],
-        ["ALTERNAR_ESTADO", "#f1bcb3ff", "#8a1500ff"],
-    ]
     const cantidadFilasMostrar = 20;
     const [paginaActual, setPaginaActual] = useState(1);
 

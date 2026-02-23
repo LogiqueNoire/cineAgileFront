@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { editIcon, saveIcon } from "@/assets/operaciones";
 
-const FSelectInput = ({ className, valorPorDefecto, label, onSave, opciones, atributo, required }) => {
+const FSelectInput = ({ className, valorPorDefecto, label, onSave, opciones, atributo, required, readOnly }) => {
     const [modo, setModo] = useState("read"); //"read" || "edit" || "submitting"
     const [input, setInput] = useState(valorPorDefecto);
     const [status, setStatus] = useState({ error: false, msg: null });
@@ -38,7 +38,8 @@ const FSelectInput = ({ className, valorPorDefecto, label, onSave, opciones, atr
     return (
         <div className={`${className} input-group has-validation`}>
             <div className={`form-floating ${status.error && 'is-invalid'}`}>
-                <select className={`form-control rounded-start-pill ${status.error && "is-invalid"}`} id={label} placeholder={label} disabled={modo != "edit"} value={input == " " ? "" : input} onChange={onChange}>
+                <select className={`form-control rounded-start-pill ${status.error && "is-invalid"} ${readOnly && "rounded-end-pill"}`}
+                 id={label} placeholder={label} disabled={modo != "edit"} value={input == " " ? "" : input} onChange={onChange}>
                     <option value="" selected disabled={true}>Selecciona un género</option>
                     {opciones.map(el => (
                         <option value={el}>{el}</option>
@@ -46,7 +47,7 @@ const FSelectInput = ({ className, valorPorDefecto, label, onSave, opciones, atr
                 </select>
                 <label htmlFor={label}>{label}</label>
             </div>
-            <button className="btn btn-primary py-2 px-4 rounded-end-pill" onClick={modo == "read" ? () => setModo("edit") : onSaveClick} disabled={modo == "submitting"}>
+            {!readOnly && <button className="btn btn-primary py-2 px-4 rounded-end-pill" onClick={modo == "read" ? () => setModo("edit") : onSaveClick} disabled={modo == "submitting"}>
                 {modo === "submitting" ?
                     <span className="d-flex align-items-center mx-2 my-2 spinner-border spinner-border-sm" role="status">
                         <span className="visually-hidden">Cargando...</span>
@@ -57,7 +58,7 @@ const FSelectInput = ({ className, valorPorDefecto, label, onSave, opciones, atr
                         {modo === "edit" && <img src={saveIcon} alt="guardar" style={{ "width": "32px", "height": "32px" }} />}
                     </>
                 }
-            </button>
+            </button>}
 
             {status.msg &&
                 <div class="invalid-feedback">

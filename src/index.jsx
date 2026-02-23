@@ -16,7 +16,7 @@ import Error from "@/components/Error.jsx"
 // Intranet
 import LoginForm from '@/intranet/LoginForm.jsx';
 import Intranet from '@/intranet/Intranet.jsx';
-import IntranetPanel from '@/intranet/IntranetPanel.jsx';
+import IntranetHome from '@/intranet/IntranetHome.jsx';
 import VentanaPeliculas from '@/intranet/peliculas/VentanaPeliculas.jsx';
 import VentanaSedesYSalas from '@/intranet/sedes-salas/VentanaSedesYSalas.jsx';
 import { FuncionesContextProvider } from '@/intranet/funciones/FuncionesContext.jsx';
@@ -28,6 +28,7 @@ import Generos from '@/intranet/generos/Generos.jsx';
 import Analiticas from '@/intranet/analiticas/Analiticas.jsx';
 import Auditoria from '@/intranet/auditoria/Auditoria.jsx';
 import OpcionesDesarrollador from '@/intranet/dev/OpcionesDesarrollador.jsx'
+import RequireRole from './intranet/RequireRole';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
     <ToastContextProvider>
@@ -47,18 +48,38 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 
 
                 <Route path='/intranet' element={<Intranet />}>
-                    <Route index element={<IntranetPanel />}></Route>
+                    <Route index element={<IntranetHome />}></Route>
                     <Route path='login' element={<LoginForm />}></Route>
-                    <Route path="peliculas" element={<VentanaPeliculas />}></Route>
-                    <Route path="sedesysalas" element={<VentanaSedesYSalas />}></Route>
-                    <Route path="sala" element={<Sala />}></Route>
-                    <Route path="funciones" element={<FuncionesContextProvider><VentanaFunciones /></FuncionesContextProvider>}></Route>
-                    <Route path='generos' element={<Generos />}></Route>
-                    <Route path="usuarios" element={<VentanaUsuario />}></Route>
-                    <Route path='ajustes' element={<VentanaAjustes />}></Route>
-                    <Route path='analiticas' element={<Analiticas />}></Route>
-                    <Route path='auditoria' element={<Auditoria />}></Route>
-                    <Route path='dev' element={<OpcionesDesarrollador />}></Route>
+                    <Route path="peliculas" element={<RequireRole rolesPermitidos={["ROLE_ADMIN", "ROLE_SEDE_ADMIN", "ROLE_PLANIFICADOR"]}>
+                        <VentanaPeliculas />
+                    </RequireRole>}></Route>
+                    <Route path="sedesysalas" element={<RequireRole rolesPermitidos={["ROLE_ADMIN", "ROLE_SEDE_ADMIN", "ROLE_PLANIFICADOR"]}>
+                        <VentanaSedesYSalas />
+                    </RequireRole>}></Route>
+                    <Route path="sala" element={<RequireRole rolesPermitidos={["ROLE_ADMIN", "ROLE_SEDE_ADMIN"]}>
+                        <Sala />
+                    </RequireRole>}></Route>
+                    <Route path="funciones" element={
+                        <FuncionesContextProvider><VentanaFunciones /></FuncionesContextProvider>
+                    }></Route>
+                    <Route path='generos' element={<RequireRole rolesPermitidos={["ROLE_ADMIN"]}>
+                        <Generos />
+                    </RequireRole>}></Route>
+                    <Route path="usuarios" element={<RequireRole rolesPermitidos={["ROLE_ADMIN"]}>
+                        <VentanaUsuario />
+                    </RequireRole>}></Route>
+                    <Route path='ajustes' element={<RequireRole rolesPermitidos={["ROLE_ADMIN", "ROLE_SEDE_ADMIN", "ROLE_PLANIFICADOR"]}>
+                        <VentanaAjustes />
+                    </RequireRole>}></Route>
+                    <Route path='analiticas' element={<RequireRole rolesPermitidos={["ROLE_ADMIN", "ROLE_SEDE_ADMIN"]}>
+                        <Analiticas />
+                    </RequireRole>}></Route>
+                    <Route path='auditoria' element={<RequireRole rolesPermitidos={["ROLE_ADMIN"]}>
+                        <Auditoria />
+                    </RequireRole>}></Route>
+                    <Route path='dev' element={<RequireRole rolesPermitidos={["ROLE_ADMIN"]}>
+                        <OpcionesDesarrollador />
+                    </RequireRole>}></Route>
                 </Route>
 
             </Routes>

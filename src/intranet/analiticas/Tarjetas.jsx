@@ -21,6 +21,8 @@ const Tarjetas = ({ fechaConsultada, setFechaConsultada }) => {
             })).data;
             setFuncionesPorProyectar(datos)
         } catch (error) {
+            if (error.response.status === 403)
+                navigate("/intranet")
             console.error(error);
         } finally {
             setLoading(false)
@@ -35,6 +37,8 @@ const Tarjetas = ({ fechaConsultada, setFechaConsultada }) => {
             })).data;
             setFuncionesAgotadas(datos)
         } catch (error) {
+            if (error.response.status === 403)
+                navigate("/intranet")
             console.error(error);
         } finally {
             setLoading(false)
@@ -49,6 +53,8 @@ const Tarjetas = ({ fechaConsultada, setFechaConsultada }) => {
             })).data;
             setEntradasVendidas(datos)
         } catch (error) {
+            if (error.response.status === 403)
+                navigate("/intranet")
             console.error(error);
         } finally {
             setLoading(false)
@@ -64,6 +70,8 @@ const Tarjetas = ({ fechaConsultada, setFechaConsultada }) => {
 
             setVentasDia(datos)
         } catch (error) {
+            if (error.response.status === 403)
+                navigate("/intranet")
             console.error(error);
         } finally {
             setLoading(false)

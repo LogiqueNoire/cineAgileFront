@@ -61,6 +61,8 @@ const DesempeñoSemanal = ({ fechaConsultada }) => {
 
             setListaPeliculas(datos?.sort(ordenamientoAlfa));
         } catch (error) {
+            if (error.response.status === 403)
+                navigate("/intranet")
             console.error(error);
         }
     }
@@ -75,6 +77,8 @@ const DesempeñoSemanal = ({ fechaConsultada }) => {
             env === "dev" && console.log(peliculaElegida)
             setVentasDetalladas(datos);
         } catch (error) {
+            if (error.response.status === 403)
+                navigate("/intranet")
             console.error(error);
         }
     }
