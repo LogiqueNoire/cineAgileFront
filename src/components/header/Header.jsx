@@ -1,7 +1,7 @@
 import React from 'react';
 import "./header.css"
 import { useNavigate, useLocation } from 'react-router-dom';
-import shield from "@/assets/escudos/shield.svg"
+import shield from "@/assets/login/shield.svg"
 
 const Header = ({ children }) => {
   const navigate = useNavigate();
