@@ -15,7 +15,7 @@ El proyecto está desarrollado con **React** y organizado por **dominios funcion
 - Context API (manejo de estado global)
 - Fetch / Axios (consumo de API REST)
 - ESLint
-- Jenkins (CI)
+- GitHub Actions (CI)
 
 ---
 
@@ -23,9 +23,19 @@ El proyecto está desarrollado con **React** y organizado por **dominios funcion
 
 ```text
 cineAgileFront/
+├── .github/
+│   ├── workflows/
+│   │   ├── preview.yml
+│   │   ├── production.yaml
 ├── public/
 ├── src/
 │   ├── assets/            # Recursos estáticos (imágenes, íconos)
+│   │   ├── entradas/
+│   │   ├── login/
+│   │   ├── modulos/
+│   │   ├── operaciones/
+│   │   ├── pasarelas/
+│   │   ├── progressBar/
 │   ├── components/        # Componentes reutilizables
 │   ├── configuracion/     # Configuración general del proyecto
 │   ├── context/           # Context API (autenticación, estado global)
@@ -41,8 +51,9 @@ cineAgileFront/
 │   │   ├── usuarios
 │   │   ├── intranet.css
 │   │   ├── Intranet.jsx
-│   │   ├── IntranetPanel.jsx
-│   │   └── LoginForm.jsx
+│   │   ├── IntranetHome.jsx
+│   │   ├── LoginForm.jsx
+│   │   └── RequireRole.jsx
 │   ├── services/          # Servicios para consumo de la API
 │   ├── venta/             # Módulo de ventas
 │   │   ├── 1-cartelera
@@ -60,7 +71,6 @@ cineAgileFront/
 ├── .gitignore
 ├── eslint.config.js
 ├── index.html
-├── Jenkinsfile
 └── jsconfig.json
 ```
 
