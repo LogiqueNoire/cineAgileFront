@@ -8,8 +8,8 @@ import Loading from "@/components/loading/Loading";
 import { accionesColores } from "../colorsConfig";
 
 const Auditoria = () => {
-    const [data, setData] = useState()
-    const [datos, setDatos] = useState()
+    const [dataCompleta, setDataCompleta] = useState()
+    const [dataParaMostrar, setDataParaMostrar] = useState()
     const [startIndex, setStartIndex] = useState()
     const cantidadFilasMostrar = 20;
     const [paginaActual, setPaginaActual] = useState(1);
@@ -24,7 +24,7 @@ const Auditoria = () => {
             response = (await axios.get(`${backend_url}/api/intranet/v1/registrosacciones`, {
                 headers: { Authorization: `Bearer ${Cookies.get("auth-token")}` }
             })).data;
-            setData(response);
+            setDataCompleta(response);
         } catch (e) {
             console.error("Error", e)
         }
@@ -35,10 +35,10 @@ const Auditoria = () => {
     }, [])
 
     useEffect(() => {
-        if (data != undefined) {
-            setDatos([...data].reverse().slice(startIndex, startIndex + cantidadFilasMostrar))
+        if (dataCompleta != undefined) {
+            setDataParaMostrar([...dataCompleta].reverse().slice(startIndex, startIndex + cantidadFilasMostrar))
         }
-    }, [data, startIndex])
+    }, [dataCompleta, startIndex])
 
     return (
         <div className="mt-4">
@@ -46,7 +46,7 @@ const Auditoria = () => {
                 <h2 className="fs-1 cineagile-blue-600 ancizar-sans-regular mb-0">Auditorías</h2>
                 <img src={auditIcon} alt="audit" className="" style={{ filter: "invert(90%) sepia(70%) saturate(25000%) hue-rotate(225deg) brightness(52.5%) contrast(100%)", height: '70px' }} />
             </div>
-            {datos != undefined && datos.length > 0 ?
+            {dataParaMostrar != undefined && dataParaMostrar?.length > 0 ?
                 <>
                     <div className="overflow-x-auto mx-4">
                         <div className="" style={{ width: 'max(max-content, 100%)', whiteSpace: "nowrap" }}>
@@ -63,7 +63,7 @@ const Auditoria = () => {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {datos.map((el) => (
+                                    {dataParaMostrar?.map((el) => (
                                         <tr className="" key={el.id}>
                                             <td className="" > {format(el.fecha, "yyyy-MM-dd")}</td>
                                             <td className="">{format(el.fecha, "HH:mm:ss")}</td>
@@ -96,7 +96,7 @@ const Auditoria = () => {
                     <div className="d-flex flex-row gap-3 justify-content-center my-3">
                         {startIndex - cantidadFilasMostrar >= 0 &&
                             <button className="btn-primary btn-primary-gradient" onClick={() => { setPaginaActual(paginaActual - 1) }}>Anterior</button>}
-                        {startIndex + cantidadFilasMostrar < data.length &&
+                        {startIndex + cantidadFilasMostrar < dataCompleta.length &&
                             <button className="btn-primary btn-primary-gradient" onClick={() => { setPaginaActual(paginaActual + 1) }}>Siguiente</button>}
                     </div>
                 </>
