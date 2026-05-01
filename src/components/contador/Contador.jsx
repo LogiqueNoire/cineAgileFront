@@ -47,8 +47,8 @@ const Contador = ({ onCancelar }) => {
 
     
     <div className="modal fade" id="contadorBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="contadorBackdropLabel" aria-hidden="true">
-            <div className="modal-dialog w-25 modal-dialog-centered">
-              <div className="modal-content">
+            <div className="modal-dialog modal-dialog-centered d-flex justify-content-center">
+              <div className="modal-content" style={{width:'270px'}}>
                 <div className="modal-header d-flex justify-content-center">
                   <h1 className="modal-title fs-2 mb-0" id="contadorBackdropLabel">Aviso</h1>
                 </div>

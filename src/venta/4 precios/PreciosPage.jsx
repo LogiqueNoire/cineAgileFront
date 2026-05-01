@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import Funcion from "@/services/Funcion.js";
 import Loading from "@/components/loading/Loading.jsx";
@@ -10,6 +10,7 @@ export const PreciosPage = ({ prev, next, onCancelar }) => {
     const location = useLocation();
     const { pelicula, funcion } = location.state || {};
     const [cargandoPrecios, setCargandoPrecios] = React.useState(true);
+    const [moving, setMoving] = useState(false)
 
     const fetchData = async () => {
         try {
@@ -26,18 +27,20 @@ export const PreciosPage = ({ prev, next, onCancelar }) => {
     }
 
     useEffect(() => {
-
         fetchData();
     }, [funcion.idFuncion]);
 
     const puedeContinuar = contexto.entradasContext.entradasSeleccionadas === contexto.butacaContext.seleccionadas.length;
 
     const siguiente = () => {
-        if (puedeContinuar)
+        if (puedeContinuar){
+            setMoving(true)
             next();
+        }
     }
 
     const volver = () => {
+        setMoving(true)
         onCancelar(() => {
             contexto.entradasContext.setEntradasSeleccionadas(0)
             contexto.entradasContext.setGeneralesSeleccionadas(0)
@@ -66,8 +69,8 @@ export const PreciosPage = ({ prev, next, onCancelar }) => {
                 </div>
 
                 <div className="d-flex justify-content-center gap-4 align-items-center">
-                    <button className="btn btn-primary btn-primary-gradient" onClick={volver} >Volver</button>
-                    <button className="btn btn-primary btn-primary-gradient" disabled={!puedeContinuar} onClick={siguiente}>Siguiente</button>
+                    <button className="btn btn-primary btn-primary-gradient" disabled={moving} onClick={volver} >Volver</button>
+                    <button className="btn btn-primary btn-primary-gradient" disabled={!puedeContinuar || moving} onClick={siguiente}>Siguiente</button>
                 </div>
             </>
 

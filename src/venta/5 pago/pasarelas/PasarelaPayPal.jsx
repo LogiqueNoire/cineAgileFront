@@ -14,7 +14,6 @@ const PasarelaPayPal = ({ setto, tipoCambio, registrarEntrada }) => {
         <PayPalButtons
           onClick={(data, actions) => {
             setto.setTerminos(false);
-            contexto.general.setSubmitting(true);
             return actions.resolve();
           }}
           onCancel={(data, actions) => {
@@ -38,6 +37,7 @@ const PasarelaPayPal = ({ setto, tipoCambio, registrarEntrada }) => {
             })
           }}
           onApprove={(_, actions) => {
+            contexto.general.setSubmitting(true);
             return actions.order.capture().then(details => {
               registrarEntrada()
               env === "dev" && console.log(details)

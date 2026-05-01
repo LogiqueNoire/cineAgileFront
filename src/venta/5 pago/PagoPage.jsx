@@ -93,18 +93,18 @@ export const PagoPage = ({ prev }) => {
     <>
       {status.error &&
         <div className="mb-5 w-100 d-flex flex-column align-items-center">
-          <div className="bg-danger bg-opacity-10 text-danger p-3 w-100 text-center border border-danger shadow mb-3">
+          <div className="btn-danger btn-danger-gradient bg-opacity-10 text-white p-3 w-100 text-center shadow mb-3">
             Error: {status.msg}
           </div>
 
-          <button className="btn btn-primary" onClick={() => { navigate("/"); }}>Volver a la página inicial</button>
+          <button className="btn btn-primary btn-primary-gradient" onClick={() => { navigate("/"); }}>Volver a la página inicial</button>
         </div>
       }
 
 
       <>
         {contexto.general.submitting && <div className="d-flex justify-content-center align-items-center bg-loading"
-          style={{ zIndex: "100", position: "fixed", inset: "0" }}>
+          style={{ zIndex: "120", position: "fixed", inset: "0" }}>
           <Loading />
         </div>}
         <div className="container-fluid d-flex flex-column justify-content-center align-items-center gap-4 my-3">
